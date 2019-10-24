@@ -45,6 +45,7 @@ PROJECT_APPS = [
     "core.apps.CoreConfig",
     "users.apps.UsersConfig",
     "reviews.apps.ReviewsConfig",
+    "products.apps.ProductsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
@@ -128,3 +129,7 @@ AUTH_USER_MODEL = "users.User"
 PHONENUMBER_DB_FORMAT = "NATIONAL"
 
 PHONENUMBER_DEFAULT_REGION = "JP"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+
+MEDIA_URL = "/media/"

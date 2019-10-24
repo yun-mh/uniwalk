@@ -17,6 +17,7 @@ class User(AbstractUser):
     GENDER_CHOICES = ((GENDER_MALE, "男性"), (GENDER_FEMALE, "女性"), (GENDER_OTHER, "その他"))
 
     username = None
+
     email = models.EmailField(_("email address"), unique=True)
     first_name_kana = models.CharField("名(カナ)", blank=True, max_length=30)
     last_name_kana = models.CharField("姓(カナ)", blank=True, max_length=150)
