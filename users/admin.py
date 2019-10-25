@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from . import models
 
 # Register your models here.
@@ -6,6 +7,43 @@ from . import models
 class CustomUserAdmin(admin.ModelAdmin):
 
     """ カスタムユーザーアドミン """
+
+    fieldsets = (
+        (
+            "会員情報",
+            {
+                "fields": (
+                    "email",
+                    "password",
+                    "last_name",
+                    "first_name",
+                    "last_name_kana",
+                    "first_name_kana",
+                    "gender",
+                    "birthday",
+                    "phone_number",
+                    "postal_code",
+                    "prefecture",
+                    "adress_detail",
+                    "adress_city",
+                )
+            },
+        ),
+        (
+            "認証・権限",
+            {
+                "fields": (
+                    "date_joined",
+                    "last_login",
+                    "is_superuser",
+                    "is_staff",
+                    "is_active",
+                    "groups",
+                    "user_permissions",
+                )
+            },
+        ),
+    )
 
     list_display = ("get_fullname", "email", "birthday", "is_staff", "is_superuser")
 
