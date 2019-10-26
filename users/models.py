@@ -2,8 +2,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from .managers import CustomUserManager
+from core.models import JPPrefectureField, JPPostalCodeModelField
 
 from phonenumber_field.modelfields import PhoneNumberField
+from localflavor.jp.jp_prefectures import JP_PREFECTURES
 
 # Create your models here.
 class User(AbstractUser):
@@ -16,6 +18,8 @@ class User(AbstractUser):
 
     GENDER_CHOICES = ((GENDER_MALE, "男性"), (GENDER_FEMALE, "女性"), (GENDER_OTHER, "その他"))
 
+    PREF_CHOICES = JP_PREFECTURES
+
     username = None
 
     email = models.EmailField(_("email address"), unique=True)
@@ -24,10 +28,8 @@ class User(AbstractUser):
     gender = models.CharField("性別", blank=True, choices=GENDER_CHOICES, max_length=10)
     birthday = models.DateField("生年月日", blank=True, null=True)
     phone_number = PhoneNumberField("電話番号", blank=True)
-    postal_code = models.CharField("郵便番号", max_length=8, blank=True)
-    prefecture = models.CharField(
-        "都道府県", max_length=10, blank=True
-    )  # yubinbango api 予定
+    postal_code = JPPostalCodeModelField("郵便番号")
+    prefecture = JPPrefectureField("都道府県", blank=True)
     adress_city = models.CharField("市区町村番地", max_length=40, blank=True)
     adress_detail = models.CharField("建物名・号室", max_length=40, blank=True)
 

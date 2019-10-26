@@ -12,6 +12,7 @@ django = "==2.2.5"
 django-phonenumber-field = "*"
 phonenumbers = "*"
 pillow = "*"
+django-localflavor = "*"
 
 [requires]
 python_version = "3.7"

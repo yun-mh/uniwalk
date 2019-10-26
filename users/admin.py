@@ -24,8 +24,8 @@ class CustomUserAdmin(admin.ModelAdmin):
                     "phone_number",
                     "postal_code",
                     "prefecture",
-                    "adress_detail",
                     "adress_city",
+                    "adress_detail",
                 )
             },
         ),
@@ -45,7 +45,17 @@ class CustomUserAdmin(admin.ModelAdmin):
         ),
     )
 
-    list_display = ("get_fullname", "email", "birthday", "is_staff", "is_superuser")
+    list_display = (
+        "get_fullname",
+        "email",
+        "birthday",
+        "gender",
+        "is_staff",
+        "is_superuser",
+    )
 
     def get_fullname(self, obj):
         return obj.last_name + obj.first_name
+
+    get_fullname.short_description = "会員名"
+
