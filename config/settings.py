@@ -80,6 +80,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
+TAILWIND_APP_NAME = "theme"
+
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -117,8 +119,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 
 # Static files (CSS, JavaScript, Images)
