@@ -39,16 +39,19 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = ["phonenumber_field", "localflavor"]
+THIRD_PARTY_APPS = ["tailwind", "phonenumber_field", "localflavor"]
 
 PROJECT_APPS = [
     "core.apps.CoreConfig",
+    "theme.apps.ThemeConfig",
     "users.apps.UsersConfig",
     "reviews.apps.ReviewsConfig",
     "products.apps.ProductsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
+
+TAILWIND_APP_NAME = 'theme'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -65,7 +68,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
