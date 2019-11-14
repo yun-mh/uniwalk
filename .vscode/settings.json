@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/home/canivas/.local/share/virtualenvs/uniwalk-v4pThEB-/bin/python",
+    "python.pythonPath": "/Users/yun-mh/.local/share/virtualenvs/uniwalk-M8VWwAsw/bin/python",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,

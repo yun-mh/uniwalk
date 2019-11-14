@@ -39,7 +39,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = ["tailwind", "phonenumber_field", "localflavor"]
+THIRD_PARTY_APPS = ["phonenumber_field", "localflavor"]
 
 PROJECT_APPS = [
     "core.apps.CoreConfig",
@@ -50,8 +50,6 @@ PROJECT_APPS = [
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
-
-TAILWIND_APP_NAME = 'theme'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -82,8 +80,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
-
-TAILWIND_APP_NAME = "theme"
 
 
 # Database

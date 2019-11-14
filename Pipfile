@@ -13,7 +13,6 @@ django-phonenumber-field = "*"
 phonenumbers = "*"
 pillow = "*"
 django-localflavor = "*"
-django-tailwind = "*"
 
 [requires]
 python_version = "3.7"
