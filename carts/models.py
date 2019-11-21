@@ -1,16 +1,22 @@
 from django.db import models
-from core import models as core_models
 from users import models as user_models
 
 
-class Cart(core_models.TimeStampedModel):
+class CartItem(models.Model):
+
+    """ カート内のアイテムのモデルを定義する """
+
+    # cart_id = models.ForeignKey()
+    # design_id = models.ForeignKey()
+    # product_id = models.ForeignKey()
+    # feet_id = models.ForeignKey()
+    quantity = models.IntegerField(default=1)
+
+
+class Cart(models.Model):
 
     """ カートのモデルを定義する """
 
-    user = models.ForeignKey(
-        user_models.User, null=True, blank=True, on_delete=models.CASCADE
-    )
-    # products    = models.ManyToManyField(Product, blank=True)
-    subtotal = models.IntegerField(default=0)
-    total = models.IntegerField(default=0)
+    session_key = models.CharField("カートセッションキー", max_length=32)
+    created = models.DateTimeField("生成日時", auto_now_add=True)
 
