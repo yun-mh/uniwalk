@@ -10,8 +10,8 @@ class TimeStampedModel(models.Model):
 
     """ 再利用可能なフィールドを各モデルに提供する """
 
-    created = models.DateTimeField("登録日", auto_now_add=True)
-    updated = models.DateTimeField("更新日", auto_now=True)
+    created = models.DateTimeField("登録日時", auto_now_add=True)
+    updated = models.DateTimeField("更新日時", auto_now=True, null=True)
 
     class Meta:
         abstract = True

@@ -6,11 +6,12 @@ class Review(core_models.TimeStampedModel):
 
     """ レビューのモデルを定義する """
 
-    # product = models.ForeignKey()
-    # email = models.ForeignKey()
+    # product_id = models.ForeignKey()
+    # user_id = models.ForeignKey()
     title = models.CharField("タイトル", max_length=50)
-    content = models.TextField("内容")
-    score = models.IntegerField("評価")
+    text = models.TextField("本文", blank=True)
+    rate = models.IntegerField("評点", default=0)
+    # review_code = models.CharField("レビュー番号", max_length=11)
 
     class Meta:
         verbose_name = "レビュー"
