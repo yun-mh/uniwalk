@@ -43,7 +43,6 @@ THIRD_PARTY_APPS = ["phonenumber_field", "localflavor"]
 
 PROJECT_APPS = [
     "core.apps.CoreConfig",
-    "theme.apps.ThemeConfig",
     "users.apps.UsersConfig",
     "reviews.apps.ReviewsConfig",
     "products.apps.ProductsConfig",
@@ -141,3 +140,8 @@ PHONENUMBER_DEFAULT_REGION = "JP"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 MEDIA_URL = "/media/"
+
+
+# Auth
+
+LOGIN_URL = "/users/login"

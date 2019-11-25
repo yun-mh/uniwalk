@@ -14,7 +14,7 @@ class Image(models.Model):
 
     """ カスタムデザインのイメージモデルを定義する """
 
-    # design_id = models.ForeignKey()
+    design_id = models.ForeignKey("Design", verbose_name="デザインid", on_delete=models.CASCADE)
     side_left = models.ImageField("側面(左)", upload_to="")
     side_right = models.ImageField("側面(右)", upload_to="")
     upper_left = models.ImageField("上面(左)", upload_to="")
@@ -29,8 +29,8 @@ class Design(core_models.TimeStampedModel):
 
     """ デザインのモデルを定義する """
 
-    # user_id = models.ForeignKey()
-    # product_id = models.ForeignKey()
+    user_id = models.ForeignKey("users.User", on_delete=models.SET_NULL, null=True)
+    product_id = models.ForeignKey("products.Product", on_delete=models.SET_NULL, null=True)
     outsole_color_left = models.CharField("アウトソール色(左)", max_length=7)
     # outsole_material_left = models.
     midsole_color_left = models.CharField("ミッドソール色(左)", max_length=7)

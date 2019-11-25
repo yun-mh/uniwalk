@@ -11,16 +11,20 @@
     <title>{% block page_title %}{% endblock page_title %}| UniWalk</title>
 </head>
 
-<body class="font-sans">
-    <header>
+<body class="font-sans text-gray-800 mt-24 font-light">
+    <header
+        class="container max-w-full flex items-center justify-between px-6 h-20 border-b border-gray-400 fixed bg-white inset-0 z-50">
         {% include "partials/nav.html" %}
     </header>
 
-    {% block content %}{% endblock %}
+    <article class="min-h-75vh">
+        {% block content %}{% endblock %}
+    </article>
 
     {% include "partials/footer.html" %}
 
     {% block javascript %}{% endblock %}
+    <script src="https://kit.fontawesome.com/d7ead653ba.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

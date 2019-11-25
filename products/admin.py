@@ -10,9 +10,13 @@ class ProductAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(models.Image)
-class ImageAdmin(admin.ModelAdmin):
+@admin.register(models.Category)
+class CategoryAdmin(admin.ModelAdmin):
 
-    """ アドミンに商品イメージを定義する """
+    """ アドミンに商品カテゴリーを定義する """
 
-    pass
+    list_display = (
+        "product_type",
+        "type_code",
+        "created",
+    )
