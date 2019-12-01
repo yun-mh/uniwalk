@@ -1,7 +1,8 @@
 {
-    "python.pythonPath": "C:\\Users\\nhs80416\\.virtualenvs\\uniwalk-Ho4TumzS\\Scripts\\python.exe",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.enabled": true,
-    "python.formatting.provider": "black",
+  "python.pythonPath": "C:\\Users\\nhs80416\\.virtualenvs\\uniwalk-Ho4TumzS\\Scripts\\python.exe",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "python.formatting.provider": "black",
+  "python.linting.flake8Args": ["--max-line-length=88"]
 }

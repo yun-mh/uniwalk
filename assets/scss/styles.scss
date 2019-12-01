@@ -3,109 +3,109 @@
 
 // nav
 .dropdown-content {
-    z-index: 1;
-    margin-top: 3px;
-    margin-left: -3rem;
-    display: none;
+  z-index: 1;
+  margin-top: 3px;
+  margin-left: -3rem;
+  display: none;
 }
 
 .btn {
-    @apply w-full font-light text-center rounded-sm py-5 text-lg;
+  @apply w-full font-light text-center rounded-sm py-5 text-lg;
 }
 
 .btn-link {
-    @apply text-center py-3 rounded-lg font-light text-lg w-full text-white bg-indigo-500;
+  @apply text-center py-3 rounded-lg font-light text-lg w-full text-white bg-indigo-500;
 }
 
 input,
 textarea,
 select {
-    @apply w-full font-light rounded-sm py-5 text-lg text-left border border-gray-600 px-5;
-    &:focus {
-        @apply outline-none border-teal-500;
-    }
+  @apply w-full font-light rounded-sm py-5 text-lg text-left border border-gray-600 px-5;
+  &:focus {
+    @apply outline-none border-teal-500;
+  }
 }
 
 textarea {
-    resize: none;
-    height: 100px;
+  resize: none;
+  height: 100px;
 }
 
 select {
-    height: 50px;
+  height: 50px;
 }
 
 form {
-    .input {
-        @apply mb-3;
-        &.has_error {
-            input {
-                @apply bg-red-200 border-gray-600;
-                &:focus {
-                    @apply border-gray-600;
-                }
-            }
+  .input {
+    @apply mb-3;
+    &.has_error {
+      input {
+        @apply bg-red-200 border-gray-600;
+        &:focus {
+          @apply border-gray-600;
         }
+      }
     }
+  }
 }
 
 @keyframes messageFadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    5% {
-        opacity: 1;
-        transform: translateY(50px);
-    }
-    95% {
-        opacity: 1;
-        transform: translateY(50px);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  5% {
+    opacity: 1;
+    transform: translateY(120px);
+  }
+  95% {
+    opacity: 1;
+    transform: translateY(120px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
 }
-  
+
 .message {
-    animation: messageFadeIn 5s ease-in-out forwards;
-    &.error {
-        @apply bg-red-600;
-    }
-    &.info {
-        @apply bg-blue-500;
-    }
-    &.warning {
-        @apply bg-yellow-400;
-    }
-    &.success {
-        @apply bg-green-500;
-    }
+  animation: messageFadeIn 5s ease-in-out forwards;
+  &.error {
+    @apply bg-red-600;
+  }
+  &.info {
+    @apply bg-teal-500;
+  }
+  &.warning {
+    @apply bg-yellow-400;
+  }
+  &.success {
+    @apply bg-green-500;
+  }
 }
 
 // アバウト
 .logo {
-    transform: translate(-50%, -50%);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    outline: 1rem solid #3e3e3e;
-    outline-offset: 1rem;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  outline: 1rem solid #3e3e3e;
+  outline-offset: 1rem;
 }
 
 .infobox-up {
-    position: relative;
-    top: 5%;
-    padding: 20px;
-    opacity: 1.0;
+  position: relative;
+  top: 5%;
+  padding: 20px;
+  opacity: 1;
 }
 
 .infobox-down {
-    position: relative;
-    top: 60%;
-    padding: 20px;
-    opacity: 1.0;
+  position: relative;
+  top: 60%;
+  padding: 20px;
+  opacity: 1;
 }
 
 @tailwind utilities;

@@ -1,6 +1,8 @@
 from django.shortcuts import render, reverse, redirect
 from django.urls import reverse_lazy
 from django.views.generic import View, FormView
+from django.utils.translation import gettext_lazy as _
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from . import forms, models, mixins
 
@@ -16,6 +18,7 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
         user = authenticate(self.request, email=email, password=password)
         if user is not None:
             login(self.request, user)
+            messages.success(self.request, _(f"ログインしました。"))
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -25,9 +28,9 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
         else:
             return reverse("core:home")
 
-    
+
 def log_out(request):
-    # messages.info(request, "See you later~!")
+    messages.info(request, _("ログアウトしました。"))
     logout(request)
     return redirect(reverse("core:home"))
 

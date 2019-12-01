@@ -6,10 +6,10 @@ from . import models
 class LoginForm(forms.Form):
 
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={"placeholder": _("Email Address")})
+        widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": _("Password")})
+        widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
     )
 
     def clean(self):

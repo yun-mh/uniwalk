@@ -1,17 +1,20 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block page_title %}
-会員登録完了
+    {% trans "会員登録完了" %}
 {% endblock page_title %}
 
 {% block content %}
 
-<div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto mb-10 flex flex-col items-center border p-6 border-gray-400">
+<div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center border p-6 border-gray-400">
 
-    <h2 class="font-medium text-4xl mb-5">会員登録完了</h2>
-    <h3 class="font-medium text-2xl mb-3">本登録が完了いたしました。</h3>
-    <p class="text-center mb-5">それではショッピングをお楽しみください。<br>今後ともご愛顧賜りますようよろしくお願い申し上げます。</p>
-    <a href="{% url 'users:login' %}" class="btn-link">ログイン</a>
+    <h2 class="font-medium text-4xl mb-5">{% trans "会員登録完了" %}</h2>
+    <h3 class="font-medium text-2xl mb-3">{% trans "本登録が完了いたしました。" %}</h3>
+    <p class="text-center mb-5">{% trans "それではショッピングをお楽しみください。" %}<br>{% trans "今後ともご愛顧賜りますようよろしくお願い申し上げます。" %}</p>
+    <a href="{% url 'users:login' %}" class="btn-link">
+        {% trans "ログイン" %}
+    </a>
 
 </div>
 

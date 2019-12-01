@@ -1,0 +1,10 @@
+{% if messages %}
+    <ul class="absolute mx-auto top-0 left-0 right-0 flex justify-center">
+        {% for message in messages %}
+        <li class="flex items-center message font-medium bg-gray-700 z-10 text-white py-6 px-6 w-1/4 text-center {% if message.tags %}{{ message.tags }}{% endif %}">
+            <i class="ml-5 fas fa-2x {% if message.tags == 'success' %}fa-check{% elif message.tags == 'info' %}fa-info{% elif message.tags == 'error' %}fa-times{% elif message.tags == 'warning' %}fa-exclamation{% endif %}"></i>
+            <span class="ml-10">{{ message }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
