@@ -5,7 +5,9 @@ class Card(models.Model):
 
     """ カードのモデルを定義する """
 
-    user_id = models.ForeignKey("users.User", on_delete=models.CASCADE, verbose_name="ユーザー")
+    user = models.ForeignKey(
+        "users.User", on_delete=models.CASCADE, verbose_name="ユーザー"
+    )
     last_name = models.CharField("姓", max_length=20)
     first_name = models.CharField("名", max_length=20)
     card_number = models.CharField("カード番号", max_length=16)

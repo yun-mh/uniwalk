@@ -6,7 +6,7 @@ class Footsize(core_models.TimeStampedModel):
 
     """ 足サイズのモデルを定義する """
 
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         "users.User", verbose_name="ユーザー", on_delete=models.CASCADE
     )
     length_left = models.IntegerField("足長(左)")
@@ -15,4 +15,4 @@ class Footsize(core_models.TimeStampedModel):
     width_right = models.IntegerField("足幅(右)")
 
     def __str__(self):
-        return self.user_id
+        return self.user

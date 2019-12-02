@@ -113,4 +113,7 @@ node_modules/
 # mac
 .DS_Store
 
+# etc
+.env
+
 # End of https://www.gitignore.io/api/python

@@ -145,3 +145,14 @@ MEDIA_URL = "/media/"
 # Auth
 
 LOGIN_URL = "/users/login"
+
+
+# Email
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.naver.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get("USERNAME")
+EMAIL_HOST_PASSWORD = os.environ.get("PASSWORD")
+DEFAULT_FROM_EMAIL = "nhs80416@naver.com"

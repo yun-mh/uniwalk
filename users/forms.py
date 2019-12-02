@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.views import PasswordResetForm, SetPasswordForm
+from django.contrib.auth import password_validation
 from django.utils.translation import gettext_lazy as _
 from . import models
 
@@ -77,3 +79,24 @@ class SignUpForm(forms.ModelForm):
         first_name_kana = self.cleaned_data.get("first_name_kana")
         user.set_password(password)
         user.save()
+
+
+class PasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")}),
+        label=_("Email"),
+        max_length=254,
+    )
+
+class SetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label=_("新しいパスワード"),
+        widget=forms.PasswordInput(attrs={"placeholder": _("新しいパスワード")}),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    new_password2 = forms.CharField(
+        label=_("パスワード確認"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"placeholder": _("パスワード確認")}),
+    )

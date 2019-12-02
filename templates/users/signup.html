@@ -1,25 +1,29 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block page_title %} 
-    {% trans "会員登録" %}
+{% block page_title %}
+{% trans "会員登録" %}
 {% endblock page_title %}
 
 {% block content %}
 
 <div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center border p-6 border-gray-400">
-    {% trans "会員登録" as registration %}
-    {% include 'mixins/auth/form_auth.html' with form=form cta=registration %}
+  <div class="text-gray-800 font-semibold text-3xl my-3">
+    {% trans '会員登録' %}
+  </div>
+
+  {% trans "会員登録" as registration %}
+  {% include 'mixins/auth/form_auth.html' with form=form cta=registration %}
 
   <div class="mt-5">
     <span class="mr-2">{% trans "既にアカウントを持っていますか?" %}</span>
     <a href="{% url 'users:login' %}" class="text-teal-500 font-medium">
-        {% trans "ログイン" %}
+      {% trans "ログイン" %}
     </a>
   </div>
 </div>
 
-{% endblock content %} 
+{% endblock content %}
 
-{% block javascript %} 
+{% block javascript %}
 {% endblock %}
