@@ -1,89 +1,70 @@
-{% load static %}
-<nav
-  class="flex fixed w-full items-center justify-between flex-wrap bg-white h-28"
->
-  <div class="flex w-full border-b border-gray-400 h-8 px-3">
-    <div
-        class="w-full block flex-grow lg:flex lg:items-center lg:justify-end lg:w-auto lg:flex-grow px-2"
-    >
-        {% if user.is_authenticated %}
-        <span
-        class="block lg:inline-block lg:mt-0 text-gray-500 mr-5 cursor-pointer"
-        >
-            <div class="user-btn hover:text-gray-600">
-                <i class="fas fa-user fa-xs"></i>
-                <span class="text-xs">マイアカウント</span>
-            </div>
-            <div class="dropdown-content border border-gray-400 absolute bg-white w-40 text-center">
-                <a href="myorder.html" class="text-gray-800 block border-b border-gray-300 py-2 hover:text-gray-600">マイページ</a>
-                <a href="{% url 'users:logout' %}" class="text-gray-800 block py-2 hover:text-gray-600">ログアウト</a>
-            </div>
-        </span>
+{% load static i18n %}
+<nav class="flex fixed w-full items-center justify-between flex-wrap bg-white h-28">
+    <div class="flex w-full border-b border-gray-400 h-8 px-3">
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:justify-end lg:w-auto lg:flex-grow px-2">
+            {% if user.is_authenticated %}
+            <span class="block lg:inline-block lg:mt-0 text-gray-500 mr-5 cursor-pointer">
+                <div class="user-btn hover:text-gray-600">
+                    <i class="fas fa-user fa-xs"></i>
+                    <span class="text-xs">{% trans 'マイアカウント' %}</span>
+                </div>
+                <div class="dropdown-content border border-gray-400 absolute bg-white w-40 text-center">
+                    <a href="myorder.html"
+                        class="text-gray-800 block border-b border-gray-300 py-2 hover:text-gray-600">{% trans 'マイページ' %}</a>
+                    <a href="{% url 'users:logout' %}"
+                        class="text-gray-800 block border-b border-gray-300 py-2 hover:text-gray-600">{% trans 'ログアウト' %}</a>
+                    {% if user.is_staff %}
+                    <a href="{% url 'admin:index' %}"
+                        class="text-gray-800 block py-2 hover:text-gray-600">{% trans '管理者モード' %}</a>
+                    {% endif %}
+                </div>
+            </span>
 
-        {% else %}
-        <a
-        href="{% url 'users:login' %}"
-        class="block text-sm lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5"
-        >
-        会員登録・ログイン
-        </a>    
-        {% endif %}
-        
-        <a
-        href="mycart.html"
-        class="block lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5"
-        >
-        <i class="fas fa-search fa-xs"></i>
-        </a>
-        <a
-        href="mycart.html"
-        class="block lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5"
-        >
-        <i class="fas fa-shopping-cart fa-xs"></i>
-        </a>
-    </div>
+            {% else %}
+            <a href="{% url 'users:login' %}"
+                class="block text-xs lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5">
+                {% trans '会員登録・ログイン' %}
+            </a>
+            {% endif %}
 
-  </div>
-
-  <div class="flex w-full items-center h-20 px-5">
-    <div class="flex items-center flex-shrink-0 text-black mr-6">
-        <a href="{% url 'core:home' %}" class="flex items-center"
-        ><img src="{% static 'images/logo.png' %}" class="h-10" /><span
-            class="font-medium text-2xl text-gray-800"
-            >UniWalk</span
-        ></a
-        >
-    </div>
-
-    <div
-        class="w-full block flex-grow lg:flex lg:items-center lg:justify-end lg:w-auto lg:flex-grow"
-    >
-        <a
-        href="{% url 'core:home' %}"
-        class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-5"
-        >
-        HOME
-        </a>
-        <a
-        href="{% url 'core:about' %}"
-        class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-5"
-        >
-        ABOUT
-        </a>
-        <a
-        href="product.html"
-        class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-5"
-        >
-        ITEMS
-        </a>
-        
-        <div class="dropdown" id="link4">
-            <span><ion-icon name="search"></ion-icon></span>
-            <div class="dropdown-content">
-                <a href="search_order.html">注文検索</a>
-            </div>
+            <a href="mycart.html" class="block lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5">
+                <i class="fas fa-search fa-xs"></i>
+            </a>
+            <a href="mycart.html" class="block lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5">
+                <i class="fas fa-shopping-cart fa-xs"></i>
+            </a>
         </div>
-        
+
     </div>
-  </div>
+
+    <div class="flex w-full items-center h-20 px-5">
+        <div class="flex items-center flex-shrink-0 text-black mr-6">
+            <a href="{% url 'core:home' %}" class="flex items-center"><img src="{% static 'images/logo.png' %}"
+                    class="h-10" /><span class="font-medium text-2xl text-gray-800">UniWalk</span></a>
+        </div>
+
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:justify-end lg:w-auto lg:flex-grow">
+            <a href="{% url 'core:home' %}"
+                class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-5">
+                HOME
+            </a>
+            <a href="{% url 'core:about' %}"
+                class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-5">
+                ABOUT
+            </a>
+            <a href="product.html" class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-5">
+                ITEMS
+            </a>
+
+            <div class="dropdo" id="link4">
+                <span>
+                    <ion-icon name="search"></ion-icon>
+                </span>
+                <div class="dropdown-content">
+                    <a href="search_order.html">注文検索</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </nav>
