@@ -51,9 +51,13 @@ class Product(core_models.TimeStampedModel):
             return round(all_ratings / len(all_reviews), 2)
         return 0
 
-    def first_photo(self):
+    def first_image(self):
         try:
             (image,) = self.images.all()[:1]
             return image.image.url
         except ValueError:
             return None
+
+    def get_next_four_images(self):
+        images = self.images.all()[1:5]
+        return images

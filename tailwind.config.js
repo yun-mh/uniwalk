@@ -2,15 +2,18 @@ module.exports = {
   theme: {
     extend: {
       inset: {
-        '0': 0,
-        '1/2': '50%',
-        '-half': '-50%',
+        "0": 0,
+        "1/2": "50%",
+        "-half": "-50%"
       },
       spacing: {
         "28": "7rem",
         "25vh": "25vh",
         "50vh": "50vh",
         "75vh": "75vh"
+      },
+      height: {
+        "1/2": "50%"
       },
       minHeight: {
         "0": "0",

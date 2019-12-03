@@ -7,46 +7,53 @@
 
 {% block content %}
 
-<div class="mx-auto pt-16 pb-10 flex">
+<div class="mx-auto pt-16 pb-10">
 
-    <div class="w-1/6 px-10">
-        <h2 class="text-lg font-semibold pb-2 mb-2 border-b">{% trans '商品カテゴリー' %}</h2>
-        <ul>
-            <li class="mb-2"><a href="{% url 'products:list' %}">{% trans 'すべて' %}</a></li>
-            {% for c in category %}
-            <li class="mb-2"><a href="{% url 'products:list-category' c.pk %}">{{ c }}</a></li>
+    <div class="flex">
+        <div class="w-1/6 px-10">
+            <h2 class="text-lg font-semibold pb-2 mb-2 border-b">{% trans '商品カテゴリー' %}</h2>
+            <ul>
+                <li class="mb-2"><a href="{% url 'products:list' %}">{% trans 'すべて' %}</a></li>
+                {% for category in categories %}
+                <li class="mb-2"><a href="{% url 'products:list-category' category.pk %}">{{ category }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="w-5/6 flex flex-wrap mb-10">
+            {% if products %}
+            {% for product in products %}
+            {% include 'mixins/products/product-card.html' with product=product %}
             {% endfor %}
-        </ul>
+
+            <div class="flex items-center justify-center mx-auto container">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="text-teal-500">
+                    <i class="fas fa-arrow-left fa-lg"></i>
+                </a>
+                {% endif %}
+
+                <span class="mx-3 font-medium text-lg">
+                    {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}
+                    {{ current_page }} ページ{% endblocktrans %}
+                </span>
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="text-teal-500">
+                    <i class="fas fa-arrow-right fa-lg"></i>
+                </a>
+                {% endif %}
+            </div>
+
+            {% else %}
+            <p class="flex justify-center items-center font-semibold w-full h-50vh text-center text-2xl">
+                <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span class="ml-5">商品が存在しません。</span>
+            </p>
+            {% endif %}
+        </div>
     </div>
 
-    <div class="w-5/6 flex flex-wrap mb-10">
-        {% if products %}
-        {% for product in products %}
-        {% include 'mixins/products/product-card.html' with product=product %}
-        {% endfor %}
-        {% else %}
-        <p>商品が存在しません。</p>
-        {% endif %}
-    </div>
 
-    <!-- <div class="flex items-center justify-center mx-auto container">
-        {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}" class="text-teal-500">
-            <i class="fas fa-arrow-left fa-lg"></i>
-        </a>
-        {% endif %}
-
-        <span class="mx-3 font-medium text-lg">
-            {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}Page
-            {{ current_page }} of {{ total_pages }}{% endblocktrans %}
-        </span>
-
-        {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="text-teal-500">
-            <i class="fas fa-arrow-right fa-lg"></i>
-        </a>
-        {% endif %}
-    </div> -->
 </div>
 
 

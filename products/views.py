@@ -1,5 +1,4 @@
-from django.views.generic.base import View
-from django.views.generic import ListView
+from django.views.generic import ListView, View, DetailView
 from django.shortcuts import render
 from . import models
 
@@ -12,7 +11,7 @@ class HomeView(View):
         return render(request, "statics/home.html")
 
 
-class ProductView(ListView):
+class ProductListView(ListView):
 
     """ 商品一覧 """
 
@@ -21,21 +20,19 @@ class ProductView(ListView):
     ordering = "created"
     context_object_name = "products"
     extra_context = {
-        "category": models.Category.objects.all(),
-    }
-    template_name = "products/product-list.html"
-
-
-class CategoryProductView(ListView):
-
-    model = models.Product
-    paginate_by = 9
-    ordering = "created"
-    context_object_name = "products"
-    extra_context = {
-        "category": models.Category.objects.all(),
+        "categories": models.Category.objects.all(),
     }
     template_name = "products/product-list.html"
 
     def get_queryset(self):
-        return models.Product.objects.filter(category_id=self.kwargs.get("pk"))
+        if self.kwargs.get("pk"):
+            return models.Product.objects.filter(category_id=self.kwargs.get("pk"))
+        return models.Product.objects.all()
+
+
+class ProductDetailView(DetailView):
+
+    """ 商品詳細 """
+
+    model = models.Product
+    template_name = "products/product-detail.html"
