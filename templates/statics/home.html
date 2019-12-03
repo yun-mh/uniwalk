@@ -1,45 +1,46 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 
 {% block page_title %}
-    ホーム
+{% trans 'ホーム' %}
 {% endblock page_title %}
 
-{% block content %} 
-    <section class="h-screen bg-center object-cover" style="background-image: url({% static 'images/visual.jpg' %});">
-    </section>
+{% block content %}
+<section class="h-screen bg-center object-cover" style="background-image: url({% static 'images/visual.jpg' %});">
+</section>
 
-    <section class="h-screen">
-        <img src="images/model1.jpg" width="50%">
-        <img src="images/model2.jpg" width="50%">
-        <img src="images/model3.jpg" width="25%">
-        <img src="images/model4.jpg" width="25%">
-    </section>
+<section class="h-screen">
+    <img src="images/model1.jpg" width="50%">
+    <img src="images/model2.jpg" width="50%">
+    <img src="images/model3.jpg" width="25%">
+    <img src="images/model4.jpg" width="25%">
+</section>
 
-    <section class="md:h-maxscreen lg:h-halfscreen p-5 flex flex-wrap lg:flex-no-wrap justify-around items-center bg-gray-100">
-        <div class="text-center lg:max-w-2xl lg:text-justify p-10 xs:p-5 xs:mb-5">
-            <h1 class="text-5xl lg:mb-3 text-gray-800">UNIWALK</h1>
-            <p class="leading-loose text-gray-700">
-                今日はどのシューズを履いていこう。今日のスタイルにはどのシューズが合うだろう。
-                「Uniwalk」はあなたのために、あなたのデザインで、あなたのサイズでシューズを作ります。
-                簡単にデザインをカスタマイズして、足測定で自分にピッタリのサイズの靴を注文できます。
-                あなたのオリジナルデザインでシューズを作る楽しみを体感してください。      
-            </p>
-        </div>
-        <div class="xs:p-5 lg:p-10">
-            <img src="{% static 'images/test.jpg' %}" width="400px">
-        </div>
-    </section>
+<section
+    class="md:h-maxscreen lg:h-halfscreen p-5 flex flex-wrap lg:flex-no-wrap justify-around items-center bg-gray-100">
+    <div class="text-center lg:max-w-2xl lg:text-justify p-10 xs:p-5 xs:mb-5">
+        <h1 class="text-5xl lg:mb-3 text-gray-800">UNIWALK</h1>
+        <p class="leading-loose text-gray-700">
+            今日はどのシューズを履いていこう。今日のスタイルにはどのシューズが合うだろう。
+            「Uniwalk」はあなたのために、あなたのデザインで、あなたのサイズでシューズを作ります。
+            簡単にデザインをカスタマイズして、足測定で自分にピッタリのサイズの靴を注文できます。
+            あなたのオリジナルデザインでシューズを作る楽しみを体感してください。
+        </p>
+    </div>
+    <div class="xs:p-5 lg:p-10">
+        <img src="{% static 'images/test.jpg' %}" width="400px">
+    </div>
+</section>
 
-    <section class="h-halfscreen">
+<section class="h-halfscreen">
 
-    </section>
+</section>
 
-    <section class="h-screen">
+<section class="h-screen">
 
-    </section>
+</section>
 {% endblock content %}
 
 {% block javascript %}
-    <script src="https://kit.fontawesome.com/d7ead653ba.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/d7ead653ba.js" crossorigin="anonymous"></script>
 {% endblock %}

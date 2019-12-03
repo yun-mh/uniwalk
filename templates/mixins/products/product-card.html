@@ -1,0 +1,23 @@
+{% load humanize %}
+<div class="w-1/3 mb-10 px-3 overflow-hidden">
+    <a href="">
+        <div class="w-full h-50vh bg-cover bg-center mb-2" style="background-image: url({{ product.first_photo }});">
+        </div>
+        <div class="flex justify-between mb-2 truncate">
+            <div class="w-4/5 overflow-hidden flex">
+                <span class="text-lg text-black w-11/12 block overflow-hidden font-medium">{{ product.name }}</span>
+            </div>
+            <span class="text-lg text-black font-medium">
+                &yen; {{ product.price|intcomma }}
+            </span>
+        </div>
+        <div class="flex justify-between mb-2 truncate">
+            <div class="w-4/5 overflow-hidden flex">
+                <span class="text-sm text-gray-600 block truncate">{{ product.category }}</span>
+            </div>
+            <span class="text-sm flex items-center">
+                <i class="fas fa-star text-xs text-red-500 mr-1"></i> {{ product.name }}
+            </span>
+        </div>
+    </a>
+</div>
