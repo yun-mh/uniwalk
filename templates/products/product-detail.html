@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n js %}
 
 {% block page_title %}
 {% blocktrans with product_name=product.name %}{{ product_name }}{% endblocktrans %}
@@ -32,7 +32,7 @@
 <div class="container mx-auto pb-56">
     <div class="w-full">
         <div class="mt-10">
-            <div class="flex items-center w-full my-5">
+            <div class="flex justify-between items-center w-full my-5">
                 <div class="h-px w-2/5 bg-gray-400"></div>
                 <span class="font-medium text-4xl mx-12">{% trans 'レビュー' %}</span>
                 <div class="h-px w-2/5 bg-gray-400"></div>
@@ -43,27 +43,46 @@
                     <i class="fas fa-star text-teal-500"></i>
                     <span class="ml-1 font-medium text-2xl">{{ product.total_rating }}</span>
                     <span
-                        class="ml-3 font-medium text-xl">{% blocktrans %}({{ product.reviews.count }}件のレビュー){% endblocktrans %}</span>
+                        class="ml-3 font-medium text-xl">{% blocktrans with review_count=product.reviews.count %}({{ review_count }}件のレビュー){% endblocktrans %}</span>
                 </div>
             </div>
-            <div class="mt-10">
-                {% for review in room.reviews.all %}
-                <div class="border-section">
-                    <div class="mb-3 flex">
-                        <div>
-
+            <div class="flex flex-wrap -mx-5">
+                {% for r in rev %}
+                <div class="w-1/2 overflow-hidden p-5">
+                    <div id="card-{{ r.pk }}" class="h-48 p-5 rounded shadow-lg">
+                        <div class="flex flex-col mb-3">
+                            <span class="font-medium">{{ r.user.get_email_name }}</span>
+                            <span class="text-sm text-gray-500">{{ r.created|date:'Y-m-d' }}</span>
                         </div>
-                        <div class="flex flex-col ml-5">
-                            <span class="font-medium">{{ review.user.first_name }}</span>
-                            <span class="text-sm text-gray-500">{{ review.created|date:'F Y' }}</span>
+                        <p id="text-{{ r.pk }}" class="text-justify">{{ r.text|truncatechars:250 }}</p>
+                        {% if r.text|length > 250 %}
+                        <div class="text-center">
+                            <a id="{{ r.pk }}" class="text-sm text-teal-500 cursor-pointer"
+                                onclick="openCards(this.id)">{% trans '詳しく見る' %}</a>
                         </div>
+                        {% endif %}
                     </div>
-                    <p>{{ review.review }}</p>
+                    {{ product.get_reviews }}
                 </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    var texts = {{ reviews_text | js }};
+    const openCards = (id) => {
+        const card = document.getElementById("card-" + id);
+        const text = document.getElementById("text-" + id);
+        const btn = document.getElementById(id);
+        console.log(card)
+        card.classList.remove("h-48");
+        card.classList.add("h-auto");
+        text.innerHTML = texts[id - 1];
+        document.getElementById(id).remove();
+    };
+    console.log(texts)
+</script>
 
 {% endblock %}

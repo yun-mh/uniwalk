@@ -47,7 +47,7 @@ class Product(core_models.TimeStampedModel):
         all_ratings = 0
         if len(all_reviews) > 0:
             for review in all_reviews:
-                all_ratings += review.rating_average()
+                all_ratings += review.rate
             return round(all_ratings / len(all_reviews), 2)
         return 0
 
@@ -61,3 +61,6 @@ class Product(core_models.TimeStampedModel):
     def get_next_four_images(self):
         images = self.images.all()[1:5]
         return images
+
+    class Meta:
+        ordering = ("-created",)
