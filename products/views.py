@@ -18,7 +18,6 @@ class ProductListView(ListView):
 
     model = models.Product
     paginate_by = 9
-    ordering = "created"
     context_object_name = "products"
     extra_context = {
         "categories": models.Category.objects.all(),
@@ -27,8 +26,10 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         if self.kwargs.get("pk"):
-            return models.Product.objects.filter(category_id=self.kwargs.get("pk"))
-        return models.Product.objects.all()
+            return models.Product.objects.filter(
+                category_id=self.kwargs.get("pk")
+            ).order_by("-created")
+        return models.Product.objects.all().order_by("-created")
 
 
 class ProductDetailView(DetailView):
@@ -40,8 +41,8 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        posts = self.object.reviews.all()[0:4]
-        each = [review.text for review in posts]
+        posts = self.object.reviews.all().order_by("-created")[0:4]
+        each = {review.pk: review.text for review in posts}
         context["reviews_text"] = each
         context["rev"] = posts
         return context

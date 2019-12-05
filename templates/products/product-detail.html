@@ -85,13 +85,14 @@
 
 <script>
     var texts = {{ reviews_text | js }};
+    console.log(texts)
     const openCards = (id) => {
         const card = document.getElementById("card-" + id);
         const text = document.getElementById("text-" + id);
         const btn = document.getElementById(id);
         card.classList.remove("h-48");
         card.classList.add("h-auto");
-        text.innerHTML = texts[id - 1];
+        text.innerHTML = texts[id];
         document.getElementById(id).remove();
     };
 </script>

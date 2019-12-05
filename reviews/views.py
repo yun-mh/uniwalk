@@ -12,12 +12,13 @@ class ReviewListView(ListView):
 
     model = models.Review
     paginate_by = 5
-    ordering = "created"
     context_object_name = "reviews"
     template_name = "reviews/review-list.html"
 
     def get_queryset(self):
-        return models.Review.objects.filter(product_id=self.kwargs.get("pk"))
+        return models.Review.objects.filter(product_id=self.kwargs.get("pk")).order_by(
+            "-created"
+        )
 
     def get_context_data(self, **kwargs):
         pk = self.kwargs.get("pk")
