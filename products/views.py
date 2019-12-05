@@ -40,9 +40,9 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        posts = self.object.reviews.all()
+        posts = self.object.reviews.all()[0:4]
         each = [review.text for review in posts]
         context["reviews_text"] = each
-        context["rev"] = self.object.reviews.all()
+        context["rev"] = posts
         return context
 

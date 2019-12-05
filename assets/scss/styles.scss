@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP&display=swap');
+
+body {
+  font-family: 'Noto Sans JP', 'Montserrat', sans-serif;
+}
+
 // nav
 .dropdown-content {
   z-index: 1;
