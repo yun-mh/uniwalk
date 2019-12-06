@@ -4,7 +4,9 @@ from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views.generic import View, FormView
+from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
+from django.utils import translation
 from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
@@ -91,3 +93,10 @@ class PasswordResetConfirmView(PasswordResetConfirmView):
 
 class PasswordResetCompleteView(PasswordResetCompleteView):
     template_name = "users/password-reset-complete.html"
+
+
+def switch_language(request):
+    lang = request.GET.get("lang", None)
+    if lang is not None:
+        request.session[translation.LANGUAGE_SESSION_KEY] = lang
+    return HttpResponse(status=200)

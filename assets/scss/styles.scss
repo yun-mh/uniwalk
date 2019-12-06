@@ -1,10 +1,10 @@
 @tailwind base;
 @tailwind components;
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP&display=swap");
 
 body {
-  font-family: 'Noto Sans JP', 'Montserrat', sans-serif;
+  font-family: "Noto Sans JP", "Montserrat", sans-serif;
 }
 
 // nav
@@ -24,8 +24,7 @@ body {
 }
 
 input,
-textarea,
-select {
+textarea {
   @apply w-full font-light rounded-sm py-5 text-lg text-left border border-gray-600 px-5;
   &:focus {
     @apply outline-none border-teal-500;
@@ -35,10 +34,6 @@ select {
 textarea {
   resize: none;
   height: 100px;
-}
-
-select {
-  height: 50px;
 }
 
 form {

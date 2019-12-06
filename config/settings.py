@@ -64,6 +64,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -158,3 +159,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get("USERNAME")
 EMAIL_HOST_PASSWORD = os.environ.get("PASSWORD")
 DEFAULT_FROM_EMAIL = "nhs80416@naver.com"
+
+
+# Locale
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)

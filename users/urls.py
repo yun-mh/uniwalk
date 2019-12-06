@@ -25,4 +25,5 @@ urlpatterns = [
         views.PasswordResetCompleteView.as_view(),
         name="password-reset-complete",
     ),
+    path("switch-language/", views.switch_language, name="switch-language"),
 ]
