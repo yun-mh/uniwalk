@@ -100,3 +100,22 @@ class SetPasswordForm(SetPasswordForm):
         strip=False,
         widget=forms.PasswordInput(attrs={"placeholder": _("パスワード確認")}),
     )
+
+
+class WithdrawalForm(forms.Form):
+
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
+    )
+
+    def clean(self):
+        email = self.cleaned_data.get("email")
+        user = models.User.objects.get(email=email)
+        password = self.cleaned_data.get("password")
+        if user.check_password(password):
+            return self.cleaned_data
+        else:
+            self.add_error("password", forms.ValidationError(_("パスワードをもう一度確認してください。")))

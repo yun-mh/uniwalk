@@ -1,0 +1,26 @@
+{% load i18n %}
+<div class="flex h-full flex-col items-center justify-between">
+    <h2 class="font-semibold text-xl text-white py-6 bg-gray-600 w-full text-center">
+        {% trans 'マイページ' %}
+    </h2>
+    <ul class="w-full text-center">
+        <a href="{% url 'users:update-profile' user.pk %}">
+            <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans '会員情報変更' %}</li>
+        </a>
+        <a href="">
+            <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans '注文履歴' %}</li>
+        </a>
+        <a href="">
+            <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans 'クレジットカード' %}</li>
+        </a>
+        <a href="">
+            <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans 'マイデザイン' %}</li>
+        </a>
+        <a href="">
+            <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans 'マイ足サイズ' %}</li>
+        </a>
+        <a href="{% url 'users:withdrawal' user.pk %}">
+            <li class="py-5 font-medium hover:bg-gray-200">{% trans '会員脱退' %}</li>
+        </a>
+    </ul>
+</div>

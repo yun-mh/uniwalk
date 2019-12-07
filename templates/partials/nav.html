@@ -37,7 +37,7 @@
                     <span class="text-xs">{% trans 'マイアカウント' %}</span>
                 </div>
                 <div class="dropdown-content border border-gray-400 absolute bg-white w-40 text-center">
-                    <a href="myorder.html"
+                    <a href="{{ user.get_absolute_url }}"
                         class="text-gray-800 block border-b border-gray-300 py-2 hover:text-gray-600">{% trans 'マイページ' %}</a>
                     <a href="{% url 'users:logout' %}"
                         class="text-gray-800 block border-b border-gray-300 py-2 hover:text-gray-600">{% trans 'ログアウト' %}</a>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans '会員脱退申込み' %}
+{% endblock page_title%}
+
+{% block content %}
+
+<div class="mx-auto pt-16 pb-10">
+    <div class="container mx-auto flex">
+        <div class="w-1/5 h-50vh shadow-lg">
+            {% include 'partials/mypage-menu.html' %}
+        </div>
+
+        <div class="w-4/5 ml-20 p-5 flex flex-col mb-10">
+            {% trans "ログイン" as login %}
+            {% include 'mixins/auth/form_auth.html' with form=form cta=login %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+{% endblock %}

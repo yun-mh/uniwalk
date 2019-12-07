@@ -3,11 +3,12 @@ from django.core.mail import send_mail
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django.views.generic import View, FormView
+from django.views.generic import View, FormView, DetailView, UpdateView
 from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
 from django.utils import translation
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import (
@@ -93,6 +94,45 @@ class PasswordResetConfirmView(PasswordResetConfirmView):
 
 class PasswordResetCompleteView(PasswordResetCompleteView):
     template_name = "users/password-reset-complete.html"
+
+
+class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView):
+    model = models.User
+    template_name = "users/update-profile.html"
+    fields = (
+        "first_name",
+        "last_name",
+    )
+    success_message = "Profile Updated"
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class WithdrawalView(mixins.LoggedInOnlyView, FormView):
+    model = models.User
+    template_name = "users/withdrawal.html"
+    form_class = forms.WithdrawalForm
+
+    def get_success_url(self):
+        pk = self.kwargs.get("pk")
+        return reverse_lazy("users:withdrawal-check", kwargs={"pk": pk})
+
+    def form_valid(self, form):
+        pk = self.kwargs.get("pk")
+        email = form.cleaned_data.get("email")
+        if self.request.user.email != email:
+            messages.error(self.request, "会員様のメールアドレスと入力したメールアドレスが違います。")
+            return redirect(reverse("users:withdrawal", kwargs={"pk": pk}))
+        else:
+            return super().form_valid(form)
+
+
+class WithdrawalCheckView(View):
+    template_name = "users/withdrawal-check.html"
+
+    def get(self, request, pk):
+        return render(request, template_name=self.template_name)
 
 
 def switch_language(request):

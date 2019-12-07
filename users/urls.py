@@ -25,5 +25,38 @@ urlpatterns = [
         views.PasswordResetCompleteView.as_view(),
         name="password-reset-complete",
     ),
+    path(
+        "mypage/<int:pk>/update-profile",
+        views.UpdateProfileView.as_view(),
+        name="update-profile",
+    ),
+    # path(
+    #     "mypage/<int:pk>/profile/update/",
+    #     views.UpdateProfileView.as_view(),
+    #     name="update-profile",
+    # ),
+    # path("mypage/<int:pk>/orders/", views.OrdersListView.as_view(), name="orders",),
+    # path(
+    #     "mypage/<int:user_pk>/orders/detail/<int:order_pk>",
+    #     views.OrdersDetailView.as_view(),
+    #     name="orders-detail",
+    # ),
+    # path("mypage/<int:pk>/cards/", views.CardsListView.as_view(), name="cards",),
+    # path(
+    #     "mypage/<int:pk>/mydesigns/",
+    #     views.MyDesignsListView.as_view(),
+    #     name="mydesigns",
+    # ),
+    # path("mypage/<int:pk>/footsizes/", views.FootSizeView.as_view(), name="footsizes",),
+    path(
+        "mypage/<int:pk>/withdrawal/",
+        views.WithdrawalView.as_view(),
+        name="withdrawal",
+    ),
+    path(
+        "mypage/<int:pk>/withdrawal/check/",
+        views.WithdrawalCheckView.as_view(),
+        name="withdrawal-check",
+    ),
     path("switch-language/", views.switch_language, name="switch-language"),
 ]

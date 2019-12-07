@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from .managers import CustomUserManager
 from core.models import JPPrefectureField, JPPostalCodeModelField
-
+from django.shortcuts import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 from localflavor.jp.jp_prefectures import JP_PREFECTURES
 
@@ -43,3 +43,6 @@ class User(AbstractUser):
 
     def get_email_name(self):
         return self.email.split("@")[0]
+
+    def get_absolute_url(self):
+        return reverse("users:update-profile", kwargs={"pk": self.pk})
