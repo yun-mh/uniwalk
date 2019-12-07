@@ -1,10 +1,10 @@
 @tailwind base;
 @tailwind components;
 
-@import url("https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP|Noto+Sans+KR&display=swap");
 
 body {
-  font-family: "Noto Sans JP", "Montserrat", sans-serif;
+  font-family: "Noto Sans JP", "Montserrat", "Noto Sans KR", sans-serif;
 }
 
 // nav

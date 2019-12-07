@@ -1,11 +1,32 @@
 {% load static i18n %}
 <nav class="flex fixed w-full items-center justify-between flex-wrap bg-white h-28">
     <div class="flex w-full border-b border-gray-400 h-8 px-3 justify-between">
-        <div class="w-1/2">
+        <div class="w-1/2 flex items-center">
+            <i class="fas fa-globe-americas text-gray-500 mr-3 ml-5"></i>
             {% get_current_language as LANGUAGE_CODE %}
-            <select class="w-1/6" id="js-lang">
-                <option value="ja" {% if LANGUAGE_CODE == 'ja' %} selected {% endif %}>日本語</option>
-                <option value="ko" {% if LANGUAGE_CODE == 'ko' %} selected {% endif %}>한국어</option>
+            {% if LANGUAGE_CODE == 'ja' %}
+            <i class="twa-lg twa-japan-flag"></i>
+            {% elif LANGUAGE_CODE == 'ko' %}
+            <i class="twa-lg twa-korea-south-south-korea-flag"></i>
+            {% elif LANGUAGE_CODE == 'id' %}
+            <i class="twa-lg twa-indonesia-flag"></i>
+            {% elif LANGUAGE_CODE == 'en' %}
+            <i class="twa-lg twa-america-island-minor-outlying-united-united-states-us-usa-flag"></i>
+            {% elif LANGUAGE_CODE == 'zh-hans' %}
+            <i class="twa-lg twa-china-flag"></i>
+            {% elif LANGUAGE_CODE == 'pt-br' %}
+            <i class="twa-lg twa-brazil-flag"></i>
+            {% endif %}
+            <select class="w-1/6 h-5 ml-1 text-xs border border-gray-400" id="js-lang">
+                <option value="ja" {% if LANGUAGE_CODE == 'ja' %} selected {% endif %} class="text-sm">日本語</option>
+                <option value="ko" {% if LANGUAGE_CODE == 'ko' %} selected {% endif %} class="text-sm">한국어</option>
+                <option value="id" {% if LANGUAGE_CODE == 'id' %} selected {% endif %} class="text-sm">Bahasa Indonesia
+                </option>
+                <option value="en" {% if LANGUAGE_CODE == 'en' %} selected {% endif %} class="text-sm">English</option>
+                <option value="zh-hans" {% if LANGUAGE_CODE == 'zh-hans' %} selected {% endif %} class="text-sm">中文
+                </option>
+                <option value="pt-br" {% if LANGUAGE_CODE == 'pt-br' %} selected {% endif %} class="text-sm">
+                    Português(Brasil)</option>
             </select>
         </div>
         <div class="w-full block flex-grow lg:flex lg:justify-end lg:items-center lg:w-auto lg:flex-grow px-2">

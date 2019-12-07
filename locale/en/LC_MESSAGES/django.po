@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-06 16:24+0900\n"
+"POT-Creation-Date: 2019-12-06 22:39+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\core\models.py:24
 msgid "JP Prefecture (two number codes)"
@@ -57,25 +57,25 @@ msgstr ""
 msgid "Password reset on %(site_name)s"
 msgstr ""
 
-#: .\templates\partials\nav.html:16
+#: .\templates\partials\nav.html:30
 msgid "マイアカウント"
-msgstr "내 계정"
+msgstr ""
 
-#: .\templates\partials\nav.html:20
+#: .\templates\partials\nav.html:34
 msgid "マイページ"
-msgstr "마이페이지"
+msgstr ""
 
-#: .\templates\partials\nav.html:22
+#: .\templates\partials\nav.html:36
 msgid "ログアウト"
-msgstr "로그아웃"
+msgstr ""
 
-#: .\templates\partials\nav.html:25
+#: .\templates\partials\nav.html:39
 msgid "管理者モード"
-msgstr "관리자 모드"
+msgstr ""
 
-#: .\templates\partials\nav.html:33
+#: .\templates\partials\nav.html:47
 msgid "会員登録・ログイン"
-msgstr "회원가입・로그인"
+msgstr ""
 
 #: .\templates\products\product-detail.html:5
 #, python-format
@@ -84,15 +84,15 @@ msgstr ""
 
 #: .\templates\products\product-detail.html:23
 msgid "税込"
-msgstr "세금 포함"
+msgstr ""
 
 #: .\templates\products\product-detail.html:28
 msgid "カスタマイズして購入"
-msgstr "커스터마이즈하여 구매"
+msgstr ""
 
 #: .\templates\products\product-detail.html:37
 msgid "レビュー"
-msgstr "리뷰"
+msgstr ""
 
 #: .\templates\products\product-detail.html:46
 #, python-format
@@ -101,27 +101,27 @@ msgstr ""
 
 #: .\templates\products\product-detail.html:49
 msgid "レビューを書く"
-msgstr "리뷰 작성하기"
+msgstr ""
 
 #: .\templates\products\product-detail.html:68
 msgid "詳しく見る"
-msgstr "자세히 보기"
+msgstr ""
 
 #: .\templates\products\product-detail.html:75
 msgid "全てのレビューを見る"
-msgstr "모든 리뷰를 보기"
+msgstr ""
 
 #: .\templates\products\product-list.html:5
 msgid "商品リスト"
-msgstr "상품 리스트"
+msgstr ""
 
 #: .\templates\products\product-list.html:14
 msgid "商品カテゴリー"
-msgstr "상품 카테고리"
+msgstr ""
 
 #: .\templates\products\product-list.html:16
 msgid "すべて"
-msgstr "모두"
+msgstr ""
 
 #: .\templates\products\product-list.html:37
 #, python-format
@@ -132,13 +132,13 @@ msgstr ""
 
 #: .\templates\reviews\review-list.html:5
 msgid "レビューリスト"
-msgstr "리뷰 리스트"
+msgstr ""
 
 #: .\templates\reviews\review-list.html:36
 #: .\templates\reviews\review-post.html:36
 #, python-format
 msgid "全 %(review_count)s 件"
-msgstr "총 %(review_count)s 건"
+msgstr ""
 
 #: .\templates\reviews\review-list.html:69
 #, python-format
@@ -150,15 +150,15 @@ msgstr ""
 #: .\templates\reviews\review-post.html:5
 #: .\templates\reviews\review-post.html:46
 msgid "レビュー投稿"
-msgstr "리뷰 작성"
+msgstr ""
 
 #: .\templates\statics\about.html:5
 msgid "アバウト"
-msgstr "소개"
+msgstr ""
 
 #: .\templates\statics\about.html:11
 msgid "UniWalkは"
-msgstr "UniWalk는…"
+msgstr ""
 
 #: .\templates\statics\about.html:26
 msgid ""
@@ -171,18 +171,10 @@ msgid ""
 "                後はあなたのもとにシューズが届くのを待つだけ！きっとお気に入"
 "りのシューズが手に入ります。"
 msgstr ""
-"언제나 이상적인 운동화를 찾고 계신 고객님을 위해 UniWalk가 탄생했습니다."
-"<br>\n"
-"                UniWalk는 고객님이 좋아하시는 색상, 디자인, 사이즈로 "
-"고객님을 위한 운동화를 만듭니다.<br>\n"
-"                우선, 운동화 베이스를 골라 좋아하는 색상을 지정하고 디테일을 디자인하고, "
-"발사이즈를 측정하세요.<br>\n"
-"                그 후에는 고객님께 운동화가 도착할 때까지 기다리면 돼요! "
-"마음에 드는 운동화를 손에 넣으실 수 있어요."
 
 #: .\templates\statics\about.html:35
 msgid "アクセス"
-msgstr "위치"
+msgstr ""
 
 #: .\templates\statics\about.html:44
 msgid ""
@@ -191,19 +183,14 @@ msgid ""
 "                営業時間 平日：13：00～20：00　土日祝：10：00～18：00<br>\n"
 "                定休日 月曜日定休"
 msgstr ""
-"주소 우편번호：450-0002 아이치현 나고야시 나카무라구 메이에키 4쵸메 27-1 종합"
-"교사 스파이럴 타워즈<br>\n"
-"                영업시간 평일：13：00～20：00　공휴일(토・일 포함)：10：00～"
-"18：00<br>\n"
-"                월요일 정기휴일"
 
 #: .\templates\statics\about.html:52
 msgid "特長"
-msgstr "특징"
+msgstr ""
 
 #: .\templates\statics\about.html:57
 msgid "カスタマイズ"
-msgstr "커스터마이즈"
+msgstr ""
 
 #: .\templates\statics\about.html:59
 msgid ""
@@ -212,14 +199,10 @@ msgid ""
 "タマイズ。<br>\n"
 "                        自分の理想のシューズを形にしてください。"
 msgstr ""
-"자신만의 디자인을 커스터마이즈해봐요!<br>\n"
-"                        색상을 선택하거나 디테일을 추가하여 간단히 커스터마이"
-"즈 가능합니다.<br>\n"
-"                        자신만의 이상적인 운동화를 구현해보세요."
 
 #: .\templates\statics\about.html:68
 msgid "足測定"
-msgstr "발사이즈 측정"
+msgstr ""
 
 #: .\templates\statics\about.html:70
 msgid ""
@@ -227,57 +210,55 @@ msgid ""
 "                        簡単にサイズを測定してピッタリのシューズを注文しよ"
 "う！"
 msgstr ""
-"내 발에 딱 맞는 운동화를 찾기 어려우세요?<br>\n"
-"                        간단히 사이즈를 측정하여 내 발에 딱 맞는 운동화를 주문해봐요!"
 
 #: .\templates\statics\home.html:5
 msgid "ホーム"
-msgstr "홈"
+msgstr ""
 
 #: .\templates\users\login.html:5 .\templates\users\login.html:11
 #: .\templates\users\login.html:14 .\templates\users\password-reset.html:20
 #: .\templates\users\signup-success.html:16 .\templates\users\signup.html:21
 msgid "ログイン"
-msgstr "로그인"
+msgstr ""
 
 #: .\templates\users\login.html:18
 msgid "パスワードを忘れましたか？"
-msgstr "비밀번호를 잊어버리셨나요?"
+msgstr ""
 
 #: .\templates\users\login.html:19
 msgid "パスワード再発行"
-msgstr "비밀번호 재설정"
+msgstr ""
 
 #: .\templates\users\login.html:23
 msgid "アカウントを持っていないですか？"
-msgstr "아직 계정을 갖고 계시지 않나요?"
+msgstr ""
 
 #: .\templates\users\login.html:25 .\templates\users\signup.html:5
 #: .\templates\users\signup.html:12 .\templates\users\signup.html:15
 msgid "会員登録"
-msgstr "회원가입"
+msgstr ""
 
 #: .\templates\users\password-reset-complete.html:5
 #: .\templates\users\password-reset-complete.html:12
 msgid "パスワード再設定完了"
-msgstr "비밀번호 재설정 완료"
+msgstr ""
 
 #: .\templates\users\password-reset-complete.html:13
 msgid "パスワード再設定が完了しました。"
-msgstr "비밀번호 재설정을 완료했습니다."
+msgstr ""
 
 #: .\templates\users\password-reset-complete.html:15
 msgid "下のボタンを押すとログインページに移動します。"
-msgstr "아래 버튼을 누르면 로그인 페이지로 이동합니다."
+msgstr ""
 
 #: .\templates\users\password-reset-confirm.html:5
 #: .\templates\users\password-reset-confirm.html:12
 msgid "パスワード再設定"
-msgstr "비밀번호 재설정"
+msgstr ""
 
 #: .\templates\users\password-reset-confirm.html:15
 msgid "設定する"
-msgstr "설정하기"
+msgstr ""
 
 #: .\templates\users\password-reset-confirm.html:21
 msgid ""
@@ -287,11 +268,11 @@ msgstr ""
 
 #: .\templates\users\password-reset-done.html:5
 msgid "パスワード再設定申込み完了"
-msgstr "비밀번호 재설정 신청완료"
+msgstr ""
 
 #: .\templates\users\password-reset-done.html:12
 msgid "パスワード再発行申込み完了"
-msgstr "비밀번호 재설정 신청완료"
+msgstr ""
 
 #: .\templates\users\password-reset-done.html:13
 msgid "ご登録のメールアドレス宛にパスワード再発行用メールを送信いたしました。"
@@ -308,28 +289,28 @@ msgstr ""
 #: .\templates\users\password-reset.html:5
 #: .\templates\users\password-reset.html:11
 msgid "パスワード再設定申込み"
-msgstr "비밀번호 재설정 신청"
+msgstr ""
 
 #: .\templates\users\password-reset.html:14
 msgid "申し込む"
-msgstr "신청하기"
+msgstr ""
 
 #: .\templates\users\password-reset.html:18
 msgid "パスワードを覚えていますか？"
-msgstr "비밀번호를 기억하고 계세요?"
+msgstr ""
 
 #: .\templates\users\signup-success.html:5
 #: .\templates\users\signup-success.html:12
 msgid "会員登録完了"
-msgstr "회원가입완료"
+msgstr ""
 
 #: .\templates\users\signup-success.html:13
 msgid "本登録が完了いたしました。"
-msgstr "회원가입이 완료되었습니다."
+msgstr ""
 
 #: .\templates\users\signup-success.html:14
 msgid "それではショッピングをお楽しみください。"
-msgstr "이제부터 쇼핑을 즐겨주시기 바랍니다."
+msgstr ""
 
 #: .\templates\users\signup-success.html:14
 msgid "今後ともご愛顧賜りますようよろしくお願い申し上げます。"
@@ -337,15 +318,15 @@ msgstr ""
 
 #: .\templates\users\signup.html:19
 msgid "既にアカウントを持っていますか?"
-msgstr "이미 계정을 갖고 계세요?"
+msgstr ""
 
 #: .\users\forms.py:11 .\users\forms.py:41 .\users\forms.py:86
 msgid "メールアドレス"
-msgstr "이메일 주소"
+msgstr ""
 
 #: .\users\forms.py:14 .\users\forms.py:49
 msgid "パスワード"
-msgstr "비밀번호"
+msgstr ""
 
 #: .\users\forms.py:42
 msgid "姓"
