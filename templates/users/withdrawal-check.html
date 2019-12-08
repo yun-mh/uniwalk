@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans '会員脱退確認' %}
+{% endblock page_title%}
+
+{% block content %}
+
+<div class="mx-auto pt-16 pb-10">
+    <div class="container mx-auto flex">
+        <div class="w-1/5 h-50vh shadow-lg">
+            {% include 'partials/mypage-menu.html' %}
+        </div>
+
+        <div class="w-4/5 ml-20 px-5 py-20 flex flex-col justify-between">
+            <h2 class="w-full text-center font-bold text-4xl">{% trans '会員脱退' %}</h2>
+            <p class="text-center leading-loose">
+                {% trans '会員から退会された場合には、現在保存されている購入履歴やお届け先等の情報は、<span class="font-semibold text-red-500">すべて削除</span>されます。<br>よろしければ、下のボタンを押してください。' %}
+            </p>
+            <form method="POST" class="text-center" enctype="multipart/form-data">
+                {% csrf_token %}
+                <button class="btn-link text-white w-64">{% trans '脱退する' %}</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+{% endblock %}

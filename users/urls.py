@@ -26,7 +26,7 @@ urlpatterns = [
         name="password-reset-complete",
     ),
     path(
-        "mypage/<int:pk>/update-profile",
+        "mypage/<int:pk>/update-profile/",
         views.UpdateProfileView.as_view(),
         name="update-profile",
     ),
@@ -49,14 +49,17 @@ urlpatterns = [
     # ),
     # path("mypage/<int:pk>/footsizes/", views.FootSizeView.as_view(), name="footsizes",),
     path(
-        "mypage/<int:pk>/withdrawal/",
+        "mypage/withdrawal/<int:pk>/",
         views.WithdrawalView.as_view(),
         name="withdrawal",
     ),
     path(
-        "mypage/<int:pk>/withdrawal/check/",
+        "mypage/withdrawal/check/<int:pk>/",
         views.WithdrawalCheckView.as_view(),
         name="withdrawal-check",
+    ),
+    path(
+        "withdrawal/done/", views.WithdrawalDoneView.as_view(), name="withdrawal-done",
     ),
     path("switch-language/", views.switch_language, name="switch-language"),
 ]

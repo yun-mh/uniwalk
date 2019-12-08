@@ -3,8 +3,8 @@ from django.core.mail import send_mail
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django.views.generic import View, FormView, DetailView, UpdateView
-from django.http import HttpResponse
+from django.views.generic import View, FormView, DetailView, UpdateView, DeleteView
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
 from django.utils import translation
 from django.contrib import messages
@@ -110,13 +110,8 @@ class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView
 
 
 class WithdrawalView(mixins.LoggedInOnlyView, FormView):
-    model = models.User
     template_name = "users/withdrawal.html"
     form_class = forms.WithdrawalForm
-
-    def get_success_url(self):
-        pk = self.kwargs.get("pk")
-        return reverse_lazy("users:withdrawal-check", kwargs={"pk": pk})
 
     def form_valid(self, form):
         pk = self.kwargs.get("pk")
@@ -124,15 +119,48 @@ class WithdrawalView(mixins.LoggedInOnlyView, FormView):
         if self.request.user.email != email:
             messages.error(self.request, "会員様のメールアドレスと入力したメールアドレスが違います。")
             return redirect(reverse("users:withdrawal", kwargs={"pk": pk}))
-        else:
-            return super().form_valid(form)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        pk = self.kwargs.get("pk")
+        return reverse("users:withdrawal-check", kwargs={"pk": pk})
 
 
-class WithdrawalCheckView(View):
+class WithdrawalCheckView(mixins.LoggedInOnlyView, DeleteView):
+    model = models.User
     template_name = "users/withdrawal-check.html"
 
     def get(self, request, pk):
+        return render(request, self.template_name, {"pk": pk})
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)
+
+    # def delete(self, form):
+    #     pk = self.kwargs.get("pk")
+    #     print(pk)
+    #     try:
+    #         user = models.User.objects.get(pk=pk)
+    #         print(user)
+    #         user.delete()
+    #     except models.User.DoesNotExist:
+    #         messages.error(self.request, "会員脱退を失敗しました。")
+    #         return redirect(reverse("users:withdrawal", kwargs={"pk": pk}))
+    #     return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse("users:withdrawal-done")
+
+
+class WithdrawalDoneView(View):
+    template_name = "users/withdrawal-done.html"
+
+    def get(self, request):
         return render(request, template_name=self.template_name)
+
 
 
 def switch_language(request):

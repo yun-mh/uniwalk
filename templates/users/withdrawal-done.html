@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans "会員脱退完了" %}
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center border p-6 border-gray-400">
+
+    <h2 class="font-medium text-4xl mb-5">{% trans "会員脱退完了" %}</h2>
+    <h3 class="font-medium text-2xl mb-3">{% trans "会員脱退が完了しました。" %}</h3>
+    <p class="text-center mb-5">{% trans "またのご利用お待ちしております！" %}</p>
+    <a href="{% url 'core:home' %}" class="btn-link">
+        {% trans "ホームへ" %}
+    </a>
+
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+
+{% endblock %}
