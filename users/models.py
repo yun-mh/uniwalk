@@ -30,8 +30,8 @@ class User(AbstractUser):
     phone_number = PhoneNumberField("電話番号", blank=True)
     postal_code = JPPostalCodeModelField("郵便番号")
     prefecture = JPPrefectureField("都道府県", blank=True)
-    adress_city = models.CharField("市区町村番地", max_length=40, blank=True)
-    adress_detail = models.CharField("建物名・号室", max_length=40, blank=True)
+    address_city = models.CharField("市区町村番地", max_length=40, blank=True)
+    address_detail = models.CharField("建物名・号室", max_length=40, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

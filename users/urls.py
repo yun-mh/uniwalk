@@ -26,7 +26,7 @@ urlpatterns = [
         name="password-reset-complete",
     ),
     path(
-        "mypage/<int:pk>/update-profile/",
+        "mypage/update-profile/<int:pk>/",
         views.UpdateProfileView.as_view(),
         name="update-profile",
     ),

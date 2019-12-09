@@ -13,7 +13,8 @@
             {% include 'partials/mypage-menu.html' %}
         </div>
 
-        <div class="w-4/5 ml-20 p-5 flex flex-col mb-10">
+        <div class="w-4/5 ml-20 flex flex-col mb-10">
+            <h2 class="font-bold text-4xl text-center mb-10">会員情報変更</h2>
             {% trans "更新する" as update %}
             {% include 'mixins/auth/form_auth.html' with form=form cta=update %}
         </div>

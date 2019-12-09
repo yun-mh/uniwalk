@@ -13,9 +13,13 @@
             {% include 'partials/mypage-menu.html' %}
         </div>
 
-        <div class="w-4/5 ml-20 p-5 flex flex-col mb-10">
-            {% trans "ログイン" as login %}
-            {% include 'mixins/auth/form_auth.html' with form=form cta=login %}
+        <div class="w-4/5 ml-20 p-5 flex flex-col justify-between mb-10">
+            <h2 class="font-bold text-4xl text-center">{% trans '会員脱退申し込み' %}</h2>
+            <p class="text-center leading-loose">{% trans '会員脱退処理を行うために、もう一度会員認証を行ってください。' %}</p>
+            <div class="w-1/2 mx-auto">
+                {% trans "ログイン" as login %}
+                {% include 'mixins/auth/form_auth.html' with form=form cta=login %}
+            </div>
         </div>
     </div>
 </div>

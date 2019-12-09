@@ -4,6 +4,7 @@ from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views.generic import View, FormView, DetailView, UpdateView, DeleteView
+from django.contrib.auth import update_session_auth_hash
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
 from django.utils import translation
@@ -97,16 +98,32 @@ class PasswordResetCompleteView(PasswordResetCompleteView):
 
 
 class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView):
-    model = models.User
+    form_class = forms.UpdateProfileForm
     template_name = "users/update-profile.html"
-    fields = (
-        "first_name",
-        "last_name",
-    )
-    success_message = "Profile Updated"
+    success_message = _("会員情報を変更しました。")
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    # def form_valid(self, form):
+    #     form.save()
+    #     update_session_auth_hash(self.request, form)
+    #     return super().form_valid(form)
+
+    # def get_success_url(self):
+    #     pk = self.kwargs.get("pk")
+    #     return reverse("users:update-profile", kwargs={"pk": pk})
+
+    def post(self, request, pk):
+        pk = self.kwargs.get("pk")
+        form = forms.UpdateProfileForm(request.POST)
+        if form.is_valid():
+            f_user = form.save()
+            update_session_auth_hash(request, form)
+            f_user.save()
+            messages.success(request, _("会員情報を変更しました。"))
+            return redirect(reverse("users:update-profile", kwargs={"pk": pk}))
+        return render(request, "users/update-profile.html", {"form": form, "pk": pk}) 
 
 
 class WithdrawalView(mixins.LoggedInOnlyView, FormView):
@@ -117,7 +134,7 @@ class WithdrawalView(mixins.LoggedInOnlyView, FormView):
         pk = self.kwargs.get("pk")
         email = form.cleaned_data.get("email")
         if self.request.user.email != email:
-            messages.error(self.request, "会員様のメールアドレスと入力したメールアドレスが違います。")
+            messages.error(self.request, _("会員様のメールアドレスと入力したメールアドレスが違います。"))
             return redirect(reverse("users:withdrawal", kwargs={"pk": pk}))
         return super().form_valid(form)
 
@@ -133,24 +150,6 @@ class WithdrawalCheckView(mixins.LoggedInOnlyView, DeleteView):
     def get(self, request, pk):
         return render(request, self.template_name, {"pk": pk})
 
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        self.object.delete()
-        return HttpResponseRedirect(success_url)
-
-    # def delete(self, form):
-    #     pk = self.kwargs.get("pk")
-    #     print(pk)
-    #     try:
-    #         user = models.User.objects.get(pk=pk)
-    #         print(user)
-    #         user.delete()
-    #     except models.User.DoesNotExist:
-    #         messages.error(self.request, "会員脱退を失敗しました。")
-    #         return redirect(reverse("users:withdrawal", kwargs={"pk": pk}))
-    #     return super().form_valid(form)
-
     def get_success_url(self):
         return reverse("users:withdrawal-done")
 
@@ -160,7 +159,6 @@ class WithdrawalDoneView(View):
 
     def get(self, request):
         return render(request, template_name=self.template_name)
-
 
 
 def switch_language(request):

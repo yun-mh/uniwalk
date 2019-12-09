@@ -22,9 +22,9 @@ class LoginForm(forms.Form):
             if user.check_password(password):
                 return self.cleaned_data
             else:
-                self.add_error("password", forms.ValidationError("Password is wrong"))
+                self.add_error("password", forms.ValidationError(_("パスワードをもう一度確認してください。")))
         except models.User.DoesNotExist:
-            self.add_error("email", forms.ValidationError("User does not exist"))
+            self.add_error("email", forms.ValidationError(_("登録されていないメールアドレスです。")))
 
 
 class SignUpForm(forms.ModelForm):
@@ -32,6 +32,8 @@ class SignUpForm(forms.ModelForm):
         model = models.User
         fields = (
             "email",
+            "password",
+            "password1",
             "last_name",
             "first_name",
             "last_name_kana",
@@ -79,6 +81,78 @@ class SignUpForm(forms.ModelForm):
         first_name_kana = self.cleaned_data.get("first_name_kana")
         user.set_password(password)
         user.save()
+
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = models.User
+        fields = (
+            "email",
+            "current_password",
+            "new_password",
+            "new_password1",
+            "last_name",
+            "first_name",
+            "last_name_kana",
+            "first_name_kana",
+            "gender",
+            "birthday",
+            "phone_number",
+            "postal_code",
+            "prefecture",
+            "address_city",
+            "address_detail",
+        )
+        widgets = {
+            "email": forms.EmailInput(attrs={"placeholder": _("メールアドレス")}),
+            "last_name": forms.TextInput(attrs={"placeholder": _("姓")}),
+            "first_name": forms.TextInput(attrs={"placeholder": _("名")}),
+            "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)")}),
+            "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)")}),
+        }
+
+    current_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": _("現在のパスワード")}),
+    )
+    new_password = forms.CharField(
+        required=False, 
+        widget=forms.PasswordInput(attrs={"placeholder": _("新しいパスワード")}),
+    )
+    new_password1 = forms.CharField(
+        required=False, 
+        widget=forms.PasswordInput(attrs={"placeholder": _("新しいパスワードの確認")}),
+    )
+
+    def clean(self):
+        email = self.cleaned_data.get("email")
+        current_password = self.cleaned_data.get("current_password")
+        user = models.User.objects.get(email=email)
+        if user.check_password(current_password):
+            return self.cleaned_data
+        else:
+            self.add_error("current_password", forms.ValidationError(_("パスワードをもう一度確認してください。")))
+
+    def clean_new_password1(self):
+        new_password = self.cleaned_data.get("new_password")
+        new_password1 = self.cleaned_data.get("new_password1")
+
+        if new_password != new_password1:
+            raise forms.ValidationError(_("パスワードが一致しません。"))
+        else:
+            return new_password
+
+    def save(self, *args, **kwargs):
+        user = super().save(commit=False)
+        # email = self.cleaned_data.get("email")
+        current_password = self.cleaned_data.get("current_password")
+        new_password = self.cleaned_data.get("new_password")
+        last_name = self.cleaned_data.get("last_name")
+        first_name = self.cleaned_data.get("first_name")
+        last_name_kana = self.cleaned_data.get("last_name_kana")
+        first_name_kana = self.cleaned_data.get("first_name_kana")
+        if len(new_password) > 0:
+            user.set_password(new_password)
+        return user
 
 
 class PasswordResetForm(PasswordResetForm):

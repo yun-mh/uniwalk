@@ -24,8 +24,8 @@ class CustomUserAdmin(admin.ModelAdmin):
                     "phone_number",
                     "postal_code",
                     "prefecture",
-                    "adress_city",
-                    "adress_detail",
+                    "address_city",
+                    "address_detail",
                 )
             },
         ),
