@@ -19,6 +19,7 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
     PasswordChangeView,
 )
+from designs import models as design_models
 from feet import models as feet_models
 from . import forms, models, mixins
 
@@ -127,14 +128,22 @@ class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
         return reverse("users:update-profile", kwargs={"pk": pk})
 
 
+class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
+    model = design_models.Design
+    template_name = "designs/design-list.html"
+    context_object_name = "designs"
+
+
 class FootSizeView(mixins.LoggedInOnlyView, ListView):
     model = feet_models.Footsize
     template_name = "feet/feet-list.html"
     context_object_name = "feet"
 
     def get_queryset(self):
-        return feet_models.Footsize.objects.get(user_id=self.kwargs.get("pk"))
-
+        try:
+            return feet_models.Footsize.objects.get(user_id=self.kwargs.get("pk"))
+        except feet_models.Footsize.DoesNotExist:
+            return None
 
 class WithdrawalView(mixins.LoggedInOnlyView, FormView):
     template_name = "users/withdrawal.html"

@@ -47,12 +47,12 @@ urlpatterns = [
     #     name="orders-detail",
     # ),
     # path("mypage/<int:pk>/cards/", views.CardsListView.as_view(), name="cards",),
-    # path(
-    #     "mypage/<int:pk>/mydesigns/",
-    #     views.MyDesignsListView.as_view(),
-    #     name="mydesigns",
-    # ),
-    path("mypage/footsizes/<int:pk>", views.FootSizeView.as_view(), name="footsizes",),
+    path(
+        "mypage/mydesigns/<int:pk>/",
+        views.MyDesignsListView.as_view(),
+        name="mydesigns",
+    ),
+    path("mypage/footsizes/<int:pk>/", views.FootSizeView.as_view(), name="footsizes",),
     path(
         "mypage/withdrawal/<int:pk>/",
         views.WithdrawalView.as_view(),
