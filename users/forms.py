@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.views import PasswordResetForm, SetPasswordForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import password_validation
 from django.utils.translation import gettext_lazy as _
 from . import models
@@ -89,8 +90,6 @@ class UpdateProfileForm(forms.ModelForm):
         fields = (
             "email",
             "current_password",
-            "new_password",
-            "new_password1",
             "last_name",
             "first_name",
             "last_name_kana",
@@ -114,14 +113,6 @@ class UpdateProfileForm(forms.ModelForm):
     current_password = forms.CharField(
         widget=forms.PasswordInput(attrs={"placeholder": _("現在のパスワード")}),
     )
-    new_password = forms.CharField(
-        required=False, 
-        widget=forms.PasswordInput(attrs={"placeholder": _("新しいパスワード")}),
-    )
-    new_password1 = forms.CharField(
-        required=False, 
-        widget=forms.PasswordInput(attrs={"placeholder": _("新しいパスワードの確認")}),
-    )
 
     def clean(self):
         email = self.cleaned_data.get("email")
@@ -132,28 +123,33 @@ class UpdateProfileForm(forms.ModelForm):
         else:
             self.add_error("current_password", forms.ValidationError(_("パスワードをもう一度確認してください。")))
 
-    def clean_new_password1(self):
-        new_password = self.cleaned_data.get("new_password")
-        new_password1 = self.cleaned_data.get("new_password1")
-
-        if new_password != new_password1:
-            raise forms.ValidationError(_("パスワードが一致しません。"))
-        else:
-            return new_password
-
     def save(self, *args, **kwargs):
         user = super().save(commit=False)
-        # email = self.cleaned_data.get("email")
+        email = self.cleaned_data.get("email")
         current_password = self.cleaned_data.get("current_password")
-        new_password = self.cleaned_data.get("new_password")
         last_name = self.cleaned_data.get("last_name")
         first_name = self.cleaned_data.get("first_name")
         last_name_kana = self.cleaned_data.get("last_name_kana")
         first_name_kana = self.cleaned_data.get("first_name_kana")
-        if len(new_password) > 0:
-            user.set_password(new_password)
-        return user
+        user.save()
 
+
+class PasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label=_("Old password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"placeholder": _("現在パスワード")}),
+    )
+    new_password1 = forms.CharField(
+        label=_("new password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"placeholder": _("新しいパスワード")}),
+    )
+    new_password2 = forms.CharField(
+        label=_("check password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"placeholder": _("パスワード確認")}),
+    )
 
 class PasswordResetForm(PasswordResetForm):
     email = forms.EmailField(

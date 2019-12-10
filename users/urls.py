@@ -30,6 +30,11 @@ urlpatterns = [
         views.UpdateProfileView.as_view(),
         name="update-profile",
     ),
+    path(
+        "mypage/change-password/<int:pk>/",
+        views.PasswordChangeView.as_view(),
+        name="change-password",
+    ),
     # path(
     #     "mypage/<int:pk>/profile/update/",
     #     views.UpdateProfileView.as_view(),
@@ -47,7 +52,7 @@ urlpatterns = [
     #     views.MyDesignsListView.as_view(),
     #     name="mydesigns",
     # ),
-    # path("mypage/<int:pk>/footsizes/", views.FootSizeView.as_view(), name="footsizes",),
+    path("mypage/footsizes/<int:pk>", views.FootSizeView.as_view(), name="footsizes",),
     path(
         "mypage/withdrawal/<int:pk>/",
         views.WithdrawalView.as_view(),

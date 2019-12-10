@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django.views.generic import View, FormView, DetailView, UpdateView, DeleteView
+from django.views.generic import View, FormView, DetailView, UpdateView, DeleteView, ListView
 from django.contrib.auth import update_session_auth_hash
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
@@ -17,7 +17,9 @@ from django.contrib.auth.views import (
     PasswordResetDoneView,
     PasswordResetConfirmView,
     PasswordResetCompleteView,
+    PasswordChangeView,
 )
+from feet import models as feet_models
 from . import forms, models, mixins
 
 # Create your views here.
@@ -105,25 +107,33 @@ class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView
     def get_object(self, queryset=None):
         return self.request.user
 
-    # def form_valid(self, form):
-    #     form.save()
-    #     update_session_auth_hash(self.request, form)
-    #     return super().form_valid(form)
-
-    # def get_success_url(self):
-    #     pk = self.kwargs.get("pk")
-    #     return reverse("users:update-profile", kwargs={"pk": pk})
-
-    def post(self, request, pk):
+    def get_success_url(self):
         pk = self.kwargs.get("pk")
-        form = forms.UpdateProfileForm(request.POST)
-        if form.is_valid():
-            f_user = form.save()
-            update_session_auth_hash(request, form)
-            f_user.save()
-            messages.success(request, _("会員情報を変更しました。"))
-            return redirect(reverse("users:update-profile", kwargs={"pk": pk}))
-        return render(request, "users/update-profile.html", {"form": form, "pk": pk}) 
+        return reverse("users:update-profile", kwargs={"pk": pk})
+
+
+class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
+    form_class = forms.PasswordChangeForm
+    template_name = 'users/password-change.html'
+
+    def form_valid(self, form):
+        form.save()
+        update_session_auth_hash(self.request, form.user)
+        messages.success(self.request, _(f"パスワードを変更しました。"))
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        pk = self.kwargs.get("pk")
+        return reverse("users:update-profile", kwargs={"pk": pk})
+
+
+class FootSizeView(mixins.LoggedInOnlyView, ListView):
+    model = feet_models.Footsize
+    template_name = "feet/feet-list.html"
+    context_object_name = "feet"
+
+    def get_queryset(self):
+        return feet_models.Footsize.objects.get(user_id=self.kwargs.get("pk"))
 
 
 class WithdrawalView(mixins.LoggedInOnlyView, FormView):

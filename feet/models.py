@@ -15,4 +15,4 @@ class Footsize(core_models.TimeStampedModel):
     width_right = models.IntegerField("足幅(右)")
 
     def __str__(self):
-        return self.user
+        return str(self.user)

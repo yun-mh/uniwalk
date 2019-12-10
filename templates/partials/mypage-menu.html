@@ -16,7 +16,7 @@
         <a href="">
             <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans 'マイデザイン' %}</li>
         </a>
-        <a href="">
+        <a href="{% url 'users:footsizes' user.pk %}">
             <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans 'マイ足サイズ' %}</li>
         </a>
         <a href="{% url 'users:withdrawal' user.pk %}">

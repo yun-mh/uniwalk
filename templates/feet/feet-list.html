@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans '会員情報変更' %}
+{% endblock page_title%}
+
+{% block content %}
+
+<div class="mx-auto pt-16 pb-10">
+    <div class="container mx-auto flex">
+        <div class="w-1/5 h-50vh shadow-lg">
+            {% include 'partials/mypage-menu.html' %}
+        </div>
+
+        <div class="w-4/5 ml-20 flex flex-col mb-10">
+            <h2 class="font-bold text-4xl text-center mb-10">マイ足サイズ</h2>
+
+            {% if feet %}
+            <div class="flex flex-no-wrap items-center justify-around mb-10">
+                <div class="border w-1/3 h-full flex flex-col justify-center">
+                    <h3 class="font-semibold text-2xl text-center py-5">左</h3>
+                    <div class="text-center mb-5">
+                        <span class="font-medium mr-10">足長</span>
+                        <span class="font-bold text-2xl">{{ feet.length_left }}</span>
+                    </div>
+                    <div class="text-center mb-5">
+                        <span class="font-medium mr-10">足幅</span>
+                        <span class="font-bold text-2xl">{{ feet.width_left }}</span>
+                    </div>
+                </div>
+                <div class="border w-1/3 h-full flex flex-col justify-center">
+                    <h3 class="font-semibold text-2xl text-center py-5">右</h3>
+                    <div class="text-center mb-5">
+                        <span class="font-medium mr-10">足長</span>
+                        <span class="font-bold text-2xl">{{ feet.length_right }}</span>
+                    </div>
+                    <div class="text-center mb-5">
+                        <span class="font-medium mr-10">足幅</span>
+                        <span class="font-bold text-2xl">{{ feet.width_right }}</span>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+
+
+            {% endif %}
+            <a href="" class="btn-link w-2/3 mx-auto">測定する</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+{% endblock %}
