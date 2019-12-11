@@ -1,0 +1,25 @@
+{% load i18n %}
+<div class="w-full mb-10 overflow-hidden shadow-md">
+    <div class="w-full flex items-center justify-between bg-gray-600 h-12 text-white px-5">
+        <h3 class="font-semibold text-lg">{{ design.title }}</h3>
+        <span class="">{{ design.created|date:'Y-m-d' }}</span>
+    </div>
+    <div class="flex flex-no-wrap py-10 px-5">
+        <div style="background-image: url({{design.images.first.side_left.url}});"
+            class="w-1/4 h-40 bg-cover bg-center mr-3">
+        </div>
+        <div style="background-image: url({{design.images.first.upper_left.url}});"
+            class="w-1/4 h-40 bg-cover bg-center mr-3">
+        </div>
+        <div style="background-image: url({{design.images.first.side_right.url}});"
+            class="w-1/4 h-40 bg-cover bg-center mr-3">
+        </div>
+        <div style="background-image: url({{design.images.first.upper_right.url}});"
+            class="w-1/4 h-40 bg-cover bg-center">
+        </div>
+    </div>
+    <div class="w-full flex justify-around mb-5">
+        <a href="" class="btn bg-orange-500 text-white w-1/3 p-3">{% trans '変更する' %}</a>
+        <a href="" class="btn bg-red-500 text-white w-1/3 p-3">{% trans '削除する' %}</a>
+    </div>
+</div>

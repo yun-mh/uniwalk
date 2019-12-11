@@ -15,26 +15,27 @@ class Image(models.Model):
     """ カスタムデザインのイメージモデルを定義する """
 
     design = models.ForeignKey(
-        "Design", verbose_name="デザインid", on_delete=models.CASCADE
+        "Design", related_name="images", verbose_name="デザインid", on_delete=models.CASCADE
     )
-    side_left = models.ImageField("側面(左)", upload_to="")
-    side_right = models.ImageField("側面(右)", upload_to="")
-    upper_left = models.ImageField("上面(左)", upload_to="")
-    upper_right = models.ImageField("上面(右)", upload_to="")
-    back_left = models.ImageField("後面(左)", upload_to="")
-    back_right = models.ImageField("後面(右)", upload_to="")
-    bottom_left = models.ImageField("下面(左)", upload_to="")
-    bottom_right = models.ImageField("下面(右)", upload_to="")
+    side_left = models.ImageField("側面(左)", upload_to="designs")
+    side_right = models.ImageField("側面(右)", upload_to="designs")
+    upper_left = models.ImageField("上面(左)", upload_to="designs")
+    upper_right = models.ImageField("上面(右)", upload_to="designs")
+    back_left = models.ImageField("後面(左)", upload_to="designs")
+    back_right = models.ImageField("後面(右)", upload_to="designs")
+    bottom_left = models.ImageField("下面(左)", upload_to="designs")
+    bottom_right = models.ImageField("下面(右)", upload_to="designs")
 
 
 class Design(core_models.TimeStampedModel):
 
     """ デザインのモデルを定義する """
 
-    user = models.ForeignKey("users.User", on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey("users.User", related_name="design", on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(
-        "products.Product", on_delete=models.SET_NULL, null=True
+        "products.Product", related_name="design", on_delete=models.SET_NULL, null=True
     )
+    title = models.CharField("デザイン名", max_length=20)
     outsole_color_left = models.CharField("アウトソール色(左)", max_length=7)
     # outsole_material_left = models.
     midsole_color_left = models.CharField("ミッドソール色(左)", max_length=7)
@@ -60,3 +61,7 @@ class Design(core_models.TimeStampedModel):
     liner_color_right = models.CharField("ライナー色(右)", max_length=7)
     # liner_material_right = models.
     customize_code = models.CharField("カスタマイズデザインコード", max_length=11)
+
+    def get_key_four_images(self):
+        images = self.objects.first().images
+        return images

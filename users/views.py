@@ -132,6 +132,13 @@ class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
     model = design_models.Design
     template_name = "designs/design-list.html"
     context_object_name = "designs"
+    paginate_by = 9
+
+    def get_queryset(self):
+        try:
+            return design_models.Design.objects.filter(user_id=self.kwargs.get("pk"))
+        except design_models.Design.DoesNotExist:
+            return None
 
 
 class FootSizeView(mixins.LoggedInOnlyView, ListView):

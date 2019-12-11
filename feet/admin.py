@@ -5,6 +5,6 @@ from . import models
 @admin.register(models.Footsize)
 class FootsizeAdmin(admin.ModelAdmin):
 
-    """ アドミンに商品を定義する """
+    """ アドミンに足サイズテーブルを定義する """
 
     pass
