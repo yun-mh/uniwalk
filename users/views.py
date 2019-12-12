@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django.views.generic import View, FormView, DetailView, UpdateView, DeleteView, ListView
+from django.views.generic import View, FormView, DetailView, UpdateView, DeleteView, ListView, TemplateView
 from django.contrib.auth import update_session_auth_hash
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
@@ -56,11 +56,51 @@ class SignUpView(mixins.LoggedOutOnlyView, FormView):
 
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
-    success_url = reverse_lazy("users:signup-success")
 
-    def form_valid(self, form):
-        form.save()
-        email = form.cleaned_data.get("email")
+    def get_initial(self):
+        if self.request.session.get("data"):
+            return self.request.session["data"]
+        else:
+            return self.initial.copy()
+
+    def form_valid(self, user):
+        data = {
+            "email": user.cleaned_data.get("email"),
+            "password": user.cleaned_data.get("password"),
+            "last_name": user.cleaned_data.get("last_name"),
+            "first_name": user.cleaned_data.get("first_name"),
+            "last_name_kana": user.cleaned_data.get("last_name_kana"),
+            "first_name_kana": user.cleaned_data.get("first_name_kana"),
+            "gender": user.cleaned_data.get("gender"),
+            "member_number": user.cleaned_data.get("member_number"),
+        }
+        self.request.session["data"] = data
+        return redirect(reverse("users:signup-check"))
+
+
+class SignUpCheckView(mixins.LoggedOutOnlyView, FormView):
+
+    template_name = "users/signup-check.html"
+
+    def get(self, request):
+        data = request.session.get("data")
+        return render(request, self.template_name, data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.session.get("data")
+        user = models.User.objects.create(
+            email=data["email"],
+            last_name=data["last_name"],
+            first_name=data["first_name"],
+            last_name_kana=data["last_name_kana"],
+            first_name_kana=data["first_name_kana"],
+            gender=data["gender"],
+            member_number=data["member_number"],
+        )
+        user.set_password(data["password"])
+        user.member_code = "C" + data["gender"] + data["member_number"]
+        user.save() 
+        email = data["email"]
         html_message = render_to_string("emails/registration-done.html")
         send_mail(
             _("UniWalk　会員登録ありがとうございます。"),
@@ -70,10 +110,11 @@ class SignUpView(mixins.LoggedOutOnlyView, FormView):
             fail_silently=False,
             html_message=html_message,
         )
-        return super().form_valid(form)
+        del request.session["data"]
+        return redirect(reverse("users:signup-success"))
 
 
-class SignupSuccessView(View):
+class SignupSuccessView(mixins.LoggedOutOnlyView, View):
     def get(self, request):
         return render(request, "users/signup-success.html")
 

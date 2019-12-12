@@ -16,7 +16,7 @@
     {% trans "会員登録" as registration %}
     {% include 'mixins/auth/form_auth.html' with form=form cta=registration %}
 
-    <div class="mt-5">
+    <div class="mt-5 text-center">
       <span class="mr-2">{% trans "既にアカウントを持っていますか?" %}</span>
       <a href="{% url 'users:login' %}" class="text-teal-500 font-medium">
         {% trans "ログイン" %}

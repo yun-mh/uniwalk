@@ -39,13 +39,17 @@ class SignUpForm(forms.ModelForm):
             "first_name",
             "last_name_kana",
             "first_name_kana",
+            "gender",
+            "member_number",
         )
         widgets = {
-            "email": forms.EmailInput(attrs={"placeholder": _("メールアドレス")}),
-            "last_name": forms.TextInput(attrs={"placeholder": _("姓")}),
-            "first_name": forms.TextInput(attrs={"placeholder": _("名")}),
-            "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)")}),
-            "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)")}),
+            "email": forms.EmailInput(attrs={"placeholder": _("メールアドレス"), "required": True}),
+            "last_name": forms.TextInput(attrs={"placeholder": _("姓"), "required": True}),
+            "first_name": forms.TextInput(attrs={"placeholder": _("名"), "required": True}),
+            "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)"), "required": True}),
+            "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)"), "required": True}),
+            "gender": forms.Select(attrs={"required": True}),
+            "member_number": forms.HiddenInput(),
         }
 
     password = forms.CharField(
@@ -74,14 +78,7 @@ class SignUpForm(forms.ModelForm):
 
     def save(self, *args, **kwargs):
         user = super().save(commit=False)
-        email = self.cleaned_data.get("email")
-        password = self.cleaned_data.get("password")
-        last_name = self.cleaned_data.get("last_name")
-        first_name = self.cleaned_data.get("first_name")
-        last_name_kana = self.cleaned_data.get("last_name_kana")
-        first_name_kana = self.cleaned_data.get("first_name_kana")
-        user.set_password(password)
-        user.save()
+        return user
 
 
 class UpdateProfileForm(forms.ModelForm):

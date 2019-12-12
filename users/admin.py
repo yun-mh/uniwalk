@@ -26,6 +26,8 @@ class CustomUserAdmin(admin.ModelAdmin):
                     "prefecture",
                     "address_city",
                     "address_detail",
+                    "member_number",
+                    "member_code",
                 )
             },
         ),

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans "会員登録情報確認" %}
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="container mx-auto my-10 flex flex-col items-center p-6">
+    <div class="w-2/3">
+        <div class="text-gray-800 font-semibold text-4xl my-3 text-center mb-10">
+            {% trans '会員登録情報確認' %}
+        </div>
+
+        {% for key, value in request.session.data.items %}
+        {% if key != "password" and key != "member_number" %}
+        <div class="text-center">
+            {% if key != "gender" %}
+            {{ value }}
+            {% else %}
+            {% if value == "M" %}
+            男性
+            {% elif value == "F" %}
+            女性
+            {% else %}
+            その他
+            {% endif %}
+            {% endif %}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        <p class="text-center my-10">
+            下記の内容でよろしいですか？<br>
+            「会員登録」ボタンをクリックすると登録手続きが行われます。<br>
+            登録情報を修正する場合は、「情報修正」ボタンをクリックしてください。
+        </p>
+
+        <form method="POST" class="w-full flex justify-around mb-5">
+            <a href="{% url 'users:signup' %}" class="btn bg-orange-500 text-white w-1/3 p-3">{% trans '情報修正' %}</a>
+            {% csrf_token %}
+            <button class="btn bg-blue-500 text-white w-1/3 p-3">{% trans '会員登録' %}</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+{% endblock %}

@@ -8,13 +8,26 @@ from phonenumber_field.modelfields import PhoneNumberField
 from localflavor.jp.jp_prefectures import JP_PREFECTURES
 
 # Create your models here.
+def create_member_number():
+    last_member = User.objects.all().order_by("pk").last()
+    if not last_member:
+        return "0000001"
+    member_number = last_member.member_number
+    member_int = int(member_number)
+    no_width = 7
+    new_member_int = member_int + 1
+    formatted = (no_width - len(str(new_member_int))) * '0' + str(new_member_int)
+    new_member_number = str(formatted)
+    return new_member_number
+
+
 class User(AbstractUser):
 
     """ ユーザーのDBをカスタマイズする """
 
-    GENDER_MALE = "male"
-    GENDER_FEMALE = "female"
-    GENDER_OTHER = "others"
+    GENDER_MALE = "M"
+    GENDER_FEMALE = "F"
+    GENDER_OTHER = "O"
 
     GENDER_CHOICES = ((GENDER_MALE, "男性"), (GENDER_FEMALE, "女性"), (GENDER_OTHER, "その他"))
 
@@ -32,6 +45,10 @@ class User(AbstractUser):
     prefecture = JPPrefectureField("都道府県", blank=True)
     address_city = models.CharField("市区町村番地", max_length=40, blank=True)
     address_detail = models.CharField("建物名・号室", max_length=40, blank=True)
+    member_number = models.CharField(
+        max_length=40, default=create_member_number, blank=True, null=True
+    )
+    member_code = models.CharField(max_length=40, blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
