@@ -39,11 +39,11 @@ urlpatterns = [
         name="change-password",
     ),
     path("mypage/orders/<int:pk>/", views.OrdersListView.as_view(), name="orders",),
-    # path(
-    #     "mypage/<int:user_pk>/orders/detail/<int:order_pk>",
-    #     views.OrdersDetailView.as_view(),
-    #     name="orders-detail",
-    # ),
+    path(
+        "mypage/orders/<int:user_pk>/detail/<int:order_pk>/",
+        views.OrdersDetailView.as_view(),
+        name="orders-detail",
+    ),
     # path("mypage/<int:pk>/cards/", views.CardsListView.as_view(), name="cards",),
     path(
         "mypage/mydesigns/<int:pk>/",

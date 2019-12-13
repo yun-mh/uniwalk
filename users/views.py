@@ -211,6 +211,19 @@ class OrdersListView(mixins.LoggedInOnlyView, ListView):
             return None
 
 
+class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
+    model = order_models.Order
+    template_name = "orders/order-list.html"
+    context_object_name = "orders"
+    paginate_by = 5
+
+    def get_queryset(self):
+        try:
+            return order_models.Order.objects.filter(user_id=self.kwargs.get("pk"))
+        except order_models.Order.DoesNotExist:
+            return None
+
+
 class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
     model = design_models.Design
     template_name = "designs/design-list.html"
