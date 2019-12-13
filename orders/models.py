@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class Step(models.Model):
     
     """ 注文の対応状況に関するモデルを定義する """
@@ -12,12 +11,12 @@ class Order(models.Model):
 
     """ 注文のモデルを定義する """
 
-    # user_id = models.ForeignKey()
+    user = models.ForeignKey("users.User", related_name="order", verbose_name="ユーザー", on_delete=models.SET_NULL, null=True)
     # cart_id = models.ForeignKey()
     last_name_orderer = models.CharField("姓()", max_length=30)
     first_name_orderer = models.CharField("名()", max_length=30)
-    last_name_orderer_kana = models.CharField("姓(,カナ)", max_length=30)
-    first_name_orderer_kana = models.CharField("名(,カナ)", max_length=30)
+    last_name_orderer_kana = models.CharField("姓(カナ)", max_length=30)
+    first_name_orderer_kana = models.CharField("名(カナ)", max_length=30)
     email = models.CharField("メールアドレス", max_length=254) 
     phone_number_orderer = models.CharField("電話番号()", max_length=15)
     postal_code_orderer = models.CharField("郵便番号()", max_length=7)

@@ -3,15 +3,18 @@ from django.contrib.auth.views import PasswordResetForm, SetPasswordForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import password_validation
 from django.utils.translation import gettext_lazy as _
+from localflavor.jp.forms import JPPostalCodeField
 from . import models
 
 
 class LoginForm(forms.Form):
 
     email = forms.EmailField(
+        label="",
         widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
     )
     password = forms.CharField(
+        label="",
         widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
     )
 
@@ -49,13 +52,15 @@ class SignUpForm(forms.ModelForm):
             "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)"), "required": True}),
             "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)"), "required": True}),
             "gender": forms.Select(attrs={"required": True}),
-            "member_number": forms.HiddenInput(),
+            "member_number": forms.TextInput(attrs={"class": "hidden"}),
         }
 
     password = forms.CharField(
+        label=_("パスワード"),
         widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
     )
     password1 = forms.CharField(
+        label=_("パスワード確認"),
         widget=forms.PasswordInput(attrs={"placeholder": _("パスワード確認")}),
     )
 
@@ -101,14 +106,26 @@ class UpdateProfileForm(forms.ModelForm):
         )
         widgets = {
             "email": forms.EmailInput(attrs={"placeholder": _("メールアドレス")}),
-            "last_name": forms.TextInput(attrs={"placeholder": _("姓")}),
-            "first_name": forms.TextInput(attrs={"placeholder": _("名")}),
-            "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)")}),
-            "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)")}),
+            "current_password": forms.PasswordInput(attrs={"placeholder": _("現在のパスワード")}),
+            "last_name": forms.TextInput(attrs={"placeholder": _("姓"), "required": True}),
+            "first_name": forms.TextInput(attrs={"placeholder": _("名"), "required": True}),
+            "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)"), "required": True}),
+            "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)"), "required": True}),
+            "gender": forms.Select(attrs={"required": True}),
+            "birthday": forms.DateInput(attrs={"placeholder": _("生年月日")}),
+            "phone_number": forms.TextInput(attrs={"placeholder": _("電話番号")}),
+            "address_city": forms.TextInput(attrs={"placeholder": _("市区町村番地")}),
+            "address_detail": forms.TextInput(attrs={"placeholder": _("建物名・号室")}),
         }
 
     current_password = forms.CharField(
+        label=_('パスワード'),
         widget=forms.PasswordInput(attrs={"placeholder": _("現在のパスワード")}),
+    )
+
+    postal_code = JPPostalCodeField(
+        label=_('郵便番号'),
+        widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),
     )
 
     def clean(self):
@@ -122,13 +139,7 @@ class UpdateProfileForm(forms.ModelForm):
 
     def save(self, *args, **kwargs):
         user = super().save(commit=False)
-        email = self.cleaned_data.get("email")
-        current_password = self.cleaned_data.get("current_password")
-        last_name = self.cleaned_data.get("last_name")
-        first_name = self.cleaned_data.get("first_name")
-        last_name_kana = self.cleaned_data.get("last_name_kana")
-        first_name_kana = self.cleaned_data.get("first_name_kana")
-        user.save()
+        return user
 
 
 class PasswordChangeForm(PasswordChangeForm):
@@ -148,12 +159,14 @@ class PasswordChangeForm(PasswordChangeForm):
         widget=forms.PasswordInput(attrs={"placeholder": _("パスワード確認")}),
     )
 
+
 class PasswordResetForm(PasswordResetForm):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")}),
         label=_("Email"),
         max_length=254,
     )
+
 
 class SetPasswordForm(SetPasswordForm):
     new_password1 = forms.CharField(

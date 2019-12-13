@@ -38,12 +38,7 @@ urlpatterns = [
         views.PasswordChangeView.as_view(),
         name="change-password",
     ),
-    # path(
-    #     "mypage/<int:pk>/profile/update/",
-    #     views.UpdateProfileView.as_view(),
-    #     name="update-profile",
-    # ),
-    # path("mypage/<int:pk>/orders/", views.OrdersListView.as_view(), name="orders",),
+    path("mypage/orders/<int:pk>/", views.OrdersListView.as_view(), name="orders",),
     # path(
     #     "mypage/<int:user_pk>/orders/detail/<int:order_pk>",
     #     views.OrdersDetailView.as_view(),

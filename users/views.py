@@ -19,6 +19,7 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
     PasswordChangeView,
 )
+from orders import models as order_models
 from designs import models as design_models
 from feet import models as feet_models
 from . import forms, models, mixins
@@ -136,6 +137,19 @@ class PasswordResetConfirmView(PasswordResetConfirmView):
     template_name = "users/password-reset-confirm.html"
     success_url = reverse_lazy("users:password-reset-complete")
 
+    def form_valid(self, form):
+        email = self.user.email
+        html_message = render_to_string("emails/password-reset-done.html")
+        send_mail(
+            _("パスワード再設定完了のお知らせ"),
+            strip_tags(html_message),
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+            fail_silently=False,
+            html_message=html_message,
+        )
+        return super().form_valid(form)
+
 
 class PasswordResetCompleteView(PasswordResetCompleteView):
     template_name = "users/password-reset-complete.html"
@@ -153,6 +167,21 @@ class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView
         pk = self.kwargs.get("pk")
         return reverse("users:update-profile", kwargs={"pk": pk})
 
+    def form_valid(self, form):
+        user = form.save()
+        user.save()
+        email = form.cleaned_data.get("email")
+        html_message = render_to_string("emails/profile-change-done.html")
+        send_mail(
+            _("UniWalk会員情報変更のお知らせ"),
+            strip_tags(html_message),
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+            fail_silently=False,
+            html_message=html_message,
+        )
+        return super().form_valid(form)
+
 
 class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
     form_class = forms.PasswordChangeForm
@@ -169,11 +198,24 @@ class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
         return reverse("users:update-profile", kwargs={"pk": pk})
 
 
+class OrdersListView(mixins.LoggedInOnlyView, ListView):
+    model = order_models.Order
+    template_name = "orders/order-list.html"
+    context_object_name = "orders"
+    paginate_by = 5
+
+    def get_queryset(self):
+        try:
+            return order_models.Order.objects.filter(user_id=self.kwargs.get("pk"))
+        except order_models.Order.DoesNotExist:
+            return None
+
+
 class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
     model = design_models.Design
     template_name = "designs/design-list.html"
     context_object_name = "designs"
-    paginate_by = 9
+    paginate_by = 5
 
     def get_queryset(self):
         try:
