@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n static humanize %}
+
+{% block page_title %}
+{% trans 'デザインカスタマイズ' %}
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="mx-auto pt-16 pb-10">
+
+    <div class="w-full mb-10">
+
+        <a href="{% url 'feet:measure' product.pk %}" class="btn-link">足サイズ測定へ</a>
+
+    </div>
+
+</div>
+
+
+{% endblock content %}

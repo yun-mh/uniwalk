@@ -25,7 +25,7 @@
         <p class="py-12">
             {{ product.description }}
         </p>
-        <a href="#" class="btn-link">{% trans 'カスタマイズして購入' %}</a>
+        <a href="{% url 'designs:customize' product.pk %}" class="btn-link">{% trans 'カスタマイズして購入' %}</a>
     </div>
 </div>
 
