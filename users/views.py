@@ -189,6 +189,16 @@ class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
 
     def form_valid(self, form):
         form.save()
+        email = self.request.user.email
+        html_message = render_to_string("emails/password-change-done.html")
+        send_mail(
+            _("UniWalkパスワード変更のお知らせ"),
+            strip_tags(html_message),
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+            fail_silently=False,
+            html_message=html_message,
+        )
         update_session_auth_hash(self.request, form.user)
         messages.success(self.request, _(f"パスワードを変更しました。"))
         return super().form_valid(form)
@@ -212,16 +222,12 @@ class OrdersListView(mixins.LoggedInOnlyView, ListView):
 
 
 class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
-    model = order_models.Order
-    template_name = "orders/order-list.html"
-    context_object_name = "orders"
-    paginate_by = 5
 
-    def get_queryset(self):
-        try:
-            return order_models.Order.objects.filter(user_id=self.kwargs.get("pk"))
-        except order_models.Order.DoesNotExist:
-            return None
+    """ 注文詳細 """
+
+    model = order_models.Order
+    template_name = "orders/order-detail.html"
+    pk_url_kwarg = "order_pk"
 
 
 class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
