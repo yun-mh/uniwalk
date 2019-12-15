@@ -10,31 +10,48 @@
 <div class="mx-auto pt-16 pb-10">
 
     <div class="container mx-auto flex">
-        <div class="w-2/3 flex flex-wrap mb-10">
-            <h3 class="w-full mb-2">
+        <div class="w-2/3 flex flex-wrap mb-10 pr-10">
+            <h3 class="w-full font-bold text-2xl mb-3 text-center">
                 ショッピングカート
             </h3>
             {% for cart_item in cart_items %}
-            <div>
-                image {{ cart_item.product.first_image }}
+            <div class="w-full flex flex-no-wrap border-b p-3">
+                <div class="h-32">
+                    <img src="{{ cart_item.product.first_image }}" class="h-full">
+                </div>
+                <div class="w-full flex justify-between px-5 items-center">
+                    <div class="flex flex-col justify-between h-full">
+                        <div class="flex flex-col">
+                            <span class="text-xl">{{ cart_item.product.name }}</span>
+                            <span class="text-gray-500">{{ cart_item.product.category }}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span>単価 {{ cart_item.product.price }}</span>
+                            <span>{{ cart_item.quantity}} x {{ cart_item.product.price }}</span>
+                        </div>
+                    </div>
+                    <div>
+                        {{cart_item.sub_total}}
+                    </div>
+                    <div>
+                        buttonss
+                    </div>
+                </div>
             </div>
-            <div>
-                {{ cart_item.product.name }}
-                {{ cart_item.product.price }}
-                {{ cart_item.quantity}} x {{ cart_item.product.price }}
-            </div>
-            <div>
-                {{cart_item.sub_total}}
-            </div>
+
             {% endfor %}
         </div>
 
-        <div class="w-1/3 mr-10 h-50vh shadow-lg">
-            <h3 class="w-full mb-2">
+        <div class="w-1/3 flex flex-col h-25vh p-5 shadow-lg justify-between">
+            <h3 class="font-bold text-2xl text-center">
                 ご注文金額
             </h3>
-            <div>
-                合計（税込）{{ amount }}
+            <div class="w-full">
+                <div class="flex flex-no-wrap justify-between">
+                    <div class="font-semibold">合計（税込）</div>
+                    <div>{{ amount }}</div>
+                </div>
+                <a href="" class="btn-link block mt-10">購入手続きへ</a>
             </div>
         </div>
     </div>
