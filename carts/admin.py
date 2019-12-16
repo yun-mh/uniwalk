@@ -8,3 +8,11 @@ class CartAdmin(admin.ModelAdmin):
     """ アドミンにカートテーブルを定義する """
 
     pass
+
+
+@admin.register(models.CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+
+    """ アドミンにカートテーブルを定義する """
+
+    pass
