@@ -4,22 +4,22 @@
         {% trans 'マイページ' %}
     </h2>
     <ul class="w-full text-center">
-        <a href="{% url 'users:update-profile' user.pk %}">
+        <a href="{% url 'users:update-profile' %}">
             <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans '会員情報変更' %}</li>
         </a>
-        <a href="{% url 'users:orders' user.pk %}">
+        <a href="{% url 'users:orders' %}">
             <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans '注文履歴' %}</li>
         </a>
         <a href="">
             <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans 'クレジットカード' %}</li>
         </a>
-        <a href="{% url 'users:mydesigns' user.pk %}">
+        <a href="{% url 'users:mydesigns' %}">
             <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans 'マイデザイン' %}</li>
         </a>
-        <a href="{% url 'users:footsizes' user.pk %}">
+        <a href="{% url 'users:footsizes' %}">
             <li class="border-b py-5 font-medium hover:bg-gray-200">{% trans 'マイ足サイズ' %}</li>
         </a>
-        <a href="{% url 'users:withdrawal' user.pk %}">
+        <a href="{% url 'users:withdrawal' %}">
             <li class="py-5 font-medium hover:bg-gray-200">{% trans '会員脱退' %}</li>
         </a>
     </ul>

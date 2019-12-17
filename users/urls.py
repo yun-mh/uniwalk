@@ -8,9 +8,7 @@ urlpatterns = [
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.log_out, name="logout"),
     path("signup/", views.SignUpView.as_view(), name="signup"),
-    path(
-        "signup/check/", views.SignUpCheckView.as_view(), name="signup-check"
-    ),
+    path("signup/check/", views.SignUpCheckView.as_view(), name="signup-check"),
     path("signup/success/", views.SignupSuccessView.as_view(), name="signup-success"),
     path("password_reset/", views.PasswordResetView.as_view(), name="password-reset"),
     path(
@@ -29,35 +27,27 @@ urlpatterns = [
         name="password-reset-complete",
     ),
     path(
-        "mypage/update-profile/<int:pk>/",
+        "mypage/update-profile/",
         views.UpdateProfileView.as_view(),
         name="update-profile",
     ),
     path(
-        "mypage/change-password/<int:pk>/",
+        "mypage/change-password/",
         views.PasswordChangeView.as_view(),
         name="change-password",
     ),
-    path("mypage/orders/<int:pk>/", views.OrdersListView.as_view(), name="orders",),
+    path("mypage/orders/", views.OrdersListView.as_view(), name="orders",),
     path(
-        "mypage/orders/<int:user_pk>/detail/<int:order_pk>/",
+        "mypage/orders/detail/<int:order_pk>/",
         views.OrdersDetailView.as_view(),
         name="orders-detail",
     ),
     # path("mypage/<int:pk>/cards/", views.CardsListView.as_view(), name="cards",),
+    path("mypage/mydesigns/", views.MyDesignsListView.as_view(), name="mydesigns",),
+    path("mypage/footsizes/", views.FootSizeView.as_view(), name="footsizes",),
+    path("mypage/withdrawal/", views.WithdrawalView.as_view(), name="withdrawal",),
     path(
-        "mypage/mydesigns/<int:pk>/",
-        views.MyDesignsListView.as_view(),
-        name="mydesigns",
-    ),
-    path("mypage/footsizes/<int:pk>/", views.FootSizeView.as_view(), name="footsizes",),
-    path(
-        "mypage/withdrawal/<int:pk>/",
-        views.WithdrawalView.as_view(),
-        name="withdrawal",
-    ),
-    path(
-        "mypage/withdrawal/check/<int:pk>/",
+        "mypage/withdrawal/check/",
         views.WithdrawalCheckView.as_view(),
         name="withdrawal-check",
     ),

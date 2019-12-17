@@ -67,7 +67,9 @@
                     <div class="font-semibold">合計（税込）</div>
                     <div>{{ amount }}</div>
                 </div>
-                <a href="" class="btn-link block mt-10">購入手続きへ</a>
+                {% if cart_items %}
+                <a href="{% url 'orders:check-authenticated' %}" class="btn-link block mt-10">購入手続きへ</a>
+                {% endif %}
             </div>
         </div>
     </div>

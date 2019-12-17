@@ -64,4 +64,4 @@ class User(AbstractUser):
         return self.email.split("@")[0]
 
     def get_absolute_url(self):
-        return reverse("users:update-profile", kwargs={"pk": self.pk})
+        return reverse("users:update-profile")

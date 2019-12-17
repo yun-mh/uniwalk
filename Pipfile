@@ -14,6 +14,7 @@ phonenumbers = "*"
 pillow = "*"
 django-localflavor = "*"
 django-dotenv = "*"
+stripe = "*"
 
 [requires]
 python_version = "3.7"

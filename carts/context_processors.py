@@ -4,8 +4,8 @@ from .views import _session_key
 
 def counter(request):
     item_count = 0
-    if "admin" in request.path:
-        return
+    if "admin" in request.META["PATH_INFO"]:
+        return {}
     else:
         try:
             cart = Cart.objects.filter(session_key=_session_key(request))

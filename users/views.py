@@ -1,5 +1,6 @@
 from django.shortcuts import render, reverse, redirect
 from django.core.mail import send_mail
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
@@ -164,8 +165,7 @@ class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView
         return self.request.user
 
     def get_success_url(self):
-        pk = self.kwargs.get("pk")
-        return reverse("users:update-profile", kwargs={"pk": pk})
+        return reverse("users:update-profile")
 
     def form_valid(self, form):
         user = form.save()
@@ -187,6 +187,9 @@ class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
     form_class = forms.PasswordChangeForm
     template_name = 'users/password-change.html'
 
+    def get_object(self, queryset=None):
+        return self.request.user
+
     def form_valid(self, form):
         form.save()
         email = self.request.user.email
@@ -204,8 +207,7 @@ class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        pk = self.kwargs.get("pk")
-        return reverse("users:update-profile", kwargs={"pk": pk})
+        return reverse("users:update-profile")
 
 
 class OrdersListView(mixins.LoggedInOnlyView, ListView):
@@ -216,7 +218,7 @@ class OrdersListView(mixins.LoggedInOnlyView, ListView):
 
     def get_queryset(self):
         try:
-            return order_models.Order.objects.filter(user_id=self.kwargs.get("pk"))
+            return order_models.Order.objects.filter(user_id=self.request.user.pk).order_by("-order_date")
         except order_models.Order.DoesNotExist:
             return None
 
@@ -227,7 +229,18 @@ class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
 
     model = order_models.Order
     template_name = "orders/order-detail.html"
+    context_object_name = "order"
     pk_url_kwarg = "order_pk"
+
+    def get(self, request, *args, **kwargs):
+        try:
+            return super(OrdersDetailView, self).get(request, *args, **kwargs)
+        except ObjectDoesNotExist:
+            # messages.error(request, _("アクセスできません。"))
+            return redirect("users:orders")
+
+    def get_object(self):
+        return order_models.Order.objects.filter(user_id=self.request.user.pk).get(pk=self.kwargs.get("order_pk"))
 
 
 class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
@@ -238,7 +251,7 @@ class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
 
     def get_queryset(self):
         try:
-            return design_models.Design.objects.filter(user_id=self.kwargs.get("pk"))
+            return design_models.Design.objects.filter(user_id=self.request.user.pk)
         except design_models.Design.DoesNotExist:
             return None
 
@@ -250,33 +263,32 @@ class FootSizeView(mixins.LoggedInOnlyView, ListView):
 
     def get_queryset(self):
         try:
-            return feet_models.Footsize.objects.get(user_id=self.kwargs.get("pk"))
+            return feet_models.Footsize.objects.get(user_id=self.request.user.pk)
         except feet_models.Footsize.DoesNotExist:
             return None
 
 class WithdrawalView(mixins.LoggedInOnlyView, FormView):
     template_name = "users/withdrawal.html"
     form_class = forms.WithdrawalForm
+    success_url = reverse_lazy("users:withdrawal-check")
 
     def form_valid(self, form):
-        pk = self.kwargs.get("pk")
         email = form.cleaned_data.get("email")
         if self.request.user.email != email:
             messages.error(self.request, _("会員様のメールアドレスと入力したメールアドレスが違います。"))
-            return redirect(reverse("users:withdrawal", kwargs={"pk": pk}))
+            return redirect(reverse("users:withdrawal"))
         return super().form_valid(form)
-
-    def get_success_url(self):
-        pk = self.kwargs.get("pk")
-        return reverse("users:withdrawal-check", kwargs={"pk": pk})
 
 
 class WithdrawalCheckView(mixins.LoggedInOnlyView, DeleteView):
     model = models.User
     template_name = "users/withdrawal-check.html"
 
-    def get(self, request, pk):
-        return render(request, self.template_name, {"pk": pk})
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def get_object(self):
+        return self.request.user
 
     def get_success_url(self):
         return reverse("users:withdrawal-done")

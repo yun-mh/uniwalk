@@ -40,7 +40,7 @@ DJANGO_APPS = [
     "django.contrib.humanize",
 ]
 
-THIRD_PARTY_APPS = ["phonenumber_field", "localflavor"]
+THIRD_PARTY_APPS = ["phonenumber_field", "localflavor", "stripe"]
 
 PROJECT_APPS = [
     "core.apps.CoreConfig",
@@ -80,7 +80,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'carts.context_processors.counter',
+                "carts.context_processors.counter",
             ]
         },
     }
@@ -164,3 +164,8 @@ DEFAULT_FROM_EMAIL = "nhs80416@naver.com"
 
 # Locale
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
+
+
+# Stripe API
+STRIPE_PUBLISHABLE_KEY = os.environ.get("PUBLISHABLE_KEY")
+STRIPE_SECRET_KEY = os.environ.get("SECRET_KEY")
