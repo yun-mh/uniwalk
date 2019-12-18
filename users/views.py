@@ -20,12 +20,13 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
     PasswordChangeView,
 )
+from carts import models as cart_models
 from orders import models as order_models
 from designs import models as design_models
 from feet import models as feet_models
 from . import forms, models, mixins
 
-# Create your views here.
+
 class LoginView(mixins.LoggedOutOnlyView, FormView):
 
     template_name = "users/login.html"
@@ -34,9 +35,13 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
+        old_session_key = self.request.session.session_key
+        print(old_session_key)
         user = authenticate(self.request, email=email, password=password)
         if user is not None:
             login(self.request, user)
+            print(self.request.session.session_key)
+            cart_models.Cart.objects.filter(session_key=old_session_key).update(session_key=self.request.session.session_key)
             messages.success(self.request, _(f"ログインしました。"))
         return super().form_valid(form)
 
@@ -266,6 +271,7 @@ class FootSizeView(mixins.LoggedInOnlyView, ListView):
             return feet_models.Footsize.objects.get(user_id=self.request.user.pk)
         except feet_models.Footsize.DoesNotExist:
             return None
+
 
 class WithdrawalView(mixins.LoggedInOnlyView, FormView):
     template_name = "users/withdrawal.html"

@@ -16,8 +16,8 @@
                 {% trans 'ログインして購入する' %}
             </div>
 
-            {% trans "ログイン" as login %}
-            {% include 'mixins/auth/form_auth.html' with form=form cta=login %}
+            {% trans "ログイン" as member_login %}
+            {% include 'mixins/auth/form_auth.html' with form=member_form cta=member_login btn_name="member_login" %}
 
             <div class="mt-5">
                 <span class="mr-2">{% trans "パスワードを忘れましたか？" %}</span>
@@ -38,7 +38,8 @@
             </div>
 
             <div class="w-full h-full px-8 flex flex-col justify-center">
-                <a class="block btn bg-blue-500 text-white">ご購入の手続きへ（ゲスト）</a>
+                {% trans "購入手続へ(ゲスト)" as guest_login %}
+                {% include 'mixins/auth/form_auth.html' with form=guest_form cta=guest_login btn_name="guest_login" %}
             </div>
         </div>
     </div>

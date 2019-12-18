@@ -11,5 +11,5 @@
     {% include 'mixins/auth/form_input.html' with field=field %}
     {% endfor %}
 
-    <button class="btn bg-blue-500 text-white">{{ cta }}</button>
+    <button class="btn bg-blue-500 text-white" {% if btn_name %}name="{{ btn_name }}" {% endif %}>{{ cta }}</button>
 </form>

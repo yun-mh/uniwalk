@@ -2,7 +2,7 @@
 {% load i18n static humanize %}
 
 {% block page_title %}
-{% trans 'レビューリスト' %}
+{% trans 'カート' %}
 {% endblock page_title %}
 
 {% block content %}
@@ -68,7 +68,7 @@
                     <div>{{ amount }}</div>
                 </div>
                 {% if cart_items %}
-                <a href="{% url 'orders:check-authenticated' %}" class="btn-link block mt-10">購入手続きへ</a>
+                <a href="{% url 'orders:member_or_guest' %}" class="btn-link block mt-10">購入手続きへ</a>
                 {% endif %}
             </div>
         </div>

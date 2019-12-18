@@ -3,6 +3,11 @@ from django.contrib.auth.admin import UserAdmin
 from . import models
 
 # Register your models here.
+@admin.register(models.Guest)
+class GuestAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(models.User)
 class CustomUserAdmin(admin.ModelAdmin):
 
