@@ -1,4 +1,5 @@
 from django.db import models
+from core import models as core_models
 from users import models as user_models
 
 
@@ -17,10 +18,10 @@ class CartItem(models.Model):
         return self.product.price * self.quantity
 
 
-class Cart(models.Model):
+class Cart(core_models.TimeStampedModel):
 
     """ カートのモデルを定義する """
 
+    user = models.ForeignKey("users.User", null=True, on_delete=models.CASCADE)
     session_key = models.CharField("カートセッションキー", max_length=254)
-    created = models.DateTimeField("生成日時", auto_now_add=True)
 

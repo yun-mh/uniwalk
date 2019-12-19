@@ -169,3 +169,7 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 # Stripe API
 STRIPE_PUBLISHABLE_KEY = os.environ.get("PUBLISHABLE_KEY")
 STRIPE_SECRET_KEY = os.environ.get("SECRET_KEY")
+
+
+SESSION_ENGINE = "core.session_setting"
+

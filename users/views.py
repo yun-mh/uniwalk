@@ -35,13 +35,11 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
-        old_session_key = self.request.session.session_key
-        print(old_session_key)
         user = authenticate(self.request, email=email, password=password)
         if user is not None:
             login(self.request, user)
-            print(self.request.session.session_key)
-            cart_models.Cart.objects.filter(session_key=old_session_key).update(session_key=self.request.session.session_key)
+            session_key = self.request.session.session_key
+            cart_models.Cart.objects.filter(session_key=session_key).update(user_id=self.request.user.pk)
             messages.success(self.request, _(f"ログインしました。"))
         return super().form_valid(form)
 
