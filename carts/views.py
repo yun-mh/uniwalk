@@ -27,9 +27,10 @@ def add_cart(request, pk):
             cart = Cart.objects.create(
                 session_key=_session_key(request), user_id=request.user.pk
             )
+            cart.save()
         else:
             cart = Cart.objects.create(session_key=_session_key(request))
-        cart.save()
+            cart.save()
     try:
         cart_item = CartItem.objects.get(product=product, cart=cart)
         cart_item.quantity += 1

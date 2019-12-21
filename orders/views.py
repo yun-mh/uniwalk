@@ -40,23 +40,26 @@ def member_or_guest_login(request):
     return render(request, "orders/member_or_guest.html", context)
 
 
-# class MemberOrGuestLoginView(mixins.LoggedOutOnlyView, FormView):
-
-#     template_name = "orders/member_or_guest.html"
-#     form_class = user_forms.LoginForm
-#     success_url = reverse_lazy("orders:checkout")
-
-#     def form_valid(self, form):
-#         email = form.cleaned_data.get("email")
-#         password = form.cleaned_data.get("password")
-#         user = authenticate(self.request, email=email, password=password)
-#         if user is not None:
-#             login(self.request, user)
-#         return super().form_valid(form)
-
-
 class CheckoutView(FormView):
+    def get(self, *args, **kwargs):
+        form = forms.CheckoutForm()
+        cart = cart_models.Cart.objects.get(
+            session_key=self.request.session.session_key
+        )
+        cart_items = cart_models.CartItem.objects.filter(cart=cart)
+        total = 0
+        for cart_item in cart_items:
+            total += cart_item.product.price * cart_item.quantity
+        context = {
+            "form": form,
+            "cart": cart,
+            "total": total,
+        }
+        return render(self.request, "orders/checkout.html", context)
 
-    template_name = "orders/checkout.html"
-    form_class = forms.CheckoutForm
+    def post(self, *args, **kwargs):
+        form = forms.CheckoutForm(self.request.POST)
+        if form.is_valid():
+            print("gooood")
+            return redirect("orders:checkout")
 

@@ -7,7 +7,7 @@ class CartItem(models.Model):
 
     """ カート内のアイテムのモデルを定義する """
 
-    cart = models.ForeignKey("Cart", on_delete=models.CASCADE)
+    cart = models.ForeignKey("Cart", related_name="cart_items", on_delete=models.CASCADE)
     # design_id = models.ForeignKey()
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
     # feet_id = models.ForeignKey()
