@@ -40,7 +40,7 @@ DJANGO_APPS = [
     "django.contrib.humanize",
 ]
 
-THIRD_PARTY_APPS = ["phonenumber_field", "localflavor", "stripe"]
+THIRD_PARTY_APPS = ["phonenumber_field", "localflavor", "stripe", "crispy_forms"]
 
 PROJECT_APPS = [
     "core.apps.CoreConfig",

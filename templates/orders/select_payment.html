@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load i18n static humanize %}
+
+{% block page_title %}
+{% trans 'ご購入の手続き' %}
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="mx-auto pt-16 pb-10">
+
+    <h3 class="w-full font-bold text-3xl mb-3 text-center">
+        ご購入の手続き
+    </h3>
+    <div class="container mx-auto flex">
+        <div class="w-2/3 flex flex-wrap mb-10 pr-10">
+            <form method="POST" class="w-3/4 mx-auto">
+                <h3 class="w-full font-semibold text-2xl mb-5">1. お届け先情報</h3>
+                <div>
+                    <h4>配送先住所</h4>
+                    <span>{{ recipient_data.last_name_recipient }}　{{ recipient_data.first_name_recipient }}</span>
+                    <span>({{ recipient_data.last_name_recipient_kana }}　{{ recipient_data.first_name_recipient_kana }})</span>
+                    <div>
+                        {{ recipient_data.postal_code_recipient }}
+                    </div>
+                    <div>
+                        {{ recipient_data.prefecture_recipient }} {{ recipient_data.address_city_recipient }}
+                        {{ recipient_data.address_detail_recipient }}
+                    </div>
+                </div>
+
+                <h3 class="w-full font-semibold text-2xl mb-5">2. お支払い方法・ご請求先情報</h3>
+                <div>
+                    <div class="w-full pb-5">
+                        <h4>お支払い方法の選択</h4>
+                        <div class="flex">
+                            <div class="w-1/2 flex items-center">
+                                <input type="radio" class="w-1/12" name="payment_method" id="method_card">クレジットカード
+                            </div>
+                            <div class="w-1/2 flex items-center">
+                                <input type="radio" class="w-1/12" name="payment_method" id="method_transfer">振り込み
+                            </div>
+                        </div>
+                    </div>
+                    <div id="for_card" class="hidden">
+                        <h4>カード情報欄</h4>
+                        <div class="mb-3">
+                            ストライプ！
+                        </div>
+                        <div class="w-1/2 flex items-center">
+                            <input type="checkbox" class="w-1/12" id="check_orderer" checked>請求書住所が配送先と同じ
+                        </div>
+                    </div>
+                    <div id="for_transfer" class="hidden">
+                        <h4>振り込み案内</h4>
+                        <p>kouzabanngo nado...</p>
+                    </div>
+                    <div id="address_orderer" class="hidden">
+                        <div class="flex mb-5">
+                            <div class="mr-5">
+                                {{ orderer_form.last_name_orderer }}
+                            </div>
+                            <div>
+                                {{ orderer_form.first_name_orderer }}
+                            </div>
+                        </div>
+                        <div class="flex mb-5">
+                            <div class="mr-5">
+                                {{ orderer_form.last_name_orderer_kana }}
+                            </div>
+                            <div>
+                                {{ orderer_form.first_name_orderer_kana }}
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            {{ orderer_form.email }}
+                        </div class="mb-5">
+                        <div class="mb-5">
+                            {{ orderer_form.phone_number_orderer }}
+                        </div>
+                        <div class="mb-5">
+                            {{ orderer_form.postal_code_orderer }}
+                        </div>
+                        <div class="mb-5">
+                            {{ orderer_form.prefecture_orderer }}
+                        </div>
+                        <div class="mb-5">
+                            {{ orderer_form.address_city_orderer }}
+                        </div>
+                        <div class="mb-5">
+                            {{ orderer_form.address_detail_orderer }}
+                        </div>
+
+                    </div>
+                </div>
+                <button class="btn-link">ご注文内容の確認へ</button>
+                <h3 class="w-full font-semibold text-2xl mb-5">3. ご注文の確認</h3>
+            </form>
+        </div>
+
+        <div class="w-1/3 flex flex-col h-full p-5 shadow-lg justify-between">
+            {% include "mixins/orders/order-summary-card.html" %}
+        </div>
+    </div>
+</div>
+
+<script>
+    const method_card = document.querySelector("#method_card");
+    const method_transfer = document.querySelector("#method_transfer");
+    const for_card = document.querySelector("#for_card");
+    const for_transfer = document.querySelector("#for_transfer");
+    const check_orderer = document.querySelector("#check_orderer");
+    const address_orderer = document.querySelector("#address_orderer");
+
+    method_card.addEventListener("change", () => {
+        for_card.classList.remove("hidden");
+        for_transfer.classList.add("hidden");
+    });
+
+    method_transfer.addEventListener("change", () => {
+        for_transfer.classList.remove("hidden");
+        for_card.classList.add("hidden");
+    });
+
+    check_orderer.addEventListener("change", () => {
+        address_orderer.classList.toggle("hidden");
+    });
+</script>
+{% endblock content %}
