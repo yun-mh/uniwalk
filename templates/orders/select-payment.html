@@ -15,6 +15,7 @@
     <div class="container mx-auto flex">
         <div class="w-2/3 flex flex-wrap mb-10 pr-10">
             <form method="POST" class="w-3/4 mx-auto">
+                {% csrf_token %}
                 <h3 class="w-full font-semibold text-2xl mb-5">1. お届け先情報</h3>
                 <div>
                     <h4>配送先住所</h4>
@@ -34,12 +35,7 @@
                     <div class="w-full pb-5">
                         <h4>お支払い方法の選択</h4>
                         <div class="flex">
-                            <div class="w-1/2 flex items-center">
-                                <input type="radio" class="w-1/12" name="payment_method" id="method_card">クレジットカード
-                            </div>
-                            <div class="w-1/2 flex items-center">
-                                <input type="radio" class="w-1/12" name="payment_method" id="method_transfer">振り込み
-                            </div>
+                            {{ orderer_form.payment }}
                         </div>
                     </div>
                     <div id="for_card" class="hidden">
@@ -47,8 +43,9 @@
                         <div class="mb-3">
                             ストライプ！
                         </div>
-                        <div class="w-1/2 flex items-center">
-                            <input type="checkbox" class="w-1/12" id="check_orderer" checked>請求書住所が配送先と同じ
+                        <div class="flex items-center">
+                            {{ orderer_form.is_same_with_recipient }}　<span>請求書住所が配送先と同じ</span>
+                            <!-- <input type="checkbox" class="w-1/12" id="check_orderer" checked> -->
                         </div>
                     </div>
                     <div id="for_transfer" class="hidden">
@@ -95,7 +92,7 @@
                     </div>
                 </div>
                 <button class="btn-link">ご注文内容の確認へ</button>
-                <h3 class="w-full font-semibold text-2xl mb-5">3. ご注文の確認</h3>
+                <h3 class="w-full font-semibold text-2xl mb-5">3. ご注文の確定</h3>
             </form>
         </div>
 
@@ -106,11 +103,11 @@
 </div>
 
 <script>
-    const method_card = document.querySelector("#method_card");
-    const method_transfer = document.querySelector("#method_transfer");
+    const method_card = document.querySelector("#id_payment_0");
+    const method_transfer = document.querySelector("#id_payment_1");
     const for_card = document.querySelector("#for_card");
     const for_transfer = document.querySelector("#for_transfer");
-    const check_orderer = document.querySelector("#check_orderer");
+    const check_orderer = document.querySelector("#id_is_same_with_recipient");
     const address_orderer = document.querySelector("#address_orderer");
 
     method_card.addEventListener("change", () => {

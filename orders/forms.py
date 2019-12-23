@@ -4,6 +4,12 @@ from localflavor.jp.forms import JPPostalCodeField
 from . import models
 
 
+PAYMENT_CARD = "P1"
+PAYMENT_TRANSFER = "P2"
+
+PAYMENT_CHOICES = ((PAYMENT_CARD, "クレジットカード"), (PAYMENT_TRANSFER, "振込"))
+
+
 class GuestForm(forms.Form):
     email = forms.EmailField(
         label="", widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
@@ -41,6 +47,7 @@ class SelectPaymentForm(forms.ModelForm):
     class Meta:
         model = models.Order
         fields = (
+            "payment",
             "last_name_orderer",
             "first_name_orderer",
             "last_name_orderer_kana",
@@ -50,8 +57,10 @@ class SelectPaymentForm(forms.ModelForm):
             "prefecture_orderer",
             "address_city_orderer",
             "address_detail_orderer",
+            "is_same_with_recipient",
         )
         widgets = {
+            "payment": forms.RadioSelect(),
             "last_name_orderer": forms.TextInput(),
             "first_name_orderer": forms.TextInput(),
             "last_name_orderer_kana": forms.TextInput(),
@@ -61,6 +70,12 @@ class SelectPaymentForm(forms.ModelForm):
             "address_city_orderer": forms.TextInput(),
             "address_detail_orderer": forms.TextInput(),
         }
+
+    payment = forms.ChoiceField(choices=PAYMENT_CHOICES, widget=forms.RadioSelect())
+
+    is_same_with_recipient = forms.BooleanField(
+        label="請求書住所が配送先と同じ", initial=True, required=False, widget=forms.CheckboxInput()
+    )
 
     # last_name_orderer = forms.TextInput()
     # first_name_orderer = forms.TextInput()

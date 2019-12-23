@@ -10,3 +10,7 @@ class SessionStore(DbSessionStore):
         Cart.objects.filter(session_key=old_session_key).update(
             session_key=self.session_key
         )
+
+    def cycle_key_after_purchase(self):
+        super(SessionStore, self).cycle_key()
+        self.save()

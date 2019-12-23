@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n static humanize %}
+
+{% block page_title %}
+{% trans 'ご購入の手続き' %}
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="mx-auto pt-16 pb-10">
+
+    <h3 class="w-full font-bold text-3xl mb-3 text-center">
+        ご購入の手続き
+    </h3>
+    <div class="container mx-auto flex">
+        <div class="w-2/3 flex flex-wrap mb-10 pr-10">
+            <form method="POST" class="w-3/4 mx-auto">
+                {% csrf_token %}
+                <h3 class="w-full font-semibold text-2xl mb-5">1. お届け先情報</h3>
+                <div>
+                    <h4>配送先住所</h4>
+                    <span>{{ recipient_data.last_name_recipient }}　{{ recipient_data.first_name_recipient }}</span>
+                    <span>({{ recipient_data.last_name_recipient_kana }}　{{ recipient_data.first_name_recipient_kana }})</span>
+                    <div>
+                        {{ recipient_data.postal_code_recipient }}
+                    </div>
+                    <div>
+                        {{ recipient_data.prefecture_recipient }} {{ recipient_data.address_city_recipient }}
+                        {{ recipient_data.address_detail_recipient }}
+                    </div>
+                </div>
+
+                <h3 class="w-full font-semibold text-2xl mb-5">2. お支払い方法・ご請求先情報</h3>
+                <div>
+                    <h4>お支払い方法</h4>
+                    {% if orderer_data.payment == "P1" %}
+                    <div>{% trans 'クレジットカード' %}</div>
+                    {% elif orderer_data.payment == "P2" %}
+                    <div>{% trans '振込' %}</div>
+                    {% endif %}
+                    <h4>請求先情報</h4>
+                    {% if orderer_data.is_same_with_recipient == True %}
+                    <span>{{ recipient_data.last_name_recipient }}　{{ recipient_data.first_name_recipient }}</span>
+                    <span>({{ recipient_data.last_name_recipient_kana }}　{{ recipient_data.first_name_recipient_kana }})</span>
+                    <div>
+                        {{ recipient_data.postal_code_recipient }}
+                    </div>
+                    <div>
+                        {{ recipient_data.prefecture_recipient }} {{ recipient_data.address_city_recipient }}
+                        {{ recipient_data.address_detail_recipient }}
+                    </div>
+                    {% else %}
+                    <span>{{ orderer_data.last_name_orderer }}　{{ orderer_data.first_name_orderer }}</span>
+                    <span>({{ orderer_data.last_name_orderer_kana }}　{{ orderer_data.first_name_orderer_kana }})</span>
+                    <div>
+                        {{ orderer_data.postal_code_orderer }}
+                    </div>
+                    <div>
+                        {{ orderer_data.prefecture_orderer }} {{ orderer_data.address_city_orderer }}
+                        {{ orderer_data.address_detail_orderer }}
+                    </div>
+                    {% endif %}
+                </div>
+                <h3 class="w-full font-semibold text-2xl mb-5">3. ご注文の確定</h3>
+                <button class="btn-link">注文を確定する</button>
+            </form>
+        </div>
+
+        <div class="w-1/3 flex flex-col h-full p-5 shadow-lg justify-between">
+            {% include "mixins/orders/order-summary-card.html" %}
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
+{% endblock content %}

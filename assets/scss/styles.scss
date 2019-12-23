@@ -55,6 +55,23 @@ form {
   }
 }
 
+#id_payment {
+  @apply w-full flex;
+  li {
+    @apply w-1/2;
+    label {
+      @apply flex items-center;
+      input {
+        @apply w-1/12;
+      }
+    }
+  }
+}
+
+#id_is_same_with_recipient {
+  @apply w-1/12;
+}
+
 @keyframes messageFadeIn {
   0% {
     opacity: 0;

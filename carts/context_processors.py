@@ -16,7 +16,7 @@ def counter(request):
                 )
             else:
                 cart = Cart.objects.get(session_key=_session_key(request))
-            cart_items = CartItem.objects.all().filter(cart=cart)
+            cart_items = CartItem.objects.all().filter(cart=cart, active=True)
             for cart_item in cart_items:
                 item_count += cart_item.quantity
         except Cart.DoesNotExist:

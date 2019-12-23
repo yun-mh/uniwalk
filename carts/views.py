@@ -43,15 +43,15 @@ def add_cart(request, pk):
 
 def cart_display(request, amount=0, counter=0, cart_items=None):
     try:
-        if request.user.is_authenticated:
-            cart = (
-                Cart.objects.filter(user_id=request.user.pk)
-                .order_by("-created")
-                .first()
-            )
-        else:
-            cart = Cart.objects.get(session_key=_session_key(request))
-        cart_items = CartItem.objects.filter(cart=cart, active=True)
+        # if request.user.is_authenticated:
+        #     cart = (
+        #         Cart.objects.filter(user_id=request.user.pk)
+        #         .order_by("-created")
+        #         .first()
+        #     )
+        # else:
+        cart = Cart.objects.get(session_key=_session_key(request))
+        cart_items = CartItem.objects.filter(cart=cart)
         for cart_item in cart_items:
             amount += cart_item.product.price * cart_item.quantity
             counter += cart_item.quantity
@@ -67,11 +67,7 @@ def cart_display(request, amount=0, counter=0, cart_items=None):
 
 def remove_item(request, pk):
     if request.user.is_authenticated:
-        cart = (
-            Cart.objects.filter(user_id=request.user.pk)
-            .order_by("-created")
-            .first()
-        )
+        cart = Cart.objects.filter(user_id=request.user.pk).order_by("-created").first()
     else:
         cart = Cart.objects.get(session_key=_session_key(request))
     product = get_object_or_404(product_models.Product, pk=pk)
@@ -86,11 +82,7 @@ def remove_item(request, pk):
 
 def delete_cartitem(request, pk):
     if request.user.is_authenticated:
-        cart = (
-            Cart.objects.filter(user_id=request.user.pk)
-            .order_by("-created")
-            .first()
-        )
+        cart = Cart.objects.filter(user_id=request.user.pk).order_by("-created").first()
     else:
         cart = Cart.objects.get(session_key=_session_key(request))
     product = get_object_or_404(product_models.Product, pk=pk)

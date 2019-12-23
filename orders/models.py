@@ -14,6 +14,11 @@ class Order(models.Model):
 
     """ 注文のモデルを定義する """
 
+    PAYMENT_CARD = "P1"
+    PAYMENT_TRANSFER = "P2"
+
+    PAYMENT_CHOICES = ((PAYMENT_CARD, "クレジットカード"), (PAYMENT_TRANSFER, "振込"))
+
     user = models.ForeignKey(
         "users.User",
         related_name="order",
@@ -21,7 +26,13 @@ class Order(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
-    # cart_id = models.ForeignKey()
+    guest = models.ForeignKey(
+        "users.Guest",
+        related_name="order",
+        verbose_name="ゲスト",
+        on_delete=models.SET_NULL,
+        null=True,
+    )
     last_name_recipient = models.CharField("姓(ご請求書先)", max_length=30)
     first_name_recipient = models.CharField("名(ご請求書先)", max_length=30)
     last_name_recipient_kana = models.CharField("姓(ご請求書先,カナ)", max_length=30)
@@ -40,9 +51,21 @@ class Order(models.Model):
     prefecture_orderer = models.CharField("都道府県(お届け先)", max_length=2)
     address_city_orderer = models.CharField("市区町村(お届け先)", max_length=40)
     address_detail_orderer = models.CharField("建物名・部屋番号(お届け先)", max_length=40)
-    order_date = models.DateTimeField("注文日時")
-    payment = models.CharField("支払方法", max_length=2)
+    order_date = models.DateTimeField("注文日時", auto_now_add=True)
+    payment = models.CharField("支払方法", max_length=2, choices=PAYMENT_CHOICES)
     # card_id = models.ForeignKey()
     # step = models.ForeignKey()
     amount = models.IntegerField("支払総額")
 
+
+class OrderItem(models.Model):
+    product = models.CharField(max_length=250)
+    quantity = models.IntegerField()
+    price = models.IntegerField()
+    order = models.ForeignKey("Order", on_delete=models.CASCADE)
+
+    def sub_total(self):
+        return self.quantity * self.price
+
+    def __str__(self):
+        return self.product
