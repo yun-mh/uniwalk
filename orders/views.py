@@ -1,8 +1,12 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, render_to_response
 from django.views.generic import View, FormView
 from django.contrib.auth import authenticate, login
 from django.utils.decorators import method_decorator
-from django.forms.models import model_to_dict
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.utils.html import strip_tags
+from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from users import mixins
 from users import forms as user_forms
@@ -57,15 +61,27 @@ class CheckoutView(FormView):
             "cart": cart,
             "total": total,
         }
-
-        recipient_info = user_models.User.objects.filter(email=self.request.user)
-        if recipient_info.exists:
-            context.update({"recipient_info": recipient_info})
+        if self.request.user.is_authenticated:
+            recipient = user_models.User.objects.get(email=self.request.user).as_dict()
+            print(recipient)
+            context["recipient_info"] = recipient
 
         return render(self.request, "orders/checkout.html", context)
 
     def post(self, *args, **kwargs):
         recipient_form = forms.CheckoutForm(self.request.POST)
+        cart = cart_models.Cart.objects.get(
+            session_key=self.request.session.session_key
+        )
+        cart_items = cart_models.CartItem.objects.filter(cart=cart)
+        total = 0
+        for cart_item in cart_items:
+            total += cart_item.product.price * cart_item.quantity
+        context = {
+            "recipient_form": recipient_form,
+            "cart": cart,
+            "total": total,
+        }
         if recipient_form.is_valid():
             recipient_data = {
                 "last_name_recipient": recipient_form.cleaned_data.get(
@@ -98,7 +114,7 @@ class CheckoutView(FormView):
             }
             self.request.session["recipient_data"] = recipient_data
             return redirect(reverse("orders:select-payment"))
-
+        return render(self.request, "orders/checkout.html", context)
 
 class SelectPaymentView(FormView):
     def get(self, *args, **kwargs):
@@ -124,38 +140,56 @@ class SelectPaymentView(FormView):
 
     def post(self, *args, **kwargs):
         orderer_form = forms.SelectPaymentForm(self.request.POST)
+        recipient_data = self.request.session["recipient_data"]
         if orderer_form.is_valid():
-            orderer_data = {
-                "is_same_with_recipient": orderer_form.cleaned_data.get(
-                    "is_same_with_recipient"
-                ),
-                "payment": orderer_form.cleaned_data.get("payment"),
-                "last_name_orderer": orderer_form.cleaned_data.get("last_name_orderer"),
-                "first_name_orderer": orderer_form.cleaned_data.get(
-                    "first_name_orderer"
-                ),
-                "last_name_orderer_kana": orderer_form.cleaned_data.get(
-                    "last_name_orderer_kana"
-                ),
-                "first_name_orderer_kana": orderer_form.cleaned_data.get(
-                    "first_name_orderer_kana"
-                ),
-                "phone_number_orderer": orderer_form.cleaned_data.get(
-                    "phone_number_orderer"
-                ),
-                "postal_code_orderer": orderer_form.cleaned_data.get(
-                    "postal_code_orderer"
-                ),
-                "prefecture_orderer": orderer_form.cleaned_data.get(
-                    "prefecture_orderer"
-                ),
-                "address_city_orderer": orderer_form.cleaned_data.get(
-                    "address_city_orderer"
-                ),
-                "address_detail_orderer": orderer_form.cleaned_data.get(
-                    "address_detail_orderer"
-                ),
-            }
+            if orderer_form.cleaned_data.get("is_same_with_recipient") == True:
+                orderer_data = {
+                    "is_same_with_recipient": orderer_form.cleaned_data.get(
+                        "is_same_with_recipient"
+                    ),
+                    "payment": orderer_form.cleaned_data.get("payment"),
+                    "last_name_orderer": recipient_data["last_name_recipient"],
+                    "first_name_orderer": recipient_data["first_name_recipient"],
+                    "last_name_orderer_kana": recipient_data["last_name_recipient_kana"],
+                    "first_name_orderer_kana": recipient_data["first_name_recipient_kana"],
+                    "phone_number_orderer": recipient_data["phone_number_recipient"],
+                    "postal_code_orderer": recipient_data["postal_code_recipient"],
+                    "prefecture_orderer": recipient_data["prefecture_recipient"],
+                    "address_city_orderer": recipient_data["address_city_recipient"],
+                    "address_detail_orderer": recipient_data["address_detail_recipient"],
+                }
+            else:
+                orderer_data = {
+                    "is_same_with_recipient": orderer_form.cleaned_data.get(
+                        "is_same_with_recipient"
+                    ),
+                    "payment": orderer_form.cleaned_data.get("payment"),
+                    "last_name_orderer": orderer_form.cleaned_data.get("last_name_orderer"),
+                    "first_name_orderer": orderer_form.cleaned_data.get(
+                        "first_name_orderer"
+                    ),
+                    "last_name_orderer_kana": orderer_form.cleaned_data.get(
+                        "last_name_orderer_kana"
+                    ),
+                    "first_name_orderer_kana": orderer_form.cleaned_data.get(
+                        "first_name_orderer_kana"
+                    ),
+                    "phone_number_orderer": orderer_form.cleaned_data.get(
+                        "phone_number_orderer"
+                    ),
+                    "postal_code_orderer": orderer_form.cleaned_data.get(
+                        "postal_code_orderer"
+                    ),
+                    "prefecture_orderer": orderer_form.cleaned_data.get(
+                        "prefecture_orderer"
+                    ),
+                    "address_city_orderer": orderer_form.cleaned_data.get(
+                        "address_city_orderer"
+                    ),
+                    "address_detail_orderer": orderer_form.cleaned_data.get(
+                        "address_detail_orderer"
+                    ),
+                }
             self.request.session["orderer_data"] = orderer_data
             return redirect(reverse("orders:order-check"))
 
@@ -225,6 +259,25 @@ class OrderCheckView(FormView):
         print(self.request.session.session_key)
         self.request.session.cycle_key_after_purchase()
         print(self.request.session.session_key)
+        try:
+            email = self.request.user.email
+        except:
+            email = self.request.session["guest_email"]
+        html_message = render_to_string("emails/purchase-done.html")
+        send_mail(
+            _("UniWalk　ご注文ありがとうございます。"),
+            strip_tags(html_message),
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+            fail_silently=False,
+            html_message=html_message,
+        )
+        try:
+            del self.request.session["guest_email"]
+            del self.request.session["recipient_data"]
+            del self.request.session["orderer_data"]
+        except:
+            pass
         return redirect("orders:checkout-done")
 
 

@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from localflavor.jp.forms import JPPostalCodeField
+from phonenumber_field import formfields
 from . import models
 
 
@@ -26,7 +27,6 @@ class CheckoutForm(forms.ModelForm):
             "first_name_recipient_kana",
             "phone_number_recipient",
             "postal_code_recipient",
-            "postal_code_recipient",
             "prefecture_recipient",
             "address_city_recipient",
             "address_detail_recipient",
@@ -41,6 +41,19 @@ class CheckoutForm(forms.ModelForm):
             "address_city_recipient": forms.TextInput(),
             "address_detail_recipient": forms.TextInput(),
         }
+    
+    last_name_recipient = forms.CharField(label=_(""), widget=forms.TextInput(attrs={"placeholder": _("")}))
+    first_name_recipient = forms.CharField(label=_(""), widget=forms.TextInput(attrs={"placeholder": _("")}))
+    last_name_recipient_kana = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
+    first_name_recipient_kana = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
+    phone_number_recipient = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
+    prefecture_recipient = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
+    address_city_recipient = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
+    address_detail_recipient = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
+    postal_code_recipient = JPPostalCodeField(
+        label=_('郵便番号'),
+        widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),
+    )
 
 
 class SelectPaymentForm(forms.ModelForm):

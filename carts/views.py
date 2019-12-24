@@ -14,14 +14,7 @@ def _session_key(request):
 def add_cart(request, pk):
     product = product_models.Product.objects.get(pk=pk)
     try:
-        if request.user.is_authenticated:
-            cart = (
-                Cart.objects.filter(user_id=request.user.pk)
-                .order_by("-created")
-                .first()
-            )
-        else:
-            cart = Cart.objects.get(session_key=_session_key(request))
+        cart = Cart.objects.get(session_key=_session_key(request))
     except Cart.DoesNotExist:
         if request.user.is_authenticated:
             cart = Cart.objects.create(
@@ -43,13 +36,6 @@ def add_cart(request, pk):
 
 def cart_display(request, amount=0, counter=0, cart_items=None):
     try:
-        # if request.user.is_authenticated:
-        #     cart = (
-        #         Cart.objects.filter(user_id=request.user.pk)
-        #         .order_by("-created")
-        #         .first()
-        #     )
-        # else:
         cart = Cart.objects.get(session_key=_session_key(request))
         cart_items = CartItem.objects.filter(cart=cart)
         for cart_item in cart_items:
@@ -57,7 +43,6 @@ def cart_display(request, amount=0, counter=0, cart_items=None):
             counter += cart_item.quantity
     except ObjectDoesNotExist:
         pass
-
     return render(
         request,
         "carts/cart.html",
@@ -66,10 +51,7 @@ def cart_display(request, amount=0, counter=0, cart_items=None):
 
 
 def remove_item(request, pk):
-    if request.user.is_authenticated:
-        cart = Cart.objects.filter(user_id=request.user.pk).order_by("-created").first()
-    else:
-        cart = Cart.objects.get(session_key=_session_key(request))
+    cart = Cart.objects.get(session_key=_session_key(request))
     product = get_object_or_404(product_models.Product, pk=pk)
     cart_item = CartItem.objects.get(product=product, cart=cart)
     if cart_item.quantity > 1:
@@ -81,10 +63,7 @@ def remove_item(request, pk):
 
 
 def delete_cartitem(request, pk):
-    if request.user.is_authenticated:
-        cart = Cart.objects.filter(user_id=request.user.pk).order_by("-created").first()
-    else:
-        cart = Cart.objects.get(session_key=_session_key(request))
+    cart = Cart.objects.get(session_key=_session_key(request))
     product = get_object_or_404(product_models.Product, pk=pk)
     cart_item = CartItem.objects.get(product=product, cart=cart)
     cart_item.delete()

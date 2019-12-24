@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static humanize %}
+{% load i18n static humanize js %}
 
 {% block page_title %}
 {% trans 'ご購入の手続き' %}
@@ -17,37 +17,58 @@
             <form method="POST" class="w-3/4 mx-auto">
                 <h3 class="w-full font-semibold text-2xl mb-5">1. お届け先情報</h3>
                 <div id="orderer">
+                    {% if request.user.is_authenticated %}
+                    <a id="get_user_data" class="block w-full btn-link mb-3 cursor-pointer">会員情報からデータを取得する</a>
+                    {% endif %}
                     {% csrf_token %}
                     <div class="flex mb-5">
                         <div class="mr-5">
                             {{ recipient_form.last_name_recipient }}
+                            <span
+                                class="text-red-700 font-medium text-sm">{{ recipient_form.last_name_recipient.errors }}</span>
                         </div>
                         <div>
                             {{ recipient_form.first_name_recipient }}
+                            <span
+                                class="text-red-700 font-medium text-sm">{{ recipient_form.first_name_recipient.errors }}</span>
                         </div>
                     </div>
                     <div class="flex mb-5">
                         <div class="mr-5">
                             {{ recipient_form.last_name_recipient_kana }}
+                            <span
+                                class="text-red-700 font-medium text-sm">{{ recipient_form.last_name_recipient_kana.errors }}</span>
                         </div>
                         <div>
                             {{ recipient_form.first_name_recipient_kana }}
+                            <span
+                                class="text-red-700 font-medium text-sm">{{ recipient_form.first_name_recipient_kana.errors }}</span>
                         </div>
                     </div>
                     <div class="mb-5">
                         {{ recipient_form.phone_number_recipient }}
+                        <span
+                            class="text-red-700 font-medium text-sm">{{ recipient_form.phone_number_recipient.errors }}</span>
                     </div>
                     <div class="mb-5">
                         {{ recipient_form.postal_code_recipient }}
+                        <span
+                            class="text-red-700 font-medium text-sm">{{ recipient_form.postal_code_recipient.errors }}</span>
                     </div>
                     <div class="mb-5">
                         {{ recipient_form.prefecture_recipient }}
+                        <span
+                            class="text-red-700 font-medium text-sm">{{ recipient_form.prefecture_recipient.errors }}</span>
                     </div>
                     <div class="mb-5">
                         {{ recipient_form.address_city_recipient }}
+                        <span
+                            class="text-red-700 font-medium text-sm">{{ recipient_form.address_city_recipient.errors }}</span>
                     </div>
                     <div class="mb-5">
                         {{ recipient_form.address_detail_recipient }}
+                        <span
+                            class="text-red-700 font-medium text-sm">{{ recipient_form.address_detail_recipient.errors }}</span>
                     </div>
                     <button class="btn-link">支払いへ</button>
                 </div>
@@ -66,6 +87,28 @@
 </div>
 
 <script>
-
+    const get_user_data_btn = document.querySelector("#get_user_data");
+    const data = {{ recipient_info | js }};
+    const first_name = document.querySelector("#id_first_name_recipient");
+    const last_name = document.querySelector("#id_last_name_recipient");
+    const first_name_kana = document.querySelector("#id_first_name_recipient_kana");
+    const last_name_kana = document.querySelector("#id_last_name_recipient_kana");
+    const phone_number = document.querySelector("#id_phone_number_recipient");
+    const postal_code = document.querySelector("#id_postal_code_recipient");
+    const prefecture = document.querySelector("#id_prefecture_recipient");
+    const address_city = document.querySelector("#id_address_city_recipient");
+    const address_detail = document.querySelector("#id_address_detail_recipient");
+    get_user_data_btn.addEventListener("click", () => {
+        first_name.value = data["first_name"];
+        last_name.value = data["last_name"];
+        first_name_kana.value = data["first_name_kana"];
+        last_name_kana.value = data["last_name_kana"];
+        phone_number.value = data["phone_number"];
+        postal_code.value = data["postal_code"];
+        prefecture.value = data["prefecture"];
+        address_city.value = data["address_city"];
+        address_detail.value = data["address_detail"];
+    });
+    console.log(data)
 </script>
 {% endblock content %}

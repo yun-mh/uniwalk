@@ -5,7 +5,7 @@ from .managers import CustomUserManager
 from core.models import JPPrefectureField, JPPostalCodeModelField
 from django.shortcuts import reverse
 from phonenumber_field.modelfields import PhoneNumberField
-from localflavor.jp.jp_prefectures import JP_PREFECTURES
+from localflavor.jp.jp_prefectures import JP_PREFECTURES, JP_PREFECTURE_CODES
 from core import models as core_models
 
 # Create your models here.
@@ -67,6 +67,23 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse("users:update-profile")
+
+    def as_dict(self):
+        prefecture_code = int(self.prefecture) - 1
+        prefecture = JP_PREFECTURE_CODES[prefecture_code]
+
+        return {
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "first_name_kana": self.first_name_kana,
+            "last_name_kana": self.last_name_kana,
+            "phone_number": self.phone_number.as_international,
+            "postal_code": self.postal_code,
+            "prefecture": self.prefecture,
+            # "prefecture": str(prefecture[1]),
+            "address_city": self.address_city,
+            "address_detail": self.address_detail,
+        }
 
 
 class Guest(core_models.TimeStampedModel):
