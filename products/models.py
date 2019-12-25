@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 def create_product_code():
     last_product = Product.objects.all().order_by("pk").last()
     if not last_product:
-        return "0000001"
+        return "0001"
     product_number = last_product.product_number
     product_int = int(product_number)
     no_width = 4

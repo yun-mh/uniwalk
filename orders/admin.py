@@ -7,4 +7,10 @@ class OrderAdmin(admin.ModelAdmin):
 
     """ アドミンに注文テーブルを定義する """
 
-    pass
+    list_display = (
+        "last_name_recipient",
+        "first_name_recipient",
+        "order_date",
+        "order_number",
+        "order_code",
+    )
