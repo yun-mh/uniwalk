@@ -57,6 +57,7 @@ class CustomUserAdmin(admin.ModelAdmin):
         "email",
         "birthday",
         "gender",
+        "member_code",
         "is_staff",
         "is_superuser",
     )

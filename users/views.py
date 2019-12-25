@@ -77,7 +77,6 @@ class SignUpView(mixins.LoggedOutOnlyView, FormView):
             "last_name_kana": user.cleaned_data.get("last_name_kana"),
             "first_name_kana": user.cleaned_data.get("first_name_kana"),
             "gender": user.cleaned_data.get("gender"),
-            "member_number": user.cleaned_data.get("member_number"),
         }
         self.request.session["data"] = data
         return redirect(reverse("users:signup-check"))
@@ -100,10 +99,8 @@ class SignUpCheckView(mixins.LoggedOutOnlyView, FormView):
             last_name_kana=data["last_name_kana"],
             first_name_kana=data["first_name_kana"],
             gender=data["gender"],
-            member_number=data["member_number"],
         )
         user.set_password(data["password"])
-        user.member_code = "C" + data["gender"] + data["member_number"]
         user.save() 
         email = data["email"]
         html_message = render_to_string("emails/registration-done.html")

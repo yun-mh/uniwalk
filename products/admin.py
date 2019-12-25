@@ -13,6 +13,11 @@ class ProductAdmin(admin.ModelAdmin):
     """ アドミンに商品を定義する """
 
     inlines = (ImageInline,)
+    list_display = (
+        "name",
+        "category",
+        "product_code",
+    )
 
 
 @admin.register(models.Category)

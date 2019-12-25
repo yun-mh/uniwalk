@@ -10,17 +10,16 @@ from core import models as core_models
 
 # Create your models here.
 def create_member_number():
-    # last_member = User.objects.all().order_by("pk").last()
-    # if not last_member:
-    #     return "0000001"
-    # member_number = last_member.member_number
-    # member_int = int(member_number)
-    # no_width = 7
-    # new_member_int = member_int + 1
-    # formatted = (no_width - len(str(new_member_int))) * "0" + str(new_member_int)
-    # new_member_number = str(formatted)
-    # return new_member_number
-    pass
+    last_member = User.objects.all().order_by("pk").last()
+    if not last_member:
+        return "0000001"
+    member_number = last_member.member_number
+    member_int = int(member_number)
+    no_width = 7
+    new_member_int = member_int + 1
+    formatted = (no_width - len(str(new_member_int))) * "0" + str(new_member_int)
+    new_member_number = str(formatted)
+    return new_member_number
 
 
 class User(AbstractUser):
@@ -67,6 +66,15 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse("users:update-profile")
+
+    def save(self, *args, **kwargs):
+        if self.is_staff == True or self.is_superuser == True:
+            character = "S"
+        else:
+            character = "C"
+        member_code = character + self.gender + self.member_number
+        self.member_code = member_code
+        super().save(*args, **kwargs)
 
     def as_dict(self):
         prefecture_code = int(self.prefecture) - 1

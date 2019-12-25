@@ -43,7 +43,6 @@ class SignUpForm(forms.ModelForm):
             "last_name_kana",
             "first_name_kana",
             "gender",
-            "member_number",
         )
         widgets = {
             "email": forms.EmailInput(attrs={"placeholder": _("メールアドレス"), "required": True}),
@@ -52,7 +51,6 @@ class SignUpForm(forms.ModelForm):
             "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)"), "required": True}),
             "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)"), "required": True}),
             "gender": forms.Select(attrs={"required": True}),
-            "member_number": forms.TextInput(attrs={"class": "hidden"}),
         }
 
     password = forms.CharField(
