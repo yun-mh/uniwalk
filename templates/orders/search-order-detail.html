@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans '注文詳細' %}
+{% endblock page_title%}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h2 class="text-center text-4xl font-bold">
+        {% trans '注文詳細' %}
+    </h2>
+    <div class="container mx-auto flex">
+
+        {% include 'mixins/orders/order-detail-card.html' with user=user %}
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+{% endblock %}

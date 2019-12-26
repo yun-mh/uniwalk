@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib import messages
 from products import models as product_models
+from users import mixins
 from . import models, forms
 
 # Create your views here.
@@ -28,7 +29,7 @@ class ReviewListView(ListView):
         return context
 
 
-class ReviewPostView(FormView):
+class ReviewPostView(mixins.LoggedInOnlyView, FormView):
 
     template_name = "reviews/review-post.html"
     success_url = reverse_lazy("products:detail")

@@ -9,5 +9,11 @@ urlpatterns = [
     path("checkout/", views.CheckoutView.as_view(), name="checkout"),
     path("checkout/payment/", views.SelectPaymentView.as_view(), name="select-payment"),
     path("checkout/check/", views.OrderCheckView.as_view(), name="order-check"),
-    path("checkout/done/", views.CheckoutDoneView.as_view(), name="checkout-done"),
+    path(
+        "checkout/done/<str:order_code>",
+        views.CheckoutDoneView.as_view(),
+        name="checkout-done",
+    ),
+    path("search/", views.OrderSearchView.as_view(), name="search"),
+    path("detail/<str:order_code>", views.OrderDetailView.as_view(), name="detail"),
 ]

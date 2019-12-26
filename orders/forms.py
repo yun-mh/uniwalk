@@ -41,18 +41,33 @@ class CheckoutForm(forms.ModelForm):
             "address_city_recipient": forms.TextInput(),
             "address_detail_recipient": forms.TextInput(),
         }
-    
-    last_name_recipient = forms.CharField(label=_(""), widget=forms.TextInput(attrs={"placeholder": _("")}))
-    first_name_recipient = forms.CharField(label=_(""), widget=forms.TextInput(attrs={"placeholder": _("")}))
-    last_name_recipient_kana = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
-    first_name_recipient_kana = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
-    phone_number_recipient = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
-    prefecture_recipient = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
-    address_city_recipient = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
-    address_detail_recipient = forms.CharField(label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")}))
+
+    last_name_recipient = forms.CharField(
+        label=_(""), widget=forms.TextInput(attrs={"placeholder": _("")})
+    )
+    first_name_recipient = forms.CharField(
+        label=_(""), widget=forms.TextInput(attrs={"placeholder": _("")})
+    )
+    last_name_recipient_kana = forms.CharField(
+        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+    )
+    first_name_recipient_kana = forms.CharField(
+        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+    )
+    phone_number_recipient = forms.CharField(
+        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+    )
+    prefecture_recipient = forms.CharField(
+        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+    )
+    address_city_recipient = forms.CharField(
+        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+    )
+    address_detail_recipient = forms.CharField(
+        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+    )
     postal_code_recipient = JPPostalCodeField(
-        label=_('郵便番号'),
-        widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),
+        label=_("郵便番号"), widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),
     )
 
 
@@ -90,23 +105,16 @@ class SelectPaymentForm(forms.ModelForm):
         label="請求書住所が配送先と同じ", initial=True, required=False, widget=forms.CheckboxInput()
     )
 
-    # last_name_orderer = forms.TextInput()
-    # first_name_orderer = forms.TextInput()
-    # last_name_orderer_kana = forms.TextInput()
-    # first_name_orderer_kana = forms.TextInput()
-    # email = forms.EmailInput()
-    # phone_number_orderer = forms.TextInput()
-    # # postal_code_orderer = forms.TextInput()
-    # prefecture_orderer = forms.TextInput()
-    # address_city_orderer = forms.TextInput()
-    # address_detail_orderer = forms.TextInput()
-    # last_name_recipient = forms.TextInput()
-    # first_name_recipient = forms.TextInput()
-    # last_name_recipient_kana = forms.TextInput()
-    # first_name_recipient_kana = forms.TextInput()
-    # phone_number_recipient = forms.TextInput()
-    # # postal_code_recipient = forms.TextInput()
-    # prefecture_recipient = forms.TextInput()
-    # address_city_recipient = forms.TextInput()
-    # address_detail_recipient = forms.TextInput()
-    # # payment
+
+class OrderSearchForm(forms.ModelForm):
+    class Meta:
+        model = models.Order
+        fields = (
+            "order_code",
+            "email",
+        )
+        widgets = {
+            "order_code": forms.TextInput(),
+        }
+
+    email = forms.EmailField()

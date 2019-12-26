@@ -45,8 +45,10 @@
                     <span
                         class="ml-3 font-medium text-xl">{% blocktrans with review_count=product.reviews.count %}({{ review_count }}件のレビュー){% endblocktrans %}</span>
                 </div>
+                {% if user.is_authenticated %}
                 <a href="{% url 'reviews:post' product.pk %}"
                     class="w-1/4 btn-link bg-green-400">{% trans 'レビューを書く' %}</a>
+                {% endif %}
             </div>
 
             {% if rev %}

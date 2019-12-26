@@ -95,7 +95,7 @@ class User(AbstractUser):
 
 
 class Guest(core_models.TimeStampedModel):
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):

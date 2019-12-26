@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse, render_to_response
-from django.views.generic import View, FormView
+from django.views.generic import View, FormView, DetailView
 from django.contrib.auth import authenticate, login
 from django.utils.decorators import method_decorator
 from django.template.loader import render_to_string
@@ -8,6 +8,8 @@ from django.utils.html import strip_tags
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
+from django.db.models import Q
+from django.contrib import messages
 from users import mixins
 from users import forms as user_forms
 from users import models as user_models
@@ -35,7 +37,10 @@ def member_or_guest_login(request):
             guest_form = forms.GuestForm(request.POST, prefix="guest")
             if guest_form.is_valid():
                 guest_email = guest_form.cleaned_data.get("email")
-                user_models.Guest.objects.create(email=guest_email)
+                try:
+                    user_models.Guest.objects.get(email=guest_email)
+                except user_models.Guest.DoesNotExist:
+                    user_models.Guest.objects.create(email=guest_email)
                 request.session["guest_email"] = guest_email
                 return redirect(reverse("orders:checkout"))
             member_form = user_forms.LoginForm(prefix="member")
@@ -231,7 +236,7 @@ class OrderCheckView(FormView):
             guest = user_models.Guest.objects.filter(
                 email=self.request.session["guest_email"]
             ).first()
-        models.Order.objects.create(
+        new_order = models.Order.objects.create(
             user=user,
             guest=guest,
             last_name_recipient=recipient_data["last_name_recipient"],
@@ -255,15 +260,14 @@ class OrderCheckView(FormView):
             payment=orderer_data["payment"],
             amount=total,
         )
-        cart_items.update(active=False)
-        print(self.request.session.session_key)
-        self.request.session.cycle_key_after_purchase()
-        print(self.request.session.session_key)
         try:
             email = self.request.user.email
         except:
             email = self.request.session["guest_email"]
-        html_message = render_to_string("emails/purchase-done.html")
+        order_code = new_order.order_code
+        cart_items.update(active=False)
+        self.request.session.cycle_key_after_purchase()
+        html_message = render_to_string("emails/purchase-done.html", {"order_code": order_code})
         send_mail(
             _("UniWalk　ご注文ありがとうございます。"),
             strip_tags(html_message),
@@ -278,9 +282,48 @@ class OrderCheckView(FormView):
             del self.request.session["orderer_data"]
         except:
             pass
-        return redirect("orders:checkout-done")
+        return redirect("orders:checkout-done", order_code)
 
 
 class CheckoutDoneView(View):
-    def get(self, request):
-        return render(request, "orders/checkout-done.html")
+    def get(self, request, *args, **kwargs):
+        context = {
+            "order_code": kwargs.get("order_code")
+        }
+        return render(request, "orders/checkout-done.html", context)
+
+
+class OrderSearchView(FormView):
+    model = models.Order
+    form_class = forms.OrderSearchForm
+    template_name = "orders/order-search.html"
+    success_url = reverse_lazy("orders:detail")
+
+    def form_valid(self, form):
+        order_code = form.cleaned_data.get("order_code")
+        email = form.cleaned_data.get("email")
+        try:
+            order = models.Order.objects.get(order_code=order_code)
+        except models.Order.DoesNotExist:
+            messages.error(self.request, _("入力した情報をもう一度確認してください。"))
+            return redirect("orders:search")
+        if str(order.user) != email and str(order.guest.email) != email:
+            messages.error(self.request, _("入力した情報をもう一度確認してください。"))
+            return redirect("orders:search")
+        else:
+            return redirect("orders:detail", order_code)
+
+
+class OrderDetailView(DetailView):
+    template_name = "orders/search-order-detail.html"
+    context_object_name = "order"
+    slug_field = 'order_code'
+    slug_url_kwarg = 'order_code'
+
+    def get_queryset(self):
+        order_code = self.kwargs.get("order_code")
+        try:
+            return models.Order.objects.filter(order_code=order_code)
+        except models.Order.DoesNotExist:
+            return None
+
