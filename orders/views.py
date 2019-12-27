@@ -244,14 +244,25 @@ class OrderCheckView(FormView):
 
             if payment == "P1":
                 if self.request.user.is_authenticated:
-                    user = user_models.User.objects.get(user=self.request.user)
+                    user = user_models.User.objects.get(email=self.request.user)
                 if save:
                     if user.stripe_customer_id != '' and user.stripe_customer_id is not None:
                         customer = stripe.Customer.retrieve(user.stripe_customer_id)
-                        customer.sources.create(source=token)
+                        customer.sources.create(
+                            source=token,
+                            # owner={
+                            #     "email": self.request.user.email,
+                            #     "name": orderer_data["first_name_orderer"] + " " + orderer_data["last_name_orderer"],
+                            # }                            
+                        )
                     else:
-                        customer = stripe.Customer.create(email=self.request.user.email)
-                        customer.sources.create(source=token)
+                        customer = stripe.Customer.create(
+                            email=self.request.user.email,
+                            name=orderer_data["first_name_orderer"] + " " + orderer_data["last_name_orderer"],
+                        )
+                        customer.sources.create(
+                            source=token
+                        )
                         user.stripe_customer_id = customer['id']
                         user.save()
                 try:
@@ -259,8 +270,11 @@ class OrderCheckView(FormView):
                         charge = stripe.Charge.create(
                             amount=total,
                             currency="JPY",
-                            customer=user.stripe_customer_id
+                            customer=user.stripe_customer_id,
+                            # billing_details=self.request.user.email,
+                            # billing_details=orderer_data["first_name_orderer"] + " " + orderer_data["last_name_orderer"],
                         )
+                        print(charge.billing_details)
                     else:
                         charge = stripe.Charge.create(
                             amount=total,

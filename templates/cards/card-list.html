@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans 'クレジットカード一覧' %}
+{% endblock page_title%}
+
+{% block content %}
+
+<div class="mx-auto pt-16 pb-10">
+    <div class="container mx-auto flex">
+        <div class="w-1/5 h-50vh shadow-lg">
+            {% include 'partials/mypage-menu.html' %}
+        </div>
+
+        <div class="w-4/5 ml-20 flex flex-col mb-10">
+            <h2 class="font-bold text-4xl text-center mb-10">{% trans 'クレジットカード一覧' %}</h2>
+
+            {% if cards %}
+            {% for card in cards %}
+            {% include 'mixins/cards/card-card.html' with card=card %}
+            {% endfor %}
+
+            <div class="flex items-center justify-center mx-auto container mt-10">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="text-teal-500">
+                    <i class="fas fa-arrow-left fa-lg"></i>
+                </a>
+                {% endif %}
+
+                <span class="mx-3 font-medium text-lg">
+                    {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}
+                    {{ current_page }} ページ{% endblocktrans %}
+                </span>
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="text-teal-500">
+                    <i class="fas fa-arrow-right fa-lg"></i>
+                </a>
+                {% endif %}
+            </div>
+
+            {% else %}
+            <p class="flex justify-center items-center font-semibold h-full w-full text-center text-2xl">
+                <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span class="ml-5">{% trans '登録したカードが存在しません。' %}</span>
+            </p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+{% endblock %}

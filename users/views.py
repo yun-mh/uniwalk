@@ -25,6 +25,7 @@ from orders import models as order_models
 from designs import models as design_models
 from feet import models as feet_models
 from . import forms, models, mixins
+import stripe
 
 
 class LoginView(mixins.LoggedOutOnlyView, FormView):
@@ -241,6 +242,22 @@ class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
 
     def get_object(self):
         return order_models.Order.objects.filter(user_id=self.request.user.pk).get(pk=self.kwargs.get("order_pk"))
+
+
+class CardsListView(mixins.LoggedInOnlyView, View):
+    def get(self, *args, **kwargs):
+        user = self.request.user
+        cards = stripe.Customer.list_sources(
+                    user.stripe_customer_id,
+                    object='card'
+                )
+        print(cards)
+        card_list = cards["data"]
+        if len(card_list) > 0:
+            context = {
+                "cards": card_list
+            }
+        return render(self.request, "cards/card-list.html", context)
 
 
 class MyDesignsListView(mixins.LoggedInOnlyView, ListView):

@@ -33,6 +33,7 @@ class CustomUserAdmin(admin.ModelAdmin):
                     "address_detail",
                     "member_number",
                     "member_code",
+                    "stripe_customer_id",
                 )
             },
         ),

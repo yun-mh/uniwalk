@@ -42,7 +42,7 @@ urlpatterns = [
         views.OrdersDetailView.as_view(),
         name="orders-detail",
     ),
-    # path("mypage/<int:pk>/cards/", views.CardsListView.as_view(), name="cards",),
+    path("mypage/cards/", views.CardsListView.as_view(), name="cards",),
     path("mypage/mydesigns/", views.MyDesignsListView.as_view(), name="mydesigns",),
     path("mypage/footsizes/", views.FootSizeView.as_view(), name="footsizes",),
     path("mypage/withdrawal/", views.WithdrawalView.as_view(), name="withdrawal",),
