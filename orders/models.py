@@ -77,7 +77,7 @@ class Order(models.Model):
     address_detail_orderer = models.CharField(_("建物名・部屋番号(お届け先)"), max_length=40)
     order_date = models.DateTimeField(_("注文日時"), auto_now_add=True)
     payment = models.CharField(_("支払方法"), max_length=2, choices=PAYMENT_CHOICES)
-    # card_id = models.ForeignKey()
+    stripe_charge_id = models.CharField(max_length=50, blank=True, null=True)
     # step = models.ForeignKey()
     amount = models.IntegerField(_("支払総額"))
     order_number = models.CharField(

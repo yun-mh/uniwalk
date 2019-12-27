@@ -100,10 +100,15 @@ class SelectPaymentForm(forms.ModelForm):
         }
 
     payment = forms.ChoiceField(choices=PAYMENT_CHOICES, widget=forms.RadioSelect())
-
     is_same_with_recipient = forms.BooleanField(
         label="請求書住所が配送先と同じ", initial=True, required=False, widget=forms.CheckboxInput()
     )
+
+
+class CardForm(forms.Form):
+    stripeToken = forms.CharField(required=False)
+    save = forms.BooleanField(required=False)
+    # use_default = forms.BooleanField(required=False)
 
 
 class OrderSearchForm(forms.ModelForm):

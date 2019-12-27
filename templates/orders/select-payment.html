@@ -10,15 +10,15 @@
 <div class="mx-auto pt-16 pb-10">
 
     <h3 class="w-full font-bold text-3xl mb-3 text-center">
-        ご購入の手続き
+        {% trans 'ご購入の手続き' %}
     </h3>
     <div class="container mx-auto flex">
         <div class="w-2/3 flex flex-wrap mb-10 pr-10">
             <form method="POST" class="w-3/4 mx-auto">
                 {% csrf_token %}
-                <h3 class="w-full font-semibold text-2xl mb-5">1. お届け先情報</h3>
+                <h3 class="w-full font-semibold text-2xl mb-5">{% trans '1. お届け先情報' %}</h3>
                 <div>
-                    <h4>配送先住所</h4>
+                    <h4>{% trans '配送先住所' %}</h4>
                     <span>{{ recipient_data.last_name_recipient }}　{{ recipient_data.first_name_recipient }}</span>
                     <span>({{ recipient_data.last_name_recipient_kana }}　{{ recipient_data.first_name_recipient_kana }})</span>
                     <div>
@@ -33,27 +33,23 @@
                     </div>
                 </div>
 
-                <h3 class="w-full font-semibold text-2xl mb-5">2. お支払い方法・ご請求先情報</h3>
+                <h3 class="w-full font-semibold text-2xl mb-5">{% trans '2. お支払い方法・ご請求先情報' %}</h3>
                 <div>
                     <div class="w-full pb-5">
-                        <h4>お支払い方法の選択</h4>
+                        <h4>{% trans 'お支払い方法の選択' %}</h4>
                         <div class="flex">
                             {{ orderer_form.payment }}
                         </div>
                     </div>
                     <div id="for_card" class="hidden">
-                        <h4>カード情報欄</h4>
-                        <div class="mb-3">
-                            ストライプ！
-                        </div>
+                        <h4>{% trans '請求先情報' %}</h4>
                         <div class="flex items-center">
-                            {{ orderer_form.is_same_with_recipient }}　<span>請求書住所が配送先と同じ</span>
-                            <!-- <input type="checkbox" class="w-1/12" id="check_orderer" checked> -->
+                            {{ orderer_form.is_same_with_recipient }}　<span>{% trans '請求書住所が配送先と同じ' %}</span>
                         </div>
                     </div>
                     <div id="for_transfer" class="hidden">
-                        <h4>振り込み案内</h4>
-                        <p>kouzabanngo nado...</p>
+                        <h4>{% trans '振り込み案内' %}</h4>
+                        <p>{% trans 'kouzabanngo nado...' %}</p>
                     </div>
                     <div id="address_orderer" class="hidden">
                         <div class="flex mb-5">
@@ -94,8 +90,8 @@
 
                     </div>
                 </div>
-                <button class="btn-link">ご注文内容の確認へ</button>
-                <h3 class="w-full font-semibold text-2xl mb-5">3. ご注文の確定</h3>
+                <button class="btn-link">{% trans 'ご注文内容の確認へ' %}</button>
+                <h3 class="w-full font-semibold text-2xl mb-5">{% trans '3. ご注文の確定' %}</h3>
             </form>
         </div>
 
@@ -121,6 +117,8 @@
     method_transfer.addEventListener("change", () => {
         for_transfer.classList.remove("hidden");
         for_card.classList.add("hidden");
+        address_orderer.classList.add("hidden");
+        check_orderer.checked = true;
     });
 
     check_orderer.addEventListener("change", () => {

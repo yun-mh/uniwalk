@@ -48,6 +48,7 @@ class User(AbstractUser):
     prefecture = JPPrefectureField(_("都道府県"), blank=True, null=True)
     address_city = models.CharField(_("市区町村番地"), max_length=40, blank=True, null=True)
     address_detail = models.CharField(_("建物名・号室"), max_length=40, blank=True, null=True)
+    stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
     member_number = models.CharField(
         max_length=40, default=create_member_number, blank=True, null=True
     )
@@ -77,18 +78,22 @@ class User(AbstractUser):
         super().save(*args, **kwargs)
 
     def as_dict(self):
-        prefecture_code = int(self.prefecture) - 1
-        prefecture = JP_PREFECTURE_CODES[prefecture_code]
+        if self.prefecture is not None:
+            prefecture_code = int(self.prefecture) - 1
+            prefecture = JP_PREFECTURE_CODES[prefecture_code]
+        if self.phone_number is not None:
+            phone_number = self.phone_number.as_international
+        else:
+            phone_number = None
 
         return {
             "first_name": self.first_name,
             "last_name": self.last_name,
             "first_name_kana": self.first_name_kana,
             "last_name_kana": self.last_name_kana,
-            "phone_number": self.phone_number.as_international,
+            "phone_number": phone_number,
             "postal_code": self.postal_code,
             "prefecture": self.prefecture,
-            # "prefecture": str(prefecture[1]),
             "address_city": self.address_city,
             "address_detail": self.address_detail,
         }

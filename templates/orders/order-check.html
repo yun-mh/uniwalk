@@ -10,15 +10,14 @@
 <div class="mx-auto pt-16 pb-10">
 
     <h3 class="w-full font-bold text-3xl mb-3 text-center">
-        ご購入の手続き
+        {% trans 'ご購入の手続き' %}
     </h3>
     <div class="container mx-auto flex">
         <div class="w-2/3 flex flex-wrap mb-10 pr-10">
-            <form method="POST" class="w-3/4 mx-auto">
-                {% csrf_token %}
-                <h3 class="w-full font-semibold text-2xl mb-5">1. お届け先情報</h3>
+            <div class="w-3/4 mx-auto">
+                <h3 class="w-full font-semibold text-2xl mb-5">{% trans '1. お届け先情報' %}</h3>
                 <div>
-                    <h4>配送先住所</h4>
+                    <h4>{% trans '配送先住所' %}</h4>
                     <span>{{ recipient_data.last_name_recipient }}　{{ recipient_data.first_name_recipient }}</span>
                     <span>({{ recipient_data.last_name_recipient_kana }}　{{ recipient_data.first_name_recipient_kana }})</span>
                     <div>
@@ -33,15 +32,15 @@
                     </div>
                 </div>
 
-                <h3 class="w-full font-semibold text-2xl mb-5">2. お支払い方法・ご請求先情報</h3>
+                <h3 class="w-full font-semibold text-2xl mb-5">{% trans '2. お支払い方法・ご請求先情報' %}</h3>
                 <div>
-                    <h4>お支払い方法</h4>
+                    <h4>{% trans 'お支払い方法' %}</h4>
                     {% if orderer_data.payment == "P1" %}
                     <div>{% trans 'クレジットカード' %}</div>
                     {% elif orderer_data.payment == "P2" %}
                     <div>{% trans '振込' %}</div>
                     {% endif %}
-                    <h4>請求先情報</h4>
+                    <h4>{% trans '請求先情報' %}</h4>
                     {% if orderer_data.is_same_with_recipient == True %}
                     <span>{{ recipient_data.last_name_recipient }}　{{ recipient_data.first_name_recipient }}</span>
                     <span>({{ recipient_data.last_name_recipient_kana }}　{{ recipient_data.first_name_recipient_kana }})</span>
@@ -64,9 +63,47 @@
                     </div>
                     {% endif %}
                 </div>
-                <h3 class="w-full font-semibold text-2xl mb-5">3. ご注文の確定</h3>
-                <button class="btn-link">注文を確定する</button>
-            </form>
+
+                <h3 class="w-full font-semibold text-2xl mb-5">{% trans '3. ご注文の確定' %}</h3>
+                <form action="." method="POST" class="stripe-form" id="stripe-form">
+                    {% csrf_token %}
+                    {% if orderer_data.payment == "P1" %}
+                    <div class="new-card-form">
+                        <div class="stripe-form-row" id="creditCard">
+                            <label for="card-element" id="stripeBtnLabel">
+                                {% trans 'クレジットカード' %}
+                            </label>
+                            <div id="card-element" class="StripeElement StripeElement--empty">
+                                <div class="__PrivateStripeElement"
+                                    style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+                                    <iframe frameborder="0" allowtransparency="true" scrolling="no"
+                                        name="__privateStripeController1" allowpaymentrequest="true"
+                                        src="https://js.stripe.com/v3/controller-aa9903ff186968008fb3408d381a22d4.html#apiKey=pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik&amp;stripeJsId=34a0363b-8ca6-4d99-8a69-e8b8bebf77f6&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController1"
+                                        aria-hidden="true" tabindex="-1"
+                                        style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        {% if user.is_authenticated %}
+                        <div class="stripe-form-row">
+                            <div class="flex items-center">
+                                <input type="checkbox" class="w-1/12" name="save" id="save_card_info">
+                                <label class="custom-control-label" for="save_card_info">カード情報をアカウントに登録する</label>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+                    {% else %}
+                    <div>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam quis at corrupti nobis in.
+                        Iste, debitis quibusdam fuga magni aliquid maxime! Accusantium nisi amet in corporis,
+                        consequuntur totam maxime sit.
+                    </div>
+                    {% endif %}
+                    <button class="btn-link">{% trans '注文を確定する' %}</button>
+                </form>
+            </div>
         </div>
 
         <div class="w-1/3 flex flex-col h-full p-5 shadow-lg justify-between">
@@ -75,7 +112,75 @@
     </div>
 </div>
 
-<script>
-
-</script>
 {% endblock content %}
+
+{% block javascript %}
+<script src="https://js.stripe.com/v3/"></script>
+
+<script nonce="">
+    // stripe.js クレジットカード
+    var stripe = Stripe('pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik');
+
+    // Create an instance of Elements.
+    var elements = stripe.elements();
+
+    var style = {
+        base: {
+            color: '#32325d',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+                color: '#aab7c4'
+            }
+        },
+        invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
+        }
+    };
+
+    var card = elements.create('card', { style: style });
+
+    card.mount('#card-element');
+
+    // Handle real-time validation errors from the card Element.
+    card.addEventListener('change', function (event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+    // Handle form submission.
+    var form = document.getElementById('stripe-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        stripe.createToken(card).then(function (result) {
+            if (result.error) {
+                // Inform the user if there was an error.
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                // Send the token to your server.
+                stripeTokenHandler(result.token);
+            }
+        });
+    });
+
+    // Submit the form with the token ID.
+    function stripeTokenHandler(token) {
+        // Insert the token ID into the form so it gets submitted to the server
+        var form = document.getElementById('stripe-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+        // Submit the form
+        form.submit();
+    }
+</script>
+{% endblock %}

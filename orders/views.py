@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render, redirect, reverse, render_to_response
 from django.views.generic import View, FormView, DetailView
 from django.contrib.auth import authenticate, login
@@ -13,8 +14,12 @@ from django.contrib import messages
 from users import mixins
 from users import forms as user_forms
 from users import models as user_models
+from cards import models as card_models
 from carts import models as cart_models
 from . import forms, models
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def member_or_guest_login(request):
@@ -68,7 +73,6 @@ class CheckoutView(FormView):
         }
         if self.request.user.is_authenticated:
             recipient = user_models.User.objects.get(email=self.request.user).as_dict()
-            print(recipient)
             context["recipient_info"] = recipient
 
         return render(self.request, "orders/checkout.html", context)
@@ -120,6 +124,7 @@ class CheckoutView(FormView):
             self.request.session["recipient_data"] = recipient_data
             return redirect(reverse("orders:select-payment"))
         return render(self.request, "orders/checkout.html", context)
+
 
 class SelectPaymentView(FormView):
     def get(self, *args, **kwargs):
@@ -201,6 +206,7 @@ class SelectPaymentView(FormView):
 
 class OrderCheckView(FormView):
     def get(self, *args, **kwargs):
+        card_form = forms.CardForm()
         recipient_data = self.request.session["recipient_data"]
         orderer_data = self.request.session["orderer_data"]
         cart = cart_models.Cart.objects.get(
@@ -213,12 +219,14 @@ class OrderCheckView(FormView):
         context = {
             "recipient_data": recipient_data,
             "orderer_data": orderer_data,
+            "card_form": card_form,
             "cart": cart,
             "total": total,
         }
         return render(self.request, "orders/order-check.html", context)
 
     def post(self, *args, **kwargs):
+        card_form = forms.CardForm(self.request.POST)
         recipient_data = self.request.session["recipient_data"]
         orderer_data = self.request.session["orderer_data"]
         cart = cart_models.Cart.objects.get(
@@ -228,61 +236,138 @@ class OrderCheckView(FormView):
         total = 0
         for cart_item in cart_items:
             total += cart_item.product.price * cart_item.quantity
-        if self.request.user.is_authenticated:
-            user = self.request.user
-            guest = None
-        else:
-            user = None
-            guest = user_models.Guest.objects.filter(
-                email=self.request.session["guest_email"]
-            ).first()
-        new_order = models.Order.objects.create(
-            user=user,
-            guest=guest,
-            last_name_recipient=recipient_data["last_name_recipient"],
-            first_name_recipient=recipient_data["first_name_recipient"],
-            last_name_recipient_kana=recipient_data["last_name_recipient_kana"],
-            first_name_recipient_kana=recipient_data["first_name_recipient_kana"],
-            phone_number_recipient=recipient_data["phone_number_recipient"],
-            postal_code_recipient=recipient_data["postal_code_recipient"],
-            prefecture_recipient=recipient_data["prefecture_recipient"],
-            address_city_recipient=recipient_data["address_city_recipient"],
-            address_detail_recipient=recipient_data["address_detail_recipient"],
-            last_name_orderer=orderer_data["last_name_orderer"],
-            first_name_orderer=orderer_data["first_name_orderer"],
-            last_name_orderer_kana=orderer_data["last_name_orderer_kana"],
-            first_name_orderer_kana=orderer_data["first_name_orderer_kana"],
-            phone_number_orderer=orderer_data["phone_number_orderer"],
-            postal_code_orderer=orderer_data["postal_code_orderer"],
-            prefecture_orderer=orderer_data["prefecture_orderer"],
-            address_city_orderer=orderer_data["address_city_orderer"],
-            address_detail_orderer=orderer_data["address_detail_orderer"],
-            payment=orderer_data["payment"],
-            amount=total,
-        )
-        try:
-            email = self.request.user.email
-        except:
-            email = self.request.session["guest_email"]
-        order_code = new_order.order_code
-        cart_items.update(active=False)
-        self.request.session.cycle_key_after_purchase()
-        html_message = render_to_string("emails/purchase-done.html", {"order_code": order_code})
-        send_mail(
-            _("UniWalk　ご注文ありがとうございます。"),
-            strip_tags(html_message),
-            settings.DEFAULT_FROM_EMAIL,
-            [email],
-            fail_silently=False,
-            html_message=html_message,
-        )
-        try:
-            del self.request.session["guest_email"]
-            del self.request.session["recipient_data"]
-            del self.request.session["orderer_data"]
-        except:
-            pass
-        return redirect("orders:checkout-done", order_code)
+
+        if card_form.is_valid():
+            payment = orderer_data["payment"]
+            token = card_form.cleaned_data.get("stripeToken")
+            save = card_form.cleaned_data.get("save")
+
+            if payment == "P1":
+                if self.request.user.is_authenticated:
+                    user = user_models.User.objects.get(user=self.request.user)
+                if save:
+                    if user.stripe_customer_id != '' and user.stripe_customer_id is not None:
+                        customer = stripe.Customer.retrieve(user.stripe_customer_id)
+                        customer.sources.create(source=token)
+                    else:
+                        customer = stripe.Customer.create(email=self.request.user.email)
+                        customer.sources.create(source=token)
+                        user.stripe_customer_id = customer['id']
+                        user.save()
+                try:
+                    if save:
+                        charge = stripe.Charge.create(
+                            amount=total,
+                            currency="JPY",
+                            customer=user.stripe_customer_id
+                        )
+                    else:
+                        charge = stripe.Charge.create(
+                            amount=total,
+                            currency="JPY",
+                            source=token
+                        )
+                    stripe_charge_id = charge["id"]
+
+                except stripe.error.CardError as e:
+                    body = e.json_body
+                    err = body.get('error', {})
+                    messages.warning(self.request, f"{err.get('message')}")
+                    return redirect("/")
+
+                except stripe.error.RateLimitError as e:
+                    # Too many requests made to the API too quickly
+                    messages.warning(self.request, "Rate limit error")
+                    return redirect("/")
+
+                except stripe.error.InvalidRequestError as e:
+                    # Invalid parameters were supplied to Stripe's API
+                    print(e)
+                    messages.warning(self.request, "Invalid parameters")
+                    return redirect("orders:select-payment")
+
+                except stripe.error.AuthenticationError as e:
+                    # Authentication with Stripe's API failed
+                    # (maybe you changed API keys recently)
+                    messages.warning(self.request, "Not authenticated")
+                    return redirect("/")
+
+                except stripe.error.APIConnectionError as e:
+                    # Network communication with Stripe failed
+                    messages.warning(self.request, "Network error")
+                    return redirect("/")
+
+                except stripe.error.StripeError as e:
+                    # Display a very generic error to the user, and maybe send
+                    # yourself an email
+                    messages.warning(
+                        self.request, "Something went wrong. You were not charged. Please try again.")
+                    return redirect("/")
+
+                except Exception as e:
+                    # send an email to ourselves
+                    messages.warning(
+                        self.request, "A serious error occurred. We have been notifed.")
+                    return redirect("/")
+            else:
+                stripe_charge_id = None
+
+            if self.request.user.is_authenticated:
+                user = self.request.user
+                guest = None
+            else:
+                user = None
+                guest = user_models.Guest.objects.get(
+                    email=self.request.session["guest_email"]
+                )
+            new_order = models.Order.objects.create(
+                user=user,
+                guest=guest,
+                last_name_recipient=recipient_data["last_name_recipient"],
+                first_name_recipient=recipient_data["first_name_recipient"],
+                last_name_recipient_kana=recipient_data["last_name_recipient_kana"],
+                first_name_recipient_kana=recipient_data["first_name_recipient_kana"],
+                phone_number_recipient=recipient_data["phone_number_recipient"],
+                postal_code_recipient=recipient_data["postal_code_recipient"],
+                prefecture_recipient=recipient_data["prefecture_recipient"],
+                address_city_recipient=recipient_data["address_city_recipient"],
+                address_detail_recipient=recipient_data["address_detail_recipient"],
+                last_name_orderer=orderer_data["last_name_orderer"],
+                first_name_orderer=orderer_data["first_name_orderer"],
+                last_name_orderer_kana=orderer_data["last_name_orderer_kana"],
+                first_name_orderer_kana=orderer_data["first_name_orderer_kana"],
+                phone_number_orderer=orderer_data["phone_number_orderer"],
+                postal_code_orderer=orderer_data["postal_code_orderer"],
+                prefecture_orderer=orderer_data["prefecture_orderer"],
+                address_city_orderer=orderer_data["address_city_orderer"],
+                address_detail_orderer=orderer_data["address_detail_orderer"],
+                payment=orderer_data["payment"],
+                amount=total,
+                stripe_charge_id=stripe_charge_id,
+            )
+            try:
+                email = self.request.user.email
+            except:
+                email = self.request.session["guest_email"]
+            order_code = new_order.order_code
+            cart_items.update(active=False)
+            self.request.session.cycle_key_after_purchase()
+            html_message = render_to_string("emails/purchase-done.html", {"order_code": order_code})
+            send_mail(
+                _("UniWalk　ご注文ありがとうございます。"),
+                strip_tags(html_message),
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+                html_message=html_message,
+            )
+            try:
+                del self.request.session["guest_email"]
+                del self.request.session["recipient_data"]
+                del self.request.session["orderer_data"]
+            except:
+                pass
+            return redirect("orders:checkout-done", order_code)
 
 
 class CheckoutDoneView(View):
