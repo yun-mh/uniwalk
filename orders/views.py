@@ -248,13 +248,34 @@ class OrderCheckView(FormView):
                 if save:
                     if user.stripe_customer_id != '' and user.stripe_customer_id is not None:
                         customer = stripe.Customer.retrieve(user.stripe_customer_id)
-                        customer.sources.create(
-                            source=token,
-                            # owner={
-                            #     "email": self.request.user.email,
-                            #     "name": orderer_data["first_name_orderer"] + " " + orderer_data["last_name_orderer"],
-                            # }                            
-                        )
+                        current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
+                        current_exp_month = stripe.Token.retrieve(token).card.exp_month
+                        current_exp_year = stripe.Token.retrieve(token).card.exp_year
+                        try:
+                            card_models.Card.objects.get(
+                                fingerprint=current_fingerprint,
+                                exp_month=current_exp_month,
+                                exp_year=current_exp_year,
+                            )
+                            # 지불 시 소스를 스트라이프에서 추출(but card_id is differed each time...)
+                            # try:
+                            #     source = stripe.Customer.retrieve_source(
+                            #         user.stripe_customer_id,
+                            #         current_id
+                            #     )
+                            # except:
+                            #     pass
+                        except card_models.Card.DoesNotExist:
+                            source = customer.create_source(
+                                user.stripe_customer_id,
+                                source=token                       
+                            )
+                            card_models.Card.objects.create(
+                                stripe_customer_id=user.stripe_customer_id,
+                                fingerprint=current_fingerprint,
+                                exp_month=current_exp_month,
+                                exp_year=current_exp_year,
+                            )
                     else:
                         customer = stripe.Customer.create(
                             email=self.request.user.email,
@@ -271,10 +292,8 @@ class OrderCheckView(FormView):
                             amount=total,
                             currency="JPY",
                             customer=user.stripe_customer_id,
-                            # billing_details=self.request.user.email,
-                            # billing_details=orderer_data["first_name_orderer"] + " " + orderer_data["last_name_orderer"],
+                            # source=source
                         )
-                        print(charge.billing_details)
                     else:
                         charge = stripe.Charge.create(
                             amount=total,
