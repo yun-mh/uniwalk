@@ -180,6 +180,10 @@ class SetPasswordForm(SetPasswordForm):
     )
 
 
+class AddCardForm(forms.Form):
+    stripeToken = forms.CharField(required=False)
+    # use_default = forms.BooleanField(required=False)
+
 class WithdrawalForm(forms.Form):
 
     email = forms.EmailField(

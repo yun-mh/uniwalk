@@ -277,15 +277,22 @@ class OrderCheckView(FormView):
                                 exp_year=current_exp_year,
                             )
                     else:
+                        current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
+                        current_exp_month = stripe.Token.retrieve(token).card.exp_month
+                        current_exp_year = stripe.Token.retrieve(token).card.exp_year
                         customer = stripe.Customer.create(
                             email=self.request.user.email,
                             name=orderer_data["first_name_orderer"] + " " + orderer_data["last_name_orderer"],
                         )
-                        customer.sources.create(
-                            source=token
-                        )
                         user.stripe_customer_id = customer['id']
                         user.save()
+                        customer.sources.create(card=token)
+                        card_models.Card.objects.create(
+                            stripe_customer_id=user.stripe_customer_id,
+                            fingerprint=current_fingerprint,
+                            exp_month=current_exp_month,
+                            exp_year=current_exp_year,
+                        )
                 try:
                     if save:
                         charge = stripe.Charge.create(

@@ -20,6 +20,7 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
     PasswordChangeView,
 )
+from cards import models as card_models
 from carts import models as cart_models
 from orders import models as order_models
 from designs import models as design_models
@@ -27,6 +28,7 @@ from feet import models as feet_models
 from . import forms, models, mixins
 import stripe
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class LoginView(mixins.LoggedOutOnlyView, FormView):
 
@@ -244,20 +246,91 @@ class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
         return order_models.Order.objects.filter(user_id=self.request.user.pk).get(pk=self.kwargs.get("order_pk"))
 
 
-class CardsListView(mixins.LoggedInOnlyView, View):
+class CardsListView(mixins.LoggedInOnlyView, FormView):
     def get(self, *args, **kwargs):
         user = self.request.user
         cards = stripe.Customer.list_sources(
                     user.stripe_customer_id,
                     object='card'
                 )
-        print(cards)
         card_list = cards["data"]
+        context = {}
         if len(card_list) > 0:
             context = {
-                "cards": card_list
+                "cards": card_list,
             }
         return render(self.request, "cards/card-list.html", context)
+
+    def post(self, *args, **kwargs):
+        card_customer = self.request.POST.get("target-customer")
+        card_id = self.request.POST.get("target-card")
+        card_fingerprint = self.request.POST.get("target-fingerprint")
+        stripe.Customer.delete_source(
+            card_customer,
+            card_id,
+        )
+        target = card_models.Card.objects.get(
+            stripe_customer_id=card_customer,
+            fingerprint=card_fingerprint,
+        )
+        target.delete()
+        return redirect("users:cards")
+
+
+class CardsAddView(mixins.LoggedInOnlyView, View):
+    def get(self, *args, **kwargs):
+        # user = self.request.user
+        add_card_form = forms.AddCardForm()
+        context = {
+            "add_card_form": add_card_form
+        }
+        return render(self.request, "cards/card-registration.html", context)
+
+    def post(self, *args, **kwargs):
+        add_card_form = forms.AddCardForm(self.request.POST)
+        if add_card_form.is_valid():
+            user = models.User.objects.get(email=self.request.user)
+            token = add_card_form.cleaned_data.get("stripeToken")
+            if user.stripe_customer_id != '' and user.stripe_customer_id is not None:
+                customer = stripe.Customer.retrieve(user.stripe_customer_id)
+                current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
+                current_exp_month = stripe.Token.retrieve(token).card.exp_month
+                current_exp_year = stripe.Token.retrieve(token).card.exp_year
+                try:
+                    card_models.Card.objects.get(
+                        fingerprint=current_fingerprint,
+                        exp_month=current_exp_month,
+                        exp_year=current_exp_year,
+                    )
+                except card_models.Card.DoesNotExist:
+                    customer.sources.create(card=token)
+                    card_models.Card.objects.create(
+                        stripe_customer_id=user.stripe_customer_id,
+                        fingerprint=current_fingerprint,
+                        exp_month=current_exp_month,
+                        exp_year=current_exp_year,
+                    )
+            else:
+                current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
+                current_exp_month = stripe.Token.retrieve(token).card.exp_month
+                current_exp_year = stripe.Token.retrieve(token).card.exp_year
+                customer = stripe.Customer.create(
+                    email=self.request.user.email,
+                )
+                user.stripe_customer_id = customer['id']
+                user.save()
+                customer.sources.create(card=token)
+                card_models.Card.objects.create(
+                    stripe_customer_id=user.stripe_customer_id,
+                    fingerprint=current_fingerprint,
+                    exp_month=current_exp_month,
+                    exp_year=current_exp_year,
+                )
+            messages.success(self.request, _("カードを登録しました。"))
+            return redirect("users:cards")
+        else:
+            messages.error(self.request, _("カード登録に失敗しました。"))
+            return redirect(reverse("users:add-card"))
 
 
 class MyDesignsListView(mixins.LoggedInOnlyView, ListView):

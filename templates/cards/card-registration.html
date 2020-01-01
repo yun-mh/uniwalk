@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+{% trans 'クレジットカード登録' %}
+{% endblock page_title%}
+
+{% block content %}
+
+<div class="mx-auto pt-16 pb-10">
+    <div class="container mx-auto flex">
+        <div class="w-1/5 h-50vh shadow-lg">
+            {% include 'partials/mypage-menu.html' %}
+        </div>
+
+        <div class="w-4/5 ml-20 flex flex-col mb-10">
+            <h2 class="font-bold text-4xl text-center mb-10">{% trans 'クレジットカード登録' %}</h2>
+
+            <div class="container">
+                <form method="POST" class="stripe-form w-1/2 mx-auto" id="stripe-form">
+                    {% csrf_token %}
+                    <div class="new-card-form">
+                        <div class="stripe-form-row" id="creditCard">
+                            <div id="card-element" class="StripeElement StripeElement--empty">
+                                <div class="__PrivateStripeElement"
+                                    style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+                                    <iframe frameborder="0" allowtransparency="true" scrolling="no"
+                                        name="__privateStripeController1" allowpaymentrequest="true"
+                                        src="https://js.stripe.com/v3/controller-aa9903ff186968008fb3408d381a22d4.html#apiKey=pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik&amp;stripeJsId=34a0363b-8ca6-4d99-8a69-e8b8bebf77f6&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController1"
+                                        aria-hidden="true" tabindex="-1"
+                                        style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+                    <div class="w-full text-center mt-6">
+                        <button class="btn-link w-2/3">{% trans 'カードを登録する' %}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+<script src="https://js.stripe.com/v3/"></script>
+
+<script nonce="">
+    // stripe.js クレジットカード
+    var stripe = Stripe('pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik');
+
+    // Create an instance of Elements.
+    var elements = stripe.elements();
+
+    var style = {
+        base: {
+            color: '#32325d',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+                color: '#aab7c4'
+            }
+        },
+        invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
+        }
+    };
+
+    var card = elements.create('card', { style: style });
+
+    card.mount('#card-element');
+
+    // Handle real-time validation errors from the card Element.
+    card.addEventListener('change', function (event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+    // Handle form submission.
+    var form = document.getElementById('stripe-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        stripe.createToken(card).then(function (result) {
+            if (result.error) {
+                // Inform the user if there was an error.
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                // Send the token to your server.
+                stripeTokenHandler(result.token);
+            }
+        });
+    });
+
+    // Submit the form with the token ID.
+    function stripeTokenHandler(token) {
+        // Insert the token ID into the form so it gets submitted to the server
+        var form = document.getElementById('stripe-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+        // Submit the form
+        form.submit();
+    }
+</script>
+{% endblock %}
