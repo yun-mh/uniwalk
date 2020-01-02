@@ -223,6 +223,18 @@ class OrderCheckView(FormView):
             "cart": cart,
             "total": total,
         }
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            cards = stripe.Customer.list_sources(
+                        user.stripe_customer_id,
+                        limit=3,
+                        object='card'
+                    )
+            card_list = cards["data"]
+            if len(card_list) > 0:
+                context.update({
+                    "card": card_list
+                })
         return render(self.request, "orders/order-check.html", context)
 
     def post(self, *args, **kwargs):
@@ -241,6 +253,7 @@ class OrderCheckView(FormView):
             payment = orderer_data["payment"]
             token = card_form.cleaned_data.get("stripeToken")
             save = card_form.cleaned_data.get("save")
+            use_default = card_form.cleaned_data.get("use_default")
 
             if payment == "P1":
                 if self.request.user.is_authenticated:
@@ -248,23 +261,27 @@ class OrderCheckView(FormView):
                 if save:
                     if user.stripe_customer_id != '' and user.stripe_customer_id is not None:
                         customer = stripe.Customer.retrieve(user.stripe_customer_id)
+                        print(stripe.Token.retrieve(token).card.id)
+                        current_card_id = stripe.Token.retrieve(token).card.id
                         current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
                         current_exp_month = stripe.Token.retrieve(token).card.exp_month
                         current_exp_year = stripe.Token.retrieve(token).card.exp_year
                         try:
-                            card_models.Card.objects.get(
+                            used = card_models.Card.objects.get(
                                 fingerprint=current_fingerprint,
                                 exp_month=current_exp_month,
                                 exp_year=current_exp_year,
                             )
+                            print(used)
                             # 지불 시 소스를 스트라이프에서 추출(but card_id is differed each time...)
-                            # try:
-                            #     source = stripe.Customer.retrieve_source(
-                            #         user.stripe_customer_id,
-                            #         current_id
-                            #     )
-                            # except:
-                            #     pass
+                            try:
+                                source = customer.retrieve_source(
+                                    user.stripe_customer_id,
+                                    current_card_id,
+                                )
+                                print(source)
+                            except:
+                                pass
                         except card_models.Card.DoesNotExist:
                             source = customer.create_source(
                                 user.stripe_customer_id,
@@ -286,7 +303,7 @@ class OrderCheckView(FormView):
                         )
                         user.stripe_customer_id = customer['id']
                         user.save()
-                        customer.sources.create(card=token)
+                        customer.sources.create(card=token) #???　保存しなくてもいいかも
                         card_models.Card.objects.create(
                             stripe_customer_id=user.stripe_customer_id,
                             fingerprint=current_fingerprint,
@@ -299,7 +316,15 @@ class OrderCheckView(FormView):
                             amount=total,
                             currency="JPY",
                             customer=user.stripe_customer_id,
-                            # source=source
+                            source=source
+                        )
+                    elif use_default:
+                        source = self.request.POST.get("use_default_card")
+                        charge = stripe.Charge.create(
+                            amount=total,
+                            currency="JPY",
+                            customer=user.stripe_customer_id,
+                            source=source
                         )
                     else:
                         charge = stripe.Charge.create(
@@ -324,7 +349,7 @@ class OrderCheckView(FormView):
                     # Invalid parameters were supplied to Stripe's API
                     print(e)
                     messages.warning(self.request, "Invalid parameters")
-                    return redirect("orders:select-payment")
+                    # return redirect("orders:select-payment")
 
                 except stripe.error.AuthenticationError as e:
                     # Authentication with Stripe's API failed

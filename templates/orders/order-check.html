@@ -65,10 +65,40 @@
                 </div>
 
                 <h3 class="w-full font-semibold text-2xl mb-5">{% trans '3. ご注文の確定' %}</h3>
+
+                {% if orderer_data.payment == "P1" %}
+                {% if card %}
+                <div id="current-card" style="padding: 5px 30px;">
+                    <form action="." method="post" class="stripe-form">
+                        {% csrf_token %}
+                        <h4>登録済みのカード</h4>
+                        <div>
+                            <select name="use_default_card" id="use_default_card">
+                                {% for c in card %}
+                                <option value="{{ c.id }}">**** **** **** {{ c.last4 }}
+                                    ({{ c.exp_month }}/{{ c.exp_year }})
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="checkbox" id="show-new-card"> 登録外のカードで支払う
+                        <div class="current-card-form">
+                            <input type="hidden" name="use_default" value="true">
+                            <div class="stripe-form-row">
+                                <button class="btn-link">{% trans '注文を確定する' %}</button>
+                            </div>
+                            <div id="card-errors" role="alert"></div>
+                        </div>
+                    </form>
+                </div>
+                {% endif %}
+
                 <form action="." method="POST" class="stripe-form" id="stripe-form">
                     {% csrf_token %}
-                    {% if orderer_data.payment == "P1" %}
-                    <div class="new-card-form">
+                    <div id="new-card" class="new-card-form">
+                        {% if card %}
+                        <input type="checkbox" id="show-current-card"> 登録したカードで支払う
+                        {% endif %}
                         <div class="stripe-form-row" id="creditCard">
                             <label for="card-element" id="stripeBtnLabel">
                                 {% trans 'クレジットカード' %}
@@ -88,11 +118,12 @@
                         <div class="stripe-form-row">
                             <div class="flex items-center">
                                 <input type="checkbox" class="w-1/12" name="save" id="save_card_info">
-                                <label class="custom-control-label" for="save_card_info">カード情報をアカウントに登録する</label>
+                                <label class="" for="save_card_info">カード情報をアカウントに登録する</label>
                             </div>
                         </div>
                         {% endif %}
                         <div id="card-errors" role="alert"></div>
+                        <button class="btn-link">{% trans '注文を確定する' %}</button>
                     </div>
                     {% else %}
                     <div>
@@ -100,8 +131,8 @@
                         Iste, debitis quibusdam fuga magni aliquid maxime! Accusantium nisi amet in corporis,
                         consequuntur totam maxime sit.
                     </div>
-                    {% endif %}
                     <button class="btn-link">{% trans '注文を確定する' %}</button>
+                    {% endif %}
                 </form>
             </div>
         </div>
@@ -117,6 +148,27 @@
 {% block javascript %}
 <script src="https://js.stripe.com/v3/"></script>
 
+<script>
+    const current_card = document.querySelector("#current-card");
+    const new_card = document.querySelector("#new-card");
+    const show_new_card_check = document.querySelector("#show-new-card");
+    const show_current_card_check = document.querySelector("#show-current-card");
+    const save_card_info = document.querySelector("#save_card_info");
+    if (current_card) {
+        new_card.style.display = "none";
+    }
+    show_new_card_check.addEventListener("change", () => {
+        current_card.style.display = "none";
+        new_card.style.display = "block";
+        show_new_card_check.checked = false;
+    });
+    show_current_card_check.addEventListener("change", () => {
+        current_card.style.display = "block";
+        new_card.style.display = "none";
+        show_current_card_check.checked = false;
+        save_card_info.checked = false;
+    });
+</script>
 <script nonce="">
     // stripe.js クレジットカード
     var stripe = Stripe('pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik');
