@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="25.241247mm"
+   height="25.505831mm"
+   viewBox="0 0 25.241247 25.505831"
+   version="1.1"
+   id="svg3898"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="planet3.svg">
+  <defs
+     id="defs3892" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="-28.942844"
+     inkscape:cy="-225.65715"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3895">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.09827045,-0.12238217)">
+    <g
+       id="planetthree"
+       transform="matrix(0.12722403,0,0,0.12855762,-3.5276144,-41.080337)">
+      <g
+   id="g3907"
+   class="st0"
+   style="opacity:0.4">
+        <circle
+   id="circle3905"
+   r="99.199997"
+   cy="419.70001"
+   cx="127.7"
+   class="st7"
+   style="fill:#606182" />
+
+      </g>
+
+      <g
+   id="g3911"
+   class="st0"
+   style="opacity:0.4">
+        <circle
+   id="circle3909"
+   r="85.900002"
+   cy="419.70001"
+   cx="127.7"
+   class="st8"
+   style="fill:#6d7974" />
+
+      </g>
+
+      <g
+   id="g3925">
+        <g
+   id="g3919">
+          <circle
+   id="circle3913"
+   r="70.800003"
+   cy="419.70001"
+   cx="127.7"
+   class="st9"
+   style="fill:#94ad70" />
+
+          <path
+   id="path3915"
+   d="m 197.7,430.7 c 0.6,-3.6 0.9,-7.3 0.9,-11 0,-19.6 -7.9,-37.3 -20.8,-50.1 -14.6,44.9 -55.1,77.1 -102.8,77.1 -4.4,0 -8.7,-0.3 -13,-0.8 8.7,21.8 28,38.3 51.5,43.1 1.3,0.1 2.5,0.1 3.8,0.1 36.8,0 68.2,-24.3 80.4,-58.4 z"
+   class="st10"
+   inkscape:connector-curvature="0"
+   style="fill:#899f64" />
+
+          <path
+   id="path3917"
+   d="m 198.5,419.7 c 0,-8.6 -1.5,-16.8 -4.3,-24.3 -16.1,41.6 -55.1,71 -100.6,71 -7.1,0 -14.1,-0.7 -20.9,-2.1 13,16 32.8,26.3 55,26.3 39.1,-0.1 70.8,-31.8 70.8,-70.9 z"
+   class="st11"
+   inkscape:connector-curvature="0"
+   style="fill:#80965d" />
+
+        </g>
+
+
+          <ellipse
+   id="ellipse3921"
+   ry="14.9"
+   rx="24.4"
+   cy="370.10001"
+   cx="120.4"
+   class="st12"
+   transform="matrix(0.9509,-0.3094,0.3094,0.9509,-108.6001,55.4099)"
+   style="fill:#849960" />
+
+
+          <circle
+   id="ellipse3923"
+   cy="434.70001"
+   cx="155.2"
+   class="st12"
+   transform="matrix(0.8393,-0.5437,0.5437,0.8393,-211.4178,154.2369)"
+   r="4.5"
+   style="fill:#849960" />
+
+      </g>
+
+    </g>
+  </g>
+  <style
+     id="style3900"
+     type="text/css">
+      .st0{opacity:0.4;}
+      .st1{fill:#5538D7;}
+      .st2{fill:#4F46E3;}
+      .st3{fill:#77BBFF;}
+      .st4{fill:#3998FF;}
+      .st5{fill:#3285FE;}
+      .st6{fill:#3C9AFF;}
+      .st7{fill:#606182;}
+      .st8{fill:#6D7974;}
+      .st9{fill:#94AD70;}
+      .st10{fill:#899F64;}
+      .st11{fill:#80965D;}
+      .st12{fill:#849960;}
+      .st13{fill:#525D95;}
+      .st14{fill:#556E9A;}
+      .st15{fill:#639FA3;}
+      .st16{fill:#5A9198;}
+      .st17{fill:#55898F;}
+      .st18{fill:#5C989E;}
+    </style>
+</svg>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="planets"
+   x="0px"
+   y="0px"
+   xml:space="preserve"
+   sodipodi:docname="planet1.svg"
+   width="212"
+   height="212"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"><metadata
+   id="metadata35"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs33" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1017"
+   id="namedview31"
+   showgrid="false"
+   inkscape:zoom="1"
+   inkscape:cx="23.77487"
+   inkscape:cy="193.04901"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="planets" />
+  <style
+   type="text/css"
+   id="style2">
+      .st0{opacity:0.4;}
+      .st1{fill:#5538D7;}
+      .st2{fill:#4F46E3;}
+      .st3{fill:#77BBFF;}
+      .st4{fill:#3998FF;}
+      .st5{fill:#3285FE;}
+      .st6{fill:#3C9AFF;}
+      .st7{fill:#606182;}
+      .st8{fill:#6D7974;}
+      .st9{fill:#94AD70;}
+      .st10{fill:#899F64;}
+      .st11{fill:#80965D;}
+      .st12{fill:#849960;}
+      .st13{fill:#525D95;}
+      .st14{fill:#556E9A;}
+      .st15{fill:#639FA3;}
+      .st16{fill:#5A9198;}
+      .st17{fill:#55898F;}
+      .st18{fill:#5C989E;}
+  </style>
+  <filter
+   id="blurMe">
+    <feGaussianBlur
+   in="SourceGraphic"
+   stdDeviation="5"
+   id="feGaussianBlur4" />
+  </filter>
+  <g
+   id="planetone"
+   transform="matrix(0.94222223,0,0,0.94222222,-137.28179,-56.062222)">
+    <g
+   class="st0"
+   id="g9"
+   style="opacity:0.4">
+      <circle
+   class="st1"
+   cx="258.20001"
+   cy="172"
+   r="112.5"
+   id="circle7"
+   style="fill:#5538d7" />
+    </g>
+    <g
+   class="st0"
+   id="g13"
+   style="opacity:0.4">
+      <circle
+   class="st2"
+   cx="258.20001"
+   cy="172"
+   r="97.400002"
+   id="circle11"
+   style="fill:#4f46e3" />
+    </g>
+    <g
+   id="g27">
+      <g
+   id="g21">
+        <circle
+   class="st3"
+   cx="258.20001"
+   cy="172"
+   r="80.199997"
+   id="circle15"
+   style="fill:#77bbff" />
+        <path
+   class="st4"
+   d="m 337.4,184.5 c 0.6,-4.1 1,-8.2 1,-12.5 0,-22.2 -9,-42.3 -23.5,-56.8 -16.5,50.9 -62.4,87.4 -116.5,87.4 -5,0 -9.9,-0.3 -14.7,-0.9 9.9,24.7 31.7,43.4 58.4,48.9 1.4,0.1 2.9,0.1 4.3,0.1 41.7,0.1 77.2,-27.5 91,-66.2 z"
+   id="path17"
+   inkscape:connector-curvature="0"
+   style="fill:#3998ff" />
+        <path
+   class="st5"
+   d="m 338.4,172 c 0,-9.7 -1.7,-19 -4.9,-27.6 -18.3,47.2 -62.5,80.5 -114,80.5 -8.1,0 -16,-0.8 -23.7,-2.4 14.7,18.2 37.2,29.8 62.4,29.8 44.3,0 80.2,-36 80.2,-80.3 z"
+   id="path19"
+   inkscape:connector-curvature="0"
+   style="fill:#3285fe" />
+      </g>
+
+      <ellipse
+   transform="matrix(0.9509,-0.3094,0.3094,0.9509,-37.4046,83.8411)"
+   class="st6"
+   cx="245.60001"
+   cy="159.8"
+   rx="19.299999"
+   ry="14.9"
+   id="ellipse23"
+   style="fill:#3c9aff" />
+
+      <circle
+   transform="matrix(0.8393,-0.5437,0.5437,0.8393,-56.7055,138.6727)"
+   class="st6"
+   cx="206.2"
+   cy="165.3"
+   id="ellipse25"
+   r="5.0999999"
+   style="fill:#3c9aff" />
+    </g>
+  </g>
+</svg>

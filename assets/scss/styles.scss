@@ -15,10 +15,179 @@ body {
   display: none;
 }
 
+// footer
+.footer-visual {
+  background: radial-gradient(ellipse at bottom, #141d25 0%, #2c3e50 100%);
+  overflow: hidden;
+}
+
+.moon {
+  top: 50%;
+  background: url("../../static/images/moon.png") left center;
+  animation: play 10s linear infinite;
+}
+
+@keyframes play {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.planet1 {
+  background: url("../../static/images/planet1.svg") left center;
+  width: 212px;
+  height: 212px;
+  top: -30%;
+  left: 35%;
+  animation: blinking 10s infinite, hop 6s infinite;
+}
+.planet2 {
+  background: url("../../static/images/planet2.svg") left center;
+  width: 51px;
+  height: 51px;
+  top: 50%;
+  animation: blinking 3s infinite, hop 2s infinite;
+}
+.planet3 {
+  background: url("../../static/images/planet3.svg") left center;
+  width: 95px;
+  height: 95px;
+  bottom: -5%;
+  left: 20%;
+  animation: blinking 5s infinite, hop 4s infinite;
+}
+
+@keyframes blinking {
+  0% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+.walk {
+  width: 46px;
+  height: 64px;
+  top: 25%;
+  background: url("../../static/images/walk.png") left center;
+  animation: walk 2s steps(2) infinite, hop 2s linear infinite;
+}
+
+@keyframes walk {
+  100% {
+    background-position: -92px;
+  }
+}
+
+@keyframes hop {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(3px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@function multiple-box-shadow($n) {
+  $value: "#{random(2000)}px #{random(512)}px #FFF";
+  @for $i from 2 through $n {
+    $value: "#{$value} , #{random(2000)}px #{random(512)}px #FFF";
+  }
+  @return unquote($value);
+}
+
+$shadows-small: multiple-box-shadow(500);
+$shadows-medium: multiple-box-shadow(100);
+$shadows-big: multiple-box-shadow(50);
+
+#stars {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: $shadows-small;
+  animation: animStar 40s linear infinite;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 512px;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: $shadows-small;
+  }
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: $shadows-medium;
+  animation: animStar 80s linear infinite;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 512px;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: $shadows-medium;
+  }
+}
+
+#stars3 {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: $shadows-big;
+  animation: animStar 120s linear infinite;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 512px;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: $shadows-big;
+  }
+}
+
+@keyframes animStar {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(64px);
+  }
+  50% {
+    transform: translateY(32px);
+  }
+  75% {
+    transform: translateY(48px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .btn {
   @apply w-full font-light text-center rounded-sm py-5 text-lg;
 }
-
 .btn-link {
   @apply text-center py-3 rounded-lg font-light text-lg w-full text-white bg-indigo-500;
 }

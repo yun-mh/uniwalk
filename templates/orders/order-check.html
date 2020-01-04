@@ -68,8 +68,8 @@
 
                 {% if orderer_data.payment == "P1" %}
                 {% if card %}
-                <div id="current-card" style="padding: 5px 30px;">
-                    <form action="." method="post" class="stripe-form">
+                <div style="padding: 5px 30px;">
+                    <form action="." method="post" class="stripe-form" id="current-card">
                         {% csrf_token %}
                         <h4>登録済みのカード</h4>
                         <div>
@@ -93,12 +93,12 @@
                 </div>
                 {% endif %}
 
-                <form action="." method="POST" class="stripe-form" id="stripe-form">
-                    {% csrf_token %}
-                    <div id="new-card" class="new-card-form">
-                        {% if card %}
-                        <input type="checkbox" id="show-current-card"> 登録したカードで支払う
-                        {% endif %}
+                <div id="new-card" class="new-card-form">
+                    {% if card %}
+                    <input type="checkbox" id="show-current-card"> 登録したカードで支払う
+                    {% endif %}
+                    <form action="." method="POST" class="stripe-form" id="stripe-form">
+                        {% csrf_token %}
                         <div class="stripe-form-row" id="creditCard">
                             <label for="card-element" id="stripeBtnLabel">
                                 {% trans 'クレジットカード' %}
@@ -124,16 +124,19 @@
                         {% endif %}
                         <div id="card-errors" role="alert"></div>
                         <button class="btn-link">{% trans '注文を確定する' %}</button>
-                    </div>
-                    {% else %}
+                    </form>
+                </div>
+                {% else %}
+                <form method="POST">
+                    {% csrf_token %}
                     <div>
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam quis at corrupti nobis in.
                         Iste, debitis quibusdam fuga magni aliquid maxime! Accusantium nisi amet in corporis,
                         consequuntur totam maxime sit.
                     </div>
                     <button class="btn-link">{% trans '注文を確定する' %}</button>
-                    {% endif %}
                 </form>
+                {% endif %}
             </div>
         </div>
 

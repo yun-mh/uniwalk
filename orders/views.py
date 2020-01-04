@@ -261,8 +261,7 @@ class OrderCheckView(FormView):
                 if save:
                     if user.stripe_customer_id != '' and user.stripe_customer_id is not None:
                         customer = stripe.Customer.retrieve(user.stripe_customer_id)
-                        print(stripe.Token.retrieve(token).card.id)
-                        current_card_id = stripe.Token.retrieve(token).card.id
+                        card_id = stripe.Token.retrieve(token).card.id
                         current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
                         current_exp_month = stripe.Token.retrieve(token).card.exp_month
                         current_exp_year = stripe.Token.retrieve(token).card.exp_year
@@ -272,23 +271,21 @@ class OrderCheckView(FormView):
                                 exp_month=current_exp_month,
                                 exp_year=current_exp_year,
                             )
-                            print(used)
-                            # 지불 시 소스를 스트라이프에서 추출(but card_id is differed each time...)
                             try:
                                 source = customer.retrieve_source(
                                     user.stripe_customer_id,
-                                    current_card_id,
+                                    used.card_id,
                                 )
-                                print(source)
                             except:
                                 pass
                         except card_models.Card.DoesNotExist:
                             source = customer.create_source(
                                 user.stripe_customer_id,
-                                source=token                       
+                                source=token
                             )
                             card_models.Card.objects.create(
                                 stripe_customer_id=user.stripe_customer_id,
+                                card_id=card_id,
                                 fingerprint=current_fingerprint,
                                 exp_month=current_exp_month,
                                 exp_year=current_exp_year,

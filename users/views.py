@@ -274,6 +274,7 @@ class CardsListView(mixins.LoggedInOnlyView, FormView):
             fingerprint=card_fingerprint,
         )
         target.delete()
+        messages.success(self.request, _("カードを登録解除しました。"))
         return redirect("users:cards")
 
 
@@ -293,6 +294,7 @@ class CardsAddView(mixins.LoggedInOnlyView, View):
             token = add_card_form.cleaned_data.get("stripeToken")
             if user.stripe_customer_id != '' and user.stripe_customer_id is not None:
                 customer = stripe.Customer.retrieve(user.stripe_customer_id)
+                card_id = stripe.Token.retrieve(token).card.id
                 current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
                 current_exp_month = stripe.Token.retrieve(token).card.exp_month
                 current_exp_year = stripe.Token.retrieve(token).card.exp_year
@@ -306,11 +308,13 @@ class CardsAddView(mixins.LoggedInOnlyView, View):
                     customer.sources.create(card=token)
                     card_models.Card.objects.create(
                         stripe_customer_id=user.stripe_customer_id,
+                        card_id=card_id,
                         fingerprint=current_fingerprint,
                         exp_month=current_exp_month,
                         exp_year=current_exp_year,
                     )
             else:
+                card_id = stripe.Token.retrieve(token).card.id
                 current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
                 current_exp_month = stripe.Token.retrieve(token).card.exp_month
                 current_exp_year = stripe.Token.retrieve(token).card.exp_year
@@ -322,6 +326,7 @@ class CardsAddView(mixins.LoggedInOnlyView, View):
                 customer.sources.create(card=token)
                 card_models.Card.objects.create(
                     stripe_customer_id=user.stripe_customer_id,
+                    card_id=card_id,
                     fingerprint=current_fingerprint,
                     exp_month=current_exp_month,
                     exp_year=current_exp_year,
