@@ -31,6 +31,9 @@ class Step(models.Model):
     step_code = models.CharField(max_length=3)
     step_name = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.step_name
+
 
 class Order(models.Model):
 
@@ -78,7 +81,13 @@ class Order(models.Model):
     order_date = models.DateTimeField(_("注文日時"), auto_now_add=True)
     payment = models.CharField(_("支払方法"), max_length=2, choices=PAYMENT_CHOICES)
     stripe_charge_id = models.CharField(max_length=50, blank=True, null=True)
-    # step = models.ForeignKey()
+    step = models.ForeignKey("Step",
+        related_name="order",
+        verbose_name=_("対応状況"),
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     amount = models.IntegerField(_("支払総額"))
     order_number = models.CharField(
         max_length=40, default=create_order_number, blank=True, null=True

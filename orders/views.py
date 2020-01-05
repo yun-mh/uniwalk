@@ -382,6 +382,10 @@ class OrderCheckView(FormView):
                 guest = user_models.Guest.objects.get(
                     email=self.request.session["guest_email"]
                 )
+            if payment == "P1":
+                step = models.Step.objects.get(step_code="T03")
+            else:
+                step = models.Step.objects.get(step_code="T01")
             new_order = models.Order.objects.create(
                 user=user,
                 guest=guest,
@@ -404,6 +408,7 @@ class OrderCheckView(FormView):
                 address_city_orderer=orderer_data["address_city_orderer"],
                 address_detail_orderer=orderer_data["address_detail_orderer"],
                 payment=orderer_data["payment"],
+                step=step,
                 amount=total,
                 stripe_charge_id=stripe_charge_id,
             )

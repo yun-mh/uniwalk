@@ -13,11 +13,13 @@ class OrderAdmin(admin.ModelAdmin):
         "order_date",
         "order_number",
         "order_code",
+        "step",
     )
 
 
 @admin.register(models.Step)
 class StepAdmin(admin.ModelAdmin):
+
     """ アドミンに注文テーブルを定義する """
 
     list_display = (
