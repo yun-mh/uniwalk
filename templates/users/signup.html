@@ -9,7 +9,7 @@
 
 <div class="container mx-auto my-10 flex flex-col items-center p-6">
   <div class="w-2/3">
-    <div class="text-gray-800 font-semibold text-4xl my-3 text-center mb-10">
+    <div class="title my-3 text-center mb-10">
       {% trans '会員登録' %}
     </div>
 
@@ -18,7 +18,7 @@
 
     <div class="mt-5 text-center">
       <span class="mr-2">{% trans "既にアカウントを持っていますか?" %}</span>
-      <a href="{% url 'users:login' %}" class="text-teal-500 font-medium">
+      <a href="{% url 'users:login' %}" class="btn-link">
         {% trans "ログイン" %}
       </a>
     </div>

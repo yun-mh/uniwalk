@@ -1,11 +1,14 @@
-<div class="w-full input {% if field.errors %}has_error{% endif %}">
-    {% if field.label != "Member number" %}
-    {{ field.label }}
-    {% endif %}
-    {{ field }}
+<div class="w-full input {% if field.errors %}has_error{% endif %} mb-2">
+    <div
+        class="floating-label {% if field.id_for_label == 'id_prefecture' or field.id_for_label == 'id_gender' %}select{% endif %}">
+        {{ field }}
+        {% if field.id_for_label != "id_prefecture" and "id_gender" %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% endif %}
+    </div>
     {% if field.errors %}
     {% for error in field.errors %}
-    <span class="text-red-700 font-medium text-sm">{{ error }}</span>
+    <span class="text-red-700 font-medium text-sm mb-3">{{ error }}</span>
     {% endfor %}
     {% endif %}
 </div>

@@ -12,7 +12,7 @@
   <title>{% block page_title %}{% endblock page_title %}| UniWalk</title>
 </head>
 
-<body class="text-gray-800 mt-24 font-light">
+<body class="bg-gray-100 text-gray-800 mt-24 font-light">
   {% include "partials/messages.html" %}
 
   <header
@@ -39,20 +39,33 @@
     if (userBtn) {
       const userDropdown = document.querySelector(".dropdown-content");
       userBtn.addEventListener("click", () => {
-        userDropdown.style.display =
-          userDropdown.style.display == "none" ? "block" : "none";
+        userDropdown.classList.toggle("hidden");
       });
     }
+    const langBtn = document.querySelector(".lang-btn");
+    const langDropdown = document.querySelector(".lang-dropdown");
+    langBtn.addEventListener("click", () => {
+      langDropdown.classList.toggle("hidden");
+    });
   </script>
 
   <script>
-    const langSelect = document.getElementById("js-lang");
-    const handleLangChange = () => {
-      const selected = langSelect.value;
-      console.log(selected)
+    const ja = document.querySelector(".ja");
+    const ko = document.querySelector(".ko");
+    const id = document.querySelector(".id");
+    const en = document.querySelector(".en");
+    const zh_hans = document.querySelector(".zh-hans");
+    const pt_br = document.querySelector(".pt-br");
+    const handleLangChange = (e) => {
+      const selected = e.target.hreflang;
       fetch(`{% url 'users:switch-language' %}?lang=${selected}`).then(() => window.location.reload());
     }
-    langSelect.addEventListener("change", handleLangChange);
+    ja.addEventListener("click", handleLangChange);
+    ko.addEventListener("click", handleLangChange);
+    id.addEventListener("click", handleLangChange);
+    en.addEventListener("click", handleLangChange);
+    zh_hans.addEventListener("click", handleLangChange);
+    pt_br.addEventListener("click", handleLangChange);
   </script>
 
 </body>

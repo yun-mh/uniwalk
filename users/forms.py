@@ -10,11 +10,11 @@ from . import models
 class LoginForm(forms.Form):
 
     email = forms.EmailField(
-        label="",
+        label="メールアドレス",
         widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
     )
     password = forms.CharField(
-        label="",
+        label="パスワード",
         widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
     )
 
@@ -52,6 +52,8 @@ class SignUpForm(forms.ModelForm):
             "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)"), "required": True}),
             "gender": forms.Select(attrs={"required": True}),
         }
+
+    GENDER_CHOICES = ("男性", "女性", "その他")
 
     password = forms.CharField(
         label=_("パスワード"),
@@ -109,7 +111,6 @@ class UpdateProfileForm(forms.ModelForm):
             "first_name": forms.TextInput(attrs={"placeholder": _("名"), "required": True}),
             "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)"), "required": True}),
             "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)"), "required": True}),
-            "gender": forms.Select(attrs={"required": True}),
             "birthday": forms.DateInput(attrs={"placeholder": _("生年月日")}),
             "phone_number": forms.TextInput(attrs={"placeholder": _("電話番号")}),
             "address_city": forms.TextInput(attrs={"placeholder": _("市区町村番地")}),
@@ -117,7 +118,7 @@ class UpdateProfileForm(forms.ModelForm):
         }
 
     current_password = forms.CharField(
-        label=_('パスワード'),
+        label=_('現在のパスワード'),
         widget=forms.PasswordInput(attrs={"placeholder": _("現在のパスワード")}),
     )
 

@@ -118,8 +118,12 @@ class OrderSearchForm(forms.ModelForm):
             "order_code",
             "email",
         )
-        widgets = {
-            "order_code": forms.TextInput(),
-        }
 
-    email = forms.EmailField()
+    order_code = forms.CharField(
+        label=_("注文番号"),
+        widget=forms.TextInput(attrs={"placeholder": _("注文番号"), "required": True}),
+    )
+    email = forms.EmailField(
+        label=_("メールアドレス"),
+        widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス"), "required": True}),
+    )

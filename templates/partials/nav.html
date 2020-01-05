@@ -1,66 +1,89 @@
 {% load static i18n %}
 <nav class="flex fixed w-full items-center justify-between flex-wrap bg-white h-28">
     <div class="flex w-full border-b border-gray-400 h-8 px-3 justify-between">
-        <div class="w-1/2 flex items-center">
-            <i class="fas fa-globe-americas text-gray-500 mr-3 ml-5"></i>
+        <div class="w-1/2 flex items-center relative">
             {% get_current_language as LANGUAGE_CODE %}
+            <a class="ml-5 mr-2 lang-btn cursor-pointer text-gray-500 hover:text-gray-600">
+                <i class="fas fa-language fa-lg"></i>
+            </a>
             {% if LANGUAGE_CODE == 'ja' %}
-            <i class="twa-lg twa-japan-flag"></i>
+            <i class="twa-lg twa-japan-flag rounded-full"></i>
             {% elif LANGUAGE_CODE == 'ko' %}
-            <i class="twa-lg twa-korea-south-south-korea-flag"></i>
+            <i class="twa-lg twa-korea-south-south-korea-flag rounded-full"></i>
             {% elif LANGUAGE_CODE == 'id' %}
-            <i class="twa-lg twa-indonesia-flag"></i>
+            <i class="twa-lg twa-indonesia-flag rounded-full"></i>
             {% elif LANGUAGE_CODE == 'en' %}
-            <i class="twa-lg twa-america-island-minor-outlying-united-united-states-us-usa-flag"></i>
+            <i class="twa-lg twa-america-island-minor-outlying-united-united-states-us-usa-flag rounded-full"></i>
             {% elif LANGUAGE_CODE == 'zh-hans' %}
-            <i class="twa-lg twa-china-flag"></i>
+            <i class="twa-lg twa-china-flag rounded-full"></i>
             {% elif LANGUAGE_CODE == 'pt-br' %}
-            <i class="twa-lg twa-brazil-flag"></i>
+            <i class="twa-lg twa-brazil-flag rounded-full"></i>
             {% endif %}
-            <select class="w-1/6 h-5 ml-1 text-xs border border-gray-400" id="js-lang">
-                <option value="ja" {% if LANGUAGE_CODE == 'ja' %} selected {% endif %} class="text-sm">日本語</option>
-                <option value="ko" {% if LANGUAGE_CODE == 'ko' %} selected {% endif %} class="text-sm">한국어</option>
-                <option value="id" {% if LANGUAGE_CODE == 'id' %} selected {% endif %} class="text-sm">Bahasa Indonesia
-                </option>
-                <option value="en" {% if LANGUAGE_CODE == 'en' %} selected {% endif %} class="text-sm">English</option>
-                <option value="zh-hans" {% if LANGUAGE_CODE == 'zh-hans' %} selected {% endif %} class="text-sm">中文
-                </option>
-                <option value="pt-br" {% if LANGUAGE_CODE == 'pt-br' %} selected {% endif %} class="text-sm">
-                    Português(Brasil)</option>
-            </select>
+            <div class="lang-dropdown border border-gray-400 bg-white w-40 hidden absolute ml-3" style="top: 100%;">
+                <a class="ja text-gray-500 block border-b border-gray-300 p-2 cursor-pointer hover:text-gray-600"
+                    hreflang="ja">
+                    日本語
+                </a>
+
+                <a class="ko text-gray-500 block border-b border-gray-300 p-2 cursor-pointer hover:text-gray-600"
+                    hreflang="ko">
+                    한국어
+                </a>
+
+                <a class="id text-gray-500 block border-b border-gray-300 p-2 cursor-pointer hover:text-gray-600"
+                    hreflang="id">
+                    Bahasa Indonesia
+                </a>
+
+                <a class="en text-gray-500 block border-b border-gray-300 p-2 cursor-pointer hover:text-gray-600"
+                    hreflang="en">
+                    English
+                </a>
+
+                <a class="zh-hans text-gray-500 block border-b border-gray-300 p-2 cursor-pointer hover:text-gray-600"
+                    hreflang="zh-hans">
+                    中文
+                </a>
+
+                <a class="pt-br text-gray-500 block p-2 hover:text-gray-600" hreflang="pt-br">
+                    Português(Brasil)
+                </a>
+
+            </div>
         </div>
-        <div class="w-full block flex-grow lg:flex lg:justify-end lg:items-center lg:w-auto lg:flex-grow px-2">
+        <div class="w-full block flex-grow flex justify-end items-center lg:w-auto lg:flex-grow px-2 relative">
             {% if user.is_authenticated %}
             <span class="block lg:inline-block lg:mt-0 text-gray-500 mr-5 cursor-pointer">
-                <div class="user-btn hover:text-gray-600">
-                    <i class="fas fa-user fa-xs"></i>
-                    <span class="text-xs">{% trans 'マイアカウント' %}</span>
+                <div class="user-btn text-xs h-full px-3 border-blue text-universe-lighter hover:text-universe-dark">
+                    <i class="fas fa-user fa-xs "></i>
+                    <span class="ml-1">{{ user.email }}</span>
                 </div>
-                <div class="dropdown-content border border-gray-400 absolute bg-white w-40 text-center">
+                <div class=" dropdown-content border border-gray-400 absolute bg-white w-40 text-center hidden"
+                    style="top: 100%; right: 5.3rem;">
                     <a href="{{ user.get_absolute_url }}"
-                        class="text-gray-800 block border-b border-gray-300 py-2 hover:text-gray-600">{% trans 'マイページ' %}</a>
+                        class="text-gray-500 block border-b border-gray-300 py-2 hover:text-gray-600">{% trans 'マイページ' %}</a>
                     <a href="{% url 'users:logout' %}"
-                        class="text-gray-800 block border-b border-gray-300 py-2 hover:text-gray-600">{% trans 'ログアウト' %}</a>
+                        class="text-gray-500 block border-b border-gray-300 py-2 hover:text-gray-600">{% trans 'ログアウト' %}</a>
                     {% if user.is_staff %}
                     <a href="{% url 'admin:index' %}"
-                        class="text-gray-800 block py-2 hover:text-gray-600">{% trans '管理者モード' %}</a>
+                        class="text-gray-500 block py-2 hover:text-gray-600">{% trans '管理者モード' %}</a>
                     {% endif %}
                 </div>
             </span>
 
             {% else %}
             <a href="{% url 'users:login' %}"
-                class="block text-xs lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5">
+                class="block text-sm lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5">
                 {% trans '会員登録・ログイン' %}
             </a>
             {% endif %}
 
             <a href="{% url 'orders:search' %}"
-                class="block lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5">
+                class="block text-sm lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5">
                 <i class="fas fa-search fa-xs"></i>
             </a>
             <a href="{% url 'carts:cart' %}"
-                class="block lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5">
+                class="block text-sm lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-600 mr-5">
                 <i class="fas fa-shopping-cart fa-xs"></i>
                 {% if item_count != 0 %}
                 <span
