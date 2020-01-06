@@ -7,4 +7,11 @@ class ReviewAdmin(admin.ModelAdmin):
 
     """ アドミンにレビューを定義する """
 
-    pass
+    list_display = (
+        "title",
+        "user",
+        "product",
+        "rate",
+        "created",
+        "updated",
+    )

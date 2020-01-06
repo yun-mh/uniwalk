@@ -33,6 +33,10 @@ class Category(core_models.TimeStampedModel):
     product_type = models.CharField(_("商品タイプ名"), max_length=20)
     type_code = models.CharField(_("タイプコード"), max_length=2)
 
+    class Meta:
+        verbose_name = _("カテゴリー")
+        verbose_name_plural = _("カテゴリー")
+
     def __str__(self):
         return self.product_type
 
@@ -52,7 +56,7 @@ class Product(core_models.TimeStampedModel):
     description = models.TextField(_("詳細説明"))
     is_active = models.BooleanField(_("販売中"), null=False, default=True)
     product_number = models.CharField(
-        max_length=40, default=create_product_code, blank=True, null=True
+        _("番号"), max_length=40, default=create_product_code, blank=True, null=True
     )
     product_code = models.CharField(_("商品番号"), max_length=40, blank=True, null=True)
 
@@ -68,6 +72,9 @@ class Product(core_models.TimeStampedModel):
             return round(all_ratings / len(all_reviews), 2)
         return 0
 
+    total_rating.short_description = _("評点")
+
+    @property
     def first_image(self):
         try:
             (image,) = self.images.all()[:1]
@@ -86,4 +93,6 @@ class Product(core_models.TimeStampedModel):
 
     class Meta:
         ordering = ("-created",)
+        verbose_name = _("商品")
+        verbose_name_plural = _("商品")
 

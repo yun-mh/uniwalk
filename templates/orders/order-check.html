@@ -68,6 +68,10 @@
 
                 {% if orderer_data.payment == "P1" %}
                 {% if card %}
+                <label class="switch">
+                    <input type="checkbox" id="show-new-card">
+                    <span class="slider"></span>
+                </label>登録外のカードで支払う
                 <div style="padding: 5px 30px;">
                     <form action="." method="post" class="stripe-form" id="current-card">
                         {% csrf_token %}
@@ -81,7 +85,6 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <input type="checkbox" id="show-new-card"> 登録外のカードで支払う
                         <div class="current-card-form">
                             <input type="hidden" name="use_default" value="true">
                             <div class="stripe-form-row">
@@ -94,9 +97,6 @@
                 {% endif %}
 
                 <div id="new-card" class="new-card-form">
-                    {% if card %}
-                    <input type="checkbox" id="show-current-card"> 登録したカードで支払う
-                    {% endif %}
                     <form action="." method="POST" class="stripe-form" id="stripe-form">
                         {% csrf_token %}
                         <div class="stripe-form-row" id="creditCard">
@@ -155,21 +155,13 @@
     const current_card = document.querySelector("#current-card");
     const new_card = document.querySelector("#new-card");
     const show_new_card_check = document.querySelector("#show-new-card");
-    const show_current_card_check = document.querySelector("#show-current-card");
     const save_card_info = document.querySelector("#save_card_info");
     if (current_card) {
-        new_card.style.display = "none";
+        new_card.classList.add("hidden");
     }
     show_new_card_check.addEventListener("change", () => {
-        current_card.style.display = "none";
-        new_card.style.display = "block";
-        show_new_card_check.checked = false;
-    });
-    show_current_card_check.addEventListener("change", () => {
-        current_card.style.display = "block";
-        new_card.style.display = "none";
-        show_current_card_check.checked = false;
-        save_card_info.checked = false;
+        current_card.classList.toggle("hidden");
+        new_card.classList.toggle("hidden");
     });
 </script>
 <script nonce="">

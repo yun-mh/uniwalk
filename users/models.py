@@ -103,5 +103,9 @@ class Guest(core_models.TimeStampedModel):
     email = models.EmailField(unique=True)
     active = models.BooleanField(default=True)
 
+    class Meta:
+        verbose_name = _("ゲスト")
+        verbose_name_plural = _("ゲスト")
+
     def __str__(self):
         return self.email

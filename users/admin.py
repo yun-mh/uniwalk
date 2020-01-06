@@ -1,11 +1,22 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import ugettext_lazy as _
+from reviews import models as review_models
 from . import models
 
-# Register your models here.
+
+class ReviewInline(admin.TabularInline):
+
+    model = review_models.Review
+
+
 @admin.register(models.Guest)
 class GuestAdmin(admin.ModelAdmin):
-    pass
+
+    list_display = (
+        "email",
+        "created",
+    )
 
 
 @admin.register(models.User)
@@ -15,7 +26,7 @@ class CustomUserAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (
-            "会員情報",
+            _("会員情報"),
             {
                 "fields": (
                     "email",
@@ -38,7 +49,7 @@ class CustomUserAdmin(admin.ModelAdmin):
             },
         ),
         (
-            "認証・権限",
+            _("認証・権限"),
             {
                 "fields": (
                     "date_joined",
@@ -53,6 +64,8 @@ class CustomUserAdmin(admin.ModelAdmin):
         ),
     )
 
+    inlines = (ReviewInline,)
+
     list_display = (
         "get_fullname",
         "email",
@@ -66,5 +79,5 @@ class CustomUserAdmin(admin.ModelAdmin):
     def get_fullname(self, obj):
         return obj.last_name + obj.first_name
 
-    get_fullname.short_description = "会員名"
+    get_fullname.short_description = _("会員名")
 

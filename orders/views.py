@@ -383,7 +383,7 @@ class OrderCheckView(FormView):
                     email=self.request.session["guest_email"]
                 )
             if payment == "P1":
-                step = models.Step.objects.get(step_code="T03")
+                step = models.Step.objects.get(step_code="T02")
             else:
                 step = models.Step.objects.get(step_code="T01")
             new_order = models.Order.objects.create(
@@ -412,6 +412,14 @@ class OrderCheckView(FormView):
                 amount=total,
                 stripe_charge_id=stripe_charge_id,
             )
+            for cart_item in cart_items:
+                models.OrderItem.objects.create(
+                    order=new_order,
+                    product=cart_item.product.name,
+                    quantity=cart_item.quantity,
+                    price=cart_item.product.price,
+                )
+                # product_name modify later!!!
             try:
                 email = self.request.user.email
             except:
@@ -459,15 +467,30 @@ class OrderSearchView(FormView):
         except models.Order.DoesNotExist:
             messages.error(self.request, _("入力した情報をもう一度確認してください。"))
             return redirect("orders:search")
-        if str(order.user) != email and str(order.guest.email) != email:
+        try:
+            if str(order.user) == email or str(order.guest.email) == email:
+                return redirect("orders:detail", order_code)
+        except AttributeError:
             messages.error(self.request, _("入力した情報をもう一度確認してください。"))
             return redirect("orders:search")
-        else:
-            return redirect("orders:detail", order_code)
 
 
 class OrderDetailView(DetailView):
     template_name = "orders/search-order-detail.html"
+    context_object_name = "order"
+    slug_field = 'order_code'
+    slug_url_kwarg = 'order_code'
+
+    def get_queryset(self):
+        order_code = self.kwargs.get("order_code")
+        try:
+            return models.Order.objects.filter(order_code=order_code)
+        except models.Order.DoesNotExist:
+            return None
+
+
+class ReceiptView(DetailView):
+    template_name = "orders/receipt.html"
     context_object_name = "order"
     slug_field = 'order_code'
     slug_url_kwarg = 'order_code'

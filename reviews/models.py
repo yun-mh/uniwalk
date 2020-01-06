@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from core import models as core_models
 
 # Create your models here.
@@ -8,21 +9,21 @@ class Review(core_models.TimeStampedModel):
 
     product = models.ForeignKey(
         "products.Product",
-        verbose_name="商品",
+        verbose_name=_("商品"),
         related_name="reviews",
         on_delete=models.CASCADE,
     )
     user = models.ForeignKey(
-        "users.User", verbose_name="ユーザー", on_delete=models.CASCADE
+        "users.User", verbose_name=_("ユーザー"), on_delete=models.CASCADE
     )
-    title = models.CharField("タイトル", max_length=50)
-    text = models.TextField("本文")
-    rate = models.IntegerField("評点", default=0)
-    review_code = models.CharField("レビュー番号", max_length=11, default="test")
+    title = models.CharField(_("タイトル"), max_length=50)
+    text = models.TextField(_("本文"))
+    rate = models.IntegerField(_("評点"), default=0)
+    review_code = models.CharField(_("レビュー番号"), max_length=11, default="test")
 
     class Meta:
-        verbose_name = "レビュー"
-        verbose_name_plural = "レビュー"
+        verbose_name = _("レビュー")
+        verbose_name_plural = _("レビュー")
 
     def __str__(self):
         return self.title

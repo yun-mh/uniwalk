@@ -6,6 +6,7 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from core import models as core_models
+from core.models import JPPrefectureField
 
 
 def create_order_number():
@@ -33,6 +34,11 @@ class Step(models.Model):
 
     def __str__(self):
         return self.step_name
+
+    class Meta:
+        ordering = ("step_code",)
+        verbose_name = _("対応")
+        verbose_name_plural = _("対応")
 
 
 class Order(models.Model):
@@ -66,7 +72,7 @@ class Order(models.Model):
     first_name_recipient_kana = models.CharField(_("名(ご請求書先,カナ)"), max_length=30)
     phone_number_recipient = PhoneNumberField(_("電話番号(ご請求書先)"), max_length=15)
     postal_code_recipient = models.CharField(_("郵便番号(ご請求書先)"), max_length=7)
-    prefecture_recipient = models.CharField(_("都道府県(ご請求書先)"), max_length=2)
+    prefecture_recipient = JPPrefectureField(_("都道府県(ご請求書先)"), max_length=2)
     address_city_recipient = models.CharField(_("市区町村(ご請求書先)"), max_length=40)
     address_detail_recipient = models.CharField(_("建物名・部屋番号(ご請求書先)"), max_length=40)
     last_name_orderer = models.CharField(_("姓(お届け先)"), max_length=30)
@@ -75,13 +81,14 @@ class Order(models.Model):
     first_name_orderer_kana = models.CharField(_("名(カナ, お届け先)"), max_length=30)
     phone_number_orderer = PhoneNumberField(_("電話番号(お届け先)"), max_length=15)
     postal_code_orderer = models.CharField(_("郵便番号(お届け先)"), max_length=7)
-    prefecture_orderer = models.CharField(_("都道府県(お届け先)"), max_length=2)
+    prefecture_orderer = JPPrefectureField(_("都道府県(お届け先)"), max_length=2)
     address_city_orderer = models.CharField(_("市区町村(お届け先)"), max_length=40)
     address_detail_orderer = models.CharField(_("建物名・部屋番号(お届け先)"), max_length=40)
     order_date = models.DateTimeField(_("注文日時"), auto_now_add=True)
     payment = models.CharField(_("支払方法"), max_length=2, choices=PAYMENT_CHOICES)
     stripe_charge_id = models.CharField(max_length=50, blank=True, null=True)
-    step = models.ForeignKey("Step",
+    step = models.ForeignKey(
+        "Step",
         related_name="order",
         verbose_name=_("対応状況"),
         on_delete=models.SET_NULL,
@@ -93,6 +100,27 @@ class Order(models.Model):
         max_length=40, default=create_order_number, blank=True, null=True
     )
     order_code = models.CharField(_("注文番号"), max_length=40, blank=True, null=True)
+
+    class Meta:
+        ordering = ("-order_date",)
+        verbose_name = _("注文")
+        verbose_name_plural = _("注文")
+
+    def show_first_one(self):
+        try:
+            (order_item,) = self.order_items.all()[:1]
+            return order_item.product
+        except ValueError:
+            return None
+
+    def count_items_all(self):
+        count = 0
+        for order_item in self.order_items.all():
+            count += order_item.quantity
+        return count
+
+    def count_items_except_one(self):
+        return self.order_items.all().count() - 1
 
 
 @receiver(post_save, sender=Order)
@@ -116,10 +144,15 @@ def set_order_code(sender, instance, created, **kwargs):
 
 
 class OrderItem(models.Model):
+    order = models.ForeignKey(
+        "Order",
+        verbose_name=_("注文アイテム"),
+        related_name="order_items",
+        on_delete=models.CASCADE,
+    )
     product = models.CharField(max_length=250)
     quantity = models.IntegerField()
     price = models.IntegerField()
-    order = models.ForeignKey("Order", on_delete=models.CASCADE)
 
     def sub_total(self):
         return self.quantity * self.price
