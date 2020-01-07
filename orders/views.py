@@ -513,3 +513,16 @@ class ReceiptView(DetailView):
         except models.Order.DoesNotExist:
             return None
 
+
+class BillView(DetailView):
+    template_name = "orders/bill.html"
+    context_object_name = "order"
+    slug_field = 'order_code'
+    slug_url_kwarg = 'order_code'
+
+    def get_queryset(self):
+        order_code = self.kwargs.get("order_code")
+        try:
+            return models.Order.objects.filter(order_code=order_code)
+        except models.Order.DoesNotExist:
+            return None

@@ -35,6 +35,10 @@
             <input type="hidden" name="target-order" value="{{ order.pk }}">
             <button class="btn bg-red-500 text-white w-1/3 p-3">{% trans '注文取消' %}</button>
             {% endif %}
+            {% if order.step.step_code == "T01" %}
+            <a href="{% url 'orders:bill' order.order_code %}"
+                class="btn bg-red-500 text-white w-1/3 p-3">{% trans '請求書発行' %}</a>
+            {% endif %}
             {% if order.step.step_code != "T01" and order.step.step_code != "T02" and order.step.step_code != "T99" %}
             <a href="{% url 'orders:receipt' order.order_code %}"
                 class="btn bg-red-500 text-white w-1/3 p-3">{% trans '領収書発行' %}</a>
