@@ -225,6 +225,16 @@ class OrdersListView(mixins.LoggedInOnlyView, ListView):
         except order_models.Order.DoesNotExist:
             return None
 
+    def post(self, *args, **kwargs):
+        order_pk = self.request.POST.get("target-order")
+        target = order_models.Order.objects.filter(pk=order_pk)
+        cancel = order_models.Step.objects.get(step_code="T99")
+        target.update(
+            step=cancel
+        )
+        messages.success(self.request, _("注文を取消しました。"))
+        return redirect("users:orders")
+
 
 class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
 
@@ -244,6 +254,16 @@ class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
 
     def get_object(self):
         return order_models.Order.objects.filter(user_id=self.request.user.pk).get(pk=self.kwargs.get("order_pk"))
+
+    def post(self, *args, **kwargs):
+        order_pk = self.request.POST.get("target-order")
+        target = order_models.Order.objects.filter(pk=order_pk)
+        cancel = order_models.Step.objects.get(step_code="T99")
+        target.update(
+            step=cancel
+        )
+        messages.success(self.request, _("注文を取消しました。"))
+        return redirect("users:orders")
 
 
 class CardsListView(mixins.LoggedInOnlyView, FormView):

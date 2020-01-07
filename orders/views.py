@@ -487,6 +487,17 @@ class OrderDetailView(DetailView):
             return models.Order.objects.filter(order_code=order_code)
         except models.Order.DoesNotExist:
             return None
+    
+    def post(self, *args, **kwargs):
+        order_code = self.kwargs.get("order_code")
+        order_pk = self.request.POST.get("target-order")
+        target = models.Order.objects.filter(pk=order_pk)
+        cancel = models.Step.objects.get(step_code="T99")
+        target.update(
+            step=cancel
+        )
+        messages.success(self.request, _("注文を取消しました。"))
+        return redirect("orders:detail", order_code)
 
 
 class ReceiptView(DetailView):
