@@ -80,7 +80,10 @@ class OrderAdmin(admin.ModelAdmin):
         "get_fullname",
         "get_fullname_kana",
         "order_date",
-        "issue",
+        "bill",
+        "receipt",
+        "ordersheet",
+        "invoice",
     )
 
     inlines = (OrderItemInline,)
@@ -93,10 +96,98 @@ class OrderAdmin(admin.ModelAdmin):
                 self.admin_site.admin_view(self.invoice_pdf),
                 name="invoice",
             ),
+            path(
+                "bill/<int:pk>", self.admin_site.admin_view(self.bill_pdf), name="bill",
+            ),
+            path(
+                "receipt/<int:pk>", self.admin_site.admin_view(self.receipt_pdf), name="receipt",
+            ),
+            path(
+                "ordersheet/<int:pk>", self.admin_site.admin_view(self.ordersheet_pdf), name="ordersheet",
+            ),
         ]
         return custom_urls + urls
 
-    def issue(self, obj):
+    def bill(self, obj):
+        if obj.step.step_code == "T01" or obj.step.step_code == "T02":
+            return format_html(
+                '<a class="button" href="{}">請求書</a>',
+                reverse("admin:bill", args=[obj.pk]),
+            )
+        else:
+            return ""
+
+    bill.short_description = "請求書"
+    bill.allow_tags = True
+
+    def bill_pdf(self, request, *args, **kwargs):
+        order_pk = kwargs.get("pk")
+        order = models.Order.objects.get(pk=order_pk)
+
+        template = get_template("documents/bill.html")
+        html = template.render({"order": order})
+        response = HttpResponse(content_type="application/pdf")
+        HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
+            response,
+            stylesheets=[CSS(settings.STATICFILES_DIRS[0] + "/css/styles.css")],
+        )
+        return response
+
+    def receipt(self, obj):
+        if (
+            obj.step.step_code == "T03"
+            or obj.step.step_code == "T11"
+            or obj.step.step_code == "T21"
+        ):
+            return format_html(
+                '<a class="button" href="{}">領収書</a>',
+                reverse("admin:receipt", args=[obj.pk]),
+            )
+        else:
+            return ""
+
+    receipt.short_description = "領収書"
+    receipt.allow_tags = True
+    
+    def receipt_pdf(self, request, *args, **kwargs):
+        order_pk = kwargs.get("pk")
+        order = models.Order.objects.get(pk=order_pk)
+
+        template = get_template("documents/receipt.html")
+        html = template.render({"order": order})
+        response = HttpResponse(content_type="application/pdf")
+        HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
+            response,
+            stylesheets=[CSS(settings.STATICFILES_DIRS[0] + "/css/styles.css")],
+        )
+        return response
+
+    def ordersheet(self, obj):
+        if obj.step.step_code == "T11":
+            return format_html(
+                '<a class="button" href="{}">発注書</a>',
+                reverse("admin:ordersheet", args=[obj.pk]),
+            )
+        else:
+            return ""
+
+    ordersheet.short_description = "発注書"
+    ordersheet.allow_tags = True
+
+    def ordersheet_pdf(self, request, *args, **kwargs):
+        order_pk = kwargs.get("pk")
+        order = models.Order.objects.get(pk=order_pk)
+
+        template = get_template("documents/ordersheet.html")
+        html = template.render({"order": order})
+        response = HttpResponse(content_type="application/pdf")
+        HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
+            response,
+            stylesheets=[CSS(settings.STATICFILES_DIRS[0] + "/css/styles.css")],
+        )
+        return response
+
+    def invoice(self, obj):
         if obj.step.step_code == "T21":
             return format_html(
                 '<a class="button" href="{}">納品書</a>',
@@ -105,8 +196,8 @@ class OrderAdmin(admin.ModelAdmin):
         else:
             return ""
 
-    issue.short_description = "発行"
-    issue.allow_tags = True
+    invoice.short_description = "納品書"
+    invoice.allow_tags = True
 
     def invoice_pdf(self, request, *args, **kwargs):
         order_pk = kwargs.get("pk")
