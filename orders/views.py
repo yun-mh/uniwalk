@@ -143,9 +143,6 @@ class SelectPaymentView(FormView):
             "cart": cart,
             "total": total,
         }
-
-        # card?
-
         return render(self.request, "orders/select-payment.html", context)
 
     def post(self, *args, **kwargs):
@@ -415,7 +412,7 @@ class OrderCheckView(FormView):
             for cart_item in cart_items:
                 models.OrderItem.objects.create(
                     order=new_order,
-                    product=cart_item.product.name,
+                    product=cart_item.product,
                     quantity=cart_item.quantity,
                     price=cart_item.product.price,
                 )

@@ -127,3 +127,4 @@ class OrderSearchForm(forms.ModelForm):
         label=_("メールアドレス"),
         widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス"), "required": True}),
     )
+

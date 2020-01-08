@@ -150,12 +150,16 @@ class OrderItem(models.Model):
         related_name="order_items",
         on_delete=models.CASCADE,
     )
-    product = models.CharField(max_length=250)
+    product = models.ForeignKey(
+        "products.Product",
+        verbose_name=_("商品"),
+        related_name="order_items",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
     quantity = models.IntegerField()
     price = models.IntegerField()
 
     def sub_total(self):
         return self.quantity * self.price
-
-    def __str__(self):
-        return self.product

@@ -16,7 +16,7 @@ django-localflavor = "*"
 django-dotenv = "*"
 stripe = "*"
 django-crispy-forms = "*"
-django-weasyprint = "*"
+weasyprint = "*"
 
 [requires]
 python_version = "3.7"
