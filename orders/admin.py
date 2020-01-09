@@ -8,6 +8,7 @@ from django.template.loader import get_template
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
+from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 from weasyprint import HTML, CSS
 from . import models
 
@@ -17,10 +18,73 @@ class OrderItemInline(admin.TabularInline):
     model = models.OrderItem
 
 
+def make_step_new(self, request, queryset):
+    step = models.Step.objects.get(step_code="T01")
+    rows_updated = queryset.update(step=step)
+    if rows_updated == 1:
+        message_bit = "1件の注文の対応を"
+    else:
+        message_bit = "%s 注文の対応を" % rows_updated
+    self.message_user(request, "%s 入金前に変更しました。" % message_bit)
+make_step_new.short_description = "選択した注文を入金前に変更"
+
+def make_step_payment_check(self, request, queryset):
+    step = models.Step.objects.get(step_code="T02")
+    rows_updated = queryset.update(step=step)
+    if rows_updated == 1:
+        message_bit = "1件の注文の対応を"
+    else:
+        message_bit = "%s 注文の対応を" % rows_updated
+    self.message_user(request, "%s 決済処理中に変更しました。" % message_bit)
+make_step_payment_check.short_description = "選択した注文を決済処理中に変更"
+
+def make_step_payment_done(self, request, queryset):
+    step = models.Step.objects.get(step_code="T03")
+    rows_updated = queryset.update(step=step)
+    if rows_updated == 1:
+        message_bit = "1件の注文の対応を"
+    else:
+        message_bit = "%s 注文の対応を" % rows_updated
+    self.message_user(request, "%s 決済確認済みに変更しました。" % message_bit)
+make_step_payment_done.short_description = "選択した注文を決済確認済みに変更"
+
+def make_step_dealing_with(self, request, queryset):
+    step = models.Step.objects.get(step_code="T11")
+    rows_updated = queryset.update(step=step)
+    if rows_updated == 1:
+        message_bit = "1件の注文の対応を"
+    else:
+        message_bit = "%s 注文の対応を" % rows_updated
+    self.message_user(request, "%s 対応中に変更しました。" % message_bit)
+make_step_dealing_with.short_description = "選択した注文を対応中に変更"
+
+def make_step_shipping_done(self, request, queryset):
+    step = models.Step.objects.get(step_code="T21")
+    rows_updated = queryset.update(step=step)
+    if rows_updated == 1:
+        message_bit = "1件の注文の対応を"
+    else:
+        message_bit = "%s 注文の対応を" % rows_updated
+    self.message_user(request, "%s 発送済みに変更しました。" % message_bit)
+make_step_shipping_done.short_description = "選択した注文を発送済みに変更"
+
+def make_step_cancel(self, request, queryset):
+    step = models.Step.objects.get(step_code="T99")
+    rows_updated = queryset.update(step=step)
+    if rows_updated == 1:
+        message_bit = "1件の注文の対応を"
+    else:
+        message_bit = "%s 注文の対応を" % rows_updated
+    self.message_user(request, "%s 注文取消しに変更しました。" % message_bit)
+make_step_cancel.short_description = "選択した注文を入金前に変更"
+
+
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
 
     """ アドミンに注文テーブルを定義する """
+
+    change_form_template = "admin/order_changeform.html"
 
     fieldsets = (
         (
@@ -31,10 +95,10 @@ class OrderAdmin(admin.ModelAdmin):
                     "order_date",
                     "user",
                     "guest",
+                    "amount",
                     "payment",
                     "stripe_charge_id",
                     "step",
-                    "amount",
                 )
             },
         ),
@@ -86,6 +150,15 @@ class OrderAdmin(admin.ModelAdmin):
         "invoice",
     )
 
+    list_filter = (
+        "step",
+        ("order_date", DateRangeFilter),
+    )
+
+    list_per_page = 20
+
+    actions = [make_step_new, make_step_payment_check, make_step_payment_done, make_step_dealing_with, make_step_shipping_done, make_step_cancel]
+
     inlines = (OrderItemInline,)
 
     def get_urls(self):
@@ -100,10 +173,14 @@ class OrderAdmin(admin.ModelAdmin):
                 "bill/<int:pk>", self.admin_site.admin_view(self.bill_pdf), name="bill",
             ),
             path(
-                "receipt/<int:pk>", self.admin_site.admin_view(self.receipt_pdf), name="receipt",
+                "receipt/<int:pk>",
+                self.admin_site.admin_view(self.receipt_pdf),
+                name="receipt",
             ),
             path(
-                "ordersheet/<int:pk>", self.admin_site.admin_view(self.ordersheet_pdf), name="ordersheet",
+                "ordersheet/<int:pk>",
+                self.admin_site.admin_view(self.ordersheet_pdf),
+                name="ordersheet",
             ),
         ]
         return custom_urls + urls
@@ -148,7 +225,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     receipt.short_description = "領収書"
     receipt.allow_tags = True
-    
+
     def receipt_pdf(self, request, *args, **kwargs):
         order_pk = kwargs.get("pk")
         order = models.Order.objects.get(pk=order_pk)

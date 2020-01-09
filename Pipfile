@@ -15,8 +15,8 @@ pillow = "*"
 django-localflavor = "*"
 django-dotenv = "*"
 stripe = "*"
-django-crispy-forms = "*"
 weasyprint = "*"
+django-admin-rangefilter = "*"
 
 [requires]
 python_version = "3.7"

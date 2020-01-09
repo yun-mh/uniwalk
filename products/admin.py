@@ -15,6 +15,7 @@ class ProductAdmin(admin.ModelAdmin):
     """ アドミンに商品を定義する """
 
     inlines = (ImageInline,)
+
     list_display = (
         "name",
         "get_thumbnail",
@@ -23,6 +24,13 @@ class ProductAdmin(admin.ModelAdmin):
         "price",
         "total_rating",
     )
+
+    search_fields = (
+        "name",
+        "product_code",
+    )
+
+    list_per_page = 20
 
     def get_thumbnail(self, obj):
         url = obj.first_image
@@ -41,3 +49,5 @@ class CategoryAdmin(admin.ModelAdmin):
         "type_code",
         "created",
     )
+
+    list_per_page = 20

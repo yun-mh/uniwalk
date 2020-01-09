@@ -67,14 +67,26 @@ class CustomUserAdmin(admin.ModelAdmin):
     inlines = (ReviewInline,)
 
     list_display = (
-        "get_fullname",
         "email",
+        "get_fullname",
         "birthday",
         "gender",
         "member_code",
         "is_staff",
         "is_superuser",
     )
+
+    search_fields = (
+        "email",
+    )
+
+    list_filter = (
+        "gender",
+        "is_staff",
+        "is_superuser",
+    )
+
+    list_per_page = 20
 
     def get_fullname(self, obj):
         return obj.last_name + obj.first_name
