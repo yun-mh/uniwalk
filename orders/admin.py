@@ -8,7 +8,6 @@ from django.template.loader import get_template
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 from weasyprint import HTML, CSS
 from . import models
 
@@ -152,7 +151,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     list_filter = (
         "step",
-        ("order_date", DateRangeFilter),
+        "order_date",
     )
 
     list_per_page = 20

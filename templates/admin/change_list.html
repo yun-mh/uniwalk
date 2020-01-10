@@ -1,0 +1,122 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/changelists.css' %}">
+{% if cl.formset %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}">
+{% endif %}
+{% if cl.formset or action_form %}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{% endif %}
+{{ media.css }}
+{% if not actions_on_top and not actions_on_bottom %}
+<style>
+    #changelist table thead th:first-child {
+        width: inherit
+    }
+</style>
+{% endif %}
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+{{ media.js }}
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
+
+{% if not is_popup %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    {% block object-tools %}
+    <ul class="object-tools text-center">
+        {% block object-tools-items %}
+        {% load i18n admin_urls %}
+        {% if has_add_permission %}
+        <li>
+            {% url cl.opts|admin_urlname:'add' as add_url %}
+            <a href="{% add_preserved_filters add_url is_popup to_field %}" class="addlink">
+                {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+            </a>
+        </li>
+        {% endif %}
+        {% endblock %}
+    </ul>
+    {% endblock %}
+    {% if cl.formset and cl.formset.errors %}
+    <p class="errornote">
+        {% if cl.formset.total_error_count == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+    </p>
+    {{ cl.formset.non_form_errors }}
+    {% endif %}
+    <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
+        {% block search %}
+        {% load i18n static %}
+        {% if cl.search_fields %}
+        {% search_form cl %}
+        {% endif %}
+
+        {% endblock %}
+        {% block date_hierarchy %}{% if cl.date_hierarchy %}{% date_hierarchy cl %}{% endif %}{% endblock %}
+
+        {% block filters %}
+        {% if cl.has_filters %}
+        <div id="changelist-filter">
+            <h2>{% trans 'Filter' %}</h2>
+            {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+        </div>
+        {% endif %}
+        {% endblock %}
+
+        <form id="changelist-form" method="post" {% if cl.formset and cl.formset.is_multipart %}
+            enctype="multipart/form-data" {% endif %} novalidate>{% csrf_token %}
+            {% if cl.formset %}
+            <div>{{ cl.formset.management_form }}</div>
+            {% endif %}
+
+            {% block result_list %}
+            {% if action_form and actions_on_top and cl.show_admin_actions %}
+            {% load i18n %}
+            <div class="actions flex justify-start">
+                {% block actions %}
+                {% block actions-form %}
+                {% for field in action_form %}
+                {{ field }}
+                {% endfor %}
+                {% endblock %}
+                {% block actions-submit %}
+                <button type="submit" class="button" title="{% trans "Run the selected action" %}" name="index"
+                    value="{{ action_index|default:0 }}">{% trans "Go" %}</button>
+                {% endblock %}
+                {% block actions-counter %}
+                {% if actions_selection_counter %}
+                <span class="action-counter" data-actions-icnt="{{ cl.result_list|length }}">{{ selection_note }}</span>
+                {% if cl.result_count != cl.result_list|length %}
+                <span class="all">{{ selection_note_all }}</span>
+                <span class="question">
+                    <a href="#"
+                        title="{% trans "Click here to select the objects across all pages" %}">{% blocktrans with cl.result_count as total_count %}Select
+                        all {{ total_count }} {{ module_name }}{% endblocktrans %}</a>
+                </span>
+                <span class="clear"><a href="#">{% trans "Clear selection" %}</a></span>
+                {% endif %}
+                {% endif %}
+                {% endblock %}
+                {% endblock %}
+            </div>
+
+            {% endif %}
+            {% result_list cl %}
+            {% if action_form and actions_on_bottom and cl.show_admin_actions %}{% admin_actions %}{% endif %}
+            {% endblock %}
+            {% block pagination %}{% pagination cl %}{% endblock %}
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -14,6 +14,8 @@ class ProductAdmin(admin.ModelAdmin):
 
     """ アドミンに商品を定義する """
 
+    change_list_template = "admin/change_list.html"
+
     inlines = (ImageInline,)
 
     list_display = (

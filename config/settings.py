@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 DJANGO_APPS = [
-    "django.contrib.admin",
+    # "django.contrib.admin",
+    "config.apps.ConfigAdminConfig",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -44,7 +45,6 @@ THIRD_PARTY_APPS = [
     "phonenumber_field",
     "localflavor",
     "stripe",
-    "rangefilter",
 ]
 
 PROJECT_APPS = [
