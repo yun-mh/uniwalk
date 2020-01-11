@@ -191,18 +191,18 @@ $shadows-big: multiple-box-shadow(50);
 
 // ボタン
 .btn {
-  @apply w-full font-light text-center rounded-lg py-5 text-lg text-white;
+  @apply w-full font-light text-center rounded-full py-5 text-lg text-white;
   background: linear-gradient(
     90deg,
     rgba(114, 43, 255, 1) 0%,
     rgba(104, 127, 255, 1) 100%
   );
   &-warning {
-    @apply w-full font-light text-center rounded-lg py-5 text-lg text-white;
+    @apply w-full font-light text-center rounded-full py-5 text-lg text-white;
     background: linear-gradient(to right, #f7971e, #ffd200);
   }
   &-danger {
-    @apply w-full font-light text-center rounded-lg py-5 text-lg text-white;
+    @apply w-full font-light text-center rounded-full py-5 text-lg text-white;
     background: linear-gradient(to left, #ed213a, #93291e);
   }
 }

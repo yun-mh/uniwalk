@@ -11,15 +11,12 @@
   <title>{% block page_title %}{% endblock page_title %}| UniWalk</title>
 </head>
 
-<body class="bg-gray-100 text-gray-800 mt-24 font-light">
+<body class="bg-white text-gray-800 mt-12 font-light">
   {% include "partials/messages.html" %}
 
-  <header
-    class="max-w-full flex items-center justify-between h-28 border-b-2 border-gray-400 fixed bg-white inset-0 z-50">
-    {% include "partials/nav.html" %}
-  </header>
+  {% include "partials/nav.html" %}
 
-  <article class="min-h-75vh pt-4">
+  <article class="w-90vw min-h-75vh mx-auto shadow-dark -mt-16 bg-white mb-16">
     {% block content %}
 
     {% endblock %}

@@ -1,23 +1,26 @@
 {% load humanize %}
-<div class="w-1/3 mb-10 px-3 overflow-hidden">
+<div class="xl:w-1/3 md:w-1/2 sm:w-full xs:w-full overflow-hidden border border-gray-300 bg-white p-5"
+    style="height: 22.5vw;">
     <a href="{% url 'products:detail' product.pk %}">
-        <div class="w-full h-50vh bg-cover bg-center mb-2" style="background-image: url({{ product.first_image }});">
+        <div class="w-full h-2/3 bg-cover bg-center mb-2" style="background-image: url({{ product.first_image }});">
         </div>
-        <div class="flex justify-between mb-2 truncate">
-            <div class="w-4/5 overflow-hidden flex">
-                <span class="text-lg text-black w-11/12 block overflow-hidden font-medium">{{ product.name }}</span>
+        <div class="flex flex-col h-1/3 justify-center">
+            <div class="flex justify-between items-end mb-2 truncate">
+                <div class="w-4/5 overflow-hidden flex">
+                    <span class="text-lg text-black w-11/12 block overflow-hidden font-medium">{{ product.name }}</span>
+                </div>
+                <span class="text-blue-600 font-medium">
+                    <span class="text-black">&yen;</span> {{ product.price|intcomma }}
+                </span>
             </div>
-            <span class="text-lg text-black font-medium">
-                &yen; {{ product.price|intcomma }}
-            </span>
-        </div>
-        <div class="flex justify-between mb-2 truncate">
-            <div class="w-4/5 overflow-hidden flex">
-                <span class="text-sm text-gray-600 block truncate">{{ product.category }}</span>
+            <div class="flex justify-between mb-2 truncate">
+                <div class="w-4/5 overflow-hidden flex">
+                    <span class="text-sm text-gray-600 block truncate">{{ product.category }}</span>
+                </div>
+                <span class="text-sm flex items-center">
+                    <i class="fas fa-star text-xs text-yellow-500 mr-1"></i> {{ product.total_rating }}
+                </span>
             </div>
-            <span class="text-sm flex items-center">
-                <i class="fas fa-star text-xs text-red-500 mr-1"></i> {{ product.total_rating }}
-            </span>
         </div>
     </a>
 </div>

@@ -7,39 +7,45 @@
 
 {% block content %}
 
-<div class="mx-auto pt-16 pb-10">
+<div class="mx-auto">
 
     <div class="flex">
-        <div class="w-1/6 px-10">
-            <h2 class="text-lg font-semibold pb-2 mb-2 border-b">{% trans '商品カテゴリー' %}</h2>
+        <div class="w-1/5 p-5" style="height: 22.5vw;">
+            <h2 class="text-sm font-semibold text-blue-500 mb-5">{% trans '商品カテゴリー' %}</h2>
             <ul>
-                <li class="mb-2"><a href="{% url 'products:list' %}">{% trans 'すべて' %}</a></li>
+                <li class="flex justify-between mb-2 text-sm">
+                    <a href="{% url 'products:list' %}">{% trans 'すべて' %}</a>
+                    <span class="text-gray-500">{{ products|length }}</span>
+                </li>
                 {% for category in categories %}
-                <li class="mb-2"><a href="{% url 'products:list-category' category.pk %}">{{ category }}</a></li>
+                <li class="flex justify-between mb-2 text-sm">
+                    <a href="{% url 'products:list-category' category.pk %}">{{ category }}</a>
+                    <span class="text-gray-500">{{ category.product.all|length }}</span>
+                </li>
                 {% endfor %}
             </ul>
         </div>
 
-        <div class="w-5/6 flex flex-wrap mb-10">
+        <div class="w-4/5 flex flex-wrap">
             {% if products %}
             {% for product in products %}
             {% include 'mixins/products/product-card.html' with product=product %}
             {% endfor %}
 
-            <div class="flex items-center justify-center mx-auto container">
+            <div class="flex h-12 items-center justify-center mx-auto container border border-gray-300 bg-gray-100">
                 {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}" class="text-teal-500">
+                <a href="?page={{ page_obj.previous_page_number }}" class="text-blue-500">
                     <i class="fas fa-arrow-left fa-lg"></i>
                 </a>
                 {% endif %}
 
-                <span class="mx-3 font-medium text-lg">
+                <span class="mx-3 font-medium text-sm">
                     {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}
                     {{ current_page }} ページ{% endblocktrans %}
                 </span>
 
                 {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}" class="text-teal-500">
+                <a href="?page={{ page_obj.next_page_number }}" class="text-blue-500">
                     <i class="fas fa-arrow-right fa-lg"></i>
                 </a>
                 {% endif %}

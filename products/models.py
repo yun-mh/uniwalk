@@ -40,6 +40,9 @@ class Category(core_models.TimeStampedModel):
     def __str__(self):
         return self.product_type
 
+    # def count_items_by_category(self):
+    #     Product.objects.
+
 
 class Product(core_models.TimeStampedModel):
 

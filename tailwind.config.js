@@ -14,6 +14,7 @@ module.exports = {
         "25vh": "25vh",
         "50vh": "50vh",
         "75vh": "75vh",
+        "75vw": "75%",
         "90vw": "90%"
       },
       height: {
@@ -39,6 +40,10 @@ module.exports = {
           dark: "rgba(114, 43, 255, 1)"
         }
       }
+    },
+    boxShadow: {
+      dark:
+        " 0 4px 6px -1px rgba(0, 0, 0, .2), 0 2px 4px -1px rgba(0, 0, 0, .08)"
     }
   },
   variants: {},
