@@ -1,44 +1,4 @@
 {% load i18n static %}
-<div class="w-1/2 pr-0">
-    <div class="flex relative inline-block float-right">
-        {% block usertools %}
-        {% if has_permission %}
-        <div id="user-tools" class="hidden lg:block text-sm">
-            {% block welcome-msg %}
-            <strong>{% firstof user.email %}</strong>
-            {% endblock %}
-            {% block userlinks %}
-            {% if site_url %}
-            <a href="{{ site_url }}" class="btn-link text-gray-600">{% trans 'View site' %}</a> |
-            {% endif %}
-            {% if user.is_active and user.is_staff %}
-            {% url 'django-admindocs-docroot' as docsroot %}
-            {% if docsroot %}
-            <a href="{{ docsroot }}" class="btn-link text-gray-600">{% trans 'Documentation' %}</a> |
-            {% endif %}
-            {% endif %}
-            {% if user.has_usable_password %}
-            <a href="{% url 'admin:password_change' %}" class="btn-link text-gray-600">{% trans 'Change password' %}</a>
-            |
-            {% endif %}
-            <a href="{% url 'admin:logout' %}" class="btn-link text-gray-600">{% trans 'Log out' %}</a>
-            {% endblock %}
-        </div>
-        {% endif %}
-        {% endblock %}
-
-        <div class="block lg:hidden pr-4">
-            <button id="nav-toggle"
-                class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-teal-500 appearance-none focus:outline-none">
-                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <title>Menu</title>
-                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                </svg>
-            </button>
-        </div>
-    </div>
-</div>
-
 <div class="w-full flex-grow hidden lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20"
     id="nav-content">
     <ul class="list-reset lg:flex flex-1 items-center px-4 md:px-0">
@@ -50,34 +10,81 @@
         </li>
         <li class="mr-6 my-2 md:my-0">
             <a href="{% url 'admin:index' %}"
-                class="block py-1 md:py-3 pl-1 align-middle text-orange-600 no-underline hover:text-gray-900 border-b-2 border-orange-600 hover:border-orange-600">
-                <i class="fas fa-home fa-fw mr-3 text-orange-600"></i><span
-                    class="pb-1 md:pb-0 text-sm">{% trans 'ホーム' %}</span>
+                class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 {% if request.path == '/admin/' %} border-orange-600 text-orange-500 {% endif %} border-b-2 border-white hover:border-orange-500">
+                <i class="fas fa-home fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">{% trans 'ホーム' %}</span>
             </a>
         </li>
-        <li class="mr-6 my-2 md:my-0">
-            <a href="{% url 'admin:products_product_changelist' %}"
-                class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-pink-500">
+        <li class="mr-6 my-2 md:my-0 relative">
+            <a id="productsBtn"
+                class="block cursor-pointer py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 {% if '/products/' in request.path %} border-pink-500 text-pink-500 {% endif %} border-b-2 border-white hover:border-pink-500">
                 <i class="fas fa-gift fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">{% trans '商品' %}</span>
             </a>
+            <div class="products-dropdown hidden bg-white w-40 absolute shadow-dark" style="top: 100%;">
+                <a href="{% url 'admin:products_category_changelist' %}"
+                    class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
+                    カテゴリー一覧
+                </a>
+                <a href="{% url 'admin:products_product_changelist' %}"
+                    class="text-sm text-gray-900 block p-2 cursor-pointer hover:text-gray-600">
+                    商品一覧
+                </a>
+            </div>
         </li>
-        <li class="mr-6 my-2 md:my-0">
-            <a href="{% url 'admin:users_user_changelist' %}"
-                class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-purple-500">
+        <li class="mr-6 my-2 md:my-0 relative">
+            <a id="usersBtn"
+                class="block cursor-pointer py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 {% if '/users/' in request.path %} border-purple-500 text-purple-500 {% endif %} border-b-2 border-white hover:border-purple-500">
                 <i class="fas fa-user-tie fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">{% trans '顧客' %}</span>
             </a>
+            <div class="users-dropdown hidden bg-white w-40 absolute shadow-dark" style="top: 100%;">
+                <a href="{% url 'admin:users_user_changelist' %}"
+                    class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
+                    会員一覧
+                </a>
+                <a href="{% url 'admin:users_guest_changelist' %}"
+                    class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
+                    ゲスト一覧
+                </a>
+            </div>
         </li>
-        <li class="mr-6 my-2 md:my-0">
-            <a href="{% url 'admin:orders_order_changelist' %}"
-                class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-green-500">
+        <li class="mr-6 my-2 md:my-0 relative">
+            <a id="ordersBtn"
+                class="block cursor-pointer py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 {% if '/orders/' in request.path %} border-green-500 text-green-500 {% endif %} border-b-2 border-white hover:border-green-500">
                 <i class="fas fa-list fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">{% trans '注文' %}</span>
             </a>
+            <div class="orders-dropdown hidden bg-white w-40 absolute shadow-dark" style="top: 100%;">
+                <a href="{% url 'admin:orders_order_changelist' %}"
+                    class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
+                    注文一覧
+                </a>
+                <a href="{% url 'admin:orders_step_changelist' %}"
+                    class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
+                    対応コードリスト
+                </a>
+            </div>
         </li>
-        <li class="mr-6 my-2 md:my-0">
-            <a href="#"
-                class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
+        <li class="mr-6 my-2 md:my-0 relative">
+            <a id="analyticsBtn"
+                class="block cursor-pointer py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 {% if '/analytics/' in request.path %} border-red-500 text-red-500 {% endif %} border-b-2 border-white hover:border-red-500">
                 <i class="fas fa-chart-pie fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">{% trans '統計' %}</span>
             </a>
+            <div class="analytics-dropdown hidden bg-white w-40 absolute shadow-dark" style="top: 100%;">
+                <a href="{% url 'admin:orders_order_changelist' %}"
+                    class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
+                    会員分析
+                </a>
+                <a href="{% url 'admin:orders_step_changelist' %}"
+                    class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
+                    販売実績分析
+                </a>
+                <a href="{% url 'admin:orders_step_changelist' %}"
+                    class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
+                    足サイズ分析
+                </a>
+                <a href="{% url 'admin:orders_step_changelist' %}"
+                    class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
+                    人気デザイン分析
+                </a>
+            </div>
         </li>
     </ul>
 </div>

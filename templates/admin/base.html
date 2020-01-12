@@ -1,0 +1,282 @@
+{% load i18n static %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl" {% endif %}>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Uniwalk 管理者モード</title>
+    {% block blockbots %}
+    <meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    {% block extrastyle %}
+    {% endblock %}
+    {% block extrahead %}{% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"
+        integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
+</head>
+{% load i18n %}
+
+<body
+    class="bg-gray-100 font-sans leading-normal tracking-normal {% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
+    data-admin-utc-offset="{% now "Z" %}">
+    <nav id="header" class="bg-white fixed w-full z-10 top-0 shadow" style="z-index: 100;">
+        <div class="w-full container mx-auto mt-0">
+            <div class="w-full flex flex-wrap items-center py-3">
+                <div class="w-1/2 pl-2 md:pl-0">
+                    <a class="flex items-center text-gray-900 text-base xl:text-xl no-underline hover:no-underline font-bold"
+                        href="{% url 'admin:index' %}">
+                        <img src="{% static 'images/logo.png' %}" class="h-10">
+                        <span>Uniwalk 管理者モード</span>
+                    </a>
+                </div>
+                <div class="w-1/2 pr-0">
+                    <div class="flex relative inline-block float-right">
+                        {% block usertools %}
+                        {% if has_permission %}
+                        <div id="user-tools" class="hidden lg:block text-sm">
+                            {% block welcome-msg %}
+                            <strong>{% firstof user.email %}</strong>
+                            {% endblock %}
+                            {% block userlinks %}
+                            {% if site_url %}
+                            <a href="{{ site_url }}" class="btn-link text-gray-600">{% trans 'View site' %}</a> |
+                            {% endif %}
+                            {% if user.is_active and user.is_staff %}
+                            {% url 'django-admindocs-docroot' as docsroot %}
+                            {% if docsroot %}
+                            <a href="{{ docsroot }}" class="btn-link text-gray-600">{% trans 'Documentation' %}</a> |
+                            {% endif %}
+                            {% endif %}
+                            {% if user.has_usable_password %}
+                            <a href="{% url 'admin:password_change' %}"
+                                class="btn-link text-gray-600">{% trans 'Change password' %}</a>
+                            |
+                            {% endif %}
+                            <a href="{% url 'admin:logout' %}" class="btn-link text-gray-600">{% trans 'Log out' %}</a>
+                            {% endblock %}
+                        </div>
+                        {% endif %}
+                        {% endblock %}
+
+                        <div class="block lg:hidden pr-4">
+                            <button id="nav-toggle"
+                                class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-teal-500 appearance-none focus:outline-none">
+                                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <title>Menu</title>
+                                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% include 'admin/extra_nav.html' %}
+        </div>
+    </nav>
+
+    <div class="container w-full mx-auto" style="padding-top: 110px; min-height: 90vh;">
+        {% block messages %}
+        {% if messages %}
+        <ul class="messagelist">{% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message|capfirst }}</li>
+                {% endfor %}</ul>
+        {% endif %}
+        {% endblock messages %}
+
+        <div class="w-full px-4 md:px-0 md:mt-12 mb-16 text-gray-800 leading-normal">
+            {% block content %}
+
+            <div class="flex flex-row flex-wrap flex-grow mt-2">
+                <div class="w-full md:w-1/2 p-3">
+                    <div class="bg-white border rounded shadow">
+                        <div class="border-b p-3">
+                            <h5 class="font-bold uppercase text-gray-600">{% trans '注文状況' %}</h5>
+                        </div>
+                        <div class="p-5">
+                            <table class="w-full">
+                                <tbody>
+                                    <tr>
+                                        <td>入金前</td>
+                                        <td class="text-center font-semibold text-lg">
+                                            {{ before_payment|length }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>決済処理中</td>
+                                        <td class="text-center font-semibold text-lg">
+                                            {{ paying|length }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>決済確認済み</td>
+                                        <td class="text-center font-semibold text-lg">
+                                            {{ payment_checked|length }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>対応中</td>
+                                        <td class="text-center font-semibold text-lg">
+                                            {{ dealing_with|length }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-center pt-5">
+                                <a href="{% url 'admin:orders_order_changelist' %}"
+                                    class="text-blue-600 font-semibold text-sm">詳しく見る</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 p-3">
+                    <div class="bg-white border rounded shadow">
+                        <div class="border-b p-3">
+                            <h5 class="font-bold uppercase text-gray-600">{% trans 'ショップ状況' %}</h5>
+                        </div>
+                        <div class="p-5">
+                            <table class="w-full">
+                                <tbody>
+                                    <tr>
+                                        <td>取扱商品数</td>
+                                        <td class="text-center font-semibold text-lg">
+                                            {{ products|length }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>会員数</td>
+                                        <td class="text-center font-semibold text-lg">
+                                            {{ users|length }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>登録デザイン数</td>
+                                        <td class="text-center font-semibold text-lg">
+                                            ?
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full p-3">
+                    <div class="bg-white border rounded shadow">
+                        <div class="border-b p-3">
+                            <h5 class="font-bold uppercase text-gray-600">今月状況</h5>
+                        </div>
+                        <div class="bg-blue-300 text-white font-semibold text-2xl h-20 flex flex-wrap">
+                            <span>{% now "Y" %} 年 {% now "m" %} 月</span>
+                            <span>{{ total_revenue_for_month }}</span>
+                        </div>
+                        <div class="p-5">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ content }}
+            {% endblock %}
+        </div>
+
+
+    </div>
+    <!--/container-->
+
+    <footer class="bg-white border-t border-gray-400 shadow">
+        <div class="container max-w-md mx-auto flex py-8">
+            <div class="w-full mx-auto text-center">
+                &copy; Team Uniwalk 2020
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/d7ead653ba.js" crossorigin="anonymous"></script>
+    <script>
+        // 短縮メニューバー
+        var navMenuDiv = document.getElementById("nav-content");
+        var navMenu = document.getElementById("nav-toggle");
+        var userTools = document.getElementById("user-tools");
+        var userToolsMenu = document.getElementById("user-tools-menu");
+
+        document.onclick = check;
+
+        function check(e) {
+            var target = (e && e.target) || (event && event.srcElement);
+            if (!checkParent(target, navMenuDiv)) {
+                if (checkParent(target, navMenu)) {
+                    if (navMenuDiv.classList.contains("hidden")) {
+                        userToolsMenu.classList.remove("hidden");
+                        navMenuDiv.classList.remove("hidden");
+                    } else {
+                        userToolsMenu.classList.add("hidden");
+                        navMenuDiv.classList.add("hidden");
+                    }
+                } else {
+                    // click both outside link and outside menu, hide menu
+                    navMenuDiv.classList.add("hidden");
+                }
+            }
+        }
+
+        function checkParent(t, elm) {
+            while (t.parentNode) {
+                if (t == elm) { return true; }
+                t = t.parentNode;
+            }
+            return false;
+        }
+
+        // 各種メニューバー
+        var productsBtn = document.getElementById("productsBtn");
+        var productsDropdown = document.querySelector(".products-dropdown");
+        var usersBtn = document.getElementById("usersBtn");
+        var usersDropdown = document.querySelector(".users-dropdown");
+        var ordersBtn = document.getElementById("ordersBtn");
+        var ordersDropdown = document.querySelector(".orders-dropdown");
+        var analyticsBtn = document.getElementById("analyticsBtn");
+        var analyticsDropdown = document.querySelector(".analytics-dropdown");
+
+        productsBtn.addEventListener("click", () => {
+            productsDropdown.classList.toggle("hidden");
+            if (!usersDropdown.classList.contains("hidden") || !ordersDropdown.classList.contains("hidden") || !analyticsDropdown.classList.contains("hidden")) {
+                usersDropdown.classList.add("hidden");
+                ordersDropdown.classList.add("hidden");
+                analyticsDropdown.classList.add("hidden");
+            }
+        });
+        usersBtn.addEventListener("click", () => {
+            usersDropdown.classList.toggle("hidden");
+            if (!productsDropdown.classList.contains("hidden") || !ordersDropdown.classList.contains("hidden") || !analyticsDropdown.classList.contains("hidden")) {
+                productsDropdown.classList.add("hidden");
+                ordersDropdown.classList.add("hidden");
+                analyticsDropdown.classList.add("hidden");
+            }
+        });
+        ordersBtn.addEventListener("click", () => {
+            ordersDropdown.classList.toggle("hidden");
+            if (!usersDropdown.classList.contains("hidden") || !productsDropdown.classList.contains("hidden") || !analyticsDropdown.classList.contains("hidden")) {
+                usersDropdown.classList.add("hidden");
+                productsDropdown.classList.add("hidden");
+                analyticsDropdown.classList.add("hidden");
+            }
+        });
+        analyticsBtn.addEventListener("click", () => {
+            analyticsDropdown.classList.toggle("hidden");
+            if (!usersDropdown.classList.contains("hidden") || !ordersDropdown.classList.contains("hidden") || !productsDropdown.classList.contains("hidden")) {
+                usersDropdown.classList.add("hidden");
+                ordersDropdown.classList.add("hidden");
+                productsDropdown.classList.add("hidden");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
