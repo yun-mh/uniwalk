@@ -90,10 +90,11 @@
                 </div>
                 <div class="w-12 h-full flex relative">
                     <a href="{% url 'carts:cart' %}" class="flex items-center cursor-pointer mx-auto">
-                        <i class="fas fa-shopping-cart fa-md text-gray-300"></i>
+                        <i class="fas fa-shopping-cart fa-md text-gray-300 relative"></i>
                         {% if item_count != 0 %}
                         <span
-                            class="inline-block text-xs w-4 h-4 rounded bg-red-500 text-white text-center">{{item_count}}</span>
+                            class="inline-block text-xs w-4 h-4 rounded-full bg-red-500 text-white text-center absolute"
+                            style="top: 7px; right: 5px">{{item_count}}</span>
                         {% endif %}
                     </a>
                 </div>

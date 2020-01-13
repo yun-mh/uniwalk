@@ -155,7 +155,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>登録デザイン数</td>
+                                        <td>登録カスタムデザイン数</td>
                                         <td class="text-center font-semibold text-lg">
                                             ?
                                         </td>
@@ -171,12 +171,35 @@
                         <div class="border-b p-3">
                             <h5 class="font-bold uppercase text-gray-600">今月状況</h5>
                         </div>
-                        <div class="bg-blue-300 text-white font-semibold text-2xl h-20 flex flex-wrap">
+                        <div
+                            class="bg-blue-400 text-white font-semibold text-2xl h-20 flex flex-wrap items-center justify-around">
                             <span>{% now "Y" %} 年 {% now "m" %} 月</span>
-                            <span>{{ total_revenue_for_month }}</span>
+                            <span>&yen; {{ total_revenue_for_month }} | {{ total_orders_for_month|length }}
+                                {% trans '件' %}</span>
                         </div>
                         <div class="p-5">
-
+                            <table class="w-full">
+                                <tbody>
+                                    <tr>
+                                        <td>今日売上実績</td>
+                                        <td class="text-center font-semibold text-lg">
+                                            &yen; {{ total_revenue_for_today }} | {{ total_orders_for_today|length }}
+                                            {% trans '件' %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>昨日売上実績</td>
+                                        <td class="text-center font-semibold text-lg">
+                                            &yen; {{ total_revenue_for_yesterday }} |
+                                            {{ total_orders_for_yesterday|length }}
+                                            {% trans '件' %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-center pt-5">
+                                <a href="" class="text-blue-600 font-semibold text-sm">詳しく見る</a>
+                            </div>
                         </div>
                     </div>
                 </div>
