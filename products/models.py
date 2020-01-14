@@ -16,6 +16,68 @@ def create_product_code():
     return new_product_number
 
 
+def generate_path(self, filename):
+    url = "product_templates/%s/%s" % (self.product.pk, filename)
+    return url
+
+
+class Template(models.Model):
+
+    """ 商品の3Dテンプレートデータを取り扱う """
+
+    product = models.ForeignKey(
+        "Product",
+        verbose_name=_("商品"),
+        related_name="templates",
+        on_delete=models.CASCADE,
+    )
+    shoelace_left = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    tongue_left = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    upper_left = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    midsole_left = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    outsole_left = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    liner_left = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    shoelace_right = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    tongue_right = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    upper_right = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    midsole_right = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    outsole_right = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+    liner_right = models.FileField(
+        upload_to=generate_path, null=True, blank=True, unique=True
+    )
+
+
+class Material(models.Model):
+
+    """ 素材のモデルを定義する """
+
+    name = models.CharField(_("素材名"), max_length=20)
+    file = models.FileField(_("素材画像"), upload_to="product_materials", blank=True)
+    material_code = models.CharField(_("素材コード"), max_length=2)
+
+
 class Image(core_models.TimeStampedModel):
 
     """ 商品のイメージを管理するモデルを定義する """
@@ -39,9 +101,6 @@ class Category(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.product_type
-
-    # def count_items_by_category(self):
-    #     Product.objects.
 
 
 class Product(core_models.TimeStampedModel):

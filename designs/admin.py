@@ -6,7 +6,7 @@ class ImageInline(admin.TabularInline):
 
     model = models.Image
 
-    
+
 @admin.register(models.Design)
 class DesignAdmin(admin.ModelAdmin):
 

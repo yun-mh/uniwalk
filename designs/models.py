@@ -1,13 +1,6 @@
 from django.db import models
 from core import models as core_models
-
-# Create your models here.
-class Material(models.Model):
-
-    """ 素材のモデルを定義する """
-
-    name = models.CharField("", max_length=20)
-    material_code = models.CharField("", max_length=2)
+from django.utils.translation import ugettext_lazy as _
 
 
 class Image(models.Model):
@@ -17,21 +10,23 @@ class Image(models.Model):
     design = models.ForeignKey(
         "Design", related_name="images", verbose_name="デザインid", on_delete=models.CASCADE
     )
-    side_left = models.ImageField("側面(左)", upload_to="designs")
-    side_right = models.ImageField("側面(右)", upload_to="designs")
-    upper_left = models.ImageField("上面(左)", upload_to="designs")
-    upper_right = models.ImageField("上面(右)", upload_to="designs")
-    back_left = models.ImageField("後面(左)", upload_to="designs")
-    back_right = models.ImageField("後面(右)", upload_to="designs")
-    bottom_left = models.ImageField("下面(左)", upload_to="designs")
-    bottom_right = models.ImageField("下面(右)", upload_to="designs")
+    side_left = models.ImageField(_("側面(左)"), upload_to="designs")
+    side_right = models.ImageField(_("側面(右)"), upload_to="designs")
+    upper_left = models.ImageField(_("上面(左)"), upload_to="designs")
+    upper_right = models.ImageField(_("上面(右)"), upload_to="designs")
+    back_left = models.ImageField(_("後面(左)"), upload_to="designs")
+    back_right = models.ImageField(_("後面(右)"), upload_to="designs")
+    bottom_left = models.ImageField(_("下面(左)"), upload_to="designs")
+    bottom_right = models.ImageField(_("下面(右)"), upload_to="designs")
 
 
 class Design(core_models.TimeStampedModel):
 
     """ デザインのモデルを定義する """
 
-    user = models.ForeignKey("users.User", related_name="design", on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(
+        "users.User", related_name="design", on_delete=models.SET_NULL, null=True
+    )
     product = models.ForeignKey(
         "products.Product", related_name="design", on_delete=models.SET_NULL, null=True
     )

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static humanize %}
+{% load i18n static js %}
 
 {% block page_title %}
 {% trans 'デザインカスタマイズ' %}
@@ -8,249 +8,15 @@
 {% block content %}
 
 <div class="mx-auto w-full min-h-75vh">
-
-    <div id="screen" class="w-full h-75vh relative">
-        <div id="guiContainer" class="absolute" style="right: 0px;"></div>
-        <script src="{% static 'js/three.min.js' %}"></script>
-        <script src="{% static 'js/OrbitControls.js' %}"></script>
-        <script src="{% static 'js/GLTFLoader.js' %}"></script>
-        <script src="{% static 'js/dat.gui.min.js' %}"></script>
-        <script>
-            var gui, jar;
-            var scene = new THREE.Scene();
-            var camera = new THREE.PerspectiveCamera(75, screen.clientWidth / screen.clientHeight, 1, 1000);
-
-            var screen = document.getElementById("screen");
-
-            var renderer = new THREE.WebGLRenderer();
-            renderer.shadowMap.enabled = true;
-            renderer.setSize(screen.clientWidth, screen.clientHeight);
-            renderer.setClearColor(0xeeeee4, 1);
-            renderer.shadowMap.Type = THREE.PCFSoftShadowMap;
-            screen.appendChild(renderer.domElement);
-
-            camera.aspect = screen.clientWidth / screen.clientHeight;
-            camera.updateProjectionMatrix();
-
-
-            window.addEventListener('resize', function () {
-                var width = screen.clientWidth;
-                var height = screen.clientHeight;
-                renderer.setSize(width, height);
-                camera.aspect = width / height;
-                camera.updateProjectionMatrix();
-            });
-
-
-            scene.controls = new THREE.OrbitControls(camera, renderer.domElement);
-
-            var loader = new THREE.GLTFLoader();
-            loader.load("{% static 'models/left_shoelace.glb' %}", load_left_shoelace);
-
-            var left_shoelace;
-
-            function load_left_shoelace(gltf) {
-                left_shoelace = gltf.scene.children[0];
-                left_shoelace.material = new THREE.MeshLambertMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
-                scene.add(left_shoelace);
-                left_shoelace.position.z = 2;
-            }
-
-            loader.load('{% static "models/left_tongue.glb" %}', load_left_tongue);
-            var left_tongue;
-
-            function load_left_tongue(gltf) {
-                left_tongue = gltf.scene.children[0];
-                left_tongue.material = new THREE.MeshPhongMaterial({ color: 0x413c69, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
-                scene.add(left_tongue);
-                left_tongue.position.z = 2;
-            }
-
-            loader.load('{% static "models/left_upper.glb" %}', load_left_upper);
-            var left_upper;
-
-            function load_left_upper(gltf) {
-                left_upper = gltf.scene.children[0];
-                left_upper.material = new THREE.MeshPhongMaterial({ color: 0x413c69, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
-                scene.add(left_upper);
-                left_upper.position.z = 2;
-            }
-
-            loader.load('{% static "models/left_bottom.glb" %}', load_left_bottom);
-            var left_bottom;
-
-            function load_left_bottom(gltf) {
-                left_bottom = gltf.scene.children[0];
-                left_bottom.material = new THREE.MeshPhongMaterial({ color: 0xad62aa, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
-                scene.add(left_bottom);
-                left_bottom.position.z = 2;
-            }
-
-            loader.load('{% static "models/left_sole.glb" %}', load_left_sole);
-            var left_sole;
-
-            function load_left_sole(gltf) {
-                left_sole = gltf.scene.children[0];
-                left_sole.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
-                scene.add(left_sole);
-                left_sole.position.z = 2;
-            }
-
-            loader.load('{% static "models/right_shoelace.glb" %}', load_right_shoelace);
-            var right_shoelace;
-
-            function load_right_shoelace(gltf) {
-                right_shoelace = gltf.scene.children[0];
-                right_shoelace.material = new THREE.MeshPhongMaterial({ color: 0xf6e1e1, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
-                scene.add(right_shoelace);
-                right_shoelace.position.z = 2;
-            }
-
-            loader.load('{% static "models/right_tongue.glb" %}', load_right_tongue);
-            var right_tongue;
-
-            function load_right_tongue(gltf) {
-                right_tongue = gltf.scene.children[0];
-                right_tongue.material = new THREE.MeshPhongMaterial({ color: 0xff9d76, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
-                scene.add(right_tongue);
-                right_tongue.position.z = 2;
-            }
-
-            loader.load('{% static "models/right_upper.glb" %}', load_right_upper);
-            var right_upper;
-
-            function load_right_upper(gltf) {
-                right_upper = gltf.scene.children[0];
-                right_upper.material = new THREE.MeshPhongMaterial({ color: 0xeb4d55, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
-                scene.add(right_upper);
-                right_upper.position.z = 2;
-            }
-
-            loader.load('{% static "models/right_bottom.glb" %}', load_right_bottom);
-            var right_bottom;
-
-            function load_right_bottom(gltf) {
-                right_bottom = gltf.scene.children[0];
-                right_bottom.material = new THREE.MeshPhongMaterial({ color: 0x333366, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
-                scene.add(right_bottom);
-                right_bottom.position.z = 2;
-            }
-
-            loader.load('{% static "models/right_sole.glb" %}', load_right_sole);
-            var right_sole;
-
-            function load_right_sole(gltf) {
-                right_sole = gltf.scene.children[0];
-                right_sole.material = new THREE.MeshPhongMaterial({ color: 0xce0ae8, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
-                scene.add(right_sole);
-                right_sole.position.z = 2;
-            }
-
-
-
-            function displaygui() {
-                var gui = new dat.GUI({ autoPlace: false });
-                parameters = {
-                    a: "Middle",
-                    d: "#ffffff",
-                    e: "#413c69",
-                    f: "#4a47a3",
-                    g: "#ad62aa",
-                    h: "#f4b0c7",
-                    i: "#ffffff",
-                    j: "#f6e1e1",
-                    k: "#ff9d76",
-                    l: "#eb4d55",
-                    m: "#333366",
-                }
-
-                gui.add(parameters, 'a').name('Name');
-
-                var left = gui.addFolder('Left Shoe');
-
-                var l_shoelace = left.addColor(parameters, 'd').name('Shoelace');
-                var l_upper = left.addColor(parameters, 'e').name('Upper');
-                var l_tongue = left.addColor(parameters, 'f').name('Tongue');
-                var l_bottom = left.addColor(parameters, 'g').name('Bottom');
-                var l_sole = left.addColor(parameters, 'h').name('Sole');
-
-                var right = gui.addFolder('Right Shoe');
-
-                var r_shoelace = right.addColor(parameters, 'i').name('Shoelace');
-                var r_upper = right.addColor(parameters, 'j').name('Upper');
-                var r_tongue = right.addColor(parameters, 'k').name('Tongue');
-                var r_bottom = right.addColor(parameters, 'l').name('Bottom');
-                var r_sole = right.addColor(parameters, 'm').name('Sole');
-
-                l_shoelace.onChange(function (jar) {
-                    left_shoelace.material.color.setHex(jar.replace("#", "0x"));
-                });
-                l_upper.onChange(function (jar) {
-                    left_upper.material.color.setHex(jar.replace("#", "0x"));
-                });
-                l_tongue.onChange(function (jar) {
-                    left_tongue.material.color.setHex(jar.replace("#", "0x"));
-                });
-                l_bottom.onChange(function (jar) {
-                    left_bottom.material.color.setHex(jar.replace("#", "0x"));
-                });
-                l_sole.onChange(function (jar) {
-                    left_sole.material.color.setHex(jar.replace("#", "0x"));
-                });
-
-                r_shoelace.onChange(function (jar) {
-                    right_shoelace.material.color.setHex(jar.replace("#", "0x"));
-                });
-                r_upper.onChange(function (jar) {
-                    right_upper.material.color.setHex(jar.replace("#", "0x"));
-                });
-                r_tongue.onChange(function (jar) {
-                    right_tongue.material.color.setHex(jar.replace("#", "0x"));
-                });
-                r_bottom.onChange(function (jar) {
-                    right_bottom.material.color.setHex(jar.replace("#", "0x"));
-                });
-                r_sole.onChange(function (jar) {
-                    right_sole.material.color.setHex(jar.replace("#", "0x"));
-                });
-                gui.close();
-                gui.open();
-
-                var guiContainer = document.getElementById("guiContainer");
-                guiContainer.appendChild(gui.domElement);
-            }
-
-            camera.position.z = 4;
-
-
-            var ambientLight = new THREE.AmbientLight(0x888888, 0.9);
-            scene.add(ambientLight);
-
-            var shadowLight = new THREE.DirectionalLight(0xffffff, 1, 0);
-            shadowLight.position.set(0, 1, 0);
-            shadowLight.castShadow = true;
-            scene.add(shadowLight);
-
-            var update = function () {
-            };
-
-            var render = function () {
-                renderer.render(scene, camera);
-            };
-
-            var GameLoop = function () {
-                requestAnimationFrame(GameLoop);
-                update();
-                render();
-            };
-
-            GameLoop();
-            displaygui();
-
-        </script>
-
-    </div>
-    <a href="{% url 'feet:measure' product.pk %}" class="btn">足サイズ測定へ</a>
+    <form method="POST">
+        {% csrf_token %}
+        <div id="screen" class="w-full h-75vh relative">
+            <div id="guiContainer" class="absolute" style="right: 0px;"></div>
+        </div>
+        {{ form }}
+        <button id="submit" class="btn">足サイズ測定へ</button>
+    </form>
+    <!-- <a href="{% url 'feet:measure' product.pk %}" class="btn">足サイズ測定へ</a> -->
 
 </div>
 
@@ -258,5 +24,336 @@
 {% endblock content %}
 
 {% block javascript %}
+<script src="{% static 'js/three.min.js' %}"></script>
+<script src="{% static 'js/OrbitControls.js' %}"></script>
+<script src="{% static 'js/GLTFLoader.js' %}"></script>
+<script src="{% static 'js/dat.gui.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script>
+    // three.js 環境設定
+    var gui, jar;
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, screen.clientWidth / screen.clientHeight, 1, 1000);
+    var screen = document.getElementById("screen");
 
+    var renderer = new THREE.WebGLRenderer();
+    renderer.shadowMap.enabled = true;
+    renderer.setSize(screen.clientWidth, screen.clientHeight);
+    renderer.setClearColor(0xeeeee4, 1);
+    renderer.shadowMap.Type = THREE.PCFSoftShadowMap;
+    screen.appendChild(renderer.domElement);
+    camera.aspect = screen.clientWidth / screen.clientHeight;
+    camera.updateProjectionMatrix();
+
+    window.addEventListener('resize', function () {
+        var width = screen.clientWidth;
+        var height = screen.clientHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    });
+
+    scene.controls = new THREE.OrbitControls(camera, renderer.domElement);
+    var loader = new THREE.GLTFLoader();
+
+    // デザインカスタマイズ用テンプレートのロード
+    var shoelace_left_data, tongue_left_data, upper_left_data, midsole_left_data, outsole_left_data, liner_left_data, shoelace_right_data, tongue_right_data, upper_right_data, midsole_right_data, outsole_right_data, liner_right_data;
+
+    {% if template.shoelace_left %}
+    shoelace_left_data = "{{ template.shoelace_left.url }}";
+    {% endif %}
+    {% if template.tongue_left %}
+    tongue_left_data = "{{ template.tongue_left.url }}";
+    {% endif %}
+    {% if template.upper_left %}
+    upper_left_data = "{{ template.upper_left.url }}";
+    {% endif %}
+    {% if template.midsole_left %}
+    midsole_left_data = "{{ template.midsole_left.url }}";
+    {% endif %}
+    {% if template.outsole_left %}
+    outsole_left_data = "{{ template.outsole_left.url }}";
+    {% endif %}
+    {% if template.liner_left %}
+    liner_left_data = "{{ template.liner_left.url }}";
+    {% endif %}
+    {% if template.shoelace_right %}
+    shoelace_right_data = "{{ template.shoelace_right.url }}";
+    {% endif %}
+    {% if template.tongue_right %}
+    tongue_right_data = "{{ template.tongue_right.url }}";
+    {% endif %}
+    {% if template.upper_right %}
+    upper_right_data = "{{ template.upper_right.url }}";
+    {% endif %}
+    {% if template.midsole_right %}
+    midsole_right_data = "{{ template.midsole_right.url }}";
+    {% endif %}
+    {% if template.outsole_right %}
+    outsole_right_data = "{{ template.outsole_right.url }}";
+    {% endif %}
+    {% if template.liner_right %}
+    liner_right_data = "{{ template.liner_right.url }}";
+    {% endif %}
+
+    if (shoelace_left_data) {
+        loader.load(shoelace_left_data, load_left_shoelace);
+    }
+    var left_shoelace;
+    function load_left_shoelace(gltf) {
+        left_shoelace = gltf.scene.children[0];
+        left_shoelace.material = new THREE.MeshLambertMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        scene.add(left_shoelace);
+        left_shoelace.position.z = 2;
+    }
+
+    if (tongue_left_data) {
+        loader.load(tongue_left_data, load_left_tongue);
+    }
+    var left_tongue;
+    function load_left_tongue(gltf) {
+        left_tongue = gltf.scene.children[0];
+        left_tongue.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        scene.add(left_tongue);
+        left_tongue.position.z = 2;
+    }
+
+    if (upper_left_data) {
+        loader.load(upper_left_data, load_left_upper);
+    }
+    var left_upper;
+    function load_left_upper(gltf) {
+        left_upper = gltf.scene.children[0];
+        left_upper.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        scene.add(left_upper);
+        left_upper.position.z = 2;
+    }
+
+    if (midsole_left_data) {
+        loader.load(midsole_left_data, load_left_bottom);
+    }
+    var left_bottom;
+    function load_left_bottom(gltf) {
+        left_bottom = gltf.scene.children[0];
+        left_bottom.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        scene.add(left_bottom);
+        left_bottom.position.z = 2;
+    }
+
+    if (outsole_left_data) {
+        loader.load(outsole_left_data, load_left_sole);
+    }
+    var left_sole;
+    function load_left_sole(gltf) {
+        left_sole = gltf.scene.children[0];
+        left_sole.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        scene.add(left_sole);
+        left_sole.position.z = 2;
+    }
+
+    // if (liner_left_data) {
+    //     loader.load('{{ template.shoelace_left.url }}', load_left_sole);
+    // }
+    // function load_left_sole(gltf) {
+    //     var left_sole;
+    //     left_sole = gltf.scene.children[0];
+    //     left_sole.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+    //     scene.add(left_sole);
+    //     left_sole.position.z = 2;
+    // }
+
+    if (shoelace_right_data) {
+        loader.load(shoelace_right_data, load_right_shoelace);
+    }
+    var right_shoelace;
+    function load_right_shoelace(gltf) {
+        right_shoelace = gltf.scene.children[0];
+        right_shoelace.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        scene.add(right_shoelace);
+        right_shoelace.position.z = 2;
+    }
+
+    if (tongue_right_data) {
+        loader.load(tongue_right_data, load_right_tongue);
+    }
+    var right_tongue;
+    function load_right_tongue(gltf) {
+        right_tongue = gltf.scene.children[0];
+        right_tongue.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        scene.add(right_tongue);
+        right_tongue.position.z = 2;
+    }
+
+    if (upper_right_data) {
+        loader.load(upper_right_data, load_right_upper);
+    }
+    var right_upper;
+    function load_right_upper(gltf) {
+        right_upper = gltf.scene.children[0];
+        right_upper.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        scene.add(right_upper);
+        right_upper.position.z = 2;
+    }
+
+    if (midsole_right_data) {
+        loader.load(midsole_right_data, load_right_bottom);
+    }
+    var right_bottom;
+    function load_right_bottom(gltf) {
+        right_bottom = gltf.scene.children[0];
+        right_bottom.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        scene.add(right_bottom);
+        right_bottom.position.z = 2;
+    }
+
+    var right_sole;
+    // console.log(load_right_sole(loader))
+    if (outsole_right_data) {
+        loader.load(outsole_right_data, load_right_sole);
+    }
+    function load_right_sole(gltf) {
+        right_sole = gltf.scene.children[0];
+        right_sole.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        scene.add(right_sole);
+        right_sole.position.z = 2;
+    }
+
+    // if (liner_right_data) {
+    //     loader.load('{{ template.shoelace_left.url }}', load_left_sole);
+    // }
+    // function load_left_sole(gltf) {
+    //     var left_sole;
+    //     left_sole = gltf.scene.children[0];
+    //     left_sole.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+    //     scene.add(left_sole);
+    //     left_sole.position.z = 2;
+    // }
+
+
+    function displaygui() {
+        var gui = new dat.GUI({ autoPlace: false });
+        parameters = {
+            a: "Middle",
+            d: "#ffffff",
+            e: "#413c69",
+            f: "#4a47a3",
+            g: "#ad62aa",
+            h: "#f4b0c7",
+            i: "#ffffff",
+            j: "#f6e1e1",
+            k: "#ff9d76",
+            l: "#eb4d55",
+            m: "#333366",
+        }
+
+        gui.add(parameters, 'a').name('Name');
+
+        var left = gui.addFolder('Left Shoe');
+
+        var l_shoelace = left.addColor(parameters, 'd').name('Shoelace');
+        var l_upper = left.addColor(parameters, 'e').name('Upper');
+        var l_tongue = left.addColor(parameters, 'f').name('Tongue');
+        var l_bottom = left.addColor(parameters, 'g').name('Bottom');
+        var l_sole = left.addColor(parameters, 'h').name('Sole');
+
+        var right = gui.addFolder('Right Shoe');
+
+        var r_shoelace = right.addColor(parameters, 'i').name('Shoelace');
+        var r_upper = right.addColor(parameters, 'j').name('Upper');
+        var r_tongue = right.addColor(parameters, 'k').name('Tongue');
+        var r_bottom = right.addColor(parameters, 'l').name('Bottom');
+        var r_sole = right.addColor(parameters, 'm').name('Sole');
+
+        l_shoelace.onChange(function (jar) {
+            left_shoelace.material.color.setHex(jar.replace("#", "0x"));
+        });
+        l_upper.onChange(function (jar) {
+            left_upper.material.color.setHex(jar.replace("#", "0x"));
+        });
+        l_tongue.onChange(function (jar) {
+            left_tongue.material.color.setHex(jar.replace("#", "0x"));
+        });
+        l_bottom.onChange(function (jar) {
+            left_bottom.material.color.setHex(jar.replace("#", "0x"));
+        });
+        l_sole.onChange(function (jar) {
+            left_sole.material.color.setHex(jar.replace("#", "0x"));
+        });
+
+        r_shoelace.onChange(function (jar) {
+            right_shoelace.material.color.setHex(jar.replace("#", "0x"));
+        });
+        r_upper.onChange(function (jar) {
+            right_upper.material.color.setHex(jar.replace("#", "0x"));
+        });
+        r_tongue.onChange(function (jar) {
+            right_tongue.material.color.setHex(jar.replace("#", "0x"));
+        });
+        r_bottom.onChange(function (jar) {
+            right_bottom.material.color.setHex(jar.replace("#", "0x"));
+        });
+        r_sole.onChange(function (jar) {
+            right_sole.material.color.setHex(jar.replace("#", "0x"));
+        });
+        gui.close();
+        gui.open();
+
+        var guiContainer = document.getElementById("guiContainer");
+        guiContainer.appendChild(gui.domElement);
+    }
+
+    camera.position.z = 4;
+
+    var ambientLight = new THREE.AmbientLight(0x888888, 0.9);
+    scene.add(ambientLight);
+
+    var shadowLight = new THREE.DirectionalLight(0xffffff, 1, 0);
+    shadowLight.position.set(0, 1, 0);
+    shadowLight.castShadow = true;
+    scene.add(shadowLight);
+
+    var render = function () {
+        renderer.render(scene, camera);
+    };
+
+    var GameLoop = function () {
+        requestAnimationFrame(GameLoop);
+        render();
+    };
+
+    GameLoop();
+    displaygui();
+
+
+    var submit = document.getElementById("submit")
+
+    var outsole_color_left = document.getElementById("id_outsole_color_left");
+    var midsole_color_left = document.getElementById("id_midsole_color_left");
+    var uppersole_color_left = document.getElementById("id_uppersole_color_left");
+    var shoelace_color_left = document.getElementById("id_shoelace_color_left");
+    var tongue_color_left = document.getElementById("id_tongue_color_left");
+    var liner_color_left = document.getElementById("id_liner_color_left");
+    var outsole_color_right = document.getElementById("id_outsole_color_right");
+    var midsole_color_right = document.getElementById("id_midsole_color_right");
+    var uppersole_color_right = document.getElementById("id_uppersole_color_right");
+    var shoelace_color_right = document.getElementById("id_shoelace_color_right");
+    var tongue_color_right = document.getElementById("id_tongue_color_right");
+    var liner_color_right = document.getElementById("id_liner_color_right");
+
+    submit.addEventListener("click", () => {
+        outsole_color_left.value = "#" + left_sole.material.color.getHexString();
+        midsole_color_left.value = "#" + left_bottom.material.color.getHexString();
+        uppersole_color_left.value = "#" + left_upper.material.color.getHexString();
+        shoelace_color_left.value = "#" + left_shoelace.material.color.getHexString();
+        tongue_color_left.value = "#" + left_tongue.material.color.getHexString();
+        // liner_color_left.value = "#" + .material.color.getHexString();
+        outsole_color_right.value = "#" + right_sole.material.color.getHexString();
+        midsole_color_right.value = "#" + right_bottom.material.color.getHexString();
+        uppersole_color_right.value = "#" + right_upper.material.color.getHexString();
+        shoelace_color_right.value = "#" + right_shoelace.material.color.getHexString();
+        tongue_color_right.value = "#" + right_tongue.material.color.getHexString();
+        // liner_color_right.value = "#" + .material.color.getHexString();
+    });
+</script>
 {% endblock %}

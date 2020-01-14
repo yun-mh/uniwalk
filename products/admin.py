@@ -7,6 +7,13 @@ from . import models
 class ImageInline(admin.TabularInline):
 
     model = models.Image
+    max_num = 1
+
+
+class TemplateInline(admin.StackedInline):
+
+    model = models.Template
+    max_num = 1
 
 
 @admin.register(models.Product)
@@ -16,7 +23,23 @@ class ProductAdmin(admin.ModelAdmin):
 
     change_list_template = "admin/change_list.html"
 
-    inlines = (ImageInline,)
+    inlines = (ImageInline, TemplateInline)
+
+    fieldsets = (
+        (
+            _("商品情報"),
+            {
+                "fields": (
+                    "name",
+                    "category",
+                    "price",
+                    "description",
+                    "is_active",
+                    "product_code",
+                )
+            },
+        ),
+    )
 
     list_display = (
         "name",
@@ -50,6 +73,19 @@ class CategoryAdmin(admin.ModelAdmin):
         "product_type",
         "type_code",
         "created",
+    )
+
+    list_per_page = 20
+
+
+@admin.register(models.Material)
+class MaterialAdmin(admin.ModelAdmin):
+
+    """ アドミンに商品素材を定義する """
+
+    list_display = (
+        "name",
+        "material_code",
     )
 
     list_per_page = 20
