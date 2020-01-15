@@ -95,8 +95,6 @@ blockquote {
 
 code,
 pre {
-  font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier,
-    monospace;
   color: #666;
   font-size: 12px;
 }
@@ -223,7 +221,6 @@ th {
   border-bottom: 1px solid #eee;
   vertical-align: top;
   padding: 8px;
-  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
 }
 
 th {
@@ -387,7 +384,6 @@ form .button {
   margin: 2px 0;
   padding: 2px 3px;
   vertical-align: middle;
-  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
   font-weight: normal;
   font-size: 13px;
 }

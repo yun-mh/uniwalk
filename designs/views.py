@@ -1,11 +1,23 @@
+import base64
+from django.core.files.base import ContentFile
 from django.shortcuts import render, redirect, reverse
-from django.views.generic import CreateView, View
+from django.views.generic import CreateView, View, FormView
 from . import models, forms
 from products import models as product_models
 from designs import models as design_models
 
 
-class CustomizeView(View):
+def base64_file(data, name=None):
+    _format, _img_str = data.split(";base64,")
+    _name, ext = _format.split("/")
+    if not name:
+        name = _name.split(":")[-1]
+    return ContentFile(base64.b64decode(_img_str), name="{}.{}".format(name, ext))
+
+
+class CustomizeView(FormView):
+    form_class = forms.CustomizeForm
+
     def get(self, request, pk, *args, **kwargs):
         pk = self.kwargs.get("pk")
         product = product_models.Product.objects.all().get(pk=pk)
@@ -40,7 +52,11 @@ class CustomizeView(View):
             "tongue_color_right": self.request.POST.get("tongue_color_right"),
             "liner_color_right": self.request.POST.get("liner_color_right"),
         }
-        design_models.Design.objects.create(
+        if self.request.user.is_authenticated:
+            user = self.request.user
+        new_design = design_models.Design.objects.create(
+            user=user,
+            product=product_models.Product.objects.get(pk=pk),
             outsole_color_left=customize_data["outsole_color_left"],
             midsole_color_left=customize_data["midsole_color_left"],
             uppersole_color_left=customize_data["uppersole_color_left"],
@@ -54,4 +70,12 @@ class CustomizeView(View):
             tongue_color_right=customize_data["tongue_color_right"],
             # liner_color_right=customize_data["address_detail_recipient"],
         )
-        return redirect('feet:measure', pk=pk)
+
+        # 画像情報をデータベースに反映する
+        image_data = self.request.POST.get("image_data")
+        design_models.Image.objects.create(
+            design=new_design, side_left=base64_file(image_data),
+        )
+
+        return redirect("feet:measure", pk=pk)
+
