@@ -489,11 +489,11 @@ textarea {
   }
   5% {
     opacity: 1;
-    transform: translateY(120px);
+    transform: translateY(60px);
   }
   95% {
     opacity: 1;
-    transform: translateY(120px);
+    transform: translateY(60px);
   }
   100% {
     opacity: 0;
@@ -504,7 +504,7 @@ textarea {
 // メッセージ
 .message {
   @apply rounded-lg;
-  animation: messageFadeIn 5s ease-in-out forwards;
+  animation: messageFadeIn 3s ease-in-out forwards;
   &.error {
     @apply bg-red-500;
   }

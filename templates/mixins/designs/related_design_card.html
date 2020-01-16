@@ -1,0 +1,19 @@
+{% if designs %}
+{% for design in designs %}
+<div class="min-w-1/5 border border-gray-200 p-3">
+    <div class="w-full h-2/3 bg-cover bg-center mb-2" style="background-image: url({{ design.first_image }});">
+    </div>
+
+    <div class="overflow-hidden text-center">
+        <span class="text-black block font-medium">{{ design.customize_code }}</span>
+    </div>
+    <div class="overflow-hidden text-center">
+        <span class="text-sm text-black block font-medium">作成者：{{ design.user.get_email_name }}</span>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<p class="flex justify-center items-center font-semibold w-full text-center text-2xl">
+    <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span class="ml-5">デザインパレットが存在しません。</span>
+</p>
+{% endif %}

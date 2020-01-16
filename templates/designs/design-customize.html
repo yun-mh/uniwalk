@@ -12,10 +12,27 @@
         {% csrf_token %}
         <div id="screen" class="w-full h-75vh relative">
             <div id="guiContainer" class="absolute" style="right: 0px;"></div>
+            <button id="submit" class="btn w-64 absolute" style="bottom: 1rem; right: 1rem;">デザイン確定</button>
         </div>
         {{ form }}
-        <button id="submit" class="btn">足サイズ測定へ</button>
     </form>
+    <div class="w-full flex">
+        <div class="w-12 bg-gray-300">
+            <a href="" id="prev_page" class="hidden w-full block h-56 flex items-center justify-center">
+                <i class="fas fa-chevron-left fa-2x"></i>
+            </a>
+        </div>
+        <ul id="design_list" class="w-full h-56 flex">
+            {% include 'mixins/designs/related_design_card.html' %}
+        </ul>
+        {% if page_obj.has_next %}
+        <div class="w-12 bg-gray-300">
+            <a href="" id="next_page" class="w-full block h-56 flex items-center justify-center">
+                <i class="fas fa-chevron-right fa-2x"></i>
+            </a>
+        </div>
+        {% endif %}
+    </div>
 </div>
 
 
@@ -26,8 +43,7 @@
 <script src="{% static 'js/OrbitControls.js' %}"></script>
 <script src="{% static 'js/GLTFLoader.js' %}"></script>
 <script src="{% static 'js/dat.gui.min.js' %}"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script>
     // three.js 環境設定
     var gui, jar;
@@ -40,16 +56,6 @@
     renderer.setClearColor(0xeeeee4, 1);
     renderer.shadowMap.Type = THREE.PCFSoftShadowMap;
     screen.appendChild(renderer.domElement);
-
-    // 内部処理用カメラ設定
-    aspectRatio = screen.clientWidth / screen.clientHeight;
-    const extraCamera = new THREE.OrthographicCamera(0, screen.clientWidth, 0, screen.clientHeight, -1, 1);
-    scene.add(extraCamera)
-    extraCamera.aspect = screen.clientWidth / screen.clientHeight;
-    extraCamera.zoom = 1;
-    cameraControls = new THREE.OrbitControls(extraCamera, renderer.domElement);
-    extraCamera.updateProjectionMatrix();
-
 
     // 操作用カメラ設定
     var camera = new THREE.PerspectiveCamera(75, screen.clientWidth / screen.clientHeight, 1, 1000);
@@ -327,7 +333,7 @@
     scene.add(shadowLight);
 
     var render = function () {
-        renderer.render(scene, extraCamera);
+        renderer.render(scene, camera);
     };
 
     var GameLoop = function () {
@@ -371,9 +377,49 @@
         // liner_color_right.value = "#" + .material.color.getHexString();
 
         // スクリーンショットを取る
+        render();
         var canvas = document.getElementsByTagName("canvas")[0];
         image_data = canvas.toDataURL('image/jpeg');
         image.value = image_data;
+    });
+</script>
+<script>
+
+    $(function () {
+        var cur_page = parseInt('{{ page_obj.number }}');
+        var next_page = parseInt('{{ page_obj.next_page_number }}');
+        var last_page = parseInt('{{ page_obj.paginator.num_pages }}');
+        $("#next_page").click(function () {
+            if (next_page == last_page) {
+                $("#next_page").addClass("hidden");
+            } else {
+                $("#next_page").removeClass("hidden");
+            }
+
+            $.get("", { page: next_page }, function (data) {
+                $("#design_list").html(data);
+                cur_page += 1;
+                next_page = cur_page + 1;
+                if (cur_page > 1) {
+                    $("#prev_page").removeClass("hidden");
+                }
+                console.log(cur_page)
+            });
+            return false;
+        });
+        $("#prev_page").click(function () {
+            $("#next_page").removeClass("hidden");
+
+            $.get("", { page: cur_page - 1 }, function (data) {
+                $("#design_list").html(data);
+                cur_page -= 1;
+                next_page = cur_page + 1;
+                if (cur_page == 1) {
+                    $("#prev_page").addClass("hidden");
+                }
+            });
+            return false;
+        });
     });
 </script>
 {% endblock %}

@@ -50,13 +50,6 @@ class Design(core_models.TimeStampedModel):
         null=True,
         blank=True,
     )
-    guest = models.ForeignKey(
-        "users.Guest",
-        related_name="design",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-    )
     product = models.ForeignKey(
         "products.Product",
         related_name="design",
@@ -92,6 +85,15 @@ class Design(core_models.TimeStampedModel):
         _("番号"), max_length=40, default=create_custom_design_code, blank=True, null=True
     )
     customize_code = models.CharField("カスタマイズデザインコード", max_length=11)
+
+    @property
+    def first_image(self):
+        print(self.images.all()[:1])
+        try:
+            (image,) = self.images.all()[:1]
+            return image.side_left.url
+        except ValueError:
+            return None
 
     def get_key_four_images(self):
         images = self.objects.first().images
