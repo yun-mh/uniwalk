@@ -76,16 +76,3 @@ class CategoryAdmin(admin.ModelAdmin):
     )
 
     list_per_page = 20
-
-
-@admin.register(models.Material)
-class MaterialAdmin(admin.ModelAdmin):
-
-    """ アドミンに商品素材を定義する """
-
-    list_display = (
-        "name",
-        "material_code",
-    )
-
-    list_per_page = 20

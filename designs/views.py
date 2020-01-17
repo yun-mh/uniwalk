@@ -38,11 +38,14 @@ class CustomizeView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
+        materials = design_models.Material.objects.all().order_by("created")
         context = super(CustomizeView, self).get_context_data(*args, **kwargs)
+        for material in materials:
+            context["mat" + str(material.pk) ] = material
         context["product"] = product_models.Product.objects.get(pk=pk)
         context["template"] = product_models.Template.objects.get(product=pk)
-        context["materials"] = product_models.Material.objects.all()
         context["form"] = forms.CustomizeForm()
+        print(context)
         return context
 
     def post(self, *args, **kwargs):

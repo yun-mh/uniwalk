@@ -69,15 +69,6 @@ class Template(models.Model):
     )
 
 
-class Material(models.Model):
-
-    """ 素材のモデルを定義する """
-
-    name = models.CharField(_("素材名"), max_length=20)
-    file = models.FileField(_("素材画像"), upload_to="product_materials", blank=True)
-    material_code = models.CharField(_("素材コード"), max_length=2)
-
-
 class Image(core_models.TimeStampedModel):
 
     """ 商品のイメージを管理するモデルを定義する """

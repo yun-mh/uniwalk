@@ -17,6 +17,15 @@ def create_custom_design_code():
     return new_design_number
 
 
+class Material(core_models.TimeStampedModel):
+
+    """ 素材のモデルを定義する """
+
+    name = models.CharField(_("素材名"), max_length=20)
+    file = models.FileField(_("素材画像"), upload_to="product_materials", blank=True)
+    material_code = models.CharField(_("素材コード"), max_length=2)
+    
+
 class Image(models.Model):
 
     """ カスタムデザインのイメージモデルを定義する """

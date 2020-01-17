@@ -6,7 +6,6 @@
 {% endblock page_title %}
 
 {% block content %}
-
 <div class="mx-auto w-full min-h-75vh">
     <form method="POST">
         {% csrf_token %}
@@ -124,14 +123,8 @@
     var left_shoelace;
     function load_left_shoelace(gltf) {
         var color, material;
-        // try {
-        //     color = ;
-        // }
-        // catch (e) {
-        //     color = "0xffffff";
-        // }
         left_shoelace = gltf.scene.children[0];
-        left_shoelace.material = new THREE.MeshLambertMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        left_shoelace.material = new THREE.MeshLambertMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{{ mat1.file.url }}'), side: THREE.DoubleSide });
         scene.add(left_shoelace);
         left_shoelace.position.z = 2;
     }
@@ -142,7 +135,7 @@
     var left_tongue;
     function load_left_tongue(gltf) {
         left_tongue = gltf.scene.children[0];
-        left_tongue.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        left_tongue.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{{ mat1.file.url }}'), side: THREE.DoubleSide });
         scene.add(left_tongue);
         left_tongue.position.z = 2;
     }
@@ -153,7 +146,7 @@
     var left_upper;
     function load_left_upper(gltf) {
         left_upper = gltf.scene.children[0];
-        left_upper.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        left_upper.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{{ mat1.file.url }}'), side: THREE.DoubleSide });
         scene.add(left_upper);
         left_upper.position.z = 2;
     }
@@ -164,7 +157,7 @@
     var left_bottom;
     function load_left_bottom(gltf) {
         left_bottom = gltf.scene.children[0];
-        left_bottom.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        left_bottom.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{{ mat1.file.url }}'), side: THREE.DoubleSide });
         scene.add(left_bottom);
         left_bottom.position.z = 2;
     }
@@ -175,7 +168,7 @@
     var left_sole;
     function load_left_sole(gltf) {
         left_sole = gltf.scene.children[0];
-        left_sole.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        left_sole.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{{ mat1.file.url }}'), side: THREE.DoubleSide });
         scene.add(left_sole);
         left_sole.position.z = 2;
     }
@@ -197,7 +190,7 @@
     var right_shoelace;
     function load_right_shoelace(gltf) {
         right_shoelace = gltf.scene.children[0];
-        right_shoelace.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        right_shoelace.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{{ mat1.file.url }}'), side: THREE.DoubleSide });
         scene.add(right_shoelace);
         right_shoelace.position.z = 2;
     }
@@ -208,7 +201,7 @@
     var right_tongue;
     function load_right_tongue(gltf) {
         right_tongue = gltf.scene.children[0];
-        right_tongue.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        right_tongue.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{{ mat1.file.url }}'), side: THREE.DoubleSide });
         scene.add(right_tongue);
         right_tongue.position.z = 2;
     }
@@ -219,7 +212,7 @@
     var right_upper;
     function load_right_upper(gltf) {
         right_upper = gltf.scene.children[0];
-        right_upper.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        right_upper.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{{ mat1.file.url }}'), side: THREE.DoubleSide });
         scene.add(right_upper);
         right_upper.position.z = 2;
     }
@@ -230,7 +223,7 @@
     var right_bottom;
     function load_right_bottom(gltf) {
         right_bottom = gltf.scene.children[0];
-        right_bottom.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        right_bottom.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{{ mat1.file.url }}'), side: THREE.DoubleSide });
         scene.add(right_bottom);
         right_bottom.position.z = 2;
     }
@@ -242,7 +235,7 @@
     }
     function load_right_sole(gltf) {
         right_sole = gltf.scene.children[0];
-        right_sole.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
+        right_sole.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{{ mat1.file.url }}'), side: THREE.DoubleSide });
         scene.add(right_sole);
         right_sole.position.z = 2;
     }
@@ -314,19 +307,19 @@
 
         // 左足の素材
         var left_m = gui.addFolder('Left Shoe Material');
-        var lm_shoelace = left_m.add(parameters, 'n', ["rubber", "leather", "fabric"]).name('Shoelace');
-        var lm_upper = left_m.add(parameters, 'o', ["rubber", "leather", "fabric"]).name('Upper');
-        var lm_tongue = left_m.add(parameters, 'p', ["rubber", "leather", "fabric"]).name('Tongue');
-        var lm_bottom = left_m.add(parameters, 'q', ["rubber", "leather", "fabric"]).name('Bottom');
-        var lm_sole = left_m.add(parameters, 'r', ["rubber", "leather", "fabric"]).name('Sole');
+        var lm_shoelace = left_m.add(parameters, 'n', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('Shoelace');
+        var lm_upper = left_m.add(parameters, 'o', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('Upper');
+        var lm_tongue = left_m.add(parameters, 'p', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('Tongue');
+        var lm_bottom = left_m.add(parameters, 'q', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('Bottom');
+        var lm_sole = left_m.add(parameters, 'r', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('Sole');
 
         // 右足の素材
         var right_m = gui.addFolder('Right Shoe Material');
-        var rm_shoelace = right_m.add(parameters, 's', ["rubber", "leather", "fabric"]).name('Shoelace');
-        var rm_upper = right_m.add(parameters, 't', ["rubber", "leather", "fabric"]).name('Upper');
-        var rm_tongue = right_m.add(parameters, 'u', ["rubber", "leather", "fabric"]).name('Tongue');
-        var rm_bottom = right_m.add(parameters, 'v', ["rubber", "leather", "fabric"]).name('Bottom');
-        var rm_sole = right_m.add(parameters, 'w', ["rubber", "leather", "fabric"]).name('Sole');
+        var rm_shoelace = right_m.add(parameters, 's', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('Shoelace');
+        var rm_upper = right_m.add(parameters, 't', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('Upper');
+        var rm_tongue = right_m.add(parameters, 'u', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('Tongue');
+        var rm_bottom = right_m.add(parameters, 'v', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('Bottom');
+        var rm_sole = right_m.add(parameters, 'w', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('Sole');
 
         // 左足の色の変更時の処理
         l_shoelace.onChange(function (jar) {
@@ -365,55 +358,125 @@
         // 左足の素材の変更時の処理
         lm_shoelace.onChange(function (jar) {
             var left_shoelace_material = lm_shoelace.object.n;
-            left_shoelace.material.map = new THREE.TextureLoader().load('img/' + left_shoelace_material + '.jpg');
-
+            var lm_shoelace_url = "";
+            if (left_shoelace_material == "{{ mat1.name }}") {
+                lm_shoelace_url = "{{ mat1.file.url }}";
+            } else if (left_shoelace_material == "{{ mat2.name }}") {
+                lm_shoelace_url = "{{ mat2.file.url }}";
+            } else if (left_shoelace_material == "{{ mat3.name }}") {
+                lm_shoelace_url = "{{ mat3.file.url }}";
+            }
+            left_shoelace.material.map = new THREE.TextureLoader().load(lm_shoelace_url);
         });
         lm_upper.onChange(function (jar) {
             var left_upper_material = lm_upper.object.o;
-            left_upper.material.map = new THREE.TextureLoader().load('img/' + left_upper_material + '.jpg');
-
+            var lm_upper_url = "";
+            if (left_upper_material == "{{ mat1.name }}") {
+                lm_upper_url = "{{ mat1.file.url }}";
+            } else if (left_upper_material == "{{ mat2.name }}") {
+                lm_upper_url = "{{ mat2.file.url }}";
+            } else if (left_upper_material == "{{ mat3.name }}") {
+                lm_upper_url = "{{ mat3.file.url }}";
+            }
+            left_upper.material.map = new THREE.TextureLoader().load(lm_upper_url);
         });
         lm_tongue.onChange(function (jar) {
             var left_tongue_material = lm_tongue.object.p;
-            left_tongue.material.map = new THREE.TextureLoader().load('img/' + left_tongue_material + '.jpg');
-
+            var lm_tongue_url = "";
+            if (left_tongue_material == "{{ mat1.name }}") {
+                lm_tongue_url = "{{ mat1.file.url }}";
+            } else if (left_tongue_material == "{{ mat2.name }}") {
+                lm_tongue_url = "{{ mat2.file.url }}";
+            } else if (left_tongue_material == "{{ mat3.name }}") {
+                lm_tongue_url = "{{ mat3.file.url }}";
+            }
+            left_tongue.material.map = new THREE.TextureLoader().load(lm_tongue_url);
         });
         lm_bottom.onChange(function (jar) {
             var left_bottom_material = lm_bottom.object.q;
-            left_bottom.material.map = new THREE.TextureLoader().load('img/' + left_bottom_material + '.jpg');
-
+            var lm_bottom_url = "";
+            if (left_bottom_material == "{{ mat1.name }}") {
+                lm_bottom_url = "{{ mat1.file.url }}";
+            } else if (left_bottom_material == "{{ mat2.name }}") {
+                lm_bottom_url = "{{ mat2.file.url }}";
+            } else if (left_bottom_material == "{{ mat3.name }}") {
+                lm_bottom_url = "{{ mat3.file.url }}";
+            }
+            left_bottom.material.map = new THREE.TextureLoader().load(lm_bottom_url);
         });
         lm_sole.onChange(function (jar) {
             var left_sole_material = lm_sole.object.r;
-            left_sole.material.map = new THREE.TextureLoader().load('img/' + left_sole_material + '.jpg');
-
+            var lm_sole_url = "";
+            if (left_sole_material == "{{ mat1.name }}") {
+                lm_sole_url = "{{ mat1.file.url }}";
+            } else if (left_sole_material == "{{ mat2.name }}") {
+                lm_sole_url = "{{ mat2.file.url }}";
+            } else if (left_sole_material == "{{ mat3.name }}") {
+                lm_sole_url = "{{ mat3.file.url }}";
+            }
+            left_sole.material.map = new THREE.TextureLoader().load(lm_sole_url);
         });
 
         // 右足の素材の変更時の処理
         rm_shoelace.onChange(function (jar) {
             var right_shoelace_material = rm_shoelace.object.s;
-            right_shoelace.material.map = new THREE.TextureLoader().load('img/' + right_shoelace_material + '.jpg');
-
+            var rm_shoelace_url = "";
+            if (right_shoelace_material == "{{ mat1.name }}") {
+                rm_shoelace_url = "{{ mat1.file.url }}";
+            } else if (right_shoelace_material == "{{ mat2.name }}") {
+                rm_shoelace_url = "{{ mat2.file.url }}";
+            } else if (right_shoelace_material == "{{ mat3.name }}") {
+                rm_shoelace_url = "{{ mat3.file.url }}";
+            }
+            right_shoelace.material.map = new THREE.TextureLoader().load(rm_shoelace_url);
         });
         rm_upper.onChange(function (jar) {
             var right_upper_material = rm_upper.object.t;
-            right_upper.material.map = new THREE.TextureLoader().load('img/' + right_upper_material + '.jpg');
-
+            var rm_upper_url = "";
+            if (right_upper_material == "{{ mat1.name }}") {
+                rm_upper_url = "{{ mat1.file.url }}";
+            } else if (right_upper_material == "{{ mat2.name }}") {
+                rm_upper_url = "{{ mat2.file.url }}";
+            } else if (right_upper_material == "{{ mat3.name }}") {
+                rm_upper_url = "{{ mat3.file.url }}";
+            }
+            right_upper.material.map = new THREE.TextureLoader().load(rm_upper_url);
         });
         rm_tongue.onChange(function (jar) {
             var right_tongue_material = rm_tongue.object.u;
-            right_tongue.material.map = new THREE.TextureLoader().load('img/' + right_tongue_material + '.jpg');
-
+            var rm_tongue_url = "";
+            if (right_tongue_material == "{{ mat1.name }}") {
+                rm_tongue_url = "{{ mat1.file.url }}";
+            } else if (right_tongue_material == "{{ mat2.name }}") {
+                rm_tongue_url = "{{ mat2.file.url }}";
+            } else if (right_tongue_material == "{{ mat3.name }}") {
+                rm_tongue_url = "{{ mat3.file.url }}";
+            }
+            right_tongue.material.map = new THREE.TextureLoader().load(rm_tongue_url);
         });
         rm_bottom.onChange(function (jar) {
             var right_bottom_material = rm_bottom.object.v;
-            right_bottom.material.map = new THREE.TextureLoader().load('img/' + right_bottom_material + '.jpg');
-
+            var rm_bottom_url = "";
+            if (right_bottom_material == "{{ mat1.name }}") {
+                rm_bottom_url = "{{ mat1.file.url }}";
+            } else if (right_bottom_material == "{{ mat2.name }}") {
+                rm_bottom_url = "{{ mat2.file.url }}";
+            } else if (right_bottom_material == "{{ mat3.name }}") {
+                rm_bottom_url = "{{ mat3.file.url }}";
+            }
+            right_bottom.material.map = new THREE.TextureLoader().load(rm_bottom_url);
         });
         rm_sole.onChange(function (jar) {
             var right_sole_material = rm_sole.object.w;
-            right_sole.material.map = new THREE.TextureLoader().load('img/' + right_sole_material + '.jpg');
-
+            var rm_sole_url = "";
+            if (right_sole_material == "{{ mat1.name }}") {
+                rm_sole_url = "{{ mat1.file.url }}";
+            } else if (right_sole_material == "{{ mat2.name }}") {
+                rm_sole_url = "{{ mat2.file.url }}";
+            } else if (right_sole_material == "{{ mat3.name }}") {
+                rm_sole_url = "{{ mat3.file.url }}";
+            }
+            right_sole.material.map = new THREE.TextureLoader().load(rm_sole_url);
         });
 
         gui.close();
