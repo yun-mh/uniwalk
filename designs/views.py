@@ -30,11 +30,8 @@ class CustomizeView(ListView):
 
     def get_queryset(self):
         pk = self.kwargs.get("pk")
-        return (
-            models.Design.objects.filter(product=pk)
-            .exclude(user__isnull=True)
-            .order_by("-created")
-        )
+        print(models.Design.objects.filter(product=pk).exclude(user__isnull=True).order_by("-created"))
+        return models.Design.objects.filter(product=pk).exclude(user__isnull=True).order_by("-created")
 
     def get_context_data(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
@@ -45,7 +42,6 @@ class CustomizeView(ListView):
         context["product"] = product_models.Product.objects.get(pk=pk)
         context["template"] = product_models.Template.objects.get(product=pk)
         context["form"] = forms.CustomizeForm()
-        print(context)
         return context
 
     def post(self, *args, **kwargs):
@@ -57,14 +53,23 @@ class CustomizeView(ListView):
             "uppersole_color_left": self.request.POST.get("uppersole_color_left"),
             "shoelace_color_left": self.request.POST.get("shoelace_color_left"),
             "tongue_color_left": self.request.POST.get("tongue_color_left"),
-            "liner_color_left": self.request.POST.get("liner_color_left"),
             "outsole_color_right": self.request.POST.get("outsole_color_right"),
             "midsole_color_right": self.request.POST.get("midsole_color_right"),
             "uppersole_color_right": self.request.POST.get("uppersole_color_right"),
             "shoelace_color_right": self.request.POST.get("shoelace_color_right"),
             "tongue_color_right": self.request.POST.get("tongue_color_right"),
-            "liner_color_right": self.request.POST.get("liner_color_right"),
+            "outsole_material_left": self.request.POST.get("outsole_material_left"),
+            "midsole_material_left": self.request.POST.get("midsole_material_left"),
+            "uppersole_material_left": self.request.POST.get("uppersole_material_left"),
+            "shoelace_material_left": self.request.POST.get("shoelace_material_left"),
+            "tongue_material_left": self.request.POST.get("tongue_material_left"),
+            "outsole_material_right": self.request.POST.get("outsole_material_right"),
+            "midsole_material_right": self.request.POST.get("midsole_material_right"),
+            "uppersole_material_right": self.request.POST.get("uppersole_material_right"),
+            "shoelace_material_right": self.request.POST.get("shoelace_material_right"),
+            "tongue_material_right": self.request.POST.get("tongue_material_right"),
         }
+        print(customize_data)
         if self.request.user.is_authenticated:
             user = self.request.user
             new_design = design_models.Design.objects.create(
@@ -75,13 +80,21 @@ class CustomizeView(ListView):
                 uppersole_color_left=customize_data["uppersole_color_left"],
                 shoelace_color_left=customize_data["shoelace_color_left"],
                 tongue_color_left=customize_data["tongue_color_left"],
-                # liner_color_left=customize_data["postal_code_recipient"],
                 outsole_color_right=customize_data["outsole_color_right"],
                 midsole_color_right=customize_data["midsole_color_right"],
                 uppersole_color_right=customize_data["uppersole_color_right"],
                 shoelace_color_right=customize_data["shoelace_color_right"],
                 tongue_color_right=customize_data["tongue_color_right"],
-                # liner_color_right=customize_data["address_detail_recipient"],
+                outsole_material_left=models.Material.objects.get(pk=customize_data["outsole_material_left"]),
+                midsole_material_left=models.Material.objects.get(pk=customize_data["midsole_material_left"]),
+                uppersole_material_left=models.Material.objects.get(pk=customize_data["uppersole_material_left"]),
+                shoelace_material_left=models.Material.objects.get(pk=customize_data["shoelace_material_left"]),
+                tongue_material_left=models.Material.objects.get(pk=customize_data["tongue_material_left"]),
+                outsole_material_right=models.Material.objects.get(pk=customize_data["outsole_material_right"]),
+                midsole_material_right=models.Material.objects.get(pk=customize_data["midsole_material_right"]),
+                uppersole_material_right=models.Material.objects.get(pk=customize_data["uppersole_material_right"]),
+                shoelace_material_right=models.Material.objects.get(pk=customize_data["shoelace_material_right"]),
+                tongue_material_right=models.Material.objects.get(pk=customize_data["tongue_material_right"]),
             )
         else:
             new_design = design_models.Design.objects.create(
@@ -91,13 +104,21 @@ class CustomizeView(ListView):
                 uppersole_color_left=customize_data["uppersole_color_left"],
                 shoelace_color_left=customize_data["shoelace_color_left"],
                 tongue_color_left=customize_data["tongue_color_left"],
-                # liner_color_left=customize_data["postal_code_recipient"],
                 outsole_color_right=customize_data["outsole_color_right"],
                 midsole_color_right=customize_data["midsole_color_right"],
                 uppersole_color_right=customize_data["uppersole_color_right"],
                 shoelace_color_right=customize_data["shoelace_color_right"],
                 tongue_color_right=customize_data["tongue_color_right"],
-                # liner_color_right=customize_data["address_detail_recipient"],
+                outsole_material_left=models.Material.objects.get(pk=customize_data["outsole_material_left"]),
+                midsole_material_left=models.Material.objects.get(pk=customize_data["midsole_material_left"]),
+                uppersole_material_left=models.Material.objects.get(pk=customize_data["uppersole_material_left"]),
+                shoelace_material_left=models.Material.objects.get(pk=customize_data["shoelace_material_left"]),
+                tongue_material_left=models.Material.objects.get(pk=customize_data["tongue_material_left"]),
+                outsole_material_right=models.Material.objects.get(pk=customize_data["outsole_material_right"]),
+                midsole_material_right=models.Material.objects.get(pk=customize_data["midsole_material_right"]),
+                uppersole_material_right=models.Material.objects.get(pk=customize_data["uppersole_material_right"]),
+                shoelace_material_right=models.Material.objects.get(pk=customize_data["shoelace_material_right"]),
+                tongue_material_right=models.Material.objects.get(pk=customize_data["tongue_material_right"]),
             )
 
         # 画像情報をデータベースに反映する
