@@ -6,6 +6,7 @@ from django.contrib.admin import AdminSite
 from django.views.decorators.cache import never_cache
 from django.template.response import TemplateResponse
 from django.utils.translation import ugettext_lazy as _
+from designs import models as designs_model
 from orders import models as orders_model
 from products import models as products_model
 from users import models as users_model
@@ -24,6 +25,7 @@ class ConfigAdminSite(AdminSite):
         app_list = self.get_app_list(request)
         orders = orders_model.Order.objects.all()
         products = products_model.Product.objects.all()
+        designs = designs_model.Design.objects.all()
         users = users_model.User.objects.all()
         sales_total_month = orders.filter(
             Q(
@@ -77,6 +79,7 @@ class ConfigAdminSite(AdminSite):
             "payment_checked": orders.filter(step__step_code__contains="T03"),
             "dealing_with": orders.filter(step__step_code__contains="T11"),
             "products": products.filter(is_active=True),
+            "designs": designs,
             "users": users,
             "total_revenue_for_month": total_revenue_month,
             "total_orders_for_month": sales_total_month,
