@@ -258,42 +258,77 @@
     //     left_sole.position.z = 2;
     // }
 
+    var gui = new dat.GUI();
 
     // GUIの設定
     function displaygui() {
-        var gui = new dat.GUI({ autoPlace: false });
         parameters = {
             a: "Middle",
+
+            // 左足の色のデフォルト値
             d: "#ffffff",
             e: "#ffffff",
             f: "#ffffff",
             g: "#ffffff",
             h: "#ffffff",
+
+            // 右足の色のデフォルト値
             i: "#ffffff",
             j: "#ffffff",
             k: "#ffffff",
             l: "#ffffff",
             m: "#ffffff",
+
+            // 左足の素材のデフォルト値
+            n: "rubber",
+            o: "rubber",
+            p: "rubber",
+            q: "rubber",
+            r: "rubber",
+
+            // 右足の素材のデフォルト値
+            s: "rubber",
+            t: "rubber",
+            u: "rubber",
+            v: "rubber",
+            w: "rubber",
         }
 
         gui.add(parameters, 'a').name('Name');
 
-        var left = gui.addFolder('Left Shoe');
-
+        // 左足の色
+        var left = gui.addFolder('Left Shoe Color');
         var l_shoelace = left.addColor(parameters, 'd').name('Shoelace');
         var l_upper = left.addColor(parameters, 'e').name('Upper');
         var l_tongue = left.addColor(parameters, 'f').name('Tongue');
         var l_bottom = left.addColor(parameters, 'g').name('Bottom');
         var l_sole = left.addColor(parameters, 'h').name('Sole');
 
-        var right = gui.addFolder('Right Shoe');
-
+        // 右足の色
+        var right = gui.addFolder('Right Shoe Color');
         var r_shoelace = right.addColor(parameters, 'i').name('Shoelace');
         var r_upper = right.addColor(parameters, 'j').name('Upper');
         var r_tongue = right.addColor(parameters, 'k').name('Tongue');
         var r_bottom = right.addColor(parameters, 'l').name('Bottom');
         var r_sole = right.addColor(parameters, 'm').name('Sole');
 
+        // 左足の素材
+        var left_m = gui.addFolder('Left Shoe Material');
+        var lm_shoelace = left_m.add(parameters, 'n', ["rubber", "leather", "fabric"]).name('Shoelace');
+        var lm_upper = left_m.add(parameters, 'o', ["rubber", "leather", "fabric"]).name('Upper');
+        var lm_tongue = left_m.add(parameters, 'p', ["rubber", "leather", "fabric"]).name('Tongue');
+        var lm_bottom = left_m.add(parameters, 'q', ["rubber", "leather", "fabric"]).name('Bottom');
+        var lm_sole = left_m.add(parameters, 'r', ["rubber", "leather", "fabric"]).name('Sole');
+
+        // 右足の素材
+        var right_m = gui.addFolder('Right Shoe Material');
+        var rm_shoelace = right_m.add(parameters, 's', ["rubber", "leather", "fabric"]).name('Shoelace');
+        var rm_upper = right_m.add(parameters, 't', ["rubber", "leather", "fabric"]).name('Upper');
+        var rm_tongue = right_m.add(parameters, 'u', ["rubber", "leather", "fabric"]).name('Tongue');
+        var rm_bottom = right_m.add(parameters, 'v', ["rubber", "leather", "fabric"]).name('Bottom');
+        var rm_sole = right_m.add(parameters, 'w', ["rubber", "leather", "fabric"]).name('Sole');
+
+        // 左足の色の変更時の処理
         l_shoelace.onChange(function (jar) {
             left_shoelace.material.color.setHex(jar.replace("#", "0x"));
         });
@@ -310,6 +345,7 @@
             left_sole.material.color.setHex(jar.replace("#", "0x"));
         });
 
+        // 右足の色の変更時の処理
         r_shoelace.onChange(function (jar) {
             right_shoelace.material.color.setHex(jar.replace("#", "0x"));
         });
@@ -325,12 +361,74 @@
         r_sole.onChange(function (jar) {
             right_sole.material.color.setHex(jar.replace("#", "0x"));
         });
+
+        // 左足の素材の変更時の処理
+        lm_shoelace.onChange(function (jar) {
+            var left_shoelace_material = lm_shoelace.object.n;
+            left_shoelace.material.map = new THREE.TextureLoader().load('img/' + left_shoelace_material + '.jpg');
+
+        });
+        lm_upper.onChange(function (jar) {
+            var left_upper_material = lm_upper.object.o;
+            left_upper.material.map = new THREE.TextureLoader().load('img/' + left_upper_material + '.jpg');
+
+        });
+        lm_tongue.onChange(function (jar) {
+            var left_tongue_material = lm_tongue.object.p;
+            left_tongue.material.map = new THREE.TextureLoader().load('img/' + left_tongue_material + '.jpg');
+
+        });
+        lm_bottom.onChange(function (jar) {
+            var left_bottom_material = lm_bottom.object.q;
+            left_bottom.material.map = new THREE.TextureLoader().load('img/' + left_bottom_material + '.jpg');
+
+        });
+        lm_sole.onChange(function (jar) {
+            var left_sole_material = lm_sole.object.r;
+            left_sole.material.map = new THREE.TextureLoader().load('img/' + left_sole_material + '.jpg');
+
+        });
+
+        // 右足の素材の変更時の処理
+        rm_shoelace.onChange(function (jar) {
+            var right_shoelace_material = rm_shoelace.object.s;
+            right_shoelace.material.map = new THREE.TextureLoader().load('img/' + right_shoelace_material + '.jpg');
+
+        });
+        rm_upper.onChange(function (jar) {
+            var right_upper_material = rm_upper.object.t;
+            right_upper.material.map = new THREE.TextureLoader().load('img/' + right_upper_material + '.jpg');
+
+        });
+        rm_tongue.onChange(function (jar) {
+            var right_tongue_material = rm_tongue.object.u;
+            right_tongue.material.map = new THREE.TextureLoader().load('img/' + right_tongue_material + '.jpg');
+
+        });
+        rm_bottom.onChange(function (jar) {
+            var right_bottom_material = rm_bottom.object.v;
+            right_bottom.material.map = new THREE.TextureLoader().load('img/' + right_bottom_material + '.jpg');
+
+        });
+        rm_sole.onChange(function (jar) {
+            var right_sole_material = rm_sole.object.w;
+            right_sole.material.map = new THREE.TextureLoader().load('img/' + right_sole_material + '.jpg');
+
+        });
+
         gui.close();
         gui.open();
 
-        var guiContainer = document.getElementById("guiContainer");
-        guiContainer.appendChild(gui.domElement);
     }
+
+    var guiContainer = document.getElementById('guiContainer');
+    guiContainer.appendChild(gui.domElement);
+    guiContainer.addEventListener('mouseover', function () {
+        controls.enabled = false;
+    })
+    guiContainer.addEventListener('mouseout', function () {
+        controls.enabled = true;
+    })
 
     camera.position.z = 4;
 
