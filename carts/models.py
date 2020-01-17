@@ -14,7 +14,13 @@ class CartItem(models.Model):
         verbose_name=_("カート"),
         on_delete=models.CASCADE,
     )
-    # design_id = models.ForeignKey()
+    design = models.ForeignKey(
+        "designs.Design",
+        verbose_name=_("デザイン"),
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
     product = models.ForeignKey(
         "products.Product", verbose_name=_("商品"), on_delete=models.CASCADE
     )

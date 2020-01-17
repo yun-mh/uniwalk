@@ -1,6 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, get_object_or_404
 from products import models as product_models
+from designs import models as design_models
 from .models import Cart, CartItem
 
 
@@ -29,8 +30,14 @@ def add_cart(request, pk):
         cart_item.quantity += 1
         cart_item.save()
     except CartItem.DoesNotExist:
-        cart_item = CartItem.objects.create(product=product, quantity=1, cart=cart)
+        cart_item = CartItem.objects.create(
+            product=product,
+            design=design_models.Design.objects.get(pk=request.session["design"]),
+            quantity=1,
+            cart=cart,
+        )
         cart_item.save()
+        del request.session["design"]
     return redirect("carts:cart")
 
 

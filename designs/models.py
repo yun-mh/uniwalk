@@ -88,7 +88,6 @@ class Design(core_models.TimeStampedModel):
 
     @property
     def first_image(self):
-        print(self.images.all()[:1])
         try:
             (image,) = self.images.all()[:1]
             return image.side_left.url

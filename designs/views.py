@@ -1,5 +1,6 @@
-import base64
+import base64, json
 from django.core.files.base import ContentFile
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, reverse
 from django.views.generic import View, ListView
 from . import models, forms
@@ -43,25 +44,6 @@ class CustomizeView(ListView):
         context["materials"] = product_models.Material.objects.all()
         context["form"] = forms.CustomizeForm()
         return context
-
-    # def get(self, request, pk, *args, **kwargs):
-    #     pk = self.kwargs.get("pk")
-    #     product = product_models.Product.objects.all().get(pk=pk)
-    #     template = product_models.Template.objects.get(product=pk)
-    #     materials = product_models.Material.objects.all()
-    #     related_designs = models.Design.objects.filter(product=pk)
-    #     customize_form = forms.CustomizeForm()
-    #     return render(
-    #         request,
-    #         "designs/design-customize.html",
-    #         {
-    #             "product": product,
-    #             "template": template,
-    #             "materials": materials,
-    #             "designs": related_designs,
-    #             "form": customize_form,
-    #         },
-    #     )
 
     def post(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
@@ -120,6 +102,37 @@ class CustomizeView(ListView):
         design_models.Image.objects.create(
             design=new_design, side_left=base64_file(image_data),
         )
+        self.request.session["design"] = new_design.pk
 
         return redirect("feet:measure", pk=pk)
 
+
+def get_palette(request):
+    if request.method == "POST" and request.is_ajax():
+        outsole_color_left = request.POST.get("outsole_color_left")
+        midsole_color_left = request.POST.get("midsole_color_left")
+        uppersole_color_left = request.POST.get("uppersole_color_left")
+        shoelace_color_left = request.POST.get("shoelace_color_left")
+        tongue_color_left = request.POST.get("tongue_color_left")
+        outsole_color_right = request.POST.get("outsole_color_right")
+        midsole_color_right = request.POST.get("midsole_color_right")
+        uppersole_color_right = request.POST.get("uppersole_color_right")
+        shoelace_color_right = request.POST.get("shoelace_color_right")
+        tongue_color_right = request.POST.get("tongue_color_right")
+        response = json.dumps(
+            {
+                "outsole_color_left": outsole_color_left,
+                "midsole_color_left": midsole_color_left,
+                "uppersole_color_left": uppersole_color_left,
+                "shoelace_color_left": shoelace_color_left,
+                "tongue_color_left": tongue_color_left,
+                "outsole_color_right": outsole_color_right,
+                "midsole_color_right": midsole_color_right,
+                "uppersole_color_right": uppersole_color_right,
+                "shoelace_color_right": shoelace_color_right,
+                "tongue_color_right": tongue_color_right,
+            }
+        )
+        return HttpResponse(response, content_type="application/json")
+    else:
+        raise Http404

@@ -8,5 +8,4 @@ class FootsizesMeasureView(View):
     def get(self, request, pk, *args, **kwargs):
         pk = self.kwargs.get("pk")
         product = product_models.Product.objects.all().get(pk=pk)
-        print(pk)
         return render(request, "feet/feet-measure.html", {"product": product})

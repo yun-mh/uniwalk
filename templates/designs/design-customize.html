@@ -23,6 +23,10 @@
             </a>
         </div>
         <ul id="design_list" class="w-full h-56 flex">
+            {% if designs %}
+            {% for design in designs %}
+            {% endfor %}
+            {% endif %}
             {% include 'mixins/designs/related_design_card.html' %}
         </ul>
         {% if page_obj.has_next %}
@@ -43,7 +47,6 @@
 <script src="{% static 'js/OrbitControls.js' %}"></script>
 <script src="{% static 'js/GLTFLoader.js' %}"></script>
 <script src="{% static 'js/dat.gui.min.js' %}"></script>
-<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script>
     // three.js 環境設定
     var gui, jar;
@@ -120,6 +123,13 @@
     }
     var left_shoelace;
     function load_left_shoelace(gltf) {
+        var color, material;
+        // try {
+        //     color = ;
+        // }
+        // catch (e) {
+        //     color = "0xffffff";
+        // }
         left_shoelace = gltf.scene.children[0];
         left_shoelace.material = new THREE.MeshLambertMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load('{% static "images/leather.jpg" %}'), side: THREE.DoubleSide });
         scene.add(left_shoelace);
@@ -255,15 +265,15 @@
         parameters = {
             a: "Middle",
             d: "#ffffff",
-            e: "#413c69",
-            f: "#4a47a3",
-            g: "#ad62aa",
-            h: "#f4b0c7",
+            e: "#ffffff",
+            f: "#ffffff",
+            g: "#ffffff",
+            h: "#ffffff",
             i: "#ffffff",
-            j: "#f6e1e1",
-            k: "#ff9d76",
-            l: "#eb4d55",
-            m: "#333366",
+            j: "#ffffff",
+            k: "#ffffff",
+            l: "#ffffff",
+            m: "#ffffff",
         }
 
         gui.add(parameters, 'a').name('Name');
@@ -384,8 +394,8 @@
     });
 </script>
 <script>
-
-    $(function () {
+    $(document).ready(function () {
+        // ページ機能
         var cur_page = parseInt('{{ page_obj.number }}');
         var next_page = parseInt('{{ page_obj.next_page_number }}');
         var last_page = parseInt('{{ page_obj.paginator.num_pages }}');
@@ -403,7 +413,6 @@
                 if (cur_page > 1) {
                     $("#prev_page").removeClass("hidden");
                 }
-                console.log(cur_page)
             });
             return false;
         });
@@ -417,9 +426,39 @@
                 if (cur_page == 1) {
                     $("#prev_page").addClass("hidden");
                 }
+
+            });
+            return false;
+        });
+
+        // パレットからのデザイン反映
+        $('body').on("click", ".design-form", function (e) {
+            e.preventDefault();
+            var pk = $(this).attr("id").split("_")[1];
+            $.ajax({
+                'url': $('#form_' + pk).attr('action'),
+                'type': 'POST',
+                'data': $('#form_' + pk).serialize(),
+                'dataType': 'json',
+                'success': function (response) {
+                    left_sole.material.color = new THREE.Color(response["outsole_color_left"]);
+                    left_bottom.material.color = new THREE.Color(response["midsole_color_left"]);
+                    left_upper.material.color = new THREE.Color(response["uppersole_color_left"]);
+                    left_shoelace.material.color = new THREE.Color(response["shoelace_color_left"]);
+                    left_tongue.material.color = new THREE.Color(response["tongue_color_left"]);
+                    right_sole.material.color = new THREE.Color(response["outsole_color_right"]);
+                    right_bottom.material.color = new THREE.Color(response["midsole_color_right"]);
+                    right_upper.material.color = new THREE.Color(response["uppersole_color_right"]);
+                    right_shoelace.material.color = new THREE.Color(response["shoelace_color_right"]);
+                    right_tongue.material.color = new THREE.Color(response["tongue_color_right"]);
+                },
+                'error': function (error) {
+                    console.log(error);
+                }
             });
             return false;
         });
     });
+
 </script>
 {% endblock %}

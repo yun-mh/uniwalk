@@ -1,16 +1,43 @@
+{% load static js %}
 {% if designs %}
 {% for design in designs %}
-<div class="min-w-1/5 border border-gray-200 p-3">
-    <div class="w-full h-2/3 bg-cover bg-center mb-2" style="background-image: url({{ design.first_image }});">
-    </div>
-
-    <div class="overflow-hidden text-center">
-        <span class="text-black block font-medium">{{ design.customize_code }}</span>
-    </div>
-    <div class="overflow-hidden text-center">
-        <span class="text-sm text-black block font-medium">作成者：{{ design.user.get_email_name }}</span>
-    </div>
-</div>
+<a id="design_{{ design.pk }}" class="block min-w-1/5 border border-gray-200 p-3 cursor-pointer">
+    <form id="form_{{ design.pk }}" action="{% url 'designs:apply' %}" method="POST" class="design-form w-full h-full">
+        {% csrf_token %}
+        <div class="w-full h-2/3 bg-cover bg-center mb-2" style="background-image: url({{ design.first_image }});">
+        </div>
+        <div class="overflow-hidden text-center">
+            <span class="text-black block font-medium">{{ design.customize_code }}</span>
+        </div>
+        <div class="overflow-hidden text-center">
+            <span class="text-sm text-black block font-medium">作成者：{{ design.user.get_email_name }}</span>
+        </div>
+        <input type="hidden" name="outsole_color_left" id="{{ design.pk }}_outsole_color_left"
+            value="{{ design.outsole_color_left }}">
+        <input type="hidden" name="midsole_color_left" id="{{ design.pk }}_midsole_color_left"
+            value="{{ design.midsole_color_left }}">
+        <input type="hidden" name="uppersole_color_left" id="{{ design.pk }}_uppersole_color_left"
+            value="{{ design.uppersole_color_left }}">
+        <input type="hidden" name="shoelace_color_left" id="{{ design.pk }}_shoelace_color_left"
+            value="{{ design.shoelace_color_left }}">
+        <input type="hidden" name="tongue_color_left" id="{{ design.pk }}_tongue_color_left"
+            value="{{ design.tongue_color_left }}">
+        <input type="hidden" name="liner_color_left" id="{{ design.pk }}_liner_color_left"
+            value="{{ design.liner_color_left }}">
+        <input type="hidden" name="outsole_color_right" id="{{ design.pk }}_outsole_color_right"
+            value="{{ design.outsole_color_right }}">
+        <input type="hidden" name="midsole_color_right" id="{{ design.pk }}_midsole_color_right"
+            value="{{ design.midsole_color_right }}">
+        <input type="hidden" name="uppersole_color_right" id="{{ design.pk }}_uppersole_color_right"
+            value="{{ design.uppersole_color_right }}">
+        <input type="hidden" name="shoelace_color_right" id="{{ design.pk }}_shoelace_color_right"
+            value="{{ design.shoelace_color_right }}">
+        <input type="hidden" name="tongue_color_right" id="{{ design.pk }}_tongue_color_right"
+            value="{{ design.tongue_color_right }}">
+        <input type="hidden" name="liner_color_right" id="{{ design.pk }}_liner_color_right"
+            value="{{ design.liner_color_right }}">
+    </form>
+</a>
 {% endfor %}
 {% else %}
 <p class="flex justify-center items-center font-semibold w-full text-center text-2xl">
