@@ -36,6 +36,27 @@
             value="{{ design.tongue_color_right }}">
         <input type="hidden" name="liner_color_right" id="{{ design.pk }}_liner_color_right"
             value="{{ design.liner_color_right }}">
+
+        <input type="hidden" name="outsole_material_left" id="{{ design.pk }}_outsole_material_left"
+            value="{{ design.outsole_material_left.pk }}">
+        <input type="hidden" name="midsole_material_left" id="{{ design.pk }}_midsole_material_left"
+            value="{{ design.midsole_material_left.pk }}">
+        <input type="hidden" name="uppersole_material_left" id="{{ design.pk }}_uppersole_material_left"
+            value="{{ design.uppersole_material_left.pk }}">
+        <input type="hidden" name="shoelace_material_left" id="{{ design.pk }}_shoelace_material_left"
+            value="{{ design.shoelace_material_left.pk }}">
+        <input type="hidden" name="tongue_material_left" id="{{ design.pk }}_tongue_material_left"
+            value="{{ design.tongue_material_left.pk }}">
+        <input type="hidden" name="outsole_material_right" id="{{ design.pk }}_outsole_material_right"
+            value="{{ design.outsole_material_right.pk }}">
+        <input type="hidden" name="midsole_material_right" id="{{ design.pk }}_midsole_material_right"
+            value="{{ design.midsole_material_right.pk }}">
+        <input type="hidden" name="uppersole_material_right" id="{{ design.pk }}_uppersole_material_right"
+            value="{{ design.uppersole_material_right.pk }}">
+        <input type="hidden" name="shoelace_material_right" id="{{ design.pk }}_shoelace_material_right"
+            value="{{ design.shoelace_material_right.pk }}">
+        <input type="hidden" name="tongue_material_right" id="{{ design.pk }}_tongue_material_right"
+            value="{{ design.tongue_material_right.pk }}">
     </form>
 </a>
 {% endfor %}

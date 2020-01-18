@@ -20,7 +20,6 @@
             {% for design in designs %}
             {% include 'mixins/designs/design-card.html' with design=design %}
             {% endfor %}
-            <a href="" class="btn w-2/3 mx-auto">{% trans 'デザインする' %}</a>
 
             <div class="flex items-center justify-center mx-auto container mt-10">
                 {% if page_obj.has_previous %}
