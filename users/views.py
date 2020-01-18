@@ -269,10 +269,13 @@ class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
 class CardsListView(mixins.LoggedInOnlyView, FormView):
     def get(self, *args, **kwargs):
         user = self.request.user
-        cards = stripe.Customer.list_sources(
-                    user.stripe_customer_id,
-                    object='card'
-                )
+        try:
+            cards = stripe.Customer.list_sources(
+                        user.stripe_customer_id,
+                        object='card'
+                    )
+        except:
+            cards = {"data": []}
         card_list = cards["data"]
         context = {}
         if len(card_list) > 0:

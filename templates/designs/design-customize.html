@@ -18,12 +18,11 @@
     }
 </style>
 <div class="mx-auto w-full min-h-75vh">
-    <form method="POST">
+    <form method="POST" id="main-form">
         {% csrf_token %}
         <div id="screen" class="w-full h-75vh relative">
             <div id="guiContainer" class="absolute" style="right: 0px;"></div>
-            <button id="submit" class="btn w-64 absolute"
-                style="bottom: 1rem; right: 1rem;">{% trans 'デザイン確定' %}</button>
+            <button class="btn w-64 absolute" style="bottom: 1rem; right: 1rem;">{% trans 'デザイン確定' %}</button>
         </div>
         {{ form }}
     </form>
@@ -509,7 +508,6 @@
         gui.open();
 
     }
-
     var guiContainer = document.getElementById('guiContainer');
     guiContainer.appendChild(gui.domElement);
     guiContainer.addEventListener('mouseover', function () {
@@ -540,9 +538,59 @@
 
     GameLoop();
     displaygui();
+</script>
+
+<script>
+    function cameraSide() {
+        camera.position.x = 0;
+        camera.position.y = 0;
+        camera.position.z = 5;
+        camera.rotation.x = 0;
+        camera.rotation.y = 0;
+        camera.rotation.z = 0;
+        scene.rotation.x = 0;
+        scene.rotation.y = 0;
+        scene.rotation.y = -45 * (Math.PI / 180);
+    }
+
+    function cameraFront() {
+        camera.position.x = 0;
+        camera.position.y = 0;
+        camera.position.z = 5;
+        camera.rotation.x = 0;
+        camera.rotation.y = 0;
+        camera.rotation.z = 0;
+        scene.rotation.x = 0;
+        scene.rotation.y = 0;
+        scene.rotation.z = 0;
+    }
+
+    function cameraUp() {
+        camera.position.x = 0;
+        camera.position.y = 4;
+        camera.position.z = 0.5;
+        camera.rotation.x = -1.5;
+        camera.rotation.y = 0;
+        camera.rotation.z = 0;
+        scene.rotation.x = 0;
+        scene.rotation.y = 0;
+        scene.rotation.z = 0;
+    }
+
+    function cameraBottom() {
+        camera.position.x = 0;
+        camera.position.y = -4;
+        camera.position.z = 0.5;
+        camera.rotation.x = 1.5;
+        camera.rotation.y = 0;
+        camera.rotation.z = 0;
+        scene.rotation.x = 0;
+        scene.rotation.y = 0;
+        scene.rotation.z = 0;
+    }
 
     // 確定後の処理
-    var submit = document.getElementById("submit")
+    var submit = document.getElementById("submit");
 
     var outsole_color_left = document.getElementById("id_outsole_color_left");
     var midsole_color_left = document.getElementById("id_midsole_color_left");
@@ -566,9 +614,16 @@
     var shoelace_material_right = document.getElementById("id_shoelace_material_right");
     var tongue_material_right = document.getElementById("id_tongue_material_right");
 
-    var image = document.getElementById("id_image_data");
+    var image_front = document.getElementById("id_image_data_front");
+    var image_side = document.getElementById("id_image_data_side");
+    var image_up = document.getElementById("id_image_data_up");
+    var image_down = document.getElementById("id_image_data_down");
 
-    submit.addEventListener("click", () => {
+    var ready = false;
+    $('#main-form').submit(function (e) {
+        var form = this;
+        console.log(form)
+        e.preventDefault();
         // 色情報を取得する
         outsole_color_left.value = "#" + left_sole.material.color.getHexString();
         midsole_color_left.value = "#" + left_bottom.material.color.getHexString();
@@ -593,13 +648,47 @@
         shoelace_material_right.value = right_shoelace.material.pk;
         tongue_material_right.value = right_tongue.material.pk;
 
-        // スクリーンショットを取る
-        render();
+        //// スクリーンショットを取る
         var canvas = document.getElementsByTagName("canvas")[0];
-        image_data = canvas.toDataURL('image/jpeg');
-        image.value = image_data;
+
+        setTimeout(function () {
+            render();
+            cameraFront();
+            console.log("4")
+            image_data_front = canvas.toDataURL('image/jpeg');
+            image_front.value = image_data_front;
+            setTimeout(function () {
+                render();
+                cameraSide();
+                console.log("3")
+                image_data_side = canvas.toDataURL('image/jpeg');
+                image_side.value = image_data_side;
+                setTimeout(function () {
+                    render();
+                    cameraUp();
+                    console.log("2")
+                    image_data_up = canvas.toDataURL('image/jpeg');
+                    image_up.value = image_data_up;
+                    setTimeout(function () {
+                        render();
+                        cameraBottom();
+                        console.log("1")
+                        image_data_down = canvas.toDataURL('image/jpeg');
+                        image_down.value = image_data_down;
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+            setTimeout(function () {
+                form.submit()
+            }, 4000)
+        }, 1000);
+        if (ready == true) {
+            console.log("hahahah")
+            return false
+        }
     });
 </script>
+
 <script>
     $(document).ready(function () {
         // ページ機能
@@ -648,6 +737,7 @@
                 'data': $('#form_' + pk).serialize(),
                 'dataType': 'json',
                 'success': function (response) {
+                    // 色
                     left_sole.material.color = new THREE.Color(response["outsole_color_left"]);
                     left_bottom.material.color = new THREE.Color(response["midsole_color_left"]);
                     left_upper.material.color = new THREE.Color(response["uppersole_color_left"]);
@@ -658,6 +748,18 @@
                     right_upper.material.color = new THREE.Color(response["uppersole_color_right"]);
                     right_shoelace.material.color = new THREE.Color(response["shoelace_color_right"]);
                     right_tongue.material.color = new THREE.Color(response["tongue_color_right"]);
+
+                    // 素材
+                    left_sole.material.map = new THREE.TextureLoader().load(response["outsole_material_left"]);
+                    left_bottom.material.map = new THREE.TextureLoader().load(response["midsole_material_left"]);
+                    left_upper.material.map = new THREE.TextureLoader().load(response["uppersole_material_left"]);
+                    left_shoelace.material.map = new THREE.TextureLoader().load(response["shoelace_material_left"]);
+                    left_tongue.material.map = new THREE.TextureLoader().load(response["tongue_material_left"]);
+                    right_sole.material.map = new THREE.TextureLoader().load(response["outsole_material_right"]);
+                    right_bottom.material.map = new THREE.TextureLoader().load(response["midsole_material_right"]);
+                    right_upper.material.map = new THREE.TextureLoader().load(response["uppersole_material_right"]);
+                    right_shoelace.material.map = new THREE.TextureLoader().load(response["shoelace_material_right"]);
+                    right_tongue.material.map = new THREE.TextureLoader().load(response["tongue_material_right"]);
                 },
                 'error': function (error) {
                     console.log(error);
@@ -666,6 +768,5 @@
             return false;
         });
     });
-
 </script>
 {% endblock %}

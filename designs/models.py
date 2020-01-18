@@ -27,7 +27,7 @@ class Material(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.name + "(" + self.material_code + ")"
-       
+
 
 class Image(models.Model):
 
@@ -41,14 +41,10 @@ class Image(models.Model):
         null=True,
         blank=True,
     )
-    side_left = models.ImageField(_("側面(左)"), upload_to="designs")
-    side_right = models.ImageField(_("側面(右)"), upload_to="designs")
-    upper_left = models.ImageField(_("上面(左)"), upload_to="designs")
-    upper_right = models.ImageField(_("上面(右)"), upload_to="designs")
-    back_left = models.ImageField(_("後面(左)"), upload_to="designs")
-    back_right = models.ImageField(_("後面(右)"), upload_to="designs")
-    bottom_left = models.ImageField(_("下面(左)"), upload_to="designs")
-    bottom_right = models.ImageField(_("下面(右)"), upload_to="designs")
+    front = models.ImageField(_("正面"), upload_to="designs")
+    side = models.ImageField(_("側面"), upload_to="designs")
+    up = models.ImageField(_("上面"), upload_to="designs")
+    down = models.ImageField(_("下面"), upload_to="designs")
 
 
 class Design(core_models.TimeStampedModel):
@@ -70,25 +66,95 @@ class Design(core_models.TimeStampedModel):
         blank=True,
     )
     outsole_color_left = models.CharField("アウトソール色(左)", max_length=7)
-    outsole_material_left = models.ForeignKey("Material", verbose_name=_("アウトソール素材(左)"), related_name="outsole_material_left", on_delete=models.SET_NULL, blank=True, null=True)
+    outsole_material_left = models.ForeignKey(
+        "Material",
+        verbose_name=_("アウトソール素材(左)"),
+        related_name="outsole_material_left",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     midsole_color_left = models.CharField("ミッドソール色(左)", max_length=7)
-    midsole_material_left = models.ForeignKey("Material", verbose_name=_("ミッドソール素材(左)"), related_name="midsole_material_left", on_delete=models.SET_NULL, blank=True, null=True)
+    midsole_material_left = models.ForeignKey(
+        "Material",
+        verbose_name=_("ミッドソール素材(左)"),
+        related_name="midsole_material_left",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     uppersole_color_left = models.CharField("アッパーソール色(左)", max_length=7)
-    uppersole_material_left = models.ForeignKey("Material", verbose_name=_("アッパーソール素材(左)"), related_name="uppersole_material_left", on_delete=models.SET_NULL, blank=True, null=True)
+    uppersole_material_left = models.ForeignKey(
+        "Material",
+        verbose_name=_("アッパーソール素材(左)"),
+        related_name="uppersole_material_left",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     shoelace_color_left = models.CharField("シューレース色(左)", max_length=7)
-    shoelace_material_left = models.ForeignKey("Material", verbose_name=_("シューレース素材(左)"), related_name="shoelace_material_left", on_delete=models.SET_NULL, blank=True, null=True)
+    shoelace_material_left = models.ForeignKey(
+        "Material",
+        verbose_name=_("シューレース素材(左)"),
+        related_name="shoelace_material_left",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     tongue_color_left = models.CharField("タン色(左)", max_length=7)
-    tongue_material_left = models.ForeignKey("Material", verbose_name=_("タン素材(左)"), related_name="tongue_material_left", on_delete=models.SET_NULL, blank=True, null=True)
+    tongue_material_left = models.ForeignKey(
+        "Material",
+        verbose_name=_("タン素材(左)"),
+        related_name="tongue_material_left",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     outsole_color_right = models.CharField("アウトソール色(右)", max_length=7)
-    outsole_material_right = models.ForeignKey("Material", verbose_name=_("アウトソール素材(右)"), related_name="outsole_material_right", on_delete=models.SET_NULL, blank=True, null=True)
+    outsole_material_right = models.ForeignKey(
+        "Material",
+        verbose_name=_("アウトソール素材(右)"),
+        related_name="outsole_material_right",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     midsole_color_right = models.CharField("ミッドソール色(右)", max_length=7)
-    midsole_material_right = models.ForeignKey("Material", verbose_name=_("ミッドソール素材(右)"), related_name="midsole_material_right", on_delete=models.SET_NULL, blank=True, null=True)
+    midsole_material_right = models.ForeignKey(
+        "Material",
+        verbose_name=_("ミッドソール素材(右)"),
+        related_name="midsole_material_right",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     uppersole_color_right = models.CharField("アッパーソール色(右)", max_length=7)
-    uppersole_material_right = models.ForeignKey("Material", verbose_name=_("アッパーソール素材(右)"), related_name="uppersole_material_right", on_delete=models.SET_NULL, blank=True, null=True)
+    uppersole_material_right = models.ForeignKey(
+        "Material",
+        verbose_name=_("アッパーソール素材(右)"),
+        related_name="uppersole_material_right",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     shoelace_color_right = models.CharField("シューレース色(右)", max_length=7)
-    shoelace_material_right = models.ForeignKey("Material", verbose_name=_("シューレース素材(右)"), related_name="shoelace_material_right", on_delete=models.SET_NULL, blank=True, null=True)
+    shoelace_material_right = models.ForeignKey(
+        "Material",
+        verbose_name=_("シューレース素材(右)"),
+        related_name="shoelace_material_right",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     tongue_color_right = models.CharField("タン色(右)", max_length=7)
-    tongue_material_right = models.ForeignKey("Material", verbose_name=_("タン素材(右)"), related_name="tongue_material_right", on_delete=models.SET_NULL, blank=True, null=True)
+    tongue_material_right = models.ForeignKey(
+        "Material",
+        verbose_name=_("タン素材(右)"),
+        related_name="tongue_material_right",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     design_number = models.CharField(
         _("番号"), max_length=40, default=create_custom_design_code, blank=True, null=True
     )
@@ -98,7 +164,7 @@ class Design(core_models.TimeStampedModel):
     def first_image(self):
         try:
             (image,) = self.images.all()[:1]
-            return image.side_left.url
+            return image.front.url
         except ValueError:
             return None
 

@@ -29,7 +29,10 @@ class CustomizeForm(forms.ModelForm):
             "uppersole_material_right",
             "shoelace_material_right",
             "tongue_material_right",
-            "image_data",
+            "image_data_front",
+            "image_data_side",
+            "image_data_up",
+            "image_data_down",
         )
         widgets = {
             "outsole_color_left": forms.HiddenInput(),
@@ -58,4 +61,7 @@ class CustomizeForm(forms.ModelForm):
             "liner_material_right": forms.HiddenInput(),
         }
 
-    image_data = forms.CharField(widget=forms.HiddenInput(), required=False)
+    image_data_front = forms.CharField(widget=forms.HiddenInput(), required=False)
+    image_data_side = forms.CharField(widget=forms.HiddenInput(), required=False)
+    image_data_up = forms.CharField(widget=forms.HiddenInput(), required=False)
+    image_data_down = forms.CharField(widget=forms.HiddenInput(), required=False)
