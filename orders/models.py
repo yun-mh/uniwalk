@@ -95,7 +95,7 @@ class Order(models.Model):
         blank=True,
         null=True,
     )
-    amount = models.IntegerField(_("支払総額"))
+    amount = models.DecimalField(_("支払総額"), decimal_places=0, max_digits=10)
     order_number = models.CharField(
         max_length=40, default=create_order_number, blank=True, null=True
     )
@@ -158,8 +158,13 @@ class OrderItem(models.Model):
         null=True,
         blank=True,
     )
-    quantity = models.IntegerField()
-    price = models.IntegerField()
+    quantity = models.IntegerField(_("数量"))
+    price = models.DecimalField(_("単価"), decimal_places=0, max_digits=6)
+    front = models.ImageField(_("正面"), upload_to="orders")
+    side = models.ImageField(_("側面"), upload_to="orders")
+    up = models.ImageField(_("上面"), upload_to="orders")
+    down = models.ImageField(_("下面"), upload_to="orders")
+    customize_code = models.CharField(_("カスタマイズデザインコード"), max_length=11)
 
     def sub_total(self):
         return self.quantity * self.price

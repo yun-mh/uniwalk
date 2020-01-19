@@ -20,6 +20,7 @@ class ProductListView(ListView):
     paginate_by = 9
     context_object_name = "products"
     extra_context = {
+        "count": len(models.Product.objects.all()),
         "categories": models.Category.objects.all(),
     }
     template_name = "products/product-list.html"

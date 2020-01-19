@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n humanize %}
 
 {% block page_title %}
 {% trans '注文詳細' %}
@@ -21,7 +21,7 @@
                 </div>
                 <div class="flex flex-no-wrap py-10 px-5">
                     <div class="w-3/4 flex flex-col justify-around">
-                        <div>合計金額: {{ order.amount }}</div>
+                        <div>合計金額: &yen; {{ order.amount | intcomma }}</div>
                         <div>注文者: {{ order.last_name_orderer }} {{ order.first_name_orderer }}</div>
                         <div>お届け先: {{ order.get_prefecture_recipient_display }} {{ order.address_city_recipient }}
                             {{ order.address_detail_recipient }}</div>
@@ -30,18 +30,18 @@
                         <div>処理状況: {{ order.step }}</div>
                     </div>
                 </div>
+                {% for order_item in order.order_items.all %}
                 <div class="flex flex-no-wrap py-10 px-5">
-                    {% for order_item in order.order_items.all %}
-                    <div style="background-image: url();" class="w-1/4 h-40 bg-cover bg-center mr-3">
-                        image
+                    <div style="background-image: url('{{ order_item.front.url }}');"
+                        class="w-1/4 h-40 bg-cover bg-center mr-3">
                     </div>
                     <div class="w-3/4 flex flex-col justify-around">
                         <div>商品名: {{ order_item.product }}</div>
-                        <div>単価: {{ order_item.price }}</div>
+                        <div>単価: &yen; {{ order_item.price | intcomma }}</div>
                         <div>数量: {{ order_item.quantity }}</div>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
 
                 <div class="w-full flex justify-around mb-5">
                     {% if order.step.step_code == "T01" or order.step.step_code == "T02" %}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n js %}
+{% load i18n js humanize %}
 
 {% block page_title %}
 {% blocktrans with product_name=product.name %}{{ product_name }}{% endblocktrans %}
@@ -18,7 +18,7 @@
             {{ product.description }}
         </p>
         <div class="flex justify-between items-center pr-10 flex-wrap">
-            <div class="w-32 text-xl font-semibold flex-shrink-0">&yen; {{ product.price }}
+            <div class="w-32 text-xl font-semibold flex-shrink-0">&yen; {{ product.price | intcomma }}
                 <span class="text-xl"> ({% trans '税込' %})</span>
             </div>
             <a href="{% url 'designs:customize' product.pk %}"

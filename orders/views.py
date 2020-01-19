@@ -14,6 +14,7 @@ from django.contrib import messages
 from users import mixins
 from users import forms as user_forms
 from users import models as user_models
+from designs import models as design_models
 from cards import models as card_models
 from carts import models as cart_models
 from . import forms, models
@@ -415,8 +416,12 @@ class OrderCheckView(FormView):
                     product=cart_item.product,
                     quantity=cart_item.quantity,
                     price=cart_item.product.price,
+                    front=design_models.Image.objects.get(design=cart_item.design.pk).front,
+                    side=design_models.Image.objects.get(design=cart_item.design.pk).side,
+                    up=design_models.Image.objects.get(design=cart_item.design.pk).up,
+                    down=design_models.Image.objects.get(design=cart_item.design.pk).down,
+                    customize_code=design_models.Design.objects.get(pk=cart_item.design.pk).customize_code,
                 )
-                # product_name modify later!!!
             try:
                 email = self.request.user.email
             except:

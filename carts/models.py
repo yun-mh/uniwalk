@@ -17,6 +17,7 @@ class CartItem(models.Model):
     design = models.ForeignKey(
         "designs.Design",
         verbose_name=_("デザイン"),
+        related_name="cart_items",
         on_delete=models.CASCADE,
         null=True,
         blank=True,

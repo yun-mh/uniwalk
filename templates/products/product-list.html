@@ -15,7 +15,7 @@
             <ul>
                 <li class="flex justify-between mb-2 text-sm">
                     <a href="{% url 'products:list' %}">{% trans 'すべて' %}</a>
-                    <span class="text-gray-500">{{ products|length }}</span>
+                    <span class="text-gray-500">{{ count }}</span>
                 </li>
                 {% for category in categories %}
                 <li class="flex justify-between mb-2 text-sm">

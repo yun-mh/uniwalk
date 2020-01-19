@@ -132,7 +132,6 @@ class CustomizeView(ListView):
             down=base64_file(image_data_down),
         )
         self.request.session["design"] = new_design.pk
-
         return redirect("feet:measure", pk=pk)
 
 

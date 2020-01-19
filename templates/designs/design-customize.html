@@ -657,22 +657,22 @@
         setTimeout(function () {
             cameraFront();
             render();
-            image_data_front = canvas.toDataURL('image/jpeg');
+            image_data_front = canvas.toDataURL('image/png');
             image_front.value = image_data_front;
             setTimeout(function () {
                 cameraSide();
                 render();
-                image_data_side = canvas.toDataURL('image/jpeg');
+                image_data_side = canvas.toDataURL('image/png');
                 image_side.value = image_data_side;
                 setTimeout(function () {
                     cameraUp();
                     render();
-                    image_data_up = canvas.toDataURL('image/jpeg');
+                    image_data_up = canvas.toDataURL('image/png');
                     image_up.value = image_data_up;
                     setTimeout(function () {
                         cameraBottom();
                         render();
-                        image_data_down = canvas.toDataURL('image/jpeg');
+                        image_data_down = canvas.toDataURL('image/png');
                         image_down.value = image_data_down;
                     }, 500);
                 }, 500);

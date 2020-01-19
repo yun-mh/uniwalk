@@ -17,9 +17,10 @@
             {% if cart_items %}
             {% for cart_item in cart_items %}
             <div class="w-full flex flex-no-wrap border-b p-3">
-                <div class="w-1/3 h-32 bg-center bg-cover"
-                    style="background-image: url('{{ cart_item.design.first_image }}');">
+                {% with cart_item.design.images.all|first as image %}
+                <div class="w-1/3 h-32 bg-center bg-cover" style="background-image: url('{{ image.front.url }}');">
                 </div>
+                {% endwith %}
                 <div class="w-full flex justify-between px-5 items-center">
                     <div class="flex flex-col justify-between h-full">
                         <div class="flex flex-col">
@@ -27,24 +28,24 @@
                             <span class="text-gray-500">{{ cart_item.product.category }}</span>
                         </div>
                         <div class="flex flex-col">
-                            <span>単価 {{ cart_item.product.price }}</span>
-                            <span>{{ cart_item.quantity}} x {{ cart_item.product.price }}</span>
+                            <span>単価　&yen; {{ cart_item.product.price | intcomma }}</span>
+                            <span>{{ cart_item.quantity}} x &yen; {{ cart_item.product.price | intcomma }}</span>
                         </div>
                     </div>
                     <div>
-                        {{cart_item.sub_total}}
+                        &yen; {{cart_item.sub_total | intcomma }}
                     </div>
                     <div>
-                        <a href="{% url 'carts:add_cart' cart_item.product.pk %}">
+                        <a href="{% url 'carts:add_cart' cart_item.product.pk cart_item.design.pk %}">
                             <i class="far fa-plus-square"></i>
                         </a>
                         <span class="mx-3">{{ cart_item.quantity}}</span>
-                        <a href="{% url 'carts:remove' cart_item.product.pk %}">
+                        <a href="{% url 'carts:remove' cart_item.product.pk cart_item.design.pk %}">
                             <i class="far fa-minus-square"></i>
                         </a>
                     </div>
                     <div>
-                        <a href="{% url 'carts:delete' cart_item.product.pk %}">
+                        <a href="{% url 'carts:delete' cart_item.product.pk cart_item.design.pk%}">
                             <span>削除</span>
                         </a>
                     </div>
@@ -65,7 +66,7 @@
             <div class="w-full">
                 <div class="flex flex-no-wrap justify-between">
                     <div class="font-semibold">合計（税込）</div>
-                    <div>{{ amount }}</div>
+                    <div>&yen; {{ amount | intcomma }}</div>
                 </div>
                 {% if cart_items %}
                 <a href="{% url 'orders:member_or_guest' %}" class="btn block mt-10">購入手続きへ</a>

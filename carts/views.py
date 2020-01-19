@@ -12,7 +12,7 @@ def _session_key(request):
     return cart
 
 
-def add_cart(request, pk):
+def add_cart(request, pk, design_pk):
     product = product_models.Product.objects.get(pk=pk)
     try:
         cart = Cart.objects.get(session_key=_session_key(request))
@@ -26,18 +26,17 @@ def add_cart(request, pk):
             cart = Cart.objects.create(session_key=_session_key(request))
             cart.save()
     try:
-        cart_item = CartItem.objects.get(product=product, cart=cart)
+        cart_item = CartItem.objects.get(product=product, cart=cart, design=design_pk)
         cart_item.quantity += 1
         cart_item.save()
     except CartItem.DoesNotExist:
         cart_item = CartItem.objects.create(
             product=product,
-            design=design_models.Design.objects.get(pk=request.session["design"]),
+            design=design_models.Design.objects.get(pk=design_pk),
             quantity=1,
             cart=cart,
         )
         cart_item.save()
-        del request.session["design"]
     return redirect("carts:cart")
 
 
@@ -57,10 +56,10 @@ def cart_display(request, amount=0, counter=0, cart_items=None):
     )
 
 
-def remove_item(request, pk):
+def remove_item(request, pk, design_pk):
     cart = Cart.objects.get(session_key=_session_key(request))
     product = get_object_or_404(product_models.Product, pk=pk)
-    cart_item = CartItem.objects.get(product=product, cart=cart)
+    cart_item = CartItem.objects.get(product=product, cart=cart, design=design_pk)
     if cart_item.quantity > 1:
         cart_item.quantity -= 1
         cart_item.save()
@@ -69,9 +68,9 @@ def remove_item(request, pk):
     return redirect("carts:cart")
 
 
-def delete_cartitem(request, pk):
+def delete_cartitem(request, pk, design_pk):
     cart = Cart.objects.get(session_key=_session_key(request))
     product = get_object_or_404(product_models.Product, pk=pk)
-    cart_item = CartItem.objects.get(product=product, cart=cart)
+    cart_item = CartItem.objects.get(product=product, cart=cart, design=design_pk)
     cart_item.delete()
     return redirect("carts:cart")

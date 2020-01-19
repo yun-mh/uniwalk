@@ -8,7 +8,7 @@ from django.template.loader import get_template
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-from weasyprint import HTML, CSS
+from weasyprint import HTML, CSS, default_url_fetcher
 from . import models
 
 
@@ -146,6 +146,7 @@ class OrderAdmin(admin.ModelAdmin):
         "bill",
         "receipt",
         "ordersheet",
+        "orderspec",
         "invoice",
     )
 
@@ -164,11 +165,6 @@ class OrderAdmin(admin.ModelAdmin):
         urls = super().get_urls()
         custom_urls = [
             path(
-                "invoice/<int:pk>",
-                self.admin_site.admin_view(self.invoice_pdf),
-                name="invoice",
-            ),
-            path(
                 "bill/<int:pk>", self.admin_site.admin_view(self.bill_pdf), name="bill",
             ),
             path(
@@ -181,9 +177,20 @@ class OrderAdmin(admin.ModelAdmin):
                 self.admin_site.admin_view(self.ordersheet_pdf),
                 name="ordersheet",
             ),
+            path(
+                "orderspec/<int:pk>",
+                self.admin_site.admin_view(self.orderspec_pdf),
+                name="orderspec",
+            ),
+            path(
+                "invoice/<int:pk>",
+                self.admin_site.admin_view(self.invoice_pdf),
+                name="invoice",
+            ),
         ]
         return custom_urls + urls
 
+    # 請求書
     def bill(self, obj):
         if obj.step.step_code == "T01" or obj.step.step_code == "T02":
             return format_html(
@@ -199,7 +206,6 @@ class OrderAdmin(admin.ModelAdmin):
     def bill_pdf(self, request, *args, **kwargs):
         order_pk = kwargs.get("pk")
         order = models.Order.objects.get(pk=order_pk)
-
         template = get_template("documents/bill.html")
         html = template.render({"order": order})
         response = HttpResponse(content_type="application/pdf")
@@ -209,6 +215,7 @@ class OrderAdmin(admin.ModelAdmin):
         )
         return response
 
+    # 領収書
     def receipt(self, obj):
         if (
             obj.step.step_code == "T03"
@@ -228,7 +235,6 @@ class OrderAdmin(admin.ModelAdmin):
     def receipt_pdf(self, request, *args, **kwargs):
         order_pk = kwargs.get("pk")
         order = models.Order.objects.get(pk=order_pk)
-
         template = get_template("documents/receipt.html")
         html = template.render({"order": order})
         response = HttpResponse(content_type="application/pdf")
@@ -238,6 +244,7 @@ class OrderAdmin(admin.ModelAdmin):
         )
         return response
 
+    # 発注書
     def ordersheet(self, obj):
         if obj.step.step_code == "T11":
             return format_html(
@@ -253,7 +260,6 @@ class OrderAdmin(admin.ModelAdmin):
     def ordersheet_pdf(self, request, *args, **kwargs):
         order_pk = kwargs.get("pk")
         order = models.Order.objects.get(pk=order_pk)
-
         template = get_template("documents/ordersheet.html")
         html = template.render({"order": order})
         response = HttpResponse(content_type="application/pdf")
@@ -263,6 +269,33 @@ class OrderAdmin(admin.ModelAdmin):
         )
         return response
 
+    # 製造仕様書
+    def orderspec(self, obj):
+        if obj.step.step_code == "T11":
+            return format_html(
+                '<a class="button" href="{}">仕様書</a>',
+                reverse("admin:orderspec", args=[obj.pk]),
+            )
+        else:
+            return ""
+
+    orderspec.short_description = "仕様書"
+    orderspec.allow_tags = True
+
+    def orderspec_pdf(self, request, *args, **kwargs):
+        order_pk = kwargs.get("pk")
+        order = models.Order.objects.get(pk=order_pk)
+        template = get_template("documents/specification.html")
+        html = template.render({"order": order})
+        response = HttpResponse(content_type="application/pdf")
+        print(request.build_absolute_uri())
+        HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
+            response,
+            stylesheets=[CSS(settings.STATICFILES_DIRS[0] + "/css/styles.css")],
+        )
+        return response
+
+    # 納品書
     def invoice(self, obj):
         if obj.step.step_code == "T21":
             return format_html(
@@ -278,7 +311,6 @@ class OrderAdmin(admin.ModelAdmin):
     def invoice_pdf(self, request, *args, **kwargs):
         order_pk = kwargs.get("pk")
         order = models.Order.objects.get(pk=order_pk)
-
         template = get_template("documents/invoice.html")
         html = template.render({"order": order})
         response = HttpResponse(content_type="application/pdf")

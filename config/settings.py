@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 DJANGO_APPS = [
-    # "django.contrib.admin",
+    # "django.contrib.admin",　-> アドミンパネルのカスタム化による無効化
     "config.apps.ConfigAdminConfig",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -123,41 +123,34 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = "ja"
-
 TIME_ZONE = "Asia/Tokyo"
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 STATIC_URL = "/static/"
-
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
 AUTH_USER_MODEL = "users.User"
 
-PHONENUMBER_DB_FORMAT = "NATIONAL"
 
-PHONENUMBER_DEFAULT_REGION = "JP"
-
+# アップロードパスを設定
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
-
 MEDIA_URL = "/media/"
 
 
-# Auth
+# 電話番号の国際化
+PHONENUMBER_DB_FORMAT = "NATIONAL"
+PHONENUMBER_DEFAULT_REGION = "JP"
 
+
+# Auth
 LOGIN_URL = "/users/login"
 
 
 # Email
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.naver.com"
 EMAIL_PORT = 587
@@ -176,5 +169,9 @@ STRIPE_PUBLISHABLE_KEY = os.environ.get("PUBLISHABLE_KEY")
 STRIPE_SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
+# カート機能実装によるセッションエンジンのカスタム化
 SESSION_ENGINE = "core.session_setting"
 
+
+# 価格の区切り設定
+NUMBER_GROUPING = 3

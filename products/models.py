@@ -105,7 +105,7 @@ class Product(core_models.TimeStampedModel):
         related_name="product",
         on_delete=models.CASCADE,
     )
-    price = models.IntegerField(_("価格"))
+    price = models.DecimalField(_("価格"), decimal_places=0, max_digits=6)
     description = models.TextField(_("詳細説明"))
     is_active = models.BooleanField(_("販売中"), null=False, default=True)
     product_number = models.CharField(
