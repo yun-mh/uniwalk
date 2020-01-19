@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block page_title %}
-{% trans 'マイデザイン' %}
+{% trans '商品選択' %}
 {% endblock page_title%}
 
 {% block content %}
@@ -14,41 +14,37 @@
         </div>
 
         <div class="w-4/5 ml-20 flex flex-col mb-10">
-            <h2 class="font-bold text-4xl text-center mb-10">{% trans 'マイデザイン' %}</h2>
+            <h2 class="font-bold text-4xl text-center mb-10">{% trans '商品選択' %}</h2>
 
-            {% if designs %}
-            {% for design in designs %}
-            {% include 'mixins/designs/design-card.html' with design=design %}
+            {% if products %}
+            {% for product in products %}
+            {% include 'mixins/designs/select-product-card.html' with product=product %}
             {% endfor %}
 
-            <div class="flex items-center justify-center mx-auto container mt-10">
+            <div class="flex h-12 items-center justify-center mx-auto container border border-gray-300 bg-gray-100">
                 {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}" class="text-teal-500">
+                <a href="?page={{ page_obj.previous_page_number }}" class="text-blue-500">
                     <i class="fas fa-arrow-left fa-lg"></i>
                 </a>
                 {% endif %}
 
-                <span class="mx-3 font-medium text-lg">
+                <span class="mx-3 font-medium text-sm">
                     {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}
                     {{ current_page }} ページ{% endblocktrans %}
                 </span>
 
                 {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}" class="text-teal-500">
+                <a href="?page={{ page_obj.next_page_number }}" class="text-blue-500">
                     <i class="fas fa-arrow-right fa-lg"></i>
                 </a>
                 {% endif %}
             </div>
 
             {% else %}
-            <p class="flex justify-center items-center font-semibold h-full w-full text-center text-2xl">
-                <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span
-                    class="ml-5">{% trans 'まだ作成したデザインがありません。' %}</span>
+            <p class="flex justify-center items-center font-semibold w-full h-50vh text-center text-2xl">
+                <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span class="ml-5">商品が存在しません。</span>
             </p>
             {% endif %}
-
-            <a href="{% url 'users:select-product' %}" class="btn w-2/3 mx-auto">{% trans 'デザインする' %}</a>
-
         </div>
     </div>
 </div>

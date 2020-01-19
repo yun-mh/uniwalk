@@ -45,6 +45,21 @@ urlpatterns = [
     path("mypage/cards/", views.CardsListView.as_view(), name="cards",),
     path("mypage/cards/add/", views.CardsAddView.as_view(), name="add-card",),
     path("mypage/mydesigns/", views.MyDesignsListView.as_view(), name="mydesigns",),
+    path(
+        "mypage/mydesigns/select-product/",
+        views.SelectProductToCustomizeView.as_view(),
+        name="select-product",
+    ),
+    path(
+        "mypage/mydesigns/customize/<int:pk>/",
+        views.MemberCustomizeView.as_view(),
+        name="customize",
+    ),
+    path(
+        "mypage/mydesigns/modify/",
+        views.MemberCustomizeModifyView.as_view(),
+        name="modify",
+    ),
     path("mypage/footsizes/", views.FootSizeView.as_view(), name="footsizes",),
     path("mypage/withdrawal/", views.WithdrawalView.as_view(), name="withdrawal",),
     path(
@@ -55,5 +70,6 @@ urlpatterns = [
     path(
         "withdrawal/done/", views.WithdrawalDoneView.as_view(), name="withdrawal-done",
     ),
+    path("apply/", views.get_palette, name="apply"),
     path("switch-language/", views.switch_language, name="switch-language"),
 ]

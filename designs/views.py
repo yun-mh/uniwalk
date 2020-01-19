@@ -124,13 +124,13 @@ class CustomizeView(ListView):
         image_data_side = self.request.POST.get("image_data_side")
         image_data_up = self.request.POST.get("image_data_up")
         image_data_down = self.request.POST.get("image_data_down")
-        # design_models.Image.objects.create(
-        #     design=new_design, 
-        #     front=base64_file(image_data_front),
-        #     side=base64_file(image_data_side),
-        #     up=base64_file(image_data_up),
-        #     down=base64_file(image_data_down),
-        # )
+        design_models.Image.objects.create(
+            design=new_design, 
+            front=base64_file(image_data_front),
+            side=base64_file(image_data_side),
+            up=base64_file(image_data_up),
+            down=base64_file(image_data_down),
+        )
         self.request.session["design"] = new_design.pk
 
         return redirect("feet:measure", pk=pk)

@@ -1,21 +1,32 @@
 {% load i18n %}
 <div class="w-full mb-10 overflow-hidden shadow-md">
     <div class="w-full flex items-center justify-between bg-gray-600 h-12 text-white px-5">
-        <h3 class="font-semibold text-lg">{{ design.title }}</h3>
-        <span class="">{{ design.created|date:'Y-m-d' }}</span>
+        <h3 class="font-semibold text-lg">{{ design.customize_code }}</h3>
+        <span class="">作成日：{{ design.created|date:'Y-m-d' }}</span>
     </div>
+    {% with design.images.all|first as image %}
     <div class="flex flex-no-wrap py-10 px-5">
-        <div style="background-image: url();" class="w-1/4 h-40 bg-cover bg-center mr-3">
+        <div style="background-image: url({{ image.front.url }});" class="w-1/4 h-40 bg-cover bg-center mr-3">
         </div>
-        <div style="background-image: url());" class="w-1/4 h-40 bg-cover bg-center mr-3">
+        <div style="background-image: url({{ image.side.url }});" class="w-1/4 h-40 bg-cover bg-center mr-3">
         </div>
-        <div style="background-image: url();" class="w-1/4 h-40 bg-cover bg-center mr-3">
+        <div style="background-image: url({{ image.up.url }});" class="w-1/4 h-40 bg-cover bg-center mr-3">
         </div>
-        <div style="background-image: url();" class="w-1/4 h-40 bg-cover bg-center">
+        <div style="background-image: url({{ image.down.url }});" class="w-1/4 h-40 bg-cover bg-center">
         </div>
     </div>
+    {% endwith %}
     <div class="w-full flex justify-around mb-5">
-        <a href="" class="btn bg-orange-500 text-white w-1/3 p-3">{% trans '変更する' %}</a>
-        <a href="" class="btn bg-red-500 text-white w-1/3 p-3">{% trans '削除する' %}</a>
+        <form method="POST" class="w-1/3">
+            {% csrf_token %}
+            <input type="hidden" name="target-design-modify" value="{{ design.id }}">
+            <button name="design_modify" class="btn bg-orange-500 text-white p-3">{% trans '変更する' %}</button>
+        </form>
+        <form method="POST" class="w-1/3">
+            {% csrf_token %}
+            <input type="hidden" name="target-design-delete" value="{{ design.id }}">
+            <button name="design_delete" class="btn bg-red-500 text-white p-3">{% trans '削除する' %}</a>
+        </form>
     </div>
+
 </div>
