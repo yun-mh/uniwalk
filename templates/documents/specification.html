@@ -17,17 +17,29 @@
             font-family: Montserrat, Noto Sans JP, Noto Sans KR;
             src: url("https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP|Noto+Sans+KR&display=swap");
         }
+
+        .seperate {
+            page-break-after: always;
+        }
+
+        .seperate:last-child {
+            page-break-after: auto;
+        }
     </style>
     <title>製造仕様書 | {{order.order_code}}</title>
 </head>
 
 {% for order_item in order.order_items.all %}
 
-<body style="min-height: 100vh;">
-    <img src="{% static 'images/logo-universe.png' %}" class="w-28 mx-auto my-5">
-    <p class="font-bold text-3xl text-center mb-10">
-        製　造　仕　様　書
-    </p>
+<body class="seperate">
+    <div class="w-90vw mx-auto">
+        <div class="w-full flex items-center justify-start">
+            <img src="{% static 'images/logo-universe.png' %}" class="inline-block w-16">
+            <div class="font-bold text-3xl text-center tracking-widest">
+                　製造仕様書
+            </div>
+        </div>
+    </div>
     <p class="w-90vw mx-auto text-right">発行日：{% now "Y-m-d" %}</p>
     <div class="w-90vw mx-auto">
         <table class="w-full border-4">
@@ -67,7 +79,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="border flex justify-between">
+                    <td class="border flex justify-around">
                         <div class="w-32 h-32 bg-cover bg-center"
                             style="background-image: url('{{ order_item.front.url }}');"></div>
                         <div class="w-32 h-32 bg-cover bg-center"
@@ -83,151 +95,121 @@
 
         <table class="w-full border-4 mb-5">
             <thead>
-                <tr class="border text-lg">
-                    <th>部品</th>
-                    <th colspan="2">色(左・右)</th>
-                    <th colspan="2">素材(左・右)</th>
-                    <th colspan="4">サイズ</th>
+                <tr class="border text-lg text-center">
+                    <th class="border">部品</th>
+                    <th class="border" colspan="2">色(左・右)</th>
+                    <th class="border" colspan="2">素材(左・右)</th>
+                    <th class="border" colspan="4">サイズ</th>
                 </tr>
             </thead>
-            <tbody class="border">
+            <tbody class="border text-sm">
                 <tr>
-                    <td>
+                    <td class="border">
                         アウトソール
                     </td>
-                    <td>
-
+                    <td class="border">
+                        {{ order_item.outsole_color_left }}
                     </td>
-                    <td>
-
+                    <td class="border">
+                        {{ order_item.outsole_color_right }}
                     </td>
-                    <td>
-
+                    <td class="border">
+                        {{ order_item.outsole_material_left }}
                     </td>
-                    <td>
-
+                    <td class="border">
+                        {{ order_item.outsole_material_right }}
                     </td>
-                    <th colspan="2">
+                    <th class="border text-center" colspan="2">
                         　左
                     </th>
-                    <th colspan="2">
+                    <th class="border text-center" colspan="2">
                         　右
                     </th>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="border">
                         ミッドソール
                     </td>
-                    <td>
-
+                    <td class="border">
+                        {{ order_item.midsole_color_left }}
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.midsole_color_right }}
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.midsole_material_left }}
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.midsole_material_right }}
                     </td>
-                    <td>
-                        　
+                    <td class="border text-center">
+                        足幅
                     </td>
-                    <td>
-                        　
+                    <td class="border text-center">
+                        足長
                     </td>
-                    <th>
+                    <th class="border text-center">
                         足幅
                     </th>
-                    <th>
+                    <th class="border text-center">
                         足長
                     </th>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="border">
                         アッパー
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.uppersole_color_left }}
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.uppersole_color_right }}
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.uppersole_material_left }}
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.uppersole_material_right }}
                     </td>
-                    <td>
-                        　
+                    <td class="border text-center" colspan="2" rowspan="3">
+                        size
                     </td>
-                    <td>
-                        　
-                    </td>
-                    <td>
-                        　
-                    </td>
-                    <td>
-                        　
+                    <td class="border text-center" colspan="2" rowspan="3">
+                        size
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="border">
                         シューレス
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.shoelace_color_left }}
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.shoelace_color_right }}
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.shoelace_material_left }}
                     </td>
-                    <td>
-                        　
-                    </td>
-                    <td>
-                        　
-                    </td>
-                    <td>
-                        　
-                    </td>
-                    <td>
-                        　
-                    </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.shoelace_material_right }}
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="border">
                         タン
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.tongue_color_left }}
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.tongue_color_right }}
                     </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.tongue_material_left }}
                     </td>
-                    <td>
-                        　
-                    </td>
-                    <td>
-                        　
-                    </td>
-                    <td>
-                        　
-                    </td>
-                    <td>
-                        　
-                    </td>
-                    <td>
-                        　
+                    <td class="border">
+                        {{ order_item.tongue_material_right }}
                     </td>
                 </tr>
             </tbody>

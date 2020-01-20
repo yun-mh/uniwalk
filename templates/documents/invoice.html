@@ -1,4 +1,4 @@
-{% load i18n static %}
+{% load i18n static humanize %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,8 +23,8 @@
 
 <body>
     <div class="flex justify-between items-center">
-        <h2 class="font-bold text-3xl mb-10">
-            納　品　書
+        <h2 class="font-bold text-3xl mb-10 tracking-widest">
+            納品書
         </h2>
         <p>
             発行日：{% now "Y-m-d" %}
@@ -81,10 +81,10 @@
                         {{ order_item.quantity }}
                     </td>
                     <td class="border text-center">
-                        {{ order_item.price }}
+                        &yen; {{ order_item.price | intcomma }}
                     </td>
                     <td class="border text-center">
-                        {{ order_item.sub_total }}
+                        &yen; {{ order_item.sub_total | intcomma }}
                     </td>
                 </tr>
                 {% endfor %}
@@ -113,7 +113,7 @@
                                 　合計(税込)
                             </td>
                             <td>
-                                　{{ order.amount }}
+                                　&yen; {{ order.amount | intcomma }}
                             </td>
                         </tr>
                         <tr class="border-b">

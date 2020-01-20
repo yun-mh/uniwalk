@@ -1,4 +1,4 @@
-{% load i18n static date %}
+{% load i18n static date humanize %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +18,8 @@
 
 <body>
     <img src="{% static 'images/logo-universe.png' %}" class="w-28 mx-auto my-5">
-    <p class="font-bold text-3xl text-center mb-10">
-        発　　注　　書
+    <p class="font-bold text-3xl text-center mb-10 tracking-widest">
+        発注書
     </p>
     <div class="w-90vw mx-auto">
         <div class="flex flex-no-wrap justify-between items-start">

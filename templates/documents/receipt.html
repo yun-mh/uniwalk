@@ -1,4 +1,4 @@
-{% load i18n static %}
+{% load i18n static humanize %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +18,8 @@
 
 <body>
     <img src="{% static 'images/logo-universe.png' %}" class="w-28 mx-auto my-5">
-    <p class="font-bold text-3xl text-center mb-10">
-        領　　収　　書
+    <p class="font-bold text-3xl text-center mb-10 tracking-widest">
+        領収書
     </p>
     <div class="w-90vw mx-auto">
         <div class="flex flex-no-wrap justify-between items-start">
@@ -39,7 +39,7 @@
                     </tr>
                     <tr>
                         <td>ご請求額：</td>
-                        <td>{{ order.amount }}</td>
+                        <td>&yen; {{ order.amount | intcomma }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -56,13 +56,13 @@
         <table class="w-full border-4 my-5">
             <thead class="border">
                 <tr>
-                    <th class="border text-lg">
+                    <th class="border text-lg text-center">
                         注文商品
                     </th>
-                    <th class="border text-lg">
+                    <th class="border text-lg text-center">
                         数量
                     </th>
-                    <th class="border text-lg">
+                    <th class="border text-lg text-center">
                         単価
                     </th>
                 </tr>
@@ -73,22 +73,21 @@
                     <td class="border">
                         {{ order_item.product }}
                     </td>
-                    <td class="border">
+                    <td class="border text-right">
                         {{ order_item.quantity }}
                     </td>
-                    <td class="border">
-                        {{ order_item.price }}
+                    <td class="border text-right">
+                        {{ order_item.price | intcomma }}
                     </td>
                 </tr>
                 {% endfor %}
-                <!-- auto completion -->
             </tbody>
         </table>
 
         <table class="w-full border-4 mb-5">
             <thead>
                 <tr class="border text-lg">
-                    <th>お届け先住所</th>
+                    <th class="text-center">お届け先住所</th>
                 </tr>
             </thead>
             <tbody class="border">
@@ -114,7 +113,7 @@
         <table class="w-full border-4 mb-5">
             <thead>
                 <tr>
-                    <th colspan="2" class="border text-lg">お支払い情報</th>
+                    <th colspan="2" class="border text-lg text-center">お支払い情報</th>
                 </tr>
             </thead>
             <tbody>
@@ -144,7 +143,7 @@
                         {% if not forloop.first %}
                         +
                         {% endif %}
-                        {{ order_item.quantity }} x {{ order_item.price }}
+                        {{ order_item.quantity }} x {{ order_item.price | intcomma }}
                         {% endfor %}
                     </td>
                 </tr>
@@ -153,7 +152,7 @@
                         {{ order.last_name_orderer }} {{ order.first_name_orderer }}　様
                     </td>
                     <td>
-                        合計金額：{{ order.amount }}
+                        合計金額：&yen; {{ order.amount | intcomma }}
                     </td>
                 </tr>
             </tbody>
