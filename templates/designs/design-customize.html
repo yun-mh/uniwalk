@@ -71,9 +71,10 @@
     screen.appendChild(renderer.domElement);
 
     // 操作用カメラ設定
-    var camera = new THREE.PerspectiveCamera(75, screen.clientWidth / screen.clientHeight, 1, 1000);
+    var camera = new THREE.PerspectiveCamera(90, screen.clientWidth / screen.clientHeight, 1, 1000);
     camera.aspect = screen.clientWidth / screen.clientHeight;
     camera.updateProjectionMatrix();
+    camera.position.z = 4;
 
     window.addEventListener('resize', function () {
         var width = screen.clientWidth;
@@ -83,7 +84,10 @@
         camera.updateProjectionMatrix();
     });
 
+
     controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.minDistance = 3.2;
+    controls.maxDistance = 5;
 
     var loader = new THREE.GLTFLoader();
 
@@ -137,7 +141,6 @@
         left_shoelace.material = new THREE.MeshPhongMaterial({ color: "{% if design_before %}{{ design_before.shoelace_color_left }}{% else %}#ffffff{% endif %}", map: new THREE.TextureLoader().load('{% if design_before %}{{ design_before.shoelace_material_left.file.url }}{% else %}{{ mat1.file.url }}{% endif %}'), side: THREE.DoubleSide });
         left_shoelace.material.pk = "{% if design_before %}{{ design_before.shoelace_material_left.pk }}{% else %}{{ mat1.pk }}{% endif %}";
         scene.add(left_shoelace);
-        left_shoelace.position.z = 2;
     }
 
     if (tongue_left_data) {
@@ -149,7 +152,6 @@
         left_tongue.material = new THREE.MeshPhongMaterial({ color: "{% if design_before %}{{ design_before.tongue_color_left }}{% else %}#ffffff{% endif %}", map: new THREE.TextureLoader().load('{% if design_before %}{{ design_before.tongue_material_left.file.url }}{% else %}{{ mat1.file.url }}{% endif %}'), side: THREE.DoubleSide });
         left_tongue.material.pk = "{% if design_before %}{{ design_before.tongue_material_left.pk }}{% else %}{{ mat1.pk }}{% endif %}";
         scene.add(left_tongue);
-        left_tongue.position.z = 2;
     }
 
     if (upper_left_data) {
@@ -161,7 +163,6 @@
         left_upper.material = new THREE.MeshPhongMaterial({ color: "{% if design_before %}{{ design_before.uppersole_color_left }}{% else %}#ffffff{% endif %}", map: new THREE.TextureLoader().load('{% if design_before %}{{ design_before.uppersole_material_left.file.url }}{% else %}{{ mat1.file.url }}{% endif %}'), side: THREE.DoubleSide });
         left_upper.material.pk = "{% if design_before %}{{ design_before.uppersole_material_left.pk }}{% else %}{{ mat1.pk }}{% endif %}";
         scene.add(left_upper);
-        left_upper.position.z = 2;
     }
 
     if (midsole_left_data) {
@@ -173,7 +174,6 @@
         left_bottom.material = new THREE.MeshPhongMaterial({ color: "{% if design_before %}{{ design_before.midsole_color_left }}{% else %}#ffffff{% endif %}", map: new THREE.TextureLoader().load('{% if design_before %}{{ design_before.midsole_material_left.file.url }}{% else %}{{ mat1.file.url }}{% endif %}'), side: THREE.DoubleSide });
         left_bottom.material.pk = "{% if design_before %}{{ design_before.midsole_material_left.pk }}{% else %}{{ mat1.pk }}{% endif %}";
         scene.add(left_bottom);
-        left_bottom.position.z = 2;
     }
 
     if (outsole_left_data) {
@@ -185,7 +185,6 @@
         left_sole.material = new THREE.MeshPhongMaterial({ color: "{% if design_before %}{{ design_before.outsole_color_left }}{% else %}#ffffff{% endif %}", map: new THREE.TextureLoader().load('{% if design_before %}{{ design_before.outsole_material_left.file.url }}{% else %}{{ mat1.file.url }}{% endif %}'), side: THREE.DoubleSide });
         left_sole.material.pk = "{% if design_before %}{{ design_before.outsole_material_left.pk }}{% else %}{{ mat1.pk }}{% endif %}";
         scene.add(left_sole);
-        left_sole.position.z = 2;
     }
 
 
@@ -198,7 +197,6 @@
         right_shoelace.material = new THREE.MeshPhongMaterial({ color: "{% if design_before %}{{ design_before.shoelace_color_right }}{% else %}#ffffff{% endif %}", map: new THREE.TextureLoader().load('{% if design_before %}{{ design_before.shoelace_material_right.file.url }}{% else %}{{ mat1.file.url }}{% endif %}'), side: THREE.DoubleSide });
         right_shoelace.material.pk = "{% if design_before %}{{ design_before.shoelace_material_right.pk }}{% else %}{{ mat1.pk }}{% endif %}";
         scene.add(right_shoelace);
-        right_shoelace.position.z = 2;
     }
 
     if (tongue_right_data) {
@@ -210,7 +208,6 @@
         right_tongue.material = new THREE.MeshPhongMaterial({ color: "{% if design_before %}{{ design_before.tongue_color_right }}{% else %}#ffffff{% endif %}", map: new THREE.TextureLoader().load('{% if design_before %}{{ design_before.tongue_material_right.file.url }}{% else %}{{ mat1.file.url }}{% endif %}'), side: THREE.DoubleSide });
         right_tongue.material.pk = "{% if design_before %}{{ design_before.tongue_material_right.pk }}{% else %}{{ mat1.pk }}{% endif %}";
         scene.add(right_tongue);
-        right_tongue.position.z = 2;
     }
 
     if (upper_right_data) {
@@ -222,7 +219,6 @@
         right_upper.material = new THREE.MeshPhongMaterial({ color: "{% if design_before %}{{ design_before.uppersole_color_right }}{% else %}#ffffff{% endif %}", map: new THREE.TextureLoader().load('{% if design_before %}{{ design_before.uppersole_material_right.file.url }}{% else %}{{ mat1.file.url }}{% endif %}'), side: THREE.DoubleSide });
         right_upper.material.pk = "{% if design_before %}{{ design_before.uppersole_material_right.pk }}{% else %}{{ mat1.pk }}{% endif %}";
         scene.add(right_upper);
-        right_upper.position.z = 2;
     }
 
     if (midsole_right_data) {
@@ -234,7 +230,6 @@
         right_bottom.material = new THREE.MeshPhongMaterial({ color: "{% if design_before %}{{ design_before.midsole_color_right }}{% else %}#ffffff{% endif %}", map: new THREE.TextureLoader().load('{% if design_before %}{{ design_before.midsole_material_right.file.url }}{% else %}{{ mat1.file.url }}{% endif %}'), side: THREE.DoubleSide });
         right_bottom.material.pk = "{% if design_before %}{{ design_before.midsole_material_right.pk }}{% else %}{{ mat1.pk }}{% endif %}";
         scene.add(right_bottom);
-        right_bottom.position.z = 2;
     }
 
     var right_sole;
@@ -246,7 +241,6 @@
         right_sole.material = new THREE.MeshPhongMaterial({ color: "{% if design_before %}{{ design_before.outsole_color_right }}{% else %}#ffffff{% endif %}", map: new THREE.TextureLoader().load('{% if design_before %}{{ design_before.outsole_material_right.file.url }}{% else %}{{ mat1.file.url }}{% endif %}'), side: THREE.DoubleSide });
         right_sole.material.pk = "{% if design_before %}{{ design_before.outsole_material_right.pk }}{% else %}{{ mat1.pk }}{% endif %}";
         scene.add(right_sole);
-        right_sole.position.z = 2;
     }
 
     var gui = new dat.GUI();
@@ -364,7 +358,6 @@
                 left_shoelace.material.pk = "{{ mat3.pk }}";
             }
             left_shoelace.material.map = new THREE.TextureLoader().load(lm_shoelace_url);
-            console.log(left_shoelace.material.pk)
         });
         lm_upper.onChange(function (jar) {
             var left_upper_material = lm_upper.object.o;
@@ -380,7 +373,6 @@
                 left_upper.material.pk = "{{ mat3.pk }}";
             }
             left_upper.material.map = new THREE.TextureLoader().load(lm_upper_url);
-            console.log(left_upper.material.pk)
         });
         lm_tongue.onChange(function (jar) {
             var left_tongue_material = lm_tongue.object.p;
@@ -396,7 +388,6 @@
                 left_tongue.material.pk = "{{ mat3.pk }}";
             }
             left_tongue.material.map = new THREE.TextureLoader().load(lm_tongue_url);
-            console.log(left_tongue.material.pk)
         });
         lm_bottom.onChange(function (jar) {
             var left_bottom_material = lm_bottom.object.q;
@@ -412,7 +403,6 @@
                 left_bottom.material.pk = "{{ mat3.pk }}";
             }
             left_bottom.material.map = new THREE.TextureLoader().load(lm_bottom_url);
-            console.log(left_bottom.material.pk)
         });
         lm_sole.onChange(function (jar) {
             var left_sole_material = lm_sole.object.r;
@@ -428,7 +418,6 @@
                 left_sole.material.pk = "{{ mat3.pk }}";
             }
             left_sole.material.map = new THREE.TextureLoader().load(lm_sole_url);
-            console.log(left_sole.material.pk)
         });
 
         // 右足の素材の変更時の処理
@@ -514,14 +503,18 @@
     }
     var guiContainer = document.getElementById('guiContainer');
     guiContainer.appendChild(gui.domElement);
-    guiContainer.addEventListener('mouseover', function () {
-        controls.enabled = false;
-    })
-    guiContainer.addEventListener('mouseout', function () {
+    screen.addEventListener('mouseenter', function () {
         controls.enabled = true;
     })
-
-    camera.position.z = 4;
+    screen.addEventListener('mouseout', function () {
+        controls.enabled = false;
+    })
+    guiContainer.addEventListener('mouseenter', function () {
+        controls.enabled = false;
+    })
+    guiContainer.addEventListener('mouseleave', function () {
+        controls.enabled = true;
+    })
 
     var ambientLight = new THREE.AmbientLight(0x888888, 0.9);
     scene.add(ambientLight);
