@@ -27,7 +27,8 @@
                         {{ recipient_data.postal_code_recipient }}
                     </div>
                     <div>
-                        {{ recipient_data.prefecture_recipient }} {{ recipient_data.address_city_recipient }}
+                        {{ recipient_pref }}
+                        {{ recipient_data.address_city_recipient }}
                         {{ recipient_data.address_detail_recipient }}
                     </div>
                 </div>
@@ -48,7 +49,8 @@
                         {{ recipient_data.postal_code_recipient }}
                     </div>
                     <div>
-                        {{ recipient_data.prefecture_recipient }} {{ recipient_data.address_city_recipient }}
+                        {{ recipient_pref }}
+                        {{ request.session.recipient_data.address_city_recipient }}
                         {{ recipient_data.address_detail_recipient }}
                     </div>
                     {% else %}
@@ -58,7 +60,8 @@
                         {{ orderer_data.postal_code_orderer }}
                     </div>
                     <div>
-                        {{ orderer_data.prefecture_orderer }} {{ orderer_data.address_city_orderer }}
+                        {{ orderer_pref }}
+                        {{ orderer_data.address_city_orderer }}
                         {{ orderer_data.address_detail_orderer }}
                     </div>
                     {% endif %}
@@ -66,8 +69,8 @@
 
                 <h3 class="w-full font-semibold text-2xl mb-5">{% trans '3. ご注文の確定' %}</h3>
 
-                {% if orderer_data.payment == "P1" %}
-                {% if card %}
+                {% if request.session.orderer_data.payment == "P1" %}
+                {% if cards %}
                 <label class="switch">
                     <input type="checkbox" id="show-new-card">
                     <span class="slider"></span>
@@ -78,7 +81,7 @@
                         <h4>登録済みのカード</h4>
                         <div>
                             <select name="use_default_card" id="use_default_card">
-                                {% for c in card %}
+                                {% for c in cards %}
                                 <option value="{{ c.id }}">**** **** **** {{ c.last4 }}
                                     ({{ c.exp_month }}/{{ c.exp_year }})
                                 </option>
@@ -159,10 +162,12 @@
     if (current_card) {
         new_card.classList.add("hidden");
     }
-    show_new_card_check.addEventListener("change", () => {
-        current_card.classList.toggle("hidden");
-        new_card.classList.toggle("hidden");
-    });
+    if (show_new_card_check) {
+        show_new_card_check.addEventListener("change", () => {
+            current_card.classList.toggle("hidden");
+            new_card.classList.toggle("hidden");
+        });
+    }
 </script>
 <script nonce="">
     // stripe.js クレジットカード
@@ -189,7 +194,9 @@
 
     var card = elements.create('card', { style: style });
 
-    card.mount('#card-element');
+    if (current_card) {
+        card.mount('#card-element');
+    }
 
     // Handle real-time validation errors from the card Element.
     card.addEventListener('change', function (event) {
@@ -203,19 +210,21 @@
 
     // Handle form submission.
     var form = document.getElementById('stripe-form');
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        stripe.createToken(card).then(function (result) {
-            if (result.error) {
-                // Inform the user if there was an error.
-                var errorElement = document.getElementById('card-errors');
-                errorElement.textContent = result.error.message;
-            } else {
-                // Send the token to your server.
-                stripeTokenHandler(result.token);
-            }
+    if (form) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            stripe.createToken(card).then(function (result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+            });
         });
-    });
+    }
 
     // Submit the form with the token ID.
     function stripeTokenHandler(token) {

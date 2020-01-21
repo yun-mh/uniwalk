@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load i18n static humanize %}
+
+{% block page_title %}
+{% trans 'デザインギャラリー' %}
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="mx-auto pt-16 pb-10">
+
+    <h2 class="text-center">{% trans 'ギャラリー' %}</h2>
+    <div class="container mx-auto flex">
+        <div class="w-full flex flex-wrap mb-10">
+            <div class="w-full flex">
+                <div class="w-1/3 pr-10">
+                    <h2 class="text-sm font-semibold text-blue-500 mb-5">{% trans '商品カテゴリー' %}</h2>
+                    <ul>
+                        <li class="flex justify-between mb-2 text-sm">
+                            <a href="{% url 'products:list' %}">{% trans 'すべて' %}</a>
+                            <span class="text-gray-500">{{ designs|length }}</span>
+                        </li>
+                        {% for category in categories %}
+                        <li class="flex justify-between mb-2 text-sm">
+                            <a href="{% url 'products:list-category' category.pk %}">{{ category }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="w-full">
+                    {% if designs %}
+                    {% for design in designs %}
+                    <div class="p-5 border border-gray-400 mb-5 shadow-md">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center">
+                                <span class="font-semibold mr-3">{{ design.user.get_email_name }}</span>
+                                <span class="text-gray-500">{{ design.created|date:'Y-m-d' }}</span>
+                            </div>
+                            <div class="flex items-center">
+                                {% if user.is_authenticated %}
+                                <a id="{{ design.pk }}" class="like">
+                                    <i
+                                        class='{% for check_user in design.likes.all %}{% if check_user == user  %}fas fa-heart text-lg text-red-600 {% endif %}{% endfor %}far fa-heart text-lg'></i>
+                                </a>
+                                {% endif %}
+                                <span id="count{{ design.pk }}" class="ml-3">{{ design.total_likes }}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-around">
+                                {% for image in design.images.all %}
+                                <div class="w-1/4 h-56 bg-cover bg-center"
+                                    style="background-image: url('{{ image.front.url }}');"></div>
+                                <div class="w-1/4 h-56 bg-cover bg-center"
+                                    style="background-image: url('{{ image.side.url }}');"></div>
+                                <div class="w-1/4 h-56 bg-cover bg-center"
+                                    style="background-image: url('{{ image.up.url }}');"></div>
+                                <div class="w-1/4 h-56 bg-cover bg-center"
+                                    style="background-image: url('{{ image.down.url }}');"></div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="flex items-center justify-center mx-auto container my-8">
+                        {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="text-teal-500">
+                            <i class="fas fa-arrow-left fa-lg"></i>
+                        </a>
+                        {% endif %}
+
+                        <span class="mx-3 font-medium text-lg">
+                            {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}
+                            {{ current_page }} ページ{% endblocktrans %}
+                        </span>
+
+                        {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="text-teal-500">
+                            <i class="fas fa-arrow-right fa-lg"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+
+                    {% else %}
+                    <p class="flex justify-center items-center font-semibold w-full h-50vh text-center text-2xl">
+                        <i class="fas fa-grin-beam-sweat fa-2x text-teal-500"></i> <span
+                            class="ml-5">デザインがまだ存在しません。</span>
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascript %}
+<script>
+    $('.like').click(function () {
+        var pk = $(this).attr('id') // 클릭한 요소의 attribute 중 name의 값을 가져온다.
+        $.ajax({
+            type: "POST", // 데이터를 전송하는 방법을 지정한다.
+            url: "{% url 'designs:like' %}", // 통신할 url을 지정한다.
+            data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, // 서버로 데이터를 전송할 때 이 옵션을 사용한다.
+            dataType: "json", // 서버측에서 전송한 데이터를 어떤 형식의 데이터로서 해석할 것인가를 지정한다. 없으면 알아서 판단한다.
+            // 서버측에서 전송한 데이터 views.py like 메소드
+            // context = {'likes_count' : memo.total_likes, 'message' : message}
+            // json.dump(context)를 통해서 json 형식으로 전달된다.
+
+            success: function (res) { // 성공했을 때 호출할 콜백을 지정한다.
+                console.log($("#" + pk))
+                if (res.check_like == "True") {
+                    $("#" + pk).html("<i class='fas fa-heart text-lg text-red-600'></i>")
+                } else {
+                    $("#" + pk).html("<i class='far fa-heart text-lg'></i>")
+                }
+                $('#count' + pk).html(res.likes_count);
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    })
+</script>
+{% endblock %}

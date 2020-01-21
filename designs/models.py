@@ -159,6 +159,7 @@ class Design(core_models.TimeStampedModel):
         _("番号"), max_length=40, default=create_custom_design_code, blank=True, null=True
     )
     customize_code = models.CharField("カスタマイズデザインコード", max_length=11)
+    likes = models.ManyToManyField("users.User", related_name="likes")
 
     @property
     def first_image(self):
@@ -171,6 +172,10 @@ class Design(core_models.TimeStampedModel):
     def get_key_four_images(self):
         images = self.objects.first().images
         return images
+
+    @property
+    def total_likes(self):
+        return self.likes.count()
 
     def save(self, *args, **kwargs):
         product_code = self.product.product_code

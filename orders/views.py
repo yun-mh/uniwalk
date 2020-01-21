@@ -19,6 +19,7 @@ from cards import models as card_models
 from carts import models as cart_models
 from . import forms, models
 import stripe
+from localflavor.jp.jp_prefectures import JP_PREFECTURE_CODES, JP_PREFECTURES
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -140,6 +141,7 @@ class SelectPaymentView(FormView):
             total += cart_item.product.price * cart_item.quantity
         context = {
             "recipient_data": recipient_data,
+            "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"]) - 1][1],
             "orderer_form": orderer_form,
             "cart": cart,
             "total": total,
@@ -214,25 +216,30 @@ class OrderCheckView(FormView):
         total = 0
         for cart_item in cart_items:
             total += cart_item.product.price * cart_item.quantity
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            try:
+                cards = stripe.Customer.list_sources(
+                            user.stripe_customer_id,
+                            object='card'
+                        )
+            except:
+                cards = {"data": []}
+            card_list = cards["data"]
+            context = {}
+            if len(card_list) > 0:
+                context = {
+                    "cards": card_list,
+                }
         context = {
             "recipient_data": recipient_data,
+            "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"]) - 1][1],
             "orderer_data": orderer_data,
+            "orderer_pref": JP_PREFECTURE_CODES[int(orderer_data["prefecture_orderer"]) - 1][1],
             "card_form": card_form,
             "cart": cart,
             "total": total,
         }
-        if self.request.user.is_authenticated:
-            user = self.request.user
-            cards = stripe.Customer.list_sources(
-                        user.stripe_customer_id,
-                        limit=3,
-                        object='card'
-                    )
-            card_list = cards["data"]
-            if len(card_list) > 0:
-                context.update({
-                    "card": card_list
-                })
         return render(self.request, "orders/order-check.html", context)
 
     def post(self, *args, **kwargs):

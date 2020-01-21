@@ -31,40 +31,66 @@ class CheckoutForm(forms.ModelForm):
             "address_city_recipient",
             "address_detail_recipient",
         )
-        widgets = {
-            "last_name_recipient": forms.TextInput(),
-            "first_name_recipient": forms.TextInput(),
-            "last_name_recipient_kana": forms.TextInput(),
-            "first_name_recipient_kana": forms.TextInput(),
-            "phone_number_recipient": forms.TextInput(),
-            "prefecture_recipient": forms.TextInput(),
-            "address_city_recipient": forms.TextInput(),
-            "address_detail_recipient": forms.TextInput(),
-        }
+        widgets = (
+            {
+                "last_name_recipient": forms.TextInput(attrs={"placeholder": _("姓")}),
+                "first_name_recipient": forms.TextInput(attrs={"placeholder": _("名")}),
+                "last_name_recipient_kana": forms.TextInput(
+                    attrs={"placeholder": _("姓(カナ)")}
+                ),
+                "first_name_recipient_kana": forms.TextInput(
+                    attrs={"placeholder": _("名(カナ)")}
+                ),
+                "phone_number_recipient": forms.TextInput(
+                    attrs={"placeholder": _("電話番号")}
+                ),
+                "prefecture_recipient": forms.TextInput(
+                    attrs={"placeholder": _("都道府県")}
+                ),
+                "address_city_recipient": forms.TextInput(
+                    attrs={"placeholder": _("市区町村番地")}
+                ),
+                "address_detail_recipient": forms.TextInput(
+                    attrs={"placeholder": _("建物名・号室")}
+                ),
+            },
+        )
 
     last_name_recipient = forms.CharField(
-        label=_(""), widget=forms.TextInput(attrs={"placeholder": _("")})
+        label=_("姓"), widget=forms.TextInput(attrs={"placeholder": _("姓")})
     )
     first_name_recipient = forms.CharField(
-        label=_(""), widget=forms.TextInput(attrs={"placeholder": _("")})
+        label=_("名"), widget=forms.TextInput(attrs={"placeholder": _("名")})
     )
     last_name_recipient_kana = forms.CharField(
-        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+        label=_("姓(カナ)"),
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": _("姓(カナ)")}),
     )
     first_name_recipient_kana = forms.CharField(
-        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+        label=_("名(カナ)"),
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": _("名(カナ)")}),
     )
     phone_number_recipient = forms.CharField(
-        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+        label=_("電話番号"),
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": _("電話番号")}),
     )
-    prefecture_recipient = forms.CharField(
-        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
-    )
+    # prefecture_recipient = forms.CharField(
+    #     label=_("都道府県"),
+    #     required=True,
+    #     widget=forms.TextInput(attrs={"placeholder": _("都道府県")}),
+    # )
     address_city_recipient = forms.CharField(
-        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+        label=_("市区町村番地"),
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": _("市区町村番地")}),
     )
     address_detail_recipient = forms.CharField(
-        label=_(""), required=True, widget=forms.TextInput(attrs={"placeholder": _("")})
+        label=_("建物名・号室"),
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": _("建物名・号室")}),
     )
     postal_code_recipient = JPPostalCodeField(
         label=_("郵便番号"), widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),

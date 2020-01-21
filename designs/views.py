@@ -1,11 +1,12 @@
 import base64, json
 from django.core.files.base import ContentFile
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import View, ListView
 from . import models, forms
 from products import models as product_models
 from designs import models as design_models
+from users import models as user_models
 
 
 def base64_file(data, name=None):
@@ -184,3 +185,46 @@ def get_palette(request):
         return HttpResponse(response, content_type="application/json")
     else:
         raise Http404
+
+
+class GalleriesListView(ListView):
+
+    """ デザインギャラリー """
+
+    model = models.Design
+    paginate_by = 10
+    context_object_name = "designs"
+    extra_context = {
+        "products": product_models.Product.objects.all(),
+        "count": len(product_models.Product.objects.all()),
+        "categories": product_models.Category.objects.all(),
+    }
+    template_name = "galleries/galleries_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        designs = models.Design.objects.filter(likes=self.request.user.pk)
+        check_like = [ design.pk for design in designs ]
+        context["check_like"] = check_like
+        return context
+
+    def get_queryset(self):
+        designs = models.Design.objects.all().exclude(user__isnull=True)
+        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+
+
+def design_like(request):
+    if request.method == 'POST':
+        user = request.user # 로그인한 유저를 가져온다.
+        design_pk = request.POST.get('pk', None)
+        design = models.Design.objects.get(pk=design_pk) #해당 메모 오브젝트를 가져온다.
+
+        if design.likes.filter(email=user.email).exists(): #이미 해당 유저가 likes컬럼에 존재하면
+            design.likes.remove(user) #likes 컬럼에서 해당 유저를 지운다.
+            check_like = False
+        else:
+            design.likes.add(user)
+            check_like = True
+        likes_count = str(design.total_likes)
+        response = json.dumps({'likes_count': likes_count, "check_like": str(check_like)})
+    return HttpResponse(response, content_type='application/json')
