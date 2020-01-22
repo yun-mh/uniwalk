@@ -31,7 +31,8 @@ class CustomizeView(ListView):
 
     def get_queryset(self):
         pk = self.kwargs.get("pk")
-        return models.Design.objects.filter(product=pk).exclude(user__isnull=True).order_by("-created")
+        designs = models.Design.objects.filter(product=pk).exclude(user__isnull=True).all()
+        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
 
     def get_context_data(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
@@ -148,6 +149,16 @@ def get_palette(request):
         uppersole_color_right = request.POST.get("uppersole_color_right")
         shoelace_color_right = request.POST.get("shoelace_color_right")
         tongue_color_right = request.POST.get("tongue_color_right")
+        name_outsole_material_left = models.Material.objects.get(pk=request.POST.get("outsole_material_left")).name
+        name_midsole_material_left = models.Material.objects.get(pk=request.POST.get("midsole_material_left")).name
+        name_uppersole_material_left = models.Material.objects.get(pk=request.POST.get("uppersole_material_left")).name
+        name_shoelace_material_left = models.Material.objects.get(pk=request.POST.get("shoelace_material_left")).name
+        name_tongue_material_left = models.Material.objects.get(pk=request.POST.get("tongue_material_left")).name
+        name_outsole_material_right = models.Material.objects.get(pk=request.POST.get("outsole_material_right")).name
+        name_midsole_material_right = models.Material.objects.get(pk=request.POST.get("midsole_material_right")).name
+        name_uppersole_material_right = models.Material.objects.get(pk=request.POST.get("uppersole_material_right")).name
+        name_shoelace_material_right = models.Material.objects.get(pk=request.POST.get("shoelace_material_right")).name
+        name_tongue_material_right = models.Material.objects.get(pk=request.POST.get("tongue_material_right")).name
         outsole_material_left = models.Material.objects.get(pk=request.POST.get("outsole_material_left")).file.url
         midsole_material_left = models.Material.objects.get(pk=request.POST.get("midsole_material_left")).file.url
         uppersole_material_left = models.Material.objects.get(pk=request.POST.get("uppersole_material_left")).file.url
@@ -170,6 +181,16 @@ def get_palette(request):
                 "uppersole_color_right": uppersole_color_right,
                 "shoelace_color_right": shoelace_color_right,
                 "tongue_color_right": tongue_color_right,
+                "name_outsole_material_left": name_outsole_material_left,
+                "name_midsole_material_left": name_midsole_material_left,
+                "name_uppersole_material_left": name_uppersole_material_left,
+                "name_shoelace_material_left": name_shoelace_material_left,
+                "name_tongue_material_left": name_tongue_material_left,
+                "name_outsole_material_right": name_outsole_material_right,
+                "name_midsole_material_right": name_midsole_material_right,
+                "name_uppersole_material_right": name_uppersole_material_right,
+                "name_shoelace_material_right": name_shoelace_material_right,
+                "name_tongue_material_right": name_tongue_material_right,
                 "outsole_material_left": outsole_material_left,
                 "midsole_material_left": midsole_material_left,
                 "uppersole_material_left": uppersole_material_left,
@@ -215,12 +236,12 @@ class GalleriesListView(ListView):
 
 def design_like(request):
     if request.method == 'POST':
-        user = request.user # 로그인한 유저를 가져온다.
+        user = request.user
         design_pk = request.POST.get('pk', None)
-        design = models.Design.objects.get(pk=design_pk) #해당 메모 오브젝트를 가져온다.
+        design = models.Design.objects.get(pk=design_pk)
 
-        if design.likes.filter(email=user.email).exists(): #이미 해당 유저가 likes컬럼에 존재하면
-            design.likes.remove(user) #likes 컬럼에서 해당 유저를 지운다.
+        if design.likes.filter(email=user.email).exists():
+            design.likes.remove(user)
             check_like = False
         else:
             design.likes.add(user)

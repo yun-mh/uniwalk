@@ -279,7 +279,6 @@ select {
   background: white;
   background-image: none;
 }
-/* Remove IE arrow */
 select::-ms-expand {
   display: none;
 }
@@ -287,7 +286,7 @@ select::-ms-expand {
 select {
   @apply w-full;
 }
-/* Custom Select */
+
 .select {
   width: 100%;
   position: relative;
@@ -305,7 +304,7 @@ select {
   color: #000;
   cursor: pointer;
 }
-/* Arrow */
+
 .select::after {
   @apply text-gray-600;
   content: "\25BC";
@@ -320,7 +319,7 @@ select {
   -o-transition: 0.25s all ease;
   transition: 0.25s all ease;
 }
-/* Transition */
+
 .select:hover::after {
   color: rgba(114, 43, 255, 1);
 }
@@ -389,75 +388,68 @@ input[type="checkbox"]:not(#show-new-card):checked {
   }
 }
 
-$radioSize: 22px;
-$radioBorder: #d1d7e3;
-$radioActive: #5d9bfb;
+input[type="radio"] {
+  position: absolute;
+  visibility: hidden;
+}
 
-.radio {
-  margin: 16px 0;
+.radio-group .radio-list label {
   display: block;
+  position: relative;
+  font-size: 16px;
+  margin: 0 16px 0 0;
+  padding: 0 0 0 30px;
+  height: 30px;
+  z-index: 9;
   cursor: pointer;
-  input {
-    display: none;
-    & + span {
-      line-height: $radioSize;
-      height: $radioSize;
-      padding-left: $radioSize;
-      display: block;
-      position: relative;
-      &:not(:empty) {
-        padding-left: $radioSize + 8;
-      }
-      &:before,
-      &:after {
-        content: "";
-        width: $radioSize;
-        height: $radioSize;
-        display: block;
-        border-radius: 50%;
-        left: 0;
-        top: 0;
-        position: absolute;
-      }
-      &:before {
-        background: $radioBorder;
-        transition: background 0.2s ease,
-          transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2);
-      }
-      &:after {
-        background: #fff;
-        transform: scale(0.78);
-        transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4);
-      }
-    }
-    &:checked + span {
-      &:before {
-        transform: scale(1.04);
-        background: $radioActive;
-      }
-      &:after {
-        transform: scale(0.4);
-        transition: transform 0.3s ease;
-      }
-    }
-  }
-  &:hover {
-    input {
-      & + span {
-        &:before {
-          transform: scale(0.92);
-        }
-        &:after {
-          transform: scale(0.74);
-        }
-      }
-      &:checked + span {
-        &:after {
-          transform: scale(0.4);
-        }
-      }
-    }
-  }
+  transition: all 0.25s linear;
+}
+
+.radio-group .radio-list:hover label {
+  color: #222;
+}
+
+.radio-group .radio-list .check {
+  display: block;
+  position: absolute;
+  border: 5px solid #aaaaaa;
+  border-radius: 100%;
+  height: 25px;
+  width: 25px;
+  top: 0px;
+  left: 0px;
+  z-index: 5;
+  transition: border 0.25s linear;
+  -webkit-transition: border 0.25s linear;
+}
+
+.radio-group .radio-list:hover .check {
+  border: 5px solid rgb(116, 138, 235);
+}
+
+.radio-group .radio-list .check::before {
+  display: block;
+  position: absolute;
+  content: "";
+  border-radius: 100%;
+  height: 11px;
+  width: 11px;
+  top: 2px;
+  left: 2px;
+  margin: auto;
+  transition: background 0.25s linear;
+}
+
+input[type="radio"]:checked ~ .check {
+  border: 5px solid rgb(116, 138, 235);
+}
+
+input[type="radio"]:checked ~ .check::before {
+  background: #722cff;
+}
+
+input[type="radio"]:checked ~ label {
+  color: #722cff;
 }
 
 .switch {

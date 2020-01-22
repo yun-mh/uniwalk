@@ -428,7 +428,8 @@ class MemberCustomizeView(mixins.LoggedInOnlyView, ListView):
 
     def get_queryset(self):
         pk = self.kwargs.get("pk")
-        return design_models.Design.objects.filter(product=pk).exclude(user__isnull=True).order_by("-created")
+        designs = design_models.Design.objects.filter(product=pk).exclude(user__isnull=True).all()
+        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
 
     def get_context_data(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
@@ -597,7 +598,8 @@ class MemberCustomizeModifyView(mixins.LoggedInOnlyView, ListView):
 
     def get_queryset(self):
         pk = self.request.session["product"]
-        return design_models.Design.objects.filter(product=pk).exclude(user__isnull=True).order_by("-created")
+        designs = design_models.Design.objects.filter(product=pk).exclude(user__isnull=True).all()
+        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
 
     def get_context_data(self, *args, **kwargs):
         pk = self.request.session["product"]

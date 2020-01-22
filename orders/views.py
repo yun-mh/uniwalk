@@ -228,9 +228,7 @@ class OrderCheckView(FormView):
             card_list = cards["data"]
             context = {}
             if len(card_list) > 0:
-                context = {
-                    "cards": card_list,
-                }
+                cards = card_list,
         context = {
             "recipient_data": recipient_data,
             "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"]) - 1][1],
@@ -239,6 +237,7 @@ class OrderCheckView(FormView):
             "card_form": card_form,
             "cart": cart,
             "total": total,
+            "cards": card_list,
         }
         return render(self.request, "orders/order-check.html", context)
 
