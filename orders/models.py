@@ -1,5 +1,5 @@
 import random, string
-from datetime import datetime
+from datetime import datetime, date
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -122,6 +122,9 @@ class Order(models.Model):
     def count_items_except_one(self):
         return self.order_items.all().count() - 1
 
+    # def profit_by_month(self):
+    #     Order.objects.filter()
+
 
 @receiver(post_save, sender=Order)
 def set_order_code(sender, instance, created, **kwargs):
@@ -188,3 +191,4 @@ class OrderItem(models.Model):
 
     def sub_total(self):
         return self.quantity * self.price
+

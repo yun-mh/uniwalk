@@ -165,25 +165,25 @@ class OrderAdmin(admin.ModelAdmin):
         urls = super().get_urls()
         custom_urls = [
             path(
-                "bill/<int:pk>", self.admin_site.admin_view(self.bill_pdf), name="bill",
+                "bill/<int:pk>/", self.admin_site.admin_view(self.bill_pdf), name="bill",
             ),
             path(
-                "receipt/<int:pk>",
+                "receipt/<int:pk>/",
                 self.admin_site.admin_view(self.receipt_pdf),
                 name="receipt",
             ),
             path(
-                "ordersheet/<int:pk>",
+                "ordersheet/<int:pk>/",
                 self.admin_site.admin_view(self.ordersheet_pdf),
                 name="ordersheet",
             ),
             path(
-                "orderspec/<int:pk>",
+                "orderspec/<int:pk>/",
                 self.admin_site.admin_view(self.orderspec_pdf),
                 name="orderspec",
             ),
             path(
-                "invoice/<int:pk>",
+                "invoice/<int:pk>/",
                 self.admin_site.admin_view(self.invoice_pdf),
                 name="invoice",
             ),

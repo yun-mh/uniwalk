@@ -18,7 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"
         integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
 </head>
-{% load i18n %}
+{% load i18n humanize %}
 
 <body
     class="bg-gray-100 font-sans leading-normal tracking-normal {% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
@@ -35,13 +35,9 @@
                 </div>
                 <div class="w-1/2 pr-0">
                     <div class="flex relative inline-block float-right">
-                        {% block usertools %}
                         {% if has_permission %}
                         <div id="user-tools" class="hidden lg:block text-sm">
-                            {% block welcome-msg %}
                             <strong>{% firstof user.email %}</strong>
-                            {% endblock %}
-                            {% block userlinks %}
                             {% if site_url %}
                             <a href="{{ site_url }}" class="btn-link text-gray-600">{% trans 'View site' %}</a> |
                             {% endif %}
@@ -57,10 +53,8 @@
                             |
                             {% endif %}
                             <a href="{% url 'admin:logout' %}" class="btn-link text-gray-600">{% trans 'Log out' %}</a>
-                            {% endblock %}
                         </div>
                         {% endif %}
-                        {% endblock %}
 
                         <div class="block lg:hidden pr-4">
                             <button id="nav-toggle"
@@ -101,25 +95,25 @@
                             <table class="w-full">
                                 <tbody>
                                     <tr>
-                                        <td>入金前</td>
+                                        <td>{% trans '入金前' %}</td>
                                         <td class="text-center font-semibold text-lg">
                                             {{ before_payment|length }}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>決済処理中</td>
+                                        <td>{% trans '決済処理中' %}</td>
                                         <td class="text-center font-semibold text-lg">
                                             {{ paying|length }}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>決済確認済み</td>
+                                        <td>{% trans '決済確認済み' %}</td>
                                         <td class="text-center font-semibold text-lg">
                                             {{ payment_checked|length }}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>対応中</td>
+                                        <td>{% trans '対応中' %}</td>
                                         <td class="text-center font-semibold text-lg">
                                             {{ dealing_with|length }}
                                         </td>
@@ -128,7 +122,7 @@
                             </table>
                             <div class="text-center pt-5">
                                 <a href="{% url 'admin:orders_order_changelist' %}"
-                                    class="text-blue-600 font-semibold text-sm">詳しく見る</a>
+                                    class="text-blue-600 font-semibold text-sm">{% trans '詳しく見る' %}</a>
                             </div>
                         </div>
                     </div>
@@ -143,19 +137,19 @@
                             <table class="w-full">
                                 <tbody>
                                     <tr>
-                                        <td>取扱商品数</td>
+                                        <td>{% trans '取扱商品数' %}</td>
                                         <td class="text-center font-semibold text-lg">
                                             {{ products|length }}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>会員数</td>
+                                        <td>{% trans '会員数' %}</td>
                                         <td class="text-center font-semibold text-lg">
                                             {{ users|length }}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>登録カスタムデザイン数</td>
+                                        <td>{% trans '登録カスタムデザイン数' %}</td>
                                         <td class="text-center font-semibold text-lg">
                                             {{ designs|length }}
                                         </td>
@@ -169,28 +163,29 @@
                 <div class="w-full p-3">
                     <div class="bg-white border rounded shadow">
                         <div class="border-b p-3">
-                            <h5 class="font-bold uppercase text-gray-600">今月状況</h5>
+                            <h5 class="font-bold uppercase text-gray-600">{% trans '今月状況' %}</h5>
                         </div>
                         <div
                             class="bg-blue-400 text-white font-semibold text-2xl h-20 flex flex-wrap items-center justify-around">
-                            <span>{% now "Y" %} 年 {% now "m" %} 月</span>
-                            <span>&yen; {{ total_revenue_for_month }} | {{ total_orders_for_month|length }}
+                            <span>{% now "Y" %} {% trans '年' %} {% now "m" %} {% trans '月' %}</span>
+                            <span>&yen; {{ total_revenue_for_month | intcomma }} | {{ total_orders_for_month|length }}
                                 {% trans '件' %}</span>
                         </div>
                         <div class="p-5">
                             <table class="w-full">
                                 <tbody>
                                     <tr>
-                                        <td>今日売上実績</td>
+                                        <td>{% trans '今日売上実績' %}</td>
                                         <td class="text-center font-semibold text-lg">
-                                            &yen; {{ total_revenue_for_today }} | {{ total_orders_for_today|length }}
+                                            &yen; {{ total_revenue_for_today | intcomma }} |
+                                            {{ total_orders_for_today|length }}
                                             {% trans '件' %}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>昨日売上実績</td>
+                                        <td>{% trans '昨日売上実績' %}</td>
                                         <td class="text-center font-semibold text-lg">
-                                            &yen; {{ total_revenue_for_yesterday }} |
+                                            &yen; {{ total_revenue_for_yesterday | intcomma }} |
                                             {{ total_orders_for_yesterday|length }}
                                             {% trans '件' %}
                                         </td>
@@ -198,19 +193,15 @@
                                 </tbody>
                             </table>
                             <div class="text-center pt-5">
-                                <a href="" class="text-blue-600 font-semibold text-sm">詳しく見る</a>
+                                <a href="" class="text-blue-600 font-semibold text-sm">{% trans '詳しく見る' %}</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{ content }}
             {% endblock %}
         </div>
-
-
     </div>
-    <!--/container-->
 
     <footer class="bg-white border-t border-gray-400 shadow">
         <div class="container max-w-md mx-auto flex py-8">

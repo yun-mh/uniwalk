@@ -1,6 +1,7 @@
 from django.db import models
 from core import models as core_models
 from django.utils.translation import ugettext_lazy as _
+from orders import models as order_models
 
 
 def create_product_code():
@@ -138,6 +139,9 @@ class Product(core_models.TimeStampedModel):
     def get_next_four_images(self):
         images = self.images.all()[1:5]
         return images
+
+    def get_orders_by_product(self):
+        return len(order_models.OrderItem.objects.filter(product=self.pk))
 
     def save(self, *args, **kwargs):
         product_code = self.category.type_code + self.product_number

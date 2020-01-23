@@ -5,8 +5,9 @@ from .managers import CustomUserManager
 from core.models import JPPrefectureField, JPPostalCodeModelField
 from django.shortcuts import reverse
 from phonenumber_field.modelfields import PhoneNumberField
-from localflavor.jp.jp_prefectures import JP_PREFECTURES, JP_PREFECTURE_CODES
 from core import models as core_models
+from localflavor.jp.jp_prefectures import JP_PREFECTURES, JP_PREFECTURE_CODES
+from datetime import date
 
 # Create your models here.
 def create_member_number():
@@ -67,6 +68,15 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse("users:update-profile")
+
+    def calculate_age(self):
+        today = date.today()
+        age = (
+            today.year
+            - self.birthday.year
+            - ((today.month, today.day) < (self.birthday.month, self.birthday.day))
+        )
+        return age
 
     def save(self, *args, **kwargs):
         if self.is_staff == True or self.is_superuser == True:
