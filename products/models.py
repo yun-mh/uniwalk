@@ -2,6 +2,7 @@ from django.db import models
 from core import models as core_models
 from django.utils.translation import ugettext_lazy as _
 from orders import models as order_models
+from designs import models as design_models
 
 
 def create_product_code():
@@ -47,9 +48,6 @@ class Template(models.Model):
     outsole_left = models.FileField(
         upload_to=generate_path, null=True, blank=True, unique=True
     )
-    liner_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
-    )
     shoelace_right = models.FileField(
         upload_to=generate_path, null=True, blank=True, unique=True
     )
@@ -63,9 +61,6 @@ class Template(models.Model):
         upload_to=generate_path, null=True, blank=True, unique=True
     )
     outsole_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
-    )
-    liner_right = models.FileField(
         upload_to=generate_path, null=True, blank=True, unique=True
     )
 
@@ -93,6 +88,13 @@ class Category(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.product_type
+
+    def count_designs_by_category(self):
+        return len(
+            design_models.Design.objects.filter(
+                product__category__product_type__contains=self.product_type
+            ).exclude(user__isnull=True)
+        )
 
 
 class Product(core_models.TimeStampedModel):
@@ -142,6 +144,13 @@ class Product(core_models.TimeStampedModel):
 
     def get_orders_by_product(self):
         return len(order_models.OrderItem.objects.filter(product=self.pk))
+
+    def count_designs_by_product(self):
+        return len(
+            design_models.Design.objects.filter(
+                product__name__contains=self.name
+            ).exclude(user__isnull=True)
+        )
 
     def save(self, *args, **kwargs):
         product_code = self.category.type_code + self.product_number

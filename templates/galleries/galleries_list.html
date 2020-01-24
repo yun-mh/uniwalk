@@ -22,7 +22,8 @@
                         </li>
                         {% for category in categories %}
                         <li class="flex justify-between mb-2 text-sm">
-                            <a href="{% url 'products:list-category' category.pk %}">{{ category }}</a>
+                            <a
+                                href="{% url 'products:list-category' category.pk %}">{{ category.count_designs_by_category }}</a>
                         </li>
                         {% endfor %}
                     </ul>

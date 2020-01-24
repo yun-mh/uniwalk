@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import operator
 from functools import reduce
+from django.views.generic import ListView
 from django.shortcuts import render, redirect, render_to_response
 from django.db.models import Q
 from django.http import HttpResponse
@@ -111,6 +112,21 @@ class ConfigAdminSite(AdminSite):
                 "analytics/footsize/",
                 self.admin_view(self.footsize_analytics),
                 name="footsize-analytics",
+            ),
+            path(
+                "analytics/rank/",
+                self.admin_view(self.DesignAnalyticsView.as_view()),
+                name="design-analytics",
+            ),
+            path(
+                "analytics/rank/category-<int:pk>/",
+                self.admin_view(self.DesignAnalyticsByCategoryView.as_view()),
+                name="design-analytics-category",
+            ),
+            path(
+                "analytics/rank/product-<int:pk>/",
+                self.admin_view(self.DesignAnalyticsByProductView.as_view()),
+                name="design-analytics-product",
             ),
             path(
                 "switch-year/",
@@ -375,17 +391,98 @@ class ConfigAdminSite(AdminSite):
         }
         return render(request, "admin/footsize-analytics.html", context)
 
-    # 人気デザイン分析
-    def design_analytics(self, request):
-        context = {
-            "site_title": self.site_title,
-            "site_header": self.site_header,
-            "site_url": self.site_url,
-            "has_permission": self.has_permission(request),
-            "available_apps": self.get_app_list(request),
-            "is_popup": False,
+    ## 人気デザイン分析
+    # 全体表示
+    class DesignAnalyticsView(ListView):
+        model = designs_model.Design
+        paginate_by = 5
+        context_object_name = "designs"
+        extra_context = {
+            "designs_all": designs_model.Design.objects.all().exclude(user__isnull=True),
+            "products": products_model.Product.objects.all(),
+            "count": len(products_model.Product.objects.all()),
+            "categories": products_model.Category.objects.all(),
         }
-        return render(request, "admin/design-analytics.html", context)
+        template_name = "admin/design-analytics.html"
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            if self.request.user.is_active and self.request.user.is_staff:
+                has_permission = True
+            else:
+                has_permission = False
+            context["site_title"] = ConfigAdminSite.site_title
+            context["site_header"] = ConfigAdminSite.site_header
+            context["site_url"] = ConfigAdminSite.site_url
+            context["has_permission"] = has_permission
+            context["is_popup"] = False
+            return context
+
+        def get_queryset(self):
+            designs = designs_model.Design.objects.all().exclude(user__isnull=True)
+            return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+
+    # カテゴリー別表示
+    class DesignAnalyticsByCategoryView(ListView):
+        model = designs_model.Design
+        paginate_by = 5
+        context_object_name = "designs"
+        extra_context = {
+            "designs_all": designs_model.Design.objects.all().exclude(user__isnull=True),
+            "products": products_model.Product.objects.all(),
+            "count": len(products_model.Product.objects.all()),
+            "categories": products_model.Category.objects.all(),
+        }
+        template_name = "admin/design-analytics.html"
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            if self.request.user.is_active and self.request.user.is_staff:
+                has_permission = True
+            else:
+                has_permission = False
+            context["site_title"] = ConfigAdminSite.site_title
+            context["site_header"] = ConfigAdminSite.site_header
+            context["site_url"] = ConfigAdminSite.site_url
+            context["has_permission"] = has_permission
+            context["is_popup"] = False
+            return context
+
+        def get_queryset(self):
+            pk = self.kwargs.get("pk")
+            designs = designs_model.Design.objects.filter(product__category=pk).exclude(user__isnull=True)
+            return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+
+    # 商品別表示
+    class DesignAnalyticsByProductView(ListView):
+        model = designs_model.Design
+        paginate_by = 5
+        context_object_name = "designs"
+        extra_context = {
+            "designs_all": designs_model.Design.objects.all().exclude(user__isnull=True),
+            "products": products_model.Product.objects.all(),
+            "count": len(products_model.Product.objects.all()),
+            "categories": products_model.Category.objects.all(),
+        }
+        template_name = "admin/design-analytics.html"
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            if self.request.user.is_active and self.request.user.is_staff:
+                has_permission = True
+            else:
+                has_permission = False
+            context["site_title"] = ConfigAdminSite.site_title
+            context["site_header"] = ConfigAdminSite.site_header
+            context["site_url"] = ConfigAdminSite.site_url
+            context["has_permission"] = has_permission
+            context["is_popup"] = False
+            return context
+
+        def get_queryset(self):
+            pk = self.kwargs.get("pk")
+            designs = designs_model.Design.objects.filter(product=pk).exclude(user__isnull=True)
+            return sorted(designs, key= lambda design: design.total_likes, reverse=True)
 
     def switch_year(self, request):
         year = request.GET.get("year", None)
