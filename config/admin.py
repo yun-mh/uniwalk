@@ -3,12 +3,14 @@ import operator
 from functools import reduce
 from django.shortcuts import render, redirect, render_to_response
 from django.db.models import Q
+from django.http import HttpResponse
 from django.urls import path, reverse
 from django.contrib.admin import AdminSite
 from django.views.decorators.cache import never_cache
 from django.template.response import TemplateResponse
 from django.utils.translation import ugettext_lazy as _
 from designs import models as designs_model
+from feet import models as feet_model
 from orders import models as orders_model
 from products import models as products_model
 from users import models as users_model
@@ -110,6 +112,11 @@ class ConfigAdminSite(AdminSite):
                 self.admin_view(self.footsize_analytics),
                 name="footsize-analytics",
             ),
+            path(
+                "switch-year/",
+                self.admin_view(self.switch_year),
+                name="switch-year",
+            ),
         ]
         return custom_urls + urls
 
@@ -169,9 +176,34 @@ class ConfigAdminSite(AdminSite):
 
     # 販売分析
     def sales_analytics(self, request):
-        # if request.method == "POST":
+        try:
+            year = request.session["year"]
+        except KeyError:
+            year = 2020
         products = products_model.Product.objects.all()
+        orders_by_year = orders_model.Order.objects.filter(Q(step__step_code__contains="T03") | Q(step__step_code__contains="T11") | Q(step__step_code__contains="T21")).filter(order_date__year=year)
+        profit_by_month = {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
+            8: 0,
+            9: 0,
+            10: 0,
+            11: 0,
+            12: 0,
+        }
+        for month in range(1, 13):
+            orders = orders_by_year.filter(order_date__month=month)
+            profit = 0
+            for order in orders:
+                profit += order.amount
+            profit_by_month[month] = profit
         context = {
+            "profit_by_month": profit_by_month,
             "products": products,
             "site_title": self.site_title,
             "site_header": self.site_header,
@@ -184,7 +216,156 @@ class ConfigAdminSite(AdminSite):
 
     # 足サイズ分析
     def footsize_analytics(self, request):
+        footsizes = feet_model.Footsize.objects.all()
+        male_sizes = footsizes.filter(user__gender__contains="M")
+        female_sizes = footsizes.filter(user__gender__contains="F")
+        ## 男性のサイズ分類
+        # 足長
+        length_male_left = {
+            230: 0,
+            240: 0,
+            250: 0,
+            260: 0,
+            270: 0,
+            280: 0,
+            290: 0,
+            300: 0,
+        }
+        for size in range(230, 290, 10):
+            items_num = len(male_sizes.filter(length_left__gte=size, length_left__lt=size+10))
+            length_male_left[size+10] = items_num
+        left_under230 = len(male_sizes.filter(length_left__lt=230))
+        length_male_left[230] = left_under230
+        left_over290 = len(male_sizes.filter(length_left__gte=290))
+        length_male_left[300] = left_over290
+
+        length_male_right = {
+            230: 0,
+            240: 0,
+            250: 0,
+            260: 0,
+            270: 0,
+            280: 0,
+            290: 0,
+            300: 0,
+        }
+        for size in range(230, 290, 10):
+            items_num = len(male_sizes.filter(length_right__gte=size, length_right__lt=size+10))
+            length_male_right[size+10] = items_num
+        right_under230 = len(male_sizes.filter(length_right__lt=230))
+        length_male_right[230] = right_under230
+        right_over290 = len(male_sizes.filter(length_right__gte=290))
+        length_male_right[300] = right_over290
+
+        # 足幅
+        width_male_left = {
+            80: 0,
+            90: 0,
+            100: 0,
+            110: 0,
+            120: 0,
+        }
+        for size in range(80, 110, 10):
+            items_num = len(male_sizes.filter(width_left__gte=size, width_left__lt=size+10))
+            width_male_left[size+10] = items_num
+        left_under80 = len(male_sizes.filter(width_left__lt=80))
+        width_male_left[80] = left_under80
+        left_over110 = len(male_sizes.filter(width_left__gte=110))
+        width_male_left[120] = left_over110
+
+        width_male_right = {
+            80: 0,
+            90: 0,
+            100: 0,
+            110: 0,
+            120: 0,
+        }
+        for size in range(80, 110, 10):
+            items_num = len(male_sizes.filter(width_right__gte=size, width_right__lt=size+10))
+            width_male_right[size+10] = items_num
+        right_under80 = len(male_sizes.filter(width_right__lt=80))
+        width_male_right[80] = right_under80
+        right_over110 = len(male_sizes.filter(width_right__gte=110))
+        width_male_right[120] = right_over110
+
+        ## 女性のサイズ分類
+        # 足長
+        length_female_left = {
+            230: 0,
+            240: 0,
+            250: 0,
+            260: 0,
+            270: 0,
+            280: 0,
+            290: 0,
+            300: 0,
+        }
+        for size in range(230, 290, 10):
+            items_num = len(female_sizes.filter(length_left__gte=size, length_left__lt=size+10))
+            length_female_left[size+10] = items_num
+        left_under230 = len(female_sizes.filter(length_left__lt=230))
+        length_female_left[230] = left_under230
+        left_over290 = len(female_sizes.filter(length_left__gte=290))
+        length_female_left[300] = left_over290
+
+        length_female_right = {
+            230: 0,
+            240: 0,
+            250: 0,
+            260: 0,
+            270: 0,
+            280: 0,
+            290: 0,
+            300: 0,
+        }
+        for size in range(230, 290, 10):
+            items_num = len(female_sizes.filter(length_right__gte=size, length_right__lt=size+10))
+            length_female_right[size+10] = items_num
+        right_under230 = len(female_sizes.filter(length_right__lt=230))
+        length_female_right[230] = right_under230
+        right_over290 = len(female_sizes.filter(length_right__gte=290))
+        length_female_right[300] = right_over290
+
+        # 足幅
+        width_female_left = {
+            80: 0,
+            90: 0,
+            100: 0,
+            110: 0,
+            120: 0,
+        }
+        for size in range(80, 110, 10):
+            items_num = len(female_sizes.filter(width_left__gte=size, width_left__lt=size+10))
+            width_female_left[size+10] = items_num
+        left_under80 = len(female_sizes.filter(width_left__lt=80))
+        width_female_left[80] = left_under80
+        left_over110 = len(female_sizes.filter(width_left__gte=110))
+        width_female_left[120] = left_over110
+
+        width_female_right = {
+            80: 0,
+            90: 0,
+            100: 0,
+            110: 0,
+            120: 0,
+        }
+        for size in range(80, 110, 10):
+            items_num = len(female_sizes.filter(width_right__gte=size, width_right__lt=size+10))
+            width_female_right[size+10] = items_num
+        right_under80 = len(female_sizes.filter(width_right__lt=80))
+        width_female_right[80] = right_under80
+        right_over110 = len(female_sizes.filter(width_right__gte=110))
+        width_female_right[120] = right_over110
+
         context = {
+            "length_male_left": length_male_left,
+            "length_male_right": length_male_right,
+            "width_male_left": width_male_left,
+            "width_male_right": width_male_right,
+            "length_female_left": length_female_left,
+            "length_female_right": length_female_right,
+            "width_female_left": width_female_left,
+            "width_female_right": width_female_right,
             "site_title": self.site_title,
             "site_header": self.site_header,
             "site_url": self.site_url,
@@ -206,3 +387,8 @@ class ConfigAdminSite(AdminSite):
         }
         return render(request, "admin/design-analytics.html", context)
 
+    def switch_year(self, request):
+        year = request.GET.get("year", None)
+        if year is not None:
+            request.session["year"] = year
+        return HttpResponse(status=200)

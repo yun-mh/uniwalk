@@ -9,10 +9,10 @@
             </div>
             <div class="p-5">
                 <div class="mb-5">
-                    <label for="">{% trans '年度' %}</label>
-                    <select name="" id="" class="">
-                        <option value="" selected>2020</option>
-                        <option value="">2019</option>
+                    <label for="year">{% trans '年度' %}</label>
+                    <select id="year">
+                        <option value="2020">2020</option>
+                        <option value="2019" {% if request.session.year == '2019' %}selected{% endif %}>2019</option>
                     </select>
                 </div>
                 <canvas id="salesLine" width="400" height="400"></canvas>
@@ -53,20 +53,20 @@
                     '12月'
                 ],
                 datasets: [{
-                    data: [3250000, 7250000, 5250000, 8250000, 9250000, 6250000, 6250000, 3250000],
-                    backgroundColor: 'rgba(75, 123, 236, 0.5)',
-                    borderColor: 'rgba(75, 123, 236, 1)',
-                    borderWidth: 1,
-                    fill: false
-                }]
+                    data: [{% for key, value in profit_by_month.items %}'{{ value }}', {% endfor %}],
+            backgroundColor: 'rgba(75, 123, 236, 0.5)',
+            borderColor: 'rgba(75, 123, 236, 1)',
+            borderWidth: 1,
+            fill: false
+        }]
             },
-            options: {
-                legend: {
-                    display: false
-                },
-                maintainAspectRatio: false,
-                responsive: true
-            }
+    options: {
+        legend: {
+            display: false
+        },
+        maintainAspectRatio: false,
+            responsive: true
+    }
         });
     }
 
@@ -104,5 +104,14 @@
     }
         });
     }
+
+    var yearSelect = document.getElementById("year");
+    function handleYearChange() {
+        var selected = yearSelect.value;
+        fetch(`{% url 'admin:switch-year' %}?year=${selected}`).then(() => {
+            window.location.reload();
+        })
+    }
+    yearSelect.addEventListener("change", handleYearChange);
 </script>
 {% endblock %}

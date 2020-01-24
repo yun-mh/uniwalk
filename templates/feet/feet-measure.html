@@ -101,7 +101,7 @@
 
     <!-- <div class="w-full mb-10">
 
-        <a href="{% url 'carts:add_cart' product.pk design.pk %}" class="btn">カートに入れる</a>
+        
 
     </div> -->
 
@@ -126,18 +126,19 @@
         <li>
             <div class="content__wrapper">
                 <h2 class="">足サイズを記入してください。</h2>
-                <form action="">
+                <form method="POST">
+                    {% csrf_token %}
                     <div class="flex justify-around">
                         <div>
                             <h3>左</h3>
                             <div class="flex items-center">
                                 <span>足長</span>
-                                <input type="text">
+                                {{ footsize_fill_form.length_left }}
                                 <span>mm</span>
                             </div>
                             <div class="flex items-center">
                                 <span>足幅</span>
-                                <input type="text">
+                                {{ footsize_fill_form.width_left }}
                                 <span>mm</span>
                             </div>
                         </div>
@@ -145,12 +146,12 @@
                             <h3>右</h3>
                             <div class="flex items-center">
                                 <span>足長</span>
-                                <input type="text">
+                                {{ footsize_fill_form.length_right }}
                                 <span>mm</span>
                             </div>
                             <div class="flex items-center">
                                 <span>足幅</span>
-                                <input type="text">
+                                {{ footsize_fill_form.width_right }}
                                 <span>mm</span>
                             </div>
                         </div>

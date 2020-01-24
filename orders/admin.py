@@ -139,8 +139,8 @@ class OrderAdmin(admin.ModelAdmin):
 
     list_display = (
         "order_code",
+        "amount",
         "step",
-        "get_fullname",
         "get_fullname_kana",
         "order_date",
         "bill",

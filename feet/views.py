@@ -1,34 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView, View
 from designs import models as design_models
 from products import models as product_models
-from . import models
+from . import models, forms
 
 
-class FootsizesMeasureView(View):
-    def get(self, request, pk, *args, **kwargs):
-        pk = self.kwargs.get("pk")
-        design_pk = request.session["design"]
-        product = product_models.Product.objects.all().get(pk=pk)
-        design = design_models.Design.objects.get(pk=design_pk)
-        return render(
-            request, "feet/feet-measure.html", {"product": product, "design": design}
-        )
-
-    # def post(self, request, *args, **kwargs):
-    #     if "footsize_fill" in request.POST:
-    #         member_form = user_forms.LoginForm(request.POST, prefix="member")
-    #         if member_form.is_valid():
-    #             member_email = member_form.cleaned_data.get("email")
-    #             member_password = member_form.cleaned_data.get("password")
-    #             user = authenticate(
-    #                 request, email=member_email, password=member_password
-    #             )
-    #             if user is not None:
-    #                 login(request, user)
-    #                 return redirect(reverse("orders:checkout"))
+def footsizes_measure(request, *args, **kwargs):
+    pk = kwargs.get("pk")
+    design_pk = request.session["design"]
+    if request.method == "POST":
+        try:
+            user = request.user
+        except:
+            user = None
+        if "footsize-fill" in request.POST:
+            footsize_fill_form = forms.FootsizeFillForm(request.POST, prefix="fill")
+            if footsize_fill_form.is_valid():
+                length_left = footsize_fill_form.cleaned_data.get("length_left")
+                length_right = footsize_fill_form.cleaned_data.get("length_right")
+                width_left = footsize_fill_form.cleaned_data.get("width_left")
+                width_right = footsize_fill_form.cleaned_data.get("width_right")
+                new_footsize = models.Footsize.objects.create(
+                    user=user,
+                    length_left=length_left,
+                    length_right=length_right,
+                    width_left=width_left,
+                    width_right=width_right,
+                )
+                print(new_footsize)
+                return redirect("carts:cart")
     #         guest_form = forms.GuestForm(prefix="guest")
-
     #     elif "guest_login" in request.POST:
     #         guest_form = forms.GuestForm(request.POST, prefix="guest")
     #         if guest_form.is_valid():
@@ -40,8 +41,8 @@ class FootsizesMeasureView(View):
     #             request.session["guest_email"] = guest_email
     #             return redirect(reverse("orders:checkout"))
     #         member_form = user_forms.LoginForm(prefix="member")
-    # else:
-    #     guest_form = forms.GuestForm(prefix="guest")
-    #     member_form = user_forms.LoginForm(prefix="member")
-    # context = {"member_form": member_form, "guest_form": guest_form}
-    # return render(request, "orders/member-or-guest.html", context)
+    else:
+        footsize_fill_form = forms.FootsizeFillForm(prefix="fill")
+        # member_form = user_forms.LoginForm(prefix="member")
+    context = {"footsize_fill_form": footsize_fill_form}
+    return render(request, "feet/feet-measure.html", context)
