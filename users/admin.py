@@ -2,12 +2,19 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from reviews import models as review_models
+from feet import models as feet_models
 from . import models
 
 
 class ReviewInline(admin.TabularInline):
 
     model = review_models.Review
+
+
+class FootsizeInline(admin.TabularInline):
+
+    model = feet_models.Footsize
+    max_num = 1
 
 
 @admin.register(models.Guest)
@@ -64,7 +71,10 @@ class CustomUserAdmin(admin.ModelAdmin):
         ),
     )
 
-    inlines = (ReviewInline,)
+    inlines = (
+        ReviewInline,
+        FootsizeInline,
+    )
 
     list_display = (
         "email",
@@ -76,9 +86,7 @@ class CustomUserAdmin(admin.ModelAdmin):
         "is_superuser",
     )
 
-    search_fields = (
-        "email",
-    )
+    search_fields = ("email",)
 
     list_filter = (
         "gender",

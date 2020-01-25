@@ -6,13 +6,20 @@ from . import models, forms
 
 
 def footsizes_measure(request, *args, **kwargs):
-    pk = kwargs.get("pk")
+
+    """ 足サイズ測定 """
+
+    # 次のページに渡すテータを取得するための操作
+    pk = request.session["product"]
     design_pk = request.session["design"]
+
+    # 足測定の結果をデータベースに反映する
     if request.method == "POST":
-        try:
+        if request.user.is_authenticated:
             user = request.user
-        except:
+        else:
             user = None
+        # 記入式で足サイズを指定した場合
         if "footsize-fill" in request.POST:
             footsize_fill_form = forms.FootsizeFillForm(request.POST, prefix="fill")
             if footsize_fill_form.is_valid():
@@ -20,15 +27,28 @@ def footsizes_measure(request, *args, **kwargs):
                 length_right = footsize_fill_form.cleaned_data.get("length_right")
                 width_left = footsize_fill_form.cleaned_data.get("width_left")
                 width_right = footsize_fill_form.cleaned_data.get("width_right")
-                new_footsize = models.Footsize.objects.create(
-                    user=user,
-                    length_left=length_left,
-                    length_right=length_right,
-                    width_left=width_left,
-                    width_right=width_right,
+                # 既存の足サイズデータがある場合、データを更新する
+                try:
+                    footsize = models.Footsize.objects.get(user=user)
+                    footsize.length_left = length_left
+                    footsize.length_right = length_right
+                    footsize.width_left = width_left
+                    footsize.width_right = width_right
+                    footsize.save()
+                # 会員に足サイズデータが存在しない場合、データを新規登録する
+                except models.Footsize.DoesNotExist:
+                    footsize = models.Footsize.objects.create(
+                        user=user,
+                        length_left=length_left,
+                        length_right=length_right,
+                        width_left=width_left,
+                        width_right=width_right,
+                    )
+                foot_pk = footsize.pk
+                print(foot_pk)
+                return redirect(
+                    "carts:add_cart", pk=pk, design_pk=design_pk, foot_pk=foot_pk
                 )
-                print(new_footsize)
-                return redirect("carts:cart")
     #         guest_form = forms.GuestForm(prefix="guest")
     #     elif "guest_login" in request.POST:
     #         guest_form = forms.GuestForm(request.POST, prefix="guest")

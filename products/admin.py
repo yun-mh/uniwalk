@@ -22,9 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
     """ アドミンに商品を定義する """
 
     change_list_template = "admin/change_list.html"
-
     inlines = (ImageInline, TemplateInline)
-
     fieldsets = (
         (
             _("商品情報"),
@@ -40,7 +38,6 @@ class ProductAdmin(admin.ModelAdmin):
             },
         ),
     )
-
     list_display = (
         "name",
         "get_thumbnail",
@@ -49,12 +46,10 @@ class ProductAdmin(admin.ModelAdmin):
         "price",
         "total_rating",
     )
-
     search_fields = (
         "name",
         "product_code",
     )
-
     list_per_page = 20
 
     def get_thumbnail(self, obj):

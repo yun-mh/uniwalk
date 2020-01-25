@@ -133,8 +133,9 @@ class CustomizeView(ListView):
             up=base64_file(image_data_up),
             down=base64_file(image_data_down),
         )
+        self.request.session["product"] = pk
         self.request.session["design"] = new_design.pk
-        return redirect("feet:measure", pk=pk)
+        return redirect("feet:measure")
 
 
 def get_palette(request):

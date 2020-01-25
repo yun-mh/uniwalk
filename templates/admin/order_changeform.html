@@ -11,6 +11,7 @@
     {% endif %}
     {% if original.step.step_code == "T11" %}
     <a href="{% url 'admin:ordersheet' original.pk %}" class="button">発注書</a>
+    <a href="{% url 'admin:orderspec' original.pk %}" class="button">仕様書</a>
     {% endif %}
     {% if original.step.step_code == "T21" %}
     <a href="{% url 'admin:invoice' original.pk %}" class="button">納品書</a>
