@@ -15,6 +15,8 @@ from . import models
 class OrderItemInline(admin.TabularInline):
 
     model = models.OrderItem
+    verbose_name = _("注文アイテム")
+    verbose_name_plural = _("注文アイテム")
 
 
 def make_step_new(self, request, queryset):
@@ -96,7 +98,7 @@ class OrderAdmin(admin.ModelAdmin):
                     "guest",
                     "amount",
                     "payment",
-                    "stripe_charge_id",
+                    # "stripe_charge_id",
                     "step",
                 )
             },
@@ -334,8 +336,9 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(models.Step)
 class StepAdmin(admin.ModelAdmin):
 
-    """ アドミンに注文テーブルを定義する """
+    """ アドミンに対応テーブルを定義する """
 
+    fieldsets = ((_("対応情報"), {"fields": ("step_code", "step_name",)},),)
     list_display = (
         "step_code",
         "step_name",

@@ -1,15 +1,7 @@
-from django.views.generic import ListView, View, DetailView
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 from reviews import models as review_model
 from . import models
-
-# Create your views here.
-class HomeView(View):
-
-    """ HomeView Definition """
-
-    def get(self, request):
-        return render(request, "statics/home.html")
 
 
 class ProductListView(ListView):
@@ -47,4 +39,3 @@ class ProductDetailView(DetailView):
         context["reviews_text"] = each
         context["rev"] = posts
         return context
-

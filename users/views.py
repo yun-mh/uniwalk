@@ -1,19 +1,5 @@
-from django.shortcuts import render, reverse, redirect
-from django.core.files.base import ContentFile
-from django.core.mail import send_mail
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils.html import strip_tags
-from django.template.loader import render_to_string
-from django.urls import reverse_lazy
-from django.views.generic import View, FormView, DetailView, UpdateView, DeleteView, ListView, TemplateView
-from django.contrib.auth import update_session_auth_hash
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.utils.translation import gettext_lazy as _
-from django.utils import translation
-from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
 from django.conf import settings
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.views import (
     PasswordResetView,
     PasswordResetDoneView,
@@ -21,12 +7,25 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
     PasswordChangeView,
 )
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.base import ContentFile
+from django.core.mail import send_mail
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.shortcuts import render, reverse, redirect
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from django.utils import translation
+from django.utils.html import strip_tags
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import View, FormView, DetailView, UpdateView, DeleteView, ListView, TemplateView
 from cards import models as card_models
 from carts import models as cart_models
-from orders import models as order_models
-from designs import models as design_models
 from designs import forms as design_forms
+from designs import models as design_models
 from feet import models as feet_models
+from orders import models as order_models
 from products import models as product_models
 from . import forms, models, mixins
 import stripe, base64, json
@@ -34,6 +33,7 @@ import stripe, base64, json
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+# インコードした画像データを画像にデコードする関数
 def base64_file(data, name=None):
     _format, _img_str = data.split(";base64,")
     _name, ext = _format.split("/")
@@ -42,7 +42,10 @@ def base64_file(data, name=None):
     result = ContentFile(base64.b64decode(_img_str), name="{}.{}".format(name, ext))
     return result
 
+
 class LoginView(mixins.LoggedOutOnlyView, FormView):
+
+    """ ログイン """
 
     template_name = "users/login.html"
     form_class = forms.LoginForm
@@ -67,12 +70,17 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
 
 
 def log_out(request):
+
+    """ ログアウト """
+
     messages.info(request, _("ログアウトしました。"))
     logout(request)
     return redirect(reverse("core:home"))
 
 
 class SignUpView(mixins.LoggedOutOnlyView, FormView):
+
+    """ 会員登録 """
 
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
@@ -98,6 +106,8 @@ class SignUpView(mixins.LoggedOutOnlyView, FormView):
 
 
 class SignUpCheckView(mixins.LoggedOutOnlyView, FormView):
+
+    """ 会員登録情報確認 """
 
     template_name = "users/signup-check.html"
 
@@ -132,11 +142,17 @@ class SignUpCheckView(mixins.LoggedOutOnlyView, FormView):
 
 
 class SignupSuccessView(mixins.LoggedOutOnlyView, View):
+    
+    """ 会員登録完了 """
+    
     def get(self, request):
         return render(request, "users/signup-success.html")
 
 
 class PasswordResetView(PasswordResetView):
+    
+    """ パスワード再設定申し込み """
+    
     form_class = forms.PasswordResetForm
     template_name = "users/password-reset.html"
     subject_template_name = "emails/password-reset-subject.txt"
@@ -145,10 +161,16 @@ class PasswordResetView(PasswordResetView):
 
 
 class PasswordResetDoneView(PasswordResetDoneView):
+    
+    """ パスワード再設定申し込み完了 """
+    
     template_name = "users/password-reset-done.html"
 
 
 class PasswordResetConfirmView(PasswordResetConfirmView):
+    
+    """ パスワード再設定 """
+    
     form_class = forms.SetPasswordForm
     template_name = "users/password-reset-confirm.html"
     success_url = reverse_lazy("users:password-reset-complete")
@@ -168,10 +190,16 @@ class PasswordResetConfirmView(PasswordResetConfirmView):
 
 
 class PasswordResetCompleteView(PasswordResetCompleteView):
+    
+    """ パスワード再設定完了 """
+    
     template_name = "users/password-reset-complete.html"
 
 
 class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView):
+    
+    """ 会員登録情報変更 """
+    
     form_class = forms.UpdateProfileForm
     template_name = "users/update-profile.html"
     success_message = _("会員情報を変更しました。")
@@ -199,6 +227,9 @@ class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView
 
 
 class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
+    
+    """ パスワード変更 """
+    
     form_class = forms.PasswordChangeForm
     template_name = 'users/password-change.html'
 
@@ -226,6 +257,9 @@ class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
 
 
 class OrdersListView(mixins.LoggedInOnlyView, ListView):
+
+    """ 注文履歴 """
+
     model = order_models.Order
     template_name = "orders/order-list.html"
     context_object_name = "orders"
@@ -279,6 +313,9 @@ class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
 
 
 class CardsListView(mixins.LoggedInOnlyView, FormView):
+    
+    """ クレジットカードリスト """
+    
     def get(self, *args, **kwargs):
         user = self.request.user
         try:
@@ -314,6 +351,9 @@ class CardsListView(mixins.LoggedInOnlyView, FormView):
 
 
 class CardsAddView(mixins.LoggedInOnlyView, View):
+    
+    """ クレジットカード登録 """
+    
     def get(self, *args, **kwargs):
         # user = self.request.user
         add_card_form = forms.AddCardForm()
@@ -374,6 +414,9 @@ class CardsAddView(mixins.LoggedInOnlyView, View):
 
 
 class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
+    
+    """ マイデザインリスト """
+    
     model = design_models.Design
     template_name = "designs/design-list.html"
     context_object_name = "designs"
@@ -405,6 +448,8 @@ class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
 
 class SelectProductToCustomizeView(mixins.LoggedInOnlyView, ListView):
 
+    """ マイページでデザインカスタマイズする場合対象商品を選択するためのビュー """
+
     model = product_models.Product
     template_name = "designs/select-products.html"
     context_object_name = "products"
@@ -415,6 +460,8 @@ class SelectProductToCustomizeView(mixins.LoggedInOnlyView, ListView):
 
 
 class MemberCustomizeView(mixins.LoggedInOnlyView, ListView):
+
+    """ 会員用デザインカスタマイズ """
 
     model = design_models.Design
     template_name = "designs/design-customize.html"
@@ -534,6 +581,9 @@ class MemberCustomizeView(mixins.LoggedInOnlyView, ListView):
 
 
 def get_palette(request):
+    
+    """ 参照用デザインパレットを呼び出すビュー """
+
     if request.method == "POST" and request.is_ajax():
         outsole_color_left = request.POST.get("outsole_color_left")
         midsole_color_left = request.POST.get("midsole_color_left")
@@ -585,6 +635,8 @@ def get_palette(request):
 
 
 class MemberCustomizeModifyView(mixins.LoggedInOnlyView, ListView):
+
+    """ 会員用デザインカスタマイズ修正ビュー """
 
     model = design_models.Design
     template_name = "designs/design-customize.html"
@@ -711,6 +763,9 @@ class MemberCustomizeModifyView(mixins.LoggedInOnlyView, ListView):
 
 
 class FootSizeView(mixins.LoggedInOnlyView, ListView):
+
+    """ マイ足サイズ確認ビュー """
+
     model = feet_models.Footsize
     template_name = "feet/feet-list.html"
     context_object_name = "feet"
@@ -723,6 +778,9 @@ class FootSizeView(mixins.LoggedInOnlyView, ListView):
 
 
 class WithdrawalView(mixins.LoggedInOnlyView, FormView):
+    
+    """ 会員脱退ビュー """
+    
     template_name = "users/withdrawal.html"
     form_class = forms.WithdrawalForm
     success_url = reverse_lazy("users:withdrawal-check")
@@ -736,6 +794,9 @@ class WithdrawalView(mixins.LoggedInOnlyView, FormView):
 
 
 class WithdrawalCheckView(mixins.LoggedInOnlyView, DeleteView):
+    
+    """ 脱退処理前にもう一度確認してもらうためのビュー """
+    
     model = models.User
     template_name = "users/withdrawal-check.html"
 
@@ -750,6 +811,9 @@ class WithdrawalCheckView(mixins.LoggedInOnlyView, DeleteView):
 
 
 class WithdrawalDoneView(View):
+
+    """ 会員脱退完了 """
+
     template_name = "users/withdrawal-done.html"
 
     def get(self, request):
@@ -757,6 +821,9 @@ class WithdrawalDoneView(View):
 
 
 def switch_language(request):
+
+    """ 言語切り替えビュー """
+
     lang = request.GET.get("lang", None)
     if lang is not None:
         request.session[translation.LANGUAGE_SESSION_KEY] = lang

@@ -1,16 +1,15 @@
 from django.conf import settings
-from django.shortcuts import render, redirect, reverse, render_to_response
-from django.views.generic import View, FormView, DetailView
-from django.contrib.auth import authenticate, login
-from django.utils.decorators import method_decorator
-from django.template.loader import render_to_string
-from django.core.mail import send_mail
-from django.utils.html import strip_tags
-from django.conf import settings
-from django.utils.translation import gettext_lazy as _
-from django.urls import reverse_lazy
-from django.db.models import Q
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.core.mail import send_mail
+from django.db.models import Q
+from django.shortcuts import render, redirect, reverse, render_to_response
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.utils.html import strip_tags
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import View, FormView, DetailView
 from users import mixins
 from users import forms as user_forms
 from users import models as user_models
@@ -18,13 +17,16 @@ from designs import models as design_models
 from cards import models as card_models
 from carts import models as cart_models
 from . import forms, models
-import stripe
 from localflavor.jp.jp_prefectures import JP_PREFECTURE_CODES, JP_PREFECTURES
+import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def member_or_guest_login(request):
+    
+    """ 会員・ゲスト確認ビュー """
+    
     if request.user.is_authenticated:
         return redirect("orders:checkout")
     if request.method == "POST":
@@ -59,6 +61,9 @@ def member_or_guest_login(request):
 
 
 class CheckoutView(FormView):
+
+    """ 注文情報入力 """
+
     def get(self, *args, **kwargs):
         recipient_form = forms.CheckoutForm()
         cart = cart_models.Cart.objects.get(
@@ -129,6 +134,9 @@ class CheckoutView(FormView):
 
 
 class SelectPaymentView(FormView):
+
+    """ 決済手段入力 """
+
     def get(self, *args, **kwargs):
         orderer_form = forms.SelectPaymentForm()
         recipient_data = self.request.session["recipient_data"]
@@ -205,6 +213,9 @@ class SelectPaymentView(FormView):
 
 
 class OrderCheckView(FormView):
+
+    """ 注文情報確認及びカード情報入力(カード決済時) """
+
     def get(self, *args, **kwargs):
         card_form = forms.CardForm()
         recipient_data = self.request.session["recipient_data"]
@@ -474,6 +485,9 @@ class OrderCheckView(FormView):
 
 
 class CheckoutDoneView(View):
+
+    """ 注文完了 """
+
     def get(self, request, *args, **kwargs):
         context = {
             "order_code": kwargs.get("order_code")
@@ -482,6 +496,9 @@ class CheckoutDoneView(View):
 
 
 class OrderSearchView(FormView):
+
+    """ 注文検索 """
+
     model = models.Order
     form_class = forms.OrderSearchForm
     template_name = "orders/order-search.html"
@@ -504,6 +521,9 @@ class OrderSearchView(FormView):
 
 
 class OrderDetailView(DetailView):
+
+    """ 注文詳細(注文番号で照会) """
+
     template_name = "orders/search-order-detail.html"
     context_object_name = "order"
     slug_field = 'order_code'
@@ -528,8 +548,11 @@ class OrderDetailView(DetailView):
         return redirect("orders:detail", order_code)
 
 
-class ReceiptView(DetailView):
-    template_name = "orders/receipt.html"
+class BillView(DetailView):
+
+    """ 請求書発行 """
+
+    template_name = "orders/bill.html"
     context_object_name = "order"
     slug_field = 'order_code'
     slug_url_kwarg = 'order_code'
@@ -542,8 +565,11 @@ class ReceiptView(DetailView):
             return None
 
 
-class BillView(DetailView):
-    template_name = "orders/bill.html"
+class ReceiptView(DetailView):
+
+    """ 領収書発行 """
+
+    template_name = "orders/receipt.html"
     context_object_name = "order"
     slug_field = 'order_code'
     slug_url_kwarg = 'order_code'

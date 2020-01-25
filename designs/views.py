@@ -1,14 +1,15 @@
-import base64, json
 from django.core.files.base import ContentFile
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import View, ListView
-from . import models, forms
-from products import models as product_models
 from designs import models as design_models
+from products import models as product_models
 from users import models as user_models
+from . import models, forms
+import base64, json
 
 
+# インコードした画像データを画像にデコードする関数
 def base64_file(data, name=None):
     _format, _img_str = data.split(";base64,")
     _name, ext = _format.split("/")
@@ -18,6 +19,8 @@ def base64_file(data, name=None):
 
 
 class CustomizeView(ListView):
+
+    """ デザインカスタマイズ """
 
     model = models.Design
     template_name = "designs/design-customize.html"
@@ -139,6 +142,9 @@ class CustomizeView(ListView):
 
 
 def get_palette(request):
+
+    """ 参照用デザインパレットを呼び出すビュー """
+
     if request.method == "POST" and request.is_ajax():
         outsole_color_left = request.POST.get("outsole_color_left")
         midsole_color_left = request.POST.get("midsole_color_left")
@@ -235,6 +241,7 @@ class GalleriesListView(ListView):
         return sorted(designs, key= lambda design: design.total_likes, reverse=True)
 
 
+# デザインに対した「いいね！」機能
 def design_like(request):
     if request.method == 'POST':
         user = request.user

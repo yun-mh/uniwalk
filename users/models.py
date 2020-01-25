@@ -45,7 +45,7 @@ class User(AbstractUser):
     )
     birthday = models.DateField(_("生年月日"), blank=True, null=True)
     phone_number = PhoneNumberField(_("電話番号"), blank=True, null=True)
-    postal_code = JPPostalCodeModelField(blank=True, null=True)
+    postal_code = JPPostalCodeModelField(_("郵便番号"), blank=True, null=True)
     prefecture = JPPrefectureField(_("都道府県"), blank=True, null=True)
     address_city = models.CharField(_("市区町村番地"), max_length=40, blank=True, null=True)
     address_detail = models.CharField(_("建物名・号室"), max_length=40, blank=True, null=True)
@@ -110,8 +110,11 @@ class User(AbstractUser):
 
 
 class Guest(core_models.TimeStampedModel):
-    email = models.EmailField(unique=True)
-    active = models.BooleanField(default=True)
+
+    """ ゲストのモデルを定義する """
+
+    email = models.EmailField(_("メールアドレス"), unique=True)
+    active = models.BooleanField(_("活性化"), default=True)
 
     class Meta:
         verbose_name = _("ゲスト")

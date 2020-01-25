@@ -8,12 +8,16 @@ class ImageInline(admin.TabularInline):
 
     model = models.Image
     max_num = 1
+    verbose_name = _("商品イメージ")
+    verbose_name_plural = _("商品イメージ")
 
 
 class TemplateInline(admin.StackedInline):
 
     model = models.Template
     max_num = 1
+    verbose_name = _("テンプレート")
+    verbose_name_plural = _("テンプレート")
 
 
 @admin.register(models.Product)
@@ -45,6 +49,8 @@ class ProductAdmin(admin.ModelAdmin):
         "product_code",
         "price",
         "total_rating",
+        "created",
+        "updated",
     )
     search_fields = (
         "name",
@@ -64,10 +70,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
     """ アドミンに商品カテゴリーを定義する """
 
+    fieldsets = ((_("カテゴリー情報"), {"fields": ("product_type", "type_code",)},),)
     list_display = (
         "product_type",
         "type_code",
-        "created",
     )
 
     list_per_page = 20

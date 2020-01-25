@@ -34,35 +34,42 @@ class Template(models.Model):
         on_delete=models.CASCADE,
     )
     shoelace_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("シューレス(左)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     tongue_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("タン(左)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     upper_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("アッパーソール(左)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     midsole_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("ミッドソール(左)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     outsole_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("アウトソール(左)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     shoelace_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("シューレス(右)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     tongue_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("タン(右)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     upper_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("アッパーソール(右)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     midsole_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("ミッドソール(右)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     outsole_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("アウトソール(右)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
+
+    class Meta:
+        verbose_name = _("テンプレート")
+        verbose_name_plural = _("テンプレート")
+
+    def __str__(self):
+        return self.product.name
 
 
 class Image(core_models.TimeStampedModel):
@@ -73,6 +80,10 @@ class Image(core_models.TimeStampedModel):
     product = models.ForeignKey(
         "Product", verbose_name=_("商品"), related_name="images", on_delete=models.CASCADE
     )
+
+    class Meta:
+        verbose_name = _("商品イメージ")
+        verbose_name_plural = _("商品イメージ")
 
 
 class Category(core_models.TimeStampedModel):

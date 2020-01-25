@@ -25,6 +25,10 @@ class Material(core_models.TimeStampedModel):
     file = models.FileField(_("素材画像"), upload_to="product_materials", blank=True)
     material_code = models.CharField(_("素材コード"), max_length=2)
 
+    class Meta:
+        verbose_name = _("素材")
+        verbose_name_plural = _("素材")
+
     def __str__(self):
         return self.name + "(" + self.material_code + ")"
 
@@ -46,6 +50,13 @@ class Image(models.Model):
     up = models.ImageField(_("上面"), upload_to="designs")
     down = models.ImageField(_("下面"), upload_to="designs")
 
+    class Meta:
+        verbose_name = _("デザインイメージ")
+        verbose_name_plural = _("デザインイメージ")
+
+    def __str__(self):
+        return self.design.customize_code
+
 
 class Design(core_models.TimeStampedModel):
 
@@ -54,6 +65,7 @@ class Design(core_models.TimeStampedModel):
     user = models.ForeignKey(
         "users.User",
         related_name="design",
+        verbose_name=_("ユーザ"),
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -61,6 +73,7 @@ class Design(core_models.TimeStampedModel):
     product = models.ForeignKey(
         "products.Product",
         related_name="design",
+        verbose_name=_("商品"),
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -159,7 +172,14 @@ class Design(core_models.TimeStampedModel):
         _("番号"), max_length=40, default=create_custom_design_code, blank=True, null=True
     )
     customize_code = models.CharField("カスタマイズデザインコード", max_length=11)
-    likes = models.ManyToManyField("users.User", related_name="likes")
+    likes = models.ManyToManyField("users.User", verbose_name=_("いいねユーザ"), related_name="likes")
+
+    class Meta:
+        verbose_name = _("デザイン")
+        verbose_name_plural = _("デザイン")
+
+    def __str__(self):
+        return self.customize_code
 
     @property
     def first_image(self):

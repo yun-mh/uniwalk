@@ -29,8 +29,8 @@ class Step(models.Model):
 
     """ 注文の対応状況に関するモデルを定義する """
 
-    step_code = models.CharField(max_length=3)
-    step_name = models.CharField(max_length=20)
+    step_code = models.CharField(_("対応コード"), max_length=3)
+    step_name = models.CharField(_("対応名"), max_length=20)
 
     def __str__(self):
         return self.step_name
@@ -121,9 +121,6 @@ class Order(models.Model):
 
     def count_items_except_one(self):
         return self.order_items.all().count() - 1
-
-    # def profit_by_month(self):
-    #     Order.objects.filter()
 
 
 @receiver(post_save, sender=Order)

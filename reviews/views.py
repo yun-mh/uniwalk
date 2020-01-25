@@ -1,12 +1,13 @@
-from django.views.generic import ListView, View, DetailView, FormView
+from django.contrib import messages
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
-from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import ListView, View, DetailView, FormView
 from products import models as product_models
 from users import mixins
 from . import models, forms
 
-# Create your views here.
+
 class ReviewListView(ListView):
 
     """ レビュー一覧 """
@@ -31,6 +32,8 @@ class ReviewListView(ListView):
 
 class ReviewPostView(mixins.LoggedInOnlyView, FormView):
 
+    """ レビュー投稿 """
+
     template_name = "reviews/review-post.html"
     success_url = reverse_lazy("products:detail")
     form_class = forms.ReviewForm
@@ -49,5 +52,5 @@ class ReviewPostView(mixins.LoggedInOnlyView, FormView):
         review.product = product
         review.user = self.request.user
         review.save()
-        messages.success(self.request, "レビューを投稿しました。")
+        messages.success(self.request, _("レビューを投稿しました。"))
         return redirect(reverse("products:detail", kwargs={"pk": pk}))
