@@ -217,12 +217,13 @@ def get_palette(request):
 
 class GalleriesListView(ListView):
 
-    """ デザインギャラリー """
+    """ デザインギャラリー(全体) """
 
     model = models.Design
-    paginate_by = 10
+    paginate_by = 5
     context_object_name = "designs"
     extra_context = {
+        "designs_all": models.Design.objects.all().exclude(user__isnull=True),
         "products": product_models.Product.objects.all(),
         "count": len(product_models.Product.objects.all()),
         "categories": product_models.Category.objects.all(),
@@ -238,6 +239,62 @@ class GalleriesListView(ListView):
 
     def get_queryset(self):
         designs = models.Design.objects.all().exclude(user__isnull=True)
+        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+
+
+class GalleriesListByCategoryView(ListView):
+
+    """ デザインギャラリー(カテゴリー別) """
+
+    model = models.Design
+    paginate_by = 5
+    context_object_name = "designs"
+    extra_context = {
+        "designs_all": models.Design.objects.all().exclude(user__isnull=True),
+        "products": product_models.Product.objects.all(),
+        "count": len(product_models.Product.objects.all()),
+        "categories": product_models.Category.objects.all(),
+    }
+    template_name = "galleries/galleries_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        designs = models.Design.objects.filter(likes=self.request.user.pk)
+        check_like = [ design.pk for design in designs ]
+        context["check_like"] = check_like
+        return context
+
+    def get_queryset(self):
+        pk = self.kwargs.get("pk")
+        designs = models.Design.objects.filter(product__category=pk).exclude(user__isnull=True)
+        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+
+
+class GalleriesListByProductView(ListView):
+
+    """ デザインギャラリー(商品別) """
+
+    model = models.Design
+    paginate_by = 5
+    context_object_name = "designs"
+    extra_context = {
+        "designs_all": models.Design.objects.all().exclude(user__isnull=True),
+        "products": product_models.Product.objects.all(),
+        "count": len(product_models.Product.objects.all()),
+        "categories": product_models.Category.objects.all(),
+    }
+    template_name = "galleries/galleries_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        designs = models.Design.objects.filter(likes=self.request.user.pk)
+        check_like = [ design.pk for design in designs ]
+        context["check_like"] = check_like
+        return context
+
+    def get_queryset(self):
+        pk = self.kwargs.get("pk")
+        designs = models.Design.objects.filter(product=pk).exclude(user__isnull=True)
         return sorted(designs, key= lambda design: design.total_likes, reverse=True)
 
 

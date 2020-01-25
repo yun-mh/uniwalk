@@ -343,11 +343,3 @@ class StepAdmin(admin.ModelAdmin):
         "step_code",
         "step_name",
     )
-
-
-@admin.register(models.OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-
-    """ アドミンに注文テーブルを定義する """
-
-    pass

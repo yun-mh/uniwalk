@@ -8,30 +8,47 @@
 {% block content %}
 
 <div class="mx-auto pt-16 pb-10">
-
     <h2 class="text-center">{% trans 'ギャラリー' %}</h2>
     <div class="container mx-auto flex">
         <div class="w-full flex flex-wrap mb-10">
             <div class="w-full flex">
                 <div class="w-1/3 pr-10">
-                    <h2 class="text-sm font-semibold text-blue-500 mb-5">{% trans '商品カテゴリー' %}</h2>
-                    <ul>
-                        <li class="flex justify-between mb-2 text-sm">
-                            <a href="{% url 'products:list' %}">{% trans 'すべて' %}</a>
-                            <span class="text-gray-500">{{ designs|length }}</span>
-                        </li>
-                        {% for category in categories %}
-                        <li class="flex justify-between mb-2 text-sm">
-                            <a
-                                href="{% url 'products:list-category' category.pk %}">{{ category.count_designs_by_category }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
+                    <div class="w-full bg-white shadow py-3 px-5">
+                        <h2 class="text-sm font-semibold text-blue-500 mb-5">{% trans 'カテゴリー別' %}</h2>
+                        <ul>
+                            <li class="flex justify-between mb-2 text-sm">
+                                <a href="{% url 'designs:galleries' %}">{% trans 'すべて' %}</a>
+                                <span class="text-gray-500">{{ designs_all |length }}</span>
+                            </li>
+                            {% for category in categories %}
+                            <li class="flex justify-between mb-2 text-sm">
+                                <a href="{% url 'designs:galleries-category' category.pk %}">{{ category }}</a>
+                                <span class="text-gray-500">{{ category.count_designs_by_category }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="w-full mt-5 bg-white shadow py-3 px-5">
+                        <h2 class="text-sm font-semibold text-blue-500 mb-5">{% trans '商品別' %}</h2>
+                        <ul>
+                            <li class="flex justify-between mb-2 text-sm">
+                                <a href="{% url 'designs:galleries' %}">{% trans 'すべて' %}</a>
+                                <span class="text-gray-500">{{ designs_all |length }}</span>
+                            </li>
+                            {% for product in products %}
+                            <li class="flex justify-between mb-2 text-sm">
+                                <a href="{% url 'designs:galleries-product' product.pk %}">{{ product }}</a>
+                                <span class="text-gray-500">{{ product.count_designs_by_product }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
-                <div class="w-full">
+
+                <div class="w-full infinite-container">
                     {% if designs %}
                     {% for design in designs %}
-                    <div class="p-5 border border-gray-400 mb-5 shadow-md">
+                    <div class="p-5 border border-gray-400 mb-5 shadow-md infinite-item">
                         <div class="flex justify-between items-center mb-3">
                             <div class="flex items-center">
                                 <span class="font-semibold mr-3">{{ design.user.get_email_name }}</span>
@@ -63,32 +80,17 @@
                         </div>
                     </div>
                     {% endfor %}
-
-                    <div class="flex items-center justify-center mx-auto container my-8">
-                        {% if page_obj.has_previous %}
-                        <a href="?page={{ page_obj.previous_page_number }}" class="text-teal-500">
-                            <i class="fas fa-arrow-left fa-lg"></i>
-                        </a>
-                        {% endif %}
-
-                        <span class="mx-3 font-medium text-lg">
-                            {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}
-                            {{ current_page }} ページ{% endblocktrans %}
-                        </span>
-
-                        {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}" class="text-teal-500">
-                            <i class="fas fa-arrow-right fa-lg"></i>
-                        </a>
-                        {% endif %}
-                    </div>
-
-                    {% else %}
-                    <p class="flex justify-center items-center font-semibold w-full h-50vh text-center text-2xl">
-                        <i class="fas fa-grin-beam-sweat fa-2x text-teal-500"></i> <span
-                            class="ml-5">デザインがまだ存在しません。</span>
-                    </p>
                     {% endif %}
+                </div>
+                {% if page_obj.has_next %}
+                <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+                {% endif %}
+
+            </div>
+            <div class="w-full flex">
+                <div class="w-1/3"></div>
+                <div class="w-full text-center mt-3 infinite-loading hidden">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
                 </div>
             </div>
         </div>
@@ -97,6 +99,8 @@
 {% endblock content %}
 
 {% block javascript %}
+<script src="/static/js/jquery.waypoints.min.js"></script>
+<script src="/static/js/infinite.min.js"></script>
 <script>
     $('.like').click(function () {
         var pk = $(this).attr('id')
@@ -118,5 +122,17 @@
             }
         });
     })
+</script>
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+        offset: 'bottom-in-view',
+        onBeforePageLoad: function () {
+            $('.infinite-loading').show();
+        },
+        onAfterPageLoad: function () {
+            $('.infinite-loading').hide();
+        }
+    });
 </script>
 {% endblock %}
