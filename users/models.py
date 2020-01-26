@@ -31,7 +31,12 @@ class User(AbstractUser):
     GENDER_FEMALE = "F"
     GENDER_OTHER = "O"
 
-    GENDER_CHOICES = ((GENDER_MALE, "男性"), (GENDER_FEMALE, "女性"), (GENDER_OTHER, "その他"))
+    GENDER_CHOICES = (
+        ("", _("--性別--")),
+        (GENDER_MALE, "男性"),
+        (GENDER_FEMALE, "女性"),
+        (GENDER_OTHER, "その他"),
+    )
 
     PREF_CHOICES = JP_PREFECTURES
 

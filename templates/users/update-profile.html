@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block page_title %}
 {% trans '会員情報変更' %}
@@ -43,4 +43,15 @@
 {% endblock content %}
 
 {% block javascript %}
+<link href="{% static 'css/datepicker.css' %}" rel="stylesheet">
+<script src="{% static 'js/datepicker.min.js' %}"></script>
+<script src="{% static 'js/i18n/datepicker.ja-JP.js' %}"></script>
+<script>
+    $(function () {
+        $(".datepicker").datepicker({
+            format: 'yyyy-mm-dd',
+            language: 'ja-JP',
+        });
+    });
+</script>
 {% endblock %}

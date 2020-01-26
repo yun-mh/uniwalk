@@ -111,7 +111,7 @@ class UpdateProfileForm(forms.ModelForm):
             "first_name": forms.TextInput(attrs={"placeholder": _("名"), "required": True}),
             "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)"), "required": True}),
             "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)"), "required": True}),
-            "birthday": forms.DateInput(attrs={"placeholder": _("生年月日")}),
+            "birthday": forms.DateInput(attrs={"placeholder": _("生年月日"), "class": "datepicker"}),
             "phone_number": forms.TextInput(attrs={"placeholder": _("電話番号")}),
             "address_city": forms.TextInput(attrs={"placeholder": _("市区町村番地")}),
             "address_detail": forms.TextInput(attrs={"placeholder": _("建物名・号室")}),
@@ -126,6 +126,10 @@ class UpdateProfileForm(forms.ModelForm):
         label=_('郵便番号'),
         widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),
     )
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateProfileForm, self).__init__(*args, **kwargs)
+        self.fields['gender'].empty_label = "hahah"
 
     def clean(self):
         email = self.cleaned_data.get("email")
