@@ -42,8 +42,8 @@ module.exports = {
       },
       colors: {
         universe: {
-          lighter: "rgba(104, 127, 255, 1)",
-          dark: "rgba(114, 43, 255, 1)"
+          lighter: "#2B3D4E",
+          dark: "#1C2934"
         }
       }
     },
