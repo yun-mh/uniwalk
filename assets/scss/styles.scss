@@ -11,6 +11,12 @@ body {
   /* background by SVGBackgrounds.com */
 }
 
+body.document {
+  font-family: "Noto Sans JP", "Montserrat", "Noto Sans KR", sans-serif;
+  background-color: white;
+  background-image: none;
+}
+
 // nav
 .dropdown-content {
   z-index: 10;
