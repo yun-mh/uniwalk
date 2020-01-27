@@ -6,16 +6,219 @@
 {% endblock page_title %}
 
 {% block content %}
+<style>
+    .tabs {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        -webkit-transform: translateY(5px);
+        transform: translateY(5px);
+    }
 
-<div class="mx-auto pt-16 pb-10">
+    .tabs>li {
+        transition-duration: .25s;
+        display: table-cell;
+        list-style: none;
+        text-align: center;
+        padding: 20px 20px 25px 20px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        color: white;
+    }
 
-    <div class="w-full mb-10">
+    .tabs>li:before {
+        z-index: -1;
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 120%;
+        top: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, .3);
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+        transition-duration: .25s;
+        border-radius: 5px 5px 0 0;
+    }
 
-        <a href="{% url 'carts:add_cart' product.pk design.pk %}" class="btn">カートに入れる</a>
+    .tabs>li:hover:before {
+        -webkit-transform: translateY(70%);
+        transform: translateY(70%);
+    }
 
-    </div>
+    .tabs>li.active {
+        color: rgb(80, 85, 90);
+    }
 
+    .tabs>li.active:before {
+        transition-duration: .5s;
+        background-color: white;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    .tab__content {
+        background-color: white;
+        position: relative;
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    .tab__content>li {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        list-style: none;
+    }
+
+    .tab__content>li .content__wrapper {
+        text-align: center;
+        border-radius: 5px;
+        width: 100%;
+        padding: 45px 40px 40px 40px;
+        background-color: white;
+    }
+
+    .content__wrapper img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .content__wrapper h2 {
+        width: 100%;
+        text-align: center;
+        padding-bottom: 20px;
+        font-weight: 300;
+    }
+</style>
+
+
+<div class="mx-auto p-28 bg-universe-dark min-h-75vh">
+
+    <!-- <div class="w-full mb-10">
+
+        
+
+    </div> -->
+
+    <ul class="tabs">
+        <li class="active font-semibold">足サイズ測定</li>
+        <li class="font-semibold">足サイズ記入</li>
+    </ul>
+
+    <ul class="tab__content">
+        <li class="active">
+            <div class="content__wrapper">
+                <h2 class="text-color">Pick a color</h2>
+                <ul class="colors">
+                    <li data-color="#2ecc71"></li>
+                    <li data-color="#D64A4B"></li>
+                    <li data-color="#8e44ad"></li>
+                    <li class="active-color" data-color="#46a1de"></li>
+                    <li data-color="#bdc3c7"></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="content__wrapper">
+                <h2 class="">足サイズを記入してください。</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="flex justify-around">
+                        <div>
+                            <h3>左</h3>
+                            <div class="flex items-center">
+                                <span>足長</span>
+                                {{ footsize_fill_form.length_left }}
+                                <span>mm</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span>足幅</span>
+                                {{ footsize_fill_form.width_left }}
+                                <span>mm</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>右</h3>
+                            <div class="flex items-center">
+                                <span>足長</span>
+                                {{ footsize_fill_form.length_right }}
+                                <span>mm</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span>足幅</span>
+                                {{ footsize_fill_form.width_right }}
+                                <span>mm</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button name="footsize-fill">決定する</button>
+                </form>
+            </div>
+        </li>
+    </ul>
 </div>
+<script>
 
+    $(document).ready(function () {
+
+        // Variables
+        var clickedTab = $(".tabs > .active");
+        var tabWrapper = $(".tab__content");
+        var activeTab = tabWrapper.find(".active");
+        var activeTabHeight = activeTab.outerHeight();
+
+        // Show tab on page load
+        activeTab.show();
+
+        // Set height of wrapper on page load
+        tabWrapper.height(activeTabHeight);
+
+        $(".tabs > li").on("click", function () {
+
+            // Remove class from active tab
+            $(".tabs > li").removeClass("active");
+
+            // Add class active to clicked tab
+            $(this).addClass("active");
+
+            // Update clickedTab variable
+            clickedTab = $(".tabs .active");
+
+            // fade out active tab
+            activeTab.fadeOut(250, function () {
+
+                // Remove active class all tabs
+                $(".tab__content > li").removeClass("active");
+
+                // Get index of clicked tab
+                var clickedTabIndex = clickedTab.index();
+
+                // Add class active to corresponding tab
+                $(".tab__content > li").eq(clickedTabIndex).addClass("active");
+
+                // update new active tab
+                activeTab = $(".tab__content > .active");
+
+                // Update variable
+                activeTabHeight = activeTab.outerHeight();
+
+                // Animate height of wrapper to new tab height
+                tabWrapper.stop().delay(50).animate({
+                    height: activeTabHeight
+                }, 500, function () {
+
+                    // Fade in active tab
+                    activeTab.delay(50).fadeIn(250);
+
+                });
+            });
+        });
+    });
+</script>
 
 {% endblock content %}

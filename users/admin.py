@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
+from feet import models as feet_models
+from orders import models as order_models
 from reviews import models as review_models
 from . import models
 
@@ -8,11 +10,22 @@ from . import models
 class ReviewInline(admin.TabularInline):
 
     model = review_models.Review
+    verbose_name = _("レビュー")
+    verbose_name_plural = _("レビュー")
+
+
+class FootsizeInline(admin.TabularInline):
+
+    model = feet_models.Footsize
+    max_num = 1
+    verbose_name = _("足サイズ")
+    verbose_name_plural = _("足サイズ")
 
 
 @admin.register(models.Guest)
 class GuestAdmin(admin.ModelAdmin):
 
+    fieldsets = ((_("ゲスト情報"), {"fields": ("email", "active",)},),)
     list_display = (
         "email",
         "created",
@@ -42,9 +55,8 @@ class CustomUserAdmin(admin.ModelAdmin):
                     "prefecture",
                     "address_city",
                     "address_detail",
-                    "member_number",
                     "member_code",
-                    "stripe_customer_id",
+                    # "stripe_customer_id",
                 )
             },
         ),
@@ -64,7 +76,10 @@ class CustomUserAdmin(admin.ModelAdmin):
         ),
     )
 
-    inlines = (ReviewInline,)
+    inlines = (
+        FootsizeInline,
+        ReviewInline,
+    )
 
     list_display = (
         "email",
@@ -78,6 +93,11 @@ class CustomUserAdmin(admin.ModelAdmin):
 
     search_fields = (
         "email",
+        "last_name",
+        "first_name",
+        "last_name_kana",
+        "first_name_kana",
+        "member_code",
     )
 
     list_filter = (

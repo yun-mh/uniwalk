@@ -1,0 +1,238 @@
+{% extends 'admin/base.html' %}
+{% load i18n humanize static %}
+{% block content %}
+<div class="flex flex-row flex-wrap flex-grow mt-2">
+    <div class="w-full md:w-1/2 p-3">
+        <div class="bg-white border rounded shadow">
+            <div class="border-b p-3">
+                <h5 class="font-bold uppercase text-gray-600">{% trans '足長(左)' %}</h5>
+            </div>
+            <div class="p-5">
+                <canvas id="footLengthHistLeft" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full md:w-1/2 p-3">
+        <div class="bg-white border rounded shadow">
+            <div class="border-b p-3">
+                <h5 class="font-bold uppercase text-gray-600">{% trans '足長(右)' %}</h5>
+            </div>
+            <div class="p-5">
+                <canvas id="footLengthHistRight" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full md:w-1/2 p-3">
+        <div class="bg-white border rounded shadow">
+            <div class="border-b p-3">
+                <h5 class="font-bold uppercase text-gray-600">{% trans '足幅(左)' %}</h5>
+            </div>
+            <div class="p-5">
+                <canvas id="footWidthHistLeft" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full md:w-1/2 p-3">
+        <div class="bg-white border rounded shadow">
+            <div class="border-b p-3">
+                <h5 class="font-bold uppercase text-gray-600">{% trans '足幅(右)' %}</h5>
+            </div>
+            <div class="p-5">
+                <canvas id="footWidthHistRight" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script>
+    var footLengthHistLeft = document.getElementById('footLengthHistLeft').getContext('2d');
+    var footLengthHistRight = document.getElementById('footLengthHistRight').getContext('2d');
+    var footWidthHistLeft = document.getElementById('footWidthHistLeft').getContext('2d');
+    var footWidthHistRight = document.getElementById('footWidthHistRight').getContext('2d');
+
+    // 足幅(左)
+    if (typeof footWidthHistLeft !== 'undefined') {
+        var footWidthHistBarChart = new Chart(footWidthHistLeft, {
+            type: 'bar',
+            data: {
+                labels: [
+                    '80以下',
+                    '~90',
+                    '~100',
+                    '~110',
+                    '~110以上'
+                ],
+                datasets: [{
+                    label: '男性',
+                    data: [{% for key, value in width_male_left.items %}'{{ value }}', {% endfor %}],
+            backgroundColor: '#36A2EB',
+            borderColor: '#36A2EB',
+            borderWidth: 1
+        }, {
+            label: '女性',
+            data: [{% for key, value in width_female_left.items %}'{{ value }}', {% endfor %}],
+    backgroundColor: '#FF6384',
+        borderColor: '#FF6384',
+            borderWidth: 1
+        }]
+            },
+    options: {
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+                yAxes: [{
+                    stacked: true
+                }]
+        },
+        legend: {
+            display: false
+        },
+        maintainAspectRatio: false,
+            responsive: true
+    }
+        });
+    }
+
+    // 足幅(右)
+    if (typeof footWidthHistRight !== 'undefined') {
+        var footWidthHistBarChart = new Chart(footWidthHistRight, {
+            type: 'bar',
+            data: {
+                labels: [
+                    '80以下',
+                    '~90',
+                    '~100',
+                    '~110',
+                    '~110以上'
+                ],
+                datasets: [{
+                    label: '男性',
+                    data: [{% for key, value in width_male_right.items %}'{{ value }}', {% endfor %}],
+            backgroundColor: '#36A2EB',
+            borderColor: '#36A2EB',
+            borderWidth: 1
+        }, {
+            label: '女性',
+            data: [{% for key, value in width_female_right.items %}'{{ value }}', {% endfor %}],
+    backgroundColor: '#FF6384',
+        borderColor: '#FF6384',
+            borderWidth: 1
+        }]
+            },
+    options: {
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+                yAxes: [{
+                    stacked: true
+                }]
+        },
+        legend: {
+            display: false
+        },
+        maintainAspectRatio: false,
+            responsive: true
+    }
+        });
+    }
+
+    // 足長(左)
+    if (typeof footLengthHistLeft !== 'undefined') {
+        var footLengthHistBarChart = new Chart(footLengthHistLeft, {
+            type: 'bar',
+            data: {
+                labels: [
+                    '230未満',
+                    '~240',
+                    '~250',
+                    '~260',
+                    '~270',
+                    '~280',
+                    '~290',
+                    '290以上',
+                ],
+                datasets: [{
+                    label: '男性',
+                    data: [{% for key, value in length_male_left.items %}'{{ value }}', {% endfor %}],
+            backgroundColor: '#36A2EB',
+            borderColor: '#36A2EB',
+            borderWidth: 1
+        }, {
+            label: '女性',
+            data: [{% for key, value in length_female_left.items %}'{{ value }}', {% endfor %}],
+    backgroundColor: '#FF6384',
+        borderColor: '#FF6384',
+            borderWidth: 1
+        }]
+            },
+    options: {
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+                yAxes: [{
+                    stacked: true
+                }]
+        },
+        legend: {
+            display: false
+        },
+        maintainAspectRatio: false,
+            responsive: true
+    }
+        });
+    }
+
+    // 足長(右)
+    if (typeof footLengthHistRight !== 'undefined') {
+        var footLengthHistBarChart = new Chart(footLengthHistRight, {
+            type: 'bar',
+            data: {
+                labels: [
+                    '230未満',
+                    '~240',
+                    '~250',
+                    '~260',
+                    '~270',
+                    '~280',
+                    '~290',
+                    '290以上',
+                ],
+                datasets: [{
+                    label: '男性',
+                    data: [{% for key, value in length_male_right.items %}'{{ value }}', {% endfor %}],
+            backgroundColor: '#36A2EB',
+            borderColor: '#36A2EB',
+            borderWidth: 1
+        }, {
+            label: '女性',
+            data: [{% for key, value in length_female_right.items %}'{{ value }}', {% endfor %}],
+    backgroundColor: '#FF6384',
+        borderColor: '#FF6384',
+            borderWidth: 1
+        }]
+            },
+    options: {
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+                yAxes: [{
+                    stacked: true
+                }]
+        },
+        legend: {
+            display: false
+        },
+        maintainAspectRatio: false,
+            responsive: true
+    }
+        });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends 'admin/base.html' %}
+{% load static i18n humanize %}
+{% block content %}
+<div class="flex flex-row flex-wrap flex-grow mt-2">
+    <div class="w-full md:w-1/2 p-3">
+        <div class="bg-white border rounded shadow">
+            <div class="border-b p-3">
+                <h5 class="font-bold uppercase text-gray-600">{% trans '全体顧客対比会員割合' %}</h5>
+            </div>
+            <div class="flex">
+                <div class="w-1/3 text-center border-b border-r py-3">
+                    <div class="text-sm">全体ユーザ数</div class="text-sm">
+                    <div class="text-lg font-semibold">{{ all_users }}</div class="text-lg font-semibold">
+                </div>
+                <div class="w-1/3 text-center border-b border-r py-3">
+                    <div class="text-sm">会員数</div>
+                    <div class="text-lg font-semibold">{{ users | length }}</div>
+                </div>
+                <div class="w-1/3 text-center border-b py-3">
+                    <div class="text-sm">ゲスト数</div>
+                    <div class="text-lg font-semibold">{{ guests | length }}</div>
+                </div>
+            </div>
+            <div class="p-5">
+                <canvas id="memberProp" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full md:w-1/2 p-3">
+        <div class="bg-white border rounded shadow">
+            <div class="border-b p-3">
+                <h5 class="font-bold uppercase text-gray-600">{% trans '会員性別割合' %}</h5>
+            </div>
+            <div class="flex">
+                <div class="w-1/4 text-center border-b border-r py-3">
+                    <div class="text-sm">全体会員数</div>
+                    <div class="text-lg font-semibold">{{ users | length }}</div>
+                </div>
+                <div class="w-1/4 text-center border-b border-r py-3">
+                    <div class="text-sm">男性</div>
+                    <div class="text-lg font-semibold">{{ male | length }}</div>
+                </div>
+                <div class="w-1/4 text-center border-b border-r py-3">
+                    <div class="text-sm">女性</div>
+                    <div class="text-lg font-semibold">{{ female | length }}</div>
+                </div>
+                <div class="w-1/4 text-center border-b py-3">
+                    <div class="text-sm">その他</div>
+                    <div class="text-lg font-semibold">{{ other | length }}</div>
+                </div>
+            </div>
+            <div class="p-5">
+                <canvas id="genderProp" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full p-3">
+        <div class="bg-white border rounded shadow">
+            <div class="border-b p-3">
+                <h5 class="font-bold uppercase text-gray-600">{% trans '会員年齢分布' %}</h5>
+            </div>
+            <div class="p-5">
+                <canvas id="ageHist" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script>
+    var memberProp = document.getElementById('memberProp').getContext('2d');
+    var genderProp = document.getElementById('genderProp').getContext('2d');
+    var ageHist = document.getElementById('ageHist').getContext('2d');
+
+    // 会員分析
+    // 全体顧客対比会員割合
+    if (typeof memberProp !== 'undefined') {
+        var memberPropPieChart = new Chart(memberProp, {
+            type: 'pie',
+            data: {
+                labels: [
+                    "{% trans '会員' %}",
+                    "{% trans 'ゲスト' %}"
+                ],
+                datasets: [{
+                    data: ['{{ users | length }}', '{{ guests | length }}'],
+                    backgroundColor: [
+                        '#FF6384',
+                        '#FFCD56'
+                    ],
+                    borderColor: [
+                        '#FF6384',
+                        '#FFCD56'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true
+            }
+        });
+    }
+
+
+    // 会員性別割合
+    if (typeof genderProp !== 'undefined') {
+        var genderPropPieChart = new Chart(genderProp, {
+            type: 'pie',
+            data: {
+                labels: [
+                    '男性',
+                    '女性',
+                    'その他'
+                ],
+                datasets: [{
+                    data: ['{{ male | length }}', '{{ female | length }}', '{{ other | length }}'],
+                    backgroundColor: [
+                        '#36A2EB',
+                        '#FF6384',
+                        '#6AB187'
+                    ],
+                    borderColor: [
+                        '#36A2EB',
+                        '#FF6384',
+                        '#6AB187'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true
+            }
+        });
+    }
+
+    // 会員年齢分布
+    if (typeof ageHist !== 'undefined') {
+        var ageHistBarChart = new Chart(ageHist, {
+            type: 'bar',
+            data: {
+                labels: [
+                    '10歳未満',
+                    '10代',
+                    '20代',
+                    '30代',
+                    '40代',
+                    '50代',
+                    '60代以上'
+                ],
+                datasets: [{
+                    data: ['{{ kids |length }}', '{{ tens |length }}', '{{ twenties |length }}', '{{ thirties |length }}', '{{ forties |length }}', '{{ fifties |length }}', '{{ over_sixties |length }}'],
+                    backgroundColor: [
+                        '#f1c40f',
+                        '#1abc9c',
+                        '#e74c3c',
+                        '#3498db',
+                        '#9b59b6',
+                        '#34495e',
+                        '#bdc3c7'
+                    ],
+                    borderColor: [
+                        '#f1c40f',
+                        '#1abc9c',
+                        '#e74c3c',
+                        '#3498db',
+                        '#9b59b6',
+                        '#34495e',
+                        '#bdc3c7'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                maintainAspectRatio: false,
+                responsive: true
+            }
+        });
+    }
+</script>
+{% endblock %}

@@ -6,10 +6,11 @@
         {% csrf_token %}
         <div class="w-full h-2/3 bg-cover bg-center mb-2" style="background-image: url({{ design.first_image }});">
         </div>
-        <div class="overflow-hidden text-center">
+        <div class="flex justify-between items-center">
             <span class="text-black block font-medium">{{ design.customize_code }}</span>
+            <span><i class="fas fa-heart text-sm"></i> {{ design.total_likes }}</span>
         </div>
-        <div class="overflow-hidden text-center">
+        <div class="overflow-hidden text-left">
             <span class="text-sm text-black block font-medium">作成者：{{ design.user.get_email_name }}</span>
         </div>
         <input type="hidden" name="outsole_color_left" id="{{ design.pk }}_outsole_color_left"

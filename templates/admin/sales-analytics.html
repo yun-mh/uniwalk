@@ -1,0 +1,117 @@
+{% extends 'admin/base.html' %}
+{% load i18n humanize static %}
+{% block content %}
+<div class="flex flex-row flex-wrap flex-grow mt-2">
+    <div class="w-full p-3">
+        <div class="bg-white border rounded shadow">
+            <div class="border-b p-3">
+                <h5 class="font-bold uppercase text-gray-600">{% trans '年間売上実績' %}</h5>
+            </div>
+            <div class="p-5">
+                <div class="mb-5">
+                    <label for="year">{% trans '年度' %}</label>
+                    <select id="year">
+                        <option value="2020">2020</option>
+                        <option value="2019" {% if request.session.year == '2019' %}selected{% endif %}>2019</option>
+                    </select>
+                </div>
+                <canvas id="salesLine" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full p-3">
+        <div class="bg-white border rounded shadow">
+            <div class="border-b p-3">
+                <h5 class="font-bold uppercase text-gray-600">{% trans '商品別販売実績(商品別販売個数)' %}</h5>
+            </div>
+            <div class="p-5">
+                <canvas id="productProp" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script>
+    // 売上実績
+    if (typeof salesLine !== 'undefined') {
+        var salesLineChart = new Chart(salesLine, {
+            type: 'line',
+            data: {
+                labels: [
+                    '1月',
+                    '2月',
+                    '3月',
+                    '4月',
+                    '5月',
+                    '6月',
+                    '7月',
+                    '8月',
+                    '9月',
+                    '10月',
+                    '11月',
+                    '12月'
+                ],
+                datasets: [{
+                    data: [{% for key, value in profit_by_month.items %}'{{ value }}', {% endfor %}],
+            backgroundColor: 'rgba(75, 123, 236, 0.5)',
+            borderColor: 'rgba(75, 123, 236, 1)',
+            borderWidth: 1,
+            fill: false
+        }]
+            },
+    options: {
+        legend: {
+            display: false
+        },
+        maintainAspectRatio: false,
+            responsive: true
+    }
+        });
+    }
+
+    // 商品別販売実績
+    var backgroundColors = [];
+    var borderColors = [];
+    var dynamicColors = function () {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
+    for (var i = 0; i < '{{ products | length}}'; i++) {
+        var new_color = dynamicColors();
+        backgroundColors.push(new_color);
+        borderColors.push(new_color);
+    }
+    if (typeof productProp !== 'undefined') {
+        var productPropPieChart = new Chart(productProp, {
+            type: 'pie',
+            data: {
+                labels: [
+                    {% for product in products %}'{{ product }}',{% endfor %}
+                ],
+    datasets: [{
+        data: [{% for product in products %}'{{ product.get_orders_by_product }}', {% endfor %}],
+        backgroundColor: backgroundColors,
+            borderColor: borderColors,
+                borderWidth: 1
+    }]
+            },
+    options: {
+        maintainAspectRatio: false,
+            responsive: true
+    }
+        });
+    }
+
+    var yearSelect = document.getElementById("year");
+    function handleYearChange() {
+        var selected = yearSelect.value;
+        fetch(`{% url 'admin:switch-year' %}?year=${selected}`).then(() => {
+            window.location.reload();
+        })
+    }
+    yearSelect.addEventListener("change", handleYearChange);
+</script>
+{% endblock %}

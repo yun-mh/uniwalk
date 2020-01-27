@@ -1,40 +1,54 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block page_title %}
 {% trans "会員登録情報確認" %}
 {% endblock page_title %}
 
 {% block content %}
-
-<div class="container mx-auto my-10 flex flex-col items-center p-6">
-    <div class="w-2/3">
-        <div class="title my-3 text-center mb-10">
+<div class="flex items-center min-h-75vh rounded-xl py-16"
+    style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
+    <div class="container bg-white w-1/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 relative">
+        <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute" style="top: -3rem;">
+            <i class="fas fa-user-check fa-3x text-white"></i>
+        </div>
+        <div class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">
             {% trans '会員登録情報確認' %}
         </div>
 
-        {% for key, value in request.session.data.items %}
-        {% if key != "password" and key != "member_number" %}
-        <div class="text-center">
-            {% if key != "gender" %}
-            {{ value }}
-            {% else %}
-            {% if value == "M" %}
-            男性
-            {% elif value == "F" %}
-            女性
-            {% else %}
-            その他
-            {% endif %}
-            {% endif %}
+        <div class="w-full flex justify-around">
+            <div class="w-1/2 flex flex-col pl-12">
+                <span class="text-purple-700 mb-3">ID</span>
+                <span class="text-purple-700 mb-3">姓</span>
+                <span class="text-purple-700 mb-3">名</span>
+                <span class="text-purple-700 mb-3">姓(カナ)</span>
+                <span class="text-purple-700 mb-3">名(カナ)</span>
+                <span class="text-purple-700 mb-3">性別</span>
+            </div>
+
+            <div class="w-1/2 flex flex-col text-center pr-12">
+                {% for key, value in request.session.data.items %}
+                {% if key != "password" and key != "member_number" %}
+                {% if key != "gender" %}
+                <span class="mb-3">{{ value }}</span>
+                {% else %}
+                {% if value == "M" %}
+                <span>男性</span>
+                {% elif value == "F" %}
+                <span>女性</span>
+                {% else %}
+                <span>その他</span>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
-        {% endif %}
-        {% endfor %}
 
         <p class="text-center my-10">
             下記の内容でよろしいですか？<br>
             「会員登録」ボタンをクリックすると登録手続きが行われます。<br>
-            登録情報を修正する場合は、「情報修正」ボタンをクリックしてください。
+            登録情報を修正する場合は「情報修正」ボタンをクリックしてください。
         </p>
 
         <form method="POST" class="w-full flex justify-around mb-5">

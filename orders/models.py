@@ -1,5 +1,5 @@
 import random, string
-from datetime import datetime
+from datetime import datetime, date
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -29,8 +29,8 @@ class Step(models.Model):
 
     """ 注文の対応状況に関するモデルを定義する """
 
-    step_code = models.CharField(max_length=3)
-    step_name = models.CharField(max_length=20)
+    step_code = models.CharField(_("対応コード"), max_length=3)
+    step_name = models.CharField(_("対応名"), max_length=20)
 
     def __str__(self):
         return self.step_name
@@ -75,15 +75,15 @@ class Order(models.Model):
     prefecture_recipient = JPPrefectureField(_("都道府県(ご請求書先)"), max_length=2)
     address_city_recipient = models.CharField(_("市区町村(ご請求書先)"), max_length=40)
     address_detail_recipient = models.CharField(_("建物名・部屋番号(ご請求書先)"), max_length=40)
-    last_name_orderer = models.CharField(_("姓(お届け先)"), max_length=30)
-    first_name_orderer = models.CharField(_("名(お届け先)"), max_length=30)
-    last_name_orderer_kana = models.CharField(_("姓(カナ, お届け先)"), max_length=30)
-    first_name_orderer_kana = models.CharField(_("名(カナ, お届け先)"), max_length=30)
-    phone_number_orderer = PhoneNumberField(_("電話番号(お届け先)"), max_length=15)
-    postal_code_orderer = models.CharField(_("郵便番号(お届け先)"), max_length=7)
-    prefecture_orderer = JPPrefectureField(_("都道府県(お届け先)"), max_length=2)
-    address_city_orderer = models.CharField(_("市区町村(お届け先)"), max_length=40)
-    address_detail_orderer = models.CharField(_("建物名・部屋番号(お届け先)"), max_length=40)
+    last_name_orderer = models.CharField(_("姓(お届け先)"), max_length=30, null=True, blank=True)
+    first_name_orderer = models.CharField(_("名(お届け先)"), max_length=30, null=True, blank=True)
+    last_name_orderer_kana = models.CharField(_("姓(カナ, お届け先)"), max_length=30, null=True, blank=True)
+    first_name_orderer_kana = models.CharField(_("名(カナ, お届け先)"), max_length=30, null=True, blank=True)
+    phone_number_orderer = PhoneNumberField(_("電話番号(お届け先)"), max_length=15, null=True, blank=True)
+    postal_code_orderer = models.CharField(_("郵便番号(お届け先)"), max_length=7, null=True, blank=True)
+    prefecture_orderer = JPPrefectureField(_("都道府県(お届け先)"), max_length=2, null=True, blank=True)
+    address_city_orderer = models.CharField(_("市区町村(お届け先)"), max_length=40, null=True, blank=True)
+    address_detail_orderer = models.CharField(_("建物名・部屋番号(お届け先)"), max_length=40, null=True, blank=True)
     order_date = models.DateTimeField(_("注文日時"), auto_now_add=True)
     payment = models.CharField(_("支払方法"), max_length=2, choices=PAYMENT_CHOICES)
     stripe_charge_id = models.CharField(max_length=50, blank=True, null=True)
@@ -188,3 +188,4 @@ class OrderItem(models.Model):
 
     def sub_total(self):
         return self.quantity * self.price
+

@@ -1,13 +1,15 @@
-import base64, json
 from django.core.files.base import ContentFile
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import View, ListView
-from . import models, forms
-from products import models as product_models
 from designs import models as design_models
+from products import models as product_models
+from users import models as user_models
+from . import models, forms
+import base64, json
 
 
+# インコードした画像データを画像にデコードする関数
 def base64_file(data, name=None):
     _format, _img_str = data.split(";base64,")
     _name, ext = _format.split("/")
@@ -17,6 +19,8 @@ def base64_file(data, name=None):
 
 
 class CustomizeView(ListView):
+
+    """ デザインカスタマイズ """
 
     model = models.Design
     template_name = "designs/design-customize.html"
@@ -30,7 +34,8 @@ class CustomizeView(ListView):
 
     def get_queryset(self):
         pk = self.kwargs.get("pk")
-        return models.Design.objects.filter(product=pk).exclude(user__isnull=True).order_by("-created")
+        designs = models.Design.objects.filter(product=pk).exclude(user__isnull=True).all()
+        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
 
     def get_context_data(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
@@ -131,11 +136,15 @@ class CustomizeView(ListView):
             up=base64_file(image_data_up),
             down=base64_file(image_data_down),
         )
+        self.request.session["product"] = pk
         self.request.session["design"] = new_design.pk
-        return redirect("feet:measure", pk=pk)
+        return redirect("feet:measure")
 
 
 def get_palette(request):
+
+    """ 参照用デザインパレットを呼び出すビュー """
+
     if request.method == "POST" and request.is_ajax():
         outsole_color_left = request.POST.get("outsole_color_left")
         midsole_color_left = request.POST.get("midsole_color_left")
@@ -147,6 +156,16 @@ def get_palette(request):
         uppersole_color_right = request.POST.get("uppersole_color_right")
         shoelace_color_right = request.POST.get("shoelace_color_right")
         tongue_color_right = request.POST.get("tongue_color_right")
+        name_outsole_material_left = models.Material.objects.get(pk=request.POST.get("outsole_material_left")).name
+        name_midsole_material_left = models.Material.objects.get(pk=request.POST.get("midsole_material_left")).name
+        name_uppersole_material_left = models.Material.objects.get(pk=request.POST.get("uppersole_material_left")).name
+        name_shoelace_material_left = models.Material.objects.get(pk=request.POST.get("shoelace_material_left")).name
+        name_tongue_material_left = models.Material.objects.get(pk=request.POST.get("tongue_material_left")).name
+        name_outsole_material_right = models.Material.objects.get(pk=request.POST.get("outsole_material_right")).name
+        name_midsole_material_right = models.Material.objects.get(pk=request.POST.get("midsole_material_right")).name
+        name_uppersole_material_right = models.Material.objects.get(pk=request.POST.get("uppersole_material_right")).name
+        name_shoelace_material_right = models.Material.objects.get(pk=request.POST.get("shoelace_material_right")).name
+        name_tongue_material_right = models.Material.objects.get(pk=request.POST.get("tongue_material_right")).name
         outsole_material_left = models.Material.objects.get(pk=request.POST.get("outsole_material_left")).file.url
         midsole_material_left = models.Material.objects.get(pk=request.POST.get("midsole_material_left")).file.url
         uppersole_material_left = models.Material.objects.get(pk=request.POST.get("uppersole_material_left")).file.url
@@ -169,6 +188,16 @@ def get_palette(request):
                 "uppersole_color_right": uppersole_color_right,
                 "shoelace_color_right": shoelace_color_right,
                 "tongue_color_right": tongue_color_right,
+                "name_outsole_material_left": name_outsole_material_left,
+                "name_midsole_material_left": name_midsole_material_left,
+                "name_uppersole_material_left": name_uppersole_material_left,
+                "name_shoelace_material_left": name_shoelace_material_left,
+                "name_tongue_material_left": name_tongue_material_left,
+                "name_outsole_material_right": name_outsole_material_right,
+                "name_midsole_material_right": name_midsole_material_right,
+                "name_uppersole_material_right": name_uppersole_material_right,
+                "name_shoelace_material_right": name_shoelace_material_right,
+                "name_tongue_material_right": name_tongue_material_right,
                 "outsole_material_left": outsole_material_left,
                 "midsole_material_left": midsole_material_left,
                 "uppersole_material_left": uppersole_material_left,
@@ -184,3 +213,104 @@ def get_palette(request):
         return HttpResponse(response, content_type="application/json")
     else:
         raise Http404
+
+
+class GalleriesListView(ListView):
+
+    """ デザインギャラリー(全体) """
+
+    model = models.Design
+    paginate_by = 5
+    context_object_name = "designs"
+    extra_context = {
+        "designs_all": models.Design.objects.all().exclude(user__isnull=True),
+        "products": product_models.Product.objects.all(),
+        "count": len(product_models.Product.objects.all()),
+        "categories": product_models.Category.objects.all(),
+    }
+    template_name = "galleries/galleries_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        designs = models.Design.objects.filter(likes=self.request.user.pk)
+        check_like = [ design.pk for design in designs ]
+        context["check_like"] = check_like
+        return context
+
+    def get_queryset(self):
+        designs = models.Design.objects.all().exclude(user__isnull=True)
+        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+
+
+class GalleriesListByCategoryView(ListView):
+
+    """ デザインギャラリー(カテゴリー別) """
+
+    model = models.Design
+    paginate_by = 5
+    context_object_name = "designs"
+    extra_context = {
+        "designs_all": models.Design.objects.all().exclude(user__isnull=True),
+        "products": product_models.Product.objects.all(),
+        "count": len(product_models.Product.objects.all()),
+        "categories": product_models.Category.objects.all(),
+    }
+    template_name = "galleries/galleries_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        designs = models.Design.objects.filter(likes=self.request.user.pk)
+        check_like = [ design.pk for design in designs ]
+        context["check_like"] = check_like
+        return context
+
+    def get_queryset(self):
+        pk = self.kwargs.get("pk")
+        designs = models.Design.objects.filter(product__category=pk).exclude(user__isnull=True)
+        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+
+
+class GalleriesListByProductView(ListView):
+
+    """ デザインギャラリー(商品別) """
+
+    model = models.Design
+    paginate_by = 5
+    context_object_name = "designs"
+    extra_context = {
+        "designs_all": models.Design.objects.all().exclude(user__isnull=True),
+        "products": product_models.Product.objects.all(),
+        "count": len(product_models.Product.objects.all()),
+        "categories": product_models.Category.objects.all(),
+    }
+    template_name = "galleries/galleries_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        designs = models.Design.objects.filter(likes=self.request.user.pk)
+        check_like = [ design.pk for design in designs ]
+        context["check_like"] = check_like
+        return context
+
+    def get_queryset(self):
+        pk = self.kwargs.get("pk")
+        designs = models.Design.objects.filter(product=pk).exclude(user__isnull=True)
+        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+
+
+# デザインに対した「いいね！」機能
+def design_like(request):
+    if request.method == 'POST':
+        user = request.user
+        design_pk = request.POST.get('pk', None)
+        design = models.Design.objects.get(pk=design_pk)
+
+        if design.likes.filter(email=user.email).exists():
+            design.likes.remove(user)
+            check_like = False
+        else:
+            design.likes.add(user)
+            check_like = True
+        likes_count = str(design.total_likes)
+        response = json.dumps({'likes_count': likes_count, "check_like": str(check_like)})
+    return HttpResponse(response, content_type='application/json')

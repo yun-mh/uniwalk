@@ -1,6 +1,8 @@
 from django.db import models
 from core import models as core_models
 from django.utils.translation import ugettext_lazy as _
+from orders import models as order_models
+from designs import models as design_models
 
 
 def create_product_code():
@@ -32,41 +34,42 @@ class Template(models.Model):
         on_delete=models.CASCADE,
     )
     shoelace_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("シューレス(左)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     tongue_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("タン(左)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     upper_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("アッパーソール(左)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     midsole_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("ミッドソール(左)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     outsole_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
-    )
-    liner_left = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("アウトソール(左)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     shoelace_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("シューレス(右)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     tongue_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("タン(右)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     upper_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("アッパーソール(右)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     midsole_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("ミッドソール(右)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
     outsole_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
+        _("アウトソール(右)"), upload_to=generate_path, null=True, blank=True, unique=True
     )
-    liner_right = models.FileField(
-        upload_to=generate_path, null=True, blank=True, unique=True
-    )
+
+    class Meta:
+        verbose_name = _("テンプレート")
+        verbose_name_plural = _("テンプレート")
+
+    def __str__(self):
+        return self.product.name
 
 
 class Image(core_models.TimeStampedModel):
@@ -77,6 +80,10 @@ class Image(core_models.TimeStampedModel):
     product = models.ForeignKey(
         "Product", verbose_name=_("商品"), related_name="images", on_delete=models.CASCADE
     )
+
+    class Meta:
+        verbose_name = _("商品イメージ")
+        verbose_name_plural = _("商品イメージ")
 
 
 class Category(core_models.TimeStampedModel):
@@ -92,6 +99,13 @@ class Category(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.product_type
+
+    def count_designs_by_category(self):
+        return len(
+            design_models.Design.objects.filter(
+                product__category__product_type__contains=self.product_type
+            ).exclude(user__isnull=True)
+        )
 
 
 class Product(core_models.TimeStampedModel):
@@ -138,6 +152,16 @@ class Product(core_models.TimeStampedModel):
     def get_next_four_images(self):
         images = self.images.all()[1:5]
         return images
+
+    def get_orders_by_product(self):
+        return len(order_models.OrderItem.objects.filter(product=self.pk))
+
+    def count_designs_by_product(self):
+        return len(
+            design_models.Design.objects.filter(
+                product__name__contains=self.name
+            ).exclude(user__isnull=True)
+        )
 
     def save(self, *args, **kwargs):
         product_code = self.category.type_code + self.product_number

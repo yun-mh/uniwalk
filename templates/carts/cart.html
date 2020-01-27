@@ -23,6 +23,7 @@
                 {% endwith %}
                 <div class="w-full flex justify-between px-5 items-center">
                     <div class="flex flex-col justify-between h-full">
+<<<<<<< HEAD
                         <div class="flex flex-row">
                             <span class="text-lg">{{ cart_item.product.name }}</span>
                             <div class="text-sm ml-64">
@@ -51,6 +52,40 @@
                                 </a>
                             </div>
                         </div>
+=======
+                        <div class="flex flex-col">
+                            <div class="flex items-baseline">
+                                <span class="text-xl mr-3">{{ cart_item.product.name }}</span>
+                                <span class="text-sm text-gray-500">{{ cart_item.product.category }}</span>
+                            </div>
+                            <span class="text-xs">(左) 足長:{{ cart_item.feet.length_left }}
+                                足幅:{{ cart_item.feet.width_left }}</span>
+                            <span class="text-xs">(右) 足長:{{ cart_item.feet.length_right }}
+                                足幅:{{ cart_item.feet.width_right }}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-sm">単価　&yen; {{ cart_item.product.price | intcomma }}</span>
+                            <span class="text-sm">{{ cart_item.quantity}} x &yen;
+                                {{ cart_item.product.price | intcomma }}</span class="text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        &yen; {{cart_item.sub_total | intcomma }}
+                    </div>
+                    <div>
+                        <a href="{% url 'carts:add_cart' cart_item.product.pk cart_item.design.pk cart_item.feet.pk %}">
+                            <i class="far fa-plus-square"></i>
+                        </a>
+                        <span class="mx-3">{{ cart_item.quantity}}</span>
+                        <a href="{% url 'carts:remove' cart_item.product.pk cart_item.design.pk cart_item.feet.pk %}">
+                            <i class="far fa-minus-square"></i>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{% url 'carts:delete' cart_item.product.pk cart_item.design.pk cart_item.feet.pk %}">
+                            <span>削除</span>
+                        </a>
+>>>>>>> master
                     </div>
                 </div>
             </div>

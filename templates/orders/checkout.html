@@ -23,51 +23,59 @@
                     {% endif %}
                     {% csrf_token %}
                     <div class="flex mb-5">
-                        <div class="mr-5">
+                        <div class="floating-label mr-5">
                             {{ recipient_form.last_name_recipient }}
+                            {{ recipient_form.last_name_recipient.label_tag }}
                             <span
                                 class="text-red-700 font-medium text-sm">{{ recipient_form.last_name_recipient.errors }}</span>
                         </div>
-                        <div>
+                        <div class="floating-label">
                             {{ recipient_form.first_name_recipient }}
+                            {{ recipient_form.first_name_recipient.label_tag }}
                             <span
                                 class="text-red-700 font-medium text-sm">{{ recipient_form.first_name_recipient.errors }}</span>
                         </div>
                     </div>
                     <div class="flex mb-5">
-                        <div class="mr-5">
+                        <div class="floating-label mr-5">
                             {{ recipient_form.last_name_recipient_kana }}
+                            {{ recipient_form.last_name_recipient_kana.label_tag }}
                             <span
                                 class="text-red-700 font-medium text-sm">{{ recipient_form.last_name_recipient_kana.errors }}</span>
                         </div>
-                        <div>
+                        <div class="floating-label">
                             {{ recipient_form.first_name_recipient_kana }}
+                            {{ recipient_form.first_name_recipient_kana.label_tag }}
                             <span
                                 class="text-red-700 font-medium text-sm">{{ recipient_form.first_name_recipient_kana.errors }}</span>
                         </div>
                     </div>
-                    <div class="mb-5">
+                    <div class="floating-label mb-5">
                         {{ recipient_form.phone_number_recipient }}
+                        {{ recipient_form.phone_number_recipient.label_tag }}
                         <span
                             class="text-red-700 font-medium text-sm">{{ recipient_form.phone_number_recipient.errors }}</span>
                     </div>
-                    <div class="mb-5">
+                    <div class="floating-label mb-5">
                         {{ recipient_form.postal_code_recipient }}
+                        {{ recipient_form.postal_code_recipient.label_tag }}
                         <span
                             class="text-red-700 font-medium text-sm">{{ recipient_form.postal_code_recipient.errors }}</span>
                     </div>
-                    <div class="mb-5">
+                    <div class="floating-label select mb-5">
                         {{ recipient_form.prefecture_recipient }}
                         <span
                             class="text-red-700 font-medium text-sm">{{ recipient_form.prefecture_recipient.errors }}</span>
                     </div>
-                    <div class="mb-5">
+                    <div class="floating-label mb-5">
                         {{ recipient_form.address_city_recipient }}
+                        {{ recipient_form.address_city_recipient.label_tag }}
                         <span
                             class="text-red-700 font-medium text-sm">{{ recipient_form.address_city_recipient.errors }}</span>
                     </div>
-                    <div class="mb-5">
+                    <div class="floating-label mb-5">
                         {{ recipient_form.address_detail_recipient }}
+                        {{ recipient_form.address_detail_recipient.label_tag }}
                         <span
                             class="text-red-700 font-medium text-sm">{{ recipient_form.address_detail_recipient.errors }}</span>
                     </div>

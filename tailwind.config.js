@@ -15,6 +15,7 @@ module.exports = {
         "50vh": "50vh",
         "75vh": "75vh",
         "75vw": "75%",
+        "80vw": "80%",
         "90vw": "90%"
       },
       height: {
@@ -42,16 +43,20 @@ module.exports = {
       },
       colors: {
         universe: {
-          lighter: "rgba(104, 127, 255, 1)",
-          dark: "rgba(114, 43, 255, 1)"
+          lighter: "#2B3D4E",
+          dark: "#1C2934"
         }
       }
     },
     boxShadow: {
       dark:
         " 0 4px 6px -1px rgba(0, 0, 0, .2), 0 2px 4px -1px rgba(0, 0, 0, .08)",
+<<<<<<< HEAD
       default: 
         "0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06)",
+=======
+      default: "0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06)",
+>>>>>>> master
       md:
         " 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -1px rgba(0, 0, 0, .06)",
       lg:

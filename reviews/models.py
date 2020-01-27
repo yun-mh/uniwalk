@@ -19,7 +19,6 @@ class Review(core_models.TimeStampedModel):
     title = models.CharField(_("タイトル"), max_length=50)
     text = models.TextField(_("本文"))
     rate = models.IntegerField(_("評点"), default=0)
-    review_code = models.CharField(_("レビュー番号"), max_length=11)
 
     class Meta:
         verbose_name = _("レビュー")

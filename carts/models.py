@@ -18,14 +18,21 @@ class CartItem(models.Model):
         "designs.Design",
         verbose_name=_("デザイン"),
         related_name="cart_items",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
     )
     product = models.ForeignKey(
         "products.Product", verbose_name=_("商品"), on_delete=models.CASCADE
     )
-    # feet_id = models.ForeignKey()
+    feet = models.ForeignKey(
+        "feet.Footsize",
+        verbose_name=_("足サイズ"),
+        related_name="cart_items",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
     quantity = models.IntegerField(_("数量"), default=1)
     active = models.BooleanField(_("活性化"), default=True)
 

@@ -1,18 +1,24 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block page_title %}
 {% trans '注文検索' %}
 {% endblock page_title%}
 
 {% block content %}
-<div class="container mx-auto my-10 flex flex-col items-center p-6">
-    <div class="title my-3">
-        {% trans '注文検索' %}
+<div class="flex items-center min-h-75vh rounded-xl py-16"
+    style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
+    <div class="container bg-white w-1/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 relative">
+        <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute" style="top: -3rem;">
+            <i class="fas fa-search fa-3x text-white"></i>
+        </div>
+        <div class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">
+            {% trans '注文検索' %}
+        </div>
+        <div class="font-medium text-xl mb-3">{% trans "注文状況を確認できます。" %}</div>
+        {% trans "検索する" as search %}
+        {% include 'mixins/auth/form_auth.html' with form=form cta=search %}
     </div>
-
-    {% trans "検索する" as search %}
-    {% include 'mixins/auth/form_auth.html' with form=form cta=search %}
 </div>
 {% endblock content %}
 

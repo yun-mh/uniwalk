@@ -5,8 +5,9 @@ from .managers import CustomUserManager
 from core.models import JPPrefectureField, JPPostalCodeModelField
 from django.shortcuts import reverse
 from phonenumber_field.modelfields import PhoneNumberField
-from localflavor.jp.jp_prefectures import JP_PREFECTURES, JP_PREFECTURE_CODES
 from core import models as core_models
+from localflavor.jp.jp_prefectures import JP_PREFECTURES, JP_PREFECTURE_CODES
+from datetime import date
 
 # Create your models here.
 def create_member_number():
@@ -30,7 +31,12 @@ class User(AbstractUser):
     GENDER_FEMALE = "F"
     GENDER_OTHER = "O"
 
-    GENDER_CHOICES = ((GENDER_MALE, "男性"), (GENDER_FEMALE, "女性"), (GENDER_OTHER, "その他"))
+    GENDER_CHOICES = (
+        ("", _("--性別--")),
+        (GENDER_MALE, "男性"),
+        (GENDER_FEMALE, "女性"),
+        (GENDER_OTHER, "その他"),
+    )
 
     PREF_CHOICES = JP_PREFECTURES
 
@@ -44,7 +50,7 @@ class User(AbstractUser):
     )
     birthday = models.DateField(_("生年月日"), blank=True, null=True)
     phone_number = PhoneNumberField(_("電話番号"), blank=True, null=True)
-    postal_code = JPPostalCodeModelField(blank=True, null=True)
+    postal_code = JPPostalCodeModelField(_("郵便番号"), blank=True, null=True)
     prefecture = JPPrefectureField(_("都道府県"), blank=True, null=True)
     address_city = models.CharField(_("市区町村番地"), max_length=40, blank=True, null=True)
     address_detail = models.CharField(_("建物名・号室"), max_length=40, blank=True, null=True)
@@ -67,6 +73,15 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse("users:update-profile")
+
+    def calculate_age(self):
+        today = date.today()
+        age = (
+            today.year
+            - self.birthday.year
+            - ((today.month, today.day) < (self.birthday.month, self.birthday.day))
+        )
+        return age
 
     def save(self, *args, **kwargs):
         if self.is_staff == True or self.is_superuser == True:
@@ -100,8 +115,11 @@ class User(AbstractUser):
 
 
 class Guest(core_models.TimeStampedModel):
-    email = models.EmailField(unique=True)
-    active = models.BooleanField(default=True)
+
+    """ ゲストのモデルを定義する """
+
+    email = models.EmailField(_("メールアドレス"), unique=True)
+    active = models.BooleanField(_("活性化"), default=True)
 
     class Meta:
         verbose_name = _("ゲスト")
