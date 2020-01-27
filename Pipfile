@@ -16,6 +16,8 @@ django-localflavor = "*"
 django-dotenv = "*"
 stripe = "*"
 weasyprint = "*"
+numpy = "*"
+opencv-python = "*"
 
 [requires]
 python_version = "3.7"

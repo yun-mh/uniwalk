@@ -45,24 +45,38 @@ def footsizes_measure(request, *args, **kwargs):
                         width_right=width_right,
                     )
                 foot_pk = footsize.pk
-                print(foot_pk)
                 return redirect(
                     "carts:add_cart", pk=pk, design_pk=design_pk, foot_pk=foot_pk
                 )
-    #         guest_form = forms.GuestForm(prefix="guest")
-    #     elif "guest_login" in request.POST:
-    #         guest_form = forms.GuestForm(request.POST, prefix="guest")
-    #         if guest_form.is_valid():
-    #             guest_email = guest_form.cleaned_data.get("email")
-    #             try:
-    #                 user_models.Guest.objects.get(email=guest_email)
-    #             except user_models.Guest.DoesNotExist:
-    #                 user_models.Guest.objects.create(email=guest_email)
-    #             request.session["guest_email"] = guest_email
-    #             return redirect(reverse("orders:checkout"))
-    #         member_form = user_forms.LoginForm(prefix="member")
+            footsize_image_form = forms.FootsizeImageForm(prefix="image")
+        elif "footsize-image" in request.POST:
+            footsize_image_form = forms.FootsizeImageForm(
+                request.POST, request.FILES, prefix="image"
+            )
+            if footsize_image_form.is_valid():
+                foot_images = models.FootImage(
+                    length_left=request.FILES["image-length_left"],
+                    length_right=request.FILES["image-length_right"],
+                    width_left=request.FILES["image-width_left"],
+                    width_right=request.FILES["image-width_right"]
+                )
+                foot_images.save()
+                return redirect("feet:auto", pk=foot_images.pk)
+            footsize_fill_form = forms.FootsizeFillForm(prefix="fill")
     else:
         footsize_fill_form = forms.FootsizeFillForm(prefix="fill")
-        # member_form = user_forms.LoginForm(prefix="member")
-    context = {"footsize_fill_form": footsize_fill_form}
+        footsize_image_form = forms.FootsizeImageForm(prefix="image")
+    context = {
+        "footsize_fill_form": footsize_fill_form,
+        "footsize_image_form": footsize_image_form,
+    }
     return render(request, "feet/feet-measure.html", context)
+
+
+def footsizes_auto(request, *args, **kwargs):
+    pk = kwargs.get("pk")
+    instance = models.FootImage.objects.get(pk=pk)
+    length_left = instance.length_left
+    width_left = instance.width_left
+    length_right = instance.length_right
+    width_right = instance.width_right

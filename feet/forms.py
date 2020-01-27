@@ -12,3 +12,14 @@ class FootsizeFillForm(forms.ModelForm):
             "width_left",
             "width_right",
         )
+
+
+class FootsizeImageForm(forms.ModelForm):
+    class Meta:
+        model = models.FootImage
+        fields = (
+            "length_left",
+            "length_right",
+            "width_left",
+            "width_right",
+        )

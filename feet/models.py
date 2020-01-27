@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from core import models as core_models
 
-# Create your models here.
+
 class Footsize(core_models.TimeStampedModel):
 
     """ 足サイズのモデルを定義する """
@@ -21,3 +21,11 @@ class Footsize(core_models.TimeStampedModel):
 
     def __str__(self):
         return str(self.user)
+
+
+class FootImage(models.Model):
+
+    length_left = models.FileField(upload_to="feet")
+    length_right = models.FileField(upload_to="feet")
+    width_left = models.FileField(upload_to="feet")
+    width_right = models.FileField(upload_to="feet")

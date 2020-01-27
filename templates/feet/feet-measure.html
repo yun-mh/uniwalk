@@ -113,14 +113,35 @@
     <ul class="tab__content">
         <li class="active">
             <div class="content__wrapper">
-                <h2 class="text-color">Pick a color</h2>
-                <ul class="colors">
-                    <li data-color="#2ecc71"></li>
-                    <li data-color="#D64A4B"></li>
-                    <li data-color="#8e44ad"></li>
-                    <li class="active-color" data-color="#46a1de"></li>
-                    <li data-color="#bdc3c7"></li>
-                </ul>
+                <h2 class="">測定するイメージファイルをアップロードしてください。</h2>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="flex justify-around">
+                        <div>
+                            <h3>左</h3>
+                            <div class="flex items-center">
+                                <span>足長</span>
+                                {{ footsize_image_form.length_left }}
+                            </div>
+                            <div class="flex items-center">
+                                <span>足幅</span>
+                                {{ footsize_image_form.width_left }}
+                            </div>
+                        </div>
+                        <div>
+                            <h3>右</h3>
+                            <div class="flex items-center">
+                                <span>足長</span>
+                                {{ footsize_image_form.length_right }}
+                            </div>
+                            <div class="flex items-center">
+                                <span>足幅</span>
+                                {{ footsize_image_form.width_right }}
+                            </div>
+                        </div>
+                    </div>
+                    <button name="footsize-image">測定する</button>
+                </form>
             </div>
         </li>
         <li>
