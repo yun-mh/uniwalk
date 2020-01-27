@@ -15,6 +15,7 @@ module.exports = {
         "50vh": "50vh",
         "75vh": "75vh",
         "75vw": "75%",
+        "80vw": "80%",
         "90vw": "90%"
       },
       height: {
@@ -42,8 +43,8 @@ module.exports = {
       },
       colors: {
         universe: {
-          lighter: "rgba(104, 127, 255, 1)",
-          dark: "rgba(114, 43, 255, 1)"
+          lighter: "#2B3D4E",
+          dark: "#1C2934"
         }
       }
     },
