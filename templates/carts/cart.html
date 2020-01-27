@@ -7,47 +7,50 @@
 
 {% block content %}
 
-<div class="mx-auto pt-16 pb-10">
+<div class="mx-auto pt-5 pb-10">
 
     <div class="container mx-auto flex">
-        <div class="w-2/3 flex flex-wrap mb-10 pr-10">
-            <h3 class="w-full font-bold text-2xl mb-3 text-center">
+        <div class="w-2/3 flex flex-wrap mb-10 p-10">
+            <h3 class="w-full font-black text-xl text-left mb-3 ml-3 p-5 bg-indigo-200 text-gray-800 ">
                 ショッピングカート
             </h3>
             {% if cart_items %}
             {% for cart_item in cart_items %}
-            <div class="w-full flex flex-no-wrap border-b p-3">
+            <div class="w-full flex flex-no-wrap border-b m-3 py-5 h-auto">
                 {% with cart_item.design.images.all|first as image %}
-                <div class="w-1/3 h-32 bg-center bg-cover" style="background-image: url('{{ image.front.url }}');">
+                <div class="w-1/3 h-auto bg-center bg-cover" style="background-image: url('{{ image.front.url }}');">
                 </div>
                 {% endwith %}
                 <div class="w-full flex justify-between px-5 items-center">
                     <div class="flex flex-col justify-between h-full">
-                        <div class="flex flex-col">
-                            <span class="text-xl">{{ cart_item.product.name }}</span>
-                            <span class="text-gray-500">{{ cart_item.product.category }}</span>
+                        <div class="flex flex-row">
+                            <span class="text-lg">{{ cart_item.product.name }}</span>
+                            <div class="text-sm ml-64">
+                                &yen; {{cart_item.sub_total | intcomma }}
+                            </div>
                         </div>
                         <div class="flex flex-col">
-                            <span>単価　&yen; {{ cart_item.product.price | intcomma }}</span>
-                            <span>{{ cart_item.quantity}} x &yen; {{ cart_item.product.price | intcomma }}</span>
+                            <span class="text-gray-500 text-xs">{{ cart_item.product.category }}</span>
+                            <span class="text-gray-500 text-xs">{{ cart_item.product.category }}</span>
+                            <span class="text-gray-500 text-xs">{{ cart_item.product.category }}</span>
                         </div>
-                    </div>
-                    <div>
-                        &yen; {{cart_item.sub_total | intcomma }}
-                    </div>
-                    <div>
-                        <a href="{% url 'carts:add_cart' cart_item.product.pk cart_item.design.pk %}">
-                            <i class="far fa-plus-square"></i>
-                        </a>
-                        <span class="mx-3">{{ cart_item.quantity}}</span>
-                        <a href="{% url 'carts:remove' cart_item.product.pk cart_item.design.pk %}">
-                            <i class="far fa-minus-square"></i>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="{% url 'carts:delete' cart_item.product.pk cart_item.design.pk%}">
-                            <span>削除</span>
-                        </a>
+                        <div class="flex flex-row">
+                            <span class="text-sm">単価　&yen; {{ cart_item.product.price | intcomma }}</span>
+                            <div class="text-xs ml-3">
+                                <a href="{% url 'carts:add_cart' cart_item.product.pk cart_item.design.pk %}">
+                                    <i class="far fa-plus-square"></i>
+                                </a>
+                                <span class="mx-2 text-sm">{{ cart_item.quantity}}</span>
+                                <a href="{% url 'carts:remove' cart_item.product.pk cart_item.design.pk %}">
+                                    <i class="far fa-minus-square"></i>
+                                </a>
+                            </div>
+                            <div class="text-sm ml-56">
+                                <a href="{% url 'carts:delete' cart_item.product.pk cart_item.design.pk%}">
+                                    <span>削除</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,11 +62,11 @@
             {% endif %}
         </div>
 
-        <div class="w-1/3 flex flex-col h-25vh p-5 shadow-lg justify-between">
-            <h3 class="font-bold text-2xl text-center">
+        <div class="w-1/3 flex flex-col h-25vh shadow-lg justify-between bg-black mt-10 shadow-lg">
+            <h3 class="w-full p-3 font-bold text-2xl text-center bg-gray-600">
                 ご注文金額
             </h3>
-            <div class="w-full">
+            <div class="w-full p-5 text-white">
                 <div class="flex flex-no-wrap justify-between">
                     <div class="font-semibold">合計（税込）</div>
                     <div>&yen; {{ amount | intcomma }}</div>
