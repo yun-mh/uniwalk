@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block page_title %}
 {% trans '会員脱退確認' %}
@@ -7,21 +7,29 @@
 
 {% block content %}
 
-<div class="mx-auto pt-16 pb-10">
-    <div class="container mx-auto flex">
-        <div class="w-1/5 h-50vh shadow-lg">
+<div class="mx-auto min-h-75vh px-10 py-10 rounded-xl"
+    style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
+    <div class="container mx-auto">
+        <div class="w-full shadow-lg">
             {% include 'partials/mypage-menu.html' %}
         </div>
 
-        <div class="w-4/5 ml-20 px-5 py-20 flex flex-col justify-between">
-            <h2 class="w-full text-center font-bold text-4xl">{% trans '会員脱退' %}</h2>
-            <p class="text-center leading-loose">
-                {% trans '会員から退会された場合には、現在保存されている購入履歴やお届け先等の情報は、<span class="font-semibold text-red-500">すべて削除</span>されます。<br>よろしければ、下のボタンを押してください。' %}
-            </p>
-            <form method="POST" class="text-center" enctype="multipart/form-data">
-                {% csrf_token %}
-                <button class="btn-danger w-64">{% trans '脱退する' %}</button>
-            </form>
+        <div class="w-full flex flex-col mb-10">
+            <div
+                class="container bg-white w-2/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 mt-24 relative">
+                <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute"
+                    style="top: -3rem;">
+                    <i class="fas fa-exclamation fa-3x text-white"></i>
+                </div>
+                <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans '会員脱退' %}</h2>
+                <p class="text-center text-lg leading-loose">
+                    {% trans '現在保存されている購入履歴やお届け先等の情報は、<span class="font-semibold text-red-500">すべて削除</span>されます。<br>よろしければ、下のボタンを押してください。' %}
+                </p>
+                <form method="POST" class="text-center" enctype="multipart/form-data" class="">
+                    {% csrf_token %}
+                    <button class="btn-danger w-64 mt-5">{% trans '脱退する' %}</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

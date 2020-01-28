@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block page_title %}
 {% trans '会員脱退申込み' %}
@@ -7,18 +7,26 @@
 
 {% block content %}
 
-<div class="mx-auto pt-16 pb-10">
-    <div class="container mx-auto flex">
-        <div class="w-1/5 h-50vh shadow-lg">
+<div class="mx-auto min-h-75vh px-10 py-10 rounded-xl"
+    style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
+    <div class="container mx-auto">
+        <div class="w-full shadow-lg">
             {% include 'partials/mypage-menu.html' %}
         </div>
 
-        <div class="w-4/5 ml-20 p-5 flex flex-col justify-between mb-10">
-            <h2 class="font-bold text-4xl text-center">{% trans '会員脱退申し込み' %}</h2>
-            <p class="text-center leading-loose">{% trans '会員脱退処理を行うために、もう一度会員認証を行ってください。' %}</p>
-            <div class="w-1/2 mx-auto">
-                {% trans "ログイン" as login %}
-                {% include 'mixins/auth/form_auth.html' with form=form cta=login %}
+        <div class="w-full flex flex-col mb-10">
+            <div
+                class="container bg-white w-2/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 mt-24 relative">
+                <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute"
+                    style="top: -3rem;">
+                    <i class="fas fa-redo-alt fa-3x text-white"></i>
+                </div>
+                <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans '会員脱退申し込み' %}</h2>
+                <p class="text-lg text-center leading-loose">{% trans '会員脱退処理を行うために、もう一度会員認証を行ってください。' %}</p>
+                <div class="w-1/2 mx-auto">
+                    {% trans "認証する" as auth %}
+                    {% include 'mixins/auth/form_auth.html' with form=form cta=auth %}
+                </div>
             </div>
         </div>
     </div>

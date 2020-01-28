@@ -1,37 +1,34 @@
 {% load i18n %}
-<div class="flex h-full flex-col items-center justify-between">
-    <h2 class="font-semibold text-xl text-white py-6 bg-red-500 w-full text-center rounded-t-lg">
-        {% trans 'マイページ' %}
-    </h2>
-    <ul class="w-full text-center">
-        <a href="{% url 'users:update-profile' %}">
+<div class="flex items-center justify-between bg-orange-100 rounded-lg">
+    <ul class="w-full text-center flex items-center">
+        <a href="{% url 'users:update-profile' %}" class="w-1/6 border-r">
             <li
-                class="border-b py-5 font-medium hover:bg-orange-200 {% if '/update-profile/' in request.path %} bg-orange-300 {% endif %}">
+                class="border-b py-5 font-medium rounded-l-lg hover:bg-orange-200 {% if '/update-profile/' in request.path or '/change-password/' in request.path %} bg-orange-300 font-semibold {% endif %}">
                 {% trans '会員情報変更' %}</li>
         </a>
-        <a href="{% url 'users:orders' %}">
+        <a href="{% url 'users:orders' %}" class="w-1/6 border-r">
             <li
-                class="border-b py-5 font-medium hover:bg-yellow-200 {% if '/orders/' in request.path %} bg-yellow-300 {% endif %}">
+                class="border-b py-5 font-medium hover:bg-yellow-200 {% if '/orders/' in request.path %} bg-yellow-300 font-semibold {% endif %}">
                 {% trans '注文履歴' %}</li>
         </a>
-        <a href="{% url 'users:cards' %}">
+        <a href="{% url 'users:cards' %}" class="w-1/6 border-r">
             <li
-                class="border-b py-5 font-medium hover:bg-green-200 {% if '/cards/' in request.path %} bg-green-300 {% endif %}">
+                class="border-b py-5 font-medium hover:bg-green-200 {% if '/cards/' in request.path %} bg-green-300 font-semibold {% endif %}">
                 {% trans 'クレジットカード' %}</li>
         </a>
-        <a href="{% url 'users:mydesigns' %}">
+        <a href="{% url 'users:mydesigns' %}" class="w-1/6 border-r">
             <li
-                class="border-b py-5 font-medium hover:bg-blue-200 {% if '/mydesigns/' in request.path %} bg-blue-300 {% endif %}">
+                class="border-b py-5 font-medium hover:bg-blue-200 {% if '/mydesigns/' in request.path %} bg-blue-300 font-semibold {% endif %}">
                 {% trans 'マイデザイン' %}</li>
         </a>
-        <a href="{% url 'users:footsizes' %}">
+        <a href="{% url 'users:footsizes' %}" class="w-1/6 border-r">
             <li
-                class="border-b py-5 font-medium hover:bg-indigo-200 {% if '/footsizes/' in request.path %} bg-indigo-300 {% endif %}">
+                class="border-b py-5 font-medium hover:bg-indigo-200 {% if '/footsizes/' in request.path %} bg-indigo-300 font-semibold {% endif %}">
                 {% trans 'マイ足サイズ' %}</li>
         </a>
-        <a href="{% url 'users:withdrawal' %}">
+        <a href="{% url 'users:withdrawal' %}" class="w-1/6">
             <li
-                class="py-5 font-medium hover:bg-purple-200 rounded-b-lg {% if '/withdrawal/' in request.path %} bg-purple-300 {% endif %}">
+                class="py-5 font-medium rounded-r-lg hover:bg-purple-200 {% if '/withdrawal/' in request.path %} bg-purple-300 font-semibold {% endif %}">
                 {% trans '会員脱退' %}</li>
         </a>
     </ul>
