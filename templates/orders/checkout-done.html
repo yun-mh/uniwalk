@@ -12,11 +12,11 @@
     <h2 class="font-medium text-4xl mb-5">{% trans "注文完了" %}</h2>
     <h3 class="font-medium text-2xl mb-3">{% trans "ご注文が完了いたしました。" %}</h3>
     <p class="text-center mb-5">
-        {% trans "注文番号は以下のどおりです。" %}<br>
+        {% trans "注文番号" %}<br>
         <span class="text-2xl font-bold">{{ order_code }}</span><br>
     </p>
     <p class="text-center mb-5">
-        {% trans "それではまたのご注文をお待ちしております。" %}<br>
+        {% trans "またのご注文をお待ちしております。" %}<br>
         {% trans "今後ともご愛顧賜りますようよろしくお願い申し上げます。" %}<br>
     </p>
     <a href="{% url 'core:home' %}" class="btn mt-5" mt-5>
