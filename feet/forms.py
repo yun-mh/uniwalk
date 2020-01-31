@@ -18,8 +18,10 @@ class FootsizeImageForm(forms.ModelForm):
     class Meta:
         model = models.FootImage
         fields = (
-            "length_left",
-            "length_right",
-            "width_left",
-            "width_right",
+            "foot_left",
+            "foot_right",
         )
+
+
+class FootImageDataForm(forms.Form):
+    image_data = forms.CharField(widget=forms.HiddenInput(), required=False)

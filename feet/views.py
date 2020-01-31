@@ -1,8 +1,20 @@
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, View
+from django.core.files.base import ContentFile
+from django.views.generic import DetailView
 from designs import models as design_models
 from products import models as product_models
-from . import models, forms
+from . import models, forms, analyze
+import base64
+
+
+# インコードした画像データを画像にデコードする関数
+def base64_file(data, name=None):
+    _format, _img_str = data.split(";base64,")
+    _name, ext = _format.split("/")
+    if not name:
+        name = _name.split(":")[-1]
+    result = ContentFile(base64.b64decode(_img_str), name="{}.{}".format(name, ext))
+    return result
 
 
 def footsizes_measure(request, *args, **kwargs):
@@ -25,8 +37,6 @@ def footsizes_measure(request, *args, **kwargs):
             if footsize_fill_form.is_valid():
                 length_left = footsize_fill_form.cleaned_data.get("length_left")
                 length_right = footsize_fill_form.cleaned_data.get("length_right")
-                width_left = footsize_fill_form.cleaned_data.get("width_left")
-                width_right = footsize_fill_form.cleaned_data.get("width_right")
                 # 既存の足サイズデータがある場合、データを更新する
                 try:
                     footsize = models.Footsize.objects.get(user=user)
@@ -55,13 +65,11 @@ def footsizes_measure(request, *args, **kwargs):
             )
             if footsize_image_form.is_valid():
                 foot_images = models.FootImage(
-                    length_left=request.FILES["image-length_left"],
-                    length_right=request.FILES["image-length_right"],
-                    width_left=request.FILES["image-width_left"],
-                    width_right=request.FILES["image-width_right"]
+                    foot_left=request.FILES["image-foot_left"],
+                    foot_right=request.FILES["image-foot_right"],
                 )
                 foot_images.save()
-                return redirect("feet:auto", pk=foot_images.pk)
+                return redirect("feet:crop-left", pk=foot_images.pk)
             footsize_fill_form = forms.FootsizeFillForm(prefix="fill")
     else:
         footsize_fill_form = forms.FootsizeFillForm(prefix="fill")
@@ -73,10 +81,51 @@ def footsizes_measure(request, *args, **kwargs):
     return render(request, "feet/feet-measure.html", context)
 
 
-def footsizes_auto(request, *args, **kwargs):
+class LeftFootsizePerspeciveCropperView(DetailView):
+    model = models.FootImage
+    context_object_name = "foot_images"
+    template_name = "feet/feet-cropper-left.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = forms.FootImageDataForm()
+        return context
+
+    def post(self, *args, **kwargs):
+        pk = kwargs.get("pk")
+        # 画像情報をデータベースに反映する
+        image_data = self.request.POST.get("image_data")
+        processed_foot = models.ProcessedFootImage.objects.create(
+            foot_left=base64_file(image_data)
+        )
+        self.request.session["processed_foot"] = processed_foot.pk
+        return redirect("feet:crop-right", pk=pk)
+
+
+class RightFootsizePerspeciveCropperView(DetailView):
+    model = models.FootImage
+    context_object_name = "foot_images"
+    template_name = "feet/feet-cropper-right.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = forms.FootImageDataForm()
+        return context
+
+    def post(self, *args, **kwargs):
+        processed_foot_pk = self.request.session["processed_foot"]
+        # 画像情報をデータベースに反映する
+        image_data = self.request.POST.get("image_data")
+        processed_foot = models.ProcessedFootImage.objects.get(pk=processed_foot_pk)
+        processed_foot.foot_right = base64_file(image_data)
+        processed_foot.save()
+        return redirect("feet:analyze", pk=processed_foot.pk)
+
+
+def footsizes_analysis(request, *args, **kwargs):
     pk = kwargs.get("pk")
-    instance = models.FootImage.objects.get(pk=pk)
-    length_left = instance.length_left
-    width_left = instance.width_left
-    length_right = instance.length_right
-    width_right = instance.width_right
+    instance = models.ProcessedFootImage.objects.get(pk=pk)
+    foot_left = instance.foot_left
+    foot_right = instance.foot_right
+    left_size = analyze.analyze(foot_left)
+    right_size = analyze.analyze(foot_right)
