@@ -13,7 +13,7 @@ PAYMENT_CHOICES = ((PAYMENT_CARD, "クレジットカード"), (PAYMENT_TRANSFER
 
 class GuestForm(forms.Form):
     email = forms.EmailField(
-        label="", widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
+        label=_("メールアドレス"), widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
     )
 
 

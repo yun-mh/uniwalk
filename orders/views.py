@@ -240,6 +240,9 @@ class OrderCheckView(FormView):
             context = {}
             if len(card_list) > 0:
                 cards = card_list,
+        else:
+            cards = {"data": []}
+            card_list = cards["data"]
         context = {
             "recipient_data": recipient_data,
             "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"]) - 1][1],

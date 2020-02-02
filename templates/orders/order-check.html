@@ -194,9 +194,9 @@
 
     var card = elements.create('card', { style: style });
 
-    if (current_card) {
-        card.mount('#card-element');
-    }
+    // if (current_card) {
+    card.mount('#card-element');
+    // }
 
     // Handle real-time validation errors from the card Element.
     card.addEventListener('change', function (event) {

@@ -36,7 +36,9 @@ def footsizes_measure(request, *args, **kwargs):
             footsize_fill_form = forms.FootsizeFillForm(request.POST, prefix="fill")
             if footsize_fill_form.is_valid():
                 length_left = footsize_fill_form.cleaned_data.get("length_left")
+                width_left = footsize_fill_form.cleaned_data.get("width_left")
                 length_right = footsize_fill_form.cleaned_data.get("length_right")
+                width_right = footsize_fill_form.cleaned_data.get("width_right")
                 # 既存の足サイズデータがある場合、データを更新する
                 try:
                     footsize = models.Footsize.objects.get(user=user)
