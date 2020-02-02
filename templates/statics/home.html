@@ -6,39 +6,54 @@
 {% endblock page_title %}
 
 {% block content %}
-<section class="h-screen bg-center object-cover" style="background-image: url();">
-</section>
-
-<section class="h-screen">
-    <img src="" width="50%">
-    <img src="" width="50%">
-    <img src="" width="25%">
-    <img src="" width="25%">
-</section>
-
-<section
-    class="md:h-maxscreen lg:h-halfscreen p-5 flex flex-wrap lg:flex-no-wrap justify-around items-center bg-gray-100">
-    <div class="text-center lg:max-w-2xl lg:text-justify p-10 xs:p-5 xs:mb-5">
-        <h1 class="text-5xl lg:mb-3 text-gray-800">UniWalk</h1>
-        <p class="leading-loose text-gray-700">
-            {% trans '今日はどのシューズを履いていこう。今日のスタイルにはどのシューズが合うだろう。
-            「Uniwalk」はあなたのために、あなたのデザインで、あなたのサイズでシューズを作ります。
-            簡単にデザインをカスタマイズして、足測定で自分にピッタリのサイズの靴を注文できます。
-            あなたのオリジナルデザインでシューズを作る楽しみを体感してください。' %}
-        </p>
+<section class="bg-center object-cover relative bg-home-gray">
+    <div class="w-full h-48" style="background-color: #FF7358">
+        <p class="text-5xl text-center pt-32 text-white">Costumize Your Own Shoes</p>
     </div>
-    <div class="xs:p-5 lg:p-10">
-        <img src="{% static 'images/test.jpg' %}" width="400px">
+    <img src="{% static 'images/test3.png' %} " class="block" >
+    <img src="{% static 'images/logo-universe.png' %}" class="w-56 mx-auto -mt-8">
+</section>
+
+<section class="w-full pt-32 pb-16 bg-home-gray" >
+    <div class="w-2/3 mx-auto flex flex">
+        <p class="w-16 text-3xl text-white h-16 bg-blue-700 text-center rounded-full">1</p>
+        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">  
+        <div class="w-2/5 mx-auto flex-col pt-20 ">
+            <p class="text-2xl text-white pb-3 border-b-2 h-12">デザインをカスタマイズする</p>
+            <p class="text-white flex-col mt-10 text-xl">素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザインを参照することもできます！</p>
+        </div> 
     </div>
 </section>
 
-<section class="h-halfscreen">
-
+<section class="w-full py-16 bg-home-gray" >
+    <div class="w-2/3 mx-auto flex flex">
+        <p class="w-16 text-3xl text-white h-16 bg-blue-700 text-center rounded-full">2</p>
+        <div class="w-2/5 mx-auto flex-col pt-20 ">
+            <p class="text-2xl text-white pb-3 border-b-2 h-12">足サイズを測定する</p>
+            <p class="text-white flex-col mt-10 text-xl">足の写真をアップロードし、両足すつ足長・足幅のサイズを測定することができます。</p>
+        </div> 
+        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">  
+    </div>
 </section>
 
-<section class="h-screen">
-
+<section class="w-full py-16 bg-home-gray">
+    <div class="w-2/3 mx-auto flex flex">
+        <p class="w-16 text-3xl text-white h-16 bg-blue-700 text-center rounded-full">3</p>
+        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">  
+        <div class="w-2/5 mx-auto flex-col pt-20 ">
+            <p class="text-2xl text-white pb-3 border-b-2 h-12">配送</p>
+            <p class="text-white flex-col mt-10 text-xl">デザインと足サイズをもとにあなたのためのスニーカーを制作します！</p>
+        </div> 
+    </div>
 </section>
+
+<section class="w-full py-16 text-center bg-home-gray" >
+    <div class="w-2/3 mx-auto mb-20 border-t-4">
+        <p class="text-white text-3xl pt-20">Product List</p>
+    </div>
+    <a href="" class="text-xl bg-white rounded p-2 font-weight-700 bg-gray-700 text-white" >MORE</a>
+</section>
+
 {% endblock content %}
 
 {% block javascript %}
