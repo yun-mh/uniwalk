@@ -116,5 +116,6 @@ node_modules/
 # etc
 .env
 uploads/
+db.sqlite3
 
 # End of https://www.gitignore.io/api/python
