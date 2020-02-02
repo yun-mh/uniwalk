@@ -787,10 +787,17 @@ class WithdrawalView(mixins.LoggedInOnlyView, FormView):
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
         if self.request.user.email != email:
-            messages.error(self.request, _("会員様のメールアドレスと入力したメールアドレスが違います。"))
+            messages.error(self.request, _("会員様のメールアドレスとは違います。"))
             return redirect(reverse("users:withdrawal"))
-        return super().form_valid(form)
+        else:
+            user = models.User.objects.get(email=email)
+            if user.check_password(password):
+                return super().form_valid(form)
+            else:
+                messages.error(self.request, _("パスワードをもう一度確認してください。"))
+                return redirect(reverse("users:withdrawal"))
 
 
 class WithdrawalCheckView(mixins.LoggedInOnlyView, DeleteView):

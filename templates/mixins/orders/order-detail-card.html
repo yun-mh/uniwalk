@@ -12,7 +12,7 @@
                 <div>注文者: {{ order.last_name_orderer }} {{ order.first_name_orderer }}</div>
                 <div>お届け先: {{ order.get_prefecture_recipient_display }} {{ order.address_city_recipient }}
                     {{ order.address_detail_recipient }}</div>
-                <div>総数量: {{ order.count_items_all }}</div>
+                <div>数量: {{ order.count_items_all }}</div>
                 <div>お支払い方法: {{ order.get_payment_display }}</div>
                 <div>処理状況: {{ order.step }}</div>
             </div>
@@ -36,11 +36,11 @@
             <button class="btn bg-red-500 text-white w-1/3 p-3">{% trans '注文取消' %}</button>
             {% endif %}
             {% if order.step.step_code == "T01" %}
-            <a href="{% url 'orders:bill' order.order_code %}"
+            <a href="{% url 'orders:bill' order.order_code %}" target="_blank"
                 class="btn bg-red-500 text-white w-1/3 p-3">{% trans '請求書発行' %}</a>
             {% endif %}
             {% if order.step.step_code != "T01" and order.step.step_code != "T02" and order.step.step_code != "T99" %}
-            <a href="{% url 'orders:receipt' order.order_code %}"
+            <a href="{% url 'orders:receipt' order.order_code %}" target="_blank"
                 class="btn bg-red-500 text-white w-1/3 p-3">{% trans '領収書発行' %}</a>
             {% endif %}
         </div>

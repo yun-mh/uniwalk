@@ -76,11 +76,14 @@ class User(AbstractUser):
 
     def calculate_age(self):
         today = date.today()
-        age = (
-            today.year
-            - self.birthday.year
-            - ((today.month, today.day) < (self.birthday.month, self.birthday.day))
-        )
+        try:
+            age = (
+                today.year
+                - self.birthday.year
+                - ((today.month, today.day) < (self.birthday.month, self.birthday.day))
+            )
+        except AttributeError:
+            age = 0
         return age
 
     def save(self, *args, **kwargs):

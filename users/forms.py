@@ -198,11 +198,15 @@ class WithdrawalForm(forms.Form):
         widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
     )
 
-    def clean(self):
-        email = self.cleaned_data.get("email")
-        user = models.User.objects.get(email=email)
-        password = self.cleaned_data.get("password")
-        if user.check_password(password):
-            return self.cleaned_data
-        else:
-            self.add_error("password", forms.ValidationError(_("パスワードをもう一度確認してください。")))
+    # def clean(self):
+    #     email = self.cleaned_data.get("email")
+    #     password = self.cleaned_data.get("password")
+    #     try:
+    #         user = models.User.objects.get(email=email)
+    #         if user.check_password(password):
+    #             return self.cleaned_data
+    #         else:
+    #             self.add_error("password", forms.ValidationError(_("パスワードをもう一度確認してください。")))
+    #     except models.User.DoesNotExist:
+    #         self.add_error("email", forms.ValidationError(_("登録されていないメールアドレスです。")))
+        

@@ -1,43 +1,50 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block page_title %}
 {% trans 'クレジットカード登録' %}
 {% endblock page_title%}
 
 {% block content %}
-
-<div class="mx-auto pt-16 pb-10">
-    <div class="container mx-auto flex">
-        <div class="w-1/5 h-50vh shadow-lg">
+<div class="mx-auto px-10 py-10 rounded-xl"
+    style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
+    <div class="container mx-auto">
+        <div class="w-full shadow-lg">
             {% include 'partials/mypage-menu.html' %}
         </div>
 
-        <div class="w-4/5 ml-20 flex flex-col mb-10">
-            <h2 class="font-bold text-4xl text-center mb-10">{% trans 'クレジットカード登録' %}</h2>
+        <div class="w-full flex flex-col mb-10">
+            <div
+                class="container min-h-75vh bg-white w-2/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 mt-24 relative">
+                <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute"
+                    style="top: -3rem;">
+                    <i class="fas fa-credit-card fa-3x text-white"></i>
+                </div>
+                <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans 'クレジットカード登録' %}</h2>
 
-            <div class="container">
-                <form method="POST" class="stripe-form w-1/2 mx-auto" id="stripe-form">
-                    {% csrf_token %}
-                    <div class="new-card-form">
-                        <div class="stripe-form-row" id="creditCard">
-                            <div id="card-element" class="StripeElement StripeElement--empty">
-                                <div class="__PrivateStripeElement"
-                                    style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
-                                    <iframe frameborder="0" allowtransparency="true" scrolling="no"
-                                        name="__privateStripeController1" allowpaymentrequest="true"
-                                        src="https://js.stripe.com/v3/controller-aa9903ff186968008fb3408d381a22d4.html#apiKey=pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik&amp;stripeJsId=34a0363b-8ca6-4d99-8a69-e8b8bebf77f6&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController1"
-                                        aria-hidden="true" tabindex="-1"
-                                        style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+                <div class="container">
+                    <form method="POST" class="stripe-form w-1/2 mx-auto" id="stripe-form">
+                        {% csrf_token %}
+                        <div class="new-card-form">
+                            <div class="stripe-form-row" id="creditCard">
+                                <div id="card-element" class="StripeElement StripeElement--empty">
+                                    <div class="__PrivateStripeElement"
+                                        style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+                                        <iframe frameborder="0" allowtransparency="true" scrolling="no"
+                                            name="__privateStripeController1" allowpaymentrequest="true"
+                                            src="https://js.stripe.com/v3/controller-aa9903ff186968008fb3408d381a22d4.html#apiKey=pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik&amp;stripeJsId=34a0363b-8ca6-4d99-8a69-e8b8bebf77f6&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController1"
+                                            aria-hidden="true" tabindex="-1"
+                                            style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+                                    </div>
                                 </div>
                             </div>
+                            <div id="card-errors" role="alert"></div>
                         </div>
-                        <div id="card-errors" role="alert"></div>
-                    </div>
-                    <div class="w-full text-center mt-6">
-                        <button class="btn w-2/3">{% trans 'カードを登録する' %}</button>
-                    </div>
-                </form>
+                        <div class="w-full text-center mt-6">
+                            <button class="btn w-2/3">{% trans 'カードを登録する' %}</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
