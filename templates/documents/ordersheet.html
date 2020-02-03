@@ -13,20 +13,20 @@
             src: url("https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP|Noto+Sans+KR&display=swap");
         }
     </style>
-    <title>発注書 | {{order.order_code}}</title>
+    <title>{% trans '発注書' %} | {{order.order_code}}</title>
 </head>
 
-<body>
+<body class="document">
     <img src="{% static 'images/logo-universe.png' %}" class="w-28 mx-auto my-5">
     <p class="font-bold text-3xl text-center mb-10 tracking-widest">
-        発注書
+        {% trans '発注書' %}
     </p>
     <div class="w-90vw mx-auto">
         <div class="flex flex-no-wrap justify-between items-start">
             <table class="block">
                 <tbody>
                     <tr>
-                        <td>　OO制作工場　　御中</td>
+                        <td>　{% trans 'OO制作工場' %}　　{% trans '御中' %}</td>
                     </tr>
                     <tr>
                         <td>　</td>
@@ -38,14 +38,14 @@
                         <td>　</td>
                     </tr>
                     <tr>
-                        <td>納期：{% a_week_after "%Y-%m-%d" %}</td>
+                        <td>{% trans '納期' %}：{% a_week_after "%Y-%m-%d" %}</td>
                     </tr>
                 </tbody>
             </table>
             <table class="block">
                 <tbody>
                     <tr>
-                        <td class="text-right">発注日：{% now "Y-m-d" %}</td>
+                        <td class="text-right">{% trans '発注日' %}：{% now "Y-m-d" %}</td>
                     </tr>
                     <tr>
                         <td>　</td>
@@ -54,36 +54,36 @@
                         <td>〒 4500002</td>
                     </tr>
                     <tr>
-                        <td>愛知県名古屋市中村区名駅4丁目27-1</td>
+                        <td>{% trans '愛知県名古屋市中村区名駅4丁目27-1' %}</td>
                     </tr>
                     <tr>
-                        <td>総合校舎スパイラルタワーズ Uniwalk</td>
+                        <td>{% trans '総合校舎スパイラルタワーズ Uniwalk' %}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <p class="text-center mt-6">
-            下記の通り、発注致します。
+            {% trans '下記の通り、発注致します。' %}
         </p>
 
         <table class="w-full border-4 my-5">
             <thead class="border">
                 <tr>
                     <th class="border text-lg text-center">
-                        項番
+                        {% trans '項番' %}
                     </th>
                     <th class="border text-lg text-center">
-                        商品名
+                        {% trans '商品名' %}
                     </th>
                     <th class="border text-lg text-center">
-                        注文番号
+                        {% trans '注文番号' %}
                     </th>
                     <th class="border text-lg text-center">
-                        カスタマイズコード
+                        {% trans 'カスタマイズコード' %}
                     </th>
                     <th class="border text-lg text-center">
-                        数量
+                        {% trans '数量' %}
                     </th>
                 </tr>
             </thead>
@@ -113,7 +113,7 @@
         <table class="w-full border-4 mb-5">
             <thead>
                 <tr class="border text-lg text-center">
-                    <th>特記事項</th>
+                    <th>{% trans '特記事項' %}</th>
                 </tr>
             </thead>
             <tbody class="border">

@@ -8,7 +8,7 @@ from . import models
 PAYMENT_CARD = "P1"
 PAYMENT_TRANSFER = "P2"
 
-PAYMENT_CHOICES = ((PAYMENT_CARD, "クレジットカード"), (PAYMENT_TRANSFER, "振込"))
+PAYMENT_CHOICES = ((PAYMENT_CARD, _("クレジットカード")), (PAYMENT_TRANSFER, _("振込")))
 
 
 class GuestForm(forms.Form):
@@ -115,29 +115,29 @@ class SelectPaymentForm(forms.ModelForm):
         )
         widgets = {
             "payment": forms.RadioSelect(),
-            "last_name_orderer": forms.TextInput(
-                attrs={"placeholder": _("姓")}),
-            "first_name_orderer": forms.TextInput(
-                attrs={"placeholder": _("名")}),
+            "last_name_orderer": forms.TextInput(attrs={"placeholder": _("姓")}),
+            "first_name_orderer": forms.TextInput(attrs={"placeholder": _("名")}),
             "last_name_orderer_kana": forms.TextInput(
-                attrs={"placeholder": _("姓(カナ)")}),
+                attrs={"placeholder": _("姓(カナ)")}
+            ),
             "first_name_orderer_kana": forms.TextInput(
-                attrs={"placeholder": _("名(カナ)")}),
-            "phone_number_orderer": forms.TextInput(
-                attrs={"placeholder": _("電話番号")}),
-            "postal_code_orderer": forms.TextInput(
-                attrs={"placeholder": _("郵便番号")}),
-            "address_city_orderer": forms.TextInput(
-                attrs={"placeholder": _("市区町村番地")}),
+                attrs={"placeholder": _("名(カナ)")}
+            ),
+            "phone_number_orderer": forms.TextInput(attrs={"placeholder": _("電話番号")}),
+            "postal_code_orderer": forms.TextInput(attrs={"placeholder": _("郵便番号")}),
+            "address_city_orderer": forms.TextInput(attrs={"placeholder": _("市区町村番地")}),
             "address_detail_orderer": forms.TextInput(
-                attrs={"placeholder": _("建物名・号室")}),
+                attrs={"placeholder": _("建物名・号室")}
+            ),
         }
 
     payment = forms.ChoiceField(choices=PAYMENT_CHOICES, widget=forms.RadioSelect())
     is_same_with_recipient = forms.BooleanField(
-        label="請求書住所が配送先と同じ", initial=True, required=False, widget=forms.CheckboxInput()
+        label=_("請求書住所が配送先と同じ"),
+        initial=True,
+        required=False,
+        widget=forms.CheckboxInput(),
     )
-    
 
 
 class CardForm(forms.Form):

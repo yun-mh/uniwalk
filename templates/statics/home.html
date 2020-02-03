@@ -8,50 +8,51 @@
 {% block content %}
 <section class="bg-center object-cover relative bg-home-gray">
     <div class="w-full h-48" style="background-color: #FF7358">
-        <p class="text-5xl text-center pt-32 text-white">Costumize Your Own Shoes</p>
+        <p class="text-5xl text-center pt-32 text-white">{% trans 'オリジナルスニーカーが作られる！' %}</p>
     </div>
-    <img src="{% static 'images/test3.png' %} " class="block" >
+    <img src="{% static 'images/test3.png' %} " class="block">
     <img src="{% static 'images/logo-universe.png' %}" class="w-56 mx-auto -mt-8">
 </section>
 
-<section class="w-full pt-32 pb-16 bg-home-gray" >
+<section class="w-full pt-32 pb-16 bg-home-gray">
     <div class="w-2/3 mx-auto flex flex">
         <p class="w-16 text-3xl text-white h-16 bg-blue-700 text-center rounded-full">1</p>
-        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">  
+        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">
         <div class="w-2/5 mx-auto flex-col pt-20 ">
-            <p class="text-2xl text-white pb-3 border-b-2 h-12">デザインをカスタマイズする</p>
-            <p class="text-white flex-col mt-10 text-xl">素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザインを参照することもできます！</p>
-        </div> 
+            <p class="text-2xl text-white pb-3 border-b-2 h-12">{% trans 'デザインをカスタマイズする' %}</p>
+            <p class="text-white flex-col mt-10 text-xl">
+                {% trans '素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザインを参照することもできます！' %}</p>
+        </div>
     </div>
 </section>
 
-<section class="w-full py-16 bg-home-gray" >
+<section class="w-full py-16 bg-home-gray">
     <div class="w-2/3 mx-auto flex flex">
         <p class="w-16 text-3xl text-white h-16 bg-blue-700 text-center rounded-full">2</p>
         <div class="w-2/5 mx-auto flex-col pt-20 ">
-            <p class="text-2xl text-white pb-3 border-b-2 h-12">足サイズを測定する</p>
-            <p class="text-white flex-col mt-10 text-xl">足の写真をアップロードし、両足すつ足長・足幅のサイズを測定することができます。</p>
-        </div> 
-        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">  
+            <p class="text-2xl text-white pb-3 border-b-2 h-12">{% trans '足サイズを測定する' %}</p>
+            <p class="text-white flex-col mt-10 text-xl">{% trans '足の写真をアップロードし、両足すつ足長・足幅のサイズを測定することができます。' %}</p>
+        </div>
+        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">
     </div>
 </section>
 
 <section class="w-full py-16 bg-home-gray">
     <div class="w-2/3 mx-auto flex flex">
         <p class="w-16 text-3xl text-white h-16 bg-blue-700 text-center rounded-full">3</p>
-        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">  
+        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">
         <div class="w-2/5 mx-auto flex-col pt-20 ">
-            <p class="text-2xl text-white pb-3 border-b-2 h-12">配送</p>
-            <p class="text-white flex-col mt-10 text-xl">デザインと足サイズをもとにあなたのためのスニーカーを制作します！</p>
-        </div> 
+            <p class="text-2xl text-white pb-3 border-b-2 h-12">{% trans '依頼どおりスニーカーを制作する' %}</p>
+            <p class="text-white flex-col mt-10 text-xl">{% trans 'デザインと足サイズをもとにあなたのためのスニーカーを制作します！' %}</p>
+        </div>
     </div>
 </section>
 
-<section class="w-full py-16 text-center bg-home-gray" >
+<section class="w-full py-16 text-center bg-home-gray">
     <div class="w-2/3 mx-auto mb-20 border-t-4">
-        <p class="text-white text-3xl pt-20">Product List</p>
+        <p class="text-white text-3xl pt-20">{% trans '商品リスト' %}</p>
     </div>
-    <a href="" class="text-xl bg-white rounded p-2 font-weight-700 bg-gray-700 text-white" >MORE</a>
+    <a href="" class="text-xl bg-white rounded p-2 font-weight-700 bg-gray-700 text-white">{% trans '詳しく見る' %}</a>
 </section>
 
 {% endblock content %}

@@ -53,8 +53,8 @@
                 </p>
 
                 <div class="flex items-center justify-center">
-                    <p class="w-1/2 text-center">新しいスニーカーはいかがですか？</p>
-                    <a href="{% url 'products:list' %}" class="btn w-1/3">商品を見る</a>
+                    <p class="w-1/2 text-center">{% trans '新しいスニーカーはいかがですか？' %}</p>
+                    <a href="{% url 'products:list' %}" class="btn w-1/3">{% trans '商品を見る' %}</a>
                 </div>
                 {% endif %}
 

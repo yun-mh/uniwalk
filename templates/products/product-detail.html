@@ -38,7 +38,7 @@
 <div class="w-full border-t bg-gray-100 px-20 py-12">
     <div class="flex items-end justify-between pb-5 border-b">
         <div>
-            <span class="ml-1 font-semibold text-lg">全てのレビュー</span>
+            <span class="ml-1 font-semibold text-lg">{% trans '全てのレビュー' %}</span>
             <span class="ml-3 text-blue-600 font-semibold text-xl">{{ product.reviews.count }}</span>
         </div>
         {% if user.is_authenticated %}
@@ -72,7 +72,8 @@
     </div>
     {% else %}
     <p class="flex justify-center items-center m-5 font-semibold w-full text-center text-2xl">
-        <i class="fas fa-grin-beam-sweat fa-2x text-teal-500"></i> <span class="ml-5">レビューがまだ存在しません。</span>
+        <i class="fas fa-grin-beam-sweat fa-2x text-teal-500"></i> <span
+            class="ml-5">{% trans 'レビューがまだ存在しません。' %}</span>
     </p>
     {% endif %}
 </div>

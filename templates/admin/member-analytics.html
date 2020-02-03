@@ -9,15 +9,15 @@
             </div>
             <div class="flex">
                 <div class="w-1/3 text-center border-b border-r py-3">
-                    <div class="text-sm">全体ユーザ数</div class="text-sm">
+                    <div class="text-sm">{% trans '全体ユーザ数' %}</div class="text-sm">
                     <div class="text-lg font-semibold">{{ all_users }}</div class="text-lg font-semibold">
                 </div>
                 <div class="w-1/3 text-center border-b border-r py-3">
-                    <div class="text-sm">会員数</div>
+                    <div class="text-sm">{% trans '会員数' %}</div>
                     <div class="text-lg font-semibold">{{ users | length }}</div>
                 </div>
                 <div class="w-1/3 text-center border-b py-3">
-                    <div class="text-sm">ゲスト数</div>
+                    <div class="text-sm">{% trans 'ゲスト数' %}</div>
                     <div class="text-lg font-semibold">{{ guests | length }}</div>
                 </div>
             </div>
@@ -34,19 +34,19 @@
             </div>
             <div class="flex">
                 <div class="w-1/4 text-center border-b border-r py-3">
-                    <div class="text-sm">全体会員数</div>
+                    <div class="text-sm">{% trans '全体会員数' %}</div>
                     <div class="text-lg font-semibold">{{ users | length }}</div>
                 </div>
                 <div class="w-1/4 text-center border-b border-r py-3">
-                    <div class="text-sm">男性</div>
+                    <div class="text-sm">{% trans '男性' %}</div>
                     <div class="text-lg font-semibold">{{ male | length }}</div>
                 </div>
                 <div class="w-1/4 text-center border-b border-r py-3">
-                    <div class="text-sm">女性</div>
+                    <div class="text-sm">{% trans '女性' %}</div>
                     <div class="text-lg font-semibold">{{ female | length }}</div>
                 </div>
                 <div class="w-1/4 text-center border-b py-3">
-                    <div class="text-sm">その他</div>
+                    <div class="text-sm">{% trans 'その他' %}</div>
                     <div class="text-lg font-semibold">{{ other | length }}</div>
                 </div>
             </div>

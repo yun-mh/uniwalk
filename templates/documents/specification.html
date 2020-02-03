@@ -26,45 +26,45 @@
             page-break-after: auto;
         }
     </style>
-    <title>製造仕様書 | {{order.order_code}}</title>
+    <title>{% trans '製造仕様書' %} | {{order.order_code}}</title>
 </head>
 
 {% for order_item in order.order_items.all %}
 
-<body class="seperate">
+<body class="document seperate">
     <div class="w-90vw mx-auto">
         <div class="w-full flex items-center justify-start">
             <img src="{% static 'images/logo-universe.png' %}" class="inline-block w-16">
             <div class="font-bold text-3xl text-center tracking-widest">
-                　製造仕様書
+                　{% trans '製造仕様書' %}
             </div>
         </div>
     </div>
-    <p class="w-90vw mx-auto text-right">発行日：{% now "Y-m-d" %}</p>
+    <p class="w-90vw mx-auto text-right">{% trans '発行日' %}：{% now "Y-m-d" %}</p>
     <div class="w-90vw mx-auto">
         <table class="w-full border-4">
             <tr>
-                <th class="w-2/5 border text-lg text-center">商品名</th>
+                <th class="w-2/5 border text-lg text-center">{% trans '商品名' %}</th>
                 <td class="border">{{ order_item.product.name }}</td>
             </tr>
             <tr>
-                <th class="w-2/5 border text-lg text-center">カスタマイズデザインコード</th>
+                <th class="w-2/5 border text-lg text-center">{% trans 'カスタマイズデザインコード' %}</th>
                 <td class="border">{{ order_item.customize_code }}</td>
             </tr>
             <tr>
-                <th class="w-2/5 border text-lg text-center">注文番号</th>
+                <th class="w-2/5 border text-lg text-center">{% trans '注文番号' %}</th>
                 <td class="border">{{ order.order_code }}</td>
             </tr>
             <tr>
-                <th class="w-2/5 border text-lg text-center">注文日</th>
+                <th class="w-2/5 border text-lg text-center">{% trans '注文日' %}</th>
                 <td class="border">{{ order.order_date|date:'Y-m-d' }}</td>
             </tr>
             <tr>
-                <th class="w-2/5 border text-lg text-center">納期</th>
+                <th class="w-2/5 border text-lg text-center">{% trans '納期' %}</th>
                 <td class="border">{% a_week_after "%Y-%m-%d" %} まで</td>
             </tr>
             <tr>
-                <th class="w-2/5 border text-lg text-center">数量</th>
+                <th class="w-2/5 border text-lg text-center">{% trans '数量' %}</th>
                 <td class="border">{{ order_item.quantity }}</td>
             </tr>
         </table>
@@ -73,7 +73,7 @@
             <thead class="border">
                 <tr>
                     <th class="border text-lg text-center">
-                        デザインイメージ
+                        {% trans 'デザインイメージ' %}
                     </th>
                 </tr>
             </thead>
@@ -96,16 +96,16 @@
         <table class="w-full border-4 mb-5">
             <thead>
                 <tr class="border text-lg text-center">
-                    <th class="border">部品</th>
-                    <th class="border" colspan="2">色(左・右)</th>
-                    <th class="border" colspan="2">素材(左・右)</th>
-                    <th class="border" colspan="4">サイズ</th>
+                    <th class="border">{% trans '部品' %}</th>
+                    <th class="border" colspan="2">{% trans '色(左・右)' %}</th>
+                    <th class="border" colspan="2">{% trans '素材(左・右)' %}</th>
+                    <th class="border" colspan="4">{% trans 'サイズ' %}</th>
                 </tr>
             </thead>
             <tbody class="border text-sm">
                 <tr>
                     <td class="border">
-                        アウトソール
+                        {% trans 'アウトソール' %}
                     </td>
                     <td class="border">
                         {{ order_item.outsole_color_left }}
@@ -120,15 +120,15 @@
                         {{ order_item.outsole_material_right }}
                     </td>
                     <th class="border text-center" colspan="2">
-                        　左
+                        　{% trans '左' %}
                     </th>
                     <th class="border text-center" colspan="2">
-                        　右
+                        　{% trans '右' %}
                     </th>
                 </tr>
                 <tr>
                     <td class="border">
-                        ミッドソール
+                        {% trans 'ミッドソール' %}
                     </td>
                     <td class="border">
                         {{ order_item.midsole_color_left }}
@@ -143,21 +143,21 @@
                         {{ order_item.midsole_material_right }}
                     </td>
                     <td class="border text-center">
-                        足幅
+                        {% trans '足幅' %}
                     </td>
                     <td class="border text-center">
-                        足長
+                        {% trans '足長' %}
                     </td>
                     <th class="border text-center">
-                        足幅
+                        {% trans '足幅' %}
                     </th>
                     <th class="border text-center">
-                        足長
+                        {% trans '足長' %}
                     </th>
                 </tr>
                 <tr>
                     <td class="border">
-                        アッパー
+                        {% trans 'アッパー' %}
                     </td>
                     <td class="border">
                         {{ order_item.uppersole_color_left }}
@@ -180,7 +180,7 @@
                 </tr>
                 <tr>
                     <td class="border">
-                        シューレス
+                        {% trans 'シューレス' %}
                     </td>
                     <td class="border">
                         {{ order_item.shoelace_color_left }}
@@ -197,7 +197,7 @@
                 </tr>
                 <tr>
                     <td class="border">
-                        タン
+                        {% trans 'タン' %}
                     </td>
                     <td class="border">
                         {{ order_item.tongue_color_left }}

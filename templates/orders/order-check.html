@@ -16,8 +16,9 @@
     <div class="container mx-auto flex bg-white p-8 rounded-xl">
         <div class="w-2/3 flex flex-wrap mb-10">
             <div class="w-3/4 mx-auto ">
-                <h3 class="w-full font-semibold text-2xl bg-black p-3 text-white rounded-t-lg">{% trans '1. お届け先情報' %}</h3>
-                    <div class="border border-gray-500 px-4 rounded-b-lg">
+                <h3 class="w-full font-semibold text-2xl bg-black p-3 text-white rounded-t-lg">{% trans '1. お届け先情報' %}
+                </h3>
+                <div class="border border-gray-500 px-4 rounded-b-lg">
                     <h4>{% trans '配送先住所' %}</h4>
                     <span>{{ recipient_data.last_name_recipient }}　{{ recipient_data.first_name_recipient }}</span>
                     <span>({{ recipient_data.last_name_recipient_kana }}　{{ recipient_data.first_name_recipient_kana }})</span>
@@ -34,7 +35,8 @@
                     </div>
                 </div>
 
-                <h3 class="w-full font-semibold text-2xl bg-black p-3 text-white rounded-t-lg mt-5">{% trans '2. お支払い方法・ご請求先情報' %}</h3>
+                <h3 class="w-full font-semibold text-2xl bg-black p-3 text-white rounded-t-lg mt-5">
+                    {% trans '2. お支払い方法・ご請求先情報' %}</h3>
                 <div class="border border-gray-500 px-4 rounded-b-lg">
                     <h4>{% trans 'お支払い方法' %}</h4>
                     {% if orderer_data.payment == "P1" %}
@@ -68,7 +70,8 @@
                     {% endif %}
                 </div>
 
-                <h3 class="w-full font-semibold text-2xl bg-black p-3 text-white rounded-t-lg mt-5">{% trans '3. ご注文の確定' %}</h3>
+                <h3 class="w-full font-semibold text-2xl bg-black p-3 text-white rounded-t-lg mt-5">
+                    {% trans '3. ご注文の確定' %}</h3>
 
                 {% if request.session.orderer_data.payment == "P1" %}
                 {% if cards %}
@@ -77,11 +80,11 @@
                         <label class="switch mt-4 mx-5">
                             <input type="checkbox" id="show-new-card">
                             <span class="slider"></span>
-                        </label>登録外のカードで支払う
+                        </label>{% trans '登録外のカードで支払う' %}
                         <div style="padding: 5px 30px;">
                             <form action="." method="post" class="stripe-form" id="current-card">
                                 {% csrf_token %}
-                                <h4 class="pt-5">登録済みのカード</h4>
+                                <h4 class="pt-5">{% trans '登録済みのカード' %}</h4>
                                 <div class="my-5">
                                     <select name="use_default_card" id="use_default_card">
                                         {% for c in cards %}
@@ -101,9 +104,9 @@
                             </form>
                         </div>
                     </div>
-                {% endif %}
+                    {% endif %}
 
-                    <div id="new-card" class="new-card-form pb-5" >
+                    <div id="new-card" class="new-card-form pb-5">
                         <form action="." method="POST" class="stripe-form" id="stripe-form">
                             {% csrf_token %}
                             <div class="stripe-form-row " id="creditCard">
@@ -125,7 +128,7 @@
                             <div class="stripe-form-row my-5">
                                 <div class="flex items-center">
                                     <input type="checkbox" class="w-1/12" name="save" id="save_card_info">
-                                    <label class="" for="save_card_info">カード情報をアカウントに登録する</label>
+                                    <label class="" for="save_card_info">{% trans 'カード情報をアカウントに登録する' %}</label>
                                 </div>
                             </div>
                             {% endif %}
@@ -133,15 +136,13 @@
                             <button class="btn">{% trans '注文を確定する' %}</button>
                         </form>
                     </div>
-                
+
                 </div>
                 {% else %}
                 <form method="POST">
                     {% csrf_token %}
                     <div class="border border-gray-500 px-4 rounded-b-lg">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam quis at corrupti nobis in.
-                        Iste, debitis quibusdam fuga magni aliquid maxime! Accusantium nisi amet in corporis,
-                        consequuntur totam maxime sit.
+                        {% trans '振込可能期間は注文時点から1週間以内になっております。' %}
                     </div>
                     <button class="btn mt-5">{% trans '注文を確定する' %}</button>
                 </form>
@@ -201,7 +202,7 @@
     var card = elements.create('card', { style: style });
 
     // if (current_card) {
-        card.mount('#card-element');
+    card.mount('#card-element');
     // }
 
     // Handle real-time validation errors from the card Element.

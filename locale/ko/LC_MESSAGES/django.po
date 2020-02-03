@@ -3,15 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: .\orders\forms.py:46 .\orders\forms.py:49 .\orders\forms.py:52
-#: .\orders\forms.py:55 .\orders\forms.py:58 .\orders\forms.py:61
-#: .\orders\forms.py:64 .\orders\forms.py:67
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 15:53+0900\n"
+"POT-Creation-Date: 2020-02-03 17:40+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,309 +19,802 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: .\carts\models.py:14 .\templates\carts\cart.html:5
+#: .\templates\mixins\orders\order-summary-card.html:16
 msgid "カート"
 msgstr "카트"
 
-#: .\carts\models.py:19 .\orders\models.py:155 .\products\models.py:25
-#: .\products\models.py:96 .\products\models.py:97 .\reviews\models.py:12
-#: .\templates\admin\extra_nav.html:61 .\templates\partials\nav.html:117
+#: .\carts\models.py:19 .\designs\models.py:178 .\designs\models.py:179
+msgid "デザイン"
+msgstr "디자인"
+
+#: .\carts\models.py:26 .\designs\models.py:76 .\orders\models.py:155
+#: .\products\models.py:32 .\products\models.py:81 .\products\models.py:173
+#: .\products\models.py:174 .\reviews\models.py:12
+#: .\templates\admin\extra_nav.html:20 .\templates\partials\nav.html:116
 msgid "商品"
 msgstr "상품"
 
-#: .\carts\models.py:22
+#: .\carts\models.py:30 .\users\admin.py:21 .\users\admin.py:22
+msgid "足サイズ"
+msgstr "발사이즈"
+
+#: .\carts\models.py:36 .\orders\models.py:161
+#: .\templates\documents\bill.html:95 .\templates\documents\invoice.html:61
+#: .\templates\documents\ordersheet.html:86
+#: .\templates\documents\receipt.html:63
+#: .\templates\documents\specification.html:67
+#: .\templates\mixins\orders\order-detail-card.html:15
+#: .\templates\mixins\orders\order-detail-card.html:28
+#: .\templates\mixins\orders\order-summary-card.html:28
+#: .\templates\orders\bill.html:88 .\templates\orders\receipt.html:57
+#: .\templates\orders\search-order-detail.html:34
+#: .\templates\orders\search-order-detail.html:47
 msgid "数量"
-msgstr ""
+msgstr "수량"
 
-#: .\carts\models.py:23
+#: .\carts\models.py:37 .\users\models.py:125
 msgid "活性化"
-msgstr ""
+msgstr "활성화"
 
-#: .\carts\models.py:34
+#: .\carts\models.py:48 .\templates\admin\member-analytics.html:83
 msgid "会員"
-msgstr ""
+msgstr "회원"
 
-#: .\carts\models.py:36
+#: .\carts\models.py:50
 msgid "カートセッションキー"
-msgstr ""
+msgstr "카트 세션키"
 
-#: .\config\admin.py:8
-msgid "Hello World"
-msgstr ""
+#: .\core\models.py:13
+msgid "登録日時"
+msgstr "등록일시"
+
+#: .\core\models.py:14
+msgid "更新日時"
+msgstr "갱신일시"
 
 #: .\core\models.py:24
-msgid "JP Prefecture (two number codes)"
-msgstr ""
+msgid "日本地域コード (2桁)"
+msgstr "일본지역코드(2자리)"
 
 #: .\core\models.py:41
 msgid "日本郵便番号：数字７桁"
-msgstr ""
+msgstr "일본우편번호：숫자 7자리"
 
-#: .\orders\admin.py:90
+#: .\designs\admin.py:17
+msgid "素材情報"
+msgstr "소재 정보"
+
+#: .\designs\admin.py:32
+msgid "デザイン情報"
+msgstr "디자인 정보"
+
+#: .\designs\admin.py:43
+msgid "デザイン詳細"
+msgstr "디자인 상세"
+
+#: .\designs\models.py:24
+msgid "素材名"
+msgstr "소재명"
+
+#: .\designs\models.py:25
+msgid "素材画像"
+msgstr "소재 이미지"
+
+#: .\designs\models.py:26
+msgid "素材コード"
+msgstr "소재코드"
+
+#: .\designs\models.py:29 .\designs\models.py:30
+msgid "素材"
+msgstr "소재"
+
+#: .\designs\models.py:43
+msgid "デザインid"
+msgstr "디자인id"
+
+#: .\designs\models.py:48 .\orders\models.py:163
+msgid "正面"
+msgstr "정면"
+
+#: .\designs\models.py:49 .\orders\models.py:164
+msgid "側面"
+msgstr "측면"
+
+#: .\designs\models.py:50 .\orders\models.py:165
+msgid "上面"
+msgstr "상면"
+
+#: .\designs\models.py:51 .\orders\models.py:166
+msgid "下面"
+msgstr "하면"
+
+#: .\designs\models.py:54 .\designs\models.py:55
+#: .\templates\documents\specification.html:76
+msgid "デザインイメージ"
+msgstr "디자인 이미지"
+
+#: .\designs\models.py:68
+msgid "ユーザ"
+msgstr "유저"
+
+#: .\designs\models.py:84
+msgid "アウトソール素材(左)"
+msgstr "아웃솔 소재(좌)"
+
+#: .\designs\models.py:93
+msgid "ミッドソール素材(左)"
+msgstr "미드솔 소재(좌)"
+
+#: .\designs\models.py:102
+msgid "アッパーソール素材(左)"
+msgstr "어퍼솔 소재(좌)"
+
+#: .\designs\models.py:111
+msgid "シューレース素材(左)"
+msgstr "슈레이스 소재(좌)"
+
+#: .\designs\models.py:120
+msgid "タン素材(左)"
+msgstr "텅 소재(좌)"
+
+#: .\designs\models.py:129
+msgid "アウトソール素材(右)"
+msgstr "아웃솔 소재(우)"
+
+#: .\designs\models.py:138
+msgid "ミッドソール素材(右)"
+msgstr "미드솔 소재(우)"
+
+#: .\designs\models.py:147
+msgid "アッパーソール素材(右)"
+msgstr "어퍼솔 소재(우)"
+
+#: .\designs\models.py:156
+msgid "シューレース素材(右)"
+msgstr "슈레이스 소재(우)"
+
+#: .\designs\models.py:165
+msgid "タン素材(右)"
+msgstr "텅 소재(우)"
+
+#: .\designs\models.py:172 .\products\models.py:126
+msgid "番号"
+msgstr "번호"
+
+#: .\designs\models.py:174 .\orders\models.py:187
+#: .\templates\documents\specification.html:51
+msgid "カスタマイズデザインコード"
+msgstr "커스터마이즈 디자인 코드"
+
+#: .\designs\models.py:175
+msgid "いいねユーザ"
+msgstr "좋아요한 유저"
+
+#: .\feet\models.py:21 .\templates\admin\footsize-analytics.html:8
+msgid "足長(左)"
+msgstr "발 길이(좌)"
+
+#: .\feet\models.py:22 .\templates\admin\footsize-analytics.html:19
+msgid "足長(右)"
+msgstr "발 길이(우)"
+
+#: .\feet\models.py:23 .\templates\admin\footsize-analytics.html:30
+msgid "足幅(左)"
+msgstr "발 넓이(좌)"
+
+#: .\feet\models.py:24 .\templates\admin\footsize-analytics.html:41
+msgid "足幅(右)"
+msgstr "발 넓이(우)"
+
+#: .\orders\admin.py:18 .\orders\admin.py:19 .\orders\models.py:149
+msgid "注文アイテム"
+msgstr "주문 아이템"
+
+#: .\orders\admin.py:26 .\orders\admin.py:36 .\orders\admin.py:46
+#: .\orders\admin.py:56 .\orders\admin.py:66 .\orders\admin.py:76
+msgid "1件の注文の対応を"
+msgstr "1건의 주문 대응을"
+
+#: .\orders\admin.py:28 .\orders\admin.py:38 .\orders\admin.py:48
+#: .\orders\admin.py:58 .\orders\admin.py:68 .\orders\admin.py:78
+#, python-format
+msgid "%s 注文の対応を"
+msgstr "%s 주문 대응을"
+
+#: .\orders\admin.py:29
+#, python-format
+msgid "%s 入金前に変更しました。"
+msgstr "%s 입금전으로 변경했습니다."
+
+#: .\orders\admin.py:30 .\orders\admin.py:80
+msgid "選択した注文を入金前に変更"
+msgstr "선택한 주문을 입금전으로 변경"
+
+#: .\orders\admin.py:39
+#, python-format
+msgid "%s 決済処理中に変更しました。"
+msgstr "%s 결제처리중으로 변경했습니다."
+
+#: .\orders\admin.py:40
+msgid "選択した注文を決済処理中に変更"
+msgstr "선택한 주문을 결제처리중으로 변경"
+
+#: .\orders\admin.py:49
+#, python-format
+msgid "%s 決済確認済みに変更しました。"
+msgstr "%s 결제확인완료로 변경했습니다."
+
+#: .\orders\admin.py:50
+msgid "選択した注文を決済確認済みに変更"
+msgstr "선택한 주문을 결제확인완료로 변경"
+
+#: .\orders\admin.py:59
+#, python-format
+msgid "%s 対応中に変更しました。"
+msgstr "%s 대응중으로 변경했습니다."
+
+#: .\orders\admin.py:60
+msgid "選択した注文を対応中に変更"
+msgstr "선택한 주문을 대응중으로 변경"
+
+#: .\orders\admin.py:69
+#, python-format
+msgid "%s 発送済みに変更しました。"
+msgstr "%s 발송완료로 변경했습니다."
+
+#: .\orders\admin.py:70
+msgid "選択した注文を発送済みに変更"
+msgstr "선택한 주문을 발송완료로 변경"
+
+#: .\orders\admin.py:79
+#, python-format
+msgid "%s 注文取消しに変更しました。"
+msgstr "%s 주문취소로 변경했습니다."
+
+#: .\orders\admin.py:92
 msgid "注文情報"
-msgstr ""
+msgstr "주문 정보"
 
-#: .\orders\admin.py:105
+#: .\orders\admin.py:106
 msgid "注文者情報"
-msgstr ""
+msgstr "주문자 정보"
 
-#: .\orders\admin.py:121
+#: .\orders\admin.py:122
 msgid "配送先情報"
-msgstr ""
+msgstr "배송지 정보"
 
-#: .\orders\admin.py:294
+#: .\orders\admin.py:204 .\templates\admin\order_changeform.html:7
+#: .\templates\documents\bill.html:16 .\templates\documents\bill.html:22
+#: .\templates\orders\bill.html:10 .\templates\orders\bill.html:16
+msgid "請求書"
+msgstr "청구서"
+
+#: .\orders\admin.py:233 .\templates\admin\order_changeform.html:10
+#: .\templates\documents\receipt.html:16 .\templates\documents\receipt.html:22
+#: .\templates\orders\receipt.html:10 .\templates\orders\receipt.html:16
+msgid "領収書"
+msgstr "영수증"
+
+#: .\orders\admin.py:258 .\templates\admin\order_changeform.html:13
+#: .\templates\documents\ordersheet.html:16
+#: .\templates\documents\ordersheet.html:22
+msgid "発注書"
+msgstr "발주서"
+
+#: .\orders\admin.py:283 .\templates\admin\order_changeform.html:14
+msgid "仕様書"
+msgstr "사양서"
+
+#: .\orders\admin.py:309 .\templates\admin\order_changeform.html:17
+#: .\templates\documents\invoice.html:21 .\templates\documents\invoice.html:27
+msgid "納品書"
+msgstr "납품서"
+
+#: .\orders\admin.py:327
 msgid "顧客名"
-msgstr ""
+msgstr "고객명"
 
-#: .\orders\admin.py:299
+#: .\orders\admin.py:332
 msgid "顧客名(カナ)"
-msgstr ""
+msgstr "고객명(가나)"
 
-#: .\orders\forms.py:16 .\orders\forms.py:127 .\orders\forms.py:128
-#: .\users\forms.py:14 .\users\forms.py:48 .\users\forms.py:108
-#: .\users\forms.py:164 .\users\forms.py:191 .\users\models.py:39
+#: .\orders\admin.py:340
+msgid "対応情報"
+msgstr "대응정보"
+
+#: .\orders\forms.py:11 .\orders\models.py:51
+#: .\templates\orders\order-check.html:43
+#: .\templates\orders\order-check.html:114
+#: .\templates\partials\mypage-menu.html:17
+msgid "クレジットカード"
+msgstr "신용카드"
+
+#: .\orders\forms.py:11 .\orders\models.py:51
+#: .\templates\orders\order-check.html:45
+msgid "振込"
+msgstr "계좌이체"
+
+#: .\orders\forms.py:16 .\orders\forms.py:162 .\orders\forms.py:163
+#: .\users\forms.py:13 .\users\forms.py:14 .\users\forms.py:48
+#: .\users\forms.py:108 .\users\forms.py:168 .\users\forms.py:195
+#: .\users\models.py:45 .\users\models.py:124
 msgid "メールアドレス"
-msgstr ""
+msgstr "이메일 주소"
 
-#: .\orders\forms.py:70 .\users\forms.py:126 .\users\forms.py:127
+#: .\orders\forms.py:36 .\orders\forms.py:60 .\orders\forms.py:118
+#: .\templates\users\signup-check.html:22 .\users\forms.py:49
+#: .\users\forms.py:110
+msgid "姓"
+msgstr "성"
+
+#: .\orders\forms.py:37 .\orders\forms.py:63 .\orders\forms.py:119
+#: .\templates\users\signup-check.html:23 .\users\forms.py:50
+#: .\users\forms.py:111
+msgid "名"
+msgstr "명"
+
+#: .\orders\forms.py:39 .\orders\forms.py:66 .\orders\forms.py:68
+#: .\orders\forms.py:121 .\templates\users\signup-check.html:24
+#: .\users\forms.py:51 .\users\forms.py:112 .\users\models.py:47
+msgid "姓(カナ)"
+msgstr "성(가나)"
+
+#: .\orders\forms.py:42 .\orders\forms.py:71 .\orders\forms.py:73
+#: .\orders\forms.py:124 .\templates\users\signup-check.html:25
+#: .\users\forms.py:52 .\users\forms.py:113 .\users\models.py:46
+msgid "名(カナ)"
+msgstr "명(가나)"
+
+#: .\orders\forms.py:45 .\orders\forms.py:76 .\orders\forms.py:78
+#: .\orders\forms.py:126 .\users\forms.py:115 .\users\models.py:52
+msgid "電話番号"
+msgstr "전화번호"
+
+#: .\orders\forms.py:48 .\users\models.py:54
+msgid "都道府県"
+msgstr "도도부현"
+
+#: .\orders\forms.py:51 .\orders\forms.py:86 .\orders\forms.py:88
+#: .\orders\forms.py:128 .\users\forms.py:116 .\users\models.py:55
+msgid "市区町村番地"
+msgstr "시구정촌번지"
+
+#: .\orders\forms.py:54 .\orders\forms.py:91 .\orders\forms.py:93
+#: .\orders\forms.py:130 .\users\forms.py:117 .\users\models.py:56
+msgid "建物名・号室"
+msgstr "건물명・호실"
+
+#: .\orders\forms.py:96 .\orders\forms.py:127 .\users\forms.py:126
+#: .\users\forms.py:127 .\users\models.py:53
 msgid "郵便番号"
-msgstr ""
+msgstr "우편번호"
 
-#: .\orders\forms.py:123 .\orders\forms.py:124 .\orders\models.py:102
+#: .\orders\forms.py:136
+msgid "請求書住所が配送先と同じ"
+msgstr "청구서 주소가 배송지와 동일"
+
+#: .\orders\forms.py:158 .\orders\forms.py:159 .\orders\models.py:102
+#: .\templates\documents\invoice.html:43
+#: .\templates\documents\ordersheet.html:80
+#: .\templates\documents\receipt.html:29
+#: .\templates\documents\specification.html:55
+#: .\templates\mixins\orders\order-card.html:6
+#: .\templates\mixins\orders\order-detail-card.html:6
+#: .\templates\orders\checkout-done.html:19 .\templates\orders\receipt.html:23
+#: .\templates\orders\search-order-detail.html:24
 msgid "注文番号"
-msgstr ""
+msgstr "주문번호"
+
+#: .\orders\models.py:32
+msgid "対応コード"
+msgstr "대응코드"
+
+#: .\orders\models.py:33
+msgid "対応名"
+msgstr "대응명"
 
 #: .\orders\models.py:40 .\orders\models.py:41
 msgid "対応"
-msgstr ""
-
-#: .\orders\models.py:51 .\templates\orders\order-check.html:39
-#: .\templates\orders\order-check.html:104
-#: .\templates\partials\mypage-menu.html:14
-msgid "クレジットカード"
-msgstr ""
-
-#: .\orders\models.py:51 .\templates\orders\order-check.html:41
-msgid "振込"
-msgstr ""
+msgstr "대응"
 
 #: .\orders\models.py:56 .\reviews\models.py:17
 msgid "ユーザー"
-msgstr ""
+msgstr "유저"
 
-#: .\orders\models.py:64 .\users\models.py:107 .\users\models.py:108
+#: .\orders\models.py:64 .\templates\admin\member-analytics.html:84
+#: .\users\models.py:128 .\users\models.py:129
 msgid "ゲスト"
-msgstr ""
+msgstr "게스트"
 
 #: .\orders\models.py:69
 msgid "姓(ご請求書先)"
-msgstr ""
+msgstr "성(청구서앞)"
 
 #: .\orders\models.py:70
 msgid "名(ご請求書先)"
-msgstr ""
+msgstr "이름(청구서앞)"
 
 #: .\orders\models.py:71
 msgid "姓(ご請求書先,カナ)"
-msgstr ""
+msgstr "성(청구서앞, 가나)"
 
 #: .\orders\models.py:72
 msgid "名(ご請求書先,カナ)"
-msgstr ""
+msgstr "명(청구서앞, 가나)"
 
 #: .\orders\models.py:73
 msgid "電話番号(ご請求書先)"
-msgstr ""
+msgstr "전화번호(청구서앞)"
 
 #: .\orders\models.py:74
 msgid "郵便番号(ご請求書先)"
-msgstr ""
+msgstr "우편번호(청구서앞)"
 
 #: .\orders\models.py:75
 msgid "都道府県(ご請求書先)"
-msgstr ""
+msgstr "도도부현(청구서앞)"
 
 #: .\orders\models.py:76
 msgid "市区町村(ご請求書先)"
-msgstr ""
+msgstr "시구정촌(청구서앞)"
 
 #: .\orders\models.py:77
 msgid "建物名・部屋番号(ご請求書先)"
-msgstr ""
+msgstr "건물명・호실번호(청구서앞)"
 
 #: .\orders\models.py:78
 msgid "姓(お届け先)"
-msgstr ""
+msgstr "성(배송지앞)"
 
 #: .\orders\models.py:79
 msgid "名(お届け先)"
-msgstr ""
+msgstr "명(배송지앞)"
 
 #: .\orders\models.py:80
 msgid "姓(カナ, お届け先)"
-msgstr ""
+msgstr "성(배송지앞, 가나)"
 
 #: .\orders\models.py:81
 msgid "名(カナ, お届け先)"
-msgstr ""
+msgstr "명(배송지앞, 가나)"
 
 #: .\orders\models.py:82
 msgid "電話番号(お届け先)"
-msgstr ""
+msgstr "전화번호(배송지앞)"
 
 #: .\orders\models.py:83
 msgid "郵便番号(お届け先)"
-msgstr ""
+msgstr "우편번호(배송지앞)"
 
 #: .\orders\models.py:84
 msgid "都道府県(お届け先)"
-msgstr ""
+msgstr "도도부현(배송지앞)"
 
 #: .\orders\models.py:85
 msgid "市区町村(お届け先)"
-msgstr ""
+msgstr "시구정촌(배송지앞)"
 
 #: .\orders\models.py:86
 msgid "建物名・部屋番号(お届け先)"
-msgstr ""
+msgstr "건물명・호실번호(배송지앞)"
 
-#: .\orders\models.py:87
+#: .\orders\models.py:87 .\templates\mixins\orders\order-card.html:7
+#: .\templates\mixins\orders\order-detail-card.html:7
+#: .\templates\orders\search-order-detail.html:25
 msgid "注文日時"
-msgstr ""
+msgstr "주문일시"
 
 #: .\orders\models.py:88
 msgid "支払方法"
-msgstr ""
+msgstr "지불방법"
 
 #: .\orders\models.py:93
 msgid "対応状況"
-msgstr ""
+msgstr "대응상황"
 
 #: .\orders\models.py:98
 msgid "支払総額"
-msgstr ""
+msgstr "지불총액"
 
 #: .\orders\models.py:106 .\orders\models.py:107
-#: .\templates\admin\extra_nav.html:73
+#: .\templates\admin\extra_nav.html:64
 msgid "注文"
-msgstr ""
+msgstr "주문"
 
-#: .\orders\models.py:149
-msgid "注文アイテム"
-msgstr ""
+#: .\orders\models.py:162 .\templates\carts\cart.html:48
+#: .\templates\documents\receipt.html:66
+#: .\templates\mixins\orders\order-detail-card.html:27
+#: .\templates\orders\bill.html:91 .\templates\orders\receipt.html:60
+#: .\templates\orders\search-order-detail.html:46
+msgid "単価"
+msgstr "단가"
 
-#: .\orders\views.py:429
+#: .\orders\views.py:359
+msgid "支払限度を超過しました。"
+msgstr "지불한도를 초과했습니다."
+
+#: .\orders\views.py:363
+msgid "無効なペラメタです。"
+msgstr "무효한 파라미터입니다."
+
+#: .\orders\views.py:366
+msgid "認証できませんでした。"
+msgstr "인증에 실패하였습니다."
+
+#: .\orders\views.py:370
+msgid "ネットワークに問題があります。"
+msgstr "네트워크에 문제가 있습니다."
+
+#: .\orders\views.py:375
+msgid "問題が発生しました。もう一度試してみてください。"
+msgstr "문제가 발생했습니다. 다시 한 번 시도해주십시오."
+
+#: .\orders\views.py:380
+msgid "エラーが発生しました。"
+msgstr "에러가 발생했습니다."
+
+#: .\orders\views.py:464
 msgid "UniWalk　ご注文ありがとうございます。"
-msgstr ""
+msgstr "UniWalk　주문 감사드립니다."
 
-#: .\orders\views.py:465 .\orders\views.py:471
+#: .\orders\views.py:506 .\orders\views.py:512
 msgid "入力した情報をもう一度確認してください。"
-msgstr ""
+msgstr "입력한 정보를 다시 한 번 확인해주세요."
 
-#: .\orders\views.py:496 .\users\views.py:235 .\users\views.py:265
+#: .\orders\views.py:540 .\users\views.py:281 .\users\views.py:311
 msgid "注文を取消しました。"
-msgstr ""
+msgstr "주문을 취소했습니다."
 
-#: .\products\admin.py:41
+#: .\products\admin.py:11 .\products\admin.py:12 .\products\models.py:85
+#: .\products\models.py:86
+msgid "商品イメージ"
+msgstr "상품 이미지"
+
+#: .\products\admin.py:19 .\products\admin.py:20 .\products\models.py:68
+#: .\products\models.py:69
+msgid "テンプレート"
+msgstr "템플레이트"
+
+#: .\products\admin.py:32
+msgid "商品情報"
+msgstr "상품정보"
+
+#: .\products\admin.py:65
 msgid "サムネイル"
-msgstr ""
+msgstr "썸네일"
 
-#: .\products\models.py:23
-msgid "イメージ"
-msgstr ""
+#: .\products\admin.py:73
+msgid "カテゴリー情報"
+msgstr "카테고리 정보"
 
-#: .\products\models.py:33
-msgid "商品タイプ名"
-msgstr ""
+#: .\products\models.py:37
+msgid "シューレス(左)"
+msgstr "슈레이스(좌)"
 
-#: .\products\models.py:34
-msgid "タイプコード"
-msgstr ""
+#: .\products\models.py:40
+msgid "タン(左)"
+msgstr "텅(좌)"
 
-#: .\products\models.py:37 .\products\models.py:38
-msgid "カテゴリー"
-msgstr ""
+#: .\products\models.py:43
+msgid "アッパーソール(左)"
+msgstr "어퍼솔(좌)"
 
-#: .\products\models.py:48
-msgid "商品名"
-msgstr ""
+#: .\products\models.py:46
+msgid "ミッドソール(左)"
+msgstr "미드솔(좌)"
 
-#: .\products\models.py:51 .\templates\products\product-list.html:14
-msgid "商品カテゴリー"
-msgstr ""
+#: .\products\models.py:49
+msgid "アウトソール(左)"
+msgstr "아웃솔(좌)"
+
+#: .\products\models.py:52
+msgid "シューレス(右)"
+msgstr "슈레이스(우)"
 
 #: .\products\models.py:55
-msgid "価格"
-msgstr ""
+msgid "タン(右)"
+msgstr "텅(우)"
 
-#: .\products\models.py:56
-msgid "詳細説明"
-msgstr ""
-
-#: .\products\models.py:57
-msgid "販売中"
-msgstr ""
-
-#: .\products\models.py:59
-msgid "番号"
-msgstr ""
+#: .\products\models.py:58
+msgid "アッパーソール(右)"
+msgstr "어퍼솔(우)"
 
 #: .\products\models.py:61
-msgid "商品番号"
-msgstr ""
+msgid "ミッドソール(右)"
+msgstr "미드솔(우)"
 
-#: .\products\models.py:75 .\reviews\models.py:21
+#: .\products\models.py:64
+msgid "アウトソール(右)"
+msgstr "아웃솔(우)"
+
+#: .\products\models.py:79
+msgid "イメージ"
+msgstr "이미지"
+
+#: .\products\models.py:93
+msgid "商品タイプ名"
+msgstr "상품 타입명"
+
+#: .\products\models.py:94
+msgid "タイプコード"
+msgstr "타입코드"
+
+#: .\products\models.py:97 .\products\models.py:98
+msgid "カテゴリー"
+msgstr "카테고리"
+
+#: .\products\models.py:115 .\templates\documents\invoice.html:58
+#: .\templates\documents\ordersheet.html:77
+#: .\templates\documents\specification.html:47
+#: .\templates\mixins\orders\order-card.html:15
+#: .\templates\mixins\orders\order-detail-card.html:26
+#: .\templates\orders\search-order-detail.html:45
+msgid "商品名"
+msgstr "상품명"
+
+#: .\products\models.py:118 .\templates\products\product-list.html:15
+msgid "商品カテゴリー"
+msgstr "상품 카테고리"
+
+#: .\products\models.py:122
+msgid "価格"
+msgstr "가격"
+
+#: .\products\models.py:123
+msgid "詳細説明"
+msgstr "상세설명"
+
+#: .\products\models.py:124
+msgid "販売中"
+msgstr "판매중"
+
+#: .\products\models.py:128 .\templates\documents\invoice.html:55
+msgid "商品番号"
+msgstr "상품번호"
+
+#: .\products\models.py:142 .\reviews\models.py:21
 msgid "評点"
-msgstr ""
+msgstr "평점"
+
+#: .\reviews\admin.py:11
+msgid "レビュー情報"
+msgstr "리뷰 정보"
 
 #: .\reviews\forms.py:16
 msgid "レビュータイトル"
-msgstr ""
+msgstr "리뷰 제목"
 
 #: .\reviews\forms.py:18
 msgid "レビュー本文"
-msgstr ""
+msgstr "리뷰 본문"
 
 #: .\reviews\models.py:19
 msgid "タイトル"
-msgstr ""
+msgstr "타이틀"
 
 #: .\reviews\models.py:20
 msgid "本文"
-msgstr ""
+msgstr "본문"
 
-#: .\reviews\models.py:22
-msgid "レビュー番号"
-msgstr ""
-
-#: .\reviews\models.py:25 .\reviews\models.py:26
-#: .\templates\products\product-detail.html:37
+#: .\reviews\models.py:24 .\reviews\models.py:25 .\users\admin.py:13
+#: .\users\admin.py:14
 msgid "レビュー"
-msgstr ""
+msgstr "리뷰"
+
+#: .\reviews\views.py:55
+msgid "レビューを投稿しました。"
+msgstr "리뷰를 등록하였습니다."
+
+#: .\templates\admin\base.html:10 .\templates\admin\base.html:33
+msgid "Uniwalk 管理者モード"
+msgstr "Uniwalk 관리자모드"
+
+#: .\templates\admin\base.html:42 .\templates\admin\extra_nav.html:6
+msgid "View site"
+msgstr "사이트 상에서 보기"
+
+#: .\templates\admin\base.html:47
+msgid "Documentation"
+msgstr "문서"
+
+#: .\templates\admin\base.html:52 .\templates\admin\extra_nav.html:7
+msgid "Change password"
+msgstr "비밀번호 변경"
+
+#: .\templates\admin\base.html:55 .\templates\admin\extra_nav.html:9
+msgid "Log out"
+msgstr "로그아웃"
+
+#: .\templates\admin\base.html:92
+msgid "注文状況"
+msgstr "주문 현황"
+
+#: .\templates\admin\base.html:98
+msgid "入金前"
+msgstr "입금전"
+
+#: .\templates\admin\base.html:104
+msgid "決済処理中"
+msgstr "결제처리중"
+
+#: .\templates\admin\base.html:110
+msgid "決済確認済み"
+msgstr "결제확인완료"
+
+#: .\templates\admin\base.html:116
+msgid "対応中"
+msgstr "대응중"
+
+#: .\templates\admin\base.html:125 .\templates\products\product-detail.html:65
+#: .\templates\statics\home.html:55
+msgid "詳しく見る"
+msgstr "자세히 보기"
+
+#: .\templates\admin\base.html:134
+msgid "ショップ状況"
+msgstr "샵 현황"
+
+#: .\templates\admin\base.html:140
+msgid "取扱商品数"
+msgstr "취급상품수"
+
+#: .\templates\admin\base.html:146 .\templates\admin\member-analytics.html:16
+msgid "会員数"
+msgstr "회원수"
+
+#: .\templates\admin\base.html:152
+msgid "登録カスタムデザイン数"
+msgstr "등록 커스텀 디자인 수"
+
+#: .\templates\admin\base.html:166
+msgid "今月状況"
+msgstr "이번 달 현황"
+
+#: .\templates\admin\base.html:170
+msgid "年"
+msgstr "년"
+
+#: .\templates\admin\base.html:170
+msgid "月"
+msgstr "월"
+
+#: .\templates\admin\base.html:172 .\templates\admin\base.html:182
+#: .\templates\admin\base.html:190
+msgid "件"
+msgstr "건"
+
+#: .\templates\admin\base.html:178
+msgid "今日売上実績"
+msgstr "오늘 판매실적"
+
+#: .\templates\admin\base.html:186
+msgid "昨日売上実績"
+msgstr "어제 판매실적"
 
 #: .\templates\admin\change_list.html:45
 #, python-format
 msgid "Add %(name)s"
-msgstr ""
+msgstr "%(name)s 추가"
 
 #: .\templates\admin\change_list.html:54
 msgid "Please correct the error below."
-msgstr ""
+msgstr "에러 부분을 수정해주세요."
 
 #: .\templates\admin\change_list.html:54
 msgid "Please correct the errors below."
-msgstr ""
+msgstr "에러 부분을 수정해주세요."
 
 #: .\templates\admin\change_list.html:71
 msgid "Filter"
-msgstr ""
+msgstr "필터"
 
 #: .\templates\admin\change_list.html:94
 msgid "Run the selected action"
-msgstr ""
+msgstr "선택한 액션을 수행"
 
 #: .\templates\admin\change_list.html:95
 msgid "Go"
-msgstr ""
+msgstr "검색"
 
 #: .\templates\admin\change_list.html:104
 msgid "Click here to select the objects across all pages"
@@ -339,423 +829,930 @@ msgstr ""
 
 #: .\templates\admin\change_list.html:107
 msgid "Clear selection"
-msgstr ""
+msgstr "선택 해제"
 
-#: .\templates\admin\extra_nav.html:12 .\templates\admin\extra_nav.html:46
-msgid "View site"
-msgstr ""
+#: .\templates\admin\design-analytics.html:8
+#: .\templates\galleries\galleries_list.html:22
+msgid "カテゴリー別"
+msgstr "카테고리별"
 
-#: .\templates\admin\extra_nav.html:17
-msgid "Documentation"
-msgstr ""
+#: .\templates\admin\design-analytics.html:11
+#: .\templates\admin\design-analytics.html:26
+#: .\templates\galleries\galleries_list.html:25
+#: .\templates\galleries\galleries_list.html:40
+#: .\templates\products\product-list.html:18
+msgid "すべて"
+msgstr "모두"
 
-#: .\templates\admin\extra_nav.html:21 .\templates\admin\extra_nav.html:47
-msgid "Change password"
-msgstr ""
+#: .\templates\admin\design-analytics.html:23
+#: .\templates\galleries\galleries_list.html:37
+msgid "商品別"
+msgstr "상품별"
 
-#: .\templates\admin\extra_nav.html:24 .\templates\admin\extra_nav.html:49
-msgid "Log out"
-msgstr ""
-
-#: .\templates\admin\extra_nav.html:55 .\templates\partials\nav.html:109
-#: .\templates\statics\home.html:5
-msgid "ホーム"
-msgstr ""
-
-#: .\templates\admin\extra_nav.html:67
-msgid "顧客"
-msgstr ""
-
-#: .\templates\admin\extra_nav.html:79
-msgid "統計"
-msgstr ""
-
-#: .\templates\admin\order_changeform.html:18
-msgid "History"
-msgstr ""
-
-#: .\templates\admin\order_changeform.html:20
-msgid "View on site"
-msgstr ""
-
-#: .\templates\cards\card-list.html:5 .\templates\cards\card-list.html:17
-msgid "クレジットカード一覧"
-msgstr ""
-
-#: .\templates\cards\card-list.html:32 .\templates\designs\design-list.html:33
-#: .\templates\orders\order-list.html:32
-#: .\templates\products\product-list.html:37
+#: .\templates\admin\design-analytics.html:80
+#: .\templates\products\product-list.html:44
 #, python-format
-msgid ""
+msgid "\n"
+"                    %(current_page)s 페이지"
 "\n"
 "                    %(current_page)s ページ"
 msgstr ""
 
-#: .\templates\cards\card-list.html:45
-msgid "登録したカードが存在しません。"
-msgstr ""
+#: .\templates\admin\extra_nav.html:14 .\templates\statics\home.html:5
+msgid "ホーム"
+msgstr "홈"
 
-#: .\templates\cards\card-list.html:49
-#: .\templates\cards\card-registration.html:38
-msgid "カードを登録する"
+#: .\templates\admin\extra_nav.html:25
+msgid "商品一覧"
+msgstr "상품 목록"
+
+#: .\templates\admin\extra_nav.html:29
+msgid "カテゴリー一覧"
+msgstr "카테고리 목록"
+
+#: .\templates\admin\extra_nav.html:33
+msgid "素材一覧"
+msgstr "소재 목록"
+
+#: .\templates\admin\extra_nav.html:37
+msgid "デザイン一覧"
+msgstr "디자인 목록"
+
+#: .\templates\admin\extra_nav.html:41
+msgid "レビュー一覧"
+msgstr "리뷰 목록"
+
+#: .\templates\admin\extra_nav.html:48
+msgid "顧客"
+msgstr "고객"
+
+#: .\templates\admin\extra_nav.html:53
+msgid "会員一覧"
+msgstr "회원 목록"
+
+#: .\templates\admin\extra_nav.html:57
+msgid "ゲスト一覧"
+msgstr "게스트 목록"
+
+#: .\templates\admin\extra_nav.html:69
+msgid "注文一覧"
+msgstr "주문 목록"
+
+#: .\templates\admin\extra_nav.html:73
+msgid "対応コードリスト"
+msgstr "대응코드 목록"
+
+#: .\templates\admin\extra_nav.html:80
+msgid "統計"
+msgstr "통계"
+
+#: .\templates\admin\extra_nav.html:85
+msgid "会員分析"
+msgstr "회원분석"
+
+#: .\templates\admin\extra_nav.html:89
+msgid "販売実績分析"
+msgstr "판매실적분석"
+
+#: .\templates\admin\extra_nav.html:93
+msgid "足サイズ分析"
+msgstr "발사이즈분석"
+
+#: .\templates\admin\extra_nav.html:97
+msgid "人気デザイン分析"
+msgstr "인기디자인 분석"
+
+#: .\templates\admin\member-analytics.html:8
+msgid "全体顧客対比会員割合"
+msgstr "전체고객 대비 회원비율"
+
+#: .\templates\admin\member-analytics.html:12
+msgid "全体ユーザ数"
+msgstr "전체 유저수"
+
+#: .\templates\admin\member-analytics.html:20
+msgid "ゲスト数"
+msgstr "게스트수"
+
+#: .\templates\admin\member-analytics.html:33
+msgid "会員性別割合"
+msgstr "회원 성별 비율"
+
+#: .\templates\admin\member-analytics.html:37
+msgid "全体会員数"
+msgstr "전체 회원수"
+
+#: .\templates\admin\member-analytics.html:41
+#: .\templates\users\signup-check.html:36 .\users\forms.py:56
+#: .\users\models.py:36
+msgid "男性"
+msgstr "남성"
+
+#: .\templates\admin\member-analytics.html:45
+#: .\templates\users\signup-check.html:38 .\users\forms.py:56
+#: .\users\models.py:37
+msgid "女性"
+msgstr "여성"
+
+#: .\templates\admin\member-analytics.html:49
+#: .\templates\users\signup-check.html:40 .\users\forms.py:56
+#: .\users\models.py:38
+msgid "その他"
+msgstr "그 외"
+
+#: .\templates\admin\member-analytics.html:62
+msgid "会員年齢分布"
+msgstr "회원 연령 분포"
+
+#: .\templates\admin\order_changeform.html:19
+msgid "History"
+msgstr "이력"
+
+#: .\templates\admin\order_changeform.html:21
+msgid "View on site"
+msgstr "사이트에서 보기"
+
+#: .\templates\admin\sales-analytics.html:8
+msgid "年間売上実績"
+msgstr "연간 판매 실적"
+
+#: .\templates\admin\sales-analytics.html:12
+msgid "年度"
+msgstr "연도"
+
+#: .\templates\admin\sales-analytics.html:26
+msgid "商品別販売実績(商品別販売個数)"
+msgstr "상품별 판매실적(상품별 판매개수)"
+
+#: .\templates\cards\card-list.html:5 .\templates\cards\card-list.html:23
+msgid "クレジットカード一覧"
+msgstr "신용카드 목록"
+
+#: .\templates\cards\card-list.html:38 .\templates\designs\design-list.html:38
+#: .\templates\designs\select-products.html:38
+#: .\templates\orders\order-list.html:38
+#, python-format
+msgid ""
+"\n"
+"                        %(current_page)s ページ"
 msgstr ""
+"\n"
+"                        %(current_page)s 페이지"
+
+#: .\templates\cards\card-list.html:52
+msgid "登録したカードが存在しません。"
+msgstr "등록한 카드가 존재하지 않습니다."
+
+#: .\templates\cards\card-list.html:56
+#: .\templates\cards\card-registration.html:44
+msgid "カードを登録する"
+msgstr "카드 등록"
 
 #: .\templates\cards\card-registration.html:5
-#: .\templates\cards\card-registration.html:17
+#: .\templates\cards\card-registration.html:23
 msgid "クレジットカード登録"
-msgstr ""
+msgstr "신용카드 등록"
+
+#: .\templates\carts\cart.html:19
+msgid "ショッピングカート"
+msgstr "쇼핑카트"
+
+#: .\templates\carts\cart.html:40 .\templates\carts\cart.html:43
+msgid "左足"
+msgstr "왼발"
+
+#: .\templates\carts\cart.html:41 .\templates\carts\cart.html:44
+msgid "(足長)"
+msgstr "(발 길이)"
+
+#: .\templates\carts\cart.html:42 .\templates\carts\cart.html:45
+msgid "(足幅)"
+msgstr "(발 넓이)"
+
+#: .\templates\carts\cart.html:75
+msgid "カートに商品が入っていません。"
+msgstr "카트에 상품이 존재하지 않습니다."
+
+#: .\templates\carts\cart.html:83
+#: .\templates\mixins\orders\order-summary-card.html:4
+msgid "ご注文金額"
+msgstr "주문금액"
+
+#: .\templates\carts\cart.html:87
+msgid "合計（税込）"
+msgstr "합계(세금포함)"
+
+#: .\templates\carts\cart.html:91
+msgid "購入手続きへ"
+msgstr "구입 절차로"
 
 #: .\templates\designs\design-customize.html:5
 msgid "デザインカスタマイズ"
-msgstr ""
+msgstr "디자인 커스터마이즈"
+
+#: .\templates\designs\design-customize.html:22
+msgid "画像を抽出しています。"
+msgstr "이미지를 추출하고 있습니다."
+
+#: .\templates\designs\design-customize.html:29
+msgid "デザイン確定"
+msgstr "디자인 확정"
+
+#: .\templates\designs\design-customize.html:282
+msgid "色(左)"
+msgstr "색(좌)"
+
+#: .\templates\designs\design-customize.html:283
+#: .\templates\designs\design-customize.html:291
+#: .\templates\designs\design-customize.html:299
+#: .\templates\designs\design-customize.html:307
+#: .\templates\documents\specification.html:183
+msgid "シューレス"
+msgstr "슈레이스"
+
+#: .\templates\designs\design-customize.html:284
+#: .\templates\designs\design-customize.html:292
+#: .\templates\designs\design-customize.html:300
+#: .\templates\designs\design-customize.html:308
+msgid "アッパーソール"
+msgstr "어퍼솔"
+
+#: .\templates\designs\design-customize.html:285
+#: .\templates\designs\design-customize.html:293
+#: .\templates\designs\design-customize.html:301
+#: .\templates\designs\design-customize.html:309
+#: .\templates\documents\specification.html:200
+msgid "タン"
+msgstr "텅"
+
+#: .\templates\designs\design-customize.html:286
+#: .\templates\designs\design-customize.html:294
+#: .\templates\designs\design-customize.html:302
+#: .\templates\designs\design-customize.html:310
+#: .\templates\documents\specification.html:131
+msgid "ミッドソール"
+msgstr "미드솔"
+
+#: .\templates\designs\design-customize.html:287
+#: .\templates\designs\design-customize.html:295
+#: .\templates\designs\design-customize.html:303
+#: .\templates\designs\design-customize.html:311
+#: .\templates\documents\specification.html:108
+msgid "アウトソール"
+msgstr "아웃솔"
+
+#: .\templates\designs\design-customize.html:290
+msgid "色(右)"
+msgstr "색(우)"
+
+#: .\templates\designs\design-customize.html:298
+msgid "素材(左)"
+msgstr "소재(좌)"
+
+#: .\templates\designs\design-customize.html:306
+msgid "素材(右)"
+msgstr "소재(우)"
 
 #: .\templates\designs\design-list.html:5
-#: .\templates\designs\design-list.html:17
-#: .\templates\partials\mypage-menu.html:17
-msgid "マイデザイン"
-msgstr ""
-
 #: .\templates\designs\design-list.html:23
-#: .\templates\designs\design-list.html:51
-msgid "デザインする"
-msgstr ""
+#: .\templates\partials\mypage-menu.html:22
+msgid "マイデザイン"
+msgstr "마이 디자인"
 
-#: .\templates\designs\design-list.html:47
+#: .\templates\designs\design-list.html:52
 msgid "まだ作成したデザインがありません。"
-msgstr ""
+msgstr "아직 작성한 디자인이 존재하지 않습니다."
 
-#: .\templates\emails\password-reset-email.html:3
+#: .\templates\designs\design-list.html:56
+msgid "デザインする"
+msgstr "디자인"
+
+#: .\templates\designs\select-products.html:5
+#: .\templates\designs\select-products.html:23
+msgid "商品選択"
+msgstr "상품 선택"
+
+#: .\templates\designs\select-products.html:51
+#: .\templates\products\product-list.html:57
+msgid "商品が存在しません。"
+msgstr "상품이 존재하지 않습니다."
+
+#: .\templates\documents\bill.html:41 .\templates\documents\invoice.html:36
+#: .\templates\documents\receipt.html:50 .\templates\documents\receipt.html:107
+#: .\templates\orders\bill.html:35 .\templates\orders\receipt.html:44
+#: .\templates\orders\receipt.html:101 .\templates\orders\receipt.html:146
+msgid "様"
+msgstr "님"
+
+#: .\templates\documents\bill.html:48 .\templates\documents\invoice.html:30
+#: .\templates\documents\receipt.html:33
+#: .\templates\documents\specification.html:43 .\templates\orders\bill.html:42
+#: .\templates\orders\receipt.html:27
+msgid "発行日"
+msgstr "발행일"
+
+#: .\templates\documents\bill.html:57 .\templates\documents\ordersheet.html:57
+#: .\templates\orders\bill.html:51
+msgid "愛知県名古屋市中村区名駅4丁目27-1"
+msgstr "아이치현 나고야시 나카무라구 메이에키 4쵸메 27-1"
+
+#: .\templates\documents\bill.html:60 .\templates\documents\ordersheet.html:60
+#: .\templates\orders\bill.html:54
+msgid "総合校舎スパイラルタワーズ Uniwalk"
+msgstr "종합교사 스파이럴타워즈 Uniwalk"
+
+#: .\templates\documents\bill.html:69 .\templates\orders\bill.html:63
+msgid "振込銀行"
+msgstr "계좌이체"
+
+#: .\templates\documents\bill.html:73 .\templates\orders\bill.html:67
+msgid "OO銀行"
+msgstr "OO은행"
+
+#: .\templates\documents\bill.html:80 .\templates\orders\bill.html:74
+msgid "下記の通りご請求致します。"
+msgstr "아래와 같이 청구합니다."
+
+#: .\templates\documents\bill.html:84 .\templates\documents\receipt.html:155
+#: .\templates\mixins\orders\order-detail-card.html:11
+#: .\templates\orders\bill.html:78 .\templates\orders\receipt.html:149
+#: .\templates\orders\search-order-detail.html:29
+msgid "合計金額"
+msgstr "합계금액"
+
+#: .\templates\documents\bill.html:85 .\templates\orders\bill.html:78
+msgid "(税込)"
+msgstr "(세금포함)"
+
+#: .\templates\documents\bill.html:92 .\templates\documents\receipt.html:60
+#: .\templates\orders\bill.html:85 .\templates\orders\receipt.html:54
+msgid "注文商品"
+msgstr "주문상품"
+
+#: .\templates\documents\bill.html:98
+msgid "単価(円)"
+msgstr "단가(엔)"
+
+#: .\templates\documents\bill.html:101
+msgid "金額(円)"
+msgstr "금액(엔)"
+
+#: .\templates\documents\bill.html:104 .\templates\orders\bill.html:97
+msgid "備考"
+msgstr "비고"
+
+#: .\templates\documents\bill.html:136
+msgid "合計(円)"
+msgstr "합계(엔)"
+
+#: .\templates\documents\bill.html:151
+#: .\templates\documents\ordersheet.html:116 .\templates\orders\bill.html:144
+msgid "特記事項"
+msgstr "특기사항"
+
+#: .\templates\documents\invoice.html:40 .\templates\documents\receipt.html:37
+#: .\templates\documents\specification.html:59
+#: .\templates\orders\receipt.html:31
+msgid "注文日"
+msgstr "주문일"
+
+#: .\templates\documents\invoice.html:64
+msgid "単価(税込)"
+msgstr "단가(세금포함)"
+
+#: .\templates\documents\invoice.html:67
+msgid "金額(税込)"
+msgstr "금액(세금포함)"
+
+#: .\templates\documents\invoice.html:113
+#: .\templates\mixins\orders\order-summary-card.html:8
+msgid "合計(税込)"
+msgstr "합계(세금포함)"
+
+#: .\templates\documents\invoice.html:121
+#: .\templates\mixins\orders\order-detail-card.html:16
+#: .\templates\orders\order-check.html:41
+#: .\templates\orders\search-order-detail.html:35
+msgid "お支払い方法"
+msgstr "지불방법"
+
+#: .\templates\documents\ordersheet.html:29
+msgid "OO制作工場"
+msgstr "OO제작공장"
+
+#: .\templates\documents\ordersheet.html:29
+msgid "御中"
+msgstr "드림"
+
+#: .\templates\documents\ordersheet.html:41
+#: .\templates\documents\specification.html:63
+msgid "納期"
+msgstr "납기"
+
+#: .\templates\documents\ordersheet.html:48
+msgid "発注日"
+msgstr "발주일"
+
+#: .\templates\documents\ordersheet.html:67
+msgid "下記の通り、発注致します。"
+msgstr "아래와 같이 발주 요청합니다."
+
+#: .\templates\documents\ordersheet.html:74
+msgid "項番"
+msgstr "번호"
+
+#: .\templates\documents\ordersheet.html:83
+msgid "カスタマイズコード"
+msgstr "커스터마이즈 코드"
+
+#: .\templates\documents\receipt.html:41 .\templates\orders\receipt.html:35
+msgid "ご請求額"
+msgstr "청구액"
+
+#: .\templates\documents\receipt.html:90 .\templates\orders\receipt.html:84
+msgid "お届け先住所"
+msgstr "배송지 주소"
+
+#: .\templates\documents\receipt.html:101
+#: .\templates\documents\receipt.html:138 .\templates\orders\receipt.html:95
+#: .\templates\orders\receipt.html:132
+msgid "住所"
+msgstr "주소"
+
+#: .\templates\documents\receipt.html:116 .\templates\orders\receipt.html:110
+msgid "お支払い情報"
+msgstr "지불정보"
+
+#: .\templates\documents\receipt.html:122 .\templates\orders\receipt.html:116
+msgid "支払い方法"
+msgstr "지불방법"
+
+#: .\templates\documents\receipt.html:133 .\templates\orders\receipt.html:127
+msgid "商品小計"
+msgstr "소계"
+
+#: .\templates\documents\specification.html:29
+#: .\templates\documents\specification.html:39
+msgid "製造仕様書"
+msgstr "제조사양서"
+
+#: .\templates\documents\specification.html:99
+msgid "部品"
+msgstr "부품"
+
+#: .\templates\documents\specification.html:100
+msgid "色(左・右)"
+msgstr "색(좌, 우)"
+
+#: .\templates\documents\specification.html:101
+msgid "素材(左・右)"
+msgstr "소재(좌, 우)"
+
+#: .\templates\documents\specification.html:102
+msgid "サイズ"
+msgstr "사이즈"
+
+#: .\templates\documents\specification.html:123
+#: .\templates\feet\feet-list.html:28
+msgid "左"
+msgstr "좌"
+
+#: .\templates\documents\specification.html:126
+#: .\templates\feet\feet-list.html:39
+msgid "右"
+msgstr "우"
+
+#: .\templates\documents\specification.html:146
+#: .\templates\documents\specification.html:152
+#: .\templates\feet\feet-list.html:34 .\templates\feet\feet-list.html:45
+msgid "足幅"
+msgstr "발 넓이"
+
+#: .\templates\documents\specification.html:149
+#: .\templates\documents\specification.html:155
+#: .\templates\feet\feet-list.html:30 .\templates\feet\feet-list.html:41
+msgid "足長"
+msgstr "발 길이"
+
+#: .\templates\documents\specification.html:160
+msgid "アッパー"
+msgstr "어퍼"
+
+#: .\templates\emails\password-reset-email.html:4
 msgid ""
 "\n"
 "顧客様からの要請により、パスワード再設定関連のメールをご送信いたしました。\n"
 msgstr ""
+"\n"
+"고객님의 요청으로, 비밀번호 재설정 관련 메일을 송신하였습니다.\n"
 
-#: .\templates\emails\password-reset-email.html:7
+#: .\templates\emails\password-reset-email.html:8
 msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。"
-msgstr ""
+msgstr "아래의 링크에 접속하여 비밀번호를 재설정하여 주시기 바랍니다."
 
-#: .\templates\emails\password-reset-email.html:11
+#: .\templates\emails\password-reset-email.html:12
 msgid "顧客様のIDは次のどおりです："
-msgstr ""
+msgstr "고객님의 ID:"
 
-#: .\templates\emails\password-reset-email.html:13
+#: .\templates\emails\password-reset-email.html:14
 msgid "いつものご利用ありがとうございます！"
-msgstr ""
+msgstr "항상 이용해주셔서 감사의 말씀 드립니다."
 
 #: .\templates\emails\password-reset-subject.txt:3
 #, python-format
 msgid "Password reset on %(site_name)s"
 msgstr ""
 
-#: .\templates\feet\feet-list.html:5 .\templates\feet\feet-list.html:17
-#: .\templates\partials\mypage-menu.html:20
+#: .\templates\feet\feet-cropper-left.html:5
+msgid "左足イメージクロップ"
+msgstr "왼발 이미지 크롭"
+
+#: .\templates\feet\feet-cropper-right.html:5
+msgid "右足イメージクロップ"
+msgstr "오른발 이미지 크롭"
+
+#: .\templates\feet\feet-list.html:5 .\templates\feet\feet-list.html:23
+#: .\templates\partials\mypage-menu.html:27
 msgid "マイ足サイズ"
-msgstr ""
+msgstr "내 발사이즈"
 
-#: .\templates\feet\feet-list.html:22
-msgid "左"
-msgstr ""
-
-#: .\templates\feet\feet-list.html:24 .\templates\feet\feet-list.html:35
-msgid "足長"
-msgstr ""
-
-#: .\templates\feet\feet-list.html:28 .\templates\feet\feet-list.html:39
-msgid "足幅"
-msgstr ""
-
-#: .\templates\feet\feet-list.html:33
-msgid "右"
-msgstr ""
-
-#: .\templates\feet\feet-list.html:47
+#: .\templates\feet\feet-list.html:53
 msgid "まだ足サイズの測定データがありません。"
-msgstr ""
+msgstr "아직 발사이즈 측정 데이터가 존재하지 않습니다."
 
-#: .\templates\feet\feet-list.html:51
+#: .\templates\feet\feet-list.html:57
 msgid "測定する"
-msgstr ""
+msgstr "측정"
 
 #: .\templates\feet\feet-measure.html:5
 msgid "足サイズ測定"
-msgstr ""
+msgstr "발사이즈 측정"
+
+#: .\templates\galleries\galleries_list.html:5
+msgid "デザインギャラリー"
+msgstr "디자인 갤러리"
+
+#: .\templates\galleries\galleries_list.html:16
+#: .\templates\partials\nav.html:118
+msgid "ギャラリー"
+msgstr "갤러리"
+
+#: .\templates\mixins\cards\card-card.html:16
+msgid "登録解除"
+msgstr "등록해제"
 
 #: .\templates\mixins\cards\card-card.html:25
 msgid "有効期限(月/年)"
-msgstr ""
+msgstr "유효기간(월/년)"
 
-#: .\templates\mixins\designs\design-card.html:22
-#: .\templates\users\password-change.html:18
-#: .\templates\users\update-profile.html:37
-msgid "変更する"
-msgstr ""
+#: .\templates\mixins\designs\design-card.html:5
+msgid "作成日"
+msgstr "작성일"
 
 #: .\templates\mixins\designs\design-card.html:23
+#: .\templates\users\password-change.html:25
+#: .\templates\users\update-profile.html:43
+msgid "変更する"
+msgstr "변경"
+
+#: .\templates\mixins\designs\design-card.html:28
 msgid "削除する"
-msgstr ""
+msgstr "삭제"
+
+#: .\templates\mixins\designs\related_design_card.html:66
+msgid "デザインパレットが存在しません。"
+msgstr "디자인 팔레트가 존재하지 않습니다."
+
+#: .\templates\mixins\orders\order-card.html:20
+msgid "支払金額"
+msgstr "지불금액"
+
+#: .\templates\mixins\orders\order-card.html:21
+#: .\templates\mixins\orders\order-detail-card.html:17
+#: .\templates\orders\search-order-detail.html:36
+msgid "処理状況"
+msgstr "처리현황"
 
 #: .\templates\mixins\orders\order-card.html:27
 #: .\templates\orders\order-detail.html:5
-#: .\templates\orders\order-detail.html:17
+#: .\templates\orders\order-detail.html:23
 #: .\templates\orders\search-order-detail.html:5
-#: .\templates\orders\search-order-detail.html:11
+#: .\templates\orders\search-order-detail.html:16
 msgid "注文詳細"
-msgstr ""
+msgstr "주문상세"
 
 #: .\templates\mixins\orders\order-card.html:29
 #: .\templates\mixins\orders\order-detail-card.html:36
-#: .\templates\orders\search-order-detail.html:49
+#: .\templates\orders\search-order-detail.html:55
 msgid "注文取消"
-msgstr ""
+msgstr "주문취소"
+
+#: .\templates\mixins\orders\order-detail-card.html:12
+#: .\templates\orders\search-order-detail.html:30
+msgid "注文者"
+msgstr "주문자"
+
+#: .\templates\mixins\orders\order-detail-card.html:13
+#: .\templates\orders\search-order-detail.html:31
+msgid "お届け先"
+msgstr "배송지"
 
 #: .\templates\mixins\orders\order-detail-card.html:40
-#: .\templates\orders\search-order-detail.html:53
+#: .\templates\orders\search-order-detail.html:59
 msgid "請求書発行"
-msgstr ""
+msgstr "청구서 발행"
 
 #: .\templates\mixins\orders\order-detail-card.html:44
-#: .\templates\orders\search-order-detail.html:57
+#: .\templates\orders\search-order-detail.html:63
 msgid "領収書発行"
-msgstr ""
+msgstr "영수증 발행"
 
-#: .\templates\orders\bill.html:157 .\templates\orders\receipt.html:156
+#: .\templates\mixins\orders\order-summary-card.html:29
+msgid "小計"
+msgstr "소계"
+
+#: .\templates\orders\bill.html:94
+msgid "金額"
+msgstr "금액"
+
+#: .\templates\orders\bill.html:129
+msgid "合計"
+msgstr "합계"
+
+#: .\templates\orders\bill.html:157 .\templates\orders\receipt.html:155
 msgid "印刷する"
-msgstr ""
+msgstr "인쇄"
 
 #: .\templates\orders\checkout-done.html:5
-#: .\templates\orders\checkout-done.html:12
+#: .\templates\orders\checkout-done.html:16
 msgid "注文完了"
-msgstr ""
+msgstr "주문완료"
 
-#: .\templates\orders\checkout-done.html:13
+#: .\templates\orders\checkout-done.html:17
 msgid "ご注文が完了いたしました。"
-msgstr ""
-
-#: .\templates\orders\checkout-done.html:15
-msgid "注文番号は以下のどおりです。"
-msgstr ""
-
-#: .\templates\orders\checkout-done.html:19
-msgid "それではまたのご注文をお待ちしております。"
-msgstr ""
-
-#: .\templates\orders\checkout-done.html:20
-#: .\templates\users\signup-success.html:17
-msgid "今後ともご愛顧賜りますようよろしくお願い申し上げます。"
-msgstr ""
+msgstr "주문이 완료되었습니다."
 
 #: .\templates\orders\checkout-done.html:23
-#: .\templates\users\withdrawal-done.html:16
-msgid "ホームへ"
-msgstr ""
+msgid "またのご注文をお待ちしております。"
+msgstr "구매해주셔서 감사드립니다."
 
-#: .\templates\orders\checkout.html:5 .\templates\orders\checkout.html:13
-#: .\templates\orders\order-check.html:5 .\templates\orders\order-check.html:13
+#: .\templates\orders\checkout-done.html:24
+#: .\templates\users\signup-success.html:20
+msgid "今後ともご愛顧賜りますようよろしくお願い申し上げます。"
+msgstr "앞으로도 많은 이용 부탁드리겠습니다."
+
+#: .\templates\orders\checkout-done.html:27
+#: .\templates\users\withdrawal-done.html:20
+msgid "ホームへ"
+msgstr "홈으로"
+
+#: .\templates\orders\checkout.html:5 .\templates\orders\checkout.html:14
+#: .\templates\orders\order-check.html:5 .\templates\orders\order-check.html:14
 #: .\templates\orders\select-payment.html:5
 #: .\templates\orders\select-payment.html:13
 msgid "ご購入の手続き"
-msgstr ""
+msgstr "구입 절차"
 
-#: .\templates\orders\checkout.html:18 .\templates\orders\order-check.html:18
+#: .\templates\orders\checkout.html:20 .\templates\orders\order-check.html:19
 #: .\templates\orders\select-payment.html:19
 msgid "1. お届け先情報"
-msgstr ""
+msgstr "1. 배송지 정보"
 
-#: .\templates\orders\checkout.html:22
+#: .\templates\orders\checkout.html:24
 msgid "会員情報からデータを取得する"
-msgstr ""
+msgstr "회원정보로부터 데이터를 취득"
 
-#: .\templates\orders\checkout.html:74
+#: .\templates\orders\checkout.html:84
 msgid "支払いへ"
-msgstr ""
+msgstr "지불 정보로"
 
-#: .\templates\orders\checkout.html:77 .\templates\orders\order-check.html:35
-#: .\templates\orders\select-payment.html:36
+#: .\templates\orders\checkout.html:88 .\templates\orders\order-check.html:39
+#: .\templates\orders\select-payment.html:41
 msgid "2. お支払い方法・ご請求先情報"
-msgstr ""
+msgstr "2. 지불방법・청구지 정보"
 
-#: .\templates\orders\checkout.html:79 .\templates\orders\order-check.html:67
-#: .\templates\orders\select-payment.html:94
+#: .\templates\orders\checkout.html:90 .\templates\orders\order-check.html:74
+#: .\templates\orders\select-payment.html:124
 msgid "3. ご注文の確定"
-msgstr ""
+msgstr "3. 주문 확정"
 
 #: .\templates\orders\member-or-guest.html:5
 msgid "会員・メンバログイン"
-msgstr ""
+msgstr "회원・멤버 로그인"
 
 #: .\templates\orders\member-or-guest.html:16
+msgid "ご購入の手続き方法を選択してください"
+msgstr "구매 방법을 선택해주세요"
+
+#: .\templates\orders\member-or-guest.html:21
 msgid "ログインして購入する"
-msgstr ""
+msgstr "로그인하여 구매"
 
-#: .\templates\orders\member-or-guest.html:19 .\templates\users\login.html:5
-#: .\templates\users\login.html:11 .\templates\users\login.html:14
-#: .\templates\users\password-reset.html:20
-#: .\templates\users\signup-success.html:20 .\templates\users\signup.html:22
-#: .\templates\users\withdrawal.html:20
+#: .\templates\orders\member-or-guest.html:24 .\templates\users\login.html:5
+#: .\templates\users\login.html:16 .\templates\users\login.html:19
+#: .\templates\users\password-reset.html:25
+#: .\templates\users\signup-success.html:23 .\templates\users\signup.html:25
 msgid "ログイン"
-msgstr ""
-
-#: .\templates\orders\member-or-guest.html:23 .\templates\users\login.html:18
-msgid "パスワードを忘れましたか？"
-msgstr ""
-
-#: .\templates\orders\member-or-guest.html:24 .\templates\users\login.html:19
-msgid "パスワード再発行"
-msgstr ""
+msgstr "로그인"
 
 #: .\templates\orders\member-or-guest.html:28 .\templates\users\login.html:23
-msgid "アカウントを持っていないですか？"
-msgstr ""
+msgid "パスワードを忘れた方は"
+msgstr "비밀번호를 잊으셨나요?"
 
-#: .\templates\orders\member-or-guest.html:30 .\templates\users\login.html:25
-#: .\templates\users\signup-check.html:43 .\templates\users\signup.html:5
-#: .\templates\users\signup.html:13 .\templates\users\signup.html:16
+#: .\templates\orders\member-or-guest.html:29 .\templates\users\login.html:24
+msgid "パスワード再発行"
+msgstr "비밀번호 재설정"
+
+#: .\templates\orders\member-or-guest.html:33 .\templates\users\login.html:28
+msgid "アカウントをお持ちでない方は"
+msgstr "계정을 갖고 계시지 않나요?"
+
+#: .\templates\orders\member-or-guest.html:35 .\templates\users\login.html:30
+#: .\templates\users\signup-check.html:57 .\templates\users\signup.html:5
+#: .\templates\users\signup.html:16 .\templates\users\signup.html:19
 msgid "会員登録"
-msgstr ""
+msgstr "회원등록"
 
-#: .\templates\orders\member-or-guest.html:37
+#: .\templates\orders\member-or-guest.html:42
 msgid "ゲストとして購入する"
-msgstr ""
+msgstr "게스트로 구매"
 
-#: .\templates\orders\member-or-guest.html:41
+#: .\templates\orders\member-or-guest.html:46
 msgid "購入手続へ(ゲスト)"
-msgstr ""
+msgstr "구매절차로(게스트)"
 
-#: .\templates\orders\order-check.html:20
-#: .\templates\orders\select-payment.html:21
+#: .\templates\orders\order-check.html:22
+#: .\templates\orders\select-payment.html:22
 msgid "配送先住所"
-msgstr ""
+msgstr "배송지 주소"
 
-#: .\templates\orders\order-check.html:37
-msgid "お支払い方法"
-msgstr ""
-
-#: .\templates\orders\order-check.html:43
-#: .\templates\orders\select-payment.html:45
+#: .\templates\orders\order-check.html:47
+#: .\templates\orders\select-payment.html:60
 msgid "請求先情報"
-msgstr ""
+msgstr "청구지 주소"
 
-#: .\templates\orders\order-check.html:91
-#: .\templates\orders\order-check.html:126
-#: .\templates\orders\order-check.html:137
+#: .\templates\orders\order-check.html:83
+msgid "登録外のカードで支払う"
+msgstr "등록 외의 카드로 지불"
+
+#: .\templates\orders\order-check.html:87
+msgid "登録済みのカード"
+msgstr "등록완료된 카드"
+
+#: .\templates\orders\order-check.html:100
+#: .\templates\orders\order-check.html:136
+#: .\templates\orders\order-check.html:147
 msgid "注文を確定する"
-msgstr ""
+msgstr "주문을 확정"
 
-#: .\templates\orders\order-list.html:5 .\templates\orders\order-list.html:17
-#: .\templates\partials\mypage-menu.html:11
+#: .\templates\orders\order-check.html:131
+msgid "カード情報をアカウントに登録する"
+msgstr "카드 정보를 계정에 등록"
+
+#: .\templates\orders\order-check.html:145
+msgid "振込可能期間は注文時点から1週間以内になっております。"
+msgstr "이체 가능 기한은 주문시점으로부터 일주일 이내입니다."
+
+#: .\templates\orders\order-list.html:5 .\templates\orders\order-list.html:23
+#: .\templates\partials\mypage-menu.html:12
 msgid "注文履歴"
-msgstr ""
+msgstr "주문이력"
 
-#: .\templates\orders\order-list.html:45
+#: .\templates\orders\order-list.html:52
 msgid "注文履歴が存在しません。"
-msgstr ""
+msgstr "주문이력이 존재하지 않습니다."
+
+#: .\templates\orders\order-list.html:56
+msgid "新しいスニーカーはいかがですか？"
+msgstr "새 운동화는 어떠세요?"
+
+#: .\templates\orders\order-list.html:57
+msgid "商品を見る"
+msgstr "상품 보기"
 
 #: .\templates\orders\order-search.html:5
-#: .\templates\orders\order-search.html:11
+#: .\templates\orders\order-search.html:16
 msgid "注文検索"
-msgstr ""
+msgstr "주문검색"
 
-#: .\templates\orders\order-search.html:14
+#: .\templates\orders\order-search.html:18
+msgid "注文の詳細情報をご覧頂けます。"
+msgstr "주문 상세정보를 확인할 수 있습니다."
+
+#: .\templates\orders\order-search.html:19
 msgid "検索する"
-msgstr ""
+msgstr "검색"
 
-#: .\templates\orders\select-payment.html:39
+#: .\templates\orders\select-payment.html:44
 msgid "お支払い方法の選択"
-msgstr ""
+msgstr "지불방법 선택"
 
-#: .\templates\orders\select-payment.html:47
-msgid "請求書住所が配送先と同じ"
-msgstr ""
+#: .\templates\orders\select-payment.html:62
+msgid "請求先住所が配送先と同じ"
+msgstr "청구지 주소가 배송지와 동일"
 
-#: .\templates\orders\select-payment.html:51
+#: .\templates\orders\select-payment.html:66
 msgid "振り込み案内"
-msgstr ""
+msgstr "이체 안내"
 
-#: .\templates\orders\select-payment.html:52
-msgid "kouzabanngo nado..."
-msgstr ""
+#: .\templates\orders\select-payment.html:69
+msgid "振込先：OO銀行"
+msgstr "이체은행명：OO은행"
 
-#: .\templates\orders\select-payment.html:93
+#: .\templates\orders\select-payment.html:72
+msgid "支店名：OOO支店(支店番号111)"
+msgstr "지점명：OOO지점(지점번호111)"
+
+#: .\templates\orders\select-payment.html:75
+msgid "取引種類：普通"
+msgstr "거래종류：보통"
+
+#: .\templates\orders\select-payment.html:78
+msgid "口座番号：XXX-XXXX"
+msgstr "계좌번호：XXX-XXXX"
+
+#: .\templates\orders\select-payment.html:81
+msgid "口座名義：UNIWALK"
+msgstr "계좌명：UNIWALK"
+
+#: .\templates\orders\select-payment.html:123
 msgid "ご注文内容の確認へ"
-msgstr ""
+msgstr "주문 내용 확인으로"
 
-#: .\templates\partials\mypage-menu.html:4 .\templates\partials\nav.html:64
-msgid "マイページ"
-msgstr ""
-
-#: .\templates\partials\mypage-menu.html:8
+#: .\templates\partials\mypage-menu.html:7
 #: .\templates\users\update-profile.html:5
+#: .\templates\users\update-profile.html:23
 msgid "会員情報変更"
-msgstr ""
+msgstr "회원정보변경"
 
-#: .\templates\partials\mypage-menu.html:23
-#: .\templates\users\withdrawal-check.html:17
+#: .\templates\partials\mypage-menu.html:32
+#: .\templates\users\withdrawal-check.html:24
 msgid "会員脱退"
-msgstr ""
+msgstr "회원탈퇴"
 
-#: .\templates\partials\nav.html:66
+#: .\templates\partials\nav.html:72
+msgid "マイページ"
+msgstr "마이페이지"
+
+#: .\templates\partials\nav.html:74
 msgid "ログアウト"
-msgstr ""
-
-#: .\templates\partials\nav.html:69
-msgid "管理者モード"
-msgstr ""
+msgstr "로그아웃"
 
 #: .\templates\partials\nav.html:77
-msgid "会員登録・ログイン"
-msgstr ""
+msgid "管理者モード"
+msgstr "관리자모드"
 
-#: .\templates\partials\nav.html:113
+#: .\templates\partials\nav.html:82
+msgid "会員登録・ログイン"
+msgstr "회원등록・로그인"
+
+#: .\templates\partials\nav.html:114
 msgid "紹介"
-msgstr ""
+msgstr "회사 소개"
 
 #: .\templates\products\product-detail.html:5
 #, python-format
 msgid "%(product_name)s"
 msgstr ""
 
-#: .\templates\products\product-detail.html:23
+#: .\templates\products\product-detail.html:30
 msgid "税込"
-msgstr ""
+msgstr "세금포함"
 
-#: .\templates\products\product-detail.html:28
+#: .\templates\products\product-detail.html:33
 msgid "カスタマイズして購入"
-msgstr ""
+msgstr "커스터마이즈하여 구매"
 
-#: .\templates\products\product-detail.html:46
-#, python-format
-msgid "(%(review_count)s件のレビュー)"
-msgstr ""
+#: .\templates\products\product-detail.html:41
+msgid "全てのレビュー"
+msgstr "모든 리뷰"
 
-#: .\templates\products\product-detail.html:49
+#: .\templates\products\product-detail.html:45
 msgid "レビューを書く"
-msgstr ""
+msgstr "리뷰 등록"
 
-#: .\templates\products\product-detail.html:69
-msgid "詳しく見る"
-msgstr ""
+#: .\templates\products\product-detail.html:71
+msgid "全てのレビューを見る"
+msgstr "모든 리뷰를 보기"
 
 #: .\templates\products\product-detail.html:76
-msgid "全てのレビューを見る"
-msgstr ""
+#: .\templates\reviews\review-list.html:83
+msgid "レビューがまだ存在しません。"
+msgstr "리뷰가 아직 존재하지 않습니다."
 
-#: .\templates\products\product-list.html:5
+#: .\templates\products\product-list.html:5 .\templates\statics\home.html:53
 msgid "商品リスト"
-msgstr ""
-
-#: .\templates\products\product-list.html:16
-msgid "すべて"
-msgstr ""
+msgstr "상품 목록"
 
 #: .\templates\reviews\review-list.html:5
 msgid "レビューリスト"
-msgstr ""
+msgstr "리뷰 목록"
 
 #: .\templates\reviews\review-list.html:36
 #: .\templates\reviews\review-post.html:36
 #, python-format
 msgid "全 %(review_count)s 件"
-msgstr ""
+msgstr "총 %(review_count)s 건"
 
 #: .\templates\reviews\review-list.html:69
 #, python-format
@@ -763,376 +1760,421 @@ msgid ""
 "\n"
 "                            %(current_page)s ページ"
 msgstr ""
+"\n"
+"                            %(current_page)s 페이지"
 
 #: .\templates\reviews\review-post.html:5
 #: .\templates\reviews\review-post.html:46
 msgid "レビュー投稿"
-msgstr ""
+msgstr "리뷰 등록"
+
+#: .\templates\reviews\review-post.html:53
+msgid "投稿する"
+msgstr "등록"
 
 #: .\templates\statics\about.html:5
 msgid "アバウト"
-msgstr ""
+msgstr "회사 소개"
 
-#: .\templates\statics\about.html:11
+#: .\templates\statics\about.html:16
 msgid "Uniwalkは"
-msgstr ""
+msgstr "Uniwalk는"
 
-#: .\templates\statics\about.html:26
+#: .\templates\statics\about.html:31
 msgid ""
 "いつも理想のシューズを探しているあなたのために「Uniwalk」が誕生しました。"
 "<br>\n"
-"                「Uniwalk」は、あなたの好きな色、好きなデザイン、好きなサイズ"
-"で、あなたのためのシューズを作ります。<br>\n"
-"                ベースの靴を選んで、ディテールをデザインして、好きな色でオー"
-"ダーして、足のサイズを測定して。<br>\n"
-"                後はあなたのもとにシューズが届くのを待つだけ！きっとお気に入"
-"りのシューズが手に入ります。"
+"                    「Uniwalk」は、あなたの好きな色、好きなデザイン、好きなサ"
+"イズで、あなたの為のシューズを作ります。<br>\n"
+"                    ベースの靴を選び、好きな色でデザインして、足のサイズを測"
+"定します。<br>\n"
+"                    後はあなたのもとにシューズが届くのを待つだけ！きっとお気"
+"に入りのシューズが手に入ります。"
 msgstr ""
+"언제나 이상적인 운동화를 찾고 계신 고개님을 위해 Uniwalk가 탄생했습니다."
+"<br>\n"
+"                    Uniwalk는 고객님이 좋아하는 색, 좋아하는 디자인, 좋아하는 "
+"사이즈로 고객님을 위한 운동화를 제작합니다.<br>\n"
+"                    베이스가 되는 운동화를 골라, 좋아하는 색으로 디자인하여, 발사이즈를 "
+"측정합니다.<br>\n"
+"                    그 다음엔 고객님 앞으로 운동화가 배송되는 걸 기다리기만 하시면 됩니다!"
+"분명 마음에 드시는 운동화를 받으실 수 있을 거라고 확신합니다."
 
-#: .\templates\statics\about.html:35
+#: .\templates\statics\about.html:40
 msgid "アクセス"
-msgstr ""
+msgstr "오시는 길"
 
-#: .\templates\statics\about.html:44
+#: .\templates\statics\about.html:49
 msgid ""
 "住所 〒450-0002 愛知県名古屋市中村区名駅４丁目２７−１ 総合校舎スパイラルタ"
 "ワーズ<br>\n"
-"                営業時間 平日：13：00～20：00　土日祝：10：00～18：00<br>\n"
-"                定休日 月曜日定休"
+"                    営業時間 平日：13：00～20：00　土日祝：10：00～18："
+"00<br>\n"
+"                    定休日 月曜日定休"
 msgstr ""
+"주소 450-0002 아이치현 나고야시 나카무라구 메이에키 4번지 27-1 종합교사 스파이럴 "
+"타워즈<br>\n"
+"                    영업시간 평일：13：00～20：00　공휴일(토일 포함)：10：00～18："
+"00<br>\n"
+"                    월요일 정기 휴일"
 
-#: .\templates\statics\about.html:52
-msgid "特長"
-msgstr ""
+#: .\templates\statics\home.html:11
+msgid "オリジナルスニーカーが作られる！"
+msgstr "고객님만의 운동화를 만들 수 있어요!"
 
-#: .\templates\statics\about.html:57
-msgid "カスタマイズ"
-msgstr ""
+#: .\templates\statics\home.html:22
+msgid "デザインをカスタマイズする"
+msgstr "디자인 커스터마이즈"
 
-#: .\templates\statics\about.html:59
+#: .\templates\statics\home.html:24
 msgid ""
-"自分だけのデザインをカスタマイズしましょう！<br>\n"
-"                        色を選んだり、ディテールのデザインを選んで簡単にカス"
-"タマイズ。<br>\n"
-"                        自分の理想のシューズを形にしてください。"
+"素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザイ"
+"ンを参照することもできます！"
 msgstr ""
+"소재, 색을 변경해 양발 모두 자신만의 개성을 표현할 수 있습니다. 다른 고객님이 만드신"
+"디자인을 참조하는 것도 가능해요!"
 
-#: .\templates\statics\about.html:68
-msgid "足測定"
-msgstr ""
+#: .\templates\statics\home.html:33
+msgid "足サイズを測定する"
+msgstr "발사이즈 측정"
 
-#: .\templates\statics\about.html:70
+#: .\templates\statics\home.html:34
 msgid ""
-"自分の足のサイズのシューズが見つからないですか？<br>\n"
-"                        簡単にサイズを測定してピッタリのシューズを注文しよ"
-"う！"
+"足の写真をアップロードし、両足すつ足長・足幅のサイズを測定することができま"
+"す。"
 msgstr ""
+
+#: .\templates\statics\home.html:45
+msgid "依頼どおりスニーカーを制作する"
+msgstr "주문대로 운동화를 제작"
+
+#: .\templates\statics\home.html:46
+msgid "デザインと足サイズをもとにあなたのためのスニーカーを制作します！"
+msgstr "디자인과 발사이즈를 바탕으로 고객님만의 운동화를 제작합니다!"
 
 #: .\templates\users\password-change.html:5
 #: .\templates\users\password-reset-confirm.html:5
-#: .\templates\users\password-reset-confirm.html:12
+#: .\templates\users\password-reset-confirm.html:17
 msgid "パスワード再設定"
-msgstr ""
+msgstr "비밀번호 재설정"
+
+#: .\templates\users\password-change.html:23
+#: .\templates\users\update-profile.html:27
+msgid "パスワード変更"
+msgstr "비밀번호 변경"
 
 #: .\templates\users\password-reset-complete.html:5
-#: .\templates\users\password-reset-complete.html:12
+#: .\templates\users\password-reset-complete.html:16
 msgid "パスワード再設定完了"
-msgstr ""
+msgstr "비밀번호 재설정 완료"
 
-#: .\templates\users\password-reset-complete.html:13
+#: .\templates\users\password-reset-complete.html:17
 msgid "パスワード再設定が完了しました。"
-msgstr ""
+msgstr "비밀번호 재설정이 완료되었습니다."
 
-#: .\templates\users\password-reset-complete.html:15
+#: .\templates\users\password-reset-complete.html:19
 msgid "下のボタンを押すとログインページに移動します。"
-msgstr ""
+msgstr "아래의 버튼을 누르면 로그인 페이지로 이동합니다."
 
-#: .\templates\users\password-reset-confirm.html:15
-msgid "設定する"
-msgstr ""
+#: .\templates\users\password-reset-complete.html:21
+msgid "ログインへ"
+msgstr "로그인으로"
+
+#: .\templates\users\password-reset-confirm.html:19
+msgid "新しいパスワードを設定してください。"
+msgstr "새로운 비밀번호를 설정해주십시오."
 
 #: .\templates\users\password-reset-confirm.html:21
+msgid "設定する"
+msgstr "설정"
+
+#: .\templates\users\password-reset-confirm.html:29
+msgid "エラー"
+msgstr "에러"
+
+#: .\templates\users\password-reset-confirm.html:32
 msgid ""
 "パスワード再設定用リンクが無効です。新たにパスワード再設定を申し込んでくださ"
 "い。"
 msgstr ""
+"비밀번호 재설정용 링크가 무효합니다. 비밀번호 재설정을 다시 신청해"
+"주십시오."
 
 #: .\templates\users\password-reset-done.html:5
 msgid "パスワード再設定申込み完了"
-msgstr ""
+msgstr "비밀번호 재설정 신청 완료"
 
-#: .\templates\users\password-reset-done.html:12
+#: .\templates\users\password-reset-done.html:15
 msgid "パスワード再発行申込み完了"
-msgstr ""
+msgstr "비밀번호 재설정 신청 완료"
 
-#: .\templates\users\password-reset-done.html:13
+#: .\templates\users\password-reset-done.html:16
 msgid "ご登録のメールアドレス宛にパスワード再発行用メールを送信いたしました。"
-msgstr ""
+msgstr "등록하셨던 이메일 주소로 비밀번호 재설정용 메일을 송신해드렸습니다."
 
-#: .\templates\users\password-reset-done.html:15
+#: .\templates\users\password-reset-done.html:18
 msgid "メールの内容をご確認いただきますよう、お願いいたします。"
-msgstr ""
+msgstr "메일 내용을 확인하시길 바랍니다."
 
-#: .\templates\users\password-reset-done.html:15
+#: .\templates\users\password-reset-done.html:18
 msgid "※メールが届かない場合はメールアドレスをご確認の上、再度お試しください。"
-msgstr ""
+msgstr "※메일이 도착하지 않은 경우 이메일 주소를 확인하신 후 다시 시도해주세요."
 
 #: .\templates\users\password-reset.html:5
-#: .\templates\users\password-reset.html:11
+#: .\templates\users\password-reset.html:16
 msgid "パスワード再設定申込み"
-msgstr ""
+msgstr "비밀번호 재설정 신청"
 
-#: .\templates\users\password-reset.html:14
+#: .\templates\users\password-reset.html:19
 msgid "申し込む"
-msgstr ""
+msgstr "신청"
 
-#: .\templates\users\password-reset.html:18
-msgid "パスワードを覚えていますか？"
-msgstr ""
+#: .\templates\users\password-reset.html:23
+msgid "パスワードを思い出した方は"
+msgstr "비밀번호가 기억나세요?"
 
-#: .\templates\users\signup-check.html:5 .\templates\users\signup-check.html:13
+#: .\templates\users\signup-check.html:5 .\templates\users\signup-check.html:16
 msgid "会員登録情報確認"
-msgstr ""
+msgstr "회원등록정보확인"
 
-#: .\templates\users\signup-check.html:41
+#: .\templates\users\signup-check.html:26 .\users\models.py:49
+msgid "性別"
+msgstr "성별"
+
+#: .\templates\users\signup-check.html:49
+msgid "下記の内容でよろしいですか？"
+msgstr "아래의 내용으로 좋습니까?"
+
+#: .\templates\users\signup-check.html:50
+msgid "「会員登録」ボタンをクリックすると登録手続きが行われます。"
+msgstr "회원등록 버튼을 누르면 등록 절차를 수행합니다."
+
+#: .\templates\users\signup-check.html:51
+msgid "登録情報を修正する場合は「情報修正」ボタンをクリックしてください。"
+msgstr "등록정보를 수정하는 경우에는 정보수정 버튼을 눌러주세요."
+
+#: .\templates\users\signup-check.html:55
 msgid "情報修正"
-msgstr ""
+msgstr "정보수정"
 
 #: .\templates\users\signup-success.html:5
-#: .\templates\users\signup-success.html:12
-msgid "会員登録完了"
-msgstr ""
-
-#: .\templates\users\signup-success.html:13
-msgid "本登録が完了いたしました。"
-msgstr ""
-
 #: .\templates\users\signup-success.html:15
-msgid "それではショッピングをお楽しみください。"
-msgstr ""
+msgid "会員登録完了"
+msgstr "회원등록완료"
 
 #: .\templates\users\signup-success.html:16
+msgid "本登録が完了いたしました。"
+msgstr "등록이 완료되었습니다."
+
+#: .\templates\users\signup-success.html:18
+msgid "それではショッピングをお楽しみください。"
+msgstr "이제부터 쇼핑을 즐기실 수 있습니다."
+
+#: .\templates\users\signup-success.html:19
 msgid "お届け住所や連絡先などの詳細情報は、「マイアカウント」で登録できます。"
-msgstr ""
+msgstr "주소나 연락처 등의 상세정보는 마이페이지에서 등록 가능합니다."
 
-#: .\templates\users\signup.html:20
+#: .\templates\users\signup.html:23
 msgid "既にアカウントを持っていますか?"
-msgstr ""
+msgstr "이미 계정을 갖고 계세요?"
 
-#: .\templates\users\update-profile.html:21
-msgid "パスワード変更"
-msgstr ""
+#: .\templates\users\update-profile.html:26
+msgid "パスワード変更の場合は、右のボタンを押してください。"
+msgstr "비밀번호 변경의 경우, 오른쪽 버튼을 눌러주시기 바랍니다."
 
 #: .\templates\users\withdrawal-check.html:5
 msgid "会員脱退確認"
-msgstr ""
+msgstr "회원탈퇴확인"
 
-#: .\templates\users\withdrawal-check.html:19
+#: .\templates\users\withdrawal-check.html:26
 msgid ""
-"会員から退会された場合には、現在保存されている購入履歴やお届け先等の情報は、"
-"<span class=\"font-semibold text-red-500\">すべて削除</span>されます。<br>よ"
-"ろしければ、下のボタンを押してください。"
+"現在保存されている購入履歴やお届け先等の情報は、<span class=\"font-semibold "
+"text-red-500\">すべて削除</span>されます。<br>よろしければ、下のボタンを押し"
+"てください。"
 msgstr ""
+"현재 저장된 구매이력이나 배송지 등의 정보는, <span class=\"font-semibold "
+"text-red-500\">모두 삭제</span>됩니다. <br>괜찮으시다면 아래의 버튼을"
+"눌러주세요."
 
-#: .\templates\users\withdrawal-check.html:23
+#: .\templates\users\withdrawal-check.html:30
 msgid "脱退する"
-msgstr ""
+msgstr "탈퇴"
 
 #: .\templates\users\withdrawal-done.html:5
-#: .\templates\users\withdrawal-done.html:12
+#: .\templates\users\withdrawal-done.html:16
 msgid "会員脱退完了"
-msgstr ""
+msgstr "회원탈퇴완료"
 
-#: .\templates\users\withdrawal-done.html:13
+#: .\templates\users\withdrawal-done.html:17
 msgid "会員脱退が完了しました。"
-msgstr ""
+msgstr "회원탈퇴가 완료되었습니다."
 
-#: .\templates\users\withdrawal-done.html:14
+#: .\templates\users\withdrawal-done.html:18
 msgid "またのご利用お待ちしております！"
-msgstr ""
+msgstr "다시 이용하시는 날을 기다리고 있겠습니다!"
 
 #: .\templates\users\withdrawal.html:5
 msgid "会員脱退申込み"
-msgstr ""
+msgstr "회원탈퇴 신청"
 
-#: .\templates\users\withdrawal.html:17
+#: .\templates\users\withdrawal.html:24
 msgid "会員脱退申し込み"
-msgstr ""
+msgstr "회원탈퇴 신청"
 
-#: .\templates\users\withdrawal.html:18
+#: .\templates\users\withdrawal.html:25
 msgid "会員脱退処理を行うために、もう一度会員認証を行ってください。"
-msgstr ""
+msgstr "회원탈퇴 처리를 수행하기 위해, 다시 한 번 회원 인증을 수행해주세요."
 
-#: .\users\admin.py:29
+#: .\templates\users\withdrawal.html:27
+msgid "認証する"
+msgstr "인증"
+
+#: .\users\admin.py:28
+msgid "ゲスト情報"
+msgstr "게스트 정보"
+
+#: .\users\admin.py:42
 msgid "会員情報"
-msgstr ""
+msgstr "회원 정보"
 
-#: .\users\admin.py:52
+#: .\users\admin.py:64
 msgid "認証・権限"
-msgstr ""
+msgstr "인증・권한"
 
-#: .\users\admin.py:94
+#: .\users\admin.py:114
 msgid "会員名"
-msgstr ""
+msgstr "회원명"
 
-#: .\users\forms.py:18 .\users\forms.py:59 .\users\forms.py:60
-#: .\users\forms.py:194
+#: .\users\forms.py:17 .\users\forms.py:18 .\users\forms.py:59
+#: .\users\forms.py:60 .\users\forms.py:198
 msgid "パスワード"
-msgstr ""
+msgstr "비밀번호"
 
-#: .\users\forms.py:29 .\users\forms.py:137 .\users\forms.py:204
+#: .\users\forms.py:29 .\users\forms.py:141 .\users\views.py:799
 msgid "パスワードをもう一度確認してください。"
-msgstr ""
+msgstr "비밀번호를 다시 확인해주세요."
 
 #: .\users\forms.py:31
 msgid "登録されていないメールアドレスです。"
-msgstr ""
+msgstr "등록되어 있지 않은 이메일 주소입니다."
 
-#: .\users\forms.py:49 .\users\forms.py:110
-msgid "姓"
-msgstr ""
-
-#: .\users\forms.py:50 .\users\forms.py:111
-msgid "名"
-msgstr ""
-
-#: .\users\forms.py:51 .\users\forms.py:112 .\users\models.py:41
-msgid "姓(カナ)"
-msgstr ""
-
-#: .\users\forms.py:52 .\users\forms.py:113 .\users\models.py:40
-msgid "名(カナ)"
-msgstr ""
-
-#: .\users\forms.py:63 .\users\forms.py:64 .\users\forms.py:158
-#: .\users\forms.py:178 .\users\forms.py:180
+#: .\users\forms.py:63 .\users\forms.py:64 .\users\forms.py:162
+#: .\users\forms.py:182 .\users\forms.py:184
 msgid "パスワード確認"
-msgstr ""
+msgstr "비밀번호 확인"
 
 #: .\users\forms.py:71
 msgid "既に登録されているメールアドレスです。"
-msgstr ""
+msgstr "이미 등록되어 있는 이메일 주소입니다."
 
 #: .\users\forms.py:80
 msgid "パスワードが一致しません。"
-msgstr ""
+msgstr "비밀번호가 일치하지 않습니다."
 
 #: .\users\forms.py:109 .\users\forms.py:121 .\users\forms.py:122
 msgid "現在のパスワード"
-msgstr ""
+msgstr "현재 비밀번호"
 
-#: .\users\forms.py:114 .\users\models.py:45
+#: .\users\forms.py:114 .\users\models.py:51
 msgid "生年月日"
-msgstr ""
+msgstr "생년월일"
 
-#: .\users\forms.py:115 .\users\models.py:46
-msgid "電話番号"
-msgstr ""
-
-#: .\users\forms.py:116 .\users\models.py:49
-msgid "市区町村番地"
-msgstr ""
-
-#: .\users\forms.py:117 .\users\models.py:50
-msgid "建物名・号室"
-msgstr ""
-
-#: .\users\forms.py:146
+#: .\users\forms.py:150
 msgid "Old password"
-msgstr ""
+msgstr "기존 비밀번호"
 
-#: .\users\forms.py:148
+#: .\users\forms.py:152
 msgid "現在パスワード"
-msgstr ""
+msgstr "현재 비밀번호"
 
-#: .\users\forms.py:151
+#: .\users\forms.py:155
 msgid "new password"
-msgstr ""
+msgstr "새 비밀번호"
 
-#: .\users\forms.py:153 .\users\forms.py:172 .\users\forms.py:173
+#: .\users\forms.py:157 .\users\forms.py:176 .\users\forms.py:177
 msgid "新しいパスワード"
-msgstr ""
+msgstr "새 비밀번호"
 
-#: .\users\forms.py:156
+#: .\users\forms.py:160
 msgid "check password"
-msgstr ""
+msgstr "비밀번호 체크"
 
-#: .\users\forms.py:165
+#: .\users\forms.py:169
 msgid "Email"
-msgstr ""
+msgstr "이메일 주소"
 
-#: .\users\managers.py:16
-msgid "The Email must be set"
-msgstr ""
+#: .\users\managers.py:18
+msgid "メールアドレスを入力してください。"
+msgstr "이메일 주소를 입력해주세요."
 
-#: .\users\managers.py:32
-msgid "Superuser must have is_staff=True."
-msgstr ""
+#: .\users\managers.py:36
+msgid "スーパーユーザにはスタフ権限が必須です。"
+msgstr "슈퍼유저에는 스탭 권한이 필수입니다."
 
-#: .\users\managers.py:34
-msgid "Superuser must have is_superuser=True."
-msgstr ""
+#: .\users\managers.py:38
+msgid "スーパーユーザにはスーパーユーザ権限が必須です。"
+msgstr "슈퍼유저에는 슈퍼유저 권한이 필수입니다."
 
 #: .\users\mixins.py:13
 msgid "アクセスできません。"
-msgstr ""
+msgstr "접근할 수 없습니다."
 
-#: .\users\models.py:43
-msgid "性別"
-msgstr ""
+#: .\users\models.py:35
+msgid "--性別--"
+msgstr "--성별--"
 
-#: .\users\models.py:48
-msgid "都道府県"
-msgstr ""
-
-#: .\users\models.py:55
+#: .\users\models.py:61
 msgid "会員番号"
-msgstr ""
+msgstr "회원번호"
 
-#: .\users\views.py:46
+#: .\users\views.py:61
 msgid "ログインしました。"
-msgstr ""
+msgstr "로그인하였습니다."
 
-#: .\users\views.py:58
+#: .\users\views.py:76
 msgid "ログアウトしました。"
-msgstr ""
+msgstr "로그아웃하였습니다."
 
-#: .\users\views.py:111
+#: .\users\views.py:133
 msgid "UniWalk　会員登録ありがとうございます。"
-msgstr ""
+msgstr "UniWalk 회원등록 감사드립니다."
 
-#: .\users\views.py:148
+#: .\users\views.py:182
 msgid "パスワード再設定完了のお知らせ"
-msgstr ""
+msgstr "비밀번호 재설정 완료 알림"
 
-#: .\users\views.py:165
+#: .\users\views.py:205
 msgid "会員情報を変更しました。"
-msgstr ""
+msgstr "회원정보를 변경하였습니다."
 
-#: .\users\views.py:179
+#: .\users\views.py:219
 msgid "UniWalk会員情報変更のお知らせ"
-msgstr ""
+msgstr "UniWalk 회원정보변경 알림"
 
-#: .\users\views.py:201
+#: .\users\views.py:244
 msgid "UniWalkパスワード変更のお知らせ"
-msgstr ""
+msgstr "UniWalk 비밀번호 변경 알림"
 
-#: .\users\views.py:209
+#: .\users\views.py:252
 msgid "パスワードを変更しました。"
-msgstr ""
+msgstr "비밀번호를 변경하였습니다."
 
-#: .\users\views.py:297
+#: .\users\views.py:349
 msgid "カードを登録解除しました。"
-msgstr ""
+msgstr "신용카드를 등록해제하였습니다."
 
-#: .\users\views.py:354
+#: .\users\views.py:409
 msgid "カードを登録しました。"
-msgstr ""
+msgstr "신용카드를 등록하였습니다."
 
-#: .\users\views.py:357
+#: .\users\views.py:412
 msgid "カード登録に失敗しました。"
-msgstr ""
+msgstr "카드 등록에 실패하였습니다."
 
-#: .\users\views.py:394
-msgid "会員様のメールアドレスと入力したメールアドレスが違います。"
-msgstr ""
+#: .\users\views.py:436
+msgid "デザインを削除しました。"
+msgstr "디자인을 삭제했습니다."
+
+#: .\users\views.py:792
+msgid "会員様のメールアドレスとは違います。"
+msgstr "회원님의 이메일 주소와 다릅니다."

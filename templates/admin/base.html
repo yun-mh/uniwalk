@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Uniwalk 管理者モード</title>
+    <title>{% trans 'Uniwalk 管理者モード' %}</title>
     {% block blockbots %}
     <meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}">
@@ -30,7 +30,7 @@
                     <a class="flex items-center text-gray-900 text-base xl:text-xl no-underline hover:no-underline font-bold"
                         href="{% url 'admin:index' %}">
                         <img src="{% static 'images/logo.png' %}" class="h-10">
-                        <span>Uniwalk 管理者モード</span>
+                        <span>{% trans 'Uniwalk 管理者モード' %}</span>
                     </a>
                 </div>
                 <div class="w-1/2 pr-0">
@@ -230,7 +230,6 @@
                         navMenuDiv.classList.add("hidden");
                     }
                 } else {
-                    // click both outside link and outside menu, hide menu
                     navMenuDiv.classList.add("hidden");
                 }
             }
@@ -287,7 +286,6 @@
             }
         });
     </script>
-
 </body>
 
 </html>

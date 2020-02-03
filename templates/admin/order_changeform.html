@@ -4,17 +4,17 @@
 <li>
     {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
     {% if original.step.step_code == "T01" or original.step.step_code == "T02" %}
-    <a href="{% url 'admin:bill' original.pk %}" class="button">請求書</a>
+    <a href="{% url 'admin:bill' original.pk %}" class="button">{% trans '請求書' %}</a>
     {% endif %}
     {% if original.step.step_code == "T03" or original.step.step_code == "T11" or original.step.step_code == "T21" %}
-    <a href="{% url 'admin:receipt' original.pk %}" class="button">領収書</a>
+    <a href="{% url 'admin:receipt' original.pk %}" class="button">{% trans '領収書' %}</a>
     {% endif %}
     {% if original.step.step_code == "T11" %}
-    <a href="{% url 'admin:ordersheet' original.pk %}" class="button">発注書</a>
-    <a href="{% url 'admin:orderspec' original.pk %}" class="button">仕様書</a>
+    <a href="{% url 'admin:ordersheet' original.pk %}" class="button">{% trans '発注書' %}</a>
+    <a href="{% url 'admin:orderspec' original.pk %}" class="button">{% trans '仕様書' %}</a>
     {% endif %}
     {% if original.step.step_code == "T21" %}
-    <a href="{% url 'admin:invoice' original.pk %}" class="button">納品書</a>
+    <a href="{% url 'admin:invoice' original.pk %}" class="button">{% trans '納品書' %}</a>
     {% endif %}
     <a href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
 </li>

@@ -10,8 +10,8 @@ class TimeStampedModel(models.Model):
 
     """ 再利用可能なフィールドを各モデルに提供する """
 
-    created = models.DateTimeField("登録日時", auto_now_add=True)
-    updated = models.DateTimeField("更新日時", auto_now=True, null=True)
+    created = models.DateTimeField(_("登録日時"), auto_now_add=True)
+    updated = models.DateTimeField(_("更新日時"), auto_now=True, null=True)
 
     class Meta:
         abstract = True
@@ -21,7 +21,7 @@ class JPPrefectureField(CharField):
 
     """ データベースに都道府県のコード番号を入れるモデルフィールド """
 
-    description = _("JP Prefecture (two number codes)")
+    description = _("日本地域コード (2桁)")
 
     def __init__(self, *args, **kwargs):
         kwargs["choices"] = JP_PREFECTURE_CODES

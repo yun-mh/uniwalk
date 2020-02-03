@@ -16,7 +16,7 @@
         <div class="w-full flex items-start justify-between">
             <div class="w-2/3 bg-white mr-16">
                 <h3 class="w-full font-black text-2xl text-left p-5 text-indigo-800">
-                    ショッピングカート
+                    {% trans 'ショッピングカート' %}
                 </h3>
                 <div class="flex flex-col">
                     {% if cart_items %}
@@ -37,19 +37,22 @@
                                 </div>
                                 <div class="flex flex-col">
                                     <span class="text-gray-500 text-xs">{{ cart_item.product.category }}</span>
-                                    <span class="text-gray-500 text-xs">左足 {{ cart_item.feet.length_left }}mm (足長)
-                                        {{ cart_item.feet.width_left }}mm (足幅)</span>
-                                    <span class="text-gray-500 text-xs">左足 {{ cart_item.feet.length_right }}mm (足長)
-                                        {{ cart_item.feet.width_right }}mm (足幅)</span>
+                                    <span class="text-gray-500 text-xs">{% trans '左足' %}
+                                        {{ cart_item.feet.length_left }}mm {% trans '(足長)' %}
+                                        {{ cart_item.feet.width_left }}mm {% trans '(足幅)' %}</span>
+                                    <span class="text-gray-500 text-xs">{% trans '左足' %}
+                                        {{ cart_item.feet.length_right }}mm {% trans '(足長)' %}
+                                        {{ cart_item.feet.width_right }}mm {% trans '(足幅)' %}</span>
                                 </div>
                                 <div class="flex flex-row mt-3">
-                                    <span class="text-sm">単価　&yen; {{ cart_item.product.price | intcomma }}</span>
+                                    <span class="text-sm">{% trans '単価' %}　&yen;
+                                        {{ cart_item.product.price | intcomma }}</span>
                                     <div class="text-xs ml-5">
                                         <a
                                             href="{% url 'carts:add_cart' cart_item.product.pk cart_item.design.pk cart_item.feet.pk %}">
                                             <i class="fas fa-plus-circle fa-lg text-indigo-600"></i>
                                         </a>
-                                        <span class="mx-2 text-sm">{{ cart_item.quantity}}</span>
+                                        <span class="mx-2 text-sm">{{ cart_item.quantity }}</span>
                                         <a
                                             href="{% url 'carts:remove' cart_item.product.pk cart_item.design.pk cart_item.feet.pk %}">
                                             <i class="fas fa-minus-circle fa-lg text-indigo-600"></i>
@@ -68,7 +71,8 @@
                     {% endfor %}
                     {% else %}
                     <p class="flex justify-center items-center font-semibold w-full h-50vh text-center text-2xl">
-                        <i class="fas fa-dizzy fa-2x text-indigo-600"></i> <span class="ml-5">カートに商品が入っていません。</span>
+                        <i class="fas fa-dizzy fa-2x text-indigo-600"></i> <span
+                            class="ml-5">{% trans 'カートに商品が入っていません。' %}</span>
                     </p>
                     {% endif %}
                 </div>
@@ -76,15 +80,15 @@
             <div
                 class="w-1/3 flex flex-col shadow-lg items-center justify-between bg-black shadow-lg relative mt-5 rounded-xl">
                 <h3 class="text-white font-semibold w-full p-3 mt-3 text-2xl text-center">
-                    ご注文金額
+                    {% trans 'ご注文金額' %}
                 </h3>
                 <div class="w-full p-5 text-white">
                     <div class="flex flex-no-wrap justify-between">
-                        <div>合計（税込）</div>
+                        <div>{% trans '合計（税込）' %}</div>
                         <div class="font-semibold">&yen; {{ amount | intcomma }}</div>
                     </div>
                     {% if cart_items %}
-                    <a href=" {% url 'orders:member_or_guest' %}" class="btn block mt-10">購入手続きへ</a>
+                    <a href=" {% url 'orders:member_or_guest' %}" class="btn block mt-10">{% trans '購入手続きへ' %}</a>
                     {% endif %}
                 </div>
             </div>

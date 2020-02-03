@@ -10,11 +10,11 @@ from . import models
 class LoginForm(forms.Form):
 
     email = forms.EmailField(
-        label="メールアドレス",
+        label=_("メールアドレス"),
         widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
     )
     password = forms.CharField(
-        label="パスワード",
+        label=_("パスワード"),
         widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
     )
 
@@ -53,7 +53,7 @@ class SignUpForm(forms.ModelForm):
             "gender": forms.Select(attrs={"required": True}),
         }
 
-    GENDER_CHOICES = ("男性", "女性", "その他")
+    GENDER_CHOICES = (_("男性"), _("女性"), _("その他"))
 
     password = forms.CharField(
         label=_("パスワード"),
@@ -129,7 +129,7 @@ class UpdateProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UpdateProfileForm, self).__init__(*args, **kwargs)
-        self.fields['gender'].empty_label = "hahah"
+        self.fields['gender'].empty_label = ""
 
     def clean(self):
         email = self.cleaned_data.get("email")

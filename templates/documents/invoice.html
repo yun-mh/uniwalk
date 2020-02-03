@@ -18,29 +18,29 @@
             src: url("https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP|Noto+Sans+KR&display=swap");
         }
     </style>
-    <title>納品書 | {{order.order_code}}</title>
+    <title>{% trans '納品書' %} | {{order.order_code}}</title>
 </head>
 
-<body>
+<body class="document">
     <div class="flex justify-between items-center">
         <h2 class="font-bold text-3xl mb-10 tracking-widest">
-            納品書
+            {% trans '納品書' %}
         </h2>
         <p>
-            発行日：{% now "Y-m-d" %}
+            {% trans '発行日' %}：{% now "Y-m-d" %}
         </p>
     </div>
     <div class="w-full">
         <div class="w-full flex justify-between items-end">
             <div>
-                {{ order.last_name_recipient }} {{ order.first_name_recipient }}　様
+                {{ order.last_name_recipient }} {{ order.first_name_recipient }}　{% trans '様' %}
             </div>
             <div>
                 <div>
-                    注文日：{{ order.order_date|date:'Y-m-d' }}
+                    {% trans '注文日' %}：{{ order.order_date|date:'Y-m-d' }}
                 </div>
                 <div>
-                    注文番号：{{ order.order_code }}
+                    {% trans '注文番号' %}：{{ order.order_code }}
                 </div>
             </div>
             <div>
@@ -52,19 +52,19 @@
             <thead class="border">
                 <tr>
                     <th class="border text-lg text-center">
-                        商品番号
+                        {% trans '商品番号' %}
                     </th>
                     <th class="border text-lg text-center">
-                        商品名
+                        {% trans '商品名' %}
                     </th>
                     <th class="border text-lg text-center">
-                        数量
+                        {% trans '数量' %}
                     </th>
                     <th class="border text-lg text-center">
-                        単価(税込)
+                        {% trans '単価(税込)' %}
                     </th>
                     <th class="border text-lg text-center">
-                        金額(税込)
+                        {% trans '金額(税込)' %}
                     </th>
                 </tr>
             </thead>
@@ -96,12 +96,12 @@
         <div class="w-full flex justify-between mt-5">
             <div class="w-2/3 rounded-xl border p-3">
                 <p class="text-sm">
-                    この度は、ご注文誠にありがとうございます。商品到着後、ご注文内容と商品をご確認ください。<br>
+                    {% trans 'この度は、ご注文誠にありがとうございます。商品到着後、ご注文内容と商品をご確認ください。<br>
                     万が一、商品不足・商品違い・商品不良などございましたら、至急ご連絡ください。<br>
                     早急に対応させていただきます。<br>
                     これからも、商品充実、サービスの向上に努めて参ります。<br>
                     お気づきの点、リクエスト等ございましたら、お気軽くお申し付けください。<br>
-                    今後とも、ご愛顧の程宜しくお願い申し上げます。<br>
+                    今後とも、ご愛顧の程宜しくお願い申し上げます。<br>' %}
                 </p>
             </div>
 
@@ -110,7 +110,7 @@
                     <tbody>
                         <tr class="border-b">
                             <td>
-                                　合計(税込)
+                                　{% trans '合計(税込)' %}
                             </td>
                             <td>
                                 　&yen; {{ order.amount | intcomma }}
@@ -118,7 +118,7 @@
                         </tr>
                         <tr class="border-b">
                             <td>
-                                　お支払い方法
+                                　{% trans 'お支払い方法' %}
                             </td>
                             <td>
                                 　{{ order.get_payment_display }}

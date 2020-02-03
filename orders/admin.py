@@ -23,61 +23,61 @@ def make_step_new(self, request, queryset):
     step = models.Step.objects.get(step_code="T01")
     rows_updated = queryset.update(step=step)
     if rows_updated == 1:
-        message_bit = "1件の注文の対応を"
+        message_bit = _("1件の注文の対応を")
     else:
-        message_bit = "%s 注文の対応を" % rows_updated
-    self.message_user(request, "%s 入金前に変更しました。" % message_bit)
-make_step_new.short_description = "選択した注文を入金前に変更"
+        message_bit = _("%s 注文の対応を") % rows_updated
+    self.message_user(request, _("%s 入金前に変更しました。") % message_bit)
+make_step_new.short_description = _("選択した注文を入金前に変更")
 
 def make_step_payment_check(self, request, queryset):
     step = models.Step.objects.get(step_code="T02")
     rows_updated = queryset.update(step=step)
     if rows_updated == 1:
-        message_bit = "1件の注文の対応を"
+        message_bit = _("1件の注文の対応を")
     else:
-        message_bit = "%s 注文の対応を" % rows_updated
-    self.message_user(request, "%s 決済処理中に変更しました。" % message_bit)
-make_step_payment_check.short_description = "選択した注文を決済処理中に変更"
+        message_bit = _("%s 注文の対応を") % rows_updated
+    self.message_user(request, _("%s 決済処理中に変更しました。") % message_bit)
+make_step_payment_check.short_description = _("選択した注文を決済処理中に変更")
 
 def make_step_payment_done(self, request, queryset):
     step = models.Step.objects.get(step_code="T03")
     rows_updated = queryset.update(step=step)
     if rows_updated == 1:
-        message_bit = "1件の注文の対応を"
+        message_bit = _("1件の注文の対応を")
     else:
-        message_bit = "%s 注文の対応を" % rows_updated
-    self.message_user(request, "%s 決済確認済みに変更しました。" % message_bit)
-make_step_payment_done.short_description = "選択した注文を決済確認済みに変更"
+        message_bit = _("%s 注文の対応を") % rows_updated
+    self.message_user(request, _("%s 決済確認済みに変更しました。") % message_bit)
+make_step_payment_done.short_description = _("選択した注文を決済確認済みに変更")
 
 def make_step_dealing_with(self, request, queryset):
     step = models.Step.objects.get(step_code="T11")
     rows_updated = queryset.update(step=step)
     if rows_updated == 1:
-        message_bit = "1件の注文の対応を"
+        message_bit = _("1件の注文の対応を")
     else:
-        message_bit = "%s 注文の対応を" % rows_updated
-    self.message_user(request, "%s 対応中に変更しました。" % message_bit)
-make_step_dealing_with.short_description = "選択した注文を対応中に変更"
+        message_bit = _("%s 注文の対応を") % rows_updated
+    self.message_user(request, _("%s 対応中に変更しました。") % message_bit)
+make_step_dealing_with.short_description = _("選択した注文を対応中に変更")
 
 def make_step_shipping_done(self, request, queryset):
     step = models.Step.objects.get(step_code="T21")
     rows_updated = queryset.update(step=step)
     if rows_updated == 1:
-        message_bit = "1件の注文の対応を"
+        message_bit = _("1件の注文の対応を")
     else:
-        message_bit = "%s 注文の対応を" % rows_updated
-    self.message_user(request, "%s 発送済みに変更しました。" % message_bit)
-make_step_shipping_done.short_description = "選択した注文を発送済みに変更"
+        message_bit = _("%s 注文の対応を") % rows_updated
+    self.message_user(request, _("%s 発送済みに変更しました。") % message_bit)
+make_step_shipping_done.short_description = _("選択した注文を発送済みに変更")
 
 def make_step_cancel(self, request, queryset):
     step = models.Step.objects.get(step_code="T99")
     rows_updated = queryset.update(step=step)
     if rows_updated == 1:
-        message_bit = "1件の注文の対応を"
+        message_bit = _("1件の注文の対応を")
     else:
-        message_bit = "%s 注文の対応を" % rows_updated
-    self.message_user(request, "%s 注文取消しに変更しました。" % message_bit)
-make_step_cancel.short_description = "選択した注文を入金前に変更"
+        message_bit = _("%s 注文の対応を") % rows_updated
+    self.message_user(request, _("%s 注文取消しに変更しました。") % message_bit)
+make_step_cancel.short_description = _("選択した注文を入金前に変更")
 
 
 @admin.register(models.Order)
@@ -98,7 +98,6 @@ class OrderAdmin(admin.ModelAdmin):
                     "guest",
                     "amount",
                     "payment",
-                    # "stripe_charge_id",
                     "step",
                 )
             },
@@ -196,13 +195,13 @@ class OrderAdmin(admin.ModelAdmin):
     def bill(self, obj):
         if obj.step.step_code == "T01" or obj.step.step_code == "T02":
             return format_html(
-                '<a class="button" href="{}">請求書</a>',
+                '<a class="button" href="{}">PDF</a>',
                 reverse("admin:bill", args=[obj.pk]),
             )
         else:
             return ""
 
-    bill.short_description = "請求書"
+    bill.short_description = _("請求書")
     bill.allow_tags = True
 
     def bill_pdf(self, request, *args, **kwargs):
@@ -225,13 +224,13 @@ class OrderAdmin(admin.ModelAdmin):
             or obj.step.step_code == "T21"
         ):
             return format_html(
-                '<a class="button" href="{}">領収書</a>',
+                '<a class="button" href="{}">PDF</a>',
                 reverse("admin:receipt", args=[obj.pk]),
             )
         else:
             return ""
 
-    receipt.short_description = "領収書"
+    receipt.short_description = _("領収書")
     receipt.allow_tags = True
 
     def receipt_pdf(self, request, *args, **kwargs):
@@ -250,13 +249,13 @@ class OrderAdmin(admin.ModelAdmin):
     def ordersheet(self, obj):
         if obj.step.step_code == "T11":
             return format_html(
-                '<a class="button" href="{}">発注書</a>',
+                '<a class="button" href="{}">PDF</a>',
                 reverse("admin:ordersheet", args=[obj.pk]),
             )
         else:
             return ""
 
-    ordersheet.short_description = "発注書"
+    ordersheet.short_description = _("発注書")
     ordersheet.allow_tags = True
 
     def ordersheet_pdf(self, request, *args, **kwargs):
@@ -275,13 +274,13 @@ class OrderAdmin(admin.ModelAdmin):
     def orderspec(self, obj):
         if obj.step.step_code == "T11":
             return format_html(
-                '<a class="button" href="{}">仕様書</a>',
+                '<a class="button" href="{}">PDF</a>',
                 reverse("admin:orderspec", args=[obj.pk]),
             )
         else:
             return ""
 
-    orderspec.short_description = "仕様書"
+    orderspec.short_description = _("仕様書")
     orderspec.allow_tags = True
 
     def orderspec_pdf(self, request, *args, **kwargs):
@@ -301,13 +300,13 @@ class OrderAdmin(admin.ModelAdmin):
     def invoice(self, obj):
         if obj.step.step_code == "T21":
             return format_html(
-                '<a class="button" href="{}">納品書</a>',
+                '<a class="button" href="{}">PDF</a>',
                 reverse("admin:invoice", args=[obj.pk]),
             )
         else:
             return ""
 
-    invoice.short_description = "納品書"
+    invoice.short_description = _("納品書")
     invoice.allow_tags = True
 
     def invoice_pdf(self, request, *args, **kwargs):

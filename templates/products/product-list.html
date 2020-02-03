@@ -7,11 +7,12 @@
 
 {% block content %}
 
-<div class="mx-auto" >
+<div class="mx-auto">
 
     <div class="flex">
         <div class="w-1/6 pt-6 px-2 border-4 mt-10 ml-6 mr-3" style="height: 15vw;">
-            <h2 class="text-base font-extrabold mb-5 py-2 pl-3 text-gray-800 border-l-4 border-blue-600">{% trans '商品カテゴリー' %}</h2>
+            <h2 class="text-base font-extrabold mb-5 py-2 pl-3 text-gray-800 border-l-4 border-blue-600">
+                {% trans '商品カテゴリー' %}</h2>
             <ul class="pl-4 ">
                 <li class="flex justify-between mb-2 text-sm hover:border-b border-blue-600">
                     <a href="{% url 'products:list' %}">{% trans 'すべて' %}</a>
@@ -53,7 +54,7 @@
 
             {% else %}
             <p class="flex justify-center items-center font-semibold w-full h-50vh text-center text-2xl">
-                <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span class="ml-5">商品が存在しません。</span>
+                <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span class="ml-5">{% trans '商品が存在しません。' %}</span>
             </p>
             {% endif %}
         </div>

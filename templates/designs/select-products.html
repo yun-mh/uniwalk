@@ -48,14 +48,13 @@
 
                 {% else %}
                 <p class="flex justify-center items-center font-semibold w-full h-50vh text-center text-2xl">
-                    <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span class="ml-5">商品が存在しません。</span>
+                    <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span class="ml-5">{% trans '商品が存在しません。' %}</span>
                 </p>
                 {% endif %}
             </div>
         </div>
     </div>
 </div>
-
 {% endblock content %}
 
 {% block javascript %}

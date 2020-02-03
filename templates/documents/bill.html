@@ -13,13 +13,13 @@
             src: url("https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP|Noto+Sans+KR&display=swap");
         }
     </style>
-    <title>請求書 | {{order.order_code}}</title>
+    <title>{% trans '請求書' %} | {{order.order_code}}</title>
 </head>
 
-<body>
+<body class="document">
     <img src="{% static 'images/logo-universe.png' %}" class="w-28 mx-auto my-5">
     <p class="font-bold text-3xl text-center mb-10 tracking-widest">
-        請求書
+        {% trans '請求書' %}
     </p>
     <div class="w-90vw mx-auto">
         <div class="flex flex-no-wrap justify-between items-start">
@@ -38,14 +38,14 @@
                         <td>{{ order.address_detail_orderer }}</td>
                     </tr>
                     <tr>
-                        <td>{{ order.last_name_orderer }} {{ order.first_name_orderer }}　様</td>
+                        <td>{{ order.last_name_orderer }} {{ order.first_name_orderer }}　{% trans '様' %}</td>
                     </tr>
                 </tbody>
             </table>
             <table class="block">
                 <tbody>
                     <tr>
-                        <td class="text-right">発行日：{% now "Y-m-d" %}</td>
+                        <td class="text-right">{% trans '発行日' %}：{% now "Y-m-d" %}</td>
                     </tr>
                     <tr>
                         <td>　</td>
@@ -54,10 +54,10 @@
                         <td>〒 4500002</td>
                     </tr>
                     <tr>
-                        <td>愛知県名古屋市中村区名駅4丁目27-1</td>
+                        <td>{% trans '愛知県名古屋市中村区名駅4丁目27-1' %}</td>
                     </tr>
                     <tr>
-                        <td>総合校舎スパイラルタワーズ Uniwalk</td>
+                        <td>{% trans '総合校舎スパイラルタワーズ Uniwalk' %}</td>
                     </tr>
                 </tbody>
             </table>
@@ -66,41 +66,42 @@
         <table class="mt-3">
             <tbody>
                 <tr>
-                    <td>振込銀行</td>
+                    <td>{% trans '振込銀行' %}</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>OO銀行</td>
+                    <td>{% trans 'OO銀行' %}</td>
                     <td>XXX-XXXX</td>
                 </tr>
             </tbody>
         </table>
 
         <p class="text-center mt-6">
-            下記の通りご請求致します。
+            {% trans '下記の通りご請求致します。' %}
         </p>
 
         <p class="font-bold text-lg text-center mt-6 mb-10">
-            <span class="border-b-8 border-double">合計金額：&yen; {{ order.amount | intcomma }} (税込)</span>
+            <span class="border-b-8 border-double">{% trans '合計金額' %}：&yen; {{ order.amount | intcomma }}
+                {% trans '(税込)' %}</span>
         </p>
 
         <table class="w-full border-4 my-5">
             <thead class="border">
                 <tr>
                     <th class="border text-lg text-center">
-                        注文商品
+                        {% trans '注文商品' %}
                     </th>
                     <th class="border text-lg text-center">
-                        数量
+                        {% trans '数量' %}
                     </th>
                     <th class="border text-lg text-center">
-                        単価(円)
+                        {% trans '単価(円)' %}
                     </th>
                     <th class="border text-lg text-center">
-                        金額(円)
+                        {% trans '金額(円)' %}
                     </th>
                     <th class="border text-lg text-center">
-                        備考
+                        {% trans '備考' %}
                     </th>
                 </tr>
             </thead>
@@ -132,7 +133,7 @@
 
                     </td>
                     <td class="border text-center text-lg font-bold">
-                        合計(円)
+                        {% trans '合計(円)' %}
                     </td>
                     <td class="border text-right">
                         {{ order.amount | intcomma }}
@@ -147,7 +148,7 @@
         <table class="w-full border-4 mb-5">
             <thead>
                 <tr class="border text-lg text-center">
-                    <th>特記事項</th>
+                    <th>{% trans '特記事項' %}</th>
                 </tr>
             </thead>
             <tbody class="border">

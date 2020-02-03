@@ -13,32 +13,32 @@
             src: url("https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP|Noto+Sans+KR&display=swap");
         }
     </style>
-    <title>領収書 | {{order.order_code}}</title>
+    <title>{% trans '領収書' %} | {{order.order_code}}</title>
 </head>
 
-<body>
+<body class="document">
     <img src="{% static 'images/logo-universe.png' %}" class="w-28 mx-auto my-5">
     <p class="font-bold text-3xl text-center mb-10 tracking-widest">
-        領収書
+        {% trans '領収書' %}
     </p>
     <div class="w-90vw mx-auto">
         <div class="flex flex-no-wrap justify-between items-start">
             <table class="block">
                 <tbody>
                     <tr>
-                        <td>注文番号：</td>
+                        <td>{% trans '注文番号' %}：</td>
                         <td>{{ order.order_code }}</td>
                     </tr>
                     <tr>
-                        <td>発行日：</td>
+                        <td>{% trans '発行日' %}：</td>
                         <td>{% now "Y-m-d" %}</td>
                     </tr>
                     <tr>
-                        <td>注文日：</td>
+                        <td>{% trans '注文日' %}：</td>
                         <td>{{ order.order_date|date:'Y-m-d' }}</td>
                     </tr>
                     <tr>
-                        <td>ご請求額：</td>
+                        <td>{% trans 'ご請求額' %}：</td>
                         <td>&yen; {{ order.amount | intcomma }}</td>
                     </tr>
                 </tbody>
@@ -47,7 +47,7 @@
                 <tbody>
                     <tr>
                         <td>{{ order.last_name_orderer }} {{ order.first_name_orderer }}　　</td>
-                        <td>様</td>
+                        <td>{% trans '様' %}</td>
                     </tr>
                 </tbody>
             </table>
@@ -57,13 +57,13 @@
             <thead class="border">
                 <tr>
                     <th class="border text-lg text-center">
-                        注文商品
+                        {% trans '注文商品' %}
                     </th>
                     <th class="border text-lg text-center">
-                        数量
+                        {% trans '数量' %}
                     </th>
                     <th class="border text-lg text-center">
-                        単価
+                        {% trans '単価' %}
                     </th>
                 </tr>
             </thead>
@@ -87,7 +87,7 @@
         <table class="w-full border-4 mb-5">
             <thead>
                 <tr class="border text-lg">
-                    <th class="text-center">お届け先住所</th>
+                    <th class="text-center">{% trans 'お届け先住所' %}</th>
                 </tr>
             </thead>
             <tbody class="border">
@@ -98,13 +98,13 @@
                 </tr>
                 <tr>
                     <td>
-                        住所：{{ order.get_prefecture_recipient_display }} {{ order.address_city_recipient }}
+                        {% trans '住所' %}：{{ order.get_prefecture_recipient_display }} {{ order.address_city_recipient }}
                         {{ order.address_detail_recipient }}
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        {{ order.last_name_recipient }} {{ order.first_name_recipient }}　様
+                        {{ order.last_name_recipient }} {{ order.first_name_recipient }}　{% trans '様' %}
                     </td>
                 </tr>
             </tbody>
@@ -113,13 +113,13 @@
         <table class="w-full border-4 mb-5">
             <thead>
                 <tr>
-                    <th colspan="2" class="border text-lg text-center">お支払い情報</th>
+                    <th colspan="2" class="border text-lg text-center">{% trans 'お支払い情報' %}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-                        支払い方法：{{ order.get_payment_display }}
+                        {% trans '支払い方法' %}：{{ order.get_payment_display }}
                     </td>
                     <td>
 
@@ -130,12 +130,12 @@
                         〒 {{ order.postal_code_orderer }}
                     </td>
                     <td>
-                        商品小計：
+                        {% trans '商品小計' %}：
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        住所：{{ order.get_prefecture_orderer_display }} {{ order.address_city_orderer }}
+                        {% trans '住所' %}：{{ order.get_prefecture_orderer_display }} {{ order.address_city_orderer }}
                         {{ order.address_detail_orderer }}
                     </td>
                     <td>
@@ -152,7 +152,7 @@
                         {{ order.last_name_orderer }} {{ order.first_name_orderer }}　様
                     </td>
                     <td>
-                        合計金額：&yen; {{ order.amount | intcomma }}
+                        {% trans '合計金額' %}：&yen; {{ order.amount | intcomma }}
                     </td>
                 </tr>
             </tbody>

@@ -19,11 +19,11 @@
         <div class="w-full flex justify-around">
             <div class="w-1/2 flex flex-col pl-12">
                 <span class="text-purple-700 mb-3">ID</span>
-                <span class="text-purple-700 mb-3">姓</span>
-                <span class="text-purple-700 mb-3">名</span>
-                <span class="text-purple-700 mb-3">姓(カナ)</span>
-                <span class="text-purple-700 mb-3">名(カナ)</span>
-                <span class="text-purple-700 mb-3">性別</span>
+                <span class="text-purple-700 mb-3">{% trans '姓' %}</span>
+                <span class="text-purple-700 mb-3">{% trans '名' %}</span>
+                <span class="text-purple-700 mb-3">{% trans '姓(カナ)' %}</span>
+                <span class="text-purple-700 mb-3">{% trans '名(カナ)' %}</span>
+                <span class="text-purple-700 mb-3">{% trans '性別' %}</span>
             </div>
 
             <div class="w-1/2 flex flex-col text-center pr-12">
@@ -33,11 +33,11 @@
                 <span class="mb-3">{{ value }}</span>
                 {% else %}
                 {% if value == "M" %}
-                <span>男性</span>
+                <span>{% trans '男性' %}</span>
                 {% elif value == "F" %}
-                <span>女性</span>
+                <span>{% trans '女性' %}</span>
                 {% else %}
-                <span>その他</span>
+                <span>{% trans 'その他' %}</span>
                 {% endif %}
                 {% endif %}
                 {% endif %}
@@ -46,9 +46,9 @@
         </div>
 
         <p class="text-center my-10">
-            下記の内容でよろしいですか？<br>
-            「会員登録」ボタンをクリックすると登録手続きが行われます。<br>
-            登録情報を修正する場合は「情報修正」ボタンをクリックしてください。
+            {% trans '下記の内容でよろしいですか？' %}<br>
+            {% trans '「会員登録」ボタンをクリックすると登録手続きが行われます。' %}<br>
+            {% trans '登録情報を修正する場合は「情報修正」ボタンをクリックしてください。' %}
         </p>
 
         <form method="POST" class="w-full flex justify-around mb-5">

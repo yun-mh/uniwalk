@@ -22,23 +22,23 @@
             <div class="products-dropdown hidden bg-white w-40 absolute shadow-dark" style="top: 100%;">
                 <a href="{% url 'admin:products_product_changelist' %}"
                     class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
-                    商品一覧
+                    {% trans '商品一覧' %}
                 </a>
                 <a href="{% url 'admin:products_category_changelist' %}"
                     class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
-                    カテゴリー一覧
+                    {% trans 'カテゴリー一覧' %}
                 </a>
                 <a href="{% url 'admin:designs_material_changelist' %}"
                     class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
-                    素材一覧
+                    {% trans '素材一覧' %}
                 </a>
                 <a href="{% url 'admin:designs_design_changelist' %}"
                     class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
-                    デザイン一覧
+                    {% trans 'デザイン一覧' %}
                 </a>
                 <a href="{% url 'admin:reviews_review_changelist' %}"
                     class="text-sm text-gray-900 block p-2 cursor-pointer hover:text-gray-600">
-                    レビュー一覧
+                    {% trans 'レビュー一覧' %}
                 </a>
             </div>
         </li>
@@ -50,11 +50,11 @@
             <div class="users-dropdown hidden bg-white w-40 absolute shadow-dark" style="top: 100%;">
                 <a href="{% url 'admin:users_user_changelist' %}"
                     class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
-                    会員一覧
+                    {% trans '会員一覧' %}
                 </a>
                 <a href="{% url 'admin:users_guest_changelist' %}"
                     class="text-sm text-gray-900 block p-2 cursor-pointer hover:text-gray-600">
-                    ゲスト一覧
+                    {% trans 'ゲスト一覧' %}
                 </a>
             </div>
         </li>
@@ -66,11 +66,11 @@
             <div class="orders-dropdown hidden bg-white w-40 absolute shadow-dark" style="top: 100%;">
                 <a href="{% url 'admin:orders_order_changelist' %}"
                     class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
-                    注文一覧
+                    {% trans '注文一覧' %}
                 </a>
                 <a href="{% url 'admin:orders_step_changelist' %}"
                     class="text-sm text-gray-900 block p-2 cursor-pointer hover:text-gray-600">
-                    対応コードリスト
+                    {% trans '対応コードリスト' %}
                 </a>
             </div>
         </li>
@@ -82,19 +82,19 @@
             <div class="analytics-dropdown hidden bg-white w-40 absolute shadow-dark" style="top: 100%;">
                 <a href="{% url 'admin:member-analytics' %}"
                     class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
-                    会員分析
+                    {% trans '会員分析' %}
                 </a>
                 <a href="{% url 'admin:sales-analytics' %}"
                     class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
-                    販売実績分析
+                    {% trans '販売実績分析' %}
                 </a>
                 <a href="{% url 'admin:footsize-analytics' %}"
                     class="text-sm text-gray-900 block border-b border-gray-100 p-2 cursor-pointer hover:text-gray-600">
-                    足サイズ分析
+                    {% trans '足サイズ分析' %}
                 </a>
                 <a href="{% url 'admin:design-analytics' %}"
                     class="text-sm text-gray-900 block p-2 cursor-pointer hover:text-gray-600">
-                    人気デザイン分析
+                    {% trans '人気デザイン分析' %}
                 </a>
             </div>
         </li>

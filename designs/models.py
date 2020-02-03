@@ -40,7 +40,7 @@ class Image(models.Model):
     design = models.ForeignKey(
         "Design",
         related_name="images",
-        verbose_name="デザインid",
+        verbose_name=_("デザインid"),
         on_delete=models.CASCADE,
         null=True,
         blank=True,
@@ -171,7 +171,7 @@ class Design(core_models.TimeStampedModel):
     design_number = models.CharField(
         _("番号"), max_length=40, default=create_custom_design_code, blank=True, null=True
     )
-    customize_code = models.CharField("カスタマイズデザインコード", max_length=11)
+    customize_code = models.CharField(_("カスタマイズデザインコード"), max_length=11)
     likes = models.ManyToManyField("users.User", verbose_name=_("いいねユーザ"), related_name="likes")
 
     class Meta:

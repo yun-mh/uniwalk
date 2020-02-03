@@ -13,7 +13,7 @@
                 <input type="hidden" name="target-customer" value="{{ card.customer }}">
                 <input type="hidden" name="target-card" value="{{ card.id }}">
                 <input type="hidden" name="target-fingerprint" value="{{ card.fingerprint }}">
-                <button class="w-20 rounded-lg bg-red-500 mx-3 px-3 py-2 text-sm text-white">登録解除</button>
+                <button class="w-20 rounded-lg bg-red-500 mx-3 px-3 py-2 text-sm text-white">{% trans '登録解除' %}</button>
             </div>
         </div>
         <div class="h-full flex justify-between px-5 py-3" style="background-color: {% if card.brand == 'Visa' %} #243545 {% elif card.brand == 'MasterCard' %} #F79F14 {% elif card.brand == 'American Express' %} #f3f3f3 {% endif %};

@@ -33,9 +33,9 @@ class User(AbstractUser):
 
     GENDER_CHOICES = (
         ("", _("--性別--")),
-        (GENDER_MALE, "男性"),
-        (GENDER_FEMALE, "女性"),
-        (GENDER_OTHER, "その他"),
+        (GENDER_MALE, _("男性")),
+        (GENDER_FEMALE, _("女性")),
+        (GENDER_OTHER, _("その他")),
     )
 
     PREF_CHOICES = JP_PREFECTURES

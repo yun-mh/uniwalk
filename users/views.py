@@ -58,7 +58,7 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
             login(self.request, user)
             session_key = self.request.session.session_key
             cart_models.Cart.objects.filter(session_key=session_key).update(user_id=self.request.user.pk)
-            messages.success(self.request, _(f"ログインしました。"))
+            messages.success(self.request, _("ログインしました。"))
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -249,7 +249,7 @@ class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
             html_message=html_message,
         )
         update_session_auth_hash(self.request, form.user)
-        messages.success(self.request, _(f"パスワードを変更しました。"))
+        messages.success(self.request, _("パスワードを変更しました。"))
         return super().form_valid(form)
 
     def get_success_url(self):

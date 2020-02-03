@@ -356,38 +356,28 @@ class OrderCheckView(FormView):
                     return redirect("/")
 
                 except stripe.error.RateLimitError as e:
-                    # Too many requests made to the API too quickly
-                    messages.warning(self.request, "Rate limit error")
+                    messages.warning(self.request, _("支払限度を超過しました。"))
                     return redirect("/")
 
                 except stripe.error.InvalidRequestError as e:
-                    # Invalid parameters were supplied to Stripe's API
-                    print(e)
-                    messages.warning(self.request, "Invalid parameters")
-                    # return redirect("orders:select-payment")
+                    messages.warning(self.request, _("無効なペラメタです。"))
 
                 except stripe.error.AuthenticationError as e:
-                    # Authentication with Stripe's API failed
-                    # (maybe you changed API keys recently)
-                    messages.warning(self.request, "Not authenticated")
+                    messages.warning(self.request, _("認証できませんでした。"))
                     return redirect("/")
 
                 except stripe.error.APIConnectionError as e:
-                    # Network communication with Stripe failed
-                    messages.warning(self.request, "Network error")
+                    messages.warning(self.request, _("ネットワークに問題があります。"))
                     return redirect("/")
 
                 except stripe.error.StripeError as e:
-                    # Display a very generic error to the user, and maybe send
-                    # yourself an email
                     messages.warning(
-                        self.request, "Something went wrong. You were not charged. Please try again.")
+                        self.request, _("問題が発生しました。もう一度試してみてください。"))
                     return redirect("/")
 
                 except Exception as e:
-                    # send an email to ourselves
                     messages.warning(
-                        self.request, "A serious error occurred. We have been notifed.")
+                        self.request, _("エラーが発生しました。"))
                     return redirect("/")
             else:
                 stripe_charge_id = None

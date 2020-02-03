@@ -16,11 +16,14 @@
         <div class="w-2/3 flex flex-wrap mb-10 pr-10">
             <form method="POST" class="w-3/4 mx-auto">
                 {% csrf_token %}
-                <h3 class="w-full font-semibold text-2xl bg-black p-3 text-white rounded-t-lg">{% trans '1. お届け先情報' %}</h3>
+                <h3 class="w-full font-semibold text-2xl bg-black p-3 text-white rounded-t-lg">{% trans '1. お届け先情報' %}
+                </h3>
                 <div class="border border-gray-500 px-4 pb-2">
                     <h4 class="pt-2">{% trans '配送先住所' %}</h4>
-                    <span class="pt-1">{{ recipient_data.last_name_recipient }}　{{ recipient_data.first_name_recipient }}</span>
-                    <span class="pt-1">({{ recipient_data.last_name_recipient_kana }}　{{ recipient_data.first_name_recipient_kana }})</span>
+                    <span
+                        class="pt-1">{{ recipient_data.last_name_recipient }}　{{ recipient_data.first_name_recipient }}</span>
+                    <span
+                        class="pt-1">({{ recipient_data.last_name_recipient_kana }}　{{ recipient_data.first_name_recipient_kana }})</span>
                     <div class="pt-1">
                         {{ recipient_data.phone_number_recipient }}
                     </div>
@@ -34,7 +37,8 @@
                     </div>
                 </div>
 
-                <h3 class="w-full font-semibold text-2xl text-white bg-black p-3 rounded-t-lg mt-5">{% trans '2. お支払い方法・ご請求先情報' %}</h3>
+                <h3 class="w-full font-semibold text-2xl text-white bg-black p-3 rounded-t-lg mt-5">
+                    {% trans '2. お支払い方法・ご請求先情報' %}</h3>
                 <div class="border border-gray-500 px-4 pb-2">
                     <div class="w-full pb-5">
                         <h4>{% trans 'お支払い方法の選択' %}</h4>
@@ -60,7 +64,23 @@
                     </div>
                     <div id="for_transfer" class="hidden border-2">
                         <h4 class="p-2">{% trans '振り込み案内' %}</h4>
-                        <p class="pb-2 px-2 text-center text-red-800">{% trans 'kouzabanngo nado...' %}</p>
+                        <div class="pb-2 px-2 text-center text-red-800">
+                            <div>
+                                {% trans '振込先：OO銀行' %}
+                            </div>
+                            <div>
+                                {% trans '支店名：OOO支店(支店番号111)' %}
+                            </div>
+                            <div>
+                                {% trans '取引種類：普通' %}
+                            </div>
+                            <div>
+                                {% trans '口座番号：XXX-XXXX' %}
+                            </div>
+                            <div>
+                                {% trans '口座名義：UNIWALK' %}
+                            </div>
+                        </div>
                     </div>
                     <div id="address_orderer" class="hidden">
                         <div class="flex mb-5">
@@ -101,7 +121,8 @@
                     </div>
                 </div>
                 <button class="btn my-5">{% trans 'ご注文内容の確認へ' %}</button>
-                <h3 class="w-full font-semibold text-2xl text-white bg-black p-3 rounded-lg">{% trans '3. ご注文の確定' %}</h3>
+                <h3 class="w-full font-semibold text-2xl text-white bg-black p-3 rounded-lg">{% trans '3. ご注文の確定' %}
+                </h3>
             </form>
         </div>
 

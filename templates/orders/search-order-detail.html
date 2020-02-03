@@ -21,18 +21,19 @@
                 <form method="POST" class="w-full h-full">
                     {% csrf_token %}
                     <div class="w-full flex items-center justify-between bg-gray-600 h-12 text-white px-5">
-                        <h3 class="font-semibold text-lg">注文番号: {{ order.order_code }}</h3>
-                        <span class="">注文日時: {{ order.order_date|date:'Y-m-d H:i:s' }}</span>
+                        <h3 class="font-semibold text-lg">{% trans '注文番号' %}: {{ order.order_code }}</h3>
+                        <span class="">{% trans '注文日時' %}: {{ order.order_date|date:'Y-m-d H:i:s' }}</span>
                     </div>
                     <div class="flex flex-no-wrap py-10 px-5">
                         <div class="w-3/4 flex flex-col justify-around">
-                            <div>合計金額: &yen; {{ order.amount | intcomma }}</div>
-                            <div>注文者: {{ order.last_name_orderer }} {{ order.first_name_orderer }}</div>
-                            <div>お届け先: {{ order.get_prefecture_recipient_display }} {{ order.address_city_recipient }}
+                            <div>{% trans '合計金額' %}: &yen; {{ order.amount | intcomma }}</div>
+                            <div>{% trans '注文者' %}: {{ order.last_name_orderer }} {{ order.first_name_orderer }}</div>
+                            <div>{% trans 'お届け先' %}: {{ order.get_prefecture_recipient_display }}
+                                {{ order.address_city_recipient }}
                                 {{ order.address_detail_recipient }}</div>
-                            <div>数量: {{ order.count_items_all }}</div>
-                            <div>お支払い方法: {{ order.get_payment_display }}</div>
-                            <div>処理状況: {{ order.step }}</div>
+                            <div>{% trans '数量' %}: {{ order.count_items_all }}</div>
+                            <div>{% trans 'お支払い方法' %}: {{ order.get_payment_display }}</div>
+                            <div>{% trans '処理状況' %}: {{ order.step }}</div>
                         </div>
                     </div>
                     {% for order_item in order.order_items.all %}
@@ -41,9 +42,9 @@
                             class="w-1/4 h-40 bg-cover bg-center mr-3">
                         </div>
                         <div class="w-3/4 flex flex-col justify-around">
-                            <div>商品名: {{ order_item.product }}</div>
-                            <div>単価: &yen; {{ order_item.price | intcomma }}</div>
-                            <div>数量: {{ order_item.quantity }}</div>
+                            <div>{% trans '商品名' %}: {{ order_item.product }}</div>
+                            <div>{% trans '単価' %}: &yen; {{ order_item.price | intcomma }}</div>
+                            <div>{% trans '数量' %}: {{ order_item.quantity }}</div>
                         </div>
                     </div>
                     {% endfor %}
