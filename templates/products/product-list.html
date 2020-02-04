@@ -42,7 +42,7 @@
 
                 <span class="mx-3 font-medium text-sm">
                     {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}
-                    {{ current_page }} ページ{% endblocktrans %}
+                    {{ current_page }} ページ {% endblocktrans %}
                 </span>
 
                 {% if page_obj.has_next %}

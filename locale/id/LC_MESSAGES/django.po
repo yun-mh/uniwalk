@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-03 17:40+0900\n"
+"POT-Creation-Date: 2020-02-04 12:40+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "デザイン"
 msgstr ""
 
-#: .\carts\models.py:26 .\designs\models.py:76 .\orders\models.py:155
+#: .\carts\models.py:26 .\designs\models.py:76 .\orders\models.py:173
 #: .\products\models.py:32 .\products\models.py:81 .\products\models.py:173
 #: .\products\models.py:174 .\reviews\models.py:12
 #: .\templates\admin\extra_nav.html:20 .\templates\partials\nav.html:116
@@ -38,7 +38,7 @@ msgstr ""
 msgid "足サイズ"
 msgstr ""
 
-#: .\carts\models.py:36 .\orders\models.py:161
+#: .\carts\models.py:36 .\orders\models.py:179
 #: .\templates\documents\bill.html:95 .\templates\documents\invoice.html:61
 #: .\templates\documents\ordersheet.html:86
 #: .\templates\documents\receipt.html:63
@@ -112,19 +112,19 @@ msgstr ""
 msgid "デザインid"
 msgstr ""
 
-#: .\designs\models.py:48 .\orders\models.py:163
+#: .\designs\models.py:48 .\orders\models.py:181
 msgid "正面"
 msgstr ""
 
-#: .\designs\models.py:49 .\orders\models.py:164
+#: .\designs\models.py:49 .\orders\models.py:182
 msgid "側面"
 msgstr ""
 
-#: .\designs\models.py:50 .\orders\models.py:165
+#: .\designs\models.py:50 .\orders\models.py:183
 msgid "上面"
 msgstr ""
 
-#: .\designs\models.py:51 .\orders\models.py:166
+#: .\designs\models.py:51 .\orders\models.py:184
 msgid "下面"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgstr ""
 msgid "番号"
 msgstr ""
 
-#: .\designs\models.py:174 .\orders\models.py:187
+#: .\designs\models.py:174 .\orders\models.py:205
 #: .\templates\documents\specification.html:51
 msgid "カスタマイズデザインコード"
 msgstr ""
@@ -206,7 +206,7 @@ msgstr ""
 msgid "足幅(右)"
 msgstr ""
 
-#: .\orders\admin.py:18 .\orders\admin.py:19 .\orders\models.py:149
+#: .\orders\admin.py:18 .\orders\admin.py:19 .\orders\models.py:167
 msgid "注文アイテム"
 msgstr ""
 
@@ -393,7 +393,7 @@ msgstr ""
 msgid "請求書住所が配送先と同じ"
 msgstr ""
 
-#: .\orders\forms.py:158 .\orders\forms.py:159 .\orders\models.py:102
+#: .\orders\forms.py:158 .\orders\forms.py:159 .\orders\models.py:120
 #: .\templates\documents\invoice.html:43
 #: .\templates\documents\ordersheet.html:80
 #: .\templates\documents\receipt.html:29
@@ -462,66 +462,66 @@ msgstr ""
 msgid "建物名・部屋番号(ご請求書先)"
 msgstr ""
 
-#: .\orders\models.py:78
+#: .\orders\models.py:79
 msgid "姓(お届け先)"
 msgstr ""
 
-#: .\orders\models.py:79
+#: .\orders\models.py:82
 msgid "名(お届け先)"
 msgstr ""
 
-#: .\orders\models.py:80
+#: .\orders\models.py:85
 msgid "姓(カナ, お届け先)"
 msgstr ""
 
-#: .\orders\models.py:81
+#: .\orders\models.py:88
 msgid "名(カナ, お届け先)"
 msgstr ""
 
-#: .\orders\models.py:82
+#: .\orders\models.py:91
 msgid "電話番号(お届け先)"
 msgstr ""
 
-#: .\orders\models.py:83
+#: .\orders\models.py:94
 msgid "郵便番号(お届け先)"
 msgstr ""
 
-#: .\orders\models.py:84
+#: .\orders\models.py:97
 msgid "都道府県(お届け先)"
 msgstr ""
 
-#: .\orders\models.py:85
+#: .\orders\models.py:100
 msgid "市区町村(お届け先)"
 msgstr ""
 
-#: .\orders\models.py:86
+#: .\orders\models.py:103
 msgid "建物名・部屋番号(お届け先)"
 msgstr ""
 
-#: .\orders\models.py:87 .\templates\mixins\orders\order-card.html:7
+#: .\orders\models.py:105 .\templates\mixins\orders\order-card.html:7
 #: .\templates\mixins\orders\order-detail-card.html:7
 #: .\templates\orders\search-order-detail.html:25
 msgid "注文日時"
 msgstr ""
 
-#: .\orders\models.py:88
+#: .\orders\models.py:106
 msgid "支払方法"
 msgstr ""
 
-#: .\orders\models.py:93
+#: .\orders\models.py:111
 msgid "対応状況"
 msgstr ""
 
-#: .\orders\models.py:98
+#: .\orders\models.py:116
 msgid "支払総額"
 msgstr ""
 
-#: .\orders\models.py:106 .\orders\models.py:107
+#: .\orders\models.py:124 .\orders\models.py:125
 #: .\templates\admin\extra_nav.html:64
 msgid "注文"
 msgstr ""
 
-#: .\orders\models.py:162 .\templates\carts\cart.html:48
+#: .\orders\models.py:180 .\templates\carts\cart.html:48
 #: .\templates\documents\receipt.html:66
 #: .\templates\mixins\orders\order-detail-card.html:27
 #: .\templates\orders\bill.html:91 .\templates\orders\receipt.html:60
@@ -729,19 +729,19 @@ msgstr ""
 msgid "注文状況"
 msgstr ""
 
-#: .\templates\admin\base.html:98
+#: .\templates\admin\base.html:98 .\vinaigrette-deleteme.py:2
 msgid "入金前"
 msgstr ""
 
-#: .\templates\admin\base.html:104
+#: .\templates\admin\base.html:104 .\vinaigrette-deleteme.py:3
 msgid "決済処理中"
 msgstr ""
 
-#: .\templates\admin\base.html:110
+#: .\templates\admin\base.html:110 .\vinaigrette-deleteme.py:4
 msgid "決済確認済み"
 msgstr ""
 
-#: .\templates\admin\base.html:116
+#: .\templates\admin\base.html:116 .\vinaigrette-deleteme.py:5
 msgid "対応中"
 msgstr ""
 
@@ -850,7 +850,6 @@ msgid "商品別"
 msgstr ""
 
 #: .\templates\admin\design-analytics.html:80
-#: .\templates\products\product-list.html:44
 #, python-format
 msgid ""
 "\n"
@@ -921,6 +920,48 @@ msgstr ""
 msgid "人気デザイン分析"
 msgstr ""
 
+#: .\templates\admin\footsize-analytics.html:62
+#: .\templates\admin\footsize-analytics.html:106
+msgid "80以下"
+msgstr ""
+
+#: .\templates\admin\footsize-analytics.html:66
+#: .\templates\admin\footsize-analytics.html:110
+msgid "~110以上"
+msgstr ""
+
+#: .\templates\admin\footsize-analytics.html:69
+#: .\templates\admin\footsize-analytics.html:113
+#: .\templates\admin\footsize-analytics.html:160
+#: .\templates\admin\footsize-analytics.html:207
+#: .\templates\admin\member-analytics.html:41
+#: .\templates\admin\member-analytics.html:113
+#: .\templates\users\signup-check.html:36 .\users\forms.py:56
+#: .\users\models.py:36
+msgid "男性"
+msgstr ""
+
+#: .\templates\admin\footsize-analytics.html:75
+#: .\templates\admin\footsize-analytics.html:119
+#: .\templates\admin\footsize-analytics.html:166
+#: .\templates\admin\footsize-analytics.html:213
+#: .\templates\admin\member-analytics.html:45
+#: .\templates\admin\member-analytics.html:114
+#: .\templates\users\signup-check.html:38 .\users\forms.py:56
+#: .\users\models.py:37
+msgid "女性"
+msgstr ""
+
+#: .\templates\admin\footsize-analytics.html:150
+#: .\templates\admin\footsize-analytics.html:197
+msgid "230未満"
+msgstr ""
+
+#: .\templates\admin\footsize-analytics.html:157
+#: .\templates\admin\footsize-analytics.html:204
+msgid "290以上"
+msgstr ""
+
 #: .\templates\admin\member-analytics.html:8
 msgid "全体顧客対比会員割合"
 msgstr ""
@@ -941,19 +982,8 @@ msgstr ""
 msgid "全体会員数"
 msgstr ""
 
-#: .\templates\admin\member-analytics.html:41
-#: .\templates\users\signup-check.html:36 .\users\forms.py:56
-#: .\users\models.py:36
-msgid "男性"
-msgstr ""
-
-#: .\templates\admin\member-analytics.html:45
-#: .\templates\users\signup-check.html:38 .\users\forms.py:56
-#: .\users\models.py:37
-msgid "女性"
-msgstr ""
-
 #: .\templates\admin\member-analytics.html:49
+#: .\templates\admin\member-analytics.html:115
 #: .\templates\users\signup-check.html:40 .\users\forms.py:56
 #: .\users\models.py:38
 msgid "その他"
@@ -961,6 +991,34 @@ msgstr ""
 
 #: .\templates\admin\member-analytics.html:62
 msgid "会員年齢分布"
+msgstr ""
+
+#: .\templates\admin\member-analytics.html:145
+msgid "10歳未満"
+msgstr ""
+
+#: .\templates\admin\member-analytics.html:146
+msgid "10代"
+msgstr ""
+
+#: .\templates\admin\member-analytics.html:147
+msgid "20代"
+msgstr ""
+
+#: .\templates\admin\member-analytics.html:148
+msgid "30代"
+msgstr ""
+
+#: .\templates\admin\member-analytics.html:149
+msgid "40代"
+msgstr ""
+
+#: .\templates\admin\member-analytics.html:150
+msgid "50代"
+msgstr ""
+
+#: .\templates\admin\member-analytics.html:151
+msgid "60代以上"
 msgstr ""
 
 #: .\templates\admin\order_changeform.html:19
@@ -981,6 +1039,54 @@ msgstr ""
 
 #: .\templates\admin\sales-analytics.html:26
 msgid "商品別販売実績(商品別販売個数)"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:42
+msgid "1月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:43
+msgid "2月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:44
+msgid "3月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:45
+msgid "4月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:46
+msgid "5月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:47
+msgid "6月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:48
+msgid "7月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:49
+msgid "8月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:50
+msgid "9月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:51
+msgid "10月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:52
+msgid "11月"
+msgstr ""
+
+#: .\templates\admin\sales-analytics.html:53
+msgid "12月"
 msgstr ""
 
 #: .\templates\cards\card-list.html:5 .\templates\cards\card-list.html:23
@@ -1438,7 +1544,7 @@ msgstr ""
 
 #: .\templates\mixins\orders\order-card.html:29
 #: .\templates\mixins\orders\order-detail-card.html:36
-#: .\templates\orders\search-order-detail.html:55
+#: .\templates\orders\search-order-detail.html:55 .\vinaigrette-deleteme.py:7
 msgid "注文取消"
 msgstr ""
 
@@ -1739,6 +1845,13 @@ msgstr ""
 msgid "商品リスト"
 msgstr ""
 
+#: .\templates\products\product-list.html:44
+#, python-format
+msgid ""
+"\n"
+"                    %(current_page)s ページ "
+msgstr ""
+
 #: .\templates\reviews\review-list.html:5
 msgid "レビューリスト"
 msgstr ""
@@ -1818,7 +1931,7 @@ msgstr ""
 
 #: .\templates\statics\home.html:34
 msgid ""
-"足の写真をアップロードし、両足すつ足長・足幅のサイズを測定することができま"
+"足の写真をアップロードし、両足ずつ足長・足幅のサイズを測定することができま"
 "す。"
 msgstr ""
 
@@ -2150,4 +2263,8 @@ msgstr ""
 
 #: .\users\views.py:792
 msgid "会員様のメールアドレスとは違います。"
+msgstr ""
+
+#: .\vinaigrette-deleteme.py:6
+msgid "発送済み"
 msgstr ""

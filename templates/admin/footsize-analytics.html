@@ -59,20 +59,20 @@
             type: 'bar',
             data: {
                 labels: [
-                    '80以下',
+                    '{% trans "80以下" %}',
                     '~90',
                     '~100',
                     '~110',
-                    '~110以上'
+                    '{% trans "~110以上" %}'
                 ],
                 datasets: [{
-                    label: '男性',
+                    label: '{% trans "男性" %}',
                     data: [{% for key, value in width_male_left.items %}'{{ value }}', {% endfor %}],
             backgroundColor: '#36A2EB',
             borderColor: '#36A2EB',
             borderWidth: 1
         }, {
-            label: '女性',
+            label: '{% trans "女性" %}',
             data: [{% for key, value in width_female_left.items %}'{{ value }}', {% endfor %}],
     backgroundColor: '#FF6384',
         borderColor: '#FF6384',
@@ -103,20 +103,20 @@
             type: 'bar',
             data: {
                 labels: [
-                    '80以下',
+                    '{% trans "80以下" %}',
                     '~90',
                     '~100',
                     '~110',
-                    '~110以上'
+                    '{% trans "~110以上" %}'
                 ],
                 datasets: [{
-                    label: '男性',
+                    label: '{% trans "男性" %}',
                     data: [{% for key, value in width_male_right.items %}'{{ value }}', {% endfor %}],
             backgroundColor: '#36A2EB',
             borderColor: '#36A2EB',
             borderWidth: 1
         }, {
-            label: '女性',
+            label: '{% trans "女性" %}',
             data: [{% for key, value in width_female_right.items %}'{{ value }}', {% endfor %}],
     backgroundColor: '#FF6384',
         borderColor: '#FF6384',
@@ -147,23 +147,23 @@
             type: 'bar',
             data: {
                 labels: [
-                    '230未満',
+                    '{% trans "230未満" %}',
                     '~240',
                     '~250',
                     '~260',
                     '~270',
                     '~280',
                     '~290',
-                    '290以上',
+                    '{% trans "290以上" %}',
                 ],
                 datasets: [{
-                    label: '男性',
+                    label: '{% trans "男性" %}',
                     data: [{% for key, value in length_male_left.items %}'{{ value }}', {% endfor %}],
             backgroundColor: '#36A2EB',
             borderColor: '#36A2EB',
             borderWidth: 1
         }, {
-            label: '女性',
+            label: '{% trans "女性" %}',
             data: [{% for key, value in length_female_left.items %}'{{ value }}', {% endfor %}],
     backgroundColor: '#FF6384',
         borderColor: '#FF6384',
@@ -194,23 +194,23 @@
             type: 'bar',
             data: {
                 labels: [
-                    '230未満',
+                    '{% trans "230未満" %}',
                     '~240',
                     '~250',
                     '~260',
                     '~270',
                     '~280',
                     '~290',
-                    '290以上',
+                    '{% trans "290以上" %}',
                 ],
                 datasets: [{
-                    label: '男性',
+                    label: '{% trans "男性" %}',
                     data: [{% for key, value in length_male_right.items %}'{{ value }}', {% endfor %}],
             backgroundColor: '#36A2EB',
             borderColor: '#36A2EB',
             borderWidth: 1
         }, {
-            label: '女性',
+            label: '{% trans "女性" %}',
             data: [{% for key, value in length_female_right.items %}'{{ value }}', {% endfor %}],
     backgroundColor: '#FF6384',
         borderColor: '#FF6384',

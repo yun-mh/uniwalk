@@ -110,9 +110,9 @@
             type: 'pie',
             data: {
                 labels: [
-                    '男性',
-                    '女性',
-                    'その他'
+                    '{% trans "男性" %}',
+                    '{% trans "女性" %}',
+                    '{% trans "その他" %}'
                 ],
                 datasets: [{
                     data: ['{{ male | length }}', '{{ female | length }}', '{{ other | length }}'],
@@ -142,13 +142,13 @@
             type: 'bar',
             data: {
                 labels: [
-                    '10歳未満',
-                    '10代',
-                    '20代',
-                    '30代',
-                    '40代',
-                    '50代',
-                    '60代以上'
+                    '{% trans "10歳未満" %}',
+                    '{% trans "10代" %}',
+                    '{% trans "20代" %}',
+                    '{% trans "30代" %}',
+                    '{% trans "40代" %}',
+                    '{% trans "50代" %}',
+                    '{% trans "60代以上" %}'
                 ],
                 datasets: [{
                     data: ['{{ kids |length }}', '{{ tens |length }}', '{{ twenties |length }}', '{{ thirties |length }}', '{{ forties |length }}', '{{ fifties |length }}', '{{ over_sixties |length }}'],

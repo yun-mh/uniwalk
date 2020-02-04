@@ -39,18 +39,18 @@
             type: 'line',
             data: {
                 labels: [
-                    '1月',
-                    '2月',
-                    '3月',
-                    '4月',
-                    '5月',
-                    '6月',
-                    '7月',
-                    '8月',
-                    '9月',
-                    '10月',
-                    '11月',
-                    '12月'
+                    '{% trans "1月" %}',
+                    '{% trans "2月" %}',
+                    '{% trans "3月" %}',
+                    '{% trans "4月" %}',
+                    '{% trans "5月" %}',
+                    '{% trans "6月" %}',
+                    '{% trans "7月" %}',
+                    '{% trans "8月" %}',
+                    '{% trans "9月" %}',
+                    '{% trans "10月" %}',
+                    '{% trans "11月" %}',
+                    '{% trans "12月" %}'
                 ],
                 datasets: [{
                     data: [{% for key, value in profit_by_month.items %}'{{ value }}', {% endfor %}],

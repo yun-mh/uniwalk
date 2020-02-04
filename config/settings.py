@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = [
     "phonenumber_field",
     "localflavor",
     "stripe",
+    "vinaigrette",
 ]
 
 PROJECT_APPS = [

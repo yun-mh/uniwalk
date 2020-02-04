@@ -19,6 +19,7 @@ weasyprint = "*"
 numpy = "*"
 opencv-python = "*"
 python-resize-image = "*"
+django-vinaigrette = "*"
 
 [requires]
 python_version = "3.7"

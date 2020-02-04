@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-03 17:40+0900\n"
+"POT-Creation-Date: 2020-02-04 12:07+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr "카트"
 msgid "デザイン"
 msgstr "디자인"
 
-#: .\carts\models.py:26 .\designs\models.py:76 .\orders\models.py:155
+#: .\carts\models.py:26 .\designs\models.py:76 .\orders\models.py:173
 #: .\products\models.py:32 .\products\models.py:81 .\products\models.py:173
 #: .\products\models.py:174 .\reviews\models.py:12
 #: .\templates\admin\extra_nav.html:20 .\templates\partials\nav.html:116
@@ -38,7 +38,7 @@ msgstr "상품"
 msgid "足サイズ"
 msgstr "발사이즈"
 
-#: .\carts\models.py:36 .\orders\models.py:161
+#: .\carts\models.py:36 .\orders\models.py:179
 #: .\templates\documents\bill.html:95 .\templates\documents\invoice.html:61
 #: .\templates\documents\ordersheet.html:86
 #: .\templates\documents\receipt.html:63
@@ -112,19 +112,19 @@ msgstr "소재"
 msgid "デザインid"
 msgstr "디자인id"
 
-#: .\designs\models.py:48 .\orders\models.py:163
+#: .\designs\models.py:48 .\orders\models.py:181
 msgid "正面"
 msgstr "정면"
 
-#: .\designs\models.py:49 .\orders\models.py:164
+#: .\designs\models.py:49 .\orders\models.py:182
 msgid "側面"
 msgstr "측면"
 
-#: .\designs\models.py:50 .\orders\models.py:165
+#: .\designs\models.py:50 .\orders\models.py:183
 msgid "上面"
 msgstr "상면"
 
-#: .\designs\models.py:51 .\orders\models.py:166
+#: .\designs\models.py:51 .\orders\models.py:184
 msgid "下面"
 msgstr "하면"
 
@@ -181,7 +181,7 @@ msgstr "텅 소재(우)"
 msgid "番号"
 msgstr "번호"
 
-#: .\designs\models.py:174 .\orders\models.py:187
+#: .\designs\models.py:174 .\orders\models.py:205
 #: .\templates\documents\specification.html:51
 msgid "カスタマイズデザインコード"
 msgstr "커스터마이즈 디자인 코드"
@@ -206,7 +206,7 @@ msgstr "발 넓이(좌)"
 msgid "足幅(右)"
 msgstr "발 넓이(우)"
 
-#: .\orders\admin.py:18 .\orders\admin.py:19 .\orders\models.py:149
+#: .\orders\admin.py:18 .\orders\admin.py:19 .\orders\models.py:167
 msgid "注文アイテム"
 msgstr "주문 아이템"
 
@@ -393,7 +393,7 @@ msgstr "우편번호"
 msgid "請求書住所が配送先と同じ"
 msgstr "청구서 주소가 배송지와 동일"
 
-#: .\orders\forms.py:158 .\orders\forms.py:159 .\orders\models.py:102
+#: .\orders\forms.py:158 .\orders\forms.py:159 .\orders\models.py:120
 #: .\templates\documents\invoice.html:43
 #: .\templates\documents\ordersheet.html:80
 #: .\templates\documents\receipt.html:29
@@ -462,66 +462,66 @@ msgstr "시구정촌(청구서앞)"
 msgid "建物名・部屋番号(ご請求書先)"
 msgstr "건물명・호실번호(청구서앞)"
 
-#: .\orders\models.py:78
+#: .\orders\models.py:79
 msgid "姓(お届け先)"
 msgstr "성(배송지앞)"
 
-#: .\orders\models.py:79
+#: .\orders\models.py:82
 msgid "名(お届け先)"
 msgstr "명(배송지앞)"
 
-#: .\orders\models.py:80
+#: .\orders\models.py:85
 msgid "姓(カナ, お届け先)"
 msgstr "성(배송지앞, 가나)"
 
-#: .\orders\models.py:81
+#: .\orders\models.py:88
 msgid "名(カナ, お届け先)"
 msgstr "명(배송지앞, 가나)"
 
-#: .\orders\models.py:82
+#: .\orders\models.py:91
 msgid "電話番号(お届け先)"
 msgstr "전화번호(배송지앞)"
 
-#: .\orders\models.py:83
+#: .\orders\models.py:94
 msgid "郵便番号(お届け先)"
 msgstr "우편번호(배송지앞)"
 
-#: .\orders\models.py:84
+#: .\orders\models.py:97
 msgid "都道府県(お届け先)"
 msgstr "도도부현(배송지앞)"
 
-#: .\orders\models.py:85
+#: .\orders\models.py:100
 msgid "市区町村(お届け先)"
 msgstr "시구정촌(배송지앞)"
 
-#: .\orders\models.py:86
+#: .\orders\models.py:103
 msgid "建物名・部屋番号(お届け先)"
 msgstr "건물명・호실번호(배송지앞)"
 
-#: .\orders\models.py:87 .\templates\mixins\orders\order-card.html:7
+#: .\orders\models.py:105 .\templates\mixins\orders\order-card.html:7
 #: .\templates\mixins\orders\order-detail-card.html:7
 #: .\templates\orders\search-order-detail.html:25
 msgid "注文日時"
 msgstr "주문일시"
 
-#: .\orders\models.py:88
+#: .\orders\models.py:106
 msgid "支払方法"
 msgstr "지불방법"
 
-#: .\orders\models.py:93
+#: .\orders\models.py:111
 msgid "対応状況"
 msgstr "대응상황"
 
-#: .\orders\models.py:98
+#: .\orders\models.py:116
 msgid "支払総額"
 msgstr "지불총액"
 
-#: .\orders\models.py:106 .\orders\models.py:107
+#: .\orders\models.py:124 .\orders\models.py:125
 #: .\templates\admin\extra_nav.html:64
 msgid "注文"
 msgstr "주문"
 
-#: .\orders\models.py:162 .\templates\carts\cart.html:48
+#: .\orders\models.py:180 .\templates\carts\cart.html:48
 #: .\templates\documents\receipt.html:66
 #: .\templates\mixins\orders\order-detail-card.html:27
 #: .\templates\orders\bill.html:91 .\templates\orders\receipt.html:60
@@ -729,19 +729,19 @@ msgstr "로그아웃"
 msgid "注文状況"
 msgstr "주문 현황"
 
-#: .\templates\admin\base.html:98
+#: .\templates\admin\base.html:98 .\vinaigrette-deleteme.py:2
 msgid "入金前"
 msgstr "입금전"
 
-#: .\templates\admin\base.html:104
+#: .\templates\admin\base.html:104 .\vinaigrette-deleteme.py:3
 msgid "決済処理中"
 msgstr "결제처리중"
 
-#: .\templates\admin\base.html:110
+#: .\templates\admin\base.html:110 .\vinaigrette-deleteme.py:4
 msgid "決済確認済み"
 msgstr "결제확인완료"
 
-#: .\templates\admin\base.html:116
+#: .\templates\admin\base.html:116 .\vinaigrette-deleteme.py:5
 msgid "対応中"
 msgstr "대응중"
 
@@ -850,13 +850,16 @@ msgid "商品別"
 msgstr "상품별"
 
 #: .\templates\admin\design-analytics.html:80
-#: .\templates\products\product-list.html:44
-#, python-format
-msgid "\n"
-"                    %(current_page)s 페이지"
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                        %(current_page)s ページ"
+msgid ""
 "\n"
 "                    %(current_page)s ページ"
 msgstr ""
+"\n"
+"                        %(current_page)s 페이지"
 
 #: .\templates\admin\extra_nav.html:14 .\templates\statics\home.html:5
 msgid "ホーム"
@@ -922,6 +925,48 @@ msgstr "발사이즈분석"
 msgid "人気デザイン分析"
 msgstr "인기디자인 분석"
 
+#: .\templates\admin\footsize-analytics.html:62
+#: .\templates\admin\footsize-analytics.html:106
+msgid "80以下"
+msgstr "80이하"
+
+#: .\templates\admin\footsize-analytics.html:66
+#: .\templates\admin\footsize-analytics.html:110
+msgid "~110以上"
+msgstr "110이상"
+
+#: .\templates\admin\footsize-analytics.html:69
+#: .\templates\admin\footsize-analytics.html:113
+#: .\templates\admin\footsize-analytics.html:160
+#: .\templates\admin\footsize-analytics.html:207
+#: .\templates\admin\member-analytics.html:41
+#: .\templates\admin\member-analytics.html:113
+#: .\templates\users\signup-check.html:36 .\users\forms.py:56
+#: .\users\models.py:36
+msgid "男性"
+msgstr "남성"
+
+#: .\templates\admin\footsize-analytics.html:75
+#: .\templates\admin\footsize-analytics.html:119
+#: .\templates\admin\footsize-analytics.html:166
+#: .\templates\admin\footsize-analytics.html:213
+#: .\templates\admin\member-analytics.html:45
+#: .\templates\admin\member-analytics.html:114
+#: .\templates\users\signup-check.html:38 .\users\forms.py:56
+#: .\users\models.py:37
+msgid "女性"
+msgstr "여성"
+
+#: .\templates\admin\footsize-analytics.html:150
+#: .\templates\admin\footsize-analytics.html:197
+msgid "230未満"
+msgstr "230미만"
+
+#: .\templates\admin\footsize-analytics.html:157
+#: .\templates\admin\footsize-analytics.html:204
+msgid "290以上"
+msgstr "290이상"
+
 #: .\templates\admin\member-analytics.html:8
 msgid "全体顧客対比会員割合"
 msgstr "전체고객 대비 회원비율"
@@ -942,19 +987,8 @@ msgstr "회원 성별 비율"
 msgid "全体会員数"
 msgstr "전체 회원수"
 
-#: .\templates\admin\member-analytics.html:41
-#: .\templates\users\signup-check.html:36 .\users\forms.py:56
-#: .\users\models.py:36
-msgid "男性"
-msgstr "남성"
-
-#: .\templates\admin\member-analytics.html:45
-#: .\templates\users\signup-check.html:38 .\users\forms.py:56
-#: .\users\models.py:37
-msgid "女性"
-msgstr "여성"
-
 #: .\templates\admin\member-analytics.html:49
+#: .\templates\admin\member-analytics.html:115
 #: .\templates\users\signup-check.html:40 .\users\forms.py:56
 #: .\users\models.py:38
 msgid "その他"
@@ -963,6 +997,34 @@ msgstr "그 외"
 #: .\templates\admin\member-analytics.html:62
 msgid "会員年齢分布"
 msgstr "회원 연령 분포"
+
+#: .\templates\admin\member-analytics.html:145
+msgid "10歳未満"
+msgstr "10세미만"
+
+#: .\templates\admin\member-analytics.html:146
+msgid "10代"
+msgstr "10대"
+
+#: .\templates\admin\member-analytics.html:147
+msgid "20代"
+msgstr "20대"
+
+#: .\templates\admin\member-analytics.html:148
+msgid "30代"
+msgstr "30대"
+
+#: .\templates\admin\member-analytics.html:149
+msgid "40代"
+msgstr "40대"
+
+#: .\templates\admin\member-analytics.html:150
+msgid "50代"
+msgstr "50대"
+
+#: .\templates\admin\member-analytics.html:151
+msgid "60代以上"
+msgstr "60대이상"
 
 #: .\templates\admin\order_changeform.html:19
 msgid "History"
@@ -983,6 +1045,78 @@ msgstr "연도"
 #: .\templates\admin\sales-analytics.html:26
 msgid "商品別販売実績(商品別販売個数)"
 msgstr "상품별 판매실적(상품별 판매개수)"
+
+#: .\templates\admin\sales-analytics.html:42
+#, fuzzy
+#| msgid "月"
+msgid "1月"
+msgstr "1월"
+
+#: .\templates\admin\sales-analytics.html:43
+#, fuzzy
+#| msgid "月"
+msgid "2月"
+msgstr "2월"
+
+#: .\templates\admin\sales-analytics.html:44
+#, fuzzy
+#| msgid "月"
+msgid "3月"
+msgstr "3월"
+
+#: .\templates\admin\sales-analytics.html:45
+#, fuzzy
+#| msgid "月"
+msgid "4月"
+msgstr "4월"
+
+#: .\templates\admin\sales-analytics.html:46
+#, fuzzy
+#| msgid "月"
+msgid "5月"
+msgstr "5월"
+
+#: .\templates\admin\sales-analytics.html:47
+#, fuzzy
+#| msgid "月"
+msgid "6月"
+msgstr "6월"
+
+#: .\templates\admin\sales-analytics.html:48
+#, fuzzy
+#| msgid "月"
+msgid "7月"
+msgstr "7월"
+
+#: .\templates\admin\sales-analytics.html:49
+#, fuzzy
+#| msgid "月"
+msgid "8月"
+msgstr "8월"
+
+#: .\templates\admin\sales-analytics.html:50
+#, fuzzy
+#| msgid "月"
+msgid "9月"
+msgstr "9월"
+
+#: .\templates\admin\sales-analytics.html:51
+#, fuzzy
+#| msgid "月"
+msgid "10月"
+msgstr "10월"
+
+#: .\templates\admin\sales-analytics.html:52
+#, fuzzy
+#| msgid "月"
+msgid "11月"
+msgstr "11월"
+
+#: .\templates\admin\sales-analytics.html:53
+#, fuzzy
+#| msgid "月"
+msgid "12月"
+msgstr "12월"
 
 #: .\templates\cards\card-list.html:5 .\templates\cards\card-list.html:23
 msgid "クレジットカード一覧"
@@ -1443,7 +1577,7 @@ msgstr "주문상세"
 
 #: .\templates\mixins\orders\order-card.html:29
 #: .\templates\mixins\orders\order-detail-card.html:36
-#: .\templates\orders\search-order-detail.html:55
+#: .\templates\orders\search-order-detail.html:55 .\vinaigrette-deleteme.py:7
 msgid "注文取消"
 msgstr "주문취소"
 
@@ -1713,7 +1847,7 @@ msgstr "회사 소개"
 #: .\templates\products\product-detail.html:5
 #, python-format
 msgid "%(product_name)s"
-msgstr ""
+msgstr "%(product_name)s"
 
 #: .\templates\products\product-detail.html:30
 msgid "税込"
@@ -1743,6 +1877,15 @@ msgstr "리뷰가 아직 존재하지 않습니다."
 #: .\templates\products\product-list.html:5 .\templates\statics\home.html:53
 msgid "商品リスト"
 msgstr "상품 목록"
+
+#: .\templates\products\product-list.html:44
+#, python-format
+msgid ""
+"\n"
+"                    %(current_page)s ページ "
+msgstr ""
+"\n"
+"                        %(current_page)s 페이지 "
 
 #: .\templates\reviews\review-list.html:5
 msgid "レビューリスト"
@@ -1793,12 +1936,12 @@ msgid ""
 msgstr ""
 "언제나 이상적인 운동화를 찾고 계신 고개님을 위해 Uniwalk가 탄생했습니다."
 "<br>\n"
-"                    Uniwalk는 고객님이 좋아하는 색, 좋아하는 디자인, 좋아하는 "
-"사이즈로 고객님을 위한 운동화를 제작합니다.<br>\n"
-"                    베이스가 되는 운동화를 골라, 좋아하는 색으로 디자인하여, 발사이즈를 "
-"측정합니다.<br>\n"
-"                    그 다음엔 고객님 앞으로 운동화가 배송되는 걸 기다리기만 하시면 됩니다!"
-"분명 마음에 드시는 운동화를 받으실 수 있을 거라고 확신합니다."
+"                    Uniwalk는 고객님이 좋아하는 색, 좋아하는 디자인, 좋아하"
+"는 사이즈로 고객님을 위한 운동화를 제작합니다.<br>\n"
+"                    베이스가 되는 운동화를 골라, 좋아하는 색으로 디자인하여, "
+"발사이즈를 측정합니다.<br>\n"
+"                    그 다음엔 고객님 앞으로 운동화가 배송되는 걸 기다리기만 "
+"하시면 됩니다!분명 마음에 드시는 운동화를 받으실 수 있을 거라고 확신합니다."
 
 #: .\templates\statics\about.html:40
 msgid "アクセス"
@@ -1812,10 +1955,10 @@ msgid ""
 "00<br>\n"
 "                    定休日 月曜日定休"
 msgstr ""
-"주소 450-0002 아이치현 나고야시 나카무라구 메이에키 4번지 27-1 종합교사 스파이럴 "
-"타워즈<br>\n"
-"                    영업시간 평일：13：00～20：00　공휴일(토일 포함)：10：00～18："
-"00<br>\n"
+"주소 450-0002 아이치현 나고야시 나카무라구 메이에키 4번지 27-1 종합교사 스파"
+"이럴 타워즈<br>\n"
+"                    영업시간 평일：13：00～20：00　공휴일(토일 포함)：10：00"
+"～18：00<br>\n"
 "                    월요일 정기 휴일"
 
 #: .\templates\statics\home.html:11
@@ -1831,8 +1974,8 @@ msgid ""
 "素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザイ"
 "ンを参照することもできます！"
 msgstr ""
-"소재, 색을 변경해 양발 모두 자신만의 개성을 표현할 수 있습니다. 다른 고객님이 만드신"
-"디자인을 참조하는 것도 가능해요!"
+"소재, 색을 변경해 양발 모두 자신만의 개성을 표현할 수 있습니다. 다른 고객님"
+"이 만드신디자인을 참조하는 것도 가능해요!"
 
 #: .\templates\statics\home.html:33
 msgid "足サイズを測定する"
@@ -1840,9 +1983,9 @@ msgstr "발사이즈 측정"
 
 #: .\templates\statics\home.html:34
 msgid ""
-"足の写真をアップロードし、両足すつ足長・足幅のサイズを測定することができま"
+"足の写真をアップロードし、両足ずつ足長・足幅のサイズを測定することができま"
 "す。"
-msgstr ""
+msgstr "발 사진을 업로드해 양발의 발 길이, 발 넓이를 측정할 수 있습니다."
 
 #: .\templates\statics\home.html:45
 msgid "依頼どおりスニーカーを制作する"
@@ -1897,8 +2040,7 @@ msgid ""
 "パスワード再設定用リンクが無効です。新たにパスワード再設定を申し込んでくださ"
 "い。"
 msgstr ""
-"비밀번호 재설정용 링크가 무효합니다. 비밀번호 재설정을 다시 신청해"
-"주십시오."
+"비밀번호 재설정용 링크가 무효합니다. 비밀번호 재설정을 다시 신청해주십시오."
 
 #: .\templates\users\password-reset-done.html:5
 msgid "パスワード再設定申込み完了"
@@ -1918,7 +2060,8 @@ msgstr "메일 내용을 확인하시길 바랍니다."
 
 #: .\templates\users\password-reset-done.html:18
 msgid "※メールが届かない場合はメールアドレスをご確認の上、再度お試しください。"
-msgstr "※메일이 도착하지 않은 경우 이메일 주소를 확인하신 후 다시 시도해주세요."
+msgstr ""
+"※메일이 도착하지 않은 경우 이메일 주소를 확인하신 후 다시 시도해주세요."
 
 #: .\templates\users\password-reset.html:5
 #: .\templates\users\password-reset.html:16
@@ -1993,8 +2136,8 @@ msgid ""
 "てください。"
 msgstr ""
 "현재 저장된 구매이력이나 배송지 등의 정보는, <span class=\"font-semibold "
-"text-red-500\">모두 삭제</span>됩니다. <br>괜찮으시다면 아래의 버튼을"
-"눌러주세요."
+"text-red-500\">모두 삭제</span>됩니다. <br>괜찮으시다면 아래의 버튼을눌러주세"
+"요."
 
 #: .\templates\users\withdrawal-check.html:30
 msgid "脱退する"
@@ -2178,3 +2321,12 @@ msgstr "디자인을 삭제했습니다."
 #: .\users\views.py:792
 msgid "会員様のメールアドレスとは違います。"
 msgstr "회원님의 이메일 주소와 다릅니다."
+
+#: .\vinaigrette-deleteme.py:6
+msgid "発送済み"
+msgstr "발송완료"
+
+#, fuzzy
+#~| msgid "注文取消"
+#~ msgid "注文取消し"
+#~ msgstr "주문취소"
