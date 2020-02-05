@@ -12,6 +12,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.base import ContentFile
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, reverse, redirect
 from django.template.loader import render_to_string
@@ -317,6 +318,8 @@ class CardsListView(mixins.LoggedInOnlyView, FormView):
     """ クレジットカードリスト """
     
     def get(self, *args, **kwargs):
+        # ページ化
+        page = self.request.GET.get("page")
         user = self.request.user
         try:
             cards = stripe.Customer.list_sources(
@@ -326,10 +329,12 @@ class CardsListView(mixins.LoggedInOnlyView, FormView):
         except:
             cards = {"data": []}
         card_list = cards["data"]
+        paginator = Paginator(card_list, 2)
+        items = paginator.get_page(page)
         context = {}
         if len(card_list) > 0:
             context = {
-                "cards": card_list,
+                "cards": items,
             }
         return render(self.request, "cards/card-list.html", context)
 
@@ -453,7 +458,7 @@ class SelectProductToCustomizeView(mixins.LoggedInOnlyView, ListView):
     model = product_models.Product
     template_name = "designs/select-products.html"
     context_object_name = "products"
-    paginate_by = 5
+    paginate_by = 3
 
     def get_queryset(self):
         return product_models.Product.objects.all().order_by("-created")

@@ -20,12 +20,12 @@
         <form method="POST" class="w-1/3">
             {% csrf_token %}
             <input type="hidden" name="target-design-modify" value="{{ design.id }}">
-            <button name="design_modify" class="btn bg-orange-500 text-white p-3">{% trans '変更する' %}</button>
+            <button name="design_modify" class="btn-warning text-white p-3">{% trans '変更する' %}</button>
         </form>
         <form method="POST" class="w-1/3">
             {% csrf_token %}
             <input type="hidden" name="target-design-delete" value="{{ design.id }}">
-            <button name="design_delete" class="btn bg-red-500 text-white p-3">{% trans '削除する' %}</a>
+            <button name="design_delete" class="btn-danger text-white p-3">{% trans '削除する' %}</a>
         </form>
     </div>
 

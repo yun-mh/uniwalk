@@ -6,7 +6,7 @@
 {% endblock page_title%}
 
 {% block content %}
-<div class="mx-auto px-10 py-10 rounded-xl"
+<div class="min-h-75vh mx-auto px-10 py-10 rounded-xl"
     style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
     <div class="container mx-auto">
         <div class="w-full shadow-lg">
@@ -15,7 +15,7 @@
 
         <div class="w-full flex flex-col mb-10">
             <div
-                class="container min-h-75vh bg-white w-2/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 mt-24 relative">
+                class="container bg-white w-2/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 mt-24 relative">
                 <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute"
                     style="top: -3rem;">
                     <i class="fas fa-palette fa-3x text-white"></i>
@@ -27,9 +27,9 @@
                 {% include 'mixins/designs/design-card.html' with design=design %}
                 {% endfor %}
 
-                <div class="flex items-center justify-center mx-auto container mt-10">
+                <div class="flex items-center justify-center mx-auto container mb-10">
                     {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}" class="text-teal-500">
+                    <a href="?page={{ page_obj.previous_page_number }}" class="text-purple-500">
                         <i class="fas fa-arrow-left fa-lg"></i>
                     </a>
                     {% endif %}
@@ -40,21 +40,20 @@
                     </span>
 
                     {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}" class="text-teal-500">
+                    <a href="?page={{ page_obj.next_page_number }}" class="text-purple-500">
                         <i class="fas fa-arrow-right fa-lg"></i>
                     </a>
                     {% endif %}
                 </div>
 
                 {% else %}
-                <p class="flex justify-center items-center font-semibold h-full w-full text-center text-2xl">
-                    <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span
+                <p class="flex justify-center items-center font-semibold h-full w-full text-center text-2xl my-5">
+                    <i class="fas fa-dizzy fa-2x text-purple-500"></i> <span
                         class="ml-5">{% trans 'まだ作成したデザインがありません。' %}</span>
                 </p>
                 {% endif %}
 
                 <a href="{% url 'users:select-product' %}" class="btn w-2/3 mx-auto">{% trans 'デザインする' %}</a>
-
             </div>
         </div>
     </div>

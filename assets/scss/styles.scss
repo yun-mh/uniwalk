@@ -18,8 +18,8 @@ body.document {
 }
 
 //home
-.bg-home-gray{
-  background-color:#423843;
+.bg-home-gray {
+  background-color: #423843;
 }
 
 // nav
@@ -503,11 +503,11 @@ input[type="radio"]:checked ~ label {
 }
 
 .switch input:checked + .slider {
-  background-color: #2196f3;
+  background-color: #722fff;
 }
 
 .switch input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px #722fff;
 }
 
 .switch input:checked + .slider:before {

@@ -149,7 +149,7 @@ class SelectPaymentView(FormView):
             total += cart_item.product.price * cart_item.quantity
         context = {
             "recipient_data": recipient_data,
-            "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"]) - 1][1],
+            "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"])][1],
             "orderer_form": orderer_form,
             "cart": cart,
             "total": total,
@@ -192,9 +192,9 @@ class SelectPaymentView(FormView):
                     "first_name_orderer_kana": orderer_form.cleaned_data.get(
                         "first_name_orderer_kana"
                     ),
-                    "phone_number_orderer": orderer_form.cleaned_data.get(
+                    "phone_number_orderer": str(orderer_form.cleaned_data.get(
                         "phone_number_orderer"
-                    ),
+                    )),
                     "postal_code_orderer": orderer_form.cleaned_data.get(
                         "postal_code_orderer"
                     ),
@@ -245,9 +245,9 @@ class OrderCheckView(FormView):
             card_list = cards["data"]
         context = {
             "recipient_data": recipient_data,
-            "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"]) - 1][1],
+            "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"])][1],
             "orderer_data": orderer_data,
-            "orderer_pref": JP_PREFECTURE_CODES[int(orderer_data["prefecture_orderer"]) - 1][1],
+            "orderer_pref": JP_PREFECTURE_CODES[int(orderer_data["prefecture_orderer"])][1],
             "card_form": card_form,
             "cart": cart,
             "total": total,

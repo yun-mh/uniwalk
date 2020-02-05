@@ -48,11 +48,22 @@
     </div>
 </section>
 
-<section class="w-full py-16 text-center bg-home-gray">
+<section class="w-full py-16 text-center bg-home-gray rounded-b-xl">
     <div class="w-2/3 mx-auto mb-20 border-t-4">
-        <p class="text-white text-3xl pt-20">{% trans '商品リスト' %}</p>
+        <p class="text-white text-3xl pt-16 mb-10">{% trans '商品リスト' %}</p>
+        <div class="w-full flex flex-no-wrap justify-around">
+            {% for product in products %}
+            <div class="w-1/4">
+                <div class="h-64 bg-cover bg-center" style="background-image: url('{{ product.first_image }}');"></div>
+                <div class="text-white text-lg mt-5">
+                    {{ product.name }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    <a href="" class="text-xl bg-white rounded p-2 font-weight-700 bg-gray-700 text-white">{% trans '詳しく見る' %}</a>
+    <a href="{% url 'products:list' %}"
+        class="text-xl bg-white rounded p-2 font-weight-700 bg-gray-700 text-white">{% trans 'もっと見る' %}</a>
 </section>
 
 {% endblock content %}
