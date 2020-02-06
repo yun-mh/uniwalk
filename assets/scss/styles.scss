@@ -210,13 +210,46 @@ $shadows-big: multiple-box-shadow(50);
     rgba(114, 43, 255, 1) 0%,
     rgba(104, 127, 255, 1) 100%
   );
+  transition: all 0.3s;
   &-warning {
     @apply w-full font-light text-center rounded-full py-5 text-lg text-white;
-    background: linear-gradient(to right, #f7971e, #ffd200);
+    background-color: #ffd200;
+    transition: all 0.3s;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      transform: translateY(-2px);
+    }
+    &:active {
+      @apply shadow-dark;
+      transform: translateY(0px);
+    }
   }
   &-danger {
     @apply w-full font-light text-center rounded-full py-5 text-lg text-white;
-    background: linear-gradient(to left, #ed213a, #93291e);
+    background-color: #ed213a;
+    transition: all 0.3s;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      transform: translateY(-2px);
+    }
+    &:active {
+      @apply shadow-dark;
+      transform: translateY(0px);
+    }
+  }
+  &:hover {
+    transform: translateY(-2px);
+  }
+  &:active {
+    @apply shadow-dark;
+    transform: translateY(0px);
+  }
+  &:focus {
+    outline: none;
   }
 }
 

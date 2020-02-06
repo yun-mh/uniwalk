@@ -96,142 +96,146 @@
     }
 </style>
 
-
+<div id="manual" class="hidden flex items-center justify-center"
+    style="position: fixed; top:0; left: 0; width: 100vw; height: 100vh; background: rgba(10, 10, 10, 0.9); z-index: 1000;">
+    <div class="flex flex-col w-2/3 h-75vh bg-white mx-auto">
+        <div class="flex justify-between m-5">
+            <h2 class="font-bold text-2xl">{% trans '足の測り方' %}</h2>
+            <a id="closeManual" class="cursor-pointer text-gray-600"><i class="fas fa-times fa-2x"></i></a>
+        </div>
+        <div class="flex justify-around">
+            <div class="w-1/3 h-full flex flex-col justify-around">
+                <div class="bg-cover mx-auto"
+                    style="width: 300px; height: 300px; background-image: url('{% static 'images/height.png' %}');">
+                </div>
+                <h3 class="w-full text-center font-semibold text-lg mt-10">{% trans '足長' %}</h3>
+                <p class="mt-10">
+                    {% trans 'メジャーを用い、足のカカトから一番出ている足の指までの長さを垂直で測ります。' %}
+                </p>
+            </div>
+            <div class="w-1/3 h-full flex flex-col justify-around">
+                <div class="bg-cover mx-auto"
+                    style="width: 300px; height: 300px; background-image: url('{% static 'images/width.png' %}');">
+                </div>
+                <h3 class="w-full text-center font-semibold text-lg mt-10">{% trans '足幅' %}</h3>
+                <p class="mt-10">
+                    {% trans '親指の関節の１番出ている部分から小指の関節の１番出ている部分までの長さをメーじゃで測ります。' %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="mx-auto p-28 bg-universe-dark min-h-75vh">
-
-    <!-- <div class="w-full mb-10">
-
-        
-
-    </div> -->
-
     <ul class="tabs">
-        <li class="active font-semibold">足サイズ測定</li>
-        <li class="font-semibold">足サイズ記入</li>
+        <li class="active font-semibold">{% trans '足サイズ測定' %}</li>
+        <li class="font-semibold">{% trans '足サイズ記入' %}</li>
     </ul>
 
     <ul class="tab__content">
         <li class="active">
             <div class="content__wrapper">
-                <h2 class="">測定するイメージファイルをアップロードしてください。</h2>
+                <h2 class="">{% trans '測定するイメージファイルをアップロードしてください。' %}</h2>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="flex justify-around">
                         <div>
-                            <h3>左</h3>
+                            <h3>{% trans '左' %}</h3>
                             <div class="flex items-center">
-                                <span>足長</span>
+                                <span>{% trans '足長' %}</span>
                                 {{ footsize_image_form.foot_left }}
                             </div>
                         </div>
                         <div>
-                            <h3>右</h3>
+                            <h3>{% trans '右' %}</h3>
                             <div class="flex items-center">
-                                <span>足長</span>
+                                <span>{% trans '足長' %}</span>
                                 {{ footsize_image_form.foot_right }}
                             </div>
                         </div>
                     </div>
-                    <button name="footsize-image">測定する</button>
+                    <button name="footsize-image">{% trans '測定する' %}</button>
                 </form>
             </div>
         </li>
         <li>
             <div class="content__wrapper">
-                <h2 class="">足サイズを記入してください。</h2>
+                <h2 class="">{% trans '足サイズを記入してください。' %}</h2>
+                <a id="infoManual" class="cursor-pointer"><i class="fas fa-question-circle"></i> 足サイズ測定方法</a>
                 <form method="POST">
                     {% csrf_token %}
                     <div class="flex justify-around">
                         <div>
-                            <h3>左</h3>
+                            <h3>{% trans '左' %}</h3>
                             <div class="flex items-center">
-                                <span>足長</span>
+                                <span>{% trans '足長' %}</span>
                                 {{ footsize_fill_form.length_left }}
                                 <span>mm</span>
                             </div>
                             <div class="flex items-center">
-                                <span>足幅</span>
+                                <span>{% trans '足幅' %}</span>
                                 {{ footsize_fill_form.width_left }}
                                 <span>mm</span>
                             </div>
                         </div>
                         <div>
-                            <h3>右</h3>
+                            <h3>{% trans '右' %}</h3>
                             <div class="flex items-center">
-                                <span>足長</span>
+                                <span>{% trans '足長' %}</span>
                                 {{ footsize_fill_form.length_right }}
                                 <span>mm</span>
                             </div>
                             <div class="flex items-center">
-                                <span>足幅</span>
+                                <span>{% trans '足幅' %}</span>
                                 {{ footsize_fill_form.width_right }}
                                 <span>mm</span>
                             </div>
                         </div>
                     </div>
-                    <button name="footsize-fill">決定する</button>
+                    <button name="footsize-fill">{% trans '決定する' %}</button>
                 </form>
             </div>
         </li>
     </ul>
 </div>
 <script>
-
+    // 足サイズ方法のタブ設定
     $(document).ready(function () {
-
-        // Variables
         var clickedTab = $(".tabs > .active");
         var tabWrapper = $(".tab__content");
         var activeTab = tabWrapper.find(".active");
         var activeTabHeight = activeTab.outerHeight();
 
-        // Show tab on page load
         activeTab.show();
 
-        // Set height of wrapper on page load
         tabWrapper.height(activeTabHeight);
 
         $(".tabs > li").on("click", function () {
-
-            // Remove class from active tab
             $(".tabs > li").removeClass("active");
-
-            // Add class active to clicked tab
             $(this).addClass("active");
-
-            // Update clickedTab variable
             clickedTab = $(".tabs .active");
-
-            // fade out active tab
             activeTab.fadeOut(250, function () {
-
-                // Remove active class all tabs
                 $(".tab__content > li").removeClass("active");
-
-                // Get index of clicked tab
                 var clickedTabIndex = clickedTab.index();
-
-                // Add class active to corresponding tab
                 $(".tab__content > li").eq(clickedTabIndex).addClass("active");
-
-                // update new active tab
                 activeTab = $(".tab__content > .active");
-
-                // Update variable
                 activeTabHeight = activeTab.outerHeight();
-
-                // Animate height of wrapper to new tab height
                 tabWrapper.stop().delay(50).animate({
                     height: activeTabHeight
                 }, 500, function () {
-
-                    // Fade in active tab
                     activeTab.delay(50).fadeIn(250);
-
                 });
             });
         });
     });
 </script>
-
+<script>
+    const infoManual = document.getElementById("infoManual");
+    const closeManual = document.getElementById("closeManual");
+    infoManual.addEventListener("click", () => {
+        document.getElementById("manual").style.display = "flex";
+    });
+    closeManual.addEventListener("click", () => {
+        document.getElementById("manual").style.display = "none";
+    });
+</script>
 {% endblock content %}

@@ -1,5 +1,6 @@
 import cv2
 import os
+import math
 from django.conf import settings
 import numpy as np
 
@@ -8,6 +9,8 @@ def analyze(target):
     # A4紙のサイズ宣言
     a4_width = 210
     a4_height = 297
+    img_width = 500
+    img_height = 707
 
     # イメージの呼び出し
     image = os.path.join(settings.MEDIA_ROOT, str(target))
@@ -22,7 +25,7 @@ def analyze(target):
     cv2.waitKey(0)
 
     imgray = cv2.cvtColor(blur, cv2.COLOR_BGR2GRAY)
-    ret, th = cv2.threshold(imgray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
+    ret, th = cv2.threshold(imgray, 127, 255, cv2.THRESH_BINARY)
     cv2.imshow(win_name, th)
     cv2.waitKey(0)
 
@@ -31,11 +34,17 @@ def analyze(target):
 
     x, y, w, h = cv2.boundingRect(contr)
     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 0), 3)
-
+    cv2.circle(img, (x, y), 3, (255, 0, 0), -1)
+    cv2.circle(img, (x + w, y + h), 3, (0, 255, 0), -1)
+    
     cv2.imshow("result", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+    width_result = math.ceil(w / img_width * a4_width)
+    height_result = math.ceil(h / img_height * a4_height)
+
+    print(width_result, height_result)
     # med_val = np.median(gray)
     # lower = int(max(0, 0.7 * med_val))
     # upper = int(min(255, 1.3 * med_val))

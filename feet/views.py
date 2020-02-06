@@ -17,6 +17,23 @@ def base64_file(data, name=None):
     return result
 
 
+def have_footsize(request, *arg, **kwargs):
+
+    """ 足サイズデータを既に持っているかどうかチェックする """
+
+    pk = request.session["product"]
+    design_pk = request.session["design"]
+    if request.user.is_authenticated:
+        user = request.user
+        try:
+            footsize = models.Footsize.objects.get(user=user)
+            request.session["feet"] = footsize.pk
+            return render(request, "feet/feet-check.html")
+        except models.Footsize.DoesNotExist:
+            return redirect("feet:measure")
+    return redirect("feet:measure")
+
+
 def footsizes_measure(request, *args, **kwargs):
 
     """ 足サイズ測定 """

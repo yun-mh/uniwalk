@@ -138,7 +138,7 @@ class CustomizeView(ListView):
         )
         self.request.session["product"] = pk
         self.request.session["design"] = new_design.pk
-        return redirect("feet:measure")
+        return redirect("feet:check")
 
 
 def get_palette(request):

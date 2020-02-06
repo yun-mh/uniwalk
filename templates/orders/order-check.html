@@ -158,7 +158,7 @@
                     {% else %}
                     <form method="POST">
                         {% csrf_token %}
-                        <div class="border border-gray-500 px-4 rounded-b-lg">
+                        <div class="border border-gray-500 py-4 rounded-b-lg text-center">
                             {% trans '振込可能期間は注文時点から1週間以内になっております。' %}
                         </div>
                         <button class="btn mt-5">{% trans '注文を確定する' %}</button>
