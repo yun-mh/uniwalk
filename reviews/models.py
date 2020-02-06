@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from core import models as core_models
@@ -18,7 +19,9 @@ class Review(core_models.TimeStampedModel):
     )
     title = models.CharField(_("タイトル"), max_length=50)
     text = models.TextField(_("本文"))
-    rate = models.IntegerField(_("評点"), default=0)
+    rate = models.PositiveIntegerField(
+        _("評点"), default=0, validators=[MaxValueValidator(5)]
+    )
 
     class Meta:
         verbose_name = _("レビュー")

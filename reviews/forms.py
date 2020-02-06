@@ -14,7 +14,7 @@ class ReviewForm(forms.ModelForm):
         )
         widgets = {
             "title": forms.TextInput(attrs={"placeholder": _("レビュータイトル")}),
-            "rate": forms.NumberInput(),
+            "rate": forms.NumberInput(attrs={"min": 1, "max": 5}),
             "text": forms.Textarea(attrs={"placeholder": _("レビュー本文")}),
         }
 
