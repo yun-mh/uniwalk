@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from core import models as core_models
 
-# Create your models here.
+
 class Review(core_models.TimeStampedModel):
 
     """ レビューのモデルを定義する """

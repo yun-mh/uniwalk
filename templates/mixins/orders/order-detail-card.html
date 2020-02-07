@@ -26,8 +26,11 @@
                 <div>{% trans '商品名' %}: {{ order_item.product }}</div>
                 <div>{% trans '単価' %}: &yen; {{ order_item.price | intcomma }}</div>
                 <div>{% trans '数量' %}: {{ order_item.quantity }}</div>
+                <div>{% trans '足サイズ(左)' %}: {{ order_item.length_left }}(足長) {{ order_item.width_left }}(足幅)</div>
+                <div>{% trans '足サイズ(右)' %}: {{ order_item.length_right }}(足長) {{ order_item.width_right }}(足幅)</div>
             </div>
         </div>
+
         {% endfor %}
 
         <div class="w-full flex justify-around mb-5">

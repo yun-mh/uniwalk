@@ -451,6 +451,10 @@ class OrderCheckView(FormView):
                     tongue_color_right=design_models.Design.objects.get(pk=cart_item.design.pk).tongue_color_right,
                     tongue_material_right=design_models.Design.objects.get(pk=cart_item.design.pk).tongue_material_right,
                     customize_code=design_models.Design.objects.get(pk=cart_item.design.pk).customize_code,
+                    length_left=int(cart_item.length_left),
+                    length_right=int(cart_item.length_right),
+                    width_left=int(cart_item.width_left),
+                    width_right=int(cart_item.width_right),
                 )
             try:
                 email = self.request.user.email

@@ -38,28 +38,26 @@
                                 <div class="flex flex-col">
                                     <span class="text-gray-500 text-xs">{{ cart_item.product.category }}</span>
                                     <span class="text-gray-500 text-xs">{% trans '左足' %}
-                                        {{ cart_item.feet.length_left }}mm {% trans '(足長)' %}
-                                        {{ cart_item.feet.width_left }}mm {% trans '(足幅)' %}</span>
+                                        {{ cart_item.length_left }}mm {% trans '(足長)' %}
+                                        {{ cart_item.width_left }}mm {% trans '(足幅)' %}</span>
                                     <span class="text-gray-500 text-xs">{% trans '左足' %}
-                                        {{ cart_item.feet.length_right }}mm {% trans '(足長)' %}
-                                        {{ cart_item.feet.width_right }}mm {% trans '(足幅)' %}</span>
+                                        {{ cart_item.length_right }}mm {% trans '(足長)' %}
+                                        {{ cart_item.width_right }}mm {% trans '(足幅)' %}</span>
                                 </div>
                                 <div class="flex flex-row mt-3">
                                     <span class="text-sm">{% trans '単価' %}　&yen;
                                         {{ cart_item.product.price | intcomma }}</span>
                                     <div class="text-xs ml-5">
-                                        <a
-                                            href="{% url 'carts:add_cart' cart_item.product.pk cart_item.design.pk cart_item.feet.pk %}">
+                                        <a href="{% url 'carts:add_cart' cart_item.product.pk cart_item.design.pk %}">
                                             <i class="fas fa-plus-circle fa-lg text-indigo-600"></i>
                                         </a>
                                         <span class="mx-2 text-sm">{{ cart_item.quantity }}</span>
-                                        <a
-                                            href="{% url 'carts:remove' cart_item.product.pk cart_item.design.pk cart_item.feet.pk %}">
+                                        <a href="{% url 'carts:remove' cart_item.product.pk cart_item.design.pk %}">
                                             <i class="fas fa-minus-circle fa-lg text-indigo-600"></i>
                                         </a>
                                     </div>
                                     <div class="text-sm ml-56">
-                                        <a href="{% url 'carts:delete' cart_item.product.pk cart_item.design.pk cart_item.feet.pk %}"
+                                        <a href="{% url 'carts:delete' cart_item.product.pk cart_item.design.pk %}"
                                             class="bg-red-500 py-1 px-5 rounded">
                                             <span><i class="fas fa-trash-alt text-white"></i></span>
                                         </a>

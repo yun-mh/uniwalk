@@ -6,7 +6,7 @@
 {% endblock page_title%}
 
 {% block content %}
-<div class="mx-auto px-10 py-10 rounded-xl"
+<div class="mx-auto min-h-75vh px-10 py-10 rounded-xl"
     style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
     <div class="container mx-auto">
         <div class="w-full shadow-lg">
@@ -15,7 +15,7 @@
 
         <div class="w-full flex flex-col mb-10">
             <div
-                class="container min-h-75vh bg-white w-2/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 mt-24 relative">
+                class="container bg-white w-2/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 mt-24 relative">
                 <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute"
                     style="top: -3rem;">
                     <i class="fas fa-credit-card fa-3x text-white"></i>
@@ -23,9 +23,9 @@
                 <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans 'クレジットカード登録' %}</h2>
 
                 <div class="container">
-                    <form method="POST" class="stripe-form w-1/2 mx-auto" id="stripe-form">
+                    <form method="POST" class="stripe-form mx-auto w-3/4" id="stripe-form">
                         {% csrf_token %}
-                        <div class="new-card-form">
+                        <div class="new-card-form w-full p-5 border mt-5">
                             <div class="stripe-form-row" id="creditCard">
                                 <div id="card-element" class="StripeElement StripeElement--empty">
                                     <div class="__PrivateStripeElement"
@@ -64,10 +64,10 @@
 
     var style = {
         base: {
-            color: '#32325d',
+            color: 'black',
             fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
             fontSmoothing: 'antialiased',
-            fontSize: '16px',
+            fontSize: '20px',
             '::placeholder': {
                 color: '#aab7c4'
             }
@@ -78,7 +78,7 @@
         }
     };
 
-    var card = elements.create('card', { style: style });
+    var card = elements.create('card', { hidePostalCode: true, style: style });
 
     card.mount('#card-element');
 

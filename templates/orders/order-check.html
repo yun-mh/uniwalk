@@ -204,7 +204,8 @@
 
     var style = {
         base: {
-            color: '#32325d',
+            color: 'black',
+            border: "1px solid black",
             fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
             fontSmoothing: 'antialiased',
             fontSize: '16px',
@@ -218,7 +219,7 @@
         }
     };
 
-    var card = elements.create('card', { style: style });
+    var card = elements.create('card', { hidePostalCode: true, style: style });
 
     // if (current_card) {
     card.mount('#card-element');

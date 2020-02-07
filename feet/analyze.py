@@ -36,7 +36,7 @@ def analyze(target):
     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 0), 3)
     cv2.circle(img, (x, y), 3, (255, 0, 0), -1)
     cv2.circle(img, (x + w, y + h), 3, (0, 255, 0), -1)
-    
+
     cv2.imshow("result", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
@@ -45,6 +45,7 @@ def analyze(target):
     height_result = math.ceil(h / img_height * a4_height)
 
     print(width_result, height_result)
+    return height_result, width_result
     # med_val = np.median(gray)
     # lower = int(max(0, 0.7 * med_val))
     # upper = int(min(255, 1.3 * med_val))

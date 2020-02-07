@@ -27,7 +27,7 @@
                 {% include 'mixins/cards/card-card.html' with card=card %}
                 {% endfor %}
 
-                <div class="flex items-center justify-center mx-auto container mt-10">
+                <div class="flex items-center justify-center mx-auto container mb-10">
                     {% if cards.has_previous %}
                     <a href="?page={{ cards.number|add:-1 }}" class="text-indigo-500">
                         <i class="fas fa-arrow-left fa-lg"></i>

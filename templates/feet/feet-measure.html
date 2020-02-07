@@ -125,6 +125,46 @@
         </div>
     </div>
 </div>
+<div id="auto" class="hidden flex items-center justify-center"
+    style="position: fixed; top:0; left: 0; width: 100vw; height: 100vh; background: rgba(10, 10, 10, 0.9); z-index: 1000;">
+    <div class="flex flex-col w-2/3 h-75vh bg-white mx-auto">
+        <div class="flex justify-between m-5">
+            <h2 class="font-bold text-2xl">{% trans '足イメージの撮り方' %}</h2>
+            <a id="closeAuto" class="cursor-pointer text-gray-600"><i class="fas fa-times fa-2x"></i></a>
+        </div>
+        <div class="flex justify-around overflow-x-auto">
+            <div class="w-full h-full flex flex-col justify-around">
+                <div class="bg-cover mx-auto"
+                    style="width: 300px; height: 345px; background-image: url('{% static 'images/correcta4.png' %}');">
+                </div>
+
+            </div>
+            <div class="w-full h-full flex flex-col justify-around px-5">
+                <div class="bg-cover mx-auto"
+                    style="width: 300px; height: 389px; background-image: url('{% static 'images/setpaper.png' %}');">
+                </div>
+
+            </div>
+            <div class="w-full h-full flex flex-col justify-around">
+                <div class="bg-cover mx-auto"
+                    style="width: 300px; height: 221px; background-image: url('{% static 'images/footona4.png' %}');">
+                </div>
+
+            </div>
+        </div>
+        <div class="w-full flex justify-around px-10 mt-10">
+            <p class="w-full mr-5">
+                {% trans 'きれいなA4サイズの黒紙を用意してください。破れた紙、印刷されている紙、しわくちゃな紙の場合は測定できないため注意してください。' %}
+            </p>
+            <p class="w-full mr-5">
+                {% trans '写真を撮るときには写真に影響を及ぼすものがないようにきれいな床で撮ってください。' %}
+            </p>
+            <p class="w-full">
+                {% trans 'カカトを紙の端に置き、人差し指が紙の垂直中央線に位置するようにしてください。' %}
+            </p>
+        </div>
+    </div>
+</div>
 <div class="mx-auto p-28 bg-universe-dark min-h-75vh">
     <ul class="tabs">
         <li class="active font-semibold">{% trans '足サイズ測定' %}</li>
@@ -135,6 +175,7 @@
         <li class="active">
             <div class="content__wrapper">
                 <h2 class="">{% trans '測定するイメージファイルをアップロードしてください。' %}</h2>
+                <a id="infoAuto" class="cursor-pointer"><i class="fas fa-question-circle"></i> 足サイズ測定方法</a>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="flex justify-around">
@@ -231,11 +272,19 @@
 <script>
     const infoManual = document.getElementById("infoManual");
     const closeManual = document.getElementById("closeManual");
+    const infoAuto = document.getElementById("infoAuto");
+    const closeAuto = document.getElementById("closeAuto");
     infoManual.addEventListener("click", () => {
         document.getElementById("manual").style.display = "flex";
     });
     closeManual.addEventListener("click", () => {
         document.getElementById("manual").style.display = "none";
+    });
+    infoAuto.addEventListener("click", () => {
+        document.getElementById("auto").style.display = "flex";
+    });
+    closeAuto.addEventListener("click", () => {
+        document.getElementById("auto").style.display = "none";
     });
 </script>
 {% endblock content %}

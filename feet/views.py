@@ -27,7 +27,10 @@ def have_footsize(request, *arg, **kwargs):
         user = request.user
         try:
             footsize = models.Footsize.objects.get(user=user)
-            request.session["feet"] = footsize.pk
+            request.session["length_left"] = int(footsize.length_left)
+            request.session["length_right"] = int(footsize.length_right)
+            request.session["width_left"] = int(footsize.width_left)
+            request.session["width_right"] = int(footsize.width_right)
             return render(request, "feet/feet-check.html")
         except models.Footsize.DoesNotExist:
             return redirect("feet:measure")
@@ -56,7 +59,7 @@ def footsizes_measure(request, *args, **kwargs):
                 width_left = footsize_fill_form.cleaned_data.get("width_left")
                 length_right = footsize_fill_form.cleaned_data.get("length_right")
                 width_right = footsize_fill_form.cleaned_data.get("width_right")
-                # 既存の足サイズデータがある場合、データを更新する
+                # 会員に既存の足サイズデータがある場合、データを更新する
                 try:
                     footsize = models.Footsize.objects.get(user=user)
                     footsize.length_left = length_left
@@ -73,10 +76,12 @@ def footsizes_measure(request, *args, **kwargs):
                         width_left=width_left,
                         width_right=width_right,
                     )
-                foot_pk = footsize.pk
-                return redirect(
-                    "carts:add_cart", pk=pk, design_pk=design_pk, foot_pk=foot_pk
-                )
+                # カートに登録している他商品の足サイズと区分するためにセッションで足サイズを渡す
+                request.session["length_left"] = int(length_left)
+                request.session["length_right"] = int(length_right)
+                request.session["width_left"] = int(width_left)
+                request.session["width_right"] = int(width_right)
+                return redirect("carts:add_cart", pk=pk, design_pk=design_pk)
             footsize_image_form = forms.FootsizeImageForm(prefix="image")
         elif "footsize-image" in request.POST:
             footsize_image_form = forms.FootsizeImageForm(
@@ -143,8 +148,40 @@ class RightFootsizePerspeciveCropperView(DetailView):
 
 def footsizes_analysis(request, *args, **kwargs):
     pk = kwargs.get("pk")
+    product_pk = request.session["product"]
+    design_pk = request.session["design"]
     instance = models.ProcessedFootImage.objects.get(pk=pk)
     foot_left = instance.foot_left
     foot_right = instance.foot_right
-    left_size = analyze.analyze(foot_left)
-    right_size = analyze.analyze(foot_right)
+    # イメージから足サイズを計算する
+    length_left, width_left = analyze.analyze(foot_left)
+    length_right, width_right = analyze.analyze(foot_right)
+    # ユーザーに足サイズデータを登録・更新する
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        user = None
+    # 会員に既存の足サイズデータがある場合、データを更新する
+    try:
+        footsize = models.Footsize.objects.get(user=user)
+        footsize.length_left = length_left
+        footsize.width_left = width_left
+        footsize.length_right = length_right
+        footsize.width_right = width_right
+        footsize.save()
+    # 会員に足サイズデータが存在しない場合、データを新規登録する
+    except models.Footsize.DoesNotExist:
+        footsize = models.Footsize.objects.create(
+            user=user,
+            length_left=length_left,
+            length_right=length_right,
+            width_left=width_left,
+            width_right=width_right,
+        )
+    # カートに登録している他商品の足サイズと区分するためにセッションで足サイズを渡す
+    request.session["length_left"] = int(length_left)
+    request.session["length_right"] = int(length_right)
+    request.session["width_left"] = int(width_left)
+    request.session["width_right"] = int(width_right)
+    return redirect("carts:add_cart", pk=product_pk, design_pk=design_pk)
+

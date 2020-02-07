@@ -25,14 +25,10 @@ class CartItem(models.Model):
     product = models.ForeignKey(
         "products.Product", verbose_name=_("商品"), on_delete=models.CASCADE
     )
-    feet = models.ForeignKey(
-        "feet.Footsize",
-        verbose_name=_("足サイズ"),
-        related_name="cart_items",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-    )
+    length_left = models.DecimalField(_("足長(左)"), max_digits=4, decimal_places=1)
+    length_right = models.DecimalField(_("足長(右)"), max_digits=4, decimal_places=1)
+    width_left = models.DecimalField(_("足幅(左)"), max_digits=4, decimal_places=1)
+    width_right = models.DecimalField(_("足幅(右)"), max_digits=4, decimal_places=1)
     quantity = models.IntegerField(_("数量"), default=1)
     active = models.BooleanField(_("活性化"), default=True)
 

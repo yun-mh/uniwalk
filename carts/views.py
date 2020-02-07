@@ -14,7 +14,7 @@ def _session_key(request):
     return cart
 
 
-def add_cart(request, pk, design_pk, foot_pk):
+def add_cart(request, pk, design_pk):
 
     """ カートに商品を追加するビュー """
 
@@ -31,16 +31,17 @@ def add_cart(request, pk, design_pk, foot_pk):
             cart = Cart.objects.create(session_key=_session_key(request))
             cart.save()
     try:
-        cart_item = CartItem.objects.get(
-            product=product, cart=cart, design=design_pk, feet=foot_pk
-        )
+        cart_item = CartItem.objects.get(product=product, cart=cart, design=design_pk)
         cart_item.quantity += 1
         cart_item.save()
     except CartItem.DoesNotExist:
         cart_item = CartItem.objects.create(
             product=product,
             design=design_models.Design.objects.get(pk=design_pk),
-            feet=foot_models.Footsize.objects.get(pk=foot_pk),
+            length_left=request.session["length_left"],
+            length_right=request.session["length_right"],
+            width_left=request.session["width_left"],
+            width_right=request.session["width_right"],
             quantity=1,
             cart=cart,
         )
@@ -49,9 +50,9 @@ def add_cart(request, pk, design_pk, foot_pk):
 
 
 def cart_display(request, amount=0, counter=0, cart_items=None):
-    
+
     """ カートの内容を表示するためのビュー """
-    
+
     try:
         cart = Cart.objects.get(session_key=_session_key(request))
         cart_items = CartItem.objects.filter(cart=cart)
@@ -67,15 +68,13 @@ def cart_display(request, amount=0, counter=0, cart_items=None):
     )
 
 
-def remove_item(request, pk, design_pk, foot_pk):
+def remove_item(request, pk, design_pk):
 
     """ カートに入れた商品の個数を減少させるためのビュー """
 
     cart = Cart.objects.get(session_key=_session_key(request))
     product = get_object_or_404(product_models.Product, pk=pk)
-    cart_item = CartItem.objects.get(
-        product=product, cart=cart, design=design_pk, feet=foot_pk
-    )
+    cart_item = CartItem.objects.get(product=product, cart=cart, design=design_pk)
     if cart_item.quantity > 1:
         cart_item.quantity -= 1
         cart_item.save()
@@ -84,14 +83,12 @@ def remove_item(request, pk, design_pk, foot_pk):
     return redirect("carts:cart")
 
 
-def delete_cartitem(request, pk, design_pk, foot_pk):
+def delete_cartitem(request, pk, design_pk):
 
     """ 商品項目をカートから削除するためのビュー """
 
     cart = Cart.objects.get(session_key=_session_key(request))
     product = get_object_or_404(product_models.Product, pk=pk)
-    cart_item = CartItem.objects.get(
-        product=product, cart=cart, design=design_pk, feet=foot_pk
-    )
+    cart_item = CartItem.objects.get(product=product, cart=cart, design=design_pk)
     cart_item.delete()
     return redirect("carts:cart")

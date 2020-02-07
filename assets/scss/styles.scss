@@ -567,15 +567,15 @@ select#js-lang {
 }
 
 textarea {
-  @apply w-full font-light rounded-sm py-5 text-lg text-left border border-gray-600 px-5;
+  @apply w-full font-light rounded-sm py-5 text-left border border-gray-600 px-5;
   &:focus {
-    @apply outline-none border-teal-500;
+    @apply outline-none border-purple-500;
   }
 }
 
 textarea {
   resize: none;
-  height: 100px;
+  height: 120px;
 }
 
 #id_payment {
