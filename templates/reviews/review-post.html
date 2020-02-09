@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static humanize %}
 
 {% block page_title %}
 {% trans "レビュー投稿" %}
@@ -7,56 +7,58 @@
 
 {% block content %}
 
-<div class="mx-auto pt-16 pb-10">
-
-    <div class="container mx-auto flex">
-        <div class="w-1/3 mr-10 h-50vh shadow-lg">
-            <a href="{% url 'products:detail' product.pk %}">
-                <div class="w-full h-1/2 bg-cover bg-center mb-2"
-                    style="background-image: url({{ product.first_image }});">
-                </div>
-            </a>
-            <div class="flex justify-between mb-2 px-5 truncate">
-                <div class="w-full overflow-hidden">
-                    <a href="{% url 'products:detail' product.pk %}" class="text-xl font-semibold">
-                        {{ product.name }}
-                    </a>
-                </div>
-            </div>
-            <div class="flex justify-between items-center mb-2 px-5 truncate">
-                <div class="w-4/5 overflow-hidden flex">
-                    <span class="text-sm text-gray-600 block truncate">{{ product.category }}</span>
-                </div>
-                <span class="text-lg text-black font-medium">
-                    &yen; {{ product.price }}
-                </span>
-            </div>
-
-            <div class="font-medium text-center text-xl mt-5">
-                {% blocktrans with review_count=product.reviews.count %}全 {{ review_count }} 件{% endblocktrans %}
-            </div>
-            <div class="text-center m-2">
-                <i class="fas fa-star text-4xl text-teal-500"></i>
-                <span class="block mt-2 text-2xl">{{ product.total_rating }}</span>
-            </div>
+<div class="flex min-h-75vh rounded-xl py-16"
+    style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
+    <div class="container bg-white w-4/5 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 relative">
+        <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute" style="top: -3rem;">
+            <i class="far fa-comments fa-3x text-white"></i>
         </div>
+        <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans 'レビュー投稿' %}</h2>
 
-        <div class="w-2/3 p-5 flex flex-col mb-10">
-            <div class="text-gray-800 font-semibold text-3xl my-5">
-                {% trans 'レビュー投稿' %}
+        <div class="container mx-auto flex">
+            <div class="w-1/3 mx-10 h-60vh shadow-lg border rounded-lg">
+                <a href="{% url 'products:detail' product.pk %}">
+                    <div class="w-full h-1/2 bg-cover bg-center border-b-2"
+                        style="background-image: url({{ product.first_image }});">
+                    </div>
+                </a>
+                <div class="flex justify-between py-2 px-5 truncate">
+                    <div class="w-full overflow-hidden">
+                        <a href="{% url 'products:detail' product.pk %}" class="text-xl font-semibold">
+                            {{ product.name }}
+                        </a>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center mb-2 px-5 truncate">
+                    <div class="w-4/5 overflow-hidden flex">
+                        <span class="text-sm text-gray-600 block truncate">{{ product.category }}</span>
+                    </div>
+                    <span class="text-lg text-black font-medium">
+                        &yen; {{ product.price | intcomma }}
+                    </span>
+                </div>
+
+                <div class="font-medium text-center text-xl mt-5">
+                    {% blocktrans with review_count=product.reviews.count %}全 {{ review_count }} 件{% endblocktrans %}
+                </div>
+                <div class="text-center m-2">
+                    <i class="fas fa-star text-4xl text-yellow-500"></i>
+                    <span class="block mt-2 text-2xl">{{ product.total_rating }}</span>
+                </div>
             </div>
 
-            <div>
-                <form action="{% url 'reviews:post' product.pk %}" method="POST" class="w-1/2 mx-auto">
-                    {% csrf_token %}
-                    {{ form }}
-                    <button class="btn mt-5">{% trans '投稿する' %}</button>
-                </form>
+            <div class="w-2/3 py-5 flex flex-col mb-10 mr-2">
+                <div>
+                    <form action="{% url 'reviews:post' product.pk %}" method="POST" class="w-full mx-auto">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button class="btn mt-5">{% trans '投稿する' %}</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock content %}
 
 {% block javascript %}
