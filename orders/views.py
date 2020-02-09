@@ -81,7 +81,6 @@ class CheckoutView(FormView):
         if self.request.user.is_authenticated:
             recipient = user_models.User.objects.get(email=self.request.user).as_dict()
             context["recipient_info"] = recipient
-
         return render(self.request, "orders/checkout.html", context)
 
     def post(self, *args, **kwargs):
@@ -159,57 +158,69 @@ class SelectPaymentView(FormView):
     def post(self, *args, **kwargs):
         orderer_form = forms.SelectPaymentForm(self.request.POST)
         recipient_data = self.request.session["recipient_data"]
+        cart = cart_models.Cart.objects.get(
+            session_key=self.request.session.session_key
+        )
+        cart_items = cart_models.CartItem.objects.filter(cart=cart)
+        total = 0
+        for cart_item in cart_items:
+            total += cart_item.product.price * cart_item.quantity
+        context = {
+            "recipient_data": recipient_data,
+            "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"])][1],
+            "orderer_form": orderer_form,
+            "cart": cart,
+            "total": total,
+        }
+        recipient_data = self.request.session["recipient_data"]
         if orderer_form.is_valid():
-            if orderer_form.cleaned_data.get("is_same_with_recipient") == True:
-                orderer_data = {
-                    "is_same_with_recipient": orderer_form.cleaned_data.get(
-                        "is_same_with_recipient"
-                    ),
-                    "payment": orderer_form.cleaned_data.get("payment"),
-                    "last_name_orderer": recipient_data["last_name_recipient"],
-                    "first_name_orderer": recipient_data["first_name_recipient"],
-                    "last_name_orderer_kana": recipient_data["last_name_recipient_kana"],
-                    "first_name_orderer_kana": recipient_data["first_name_recipient_kana"],
-                    "phone_number_orderer": recipient_data["phone_number_recipient"],
-                    "postal_code_orderer": recipient_data["postal_code_recipient"],
-                    "prefecture_orderer": recipient_data["prefecture_recipient"],
-                    "address_city_orderer": recipient_data["address_city_recipient"],
-                    "address_detail_orderer": recipient_data["address_detail_recipient"],
-                }
-            else:
-                orderer_data = {
-                    "is_same_with_recipient": orderer_form.cleaned_data.get(
-                        "is_same_with_recipient"
-                    ),
-                    "payment": orderer_form.cleaned_data.get("payment"),
-                    "last_name_orderer": orderer_form.cleaned_data.get("last_name_orderer"),
-                    "first_name_orderer": orderer_form.cleaned_data.get(
-                        "first_name_orderer"
-                    ),
-                    "last_name_orderer_kana": orderer_form.cleaned_data.get(
-                        "last_name_orderer_kana"
-                    ),
-                    "first_name_orderer_kana": orderer_form.cleaned_data.get(
-                        "first_name_orderer_kana"
-                    ),
-                    "phone_number_orderer": str(orderer_form.cleaned_data.get(
-                        "phone_number_orderer"
-                    )),
-                    "postal_code_orderer": orderer_form.cleaned_data.get(
-                        "postal_code_orderer"
-                    ),
-                    "prefecture_orderer": orderer_form.cleaned_data.get(
-                        "prefecture_orderer"
-                    ),
-                    "address_city_orderer": orderer_form.cleaned_data.get(
-                        "address_city_orderer"
-                    ),
-                    "address_detail_orderer": orderer_form.cleaned_data.get(
-                        "address_detail_orderer"
-                    ),
-                }
+            orderer_data = {
+                "payment": orderer_form.cleaned_data.get("payment"),
+                "last_name_orderer": orderer_form.cleaned_data.get("last_name_orderer"),
+                "first_name_orderer": orderer_form.cleaned_data.get(
+                    "first_name_orderer"
+                ),
+                "last_name_orderer_kana": orderer_form.cleaned_data.get(
+                    "last_name_orderer_kana"
+                ),
+                "first_name_orderer_kana": orderer_form.cleaned_data.get(
+                    "first_name_orderer_kana"
+                ),
+                "phone_number_orderer": str(orderer_form.cleaned_data.get(
+                    "phone_number_orderer"
+                )),
+                "postal_code_orderer": orderer_form.cleaned_data.get(
+                    "postal_code_orderer"
+                ),
+                "prefecture_orderer": orderer_form.cleaned_data.get(
+                    "prefecture_orderer"
+                ),
+                "address_city_orderer": orderer_form.cleaned_data.get(
+                    "address_city_orderer"
+                ),
+                "address_detail_orderer": orderer_form.cleaned_data.get(
+                    "address_detail_orderer"
+                ),
+            }
             self.request.session["orderer_data"] = orderer_data
             return redirect(reverse("orders:order-check"))
+        if orderer_form.cleaned_data.get("payment") == "P2":
+            orderer_data = {
+                "payment": orderer_form.cleaned_data.get("payment"),
+                "last_name_orderer": recipient_data["last_name_recipient"],
+                "first_name_orderer": recipient_data["first_name_recipient"],
+                "last_name_orderer_kana": recipient_data["last_name_recipient_kana"],
+                "first_name_orderer_kana": recipient_data["first_name_recipient_kana"],
+                "phone_number_orderer": recipient_data["phone_number_recipient"],
+                "postal_code_orderer": recipient_data["postal_code_recipient"],
+                "prefecture_orderer": recipient_data["prefecture_recipient"],
+                "address_city_orderer": recipient_data["address_city_recipient"],
+                "address_detail_orderer": recipient_data["address_detail_recipient"],
+            }
+            self.request.session["orderer_data"] = orderer_data
+            return redirect(reverse("orders:order-check"))
+        messages.error(self.request, _("入力した情報をもう一度確認してください。"))
+        return render(self.request, "orders/select-payment.html", context)
 
 
 class OrderCheckView(FormView):

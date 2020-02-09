@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static humanize %}
+{% load i18n static humanize js %}
 
 {% block page_title %}
 {% trans 'ご購入の手続き' %}
@@ -17,12 +17,12 @@
         </h2>
         <div class="w-full flex">
             <div class="w-2/3 flex flex-wrap mb-10">
-                <form method="POST" class="w-3/4 mx-auto py-5">
+                <form id="form" method="POST" class="w-3/4 mx-auto py-5">
                     {% csrf_token %}
                     <h3 class="w-full font-semibold text-xl bg-gray-900 p-3 text-white rounded-t-lg">
                         {% trans '1. お届け先情報' %}
                     </h3>
-                    <div class="border border-gray-500 px-4 pb-2">
+                    <div class="border border-gray-500 rounded-b-lg px-4 pb-2">
                         <h4 class="pt-2 font-semibold mb-2">{% trans '配送先住所' %}</h4>
                         <span
                             class="pt-1">{{ recipient_data.last_name_recipient }}　{{ recipient_data.first_name_recipient }}</span>
@@ -43,7 +43,7 @@
 
                     <h3 class="w-full font-semibold text-2xl text-white bg-gray-900 p-3 rounded-t-lg mt-5">
                         {% trans '2. お支払い方法・ご請求先情報' %}</h3>
-                    <div class="border border-gray-500 px-4 pb-2">
+                    <div class="border border-gray-500 rounded-b-lg px-4 pb-2">
                         <div class="w-full pb-5">
                             <h4 class="pt-2 font-semibold mb-2">{% trans 'お支払い方法の選択' %}</h4>
                             <div class="flex">
@@ -62,67 +62,111 @@
                         </div>
                         <div id="for_card" class="hidden mb-4">
                             <h4 class="font-semibold mb-2">{% trans '請求先情報' %}</h4>
-                            <div class="flex items-center rounded">
-                                {{ orderer_form.is_same_with_recipient }}　<span>{% trans '請求先住所が配送先と同じ' %}</span>
+                            <a id="get_prev_data"
+                                class="block w-full btn-link mt-4 mb-8 cursor-pointer">{% trans '請求先住所が配送先と同じ' %}</a>
+                            <div id="address_orderer">
+                                <div class="flex mb-5">
+                                    <div class="mr-5 border rounded px-3 py-1">
+                                        <div class="floating-label">
+                                            {{ orderer_form.last_name_orderer }}
+                                            {{ orderer_form.last_name_orderer.label_tag }}
+                                            <span
+                                                class="text-red-700 font-medium text-xs">{{ orderer_form.last_name_orderer.errors }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="border rounded px-3 py-1">
+                                        <div class="floating-label">
+                                            {{ orderer_form.first_name_orderer }}
+                                            {{ orderer_form.first_name_orderer.label_tag }}
+                                            <span
+                                                class="text-red-700 font-medium text-xs">{{ orderer_form.first_name_orderer.errors }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex mb-5">
+                                    <div class="mr-5 border rounded px-3 py-1">
+                                        <div class="floating-label">
+                                            {{ orderer_form.last_name_orderer_kana }}
+                                            {{ orderer_form.last_name_orderer_kana.label_tag }}
+                                            <span
+                                                class="text-red-700 font-medium text-xs">{{ orderer_form.last_name_orderer_kana.errors }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="border rounded px-3 py-1">
+                                        <div class="floating-label">
+                                            {{ orderer_form.first_name_orderer_kana }}
+                                            {{ orderer_form.first_name_orderer_kana.label_tag }}
+                                            <span
+                                                class="text-red-700 font-medium text-xs">{{ orderer_form.first_name_orderer_kana.errors }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-5">
+                                    <div class="floating-label">
+                                        {{ orderer_form.email }}
+                                    </div>
+                                </div>
+                                <div class="mb-5 border rounded px-3 py-1">
+                                    <div class="floating-label">
+                                        {{ orderer_form.phone_number_orderer }}
+                                        {{ orderer_form.phone_number_orderer.label_tag }}
+                                        <span
+                                            class="text-red-700 font-medium text-xs">{{ orderer_form.phone_number_orderer.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="mb-5 border rounded px-3 py-1">
+                                    <div class="floating-label">
+                                        {{ orderer_form.postal_code_orderer }}
+                                        {{ orderer_form.postal_code_orderer.label_tag }}
+                                        <span
+                                            class="text-red-700 font-medium text-xs">{{ orderer_form.postal_code_orderer.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="floating-label select mb-5 border rounded px-3 py-2">
+                                    {{ orderer_form.prefecture_orderer }}
+                                </div>
+                                <div class="mb-5 border rounded px-3 py-1">
+                                    <div class="floating-label">
+                                        {{ orderer_form.address_city_orderer }}
+                                        {{ orderer_form.address_city_orderer.label_tag }}
+                                        <span
+                                            class="text-red-700 font-medium text-xs">{{ orderer_form.address_city_orderer.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="mb-5 border rounded px-3 py-1">
+                                    <div class="floating-label">
+                                        {{ orderer_form.address_detail_orderer }}
+                                        {{ orderer_form.address_detail_orderer.label_tag }}
+                                        <span
+                                            class="text-red-700 font-medium text-xs">{{ orderer_form.address_detail_orderer.errors }}</span>
+                                    </div>
+                                </div>
+                                <button class="btn my-5">{% trans 'ご注文内容の確認へ' %}</button>
                             </div>
                         </div>
-                        <div id="for_transfer" class="hidden border-2 mb-3">
-                            <h4 class="p-2 font-semibold">{% trans '振込先案内' %}</h4>
-                            <div class="pb-2 px-2 text-center text-indigo-800">
-                                <div>
-                                    {% trans '振込先：OO銀行' %}
-                                </div>
-                                <div>
-                                    {% trans '支店名：OOO支店(支店番号111)' %}
-                                </div>
-                                <div>
-                                    {% trans '取引種類：普通' %}
-                                </div>
-                                <div>
-                                    {% trans '口座番号：XXX-XXXX' %}
-                                </div>
-                                <div>
-                                    {% trans '口座名義：UNIWALK' %}
+                        <div id="for_transfer" class="hidden">
+                            <div class="border-2 mb-3">
+                                <h4 class="p-2 font-semibold">{% trans '振込先案内' %}</h4>
+                                <div class="pb-2 px-2 text-center text-indigo-800">
+                                    <div>
+                                        {% trans '振込先：OO銀行' %}
+                                    </div>
+                                    <div>
+                                        {% trans '支店名：OOO支店(支店番号111)' %}
+                                    </div>
+                                    <div>
+                                        {% trans '取引種類：普通' %}
+                                    </div>
+                                    <div>
+                                        {% trans '口座番号：XXX-XXXX' %}
+                                    </div>
+                                    <div>
+                                        {% trans '口座名義：UNIWALK' %}
+                                    </div>
                                 </div>
                             </div>
+                            <button class="btn my-5">{% trans 'ご注文内容の確認へ' %}</button>
                         </div>
-                        <div id="address_orderer" class="hidden">
-                            <div class="flex mb-5">
-                                <div class="mr-5 border rounded px-3 py-1">
-                                    {{ orderer_form.last_name_orderer }}
-                                </div>
-                                <div class="mr-5 border rounded px-3 py-1">
-                                    {{ orderer_form.first_name_orderer }}
-                                </div>
-                            </div>
-                            <div class="flex mb-5">
-                                <div class="mr-5 border rounded px-3 py-1">
-                                    {{ orderer_form.last_name_orderer_kana }}
-                                </div>
-                                <div class="mr-5 border rounded px-3 py-1">
-                                    {{ orderer_form.first_name_orderer_kana }}
-                                </div>
-                            </div>
-                            <div class="mb-5">
-                                {{ orderer_form.email }}
-                            </div>
-                            <div class="mb-5 border rounded px-3 py-1">
-                                {{ orderer_form.phone_number_orderer }}
-                            </div>
-                            <div class="mb-5 border rounded px-3 py-1">
-                                {{ orderer_form.postal_code_orderer }}
-                            </div>
-                            <div class="floating-label select mb-5 border rounded px-3 py-2">
-                                {{ orderer_form.prefecture_orderer }}
-                            </div>
-                            <div class="mb-5 border rounded px-3 py-1">
-                                {{ orderer_form.address_city_orderer }}
-                            </div>
-                            <div class="mb-5 border rounded px-3 py-1">
-                                {{ orderer_form.address_detail_orderer }}
-                            </div>
-                        </div>
-                        <button class="btn my-5">{% trans 'ご注文内容の確認へ' %}</button>
                     </div>
                     <h3 class="w-full font-semibold text-xl text-white bg-gray-900 p-3 mt-5 rounded-lg">
                         {% trans '3. ご注文の確定' %}
@@ -139,27 +183,51 @@
 </div>
 
 <script>
+    const form = document.querySelector("#form");
     const method_card = document.querySelector("#id_payment_0");
     const method_transfer = document.querySelector("#id_payment_1");
     const for_card = document.querySelector("#for_card");
     const for_transfer = document.querySelector("#for_transfer");
-    const check_orderer = document.querySelector("#id_is_same_with_recipient");
-    const address_orderer = document.querySelector("#address_orderer");
+
+    if (method_card.checked == true || method_transfer.checked == true) {
+        method_card.checked = false;
+        method_transfer.checked = false;
+    }
 
     method_card.addEventListener("change", () => {
         for_card.classList.remove("hidden");
         for_transfer.classList.add("hidden");
+        form.setAttribute("novalidate", false);
     });
 
     method_transfer.addEventListener("change", () => {
         for_transfer.classList.remove("hidden");
         for_card.classList.add("hidden");
-        address_orderer.classList.add("hidden");
-        check_orderer.checked = true;
+        form.setAttribute("novalidate", true);
     });
 
-    check_orderer.addEventListener("change", () => {
-        address_orderer.classList.toggle("hidden");
+    const get_prev_data_btn = document.querySelector("#get_prev_data");
+    const data = {{ recipient_data | js }};
+    const first_name = document.querySelector("#id_first_name_orderer");
+    const last_name = document.querySelector("#id_last_name_orderer");
+    const first_name_kana = document.querySelector("#id_first_name_orderer_kana");
+    const last_name_kana = document.querySelector("#id_last_name_orderer_kana");
+    const phone_number = document.querySelector("#id_phone_number_orderer");
+    const postal_code = document.querySelector("#id_postal_code_orderer");
+    const prefecture = document.querySelector("#id_prefecture_orderer");
+    const address_city = document.querySelector("#id_address_city_orderer");
+    const address_detail = document.querySelector("#id_address_detail_orderer");
+    get_prev_data_btn.addEventListener("click", () => {
+        first_name.value = data["first_name_recipient"];
+        last_name.value = data["last_name_recipient"];
+        first_name_kana.value = data["first_name_recipient_kana"];
+        last_name_kana.value = data["last_name_recipient_kana"];
+        phone_number.value = data["phone_number_recipient"];
+        postal_code.value = data["postal_code_recipient"];
+        prefecture.value = data["prefecture_recipient"];
+        address_city.value = data["address_city_recipient"];
+        address_detail.value = data["address_detail_recipient"];
     });
+
 </script>
 {% endblock content %}

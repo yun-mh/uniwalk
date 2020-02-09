@@ -77,11 +77,6 @@ class CheckoutForm(forms.ModelForm):
         required=True,
         widget=forms.TextInput(attrs={"placeholder": _("電話番号")}),
     )
-    # prefecture_recipient = forms.CharField(
-    #     label=_("都道府県"),
-    #     required=True,
-    #     widget=forms.TextInput(attrs={"placeholder": _("都道府県")}),
-    # )
     address_city_recipient = forms.CharField(
         label=_("市区町村番地"),
         required=True,
@@ -93,8 +88,14 @@ class CheckoutForm(forms.ModelForm):
         widget=forms.TextInput(attrs={"placeholder": _("建物名・号室")}),
     )
     postal_code_recipient = JPPostalCodeField(
-        label=_("郵便番号"), widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),
+        label=_("郵便番号"), 
+        required=True, 
+        widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
 
 
 class SelectPaymentForm(forms.ModelForm):
@@ -111,7 +112,6 @@ class SelectPaymentForm(forms.ModelForm):
             "prefecture_orderer",
             "address_city_orderer",
             "address_detail_orderer",
-            "is_same_with_recipient",
         )
         widgets = {
             "payment": forms.RadioSelect(),
@@ -132,12 +132,46 @@ class SelectPaymentForm(forms.ModelForm):
         }
 
     payment = forms.ChoiceField(choices=PAYMENT_CHOICES, widget=forms.RadioSelect())
-    is_same_with_recipient = forms.BooleanField(
-        label=_("請求書住所が配送先と同じ"),
-        initial=True,
-        required=False,
-        widget=forms.CheckboxInput(),
+    last_name_orderer = forms.CharField(
+        label=_("姓"), widget=forms.TextInput(attrs={"placeholder": _("姓")})
     )
+    first_name_orderer = forms.CharField(
+        label=_("名"), widget=forms.TextInput(attrs={"placeholder": _("名")})
+    )
+    last_name_orderer_kana = forms.CharField(
+        label=_("姓(カナ)"),
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": _("姓(カナ)")}),
+    )
+    first_name_orderer_kana = forms.CharField(
+        label=_("名(カナ)"),
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": _("名(カナ)")}),
+    )
+    phone_number_orderer = forms.CharField(
+        label=_("電話番号"),
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": _("電話番号")}),
+    )
+    address_city_orderer = forms.CharField(
+        label=_("市区町村番地"),
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": _("市区町村番地")}),
+    )
+    address_detail_orderer = forms.CharField(
+        label=_("建物名・号室"),
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": _("建物名・号室")}),
+    )
+    postal_code_orderer = JPPostalCodeField(
+        label=_("郵便番号"), 
+        required=True, 
+        widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
 
 
 class CardForm(forms.Form):

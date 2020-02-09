@@ -76,7 +76,7 @@ class Order(models.Model):
     address_city_recipient = models.CharField(_("市区町村(ご請求書先)"), max_length=40)
     address_detail_recipient = models.CharField(_("建物名・部屋番号(ご請求書先)"), max_length=40)
     last_name_orderer = models.CharField(
-        _("姓(お届け先)"), max_length=30, null=True, blank=True
+        _("姓(お届け先)"), max_length=30
     )
     first_name_orderer = models.CharField(
         _("名(お届け先)"), max_length=30, null=True, blank=True

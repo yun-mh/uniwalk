@@ -21,68 +21,84 @@
                     <div id="orderer" class="py-5">
                         <h3 class="w-full font-semibold text-2xl bg-gray-900 p-3 text-white rounded-t-lg">
                             {% trans '1. お届け先情報' %}</h3>
-                        <div class="border border-gray-500 px-4">
+                        <div class="border border-gray-500 rounded-b-lg px-4">
                             {% if request.user.is_authenticated %}
                             <a id="get_user_data"
                                 class="block w-full btn-link mt-4 mb-8 cursor-pointer">{% trans '会員情報からデータを取得する' %}</a>
                             {% endif %}
                             {% csrf_token %}
                             <div class="flex mb-5 ">
-                                <div class="floating-label mr-5 border rounded px-3 pb-2">
-                                    {{ recipient_form.last_name_recipient }}
-                                    {{ recipient_form.last_name_recipient.label_tag }}
-                                    <span
-                                        class="text-red-700 font-medium text-xs ">{{ recipient_form.last_name_recipient.errors }}</span>
+                                <div class="mr-5 border rounded px-3 pb-2">
+                                    <div class="floating-label ">
+                                        {{ recipient_form.last_name_recipient }}
+                                        {{ recipient_form.last_name_recipient.label_tag }}
+                                        <span
+                                            class="text-red-700 font-medium text-xs">{{ recipient_form.last_name_recipient.errors }}</span>
+                                    </div>
                                 </div>
-                                <div class="floating-label border rounded px-3 pb-2">
-                                    {{ recipient_form.first_name_recipient }}
-                                    {{ recipient_form.first_name_recipient.label_tag }}
-                                    <span
-                                        class="text-red-700 font-medium text-xs">{{ recipient_form.first_name_recipient.errors }}</span>
+                                <div class="border rounded px-3 pb-2">
+                                    <div class="floating-label">
+                                        {{ recipient_form.first_name_recipient }}
+                                        {{ recipient_form.first_name_recipient.label_tag }}
+                                        <span
+                                            class="text-red-700 font-medium text-xs">{{ recipient_form.first_name_recipient.errors }}</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="flex mb-5">
-                                <div class="floating-label mr-5 border rounded px-3 pb-2">
-                                    {{ recipient_form.last_name_recipient_kana }}
-                                    {{ recipient_form.last_name_recipient_kana.label_tag }}
-                                    <span
-                                        class="text-red-700 font-medium text-xs">{{ recipient_form.last_name_recipient_kana.errors }}</span>
+                                <div class="mr-5 border rounded px-3 pb-2">
+                                    <div class="floating-label">
+                                        {{ recipient_form.last_name_recipient_kana }}
+                                        {{ recipient_form.last_name_recipient_kana.label_tag }}
+                                        <span
+                                            class="text-red-700 font-medium text-xs">{{ recipient_form.last_name_recipient_kana.errors }}</span>
+                                    </div>
                                 </div>
-                                <div class="floating-label border rounded px-3 pb-2">
-                                    {{ recipient_form.first_name_recipient_kana }}
-                                    {{ recipient_form.first_name_recipient_kana.label_tag }}
-                                    <span
-                                        class="text-red-700 font-medium text-xs">{{ recipient_form.first_name_recipient_kana.errors }}</span>
+                                <div class="border rounded px-3 pb-2">
+                                    <div class="floating-label">
+                                        {{ recipient_form.first_name_recipient_kana }}
+                                        {{ recipient_form.first_name_recipient_kana.label_tag }}
+                                        <span
+                                            class="text-red-700 font-medium text-xs">{{ recipient_form.first_name_recipient_kana.errors }}</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="floating-label mb-5 border rounded px-3 py-1">
-                                {{ recipient_form.phone_number_recipient }}
-                                {{ recipient_form.phone_number_recipient.label_tag }}
-                                <span
-                                    class="text-red-700 font-medium text-xs">{{ recipient_form.phone_number_recipient.errors }}</span>
+                            <div class="mb-5 border rounded px-3 py-1">
+                                <div class="floating-label">
+                                    {{ recipient_form.phone_number_recipient }}
+                                    {{ recipient_form.phone_number_recipient.label_tag }}
+                                    <span
+                                        class="text-red-700 font-medium text-xs">{{ recipient_form.phone_number_recipient.errors }}</span>
+                                </div>
                             </div>
-                            <div class="floating-label mb-5 border rounded px-3 py-1">
-                                {{ recipient_form.postal_code_recipient }}
-                                {{ recipient_form.postal_code_recipient.label_tag }}
-                                <span
-                                    class="text-red-700 font-medium text-xs ">{{ recipient_form.postal_code_recipient.errors }}</span>
+                            <div class="mb-5 border rounded px-3 py-1">
+                                <div class="floating-label">
+                                    {{ recipient_form.postal_code_recipient }}
+                                    {{ recipient_form.postal_code_recipient.label_tag }}
+                                    <span
+                                        class="text-red-700 font-medium text-xs ">{{ recipient_form.postal_code_recipient.errors }}</span>
+                                </div>
                             </div>
                             <div class="floating-label select mb-5 border rounded px-3 py-2">
                                 {{ recipient_form.prefecture_recipient }}
                                 <span
                                     class="text-red-700 font-medium text-xs">{{ recipient_form.prefecture_recipient.errors }}</span>
                             </div>
-                            <div class="floating-label mb-5 border rounded px-3 pb-2">
-                                {{ recipient_form.address_city_recipient }}
-                                {{ recipient_form.address_city_recipient.label_tag }}
-                                <span
-                                    class="text-red-700 font-medium text-xs">{{ recipient_form.address_city_recipient.errors }}</span>
+                            <div class="mb-5 border rounded px-3 pb-2">
+                                <div class="floating-label">
+                                    {{ recipient_form.address_city_recipient }}
+                                    {{ recipient_form.address_city_recipient.label_tag }}
+                                    <span
+                                        class="text-red-700 font-medium text-xs">{{ recipient_form.address_city_recipient.errors }}</span>
+                                </div>
                             </div>
-                            <div class="floating-label mb-5 border rounded px-3 pb-2">
-                                {{ recipient_form.address_detail_recipient }}
-                                {{ recipient_form.address_detail_recipient.label_tag }}
-                                <span
-                                    class="text-red-700 font-medium text-xs">{{ recipient_form.address_detail_recipient.errors }}</span>
+                            <div class="mb-5 border rounded px-3 pb-2">
+                                <div class="floating-label">
+                                    {{ recipient_form.address_detail_recipient }}
+                                    {{ recipient_form.address_detail_recipient.label_tag }}
+                                    <span
+                                        class="text-red-700 font-medium text-xs">{{ recipient_form.address_detail_recipient.errors }}</span>
+                                </div>
                             </div>
                             <button class="btn mb-4">{% trans 'お支払い方法の選択へ' %}</button>
                         </div>

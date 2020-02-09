@@ -16,10 +16,9 @@
                 <button class="w-20 rounded-lg bg-red-500 mx-3 px-3 py-2 text-sm text-white">{% trans '登録解除' %}</button>
             </div>
         </div>
-        <div class="h-full flex justify-between px-5 py-3" style="background-color: {% if card.brand == 'Visa' %} #243545 {% elif card.brand == 'MasterCard' %} #F79F14 {% elif card.brand == 'American Express' %} #f3f3f3 {% endif %};
+        <div class="h-full flex justify-end px-5 py-3" style="background-color: {% if card.brand == 'Visa' %} #243545 {% elif card.brand == 'MasterCard' %} #F79F14 {% elif card.brand == 'American Express' %} #f3f3f3 {% endif %};
                     color: {% if card.brand == 'Visa' %} #f3f3f3 {% elif card.brand == 'MasterCard' %} #243545 {% elif card.brand == 'American Express' %} #016FD0 {% endif %};
                 ">
-            <div>name</div>
             <div class="flex">
                 <div class="flex flex-col items-center">
                     <span class="text-sm">{% trans '有効期限(月/年)' %}</span>
@@ -40,4 +39,3 @@
         </div>
     </form>
 </div>
-{{ card }}
