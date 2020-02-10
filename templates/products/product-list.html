@@ -7,19 +7,20 @@
 
 {% block content %}
 
-<div class="mx-auto">
+<div class="min-h-75vh rounded-xl mx-auto"
+    style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">>
 
-    <div class="flex">
-        <div class="w-1/6 pt-6 px-2 border-4 mt-10 ml-6 mr-3" style="height: 15vw;">
-            <h2 class="text-base font-extrabold mb-5 py-2 pl-3 text-gray-800 border-l-4 border-blue-600">
-                {% trans '商品カテゴリー' %}</h2>
-            <ul class="pl-4 ">
-                <li class="flex justify-between mb-2 text-sm hover:border-b border-blue-600">
+    <div class="flex p-10">
+        <div class="w-1/6 shadow-lg bg-white rounded-lg ml-6 mr-3 h-2/3">
+            <h2 class="text-lg font-extrabold py-2 mb-1 pl-3 bg-gray-900 text-white rounded-t-lg">{% trans '商品カテゴリー' %}
+            </h2>
+            <ul class="px-4">
+                <li class="flex justify-between py-2 text-base pr-3 p-1">
                     <a href="{% url 'products:list' %}">{% trans 'すべて' %}</a>
                     <span class="text-gray-500">{{ count }}</span>
                 </li>
                 {% for category in categories %}
-                <li class="flex justify-between mb-2 text-sm">
+                <li class="flex justify-between mb-2 text-base pr-3 p-1">
                     <a href="{% url 'products:list-category' category.pk %}">{{ category }}</a>
                     <span class="text-gray-500">{{ category.product.all|length }}</span>
                 </li>
@@ -27,13 +28,25 @@
             </ul>
         </div>
 
-        <div class="w-5/6 flex flex-wrap pr-10 pl-3 pt-10">
+        <div class="w-5/6 flex flex-wrap mr-10 ml-3 rounded-lg p-5 bg-white">
+            <h2 class="w-full text-indigo-800 mt-3 mb-5 text-3xl text-center font-semibold">
+                {% if '/category-1/' in request.path %}
+                HIGH CUT
+                {% elif '/category-2/' in request.path %}
+                MIDDLE CUT
+                {% elif '/category-3/' in request.path %}
+                LOW CUT
+                {% else %}
+                ALL
+                {% endif %}
+            </h2>
             {% if products %}
             {% for product in products %}
             {% include 'mixins/products/product-card.html' with product=product %}
             {% endfor %}
 
-            <div class="flex h-12 items-center justify-center mx-auto container border border-gray-300 bg-gray-100">
+            <div
+                class="flex h-12 items-center justify-center mx-auto container border border-gray-300 mt-5 bg-gray-100">
                 {% if page_obj.has_previous %}
                 <a href="?page={{ page_obj.previous_page_number }}" class="text-blue-500">
                     <i class="fas fa-arrow-left fa-lg"></i>
@@ -59,9 +72,5 @@
             {% endif %}
         </div>
     </div>
-
-
 </div>
-
-
 {% endblock content %}

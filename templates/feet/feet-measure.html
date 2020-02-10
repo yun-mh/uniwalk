@@ -175,7 +175,8 @@
         <li class="active">
             <div class="content__wrapper">
                 <h2 class="">{% trans '測定するイメージファイルをアップロードしてください。' %}</h2>
-                <a id="infoAuto" class="cursor-pointer"><i class="fas fa-question-circle"></i> 足サイズ測定方法</a>
+                <a id="infoAuto" class="cursor-pointer"><i class="fas fa-question-circle"></i>
+                    {% trans '足サイズ測定方法' %}</a>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="flex justify-around">
@@ -201,7 +202,8 @@
         <li>
             <div class="content__wrapper">
                 <h2 class="">{% trans '足サイズを記入してください。' %}</h2>
-                <a id="infoManual" class="cursor-pointer"><i class="fas fa-question-circle"></i> 足サイズ測定方法</a>
+                <a id="infoManual" class="cursor-pointer"><i class="fas fa-question-circle"></i>
+                    {% trans '足サイズ測定方法' %}</a>
                 <form method="POST">
                     {% csrf_token %}
                     <div class="flex justify-around">
