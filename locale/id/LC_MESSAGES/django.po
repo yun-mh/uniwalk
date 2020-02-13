@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-09 22:08+0900\n"
+"POT-Creation-Date: 2020-02-12 00:54+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -747,7 +747,7 @@ msgstr ""
 msgid "対応中"
 msgstr ""
 
-#: .\templates\admin\base.html:125 .\templates\products\product-detail.html:65
+#: .\templates\admin\base.html:125 .\templates\products\product-detail.html:92
 msgid "詳しく見る"
 msgstr ""
 
@@ -841,7 +841,7 @@ msgstr ""
 #: .\templates\admin\design-analytics.html:26
 #: .\templates\galleries\galleries_list.html:25
 #: .\templates\galleries\galleries_list.html:40
-#: .\templates\products\product-list.html:18
+#: .\templates\products\product-list.html:19
 msgid "すべて"
 msgstr ""
 
@@ -874,6 +874,7 @@ msgid "素材一覧"
 msgstr ""
 
 #: .\templates\admin\extra_nav.html:37
+#: .\templates\products\product-detail.html:42
 msgid "デザイン一覧"
 msgstr ""
 
@@ -1121,7 +1122,7 @@ msgstr ""
 msgid "ショッピングカート"
 msgstr ""
 
-#: .\templates\carts\cart.html:40 .\templates\carts\cart.html:43
+#: .\templates\carts\cart.html:40
 msgid "左足"
 msgstr ""
 
@@ -1131,6 +1132,10 @@ msgstr ""
 
 #: .\templates\carts\cart.html:42 .\templates\carts\cart.html:45
 msgid "(足幅)"
+msgstr ""
+
+#: .\templates\carts\cart.html:43
+msgid "右足"
 msgstr ""
 
 #: .\templates\carts\cart.html:73
@@ -1237,7 +1242,7 @@ msgid "商品選択"
 msgstr ""
 
 #: .\templates\designs\select-products.html:54
-#: .\templates\products\product-list.html:57
+#: .\templates\products\product-list.html:70
 msgid "商品が存在しません。"
 msgstr ""
 
@@ -1531,8 +1536,8 @@ msgstr ""
 
 #: .\templates\feet\feet-measure.html:122
 msgid ""
-"親指の関節の１番出ている部分から小指の関節の１番出ている部分までの長さをメー"
-"じゃで測ります。"
+"親指の関節の１番出ている部分から小指の関節の１番出ている部分までの長さをメ"
+"ジャーで測ります。"
 msgstr ""
 
 #: .\templates\feet\feet-measure.html:132
@@ -1915,27 +1920,35 @@ msgstr ""
 msgid "%(product_name)s"
 msgstr ""
 
-#: .\templates\products\product-detail.html:30
+#: .\templates\products\product-detail.html:26
 msgid "税込"
 msgstr ""
 
-#: .\templates\products\product-detail.html:33
+#: .\templates\products\product-detail.html:34
 msgid "カスタマイズして購入"
 msgstr ""
 
-#: .\templates\products\product-detail.html:41
+#: .\templates\products\product-detail.html:56
+msgid "全てのデザインを見る"
+msgstr ""
+
+#: .\templates\products\product-detail.html:60
+msgid "デザインデータがまだ存在しません。"
+msgstr ""
+
+#: .\templates\products\product-detail.html:68
 msgid "全てのレビュー"
 msgstr ""
 
-#: .\templates\products\product-detail.html:45
+#: .\templates\products\product-detail.html:72
 msgid "レビューを書く"
 msgstr ""
 
-#: .\templates\products\product-detail.html:71
+#: .\templates\products\product-detail.html:98
 msgid "全てのレビューを見る"
 msgstr ""
 
-#: .\templates\products\product-detail.html:76
+#: .\templates\products\product-detail.html:103
 #: .\templates\reviews\review-list.html:89
 msgid "レビューがまだ存在しません。"
 msgstr ""
@@ -1944,7 +1957,7 @@ msgstr ""
 msgid "商品リスト"
 msgstr ""
 
-#: .\templates\products\product-list.html:44
+#: .\templates\products\product-list.html:57
 #, python-format
 msgid ""
 "\n"

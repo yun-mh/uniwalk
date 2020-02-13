@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-09 22:09+0900\n"
+"POT-Creation-Date: 2020-02-12 00:54+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -213,63 +213,63 @@ msgstr "Order Item"
 #: .\orders\admin.py:26 .\orders\admin.py:36 .\orders\admin.py:46
 #: .\orders\admin.py:56 .\orders\admin.py:66 .\orders\admin.py:76
 msgid "1件の注文の対応を"
-msgstr ""
+msgstr "The process of 1 item "
 
 #: .\orders\admin.py:28 .\orders\admin.py:38 .\orders\admin.py:48
 #: .\orders\admin.py:58 .\orders\admin.py:68 .\orders\admin.py:78
 #, python-format
 msgid "%s 注文の対応を"
-msgstr ""
+msgstr "The process of %s items "
 
 #: .\orders\admin.py:29
 #, python-format
 msgid "%s 入金前に変更しました。"
-msgstr ""
+msgstr "%s got to be Before transfer"
 
 #: .\orders\admin.py:30 .\orders\admin.py:80
 msgid "選択した注文を入金前に変更"
-msgstr ""
+msgstr "Make the selected items 'Before transfer'"
 
 #: .\orders\admin.py:39
 #, python-format
 msgid "%s 決済処理中に変更しました。"
-msgstr ""
+msgstr "%s got to be Processing billing"
 
 #: .\orders\admin.py:40
 msgid "選択した注文を決済処理中に変更"
-msgstr ""
+msgstr "Make the selected items 'Processing billing'"
 
 #: .\orders\admin.py:49
 #, python-format
 msgid "%s 決済確認済みに変更しました。"
-msgstr ""
+msgstr "%s got to be Billing checked"
 
 #: .\orders\admin.py:50
 msgid "選択した注文を決済確認済みに変更"
-msgstr ""
+msgstr "Make the selected items 'Billing checked'"
 
 #: .\orders\admin.py:59
 #, python-format
 msgid "%s 対応中に変更しました。"
-msgstr ""
+msgstr "%s got to be Processing"
 
 #: .\orders\admin.py:60
 msgid "選択した注文を対応中に変更"
-msgstr ""
+msgstr "Make the selected items 'Processing'"
 
 #: .\orders\admin.py:69
 #, python-format
 msgid "%s 発送済みに変更しました。"
-msgstr ""
+msgstr "%s got to be Shipped"
 
 #: .\orders\admin.py:70
 msgid "選択した注文を発送済みに変更"
-msgstr ""
+msgstr "Make the selected items 'Shipped'"
 
 #: .\orders\admin.py:79
 #, python-format
 msgid "%s 注文取消しに変更しました。"
-msgstr ""
+msgstr "%s got to be Canceled"
 
 #: .\orders\admin.py:92
 msgid "注文情報"
@@ -533,11 +533,11 @@ msgstr "Amount"
 
 #: .\orders\views.py:222 .\orders\views.py:521 .\orders\views.py:527
 msgid "入力した情報をもう一度確認してください。"
-msgstr ""
+msgstr "Please check your input data."
 
 #: .\orders\views.py:370
 msgid "支払限度を超過しました。"
-msgstr ""
+msgstr "Exceeded the limit."
 
 #: .\orders\views.py:374
 msgid "無効なペラメタです。"
@@ -561,7 +561,7 @@ msgstr "Error."
 
 #: .\orders\views.py:479
 msgid "UniWalk　ご注文ありがとうございます。"
-msgstr ""
+msgstr "UniWalk Thank you for ordering our products."
 
 #: .\orders\views.py:555 .\users\views.py:282 .\users\views.py:312
 msgid "注文を取消しました。"
@@ -705,7 +705,7 @@ msgstr "Review"
 
 #: .\reviews\views.py:55
 msgid "レビューを投稿しました。"
-msgstr ""
+msgstr "Review uploaded."
 
 #: .\templates\admin\base.html:10 .\templates\admin\base.html:33
 msgid "Uniwalk 管理者モード"
@@ -747,7 +747,7 @@ msgstr "Billing checked"
 msgid "対応中"
 msgstr "Processing"
 
-#: .\templates\admin\base.html:125 .\templates\products\product-detail.html:65
+#: .\templates\admin\base.html:125 .\templates\products\product-detail.html:92
 msgid "詳しく見る"
 msgstr "More"
 
@@ -843,7 +843,7 @@ msgstr "By Categories"
 #: .\templates\admin\design-analytics.html:26
 #: .\templates\galleries\galleries_list.html:25
 #: .\templates\galleries\galleries_list.html:40
-#: .\templates\products\product-list.html:18
+#: .\templates\products\product-list.html:19
 msgid "すべて"
 msgstr "All"
 
@@ -878,6 +878,7 @@ msgid "素材一覧"
 msgstr "Materials"
 
 #: .\templates\admin\extra_nav.html:37
+#: .\templates\products\product-detail.html:42
 msgid "デザイン一覧"
 msgstr "Designs"
 
@@ -1127,7 +1128,7 @@ msgstr "Register a credit card"
 msgid "ショッピングカート"
 msgstr "Shopping cart"
 
-#: .\templates\carts\cart.html:40 .\templates\carts\cart.html:43
+#: .\templates\carts\cart.html:40
 msgid "左足"
 msgstr "Left foot"
 
@@ -1138,6 +1139,12 @@ msgstr "(Foot length)"
 #: .\templates\carts\cart.html:42 .\templates\carts\cart.html:45
 msgid "(足幅)"
 msgstr "(Foot width)"
+
+#: .\templates\carts\cart.html:43
+#, fuzzy
+#| msgid "右"
+msgid "右足"
+msgstr "Right"
 
 #: .\templates\carts\cart.html:73
 msgid "カートに商品が入っていません。"
@@ -1243,7 +1250,7 @@ msgid "商品選択"
 msgstr "Select a product"
 
 #: .\templates\designs\select-products.html:54
-#: .\templates\products\product-list.html:57
+#: .\templates\products\product-list.html:70
 msgid "商品が存在しません。"
 msgstr "No products available."
 
@@ -1463,18 +1470,20 @@ msgid ""
 "\n"
 "顧客様からの要請により、パスワード再設定関連のメールをご送信いたしました。\n"
 msgstr ""
+"\n"
+"We have sent a password resetting email to you by your request.\n"
 
 #: .\templates\emails\password-reset-email.html:8
 msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。"
-msgstr ""
+msgstr "Please reset your password through the link below."
 
 #: .\templates\emails\password-reset-email.html:12
 msgid "顧客様のIDは次のどおりです："
-msgstr ""
+msgstr "Your ID: "
 
 #: .\templates\emails\password-reset-email.html:14
 msgid "いつものご利用ありがとうございます！"
-msgstr ""
+msgstr "We always appreciate your usual use of our site."
 
 #: .\templates\emails\password-reset-subject.txt:3
 #, python-format
@@ -1534,12 +1543,14 @@ msgstr "How to measure?"
 msgid ""
 "メジャーを用い、足のカカトから一番出ている足の指までの長さを垂直で測ります。"
 msgstr ""
+"Please measure the vertical length from the end point of your heel to the "
+"most prominent point of your toe by using a tape measure."
 
 #: .\templates\feet\feet-measure.html:122
 msgid ""
-"親指の関節の１番出ている部分から小指の関節の１番出ている部分までの長さをメー"
-"じゃで測ります。"
-msgstr ""
+"親指の関節の１番出ている部分から小指の関節の１番出ている部分までの長さをメ"
+"ジャーで測ります。"
+msgstr "Measure the widest part of your feet."
 
 #: .\templates\feet\feet-measure.html:132
 msgid "足イメージの撮り方"
@@ -1550,17 +1561,23 @@ msgid ""
 "きれいなA4サイズの黒紙を用意してください。破れた紙、印刷されている紙、しわく"
 "ちゃな紙の場合は測定できないため注意してください。"
 msgstr ""
+"Prepare an A4 sized black paper. Note that a paper that is torn, printed, or "
+"crumpled cannot be used for measurement."
 
 #: .\templates\feet\feet-measure.html:160
 msgid ""
 "写真を撮るときには写真に影響を及ぼすものがないようにきれいな床で撮ってくださ"
 "い。"
 msgstr ""
+"Set your feet in the place where there are no objects which can affect the "
+"quality of your photos while taking them."
 
 #: .\templates\feet\feet-measure.html:163
 msgid ""
 "カカトを紙の端に置き、人差し指が紙の垂直中央線に位置するようにしてください。"
 msgstr ""
+"Place your heel at the edge of the paper, and set your second toe on the "
+"middle of the horizontal line of the paper."
 
 #: .\templates\feet\feet-measure.html:171
 msgid "足サイズ記入"
@@ -1921,27 +1938,39 @@ msgstr "About us"
 msgid "%(product_name)s"
 msgstr "%(product_name)s"
 
-#: .\templates\products\product-detail.html:30
+#: .\templates\products\product-detail.html:26
 msgid "税込"
 msgstr "Tax included"
 
-#: .\templates\products\product-detail.html:33
+#: .\templates\products\product-detail.html:34
 msgid "カスタマイズして購入"
 msgstr "Purchase"
 
-#: .\templates\products\product-detail.html:41
+#: .\templates\products\product-detail.html:56
+#, fuzzy
+#| msgid "デザインする"
+msgid "全てのデザインを見る"
+msgstr "Make designs"
+
+#: .\templates\products\product-detail.html:60
+#, fuzzy
+#| msgid "レビューがまだ存在しません。"
+msgid "デザインデータがまだ存在しません。"
+msgstr "No reviews written."
+
+#: .\templates\products\product-detail.html:68
 msgid "全てのレビュー"
 msgstr "All reviews"
 
-#: .\templates\products\product-detail.html:45
+#: .\templates\products\product-detail.html:72
 msgid "レビューを書く"
 msgstr "Write a review"
 
-#: .\templates\products\product-detail.html:71
+#: .\templates\products\product-detail.html:98
 msgid "全てのレビューを見る"
 msgstr "View all"
 
-#: .\templates\products\product-detail.html:76
+#: .\templates\products\product-detail.html:103
 #: .\templates\reviews\review-list.html:89
 msgid "レビューがまだ存在しません。"
 msgstr "No reviews written."
@@ -1950,7 +1979,7 @@ msgstr "No reviews written."
 msgid "商品リスト"
 msgstr "Product list"
 
-#: .\templates\products\product-list.html:44
+#: .\templates\products\product-list.html:57
 #, python-format
 msgid ""
 "\n"
@@ -2006,6 +2035,13 @@ msgid ""
 "                    後はあなたのもとにシューズが届くのを待つだけ！きっとお気"
 "に入りのシューズが手に入ります。"
 msgstr ""
+"Uniwalk was established for you who are looking for the ideal shoes.<br>\n"
+"                    Uniwalk will make the shoes for you with yourfavourite "
+"color, design and size.<br>\n"
+"                    You choose the base, design with your color,and measure "
+"your foot size. <br>\n"
+"                    Then, you just can wait for your shoes to be delivered!"
+"You will be getting the favourite shoes of yours."
 
 #: .\templates\statics\about.html:40
 msgid "アクセス"
@@ -2019,38 +2055,47 @@ msgid ""
 "00<br>\n"
 "                    定休日 月曜日定休"
 msgstr ""
+"Address: 450-0002(Postal code) Spiral Towers, 27-1, 4chome, Meieki, "
+"Nakamuraku, Nagoya, Aichi<br>\n"
+"                    Open hours: 13：00～20：00(Weekday) 10：00～18："
+"00(Weekend)<br>\n"
+"                    Closed on every Monday"
 
 #: .\templates\statics\home.html:11
 msgid "オリジナルスニーカーが作られる！"
-msgstr ""
+msgstr "You can create your own sneakers!"
 
 #: .\templates\statics\home.html:22
 msgid "デザインをカスタマイズする"
-msgstr ""
+msgstr "Customize the design"
 
 #: .\templates\statics\home.html:24
 msgid ""
 "素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザイ"
 "ンを参照することもできます！"
 msgstr ""
+"You can express your own personality by customizing colors or matrials of "
+"sneakers.There are lots of references created by other users!"
 
 #: .\templates\statics\home.html:33
 msgid "足サイズを測定する"
-msgstr ""
+msgstr "Measure your footsizes"
 
 #: .\templates\statics\home.html:34
 msgid ""
 "足の写真をアップロードし、両足ずつ足長・足幅のサイズを測定することができま"
 "す。"
 msgstr ""
+"Upload your feet images, then your feet length and width can be measured."
 
 #: .\templates\statics\home.html:45
 msgid "依頼どおりスニーカーを制作する"
-msgstr ""
+msgstr "Tailor your sneaker as you ordered"
 
 #: .\templates\statics\home.html:46
 msgid "デザインと足サイズをもとにあなたのためのスニーカーを制作します！"
 msgstr ""
+"We will make your own sneakers that fit to your feet sizes and visual tastes!"
 
 #: .\templates\statics\home.html:66
 msgid "もっと見る"
@@ -2100,7 +2145,7 @@ msgstr "Error"
 msgid ""
 "パスワード再設定用リンクが無効です。新たにパスワード再設定を申し込んでくださ"
 "い。"
-msgstr ""
+msgstr "Not valid link anymore. A new request for resetting password needed."
 
 #: .\templates\users\password-reset-done.html:5
 msgid "パスワード再設定申込み完了"
@@ -2112,7 +2157,8 @@ msgstr "Request for resetting password submitted"
 
 #: .\templates\users\password-reset-done.html:16
 msgid "ご登録のメールアドレス宛にパスワード再発行用メールを送信いたしました。"
-msgstr "We send a mail with a link for resetting your password to your mail address."
+msgstr ""
+"We send a mail with a link for resetting your password to your mail address."
 
 #: .\templates\users\password-reset-done.html:18
 msgid "メールの内容をご確認いただきますよう、お願いいたします。"
@@ -2182,7 +2228,8 @@ msgstr "Have an account?"
 
 #: .\templates\users\update-profile.html:26
 msgid "パスワード変更の場合は、右のボタンを押してください。"
-msgstr "Please click the right button if you would like to change your password."
+msgstr ""
+"Please click the right button if you would like to change your password."
 
 #: .\templates\users\withdrawal-check.html:5
 msgid "会員脱退確認"
@@ -2194,9 +2241,9 @@ msgid ""
 "text-red-500\">すべて削除</span>されます。<br>よろしければ、下のボタンを押し"
 "てください。"
 msgstr ""
-"Saved data in your account will be <span class=\"font-semibold "
-"text-red-500\">ALL DELETED</span><br>Click the button below if you would like to"
-"proceed"
+"Saved data in your account will be <span class=\"font-semibold text-"
+"red-500\">ALL DELETED</span><br>Click the button below if you would like "
+"toproceed"
 
 #: .\templates\users\withdrawal-check.html:30
 msgid "脱退する"

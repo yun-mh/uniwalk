@@ -8,7 +8,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="{% static 'css/twemoji-awesome.css' %}">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <!-- <script src="{% static 'js/all.min.js' %}"></script> -->
+  <script src="https://kit.fontawesome.com/d7ead653ba.js" crossorigin="anonymous"></script>
   <title>{% block page_title %}{% endblock page_title %}| UniWalk</title>
 </head>
 
@@ -24,10 +27,6 @@
   </article>
 
   {% include "partials/footer.html" %}
-
-
-  <script src="https://kit.fontawesome.com/d7ead653ba.js" crossorigin="anonymous"></script>
-
 
   <script>
     const userBtn = document.querySelector(".user-btn");
@@ -62,6 +61,7 @@
     zh_hans.addEventListener("click", handleLangChange);
     pt_br.addEventListener("click", handleLangChange);
   </script>
+
   {% block javascript %}
 
   {% endblock %}
