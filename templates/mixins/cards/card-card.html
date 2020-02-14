@@ -1,5 +1,5 @@
 {% load i18n %}
-<div class="w-50vh h-25vh mx-auto rounded-lg mb-10 overflow-hidden bg-gray-600 shadow-dark">
+<div class="w-50vh h-25vh mx-auto rounded-lg mb-10 overflow-hidden bg-gray-600 shadow-dark wow fadeIn">
     <form method="POST" class="w-full h-full">
         {% csrf_token %}
         <div class="h-2/3 flex items-center justify-center relative" style="background-color: {% if card.brand == 'Visa' %} #f3f3f3 {% elif card.brand == 'MasterCard' %} #243545 {% elif card.brand == 'American Express' %} #016FD0 {% endif %};

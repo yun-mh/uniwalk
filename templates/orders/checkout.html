@@ -10,7 +10,7 @@
     style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
     <div class="w-5/6 flex flex-col items-center container mx-auto bg-white p-12 my-10 rounded-xl relative">
         <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute" style="top: -3rem;">
-            <i class="fas fa-shopping-bag fa-3x text-white"></i>
+            <i class="fas fa-shopping-bag fa-3x text-white wow fadeIn"></i>
         </div>
         <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold text-center">
             {% trans 'ご購入の手続き' %}
@@ -18,7 +18,7 @@
         <div class="w-full flex">
             <div class="w-2/3 flex flex-wrap mb-10">
                 <form method="POST" class="w-3/4 mx-auto">
-                    <div id="orderer" class="py-5">
+                    <div id="orderer" class="py-5 wow fadeIn">
                         <h3 class="w-full font-semibold text-2xl bg-gray-900 p-3 text-white rounded-t-lg">
                             {% trans '1. お届け先情報' %}</h3>
                         <div class="border border-gray-500 rounded-b-lg px-4">

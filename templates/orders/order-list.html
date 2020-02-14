@@ -18,7 +18,7 @@
                 class="container bg-white w-2/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 mt-24 relative">
                 <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute"
                     style="top: -3rem;">
-                    <i class="fas fa-truck fa-3x text-white"></i>
+                    <i class="fas fa-truck fa-3x text-white wow fadeIn"></i>
                 </div>
                 <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans '注文履歴' %}</h2>
 
@@ -47,12 +47,12 @@
                 </div>
 
                 {% else %}
-                <p class="flex justify-center items-center font-semibold h-full w-full text-center text-2xl">
+                <p class="flex justify-center items-center font-semibold h-full w-full text-center text-2xl wow fadeIn">
                     <i class="fas fa-dizzy fa-2x text-purple-500"></i> <span
                         class="ml-5">{% trans '注文履歴が存在しません。' %}</span>
                 </p>
 
-                <div class="w-full flex items-center justify-center mt-5">
+                <div class="w-full flex items-center justify-center mt-5 wow fadeIn">
                     <p class="w-1/2 text-center">{% trans '新しいスニーカーはいかがですか？' %}</p>
                     <a href="{% url 'products:list' %}" class="btn w-1/3">{% trans '商品を見る' %}</a>
                 </div>

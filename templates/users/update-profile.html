@@ -18,7 +18,7 @@
                 class="container min-h-75vh bg-white w-2/3 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 mt-24 relative">
                 <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute"
                     style="top: -3rem;">
-                    <i class="fas fa-user-cog fa-3x text-white"></i>
+                    <i class="fas fa-user-cog fa-3x text-white wow fadeIn"></i>
                 </div>
                 <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans '会員情報変更' %}</h2>
 
@@ -28,18 +28,19 @@
                 </div>
 
                 <form method="POST" enctype="multipart/form-data" class="w-full p-5">
-                    {% csrf_token %}
+                    <div class="wow fadeIn">
+                        {% csrf_token %}
 
-                    {% if form.non_field_errors %}
-                    {% for error in form.non_field_errors %}
-                    <span class="text-red-700 font-medium text-sm">{{ error }}</span>
-                    {% endfor %}
-                    {% endif %}
+                        {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                        <span class="text-red-700 font-medium text-sm">{{ error }}</span>
+                        {% endfor %}
+                        {% endif %}
 
-                    {% for field in form %}
-                    {% include 'mixins/auth/form_input.html' with field=field %}
-                    {% endfor %}
-
+                        {% for field in form %}
+                        {% include 'mixins/auth/form_input.html' with field=field %}
+                        {% endfor %}
+                    </div>
                     <button class="btn bg-blue-500 text-white mt-5">{% trans '変更する' %}</button>
                 </form>
             </div>

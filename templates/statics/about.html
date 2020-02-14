@@ -10,9 +10,9 @@
     style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
     <div class="container bg-white w-4/5 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 relative">
         <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute" style="top: -3rem;">
-            <img src="{% static 'images/logo-icon.png' %}">
+            <img src="{% static 'images/logo-icon.png' %}" class="wow fadeIn">
         </div>
-        <section class="w-full text-center mb-10">
+        <section class="w-full text-center mb-10 wow fadeIn">
             <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans 'Uniwalkは' %}</h2>
             <div class="flex relative">
                 <div class="w-2/4 h-50vh bg-center bg-cover opacity-50"
@@ -36,7 +36,7 @@
             </div>
         </section>
 
-        <section class="w-full text-center mb-10">
+        <section class="w-full text-center mb-10 wow fadeIn">
             <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans 'アクセス' %}</h2>
             <div class="mt-10">
                 <iframe class="w-full h-50vh"

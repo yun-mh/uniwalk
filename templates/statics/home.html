@@ -6,21 +6,26 @@
 {% endblock page_title %}
 
 {% block content %}
-<section class="bg-center object-cover relative bg-home-gray">
-    <div class="w-full h-48" style="background-color: #FF7358">
-        <p class="text-5xl text-center pt-32 text-white">{% trans 'オリジナルスニーカーが作られる！' %}</p>
+<section class="bg-center object-cover relative rounded-t-xl" style="background-color: #322f38;">
+    <div class="w-full h-48 rounded-t-xl" style="background-color: #366ccf;">
+        <p class="text-5xl text-center pt-32 text-white">{% trans 'オリジナルスニーカーが作れる！' %}</p>
     </div>
-    <img src="{% static 'images/test3.png' %} " class="block">
-    <img src="{% static 'images/logo-universe.png' %}" class="w-56 mx-auto -mt-8">
+    <img src="{% static 'images/test3.png' %}" class="block relative">
+    <div class="flex justify-center items-center w-56 h-56 mx-auto -mt-8 rounded-full bg-gray-800 p-5 absolute"
+        style="border-width: 16px; border-color: #366ccf; left: 50%; bottom: -15%; transform: translateX(-7rem);">
+        <img src="{% static 'images/logo_white.png' %}" class="">
+    </div>
 </section>
 
-<section class="w-full pt-32 pb-16 bg-home-gray">
+
+<section class="w-full pt-32 pb-16" style="background-color: #322f38;">
     <div class="w-2/3 mx-auto flex flex">
-        <p class="w-16 text-3xl text-white h-16 bg-blue-700 text-center rounded-full">1</p>
+        <p class="flex justify-center items-center w-16 text-3xl text-white h-16 text-center rounded-full"
+            style="background-color: #366ccf;">1</p>
         <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">
         <div class="w-2/5 mx-auto flex-col pt-20 ">
             <p class="text-2xl text-white pb-3 border-b-2 h-12">{% trans 'デザインをカスタマイズする' %}</p>
-            <p class="text-white flex-col mt-10 text-xl">
+            <p class="text-white flex-col mt-10 text-lg font-light">
                 {% trans '素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザインを参照することもできます！' %}</p>
         </div>
     </div>
@@ -28,7 +33,8 @@
 
 <section class="w-full py-16 bg-home-gray">
     <div class="w-2/3 mx-auto flex flex">
-        <p class="w-16 text-3xl text-white h-16 bg-blue-700 text-center rounded-full">2</p>
+        <p class="flex justify-center items-center w-16 text-3xl text-white h-16 text-center rounded-full"
+            style="background-color: #366ccf;">2</p>
         <div class="w-2/5 mx-auto flex-col pt-20 ">
             <p class="text-2xl text-white pb-3 border-b-2 h-12">{% trans '足サイズを測定する' %}</p>
             <p class="text-white flex-col mt-10 text-xl">{% trans '足の写真をアップロードし、両足ずつ足長・足幅のサイズを測定することができます。' %}</p>
@@ -39,7 +45,8 @@
 
 <section class="w-full py-16 bg-home-gray">
     <div class="w-2/3 mx-auto flex flex">
-        <p class="w-16 text-3xl text-white h-16 bg-blue-700 text-center rounded-full">3</p>
+        <p class="flex justify-center items-center w-16 text-3xl text-white h-16 text-center rounded-full"
+            style="background-color: #366ccf;">3</p>
         <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">
         <div class="w-2/5 mx-auto flex-col pt-20 ">
             <p class="text-2xl text-white pb-3 border-b-2 h-12">{% trans '依頼どおりスニーカーを制作する' %}</p>

@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <footer class="footer-visual">
     <div class="h-64 flex overflow-hidden">
         <div class="flex justify-between items-center w-full">
@@ -22,11 +22,11 @@
         </div>
     </div>
     <div class="h-10 flex justify-between items-center">
-        <span class="w-64 text-gray-500 text-xs text-center tracking-widest ml-10">
+        <span class="w-64 text-gray-500 text-xs text-center tracking-widest pl-20">
             &copy; Team Uniwalk 2020
         </span>
-        <div class="pr-12">
-            <a href="https://www.facebook.com/uniwalkofficial/" target="_blank" class="ml-5 text-gray-500">
+        <div class="w-64 text-center">
+            <a href="https://www.facebook.com/uniwalkofficial/" target="_blank" class="text-gray-500">
                 <i class="fab fa-facebook fa-lg"></i>
             </a>
             <a href="" target="_blank" class="ml-5 text-gray-500">
@@ -36,5 +36,123 @@
                 <i class="fab fa-instagram fa-lg"></i>
             </a>
         </div>
+        <div class="w-64">
+            　
+        </div>
     </div>
+
+    <style>
+        .chatbubble {
+            bottom: 1rem;
+            right: 1rem;
+            transition: transform .3s ease-in-out;
+        }
+
+        .msgs {
+            list-style: none;
+            padding: 0;
+        }
+
+        .msgs li {
+            width: 85%;
+            float: right;
+            padding: 10px;
+            font-size: 14px;
+            background: rgb(171, 183, 255);
+            margin-bottom: 10px;
+        }
+
+        .msgs li .sender {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .msgs li.support {
+            float: left;
+            color: black;
+            background-color: #E2E8F0;
+            border-radius: 5px 5px 0 5px;
+        }
+
+        /* Loader Credit: https://codepen.io/ashmind/pen/zqaqpB */
+        .loader {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            opacity: 0.8;
+        }
+
+        .loader span {
+            display: inline-block;
+            -webkit-animation: pulse 0.4s alternate infinite ease-in-out;
+            animation: pulse 0.4s alternate infinite ease-in-out;
+        }
+
+        .loader span:nth-child(odd) {
+            -webkit-animation-delay: 0.4s;
+            animation-delay: 0.4s;
+        }
+
+        @-webkit-keyframes pulse {
+            to {
+                -webkit-transform: scale(0.8);
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes pulse {
+            to {
+                -webkit-transform: scale(0.8);
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+        }
+    </style>
+
+
+    <div class="chatbubble fixed right-0 bottom-0 wow fadeIn">
+        <div
+            class="flex items-center justify-center relative rounded-full w-16 h-16 cursor-pointer bg-indigo-800 shadow-dark">
+            <div class="title text-white text-3xl"><i class="far fa-comment-dots"></i></div>
+        </div>
+    </div>
+    <div class="chat-window fixed right-0 bottom-0 bg-white rounded-xl p-5 overflow-auto shadow-dark hidden"
+        style="width: 22rem; right: 1rem; bottom: 1rem;">
+        <div class="flex justify-between">
+            <h3 class="text-lg font-semibold text-indigo-800">
+                {% trans '相談チャット' %}
+            </h3>
+            <div class="closeBtn text-lg text-gray-700 cursor-pointer">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <form id="loginScreenForm">
+            <div class="login-screen mx-5 mt-5">
+                <input type="email" class="form-control" id="email" placeholder="{% trans 'メールアドレス' %}" required>
+                <button type="submit" class="btn mt-5 p-0 h-10">{% trans 'チャットする' %}</button>
+            </div>
+        </form>
+        <div class="chats">
+            <div class="loader-wrapper w-full text-center">
+                <div class="loader text-3xl font-bold text-indigo-800">
+                    <span>・</span><span>・</span><span>・</span>
+                </div>
+            </div>
+            <ul class="msgs mt-5 overflow-auto hidden" style="max-height: 30vh;">
+            </ul>
+            <div class="input hidden">
+                <form class="form-inline" id="messageSupport">
+                    <div class="form-group">
+                        <input type="text" autocomplete="off" class="form-control" id="newMessage"
+                            placeholder="{% trans 'メッセージ入力' %}">
+                    </div>
+                    <button type="submit" class="btn mt-5 p-0 h-10">{% trans '送信する' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/chat/axios.js' %}"></script>
+    <script src="{% static 'js/chat/app.js' %}"></script>
 </footer>

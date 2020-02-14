@@ -8,7 +8,7 @@
 {% block content %}
 
 <div class="container max-w-full w-full mx-auto flex px-20 py-24 bg-white px-64 rounded-xl">
-    <div class="w-3/5 flex flex-wrap mx-5 ">
+    <div class="w-3/5 flex flex-wrap mx-5 wow fadeIn">
         <div class="w-full h-2/3 bg-cover bg-center"
             style="background-image: url({{product.first_image}}); min-height: 50vh;"></div>
         {% for image in product.get_next_four_images %}
@@ -44,7 +44,7 @@
         </div>
     </div>
     {% if designs %}
-    <div class="w-full flex justify-between mt-10">
+    <div class="w-full flex justify-between mt-10 wow fadeIn">
         {% for design in designs %}
         <div class="w-1/5">
             <div class="w-full h-64 bg-center bg-cover"
@@ -74,7 +74,7 @@
     </div>
 
     {% if rev %}
-    <div class="flex flex-wrap -mx-5 my-3">
+    <div class="flex flex-wrap -mx-5 my-3 wow fadeIn">
         {% for r in rev %}
         <div class="w-1/2 overflow-hidden p-5 h-auto">
             <div id="card-{{ r.pk }}" class="h-48 shadow-lg overflow-hidden border-2 rounded-lg border-gray-300 pb-5">
@@ -95,10 +95,10 @@
             </div>
         </div>
         {% endfor %}
-        <a href="{% url 'reviews:list' product.pk %}" class="btn mt-5 mx-5">{% trans '全てのレビューを見る' %}</a>
     </div>
+    <a href="{% url 'reviews:list' product.pk %}" class="btn block mt-5 mx-5">{% trans '全てのレビューを見る' %}</a>
     {% else %}
-    <p class="flex justify-center items-center m-5 font-semibold w-full text-center text-2xl">
+    <p class="flex justify-center items-center m-5 font-semibold w-full text-center text-2xl wow fadeIn">
         <i class="fas fa-grin-beam-sweat fa-2x text-purple-500 my-10"></i> <span
             class="ml-5">{% trans 'レビューがまだ存在しません。' %}</span>
     </p>
