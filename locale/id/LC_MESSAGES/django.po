@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-12 00:54+0900\n"
+"POT-Creation-Date: 2020-02-15 15:37+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,7 @@ msgid "カート"
 msgstr ""
 
 #: .\carts\models.py:19 .\designs\models.py:178 .\designs\models.py:179
+#: .\templates\statics\home.html:41
 msgid "デザイン"
 msgstr ""
 
@@ -121,6 +122,7 @@ msgid "素材コード"
 msgstr ""
 
 #: .\designs\models.py:29 .\designs\models.py:30
+#: .\templates\statics\home.html:37
 msgid "素材"
 msgstr ""
 
@@ -324,7 +326,6 @@ msgstr ""
 
 #: .\orders\forms.py:11 .\orders\models.py:51
 #: .\templates\orders\order-check.html:49
-#: .\templates\orders\order-check.html:131
 #: .\templates\partials\mypage-menu.html:17
 msgid "クレジットカード"
 msgstr ""
@@ -335,41 +336,41 @@ msgid "振込"
 msgstr ""
 
 #: .\orders\forms.py:16 .\orders\forms.py:196 .\orders\forms.py:197
-#: .\users\forms.py:13 .\users\forms.py:14 .\users\forms.py:48
-#: .\users\forms.py:108 .\users\forms.py:168 .\users\forms.py:195
+#: .\templates\partials\footer.html:130 .\users\forms.py:13 .\users\forms.py:49
+#: .\users\forms.py:117 .\users\forms.py:190 .\users\forms.py:217
 #: .\users\models.py:45 .\users\models.py:124
 msgid "メールアドレス"
 msgstr ""
 
 #: .\orders\forms.py:36 .\orders\forms.py:60 .\orders\forms.py:118
 #: .\orders\forms.py:136 .\templates\users\signup-check.html:22
-#: .\users\forms.py:49 .\users\forms.py:110
+#: .\users\forms.py:52 .\users\forms.py:122
 msgid "姓"
 msgstr ""
 
 #: .\orders\forms.py:37 .\orders\forms.py:63 .\orders\forms.py:119
 #: .\orders\forms.py:139 .\templates\users\signup-check.html:23
-#: .\users\forms.py:50 .\users\forms.py:111
+#: .\users\forms.py:55 .\users\forms.py:125
 msgid "名"
 msgstr ""
 
 #: .\orders\forms.py:39 .\orders\forms.py:66 .\orders\forms.py:68
 #: .\orders\forms.py:121 .\orders\forms.py:142 .\orders\forms.py:144
-#: .\templates\users\signup-check.html:24 .\users\forms.py:51
-#: .\users\forms.py:112 .\users\models.py:47
+#: .\templates\users\signup-check.html:24 .\users\forms.py:58
+#: .\users\forms.py:128 .\users\models.py:47
 msgid "姓(カナ)"
 msgstr ""
 
 #: .\orders\forms.py:42 .\orders\forms.py:71 .\orders\forms.py:73
 #: .\orders\forms.py:124 .\orders\forms.py:147 .\orders\forms.py:149
-#: .\templates\users\signup-check.html:25 .\users\forms.py:52
-#: .\users\forms.py:113 .\users\models.py:46
+#: .\templates\users\signup-check.html:25 .\users\forms.py:61
+#: .\users\forms.py:131 .\users\models.py:46
 msgid "名(カナ)"
 msgstr ""
 
 #: .\orders\forms.py:45 .\orders\forms.py:76 .\orders\forms.py:78
 #: .\orders\forms.py:126 .\orders\forms.py:152 .\orders\forms.py:154
-#: .\users\forms.py:115 .\users\models.py:52
+#: .\users\forms.py:136 .\users\models.py:52
 msgid "電話番号"
 msgstr ""
 
@@ -379,19 +380,19 @@ msgstr ""
 
 #: .\orders\forms.py:51 .\orders\forms.py:81 .\orders\forms.py:83
 #: .\orders\forms.py:128 .\orders\forms.py:157 .\orders\forms.py:159
-#: .\users\forms.py:116 .\users\models.py:55
+#: .\users\forms.py:137 .\users\models.py:55
 msgid "市区町村番地"
 msgstr ""
 
 #: .\orders\forms.py:54 .\orders\forms.py:86 .\orders\forms.py:88
 #: .\orders\forms.py:130 .\orders\forms.py:162 .\orders\forms.py:164
-#: .\users\forms.py:117 .\users\models.py:56
+#: .\users\forms.py:138 .\users\models.py:56
 msgid "建物名・号室"
 msgstr ""
 
 #: .\orders\forms.py:91 .\orders\forms.py:93 .\orders\forms.py:127
-#: .\orders\forms.py:167 .\orders\forms.py:169 .\users\forms.py:126
-#: .\users\forms.py:127 .\users\models.py:53
+#: .\orders\forms.py:167 .\orders\forms.py:169 .\users\forms.py:147
+#: .\users\models.py:53
 msgid "郵便番号"
 msgstr ""
 
@@ -531,39 +532,41 @@ msgstr ""
 msgid "単価"
 msgstr ""
 
-#: .\orders\views.py:222 .\orders\views.py:521 .\orders\views.py:527
+#: .\orders\views.py:226 .\orders\views.py:579 .\orders\views.py:585
+#: .\orders\views.py:588
 msgid "入力した情報をもう一度確認してください。"
 msgstr ""
 
-#: .\orders\views.py:370
+#: .\orders\views.py:382
 msgid "支払限度を超過しました。"
 msgstr ""
 
-#: .\orders\views.py:374
+#: .\orders\views.py:386
 msgid "無効なペラメタです。"
 msgstr ""
 
-#: .\orders\views.py:377
+#: .\orders\views.py:389
 msgid "認証できませんでした。"
 msgstr ""
 
-#: .\orders\views.py:381
+#: .\orders\views.py:393
 msgid "ネットワークに問題があります。"
 msgstr ""
 
-#: .\orders\views.py:386
+#: .\orders\views.py:397 .\users\views.py:988 .\users\views.py:1020
+#: .\users\views.py:1078 .\users\views.py:1083
 msgid "問題が発生しました。もう一度試してみてください。"
 msgstr ""
 
-#: .\orders\views.py:391
+#: .\orders\views.py:401
 msgid "エラーが発生しました。"
 msgstr ""
 
-#: .\orders\views.py:479
+#: .\orders\views.py:539
 msgid "UniWalk　ご注文ありがとうございます。"
 msgstr ""
 
-#: .\orders\views.py:555 .\users\views.py:282 .\users\views.py:312
+#: .\orders\views.py:614 .\users\views.py:295 .\users\views.py:325
 msgid "注文を取消しました。"
 msgstr ""
 
@@ -938,7 +941,7 @@ msgstr ""
 #: .\templates\admin\footsize-analytics.html:207
 #: .\templates\admin\member-analytics.html:41
 #: .\templates\admin\member-analytics.html:113
-#: .\templates\users\signup-check.html:36 .\users\forms.py:56
+#: .\templates\users\signup-check.html:36 .\users\forms.py:66
 #: .\users\models.py:36
 msgid "男性"
 msgstr ""
@@ -949,7 +952,7 @@ msgstr ""
 #: .\templates\admin\footsize-analytics.html:213
 #: .\templates\admin\member-analytics.html:45
 #: .\templates\admin\member-analytics.html:114
-#: .\templates\users\signup-check.html:38 .\users\forms.py:56
+#: .\templates\users\signup-check.html:38 .\users\forms.py:66
 #: .\users\models.py:37
 msgid "女性"
 msgstr ""
@@ -986,7 +989,7 @@ msgstr ""
 
 #: .\templates\admin\member-analytics.html:49
 #: .\templates\admin\member-analytics.html:115
-#: .\templates\users\signup-check.html:40 .\users\forms.py:56
+#: .\templates\users\signup-check.html:40 .\users\forms.py:66
 #: .\users\models.py:38
 msgid "その他"
 msgstr ""
@@ -1138,20 +1141,20 @@ msgstr ""
 msgid "右足"
 msgstr ""
 
-#: .\templates\carts\cart.html:73
+#: .\templates\carts\cart.html:74
 msgid "カートに商品が入っていません。"
 msgstr ""
 
-#: .\templates\carts\cart.html:81
+#: .\templates\carts\cart.html:82
 #: .\templates\mixins\orders\order-summary-card.html:4
 msgid "ご注文金額"
 msgstr ""
 
-#: .\templates\carts\cart.html:85
+#: .\templates\carts\cart.html:86
 msgid "合計（税込）"
 msgstr ""
 
-#: .\templates\carts\cart.html:89
+#: .\templates\carts\cart.html:90
 msgid "購入手続きへ"
 msgstr ""
 
@@ -1422,34 +1425,32 @@ msgid "サイズ"
 msgstr ""
 
 #: .\templates\documents\specification.html:123
-#: .\templates\feet\feet-list.html:28 .\templates\feet\feet-measure.html:184
-#: .\templates\feet\feet-measure.html:211
+#: .\templates\feet\feet-list.html:31 .\templates\feet\feet-measure.html:190
+#: .\templates\feet\feet-measure.html:219
 msgid "左"
 msgstr ""
 
 #: .\templates\documents\specification.html:126
-#: .\templates\feet\feet-list.html:39 .\templates\feet\feet-measure.html:191
-#: .\templates\feet\feet-measure.html:224
+#: .\templates\feet\feet-list.html:47 .\templates\feet\feet-measure.html:198
+#: .\templates\feet\feet-measure.html:233
 msgid "右"
 msgstr ""
 
 #: .\templates\documents\specification.html:146
 #: .\templates\documents\specification.html:152
-#: .\templates\feet\feet-list.html:34 .\templates\feet\feet-list.html:45
+#: .\templates\feet\feet-list.html:38 .\templates\feet\feet-list.html:54
 #: .\templates\feet\feet-measure.html:120
-#: .\templates\feet\feet-measure.html:218
-#: .\templates\feet\feet-measure.html:231
+#: .\templates\feet\feet-measure.html:226
+#: .\templates\feet\feet-measure.html:240 .\templates\statics\home.html:58
 msgid "足幅"
 msgstr ""
 
 #: .\templates\documents\specification.html:149
 #: .\templates\documents\specification.html:155
-#: .\templates\feet\feet-list.html:30 .\templates\feet\feet-list.html:41
+#: .\templates\feet\feet-list.html:33 .\templates\feet\feet-list.html:49
 #: .\templates\feet\feet-measure.html:111
-#: .\templates\feet\feet-measure.html:186
-#: .\templates\feet\feet-measure.html:193
-#: .\templates\feet\feet-measure.html:213
-#: .\templates\feet\feet-measure.html:226
+#: .\templates\feet\feet-measure.html:221
+#: .\templates\feet\feet-measure.html:235 .\templates\statics\home.html:62
 msgid "足長"
 msgstr ""
 
@@ -1513,15 +1514,15 @@ msgstr ""
 msgid "マイ足サイズ"
 msgstr ""
 
-#: .\templates\feet\feet-list.html:53
+#: .\templates\feet\feet-list.html:63
 msgid "まだ足サイズの測定データがありません。"
 msgstr ""
 
-#: .\templates\feet\feet-list.html:57 .\templates\feet\feet-measure.html:198
+#: .\templates\feet\feet-list.html:67 .\templates\feet\feet-measure.html:204
 msgid "測定する"
 msgstr ""
 
-#: .\templates\feet\feet-measure.html:5 .\templates\feet\feet-measure.html:170
+#: .\templates\feet\feet-measure.html:5 .\templates\feet\feet-measure.html:172
 msgid "足サイズ測定"
 msgstr ""
 
@@ -1561,24 +1562,24 @@ msgid ""
 "カカトを紙の端に置き、人差し指が紙の垂直中央線に位置するようにしてください。"
 msgstr ""
 
-#: .\templates\feet\feet-measure.html:171
+#: .\templates\feet\feet-measure.html:173
 msgid "足サイズ記入"
 msgstr ""
 
-#: .\templates\feet\feet-measure.html:177
+#: .\templates\feet\feet-measure.html:179
 msgid "測定するイメージファイルをアップロードしてください。"
 msgstr ""
 
-#: .\templates\feet\feet-measure.html:179
-#: .\templates\feet\feet-measure.html:206
+#: .\templates\feet\feet-measure.html:183
+#: .\templates\feet\feet-measure.html:213
 msgid "足サイズ測定方法"
 msgstr ""
 
-#: .\templates\feet\feet-measure.html:204
+#: .\templates\feet\feet-measure.html:210
 msgid "足サイズを記入してください。"
 msgstr ""
 
-#: .\templates\feet\feet-measure.html:237
+#: .\templates\feet\feet-measure.html:246
 msgid "決定する"
 msgstr ""
 
@@ -1605,7 +1606,7 @@ msgstr ""
 
 #: .\templates\mixins\designs\design-card.html:23
 #: .\templates\users\password-change.html:25
-#: .\templates\users\update-profile.html:43
+#: .\templates\users\update-profile.html:44
 msgid "変更する"
 msgstr ""
 
@@ -1804,16 +1805,16 @@ msgid "登録済みのカード"
 msgstr ""
 
 #: .\templates\orders\order-check.html:117
-#: .\templates\orders\order-check.html:153
-#: .\templates\orders\order-check.html:164
+#: .\templates\orders\order-check.html:152
+#: .\templates\orders\order-check.html:162
 msgid "注文を確定する"
 msgstr ""
 
-#: .\templates\orders\order-check.html:148
+#: .\templates\orders\order-check.html:147
 msgid "カード情報をアカウントに登録する"
 msgstr ""
 
-#: .\templates\orders\order-check.html:162
+#: .\templates\orders\order-check.html:160
 msgid "振込可能期間は注文時点から1週間以内になっております。"
 msgstr ""
 
@@ -1884,6 +1885,22 @@ msgstr ""
 msgid "口座名義：UNIWALK"
 msgstr ""
 
+#: .\templates\partials\footer.html:122
+msgid "相談チャット"
+msgstr ""
+
+#: .\templates\partials\footer.html:131
+msgid "チャットする"
+msgstr ""
+
+#: .\templates\partials\footer.html:146
+msgid "メッセージ入力"
+msgstr ""
+
+#: .\templates\partials\footer.html:148
+msgid "送信する"
+msgstr ""
+
 #: .\templates\partials\mypage-menu.html:7
 #: .\templates\users\update-profile.html:5
 #: .\templates\users\update-profile.html:23
@@ -1944,7 +1961,7 @@ msgstr ""
 msgid "レビューを書く"
 msgstr ""
 
-#: .\templates\products\product-detail.html:98
+#: .\templates\products\product-detail.html:99
 msgid "全てのレビューを見る"
 msgstr ""
 
@@ -1953,7 +1970,7 @@ msgstr ""
 msgid "レビューがまだ存在しません。"
 msgstr ""
 
-#: .\templates\products\product-list.html:5 .\templates\statics\home.html:53
+#: .\templates\products\product-list.html:5 .\templates\statics\home.html:95
 msgid "商品リスト"
 msgstr ""
 
@@ -2023,39 +2040,43 @@ msgid ""
 "                    定休日 月曜日定休"
 msgstr ""
 
-#: .\templates\statics\home.html:11
-msgid "オリジナルスニーカーが作られる！"
+#: .\templates\statics\home.html:12
+msgid "オリジナルスニーカーが作れる！"
 msgstr ""
 
-#: .\templates\statics\home.html:22
+#: .\templates\statics\home.html:28
 msgid "デザインをカスタマイズする"
 msgstr ""
 
-#: .\templates\statics\home.html:24
+#: .\templates\statics\home.html:30
 msgid ""
 "素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザイ"
 "ンを参照することもできます！"
 msgstr ""
 
 #: .\templates\statics\home.html:33
+msgid "色"
+msgstr ""
+
+#: .\templates\statics\home.html:54
 msgid "足サイズを測定する"
 msgstr ""
 
-#: .\templates\statics\home.html:34
+#: .\templates\statics\home.html:55
 msgid ""
 "足の写真をアップロードし、両足ずつ足長・足幅のサイズを測定することができま"
 "す。"
 msgstr ""
 
-#: .\templates\statics\home.html:45
+#: .\templates\statics\home.html:77
 msgid "依頼どおりスニーカーを制作する"
 msgstr ""
 
-#: .\templates\statics\home.html:46
+#: .\templates\statics\home.html:78
 msgid "デザインと足サイズをもとにあなたのためのスニーカーを制作します！"
 msgstr ""
 
-#: .\templates\statics\home.html:66
+#: .\templates\statics\home.html:108
 msgid "もっと見る"
 msgstr ""
 
@@ -2194,8 +2215,8 @@ msgstr ""
 #: .\templates\users\withdrawal-check.html:26
 msgid ""
 "現在保存されている購入履歴やお届け先等の情報は、<span class=\"font-semibold "
-"text-red-500\">すべて削除</span>されます。<br>よろしければ、下のボタンを押し"
-"てください。"
+"text-red-500 wow fadeIn\">すべて削除</span>されます。<br>よろしければ、下のボ"
+"タンを押してください。"
 msgstr ""
 
 #: .\templates\users\withdrawal-check.html:30
@@ -2251,12 +2272,11 @@ msgstr ""
 msgid "会員名"
 msgstr ""
 
-#: .\users\forms.py:17 .\users\forms.py:18 .\users\forms.py:59
-#: .\users\forms.py:60 .\users\forms.py:198
+#: .\users\forms.py:16 .\users\forms.py:69 .\users\forms.py:220
 msgid "パスワード"
 msgstr ""
 
-#: .\users\forms.py:29 .\users\forms.py:141 .\users\views.py:804
+#: .\users\forms.py:28 .\users\forms.py:162 .\users\views.py:1108
 msgid "パスワードをもう一度確認してください。"
 msgstr ""
 
@@ -2264,48 +2284,48 @@ msgstr ""
 msgid "登録されていないメールアドレスです。"
 msgstr ""
 
-#: .\users\forms.py:63 .\users\forms.py:64 .\users\forms.py:162
-#: .\users\forms.py:182 .\users\forms.py:184
+#: .\users\forms.py:72 .\users\forms.py:73 .\users\forms.py:184
+#: .\users\forms.py:204 .\users\forms.py:206
 msgid "パスワード確認"
 msgstr ""
 
-#: .\users\forms.py:71
+#: .\users\forms.py:80
 msgid "既に登録されているメールアドレスです。"
 msgstr ""
 
-#: .\users\forms.py:80
+#: .\users\forms.py:89
 msgid "パスワードが一致しません。"
 msgstr ""
 
-#: .\users\forms.py:109 .\users\forms.py:121 .\users\forms.py:122
+#: .\users\forms.py:119 .\users\forms.py:142 .\users\forms.py:143
 msgid "現在のパスワード"
 msgstr ""
 
-#: .\users\forms.py:114 .\users\models.py:51
+#: .\users\forms.py:134 .\users\models.py:51
 msgid "生年月日"
 msgstr ""
 
-#: .\users\forms.py:150
+#: .\users\forms.py:172
 msgid "Old password"
 msgstr ""
 
-#: .\users\forms.py:152
+#: .\users\forms.py:174
 msgid "現在パスワード"
 msgstr ""
 
-#: .\users\forms.py:155
+#: .\users\forms.py:177
 msgid "new password"
 msgstr ""
 
-#: .\users\forms.py:157 .\users\forms.py:176 .\users\forms.py:177
+#: .\users\forms.py:179 .\users\forms.py:198 .\users\forms.py:199
 msgid "新しいパスワード"
 msgstr ""
 
-#: .\users\forms.py:160
+#: .\users\forms.py:182
 msgid "check password"
 msgstr ""
 
-#: .\users\forms.py:169
+#: .\users\forms.py:191
 msgid "Email"
 msgstr ""
 
@@ -2333,54 +2353,58 @@ msgstr ""
 msgid "会員番号"
 msgstr ""
 
-#: .\users\views.py:62
+#: .\users\views.py:75
 msgid "ログインしました。"
 msgstr ""
 
-#: .\users\views.py:77
+#: .\users\views.py:90
 msgid "ログアウトしました。"
 msgstr ""
 
-#: .\users\views.py:134
+#: .\users\views.py:147
 msgid "UniWalk　会員登録ありがとうございます。"
 msgstr ""
 
-#: .\users\views.py:183
+#: .\users\views.py:196
 msgid "パスワード再設定完了のお知らせ"
 msgstr ""
 
-#: .\users\views.py:206
+#: .\users\views.py:219
 msgid "会員情報を変更しました。"
 msgstr ""
 
-#: .\users\views.py:220
+#: .\users\views.py:233
 msgid "UniWalk会員情報変更のお知らせ"
 msgstr ""
 
-#: .\users\views.py:245
+#: .\users\views.py:258
 msgid "UniWalkパスワード変更のお知らせ"
 msgstr ""
 
-#: .\users\views.py:253
+#: .\users\views.py:266
 msgid "パスワードを変更しました。"
 msgstr ""
 
-#: .\users\views.py:354
+#: .\users\views.py:362
 msgid "カードを登録解除しました。"
 msgstr ""
 
-#: .\users\views.py:414
+#: .\users\views.py:418
 msgid "カードを登録しました。"
 msgstr ""
 
-#: .\users\views.py:417
+#: .\users\views.py:421
 msgid "カード登録に失敗しました。"
 msgstr ""
 
-#: .\users\views.py:441
+#: .\users\views.py:447
 msgid "デザインを削除しました。"
 msgstr ""
 
-#: .\users\views.py:797
+#: .\users\views.py:947 .\users\views.py:1085
+msgid "足サイズを登録しました。"
+msgstr ""
+
+#: .\users\views.py:1101
 msgid "会員様のメールアドレスとは違います。"
 msgstr ""
