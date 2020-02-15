@@ -45,6 +45,10 @@ module.exports = {
         universe: {
           lighter: "#2B3D4E",
           dark: "#1C2934"
+        },
+        home: {
+          gray: "#322f38",
+          blue: "#366ccf"
         }
       }
     },

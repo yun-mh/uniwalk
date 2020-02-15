@@ -24,9 +24,9 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def member_or_guest_login(request):
-    
+
     """ 会員・ゲスト確認ビュー """
-    
+
     if request.user.is_authenticated:
         return redirect("orders:checkout")
     if request.method == "POST":
@@ -148,7 +148,9 @@ class SelectPaymentView(FormView):
             total += cart_item.product.price * cart_item.quantity
         context = {
             "recipient_data": recipient_data,
-            "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"])][1],
+            "recipient_pref": JP_PREFECTURE_CODES[
+                int(recipient_data["prefecture_recipient"])
+            ][1],
             "orderer_form": orderer_form,
             "cart": cart,
             "total": total,
@@ -167,7 +169,9 @@ class SelectPaymentView(FormView):
             total += cart_item.product.price * cart_item.quantity
         context = {
             "recipient_data": recipient_data,
-            "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"])][1],
+            "recipient_pref": JP_PREFECTURE_CODES[
+                int(recipient_data["prefecture_recipient"])
+            ][1],
             "orderer_form": orderer_form,
             "cart": cart,
             "total": total,
@@ -186,9 +190,9 @@ class SelectPaymentView(FormView):
                 "first_name_orderer_kana": orderer_form.cleaned_data.get(
                     "first_name_orderer_kana"
                 ),
-                "phone_number_orderer": str(orderer_form.cleaned_data.get(
-                    "phone_number_orderer"
-                )),
+                "phone_number_orderer": str(
+                    orderer_form.cleaned_data.get("phone_number_orderer")
+                ),
                 "postal_code_orderer": orderer_form.cleaned_data.get(
                     "postal_code_orderer"
                 ),
@@ -242,23 +246,26 @@ class OrderCheckView(FormView):
             user = self.request.user
             try:
                 cards = stripe.Customer.list_sources(
-                            user.stripe_customer_id,
-                            object='card'
-                        )
+                    user.stripe_customer_id, object="card"
+                )
             except:
                 cards = {"data": []}
             card_list = cards["data"]
             context = {}
             if len(card_list) > 0:
-                cards = card_list,
+                cards = (card_list,)
         else:
             cards = {"data": []}
             card_list = cards["data"]
         context = {
             "recipient_data": recipient_data,
-            "recipient_pref": JP_PREFECTURE_CODES[int(recipient_data["prefecture_recipient"])][1],
+            "recipient_pref": JP_PREFECTURE_CODES[
+                int(recipient_data["prefecture_recipient"])
+            ][1],
             "orderer_data": orderer_data,
-            "orderer_pref": JP_PREFECTURE_CODES[int(orderer_data["prefecture_orderer"])][1],
+            "orderer_pref": JP_PREFECTURE_CODES[
+                int(orderer_data["prefecture_orderer"])
+            ][1],
             "card_form": card_form,
             "cart": cart,
             "total": total,
@@ -288,10 +295,15 @@ class OrderCheckView(FormView):
                 if self.request.user.is_authenticated:
                     user = user_models.User.objects.get(email=self.request.user)
                 if save:
-                    if user.stripe_customer_id != '' and user.stripe_customer_id is not None:
+                    if (
+                        user.stripe_customer_id != ""
+                        and user.stripe_customer_id is not None
+                    ):
                         customer = stripe.Customer.retrieve(user.stripe_customer_id)
                         card_id = stripe.Token.retrieve(token).card.id
-                        current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
+                        current_fingerprint = stripe.Token.retrieve(
+                            token
+                        ).card.fingerprint
                         current_exp_month = stripe.Token.retrieve(token).card.exp_month
                         current_exp_year = stripe.Token.retrieve(token).card.exp_year
                         try:
@@ -302,15 +314,13 @@ class OrderCheckView(FormView):
                             )
                             try:
                                 source = customer.retrieve_source(
-                                    user.stripe_customer_id,
-                                    used.card_id,
+                                    user.stripe_customer_id, used.card_id,
                                 )
                             except:
                                 pass
                         except card_models.Card.DoesNotExist:
                             source = customer.create_source(
-                                user.stripe_customer_id,
-                                source=token
+                                user.stripe_customer_id, source=token
                             )
                             card_models.Card.objects.create(
                                 stripe_customer_id=user.stripe_customer_id,
@@ -320,16 +330,20 @@ class OrderCheckView(FormView):
                                 exp_year=current_exp_year,
                             )
                     else:
-                        current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
+                        current_fingerprint = stripe.Token.retrieve(
+                            token
+                        ).card.fingerprint
                         current_exp_month = stripe.Token.retrieve(token).card.exp_month
                         current_exp_year = stripe.Token.retrieve(token).card.exp_year
                         customer = stripe.Customer.create(
                             email=self.request.user.email,
-                            name=orderer_data["first_name_orderer"] + " " + orderer_data["last_name_orderer"],
+                            name=orderer_data["first_name_orderer"]
+                            + " "
+                            + orderer_data["last_name_orderer"],
                         )
-                        user.stripe_customer_id = customer['id']
+                        user.stripe_customer_id = customer["id"]
                         user.save()
-                        customer.sources.create(card=token) #???　保存しなくてもいいかも
+                        customer.sources.create(card=token)  # ???　保存しなくてもいいかも
                         card_models.Card.objects.create(
                             stripe_customer_id=user.stripe_customer_id,
                             fingerprint=current_fingerprint,
@@ -342,7 +356,7 @@ class OrderCheckView(FormView):
                             amount=total,
                             currency="JPY",
                             customer=user.stripe_customer_id,
-                            source=source
+                            source=source,
                         )
                     elif use_default:
                         source = self.request.POST.get("use_default_card")
@@ -350,19 +364,17 @@ class OrderCheckView(FormView):
                             amount=total,
                             currency="JPY",
                             customer=user.stripe_customer_id,
-                            source=source
+                            source=source,
                         )
                     else:
                         charge = stripe.Charge.create(
-                            amount=total,
-                            currency="JPY",
-                            source=token
+                            amount=total, currency="JPY", source=token
                         )
                     stripe_charge_id = charge["id"]
 
                 except stripe.error.CardError as e:
                     body = e.json_body
-                    err = body.get('error', {})
+                    err = body.get("error", {})
                     messages.warning(self.request, f"{err.get('message')}")
                     return redirect("/")
 
@@ -382,13 +394,11 @@ class OrderCheckView(FormView):
                     return redirect("/")
 
                 except stripe.error.StripeError as e:
-                    messages.warning(
-                        self.request, _("問題が発生しました。もう一度試してみてください。"))
+                    messages.warning(self.request, _("問題が発生しました。もう一度試してみてください。"))
                     return redirect("/")
 
                 except Exception as e:
-                    messages.warning(
-                        self.request, _("エラーが発生しました。"))
+                    messages.warning(self.request, _("エラーが発生しました。"))
                     return redirect("/")
             else:
                 stripe_charge_id = None
@@ -437,31 +447,79 @@ class OrderCheckView(FormView):
                     product=cart_item.product,
                     quantity=cart_item.quantity,
                     price=cart_item.product.price,
-                    front=design_models.Image.objects.get(design=cart_item.design.pk).front,
-                    side=design_models.Image.objects.get(design=cart_item.design.pk).side,
+                    front=design_models.Image.objects.get(
+                        design=cart_item.design.pk
+                    ).front,
+                    side=design_models.Image.objects.get(
+                        design=cart_item.design.pk
+                    ).side,
                     up=design_models.Image.objects.get(design=cart_item.design.pk).up,
-                    down=design_models.Image.objects.get(design=cart_item.design.pk).down,
-                    outsole_color_left=design_models.Design.objects.get(pk=cart_item.design.pk).outsole_color_left,
-                    outsole_material_left=design_models.Design.objects.get(pk=cart_item.design.pk).outsole_material_left,
-                    midsole_color_left=design_models.Design.objects.get(pk=cart_item.design.pk).midsole_color_left,
-                    midsole_material_left=design_models.Design.objects.get(pk=cart_item.design.pk).midsole_material_left,
-                    uppersole_color_left=design_models.Design.objects.get(pk=cart_item.design.pk).uppersole_color_left,
-                    uppersole_material_left=design_models.Design.objects.get(pk=cart_item.design.pk).uppersole_material_left,
-                    shoelace_color_left=design_models.Design.objects.get(pk=cart_item.design.pk).shoelace_color_left,
-                    shoelace_material_left=design_models.Design.objects.get(pk=cart_item.design.pk).shoelace_material_left,
-                    tongue_color_left=design_models.Design.objects.get(pk=cart_item.design.pk).tongue_color_left,
-                    tongue_material_left=design_models.Design.objects.get(pk=cart_item.design.pk).tongue_material_left,
-                    outsole_color_right=design_models.Design.objects.get(pk=cart_item.design.pk).outsole_color_right,
-                    outsole_material_right=design_models.Design.objects.get(pk=cart_item.design.pk).outsole_material_right,
-                    midsole_color_right=design_models.Design.objects.get(pk=cart_item.design.pk).midsole_color_right,
-                    midsole_material_right=design_models.Design.objects.get(pk=cart_item.design.pk).midsole_material_right,
-                    uppersole_color_right=design_models.Design.objects.get(pk=cart_item.design.pk).uppersole_color_right,
-                    uppersole_material_right=design_models.Design.objects.get(pk=cart_item.design.pk).uppersole_material_right,
-                    shoelace_color_right=design_models.Design.objects.get(pk=cart_item.design.pk).shoelace_color_right,
-                    shoelace_material_right=design_models.Design.objects.get(pk=cart_item.design.pk).shoelace_material_right,
-                    tongue_color_right=design_models.Design.objects.get(pk=cart_item.design.pk).tongue_color_right,
-                    tongue_material_right=design_models.Design.objects.get(pk=cart_item.design.pk).tongue_material_right,
-                    customize_code=design_models.Design.objects.get(pk=cart_item.design.pk).customize_code,
+                    down=design_models.Image.objects.get(
+                        design=cart_item.design.pk
+                    ).down,
+                    outsole_color_left=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).outsole_color_left,
+                    outsole_material_left=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).outsole_material_left,
+                    midsole_color_left=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).midsole_color_left,
+                    midsole_material_left=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).midsole_material_left,
+                    uppersole_color_left=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).uppersole_color_left,
+                    uppersole_material_left=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).uppersole_material_left,
+                    shoelace_color_left=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).shoelace_color_left,
+                    shoelace_material_left=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).shoelace_material_left,
+                    tongue_color_left=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).tongue_color_left,
+                    tongue_material_left=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).tongue_material_left,
+                    outsole_color_right=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).outsole_color_right,
+                    outsole_material_right=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).outsole_material_right,
+                    midsole_color_right=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).midsole_color_right,
+                    midsole_material_right=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).midsole_material_right,
+                    uppersole_color_right=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).uppersole_color_right,
+                    uppersole_material_right=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).uppersole_material_right,
+                    shoelace_color_right=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).shoelace_color_right,
+                    shoelace_material_right=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).shoelace_material_right,
+                    tongue_color_right=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).tongue_color_right,
+                    tongue_material_right=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).tongue_material_right,
+                    customize_code=design_models.Design.objects.get(
+                        pk=cart_item.design.pk
+                    ).customize_code,
                     length_left=int(cart_item.length_left),
                     length_right=int(cart_item.length_right),
                     width_left=int(cart_item.width_left),
@@ -474,7 +532,9 @@ class OrderCheckView(FormView):
             order_code = new_order.order_code
             cart_items.update(active=False)
             self.request.session.cycle_key_after_purchase()
-            html_message = render_to_string("emails/purchase-done.html", {"order_code": order_code})
+            html_message = render_to_string(
+                "emails/purchase-done.html", {"order_code": order_code}
+            )
             send_mail(
                 _("UniWalk　ご注文ありがとうございます。"),
                 strip_tags(html_message),
@@ -497,9 +557,7 @@ class CheckoutDoneView(View):
     """ 注文完了 """
 
     def get(self, request, *args, **kwargs):
-        context = {
-            "order_code": kwargs.get("order_code")
-        }
+        context = {"order_code": kwargs.get("order_code")}
         return render(request, "orders/checkout-done.html", context)
 
 
@@ -523,6 +581,9 @@ class OrderSearchView(FormView):
         try:
             if str(order.user) == email or str(order.guest.email) == email:
                 return redirect("orders:detail", order_code)
+            else:
+                messages.error(self.request, _("入力した情報をもう一度確認してください。"))
+                return redirect("orders:search")
         except AttributeError:
             messages.error(self.request, _("入力した情報をもう一度確認してください。"))
             return redirect("orders:search")
@@ -534,8 +595,8 @@ class OrderDetailView(DetailView):
 
     template_name = "orders/search-order-detail.html"
     context_object_name = "order"
-    slug_field = 'order_code'
-    slug_url_kwarg = 'order_code'
+    slug_field = "order_code"
+    slug_url_kwarg = "order_code"
 
     def get_queryset(self):
         order_code = self.kwargs.get("order_code")
@@ -543,15 +604,13 @@ class OrderDetailView(DetailView):
             return models.Order.objects.filter(order_code=order_code)
         except models.Order.DoesNotExist:
             return None
-    
+
     def post(self, *args, **kwargs):
         order_code = self.kwargs.get("order_code")
         order_pk = self.request.POST.get("target-order")
         target = models.Order.objects.filter(pk=order_pk)
         cancel = models.Step.objects.get(step_code="T99")
-        target.update(
-            step=cancel
-        )
+        target.update(step=cancel)
         messages.success(self.request, _("注文を取消しました。"))
         return redirect("orders:detail", order_code)
 
@@ -562,8 +621,8 @@ class BillView(DetailView):
 
     template_name = "orders/bill.html"
     context_object_name = "order"
-    slug_field = 'order_code'
-    slug_url_kwarg = 'order_code'
+    slug_field = "order_code"
+    slug_url_kwarg = "order_code"
 
     def get_queryset(self):
         order_code = self.kwargs.get("order_code")
@@ -579,8 +638,8 @@ class ReceiptView(DetailView):
 
     template_name = "orders/receipt.html"
     context_object_name = "order"
-    slug_field = 'order_code'
-    slug_url_kwarg = 'order_code'
+    slug_field = "order_code"
+    slug_url_kwarg = "order_code"
 
     def get_queryset(self):
         order_code = self.kwargs.get("order_code")

@@ -106,6 +106,9 @@ def footsizes_measure(request, *args, **kwargs):
 
 
 class LeftFootsizePerspeciveCropperView(DetailView):
+
+    """ 左足のイメージをクロップするためのツールを提供する """
+
     model = models.FootImage
     context_object_name = "foot_images"
     template_name = "feet/feet-cropper-left.html"
@@ -127,6 +130,9 @@ class LeftFootsizePerspeciveCropperView(DetailView):
 
 
 class RightFootsizePerspeciveCropperView(DetailView):
+
+    """ 右足のイメージをクロップするためのツールを提供する """
+
     model = models.FootImage
     context_object_name = "foot_images"
     template_name = "feet/feet-cropper-right.html"

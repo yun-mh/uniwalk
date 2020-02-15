@@ -88,8 +88,8 @@
                         {% trans '3. ご注文の確定' %}</h3>
 
                     {% if request.session.orderer_data.payment == "P1" %}
-                    {% if cards %}
                     <div class="border border-gray-500 px-4 rounded-b-lg pb-5 wow fadeIn">
+                        {% if cards %}
                         <div>
                             <div class="flex items-center">
                                 <label class="switch mt-4 mx-5">
@@ -123,21 +123,20 @@
                         </div>
                         {% endif %}
 
-                        <div id="new-card" class="new-card-form pb-5">
+                        <div id="new-card" class="new-card-form px-5 pb-5">
                             <form action="." method="POST" class="stripe-form" id="stripe-form">
                                 {% csrf_token %}
-                                <div class="stripe-form-row " id="creditCard">
-                                    <label for="card-element" id="stripeBtnLabel">
-                                        {% trans 'クレジットカード' %}
-                                    </label>
-                                    <div id="card-element" class="StripeElement StripeElement--empty my-4">
-                                        <div class="__PrivateStripeElement h-screen"
-                                            style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
-                                            <iframe frameborder="0" allowtransparency="true" scrolling="no"
-                                                name="__privateStripeController1" allowpaymentrequest="true"
-                                                src="https://js.stripe.com/v3/controller-aa9903ff186968008fb3408d381a22d4.html#apiKey=pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik&amp;stripeJsId=34a0363b-8ca6-4d99-8a69-e8b8bebf77f6&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController1"
-                                                aria-hidden="true" tabindex="-1"
-                                                style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+                                <div class="border px-3 my-5">
+                                    <div class="stripe-form-row " id="creditCard">
+                                        <div id="card-element" class="StripeElement StripeElement--empty my-4">
+                                            <div class="__PrivateStripeElement h-screen"
+                                                style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+                                                <iframe frameborder="0" allowtransparency="true" scrolling="no"
+                                                    name="__privateStripeController1" allowpaymentrequest="true"
+                                                    src="https://js.stripe.com/v3/controller-aa9903ff186968008fb3408d381a22d4.html#apiKey=pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik&amp;stripeJsId=34a0363b-8ca6-4d99-8a69-e8b8bebf77f6&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController1"
+                                                    aria-hidden="true" tabindex="-1"
+                                                    style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

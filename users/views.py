@@ -1,5 +1,7 @@
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import (
     PasswordResetView,
     PasswordResetDoneView,
@@ -7,7 +9,6 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
     PasswordChangeView,
 )
-from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.base import ContentFile
@@ -20,12 +21,22 @@ from django.urls import reverse_lazy
 from django.utils import translation
 from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import View, FormView, DetailView, UpdateView, DeleteView, ListView, TemplateView
+from django.views.generic import (
+    View,
+    FormView,
+    DetailView,
+    UpdateView,
+    DeleteView,
+    ListView,
+    TemplateView,
+)
 from cards import models as card_models
 from carts import models as cart_models
 from designs import forms as design_forms
 from designs import models as design_models
 from feet import models as feet_models
+from feet import forms as feet_forms
+from feet import analyze
 from orders import models as order_models
 from products import models as product_models
 from . import forms, models, mixins
@@ -58,7 +69,9 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
         if user is not None:
             login(self.request, user)
             session_key = self.request.session.session_key
-            cart_models.Cart.objects.filter(session_key=session_key).update(user_id=self.request.user.pk)
+            cart_models.Cart.objects.filter(session_key=session_key).update(
+                user_id=self.request.user.pk
+            )
             messages.success(self.request, _("ログインしました。"))
         return super().form_valid(form)
 
@@ -127,7 +140,7 @@ class SignUpCheckView(mixins.LoggedOutOnlyView, FormView):
             gender=data["gender"],
         )
         user.set_password(data["password"])
-        user.save() 
+        user.save()
         email = data["email"]
         html_message = render_to_string("emails/registration-done.html")
         send_mail(
@@ -143,17 +156,17 @@ class SignUpCheckView(mixins.LoggedOutOnlyView, FormView):
 
 
 class SignupSuccessView(mixins.LoggedOutOnlyView, View):
-    
+
     """ 会員登録完了 """
-    
+
     def get(self, request):
         return render(request, "users/signup-success.html")
 
 
 class PasswordResetView(PasswordResetView):
-    
+
     """ パスワード再設定申し込み """
-    
+
     form_class = forms.PasswordResetForm
     template_name = "users/password-reset.html"
     subject_template_name = "emails/password-reset-subject.txt"
@@ -162,16 +175,16 @@ class PasswordResetView(PasswordResetView):
 
 
 class PasswordResetDoneView(PasswordResetDoneView):
-    
+
     """ パスワード再設定申し込み完了 """
-    
+
     template_name = "users/password-reset-done.html"
 
 
 class PasswordResetConfirmView(PasswordResetConfirmView):
-    
+
     """ パスワード再設定 """
-    
+
     form_class = forms.SetPasswordForm
     template_name = "users/password-reset-confirm.html"
     success_url = reverse_lazy("users:password-reset-complete")
@@ -191,16 +204,16 @@ class PasswordResetConfirmView(PasswordResetConfirmView):
 
 
 class PasswordResetCompleteView(PasswordResetCompleteView):
-    
+
     """ パスワード再設定完了 """
-    
+
     template_name = "users/password-reset-complete.html"
 
 
 class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView):
-    
+
     """ 会員登録情報変更 """
-    
+
     form_class = forms.UpdateProfileForm
     template_name = "users/update-profile.html"
     success_message = _("会員情報を変更しました。")
@@ -228,11 +241,11 @@ class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView
 
 
 class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
-    
+
     """ パスワード変更 """
-    
+
     form_class = forms.PasswordChangeForm
-    template_name = 'users/password-change.html'
+    template_name = "users/password-change.html"
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -268,7 +281,9 @@ class OrdersListView(mixins.LoggedInOnlyView, ListView):
 
     def get_queryset(self):
         try:
-            return order_models.Order.objects.filter(user_id=self.request.user.pk).order_by("-order_date")
+            return order_models.Order.objects.filter(
+                user_id=self.request.user.pk
+            ).order_by("-order_date")
         except order_models.Order.DoesNotExist:
             return None
 
@@ -276,9 +291,7 @@ class OrdersListView(mixins.LoggedInOnlyView, ListView):
         order_pk = self.request.POST.get("target-order")
         target = order_models.Order.objects.filter(pk=order_pk)
         cancel = order_models.Step.objects.get(step_code="T99")
-        target.update(
-            step=cancel
-        )
+        target.update(step=cancel)
         messages.success(self.request, _("注文を取消しました。"))
         return redirect("users:orders")
 
@@ -300,32 +313,29 @@ class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
             return redirect("users:orders")
 
     def get_object(self):
-        return order_models.Order.objects.filter(user_id=self.request.user.pk).get(pk=self.kwargs.get("order_pk"))
+        return order_models.Order.objects.filter(user_id=self.request.user.pk).get(
+            pk=self.kwargs.get("order_pk")
+        )
 
     def post(self, *args, **kwargs):
         order_pk = self.request.POST.get("target-order")
         target = order_models.Order.objects.filter(pk=order_pk)
         cancel = order_models.Step.objects.get(step_code="T99")
-        target.update(
-            step=cancel
-        )
+        target.update(step=cancel)
         messages.success(self.request, _("注文を取消しました。"))
         return redirect("users:orders")
 
 
 class CardsListView(mixins.LoggedInOnlyView, FormView):
-    
+
     """ クレジットカードリスト """
-    
+
     def get(self, *args, **kwargs):
         # ページ化
         page = self.request.GET.get("page")
         user = self.request.user
         try:
-            cards = stripe.Customer.list_sources(
-                        user.stripe_customer_id,
-                        object='card'
-                    )
+            cards = stripe.Customer.list_sources(user.stripe_customer_id, object="card")
         except:
             cards = {"data": []}
         card_list = cards["data"]
@@ -343,12 +353,10 @@ class CardsListView(mixins.LoggedInOnlyView, FormView):
         card_id = self.request.POST.get("target-card")
         card_fingerprint = self.request.POST.get("target-fingerprint")
         stripe.Customer.delete_source(
-            card_customer,
-            card_id,
+            card_customer, card_id,
         )
         target = card_models.Card.objects.get(
-            stripe_customer_id=card_customer,
-            fingerprint=card_fingerprint,
+            stripe_customer_id=card_customer, fingerprint=card_fingerprint,
         )
         target.delete()
         messages.success(self.request, _("カードを登録解除しました。"))
@@ -356,15 +364,13 @@ class CardsListView(mixins.LoggedInOnlyView, FormView):
 
 
 class CardsAddView(mixins.LoggedInOnlyView, View):
-    
+
     """ クレジットカード登録 """
-    
+
     def get(self, *args, **kwargs):
         # user = self.request.user
         add_card_form = forms.AddCardForm()
-        context = {
-            "add_card_form": add_card_form
-        }
+        context = {"add_card_form": add_card_form}
         return render(self.request, "cards/card-registration.html", context)
 
     def post(self, *args, **kwargs):
@@ -372,7 +378,7 @@ class CardsAddView(mixins.LoggedInOnlyView, View):
         if add_card_form.is_valid():
             user = models.User.objects.get(email=self.request.user)
             token = add_card_form.cleaned_data.get("stripeToken")
-            if user.stripe_customer_id != '' and user.stripe_customer_id is not None:
+            if user.stripe_customer_id != "" and user.stripe_customer_id is not None:
                 customer = stripe.Customer.retrieve(user.stripe_customer_id)
                 card_id = stripe.Token.retrieve(token).card.id
                 current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
@@ -398,10 +404,8 @@ class CardsAddView(mixins.LoggedInOnlyView, View):
                 current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
                 current_exp_month = stripe.Token.retrieve(token).card.exp_month
                 current_exp_year = stripe.Token.retrieve(token).card.exp_year
-                customer = stripe.Customer.create(
-                    email=self.request.user.email,
-                )
-                user.stripe_customer_id = customer['id']
+                customer = stripe.Customer.create(email=self.request.user.email,)
+                user.stripe_customer_id = customer["id"]
                 user.save()
                 customer.sources.create(card=token)
                 card_models.Card.objects.create(
@@ -419,9 +423,9 @@ class CardsAddView(mixins.LoggedInOnlyView, View):
 
 
 class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
-    
+
     """ マイデザインリスト """
-    
+
     model = design_models.Design
     template_name = "designs/design-list.html"
     context_object_name = "designs"
@@ -429,7 +433,9 @@ class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
 
     def get_queryset(self):
         try:
-            return design_models.Design.objects.filter(user_id=self.request.user.pk).order_by("-created")
+            return design_models.Design.objects.filter(
+                user_id=self.request.user.pk
+            ).order_by("-created")
         except design_models.Design.DoesNotExist:
             return None
 
@@ -449,7 +455,7 @@ class MyDesignsListView(mixins.LoggedInOnlyView, ListView):
                 self.request.session["design"] = design.pk
                 self.request.session["design_image"] = design_image.pk
                 return redirect("users:modify")
-        
+
 
 class SelectProductToCustomizeView(mixins.LoggedInOnlyView, ListView):
 
@@ -480,15 +486,19 @@ class MemberCustomizeView(mixins.LoggedInOnlyView, ListView):
 
     def get_queryset(self):
         pk = self.kwargs.get("pk")
-        designs = design_models.Design.objects.filter(product=pk).exclude(user__isnull=True).all()
-        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+        designs = (
+            design_models.Design.objects.filter(product=pk)
+            .exclude(user__isnull=True)
+            .all()
+        )
+        return sorted(designs, key=lambda design: design.total_likes, reverse=True)
 
     def get_context_data(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
         materials = design_models.Material.objects.all().order_by("created")
         context = super(MemberCustomizeView, self).get_context_data(*args, **kwargs)
         for material in materials:
-            context["mat" + str(material.pk) ] = material
+            context["mat" + str(material.pk)] = material
         context["product"] = product_models.Product.objects.get(pk=pk)
         context["template"] = product_models.Template.objects.get(product=pk)
         context["form"] = design_forms.CustomizeForm()
@@ -515,7 +525,9 @@ class MemberCustomizeView(mixins.LoggedInOnlyView, ListView):
             "tongue_material_left": self.request.POST.get("tongue_material_left"),
             "outsole_material_right": self.request.POST.get("outsole_material_right"),
             "midsole_material_right": self.request.POST.get("midsole_material_right"),
-            "uppersole_material_right": self.request.POST.get("uppersole_material_right"),
+            "uppersole_material_right": self.request.POST.get(
+                "uppersole_material_right"
+            ),
             "shoelace_material_right": self.request.POST.get("shoelace_material_right"),
             "tongue_material_right": self.request.POST.get("tongue_material_right"),
         }
@@ -534,16 +546,36 @@ class MemberCustomizeView(mixins.LoggedInOnlyView, ListView):
                 uppersole_color_right=customize_data["uppersole_color_right"],
                 shoelace_color_right=customize_data["shoelace_color_right"],
                 tongue_color_right=customize_data["tongue_color_right"],
-                outsole_material_left=design_models.Material.objects.get(pk=customize_data["outsole_material_left"]),
-                midsole_material_left=design_models.Material.objects.get(pk=customize_data["midsole_material_left"]),
-                uppersole_material_left=design_models.Material.objects.get(pk=customize_data["uppersole_material_left"]),
-                shoelace_material_left=design_models.Material.objects.get(pk=customize_data["shoelace_material_left"]),
-                tongue_material_left=design_models.Material.objects.get(pk=customize_data["tongue_material_left"]),
-                outsole_material_right=design_models.Material.objects.get(pk=customize_data["outsole_material_right"]),
-                midsole_material_right=design_models.Material.objects.get(pk=customize_data["midsole_material_right"]),
-                uppersole_material_right=design_models.Material.objects.get(pk=customize_data["uppersole_material_right"]),
-                shoelace_material_right=design_models.Material.objects.get(pk=customize_data["shoelace_material_right"]),
-                tongue_material_right=design_models.Material.objects.get(pk=customize_data["tongue_material_right"]),
+                outsole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["outsole_material_left"]
+                ),
+                midsole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["midsole_material_left"]
+                ),
+                uppersole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["uppersole_material_left"]
+                ),
+                shoelace_material_left=design_models.Material.objects.get(
+                    pk=customize_data["shoelace_material_left"]
+                ),
+                tongue_material_left=design_models.Material.objects.get(
+                    pk=customize_data["tongue_material_left"]
+                ),
+                outsole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["outsole_material_right"]
+                ),
+                midsole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["midsole_material_right"]
+                ),
+                uppersole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["uppersole_material_right"]
+                ),
+                shoelace_material_right=design_models.Material.objects.get(
+                    pk=customize_data["shoelace_material_right"]
+                ),
+                tongue_material_right=design_models.Material.objects.get(
+                    pk=customize_data["tongue_material_right"]
+                ),
             )
         else:
             new_design = design_models.Design.objects.create(
@@ -558,16 +590,36 @@ class MemberCustomizeView(mixins.LoggedInOnlyView, ListView):
                 uppersole_color_right=customize_data["uppersole_color_right"],
                 shoelace_color_right=customize_data["shoelace_color_right"],
                 tongue_color_right=customize_data["tongue_color_right"],
-                outsole_material_left=design_models.Material.objects.get(pk=customize_data["outsole_material_left"]),
-                midsole_material_left=design_models.Material.objects.get(pk=customize_data["midsole_material_left"]),
-                uppersole_material_left=design_models.Material.objects.get(pk=customize_data["uppersole_material_left"]),
-                shoelace_material_left=design_models.Material.objects.get(pk=customize_data["shoelace_material_left"]),
-                tongue_material_left=design_models.Material.objects.get(pk=customize_data["tongue_material_left"]),
-                outsole_material_right=design_models.Material.objects.get(pk=customize_data["outsole_material_right"]),
-                midsole_material_right=design_models.Material.objects.get(pk=customize_data["midsole_material_right"]),
-                uppersole_material_right=design_models.Material.objects.get(pk=customize_data["uppersole_material_right"]),
-                shoelace_material_right=design_models.Material.objects.get(pk=customize_data["shoelace_material_right"]),
-                tongue_material_right=design_models.Material.objects.get(pk=customize_data["tongue_material_right"]),
+                outsole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["outsole_material_left"]
+                ),
+                midsole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["midsole_material_left"]
+                ),
+                uppersole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["uppersole_material_left"]
+                ),
+                shoelace_material_left=design_models.Material.objects.get(
+                    pk=customize_data["shoelace_material_left"]
+                ),
+                tongue_material_left=design_models.Material.objects.get(
+                    pk=customize_data["tongue_material_left"]
+                ),
+                outsole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["outsole_material_right"]
+                ),
+                midsole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["midsole_material_right"]
+                ),
+                uppersole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["uppersole_material_right"]
+                ),
+                shoelace_material_right=design_models.Material.objects.get(
+                    pk=customize_data["shoelace_material_right"]
+                ),
+                tongue_material_right=design_models.Material.objects.get(
+                    pk=customize_data["tongue_material_right"]
+                ),
             )
 
         # 画像情報をデータベースに反映する
@@ -576,7 +628,7 @@ class MemberCustomizeView(mixins.LoggedInOnlyView, ListView):
         image_data_up = self.request.POST.get("image_data_up")
         image_data_down = self.request.POST.get("image_data_down")
         design_models.Image.objects.create(
-            design=new_design, 
+            design=new_design,
             front=base64_file(image_data_front),
             side=base64_file(image_data_side),
             up=base64_file(image_data_up),
@@ -586,7 +638,7 @@ class MemberCustomizeView(mixins.LoggedInOnlyView, ListView):
 
 
 def get_palette(request):
-    
+
     """ 参照用デザインパレットを呼び出すビュー """
 
     if request.method == "POST" and request.is_ajax():
@@ -600,16 +652,36 @@ def get_palette(request):
         uppersole_color_right = request.POST.get("uppersole_color_right")
         shoelace_color_right = request.POST.get("shoelace_color_right")
         tongue_color_right = request.POST.get("tongue_color_right")
-        outsole_material_left = design_models.Material.objects.get(pk=request.POST.get("outsole_material_left")).file.url
-        midsole_material_left = design_models.Material.objects.get(pk=request.POST.get("midsole_material_left")).file.url
-        uppersole_material_left = design_models.Material.objects.get(pk=request.POST.get("uppersole_material_left")).file.url
-        shoelace_material_left = design_models.Material.objects.get(pk=request.POST.get("shoelace_material_left")).file.url
-        tongue_material_left = design_models.Material.objects.get(pk=request.POST.get("tongue_material_left")).file.url
-        outsole_material_right = design_models.Material.objects.get(pk=request.POST.get("outsole_material_right")).file.url
-        midsole_material_right = design_models.Material.objects.get(pk=request.POST.get("midsole_material_right")).file.url
-        uppersole_material_right = design_models.Material.objects.get(pk=request.POST.get("uppersole_material_right")).file.url
-        shoelace_material_right = design_models.Material.objects.get(pk=request.POST.get("shoelace_material_right")).file.url
-        tongue_material_right = design_models.Material.objects.get(pk=request.POST.get("tongue_material_right")).file.url
+        outsole_material_left = design_models.Material.objects.get(
+            pk=request.POST.get("outsole_material_left")
+        ).file.url
+        midsole_material_left = design_models.Material.objects.get(
+            pk=request.POST.get("midsole_material_left")
+        ).file.url
+        uppersole_material_left = design_models.Material.objects.get(
+            pk=request.POST.get("uppersole_material_left")
+        ).file.url
+        shoelace_material_left = design_models.Material.objects.get(
+            pk=request.POST.get("shoelace_material_left")
+        ).file.url
+        tongue_material_left = design_models.Material.objects.get(
+            pk=request.POST.get("tongue_material_left")
+        ).file.url
+        outsole_material_right = design_models.Material.objects.get(
+            pk=request.POST.get("outsole_material_right")
+        ).file.url
+        midsole_material_right = design_models.Material.objects.get(
+            pk=request.POST.get("midsole_material_right")
+        ).file.url
+        uppersole_material_right = design_models.Material.objects.get(
+            pk=request.POST.get("uppersole_material_right")
+        ).file.url
+        shoelace_material_right = design_models.Material.objects.get(
+            pk=request.POST.get("shoelace_material_right")
+        ).file.url
+        tongue_material_right = design_models.Material.objects.get(
+            pk=request.POST.get("tongue_material_right")
+        ).file.url
         response = json.dumps(
             {
                 "outsole_color_left": outsole_color_left,
@@ -655,17 +727,23 @@ class MemberCustomizeModifyView(mixins.LoggedInOnlyView, ListView):
 
     def get_queryset(self):
         pk = self.request.session["product"]
-        designs = design_models.Design.objects.filter(product=pk).exclude(user__isnull=True).all()
-        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+        designs = (
+            design_models.Design.objects.filter(product=pk)
+            .exclude(user__isnull=True)
+            .all()
+        )
+        return sorted(designs, key=lambda design: design.total_likes, reverse=True)
 
     def get_context_data(self, *args, **kwargs):
         pk = self.request.session["product"]
         design_pk = self.request.session["design"]
         materials = design_models.Material.objects.all().order_by("created")
         design_before = design_models.Design.objects.get(pk=design_pk)
-        context = super(MemberCustomizeModifyView, self).get_context_data(*args, **kwargs)
+        context = super(MemberCustomizeModifyView, self).get_context_data(
+            *args, **kwargs
+        )
         for material in materials:
-            context["mat" + str(material.pk) ] = material
+            context["mat" + str(material.pk)] = material
         context["design_before"] = design_before
         context["product"] = product_models.Product.objects.get(pk=pk)
         context["template"] = product_models.Template.objects.get(product=pk)
@@ -695,7 +773,9 @@ class MemberCustomizeModifyView(mixins.LoggedInOnlyView, ListView):
             "tongue_material_left": self.request.POST.get("tongue_material_left"),
             "outsole_material_right": self.request.POST.get("outsole_material_right"),
             "midsole_material_right": self.request.POST.get("midsole_material_right"),
-            "uppersole_material_right": self.request.POST.get("uppersole_material_right"),
+            "uppersole_material_right": self.request.POST.get(
+                "uppersole_material_right"
+            ),
             "shoelace_material_right": self.request.POST.get("shoelace_material_right"),
             "tongue_material_right": self.request.POST.get("tongue_material_right"),
         }
@@ -712,16 +792,36 @@ class MemberCustomizeModifyView(mixins.LoggedInOnlyView, ListView):
                 uppersole_color_right=customize_data["uppersole_color_right"],
                 shoelace_color_right=customize_data["shoelace_color_right"],
                 tongue_color_right=customize_data["tongue_color_right"],
-                outsole_material_left=design_models.Material.objects.get(pk=customize_data["outsole_material_left"]),
-                midsole_material_left=design_models.Material.objects.get(pk=customize_data["midsole_material_left"]),
-                uppersole_material_left=design_models.Material.objects.get(pk=customize_data["uppersole_material_left"]),
-                shoelace_material_left=design_models.Material.objects.get(pk=customize_data["shoelace_material_left"]),
-                tongue_material_left=design_models.Material.objects.get(pk=customize_data["tongue_material_left"]),
-                outsole_material_right=design_models.Material.objects.get(pk=customize_data["outsole_material_right"]),
-                midsole_material_right=design_models.Material.objects.get(pk=customize_data["midsole_material_right"]),
-                uppersole_material_right=design_models.Material.objects.get(pk=customize_data["uppersole_material_right"]),
-                shoelace_material_right=design_models.Material.objects.get(pk=customize_data["shoelace_material_right"]),
-                tongue_material_right=design_models.Material.objects.get(pk=customize_data["tongue_material_right"]),
+                outsole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["outsole_material_left"]
+                ),
+                midsole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["midsole_material_left"]
+                ),
+                uppersole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["uppersole_material_left"]
+                ),
+                shoelace_material_left=design_models.Material.objects.get(
+                    pk=customize_data["shoelace_material_left"]
+                ),
+                tongue_material_left=design_models.Material.objects.get(
+                    pk=customize_data["tongue_material_left"]
+                ),
+                outsole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["outsole_material_right"]
+                ),
+                midsole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["midsole_material_right"]
+                ),
+                uppersole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["uppersole_material_right"]
+                ),
+                shoelace_material_right=design_models.Material.objects.get(
+                    pk=customize_data["shoelace_material_right"]
+                ),
+                tongue_material_right=design_models.Material.objects.get(
+                    pk=customize_data["tongue_material_right"]
+                ),
             )
         else:
             design_models.Design.objects.filter(pk=design_pk).update(
@@ -736,16 +836,36 @@ class MemberCustomizeModifyView(mixins.LoggedInOnlyView, ListView):
                 uppersole_color_right=customize_data["uppersole_color_right"],
                 shoelace_color_right=customize_data["shoelace_color_right"],
                 tongue_color_right=customize_data["tongue_color_right"],
-                outsole_material_left=design_models.Material.objects.get(pk=customize_data["outsole_material_left"]),
-                midsole_material_left=design_models.Material.objects.get(pk=customize_data["midsole_material_left"]),
-                uppersole_material_left=design_models.Material.objects.get(pk=customize_data["uppersole_material_left"]),
-                shoelace_material_left=design_models.Material.objects.get(pk=customize_data["shoelace_material_left"]),
-                tongue_material_left=design_models.Material.objects.get(pk=customize_data["tongue_material_left"]),
-                outsole_material_right=design_models.Material.objects.get(pk=customize_data["outsole_material_right"]),
-                midsole_material_right=design_models.Material.objects.get(pk=customize_data["midsole_material_right"]),
-                uppersole_material_right=design_models.Material.objects.get(pk=customize_data["uppersole_material_right"]),
-                shoelace_material_right=design_models.Material.objects.get(pk=customize_data["shoelace_material_right"]),
-                tongue_material_right=design_models.Material.objects.get(pk=customize_data["tongue_material_right"]),
+                outsole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["outsole_material_left"]
+                ),
+                midsole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["midsole_material_left"]
+                ),
+                uppersole_material_left=design_models.Material.objects.get(
+                    pk=customize_data["uppersole_material_left"]
+                ),
+                shoelace_material_left=design_models.Material.objects.get(
+                    pk=customize_data["shoelace_material_left"]
+                ),
+                tongue_material_left=design_models.Material.objects.get(
+                    pk=customize_data["tongue_material_left"]
+                ),
+                outsole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["outsole_material_right"]
+                ),
+                midsole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["midsole_material_right"]
+                ),
+                uppersole_material_right=design_models.Material.objects.get(
+                    pk=customize_data["uppersole_material_right"]
+                ),
+                shoelace_material_right=design_models.Material.objects.get(
+                    pk=customize_data["shoelace_material_right"]
+                ),
+                tongue_material_right=design_models.Material.objects.get(
+                    pk=customize_data["tongue_material_right"]
+                ),
             )
 
         # 画像情報をデータベースに反映する
@@ -782,10 +902,194 @@ class FootSizeView(mixins.LoggedInOnlyView, ListView):
             return None
 
 
+@login_required()
+def footsizes_measure(request, *args, **kwargs):
+
+    """ 足サイズ測定 """
+
+    # 足測定の結果をデータベースに反映する
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            user = request.user
+        # 記入式で足サイズを指定した場合
+        if "footsize-fill" in request.POST:
+            footsize_fill_form = feet_forms.FootsizeFillForm(
+                request.POST, prefix="fill"
+            )
+            if footsize_fill_form.is_valid():
+                length_left = footsize_fill_form.cleaned_data.get("length_left")
+                width_left = footsize_fill_form.cleaned_data.get("width_left")
+                length_right = footsize_fill_form.cleaned_data.get("length_right")
+                width_right = footsize_fill_form.cleaned_data.get("width_right")
+                # 会員に既存の足サイズデータがある場合、データを更新する
+                try:
+                    footsize = feet_models.Footsize.objects.get(user=user)
+                    footsize.length_left = length_left
+                    footsize.length_right = length_right
+                    footsize.width_left = width_left
+                    footsize.width_right = width_right
+                    footsize.save()
+                # 会員に足サイズデータが存在しない場合、データを新規登録する
+                except models.Footsize.DoesNotExist:
+                    footsize = feet_models.Footsize.objects.create(
+                        user=user,
+                        length_left=length_left,
+                        length_right=length_right,
+                        width_left=width_left,
+                        width_right=width_right,
+                    )
+                # カートに登録している他商品の足サイズと区分するためにセッションで足サイズを渡す
+                request.session["length_left"] = int(length_left)
+                request.session["length_right"] = int(length_right)
+                request.session["width_left"] = int(width_left)
+                request.session["width_right"] = int(width_right)
+                # 登録完了のメッセージを表示し、元の画面に戻る
+                messages.success(request, _("足サイズを登録しました。"))
+                return redirect("users:footsizes")
+            footsize_image_form = feet_forms.FootsizeImageForm(prefix="image")
+        # イメージ測定を選んだ場合
+        elif "footsize-image" in request.POST:
+            footsize_image_form = feet_forms.FootsizeImageForm(
+                request.POST, request.FILES, prefix="image"
+            )
+            if footsize_image_form.is_valid():
+                foot_images = feet_models.FootImage(
+                    foot_left=request.FILES["image-foot_left"],
+                    foot_right=request.FILES["image-foot_right"],
+                )
+                foot_images.save()
+                request.session["foot_images"] = foot_images.pk
+                return redirect("users:crop-left")
+            footsize_fill_form = feet_forms.FootsizeFillForm(prefix="fill")
+    else:
+        footsize_fill_form = feet_forms.FootsizeFillForm(prefix="fill")
+        footsize_image_form = feet_forms.FootsizeImageForm(prefix="image")
+    context = {
+        "footsize_fill_form": footsize_fill_form,
+        "footsize_image_form": footsize_image_form,
+    }
+    return render(request, "feet/feet-measure.html", context)
+
+
+class LeftFootsizePerspeciveCropperView(mixins.LoggedInOnlyView, DetailView):
+
+    """ 左足のイメージをクロップするためのツールを提供する """
+
+    model = feet_models.FootImage
+    context_object_name = "foot_images"
+    template_name = "feet/feet-cropper-left.html"
+
+    def get_object(self, queryset=None):
+        try:
+            return feet_models.FootImage.objects.get(
+                pk=self.request.session["foot_images"]
+            )
+        except KeyError:
+            messages.error(self.request, _("問題が発生しました。もう一度試してみてください。"))
+            return redirect(reverse("users:footsizes"), permanent=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = feet_forms.FootImageDataForm()
+        return context
+
+    def post(self, *args, **kwargs):
+        # 画像情報をデータベースに反映する
+        image_data = self.request.POST.get("image_data")
+        processed_foot = feet_models.ProcessedFootImage.objects.create(
+            foot_left=base64_file(image_data)
+        )
+        self.request.session["processed_foot"] = processed_foot.pk
+        return redirect("users:crop-right")
+
+
+class RightFootsizePerspeciveCropperView(mixins.LoggedInOnlyView, DetailView):
+
+    """ 右足のイメージをクロップするためのツールを提供する """
+
+    model = feet_models.FootImage
+    context_object_name = "foot_images"
+    template_name = "feet/feet-cropper-right.html"
+
+    def get_object(self, queryset=None):
+        try:
+            return feet_models.FootImage.objects.get(
+                pk=self.request.session["foot_images"]
+            )
+        except KeyError:
+            messages.error(self.request, _("問題が発生しました。もう一度試してみてください。"))
+            return redirect(reverse("users:footsizes"))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = feet_forms.FootImageDataForm()
+        return context
+
+    def post(self, *args, **kwargs):
+        processed_foot_pk = self.request.session["processed_foot"]
+        # 画像情報をデータベースに反映する
+        image_data = self.request.POST.get("image_data")
+        processed_foot = feet_models.ProcessedFootImage.objects.get(
+            pk=processed_foot_pk
+        )
+        processed_foot.foot_right = base64_file(image_data)
+        processed_foot.save()
+        return redirect("users:analyze", pk=processed_foot.pk)
+
+
+@login_required()
+def footsizes_analysis(request, *args, **kwargs):
+    pk = kwargs.get("pk")
+    instance = feet_models.ProcessedFootImage.objects.get(pk=pk)
+    foot_left = instance.foot_left
+    foot_right = instance.foot_right
+    # イメージから足サイズを計算する
+    length_left, width_left = analyze.analyze(foot_left)
+    length_right, width_right = analyze.analyze(foot_right)
+    # ユーザーに足サイズデータを登録・更新する
+    if request.user.is_authenticated:
+        user = request.user
+    # 会員に既存の足サイズデータがある場合、データを更新する
+    try:
+        footsize = feet_models.Footsize.objects.get(user=user)
+        footsize.length_left = length_left
+        footsize.width_left = width_left
+        footsize.length_right = length_right
+        footsize.width_right = width_right
+        footsize.save()
+    # 会員に足サイズデータが存在しない場合、データを新規登録する
+    except feet_models.Footsize.DoesNotExist:
+        footsize = feet_models.Footsize.objects.create(
+            user=user,
+            length_left=length_left,
+            length_right=length_right,
+            width_left=width_left,
+            width_right=width_right,
+        )
+    # カートに登録している他商品の足サイズと区分するためにセッションで足サイズを渡す
+    request.session["length_left"] = int(length_left)
+    request.session["length_right"] = int(length_right)
+    request.session["width_left"] = int(width_left)
+    request.session["width_right"] = int(width_right)
+    # 前の画面から受け渡されたセッション値を削除する
+    try:
+        del request.session["foot_images"]
+    except KeyError:
+        messages.error(request, _("問題が発生しました。もう一度試してみてください。"))
+        return redirect(reverse("users:footsizes"))
+    try:
+        del request.session["processed_foot"]
+    except KeyError:
+        messages.error(request, _("問題が発生しました。もう一度試してみてください。"))
+        return redirect(reverse("users:footsizes"))
+    messages.success(request, _("足サイズを登録しました。"))
+    return redirect("users:footsizes")
+
+
 class WithdrawalView(mixins.LoggedInOnlyView, FormView):
-    
+
     """ 会員脱退ビュー """
-    
+
     template_name = "users/withdrawal.html"
     form_class = forms.WithdrawalForm
     success_url = reverse_lazy("users:withdrawal-check")
@@ -806,9 +1110,9 @@ class WithdrawalView(mixins.LoggedInOnlyView, FormView):
 
 
 class WithdrawalCheckView(mixins.LoggedInOnlyView, DeleteView):
-    
+
     """ 脱退処理前にもう一度確認してもらうためのビュー """
-    
+
     model = models.User
     template_name = "users/withdrawal-check.html"
 

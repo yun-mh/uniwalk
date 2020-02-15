@@ -20,6 +20,7 @@ numpy = "*"
 opencv-python = "*"
 python-resize-image = "*"
 django-vinaigrette = "*"
+pusher = "*"
 
 [requires]
 python_version = "3.7"

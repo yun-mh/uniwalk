@@ -6,51 +6,86 @@
 {% endblock page_title %}
 
 {% block content %}
-<section class="bg-center object-cover relative rounded-t-xl" style="background-color: #322f38;">
-    <div class="w-full h-48 rounded-t-xl" style="background-color: #366ccf;">
-        <p class="text-5xl text-center pt-32 text-white">{% trans 'オリジナルスニーカーが作れる！' %}</p>
+<section class="bg-center object-cover relative rounded-t-xl bg-home-gray">
+    <div class="w-full h-48 rounded-t-xl bg-home-blue">
+        <p class="text-6xl text-center pt-28 text-white wow fadeIn" style="text-shadow: 5px 5px rgba(51, 51, 51, 0.2);">
+            {% trans 'オリジナルスニーカーが作れる！' %}</p>
     </div>
     <img src="{% static 'images/test3.png' %}" class="block relative">
-    <div class="flex justify-center items-center w-56 h-56 mx-auto -mt-8 rounded-full bg-gray-800 p-5 absolute"
-        style="border-width: 16px; border-color: #366ccf; left: 50%; bottom: -15%; transform: translateX(-7rem);">
-        <img src="{% static 'images/logo_white.png' %}" class="">
+    <div class="flex justify-center items-center w-56 h-56 mx-auto -mt-8 rounded-full bg-gray-800 border-home-blue p-5 absolute wow fadeIn"
+        style="border-width: 16px; left: 50%; bottom: -15%; transform: translateX(-7rem);">
+        <img src="{% static 'images/logo_white.png' %}">
     </div>
 </section>
 
 
-<section class="w-full pt-32 pb-16" style="background-color: #322f38;">
+<section class="w-full pt-48 pb-16 bg-home-gray">
     <div class="w-2/3 mx-auto flex flex">
-        <p class="flex justify-center items-center w-16 text-3xl text-white h-16 text-center rounded-full"
-            style="background-color: #366ccf;">1</p>
-        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">
+        <p class="flex justify-center items-center w-12 h-12 text-2xl text-white text-center rounded-full bg-home-blue">
+            1</p>
+        <img src="{% static 'images/home-design.jpg' %}" class="m-10 w-2/5">
         <div class="w-2/5 mx-auto flex-col pt-20 ">
             <p class="text-2xl text-white pb-3 border-b-2 h-12">{% trans 'デザインをカスタマイズする' %}</p>
             <p class="text-white flex-col mt-10 text-lg font-light">
                 {% trans '素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザインを参照することもできます！' %}</p>
+            <div class="flex flex mt-8 mx-auto w-full text-center">
+                <div class="mx-auto ">
+                    <p class="text-xl text-white mb-5">{% trans '色' %}</p>
+                    <i class="fas fa-palette fa-3x text-white"></i>
+                </div>
+                <div class="mx-auto">
+                    <p class="text-xl text-white mb-5">{% trans '素材' %}</p>
+                    <i class="fab fa-firstdraft fa-3x text-white mx-auto"></i>
+                </div>
+                <div class="mx-auto">
+                    <p class="text-xl text-white mb-5">{% trans 'デザイン' %}</p>
+                    <i class="fas fa-trophy fa-3x text-white"></i>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <section class="w-full py-16 bg-home-gray">
-    <div class="w-2/3 mx-auto flex flex">
-        <p class="flex justify-center items-center w-16 text-3xl text-white h-16 text-center rounded-full"
-            style="background-color: #366ccf;">2</p>
+    <div class="w-2/3 mx-auto flex">
+        <p class="flex justify-center items-center w-12 h-12 text-2xl text-white text-center rounded-full bg-home-blue">
+            2</p>
         <div class="w-2/5 mx-auto flex-col pt-20 ">
             <p class="text-2xl text-white pb-3 border-b-2 h-12">{% trans '足サイズを測定する' %}</p>
             <p class="text-white flex-col mt-10 text-xl">{% trans '足の写真をアップロードし、両足ずつ足長・足幅のサイズを測定することができます。' %}</p>
+            <div class="flex mt-8 mx-auto w-full text-center">
+                <div class="mx-auto">
+                    <p class="text-xl text-white mb-5">{% trans '足幅' %}</p>
+                    <i class="fas fa-ruler-horizontal fa-3x text-white"></i>
+                </div>
+                <div class="mx-auto">
+                    <p class="text-xl text-white mb-5">{% trans '足長' %}</p>
+                    <i class="fas fa-ruler-vertical fa-3x text-white"></i>
+                </div>
+            </div>
         </div>
-        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">
+        <img src="{% static 'images/home-measure.jpg' %}" class="m-10 w-2/5">
     </div>
 </section>
 
 <section class="w-full py-16 bg-home-gray">
     <div class="w-2/3 mx-auto flex flex">
-        <p class="flex justify-center items-center w-16 text-3xl text-white h-16 text-center rounded-full"
-            style="background-color: #366ccf;">3</p>
-        <img src="{% static 'images/home-bg2.png' %}" class="m-10 w-2/5">
+        <p class="flex justify-center items-center w-12 h-12 text-2xl text-white text-center rounded-full bg-home-blue">
+            3</p>
+        <img src="{% static 'images/home-customization.jpg' %}" class="m-10 w-2/5">
         <div class="w-2/5 mx-auto flex-col pt-20 ">
             <p class="text-2xl text-white pb-3 border-b-2 h-12">{% trans '依頼どおりスニーカーを制作する' %}</p>
             <p class="text-white flex-col mt-10 text-xl">{% trans 'デザインと足サイズをもとにあなたのためのスニーカーを制作します！' %}</p>
+            <div class="flex flex mt-8 mx-auto w-full text-center">
+                <div class="mx-auto">
+                    <p class="text-xl text-white mb-5">カスタム制作</p>
+                    <i class="fas fa-money-check fa-3x text-white"></i>
+                </div>
+                <div class="mx-auto">
+                    <p class="text-xl text-white mb-5">配送</p>
+                    <i class="fas fa-truck fa-3x text-white"></i>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -60,17 +95,17 @@
         <p class="text-white text-3xl pt-16 mb-10">{% trans '商品リスト' %}</p>
         <div class="w-full flex flex-no-wrap justify-around">
             {% for product in products %}
-            <div class="w-1/4">
-                <div class="h-64 bg-cover bg-center" style="background-image: url('{{ product.first_image }}');"></div>
-                <div class="text-white text-lg mt-5">
+            <div class="w-1/4 shadow-lg">
+                <div class="h-64 bg-cover bg-center border-2 border-black rounded-t-xl"
+                    style="background-image: url('{{ product.first_image }}');"></div>
+                <div class="text-white text-lg p-5 bg-black rounded-b-xl">
                     {{ product.name }}
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-    <a href="{% url 'products:list' %}"
-        class="text-xl bg-white rounded p-2 font-weight-700 bg-gray-700 text-white">{% trans 'もっと見る' %}</a>
+    <a href="{% url 'products:list' %}" class="btn py-4 px-10">{% trans 'もっと見る' %}</a>
 </section>
 
 {% endblock content %}

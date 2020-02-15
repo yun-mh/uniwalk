@@ -10,12 +10,10 @@ from . import models
 class LoginForm(forms.Form):
 
     email = forms.EmailField(
-        label=_("メールアドレス"),
-        widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
+        label=_("メールアドレス"), widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
     )
     password = forms.CharField(
-        label=_("パスワード"),
-        widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
+        label=_("パスワード"), widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
     )
 
     def clean(self):
@@ -26,7 +24,9 @@ class LoginForm(forms.Form):
             if user.check_password(password):
                 return self.cleaned_data
             else:
-                self.add_error("password", forms.ValidationError(_("パスワードをもう一度確認してください。")))
+                self.add_error(
+                    "password", forms.ValidationError(_("パスワードをもう一度確認してください。"))
+                )
         except models.User.DoesNotExist:
             self.add_error("email", forms.ValidationError(_("登録されていないメールアドレスです。")))
 
@@ -45,19 +45,28 @@ class SignUpForm(forms.ModelForm):
             "gender",
         )
         widgets = {
-            "email": forms.EmailInput(attrs={"placeholder": _("メールアドレス"), "required": True}),
-            "last_name": forms.TextInput(attrs={"placeholder": _("姓"), "required": True}),
-            "first_name": forms.TextInput(attrs={"placeholder": _("名"), "required": True}),
-            "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)"), "required": True}),
-            "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)"), "required": True}),
+            "email": forms.EmailInput(
+                attrs={"placeholder": _("メールアドレス"), "required": True}
+            ),
+            "last_name": forms.TextInput(
+                attrs={"placeholder": _("姓"), "required": True}
+            ),
+            "first_name": forms.TextInput(
+                attrs={"placeholder": _("名"), "required": True}
+            ),
+            "last_name_kana": forms.TextInput(
+                attrs={"placeholder": _("姓(カナ)"), "required": True}
+            ),
+            "first_name_kana": forms.TextInput(
+                attrs={"placeholder": _("名(カナ)"), "required": True}
+            ),
             "gender": forms.Select(attrs={"required": True}),
         }
 
     GENDER_CHOICES = (_("男性"), _("女性"), _("その他"))
 
     password = forms.CharField(
-        label=_("パスワード"),
-        widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
+        label=_("パスワード"), widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
     )
     password1 = forms.CharField(
         label=_("パスワード確認"),
@@ -106,30 +115,41 @@ class UpdateProfileForm(forms.ModelForm):
         )
         widgets = {
             "email": forms.EmailInput(attrs={"placeholder": _("メールアドレス")}),
-            "current_password": forms.PasswordInput(attrs={"placeholder": _("現在のパスワード")}),
-            "last_name": forms.TextInput(attrs={"placeholder": _("姓"), "required": True}),
-            "first_name": forms.TextInput(attrs={"placeholder": _("名"), "required": True}),
-            "last_name_kana": forms.TextInput(attrs={"placeholder": _("姓(カナ)"), "required": True}),
-            "first_name_kana": forms.TextInput(attrs={"placeholder": _("名(カナ)"), "required": True}),
-            "birthday": forms.DateInput(attrs={"placeholder": _("生年月日"), "class": "datepicker"}),
+            "current_password": forms.PasswordInput(
+                attrs={"placeholder": _("現在のパスワード")}
+            ),
+            "last_name": forms.TextInput(
+                attrs={"placeholder": _("姓"), "required": True}
+            ),
+            "first_name": forms.TextInput(
+                attrs={"placeholder": _("名"), "required": True}
+            ),
+            "last_name_kana": forms.TextInput(
+                attrs={"placeholder": _("姓(カナ)"), "required": True}
+            ),
+            "first_name_kana": forms.TextInput(
+                attrs={"placeholder": _("名(カナ)"), "required": True}
+            ),
+            "birthday": forms.DateInput(
+                attrs={"placeholder": _("生年月日"), "class": "datepicker"}
+            ),
             "phone_number": forms.TextInput(attrs={"placeholder": _("電話番号")}),
             "address_city": forms.TextInput(attrs={"placeholder": _("市区町村番地")}),
             "address_detail": forms.TextInput(attrs={"placeholder": _("建物名・号室")}),
         }
 
     current_password = forms.CharField(
-        label=_('現在のパスワード'),
+        label=_("現在のパスワード"),
         widget=forms.PasswordInput(attrs={"placeholder": _("現在のパスワード")}),
     )
 
     postal_code = JPPostalCodeField(
-        label=_('郵便番号'),
-        widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),
+        label=_("郵便番号"), widget=forms.TextInput(attrs={"placeholder": _("郵便番号")}),
     )
 
     def __init__(self, *args, **kwargs):
         super(UpdateProfileForm, self).__init__(*args, **kwargs)
-        self.fields['gender'].empty_label = ""
+        self.fields["gender"].empty_label = ""
 
     def clean(self):
         email = self.cleaned_data.get("email")
@@ -138,7 +158,9 @@ class UpdateProfileForm(forms.ModelForm):
         if user.check_password(current_password):
             return self.cleaned_data
         else:
-            self.add_error("current_password", forms.ValidationError(_("パスワードをもう一度確認してください。")))
+            self.add_error(
+                "current_password", forms.ValidationError(_("パスワードをもう一度確認してください。"))
+            )
 
     def save(self, *args, **kwargs):
         user = super().save(commit=False)
@@ -198,15 +220,3 @@ class WithdrawalForm(forms.Form):
         widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
     )
 
-    # def clean(self):
-    #     email = self.cleaned_data.get("email")
-    #     password = self.cleaned_data.get("password")
-    #     try:
-    #         user = models.User.objects.get(email=email)
-    #         if user.check_password(password):
-    #             return self.cleaned_data
-    #         else:
-    #             self.add_error("password", forms.ValidationError(_("パスワードをもう一度確認してください。")))
-    #     except models.User.DoesNotExist:
-    #         self.add_error("email", forms.ValidationError(_("登録されていないメールアドレスです。")))
-        

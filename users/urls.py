@@ -61,6 +61,22 @@ urlpatterns = [
         name="modify",
     ),
     path("mypage/footsizes/", views.FootSizeView.as_view(), name="footsizes",),
+    path("mypage/footsizes/measure/", views.footsizes_measure, name="measure"),
+    path(
+        "mypage/footsizes/measure/cropper/left/",
+        views.LeftFootsizePerspeciveCropperView.as_view(),
+        name="crop-left",
+    ),
+    path(
+        "mypage/footsizes/measure/cropper/right/",
+        views.RightFootsizePerspeciveCropperView.as_view(),
+        name="crop-right",
+    ),
+    path(
+        "mypage/footsizes/measure/analyze/<int:pk>/",
+        views.footsizes_analysis,
+        name="analyze",
+    ),
     path("mypage/withdrawal/", views.WithdrawalView.as_view(), name="withdrawal",),
     path(
         "mypage/withdrawal/check/",
