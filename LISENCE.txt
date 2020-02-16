@@ -1,5 +1,0 @@
-tailwindcss
-
-SVGBackgrounds.com
-As long as you don’t re-distribute or re-sell backgrounds from SVGBackgrounds.com, you may use these backgrounds in personal or commercial projects under the following license: CC BY 4.0.
-Minimal approach: Place credit in CSS code commented out near background-image code.
