@@ -58,6 +58,7 @@ PROJECT_APPS = [
     "designs.apps.DesignsConfig",
     "feet.apps.FeetConfig",
     "orders.apps.OrdersConfig",
+    "chats.apps.ChatsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS

@@ -206,6 +206,20 @@ $shadows-big: multiple-box-shadow(50);
     rgba(104, 127, 255, 1) 100%
   );
   transition: all 0.3s;
+  &-home {
+    @apply w-full font-light text-center rounded-full py-5 text-lg text-white bg-home-blue;
+    transition: all 0.3s;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      transform: translateY(-2px);
+    }
+    &:active {
+      @apply shadow-dark;
+      transform: translateY(0px);
+    }
+  }
   &-warning {
     @apply w-full font-light text-center rounded-full py-5 text-lg text-white;
     background-color: #ffd200;

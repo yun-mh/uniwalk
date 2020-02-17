@@ -1,5 +1,32 @@
-<h4>会員登録完了</h4>
-<span>
-    UniWalkサイトをご利用いただきまして誠にありがとうございます。<br>
-    会員登録を確かに承りました。
-</span>
+{% load static i18n %}
+<table style="width: 70%; background-color: white; border: 1px solid lightgray; border-radius: 5px;">
+    <tbody>
+        <tr>
+            <td style="text-align: center; padding: 5px; background-color: #2d3748;">
+                <img src="http://127.0.0.1:8000{% static 'images/logo-nav.png' %}" alt="logo" style="height: 40px;">
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <h2 style="padding-left: 10px; font-weight: bold; font-size: 1rem;">{% trans '会員登録完了' %}</span>
+            </td>
+        </tr>
+        <tr style="height: 10rem;">
+            <td>
+                <p style="padding-left: 10px; font-size: 1rem;">
+                    {% blocktrans %}
+                    UniWalkサイトをご利用いただきまして誠にありがとうございます。<br>
+                    会員登録が完了いたしました。<br>
+                    ご登録ありがとうございます。 <br>
+                    お客様からのご注文お待ちしております！ <br>
+                    {% endblocktrans %}
+                </p>
+            </td>
+        </tr>
+        <tr style="height: 2rem;">
+            <td style="text-align: center;">
+                &copy; Team Uniwalk 2020
+            </td>
+        </tr>
+    </tbody>
+</table>

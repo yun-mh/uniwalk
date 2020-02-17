@@ -144,7 +144,7 @@ class SignUpCheckView(mixins.LoggedOutOnlyView, FormView):
         email = data["email"]
         html_message = render_to_string("emails/registration-done.html")
         send_mail(
-            _("UniWalk　会員登録ありがとうございます。"),
+            _("Uniwalk 会員登録ありがとうございます。"),
             strip_tags(html_message),
             settings.DEFAULT_FROM_EMAIL,
             [email],
@@ -170,7 +170,8 @@ class PasswordResetView(PasswordResetView):
     form_class = forms.PasswordResetForm
     template_name = "users/password-reset.html"
     subject_template_name = "emails/password-reset-subject.txt"
-    email_template_name = "emails/password-reset-email.html"
+    email_template_name = "emails/password_reset_form.html"
+    html_email_template_name = "emails/password_reset_form.html"
     success_url = reverse_lazy("users:password-reset-done")
 
 
@@ -193,7 +194,7 @@ class PasswordResetConfirmView(PasswordResetConfirmView):
         email = self.user.email
         html_message = render_to_string("emails/password-reset-done.html")
         send_mail(
-            _("パスワード再設定完了のお知らせ"),
+            _("Uniwalk パスワード再設定完了のお知らせ"),
             strip_tags(html_message),
             settings.DEFAULT_FROM_EMAIL,
             [email],
@@ -230,7 +231,7 @@ class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView
         email = form.cleaned_data.get("email")
         html_message = render_to_string("emails/profile-change-done.html")
         send_mail(
-            _("UniWalk会員情報変更のお知らせ"),
+            _("Uniwalk 会員情報変更のお知らせ"),
             strip_tags(html_message),
             settings.DEFAULT_FROM_EMAIL,
             [email],
@@ -255,7 +256,7 @@ class PasswordChangeView(mixins.LoggedInOnlyView, PasswordChangeView):
         email = self.request.user.email
         html_message = render_to_string("emails/password-change-done.html")
         send_mail(
-            _("UniWalkパスワード変更のお知らせ"),
+            _("UniWalk パスワード変更のお知らせ"),
             strip_tags(html_message),
             settings.DEFAULT_FROM_EMAIL,
             [email],
@@ -292,6 +293,19 @@ class OrdersListView(mixins.LoggedInOnlyView, ListView):
         target = order_models.Order.objects.filter(pk=order_pk)
         cancel = order_models.Step.objects.get(step_code="T99")
         target.update(step=cancel)
+        email = self.request.user.email
+        html_message = render_to_string(
+            "emails/cancel-done.html",
+            {"order_code": order_models.Order.objects.get(pk=order_pk).order_code},
+        )
+        send_mail(
+            _("Uniwalk ご注文取消しのご連絡"),
+            strip_tags(html_message),
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+            fail_silently=False,
+            html_message=html_message,
+        )
         messages.success(self.request, _("注文を取消しました。"))
         return redirect("users:orders")
 
@@ -322,6 +336,19 @@ class OrdersDetailView(mixins.LoggedInOnlyView, DetailView):
         target = order_models.Order.objects.filter(pk=order_pk)
         cancel = order_models.Step.objects.get(step_code="T99")
         target.update(step=cancel)
+        email = self.request.user.email
+        html_message = render_to_string(
+            "emails/cancel-done.html",
+            {"order_code": order_models.Order.objects.get(pk=order_pk).order_code},
+        )
+        send_mail(
+            _("Uniwalk ご注文取消しのご連絡"),
+            strip_tags(html_message),
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+            fail_silently=False,
+            html_message=html_message,
+        )
         messages.success(self.request, _("注文を取消しました。"))
         return redirect("users:orders")
 

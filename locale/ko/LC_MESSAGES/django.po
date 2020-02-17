@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-15 15:36+0900\n"
+"POT-Creation-Date: 2020-02-15 19:09+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgid "カート"
 msgstr "카트"
 
 #: .\carts\models.py:19 .\designs\models.py:178 .\designs\models.py:179
-#: .\templates\statics\home.html:41
+#: .\templates\statics\home.html:40
 msgid "デザイン"
 msgstr "디자인"
 
@@ -122,7 +122,7 @@ msgid "素材コード"
 msgstr "소재코드"
 
 #: .\designs\models.py:29 .\designs\models.py:30
-#: .\templates\statics\home.html:37
+#: .\templates\statics\home.html:36
 msgid "素材"
 msgstr "소재"
 
@@ -532,8 +532,8 @@ msgstr "주문"
 msgid "単価"
 msgstr "단가"
 
-#: .\orders\views.py:226 .\orders\views.py:579 .\orders\views.py:585
-#: .\orders\views.py:588
+#: .\orders\views.py:226 .\orders\views.py:581 .\orders\views.py:589
+#: .\orders\views.py:593
 msgid "入力した情報をもう一度確認してください。"
 msgstr "입력한 정보를 다시 한 번 확인해주세요."
 
@@ -553,8 +553,8 @@ msgstr "인증에 실패하였습니다."
 msgid "ネットワークに問題があります。"
 msgstr "네트워크에 문제가 있습니다."
 
-#: .\orders\views.py:397 .\users\views.py:988 .\users\views.py:1020
-#: .\users\views.py:1078 .\users\views.py:1083
+#: .\orders\views.py:397 .\users\views.py:1015 .\users\views.py:1047
+#: .\users\views.py:1105 .\users\views.py:1110
 msgid "問題が発生しました。もう一度試してみてください。"
 msgstr "문제가 발생했습니다. 다시 한 번 시도해주십시오."
 
@@ -563,11 +563,15 @@ msgid "エラーが発生しました。"
 msgstr "에러가 발생했습니다."
 
 #: .\orders\views.py:539
-msgid "UniWalk　ご注文ありがとうございます。"
+msgid "Uniwalk ご注文ありがとうございます。"
 msgstr "UniWalk　주문 감사드립니다."
 
-#: .\orders\views.py:614 .\users\views.py:295 .\users\views.py:325
-msgid "注文を取消しました。"
+#: .\orders\views.py:629 .\users\views.py:302 .\users\views.py:345
+msgid "Uniwalk ご注文取消しのご連絡"
+msgstr "Uniwalk 주문취소 알림"
+
+#: .\orders\views.py:637
+msgid "注文を取り消しました。"
 msgstr "주문을 취소했습니다."
 
 #: .\products\admin.py:11 .\products\admin.py:12 .\products\models.py:85
@@ -1144,10 +1148,8 @@ msgid "(足幅)"
 msgstr "(발 넓이)"
 
 #: .\templates\carts\cart.html:43
-#, fuzzy
-#| msgid "右"
 msgid "右足"
-msgstr "우"
+msgstr "오른쪽 발"
 
 #: .\templates\carts\cart.html:74
 msgid "カートに商品が入っていません。"
@@ -1449,7 +1451,7 @@ msgstr "우"
 #: .\templates\feet\feet-list.html:38 .\templates\feet\feet-list.html:54
 #: .\templates\feet\feet-measure.html:120
 #: .\templates\feet\feet-measure.html:226
-#: .\templates\feet\feet-measure.html:240 .\templates\statics\home.html:58
+#: .\templates\feet\feet-measure.html:240 .\templates\statics\home.html:57
 msgid "足幅"
 msgstr "발 넓이"
 
@@ -1458,7 +1460,7 @@ msgstr "발 넓이"
 #: .\templates\feet\feet-list.html:33 .\templates\feet\feet-list.html:49
 #: .\templates\feet\feet-measure.html:111
 #: .\templates\feet\feet-measure.html:221
-#: .\templates\feet\feet-measure.html:235 .\templates\statics\home.html:62
+#: .\templates\feet\feet-measure.html:235 .\templates\statics\home.html:61
 msgid "足長"
 msgstr "발 길이"
 
@@ -1466,30 +1468,172 @@ msgstr "발 길이"
 msgid "アッパー"
 msgstr "어퍼"
 
-#: .\templates\emails\password-reset-email.html:4
+#: .\templates\emails\cancel-done.html:11
+msgid "ご注文の取消しのご連絡"
+msgstr "주문취소 알림"
+
+#: .\templates\emails\cancel-done.html:17
+#, python-format
 msgid ""
 "\n"
-"顧客様からの要請により、パスワード再設定関連のメールをご送信いたしました。\n"
+"                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
+"す。<br>\n"
+"                    ご注文の取消しを完了いたしました。<br>\n"
+"                    取り消された注文番号は以下のとおりです。<br>\n"
+"                    注文番号：%(order_code)s\n"
+"                    "
+msgstr ""
+
+#: .\templates\emails\password-change-done.html:11
+msgid "パスワード変更完了"
+msgstr "비밀번호 변경 완료"
+
+#: .\templates\emails\password-change-done.html:17
+msgid ""
+"\n"
+"                    いつもUniWalkサイトをご利用いただきまして誠にありがとうご"
+"ざいます。<br>\n"
+"                    パスワードの変更が完了しました。<br>\n"
+"                    パスワードの変更にお心当たりがない場合、Uniwalkのお問い合"
+"わせにご連絡ください。\n"
+"                    "
 msgstr ""
 "\n"
-"고객님의 요청으로, 비밀번호 재설정 관련 메일을 송신하였습니다.\n"
+"                    항상 UniWalk를 이용해주셔서 감사의 말씀 "
+"드립니다.<br>\n"
+"                    비밀번호 변경이 완료되었습니다.<br>\n"
+"                    비밀번호 변경을 하신 적이 없는 경우, Uniwalk에"
+"문의하여 주시기 바랍니다.\n"
+"                    "
 
-#: .\templates\emails\password-reset-email.html:8
-msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。"
-msgstr "아래의 링크에 접속하여 비밀번호를 재설정하여 주시기 바랍니다."
+#: .\templates\emails\password-reset-done.html:11
+#: .\templates\users\password-reset-complete.html:5
+#: .\templates\users\password-reset-complete.html:16
+msgid "パスワード再設定完了"
+msgstr "비밀번호 재설정 완료"
 
-#: .\templates\emails\password-reset-email.html:12
-msgid "顧客様のIDは次のどおりです："
-msgstr "고객님의 ID:"
-
-#: .\templates\emails\password-reset-email.html:14
-msgid "いつものご利用ありがとうございます！"
-msgstr "항상 이용해주셔서 감사의 말씀 드립니다."
+#: .\templates\emails\password-reset-done.html:17
+msgid ""
+"\n"
+"                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
+"す。<br>\n"
+"                    パスワードの再設定が完了しました。<br>\n"
+"                    パスワードの再設定にお心当たりがない場合、Uniwalkのお問い"
+"合わせにご連絡ください。\n"
+"                    "
+msgstr ""
+"\n"
+"                    항상 UniWalk를 이용해주셔서 감사의 말씀 "
+"드립니다.<br>\n"
+"                    비밀번호 재설정이 완료되었습니다.<br>\n"
+"                    비밀번호 재설정을 하신 적이 없다면, Uniwalk에 "
+"문의하여 주시기 바랍니다.\n"
+"                    "
 
 #: .\templates\emails\password-reset-subject.txt:3
+msgid "Uniwalk パスワード再設定"
+msgstr "Uniwalk 비밀번호 재설정"
+
+#: .\templates\emails\password_reset_form.html:12
+msgid "パスワード再設定用リンクの配布"
+msgstr "비밀번호 재설정용 링크 배부"
+
+#: .\templates\emails\password_reset_form.html:18
+msgid ""
+"\n"
+"                    お客様からの要請により、パスワード再設定のメールをご送信"
+"いたしました。<br>\n"
+"                    "
+msgstr ""
+"\n"
+"고객님의 요청으로, 비밀번호 재설정 메일을 "
+"송신하였습니다.<br>\n"
+"                    "
+
+#: .\templates\emails\password_reset_form.html:21
+msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。<br>"
+msgstr "아래의 링크에 접속하여 비밀번호를 재설정하여 주시기 바랍니다. <br>"
+
+#: .\templates\emails\password_reset_form.html:28
+msgid "<br>お客様のIDは次のどおりです："
+msgstr "<br>고객님의 ID:"
+
+#: .\templates\emails\password_reset_form.html:29
+msgid "いつものご利用ありがとうございます！"
+msgstr "항상 이용해주셔서 감사합니다!"
+
+#: .\templates\emails\profile-change-done.html:11
+msgid "会員情報修正完了"
+msgstr "회원정보 수정 완료"
+
+#: .\templates\emails\profile-change-done.html:17
+msgid ""
+"\n"
+"                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
+"す。<br>\n"
+"                    会員情報の修正が完了しました。<br>\n"
+"                    会員情報の修正にお心当たりがない場合、Uniwalkのお問い合わ"
+"せにご連絡ください。\n"
+"                    "
+msgstr ""
+"\n"
+"                    UniWalk를 이용해주셔서 감사의 말씀 "
+"드립니다.<br>\n"
+"                    회원정보 수정이 완료되었습니다.<br>\n"
+"                    회원정보를 변경하신 적이 없으시다면, Uniwalk에 "
+"문의하여 주시기 바랍니다. \n"
+"                    "
+
+#: .\templates\emails\purchase-done.html:11
+#: .\templates\orders\checkout-done.html:5
+#: .\templates\orders\checkout-done.html:16
+msgid "注文完了"
+msgstr "주문완료"
+
+#: .\templates\emails\purchase-done.html:17
 #, python-format
-msgid "Password reset on %(site_name)s"
-msgstr "%(site_name)s 비밀번호 리셋"
+msgid ""
+"\n"
+"                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
+"す。<br>\n"
+"                    ご注文を確かに承りました。<br>\n"
+"                    注文番号は以下のとおりです。<br>\n"
+"                    注文番号：%(order_code)s <br>\n"
+"                    注文情報はマイページか注文検索からご覧になれます。\n"
+"                    "
+msgstr ""
+"\n"
+"                    UniWalk를 이용해주셔서 감사의 말씀 "
+"드립니다.<br>\n"
+"                    주문이 완료되었습니다.<br>\n"
+"                    주문번호는 아래와 같습니다.<br>\n"
+"                    주문번호：%(order_code)s <br>\n"
+"                    주문정보는 마이페이지 또는 주문검색에서 확인 가능합니다.\n"
+"                    "
+
+#: .\templates\emails\registration-done.html:11
+#: .\templates\users\signup-success.html:5
+#: .\templates\users\signup-success.html:15
+msgid "会員登録完了"
+msgstr "회원등록완료"
+
+#: .\templates\emails\registration-done.html:17
+msgid ""
+"\n"
+"                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
+"す。<br>\n"
+"                    会員登録が完了いたしました。<br>\n"
+"                    ご登録ありがとうございます。 <br>\n"
+"                    お客様からのご注文お待ちしております！ <br>\n"
+"                    "
+msgstr ""
+"\n"
+"                    UniWalk를 이용해주셔서 감사의 말씀 "
+"드립니다.<br>\n"
+"                    회원등록이 완료되었습니다.<br>\n"
+"                    등록하여 주셔서 감사합니다. <br>\n"
+"                    앞으로의 주문 기대하고 있겠습니다! <br>\n"
+"                    "
 
 #: .\templates\feet\feet-check.html:5
 msgid "足サイズデータチェック"
@@ -1548,10 +1692,6 @@ msgstr ""
 "로 측정합니다."
 
 #: .\templates\feet\feet-measure.html:122
-#, fuzzy
-#| msgid ""
-#| "親指の関節の１番出ている部分から小指の関節の１番出ている部分までの長さを"
-#| "メーじゃで測ります。"
 msgid ""
 "親指の関節の１番出ている部分から小指の関節の１番出ている部分までの長さをメ"
 "ジャーで測ります。"
@@ -1576,7 +1716,7 @@ msgid ""
 "写真を撮るときには写真に影響を及ぼすものがないようにきれいな床で撮ってくださ"
 "い。"
 msgstr ""
-"사진 촬영 시, 사진에 영향을 끼칠 수 있는 물건들이 없도록 깔끔한 바닥에서촬영"
+"사진 촬영 시, 사진에 영향을 끼칠 수 있는 물건들이 없도록 깔끔한 바닥에서 촬영"
 "해주세요."
 
 #: .\templates\feet\feet-measure.html:163
@@ -1711,11 +1851,6 @@ msgstr "합계"
 #: .\templates\orders\bill.html:157 .\templates\orders\receipt.html:155
 msgid "印刷する"
 msgstr "인쇄"
-
-#: .\templates\orders\checkout-done.html:5
-#: .\templates\orders\checkout-done.html:16
-msgid "注文完了"
-msgstr "주문완료"
 
 #: .\templates\orders\checkout-done.html:17
 msgid "ご注文が完了いたしました。"
@@ -1911,19 +2046,19 @@ msgstr "계좌명：UNIWALK"
 
 #: .\templates\partials\footer.html:122
 msgid "相談チャット"
-msgstr ""
+msgstr "상담 채팅"
 
 #: .\templates\partials\footer.html:131
 msgid "チャットする"
-msgstr ""
+msgstr "채팅하기"
 
 #: .\templates\partials\footer.html:146
 msgid "メッセージ入力"
-msgstr ""
+msgstr "메시지 입력"
 
 #: .\templates\partials\footer.html:148
 msgid "送信する"
-msgstr ""
+msgstr "보내기"
 
 #: .\templates\partials\mypage-menu.html:7
 #: .\templates\users\update-profile.html:5
@@ -2082,16 +2217,14 @@ msgstr ""
 "                    월요일 정기 휴일"
 
 #: .\templates\statics\home.html:12
-#, fuzzy
-#| msgid "オリジナルスニーカーが作られる！"
 msgid "オリジナルスニーカーが作れる！"
 msgstr "고객님만의 운동화를 만들 수 있어요!"
 
-#: .\templates\statics\home.html:28
+#: .\templates\statics\home.html:26
 msgid "デザインをカスタマイズする"
 msgstr "디자인 커스터마이즈"
 
-#: .\templates\statics\home.html:30
+#: .\templates\statics\home.html:28
 msgid ""
 "素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザイ"
 "ンを参照することもできます！"
@@ -2099,29 +2232,37 @@ msgstr ""
 "소재, 색을 변경해 양발 모두 자신만의 개성을 표현할 수 있습니다. 다른 고객님"
 "이 만드신디자인을 참조하는 것도 가능해요!"
 
-#: .\templates\statics\home.html:33
+#: .\templates\statics\home.html:32
 msgid "色"
-msgstr ""
+msgstr "색"
 
-#: .\templates\statics\home.html:54
+#: .\templates\statics\home.html:52
 msgid "足サイズを測定する"
 msgstr "발사이즈 측정"
 
-#: .\templates\statics\home.html:55
+#: .\templates\statics\home.html:53
 msgid ""
 "足の写真をアップロードし、両足ずつ足長・足幅のサイズを測定することができま"
 "す。"
 msgstr "발 사진을 업로드해 양발의 발 길이, 발 넓이를 측정할 수 있습니다."
 
-#: .\templates\statics\home.html:77
+#: .\templates\statics\home.html:75
 msgid "依頼どおりスニーカーを制作する"
 msgstr "주문대로 운동화를 제작"
 
-#: .\templates\statics\home.html:78
+#: .\templates\statics\home.html:76
 msgid "デザインと足サイズをもとにあなたのためのスニーカーを制作します！"
 msgstr "디자인과 발사이즈를 바탕으로 고객님만의 운동화를 제작합니다!"
 
-#: .\templates\statics\home.html:108
+#: .\templates\statics\home.html:80
+msgid "カスタム制作"
+msgstr "커스텀 제작"
+
+#: .\templates\statics\home.html:84
+msgid "配送"
+msgstr "배송"
+
+#: .\templates\statics\home.html:110
 msgid "もっと見る"
 msgstr "더 보기"
 
@@ -2135,11 +2276,6 @@ msgstr "비밀번호 재설정"
 #: .\templates\users\update-profile.html:27
 msgid "パスワード変更"
 msgstr "비밀번호 변경"
-
-#: .\templates\users\password-reset-complete.html:5
-#: .\templates\users\password-reset-complete.html:16
-msgid "パスワード再設定完了"
-msgstr "비밀번호 재설정 완료"
 
 #: .\templates\users\password-reset-complete.html:17
 msgid "パスワード再設定が完了しました。"
@@ -2230,11 +2366,6 @@ msgstr "등록정보를 수정하는 경우에는 정보수정 버튼을 눌러�
 msgid "情報修正"
 msgstr "정보수정"
 
-#: .\templates\users\signup-success.html:5
-#: .\templates\users\signup-success.html:15
-msgid "会員登録完了"
-msgstr "회원등록완료"
-
 #: .\templates\users\signup-success.html:16
 msgid "本登録が完了いたしました。"
 msgstr "등록이 완료되었습니다."
@@ -2260,19 +2391,14 @@ msgid "会員脱退確認"
 msgstr "회원탈퇴확인"
 
 #: .\templates\users\withdrawal-check.html:26
-#, fuzzy
-#| msgid ""
-#| "現在保存されている購入履歴やお届け先等の情報は、<span class=\"font-"
-#| "semibold text-red-500\">すべて削除</span>されます。<br>よろしければ、下の"
-#| "ボタンを押してください。"
 msgid ""
 "現在保存されている購入履歴やお届け先等の情報は、<span class=\"font-semibold "
 "text-red-500 wow fadeIn\">すべて削除</span>されます。<br>よろしければ、下のボ"
 "タンを押してください。"
 msgstr ""
 "현재 저장된 구매이력이나 배송지 등의 정보는, <span class=\"font-semibold "
-"text-red-500\">모두 삭제</span>됩니다. <br>괜찮으시다면 아래의 버튼을눌러주세"
-"요."
+"text-red-500\">모두 삭제</span>됩니다. <br>괜찮으시다면 아래의 버튼을 눌러주"
+"세요."
 
 #: .\templates\users\withdrawal-check.html:30
 msgid "脱退する"
@@ -2331,7 +2457,7 @@ msgstr "회원명"
 msgid "パスワード"
 msgstr "비밀번호"
 
-#: .\users\forms.py:28 .\users\forms.py:162 .\users\views.py:1108
+#: .\users\forms.py:28 .\users\forms.py:162 .\users\views.py:1135
 msgid "パスワードをもう一度確認してください。"
 msgstr "비밀번호를 다시 확인해주세요."
 
@@ -2417,51 +2543,57 @@ msgid "ログアウトしました。"
 msgstr "로그아웃하였습니다."
 
 #: .\users\views.py:147
-msgid "UniWalk　会員登録ありがとうございます。"
-msgstr "UniWalk 회원등록 감사드립니다."
+msgid "Uniwalk 会員登録ありがとうございます。"
+msgstr "Uniwalk 회원등록 감사합니다."
 
-#: .\users\views.py:196
-msgid "パスワード再設定完了のお知らせ"
-msgstr "비밀번호 재설정 완료 알림"
+#: .\users\views.py:197
+msgid "Uniwalk パスワード再設定完了のお知らせ"
+msgstr "Uniwalk 비밀번호 재설정 완료 알림"
 
-#: .\users\views.py:219
+#: .\users\views.py:220
 msgid "会員情報を変更しました。"
 msgstr "회원정보를 변경하였습니다."
 
-#: .\users\views.py:233
-msgid "UniWalk会員情報変更のお知らせ"
+#: .\users\views.py:234
+msgid "Uniwalk 会員情報変更のお知らせ"
 msgstr "UniWalk 회원정보변경 알림"
 
-#: .\users\views.py:258
-msgid "UniWalkパスワード変更のお知らせ"
-msgstr "UniWalk 비밀번호 변경 알림"
+#: .\users\views.py:259
+msgid "UniWalk パスワード変更のお知らせ"
+msgstr "Uniwalk 비밀번호 변경 알림"
 
-#: .\users\views.py:266
+#: .\users\views.py:267
 msgid "パスワードを変更しました。"
 msgstr "비밀번호를 변경하였습니다."
 
-#: .\users\views.py:362
+#: .\users\views.py:309 .\users\views.py:352
+msgid "注文を取消しました。"
+msgstr "주문을 취소했습니다."
+
+#: .\users\views.py:389
 msgid "カードを登録解除しました。"
 msgstr "신용카드를 등록해제하였습니다."
 
-#: .\users\views.py:418
+#: .\users\views.py:445
 msgid "カードを登録しました。"
 msgstr "신용카드를 등록하였습니다."
 
-#: .\users\views.py:421
+#: .\users\views.py:448
 msgid "カード登録に失敗しました。"
 msgstr "카드 등록에 실패하였습니다."
 
-#: .\users\views.py:447
+#: .\users\views.py:474
 msgid "デザインを削除しました。"
 msgstr "디자인을 삭제했습니다."
 
-#: .\users\views.py:947 .\users\views.py:1085
-#, fuzzy
-#| msgid "カードを登録しました。"
+#: .\users\views.py:974 .\users\views.py:1112
 msgid "足サイズを登録しました。"
-msgstr "신용카드를 등록하였습니다."
+msgstr "발 사이즈를 등록하였습니다."
 
-#: .\users\views.py:1101
+#: .\users\views.py:1128
 msgid "会員様のメールアドレスとは違います。"
 msgstr "회원님의 이메일 주소와 다릅니다."
+
+#, python-format
+#~ msgid "Password reset on %(site_name)s"
+#~ msgstr "%(site_name)s 비밀번호 리셋"

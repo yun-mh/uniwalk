@@ -536,7 +536,7 @@ class OrderCheckView(FormView):
                 "emails/purchase-done.html", {"order_code": order_code}
             )
             send_mail(
-                _("UniWalk　ご注文ありがとうございます。"),
+                _("Uniwalk ご注文ありがとうございます。"),
                 strip_tags(html_message),
                 settings.DEFAULT_FROM_EMAIL,
                 [email],
@@ -573,17 +573,22 @@ class OrderSearchView(FormView):
     def form_valid(self, form):
         order_code = form.cleaned_data.get("order_code")
         email = form.cleaned_data.get("email")
+        # 注文番号に合う注文があるかチェックする
         try:
             order = models.Order.objects.get(order_code=order_code)
+        # エラーの場合の処理
         except models.Order.DoesNotExist:
             messages.error(self.request, _("入力した情報をもう一度確認してください。"))
             return redirect("orders:search")
+        # 検索対象の注文に記載されているメールアドレスとフォームに入力されたメールアドレスが一致するかチェックする
         try:
             if str(order.user) == email or str(order.guest.email) == email:
                 return redirect("orders:detail", order_code)
+            # エラーの場合の処理
             else:
                 messages.error(self.request, _("入力した情報をもう一度確認してください。"))
                 return redirect("orders:search")
+        # エラーの場合の処理
         except AttributeError:
             messages.error(self.request, _("入力した情報をもう一度確認してください。"))
             return redirect("orders:search")
@@ -608,10 +613,28 @@ class OrderDetailView(DetailView):
     def post(self, *args, **kwargs):
         order_code = self.kwargs.get("order_code")
         order_pk = self.request.POST.get("target-order")
+        # データベースに注文の取消しを反映する
         target = models.Order.objects.filter(pk=order_pk)
         cancel = models.Step.objects.get(step_code="T99")
         target.update(step=cancel)
-        messages.success(self.request, _("注文を取消しました。"))
+        # 取消完了のお知らせメールの送信
+        try:
+            email = models.Order.objects.get(pk=order_pk).user.email  # 会員購入の場合
+        except:
+            email = models.Order.objects.get(pk=order_pk).guest.email  # ゲスト購入の場合
+        html_message = render_to_string(
+            "emails/cancel-done.html", {"order_code": order_code}
+        )
+        send_mail(
+            _("Uniwalk ご注文取消しのご連絡"),
+            strip_tags(html_message),
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+            fail_silently=False,
+            html_message=html_message,
+        )
+        # サイトにメッセージを表示
+        messages.success(self.request, _("注文を取り消しました。"))
         return redirect("orders:detail", order_code)
 
 

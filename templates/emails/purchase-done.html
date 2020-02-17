@@ -1,6 +1,33 @@
-<h4>注文完了</h4>
-<span>
-    UniWalkサイトをご利用いただきまして誠にありがとうございます。<br>
-    注文を確かに承りました。
-    注文番号：{{ order_code }}
-</span>
+{% load static i18n %}
+<table style="width: 70%; background-color: white; border: 1px solid lightgray; border-radius: 5px;">
+    <tbody>
+        <tr>
+            <td style="text-align: center; padding: 5px; background-color: #2d3748;">
+                <img src="http://127.0.0.1:8000{% static 'images/logo-nav.png' %}" alt="logo" style="height: 40px;">
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <h2 style="padding-left: 10px; font-weight: bold; font-size: 1rem;">{% trans '注文完了' %}</span>
+            </td>
+        </tr>
+        <tr style="height: 10rem;">
+            <td>
+                <p style="padding-left: 10px; font-size: 1rem;">
+                    {% blocktrans %}
+                    UniWalkサイトをご利用いただきまして誠にありがとうございます。<br>
+                    ご注文を確かに承りました。<br>
+                    注文番号は以下のとおりです。<br>
+                    注文番号：{{ order_code }} <br>
+                    注文情報はマイページか注文検索からご覧になれます。
+                    {% endblocktrans %}
+                </p>
+            </td>
+        </tr>
+        <tr style="height: 2rem;">
+            <td style="text-align: center;">
+                &copy; Team Uniwalk 2020
+            </td>
+        </tr>
+    </tbody>
+</table>

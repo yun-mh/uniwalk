@@ -133,6 +133,11 @@ class ConfigAdminSite(AdminSite):
                 self.admin_view(self.switch_year),
                 name="switch-year",
             ),
+            path(
+                "chat/",
+                self.admin_view(self.chat),
+                name="chat",
+            ),
         ]
         return custom_urls + urls
 
@@ -489,3 +494,6 @@ class ConfigAdminSite(AdminSite):
         if year is not None:
             request.session["year"] = year
         return HttpResponse(status=200)
+
+    def chat(self, request):
+        return render(request, "admin/chat.html")

@@ -29,6 +29,7 @@ urlpatterns = [
     path("feet/", include("feet.urls", namespace="feet")),
     path("carts/", include("carts.urls", namespace="carts")),
     path("orders/", include("orders.urls", namespace="orders")),
+    path("chats/", include("chats.urls", namespace="chats")),
 ]
 
 if settings.DEBUG:
