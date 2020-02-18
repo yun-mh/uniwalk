@@ -1,15 +1,16 @@
-from datetime import datetime, timedelta
 import operator
+from datetime import datetime, timedelta
 from functools import reduce
-from django.views.generic import ListView
-from django.shortcuts import render, redirect, render_to_response
+from django.contrib.admin import AdminSite
 from django.db.models import Q
 from django.http import HttpResponse
-from django.urls import path, reverse
-from django.contrib.admin import AdminSite
-from django.views.decorators.cache import never_cache
+from django.shortcuts import render, redirect, render_to_response
 from django.template.response import TemplateResponse
+from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
+from django.urls import path, reverse
+from django.views.decorators.cache import never_cache
+from django.views.generic import ListView, View
 from designs import models as designs_model
 from feet import models as feet_model
 from orders import models as orders_model
@@ -129,15 +130,9 @@ class ConfigAdminSite(AdminSite):
                 name="design-analytics-product",
             ),
             path(
-                "switch-year/",
-                self.admin_view(self.switch_year),
-                name="switch-year",
+                "switch-year/", self.admin_view(self.switch_year), name="switch-year",
             ),
-            path(
-                "chat/",
-                self.admin_view(self.chat),
-                name="chat",
-            ),
+            path("chat/", self.admin_view(self.Chat.as_view()), name="chat",),
         ]
         return custom_urls + urls
 
@@ -202,7 +197,11 @@ class ConfigAdminSite(AdminSite):
         except KeyError:
             year = 2020
         products = products_model.Product.objects.all()
-        orders_by_year = orders_model.Order.objects.filter(Q(step__step_code__contains="T03") | Q(step__step_code__contains="T11") | Q(step__step_code__contains="T21")).filter(order_date__year=year)
+        orders_by_year = orders_model.Order.objects.filter(
+            Q(step__step_code__contains="T03")
+            | Q(step__step_code__contains="T11")
+            | Q(step__step_code__contains="T21")
+        ).filter(order_date__year=year)
         profit_by_month = {
             1: 0,
             2: 0,
@@ -253,8 +252,10 @@ class ConfigAdminSite(AdminSite):
             300: 0,
         }
         for size in range(230, 290, 10):
-            items_num = len(male_sizes.filter(length_left__gte=size, length_left__lt=size+10))
-            length_male_left[size+10] = items_num
+            items_num = len(
+                male_sizes.filter(length_left__gte=size, length_left__lt=size + 10)
+            )
+            length_male_left[size + 10] = items_num
         left_under230 = len(male_sizes.filter(length_left__lt=230))
         length_male_left[230] = left_under230
         left_over290 = len(male_sizes.filter(length_left__gte=290))
@@ -271,8 +272,10 @@ class ConfigAdminSite(AdminSite):
             300: 0,
         }
         for size in range(230, 290, 10):
-            items_num = len(male_sizes.filter(length_right__gte=size, length_right__lt=size+10))
-            length_male_right[size+10] = items_num
+            items_num = len(
+                male_sizes.filter(length_right__gte=size, length_right__lt=size + 10)
+            )
+            length_male_right[size + 10] = items_num
         right_under230 = len(male_sizes.filter(length_right__lt=230))
         length_male_right[230] = right_under230
         right_over290 = len(male_sizes.filter(length_right__gte=290))
@@ -287,8 +290,10 @@ class ConfigAdminSite(AdminSite):
             120: 0,
         }
         for size in range(80, 110, 10):
-            items_num = len(male_sizes.filter(width_left__gte=size, width_left__lt=size+10))
-            width_male_left[size+10] = items_num
+            items_num = len(
+                male_sizes.filter(width_left__gte=size, width_left__lt=size + 10)
+            )
+            width_male_left[size + 10] = items_num
         left_under80 = len(male_sizes.filter(width_left__lt=80))
         width_male_left[80] = left_under80
         left_over110 = len(male_sizes.filter(width_left__gte=110))
@@ -302,8 +307,10 @@ class ConfigAdminSite(AdminSite):
             120: 0,
         }
         for size in range(80, 110, 10):
-            items_num = len(male_sizes.filter(width_right__gte=size, width_right__lt=size+10))
-            width_male_right[size+10] = items_num
+            items_num = len(
+                male_sizes.filter(width_right__gte=size, width_right__lt=size + 10)
+            )
+            width_male_right[size + 10] = items_num
         right_under80 = len(male_sizes.filter(width_right__lt=80))
         width_male_right[80] = right_under80
         right_over110 = len(male_sizes.filter(width_right__gte=110))
@@ -322,8 +329,10 @@ class ConfigAdminSite(AdminSite):
             300: 0,
         }
         for size in range(230, 290, 10):
-            items_num = len(female_sizes.filter(length_left__gte=size, length_left__lt=size+10))
-            length_female_left[size+10] = items_num
+            items_num = len(
+                female_sizes.filter(length_left__gte=size, length_left__lt=size + 10)
+            )
+            length_female_left[size + 10] = items_num
         left_under230 = len(female_sizes.filter(length_left__lt=230))
         length_female_left[230] = left_under230
         left_over290 = len(female_sizes.filter(length_left__gte=290))
@@ -340,8 +349,10 @@ class ConfigAdminSite(AdminSite):
             300: 0,
         }
         for size in range(230, 290, 10):
-            items_num = len(female_sizes.filter(length_right__gte=size, length_right__lt=size+10))
-            length_female_right[size+10] = items_num
+            items_num = len(
+                female_sizes.filter(length_right__gte=size, length_right__lt=size + 10)
+            )
+            length_female_right[size + 10] = items_num
         right_under230 = len(female_sizes.filter(length_right__lt=230))
         length_female_right[230] = right_under230
         right_over290 = len(female_sizes.filter(length_right__gte=290))
@@ -356,8 +367,10 @@ class ConfigAdminSite(AdminSite):
             120: 0,
         }
         for size in range(80, 110, 10):
-            items_num = len(female_sizes.filter(width_left__gte=size, width_left__lt=size+10))
-            width_female_left[size+10] = items_num
+            items_num = len(
+                female_sizes.filter(width_left__gte=size, width_left__lt=size + 10)
+            )
+            width_female_left[size + 10] = items_num
         left_under80 = len(female_sizes.filter(width_left__lt=80))
         width_female_left[80] = left_under80
         left_over110 = len(female_sizes.filter(width_left__gte=110))
@@ -371,8 +384,10 @@ class ConfigAdminSite(AdminSite):
             120: 0,
         }
         for size in range(80, 110, 10):
-            items_num = len(female_sizes.filter(width_right__gte=size, width_right__lt=size+10))
-            width_female_right[size+10] = items_num
+            items_num = len(
+                female_sizes.filter(width_right__gte=size, width_right__lt=size + 10)
+            )
+            width_female_right[size + 10] = items_num
         right_under80 = len(female_sizes.filter(width_right__lt=80))
         width_female_right[80] = right_under80
         right_over110 = len(female_sizes.filter(width_right__gte=110))
@@ -403,7 +418,9 @@ class ConfigAdminSite(AdminSite):
         paginate_by = 5
         context_object_name = "designs"
         extra_context = {
-            "designs_all": designs_model.Design.objects.all().exclude(user__isnull=True),
+            "designs_all": designs_model.Design.objects.all().exclude(
+                user__isnull=True
+            ),
             "products": products_model.Product.objects.all(),
             "count": len(products_model.Product.objects.all()),
             "categories": products_model.Category.objects.all(),
@@ -425,7 +442,7 @@ class ConfigAdminSite(AdminSite):
 
         def get_queryset(self):
             designs = designs_model.Design.objects.all().exclude(user__isnull=True)
-            return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+            return sorted(designs, key=lambda design: design.total_likes, reverse=True)
 
     # カテゴリー別表示
     class DesignAnalyticsByCategoryView(ListView):
@@ -433,7 +450,9 @@ class ConfigAdminSite(AdminSite):
         paginate_by = 5
         context_object_name = "designs"
         extra_context = {
-            "designs_all": designs_model.Design.objects.all().exclude(user__isnull=True),
+            "designs_all": designs_model.Design.objects.all().exclude(
+                user__isnull=True
+            ),
             "products": products_model.Product.objects.all(),
             "count": len(products_model.Product.objects.all()),
             "categories": products_model.Category.objects.all(),
@@ -455,8 +474,10 @@ class ConfigAdminSite(AdminSite):
 
         def get_queryset(self):
             pk = self.kwargs.get("pk")
-            designs = designs_model.Design.objects.filter(product__category=pk).exclude(user__isnull=True)
-            return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+            designs = designs_model.Design.objects.filter(product__category=pk).exclude(
+                user__isnull=True
+            )
+            return sorted(designs, key=lambda design: design.total_likes, reverse=True)
 
     # 商品別表示
     class DesignAnalyticsByProductView(ListView):
@@ -464,7 +485,9 @@ class ConfigAdminSite(AdminSite):
         paginate_by = 5
         context_object_name = "designs"
         extra_context = {
-            "designs_all": designs_model.Design.objects.all().exclude(user__isnull=True),
+            "designs_all": designs_model.Design.objects.all().exclude(
+                user__isnull=True
+            ),
             "products": products_model.Product.objects.all(),
             "count": len(products_model.Product.objects.all()),
             "categories": products_model.Category.objects.all(),
@@ -486,8 +509,25 @@ class ConfigAdminSite(AdminSite):
 
         def get_queryset(self):
             pk = self.kwargs.get("pk")
-            designs = designs_model.Design.objects.filter(product=pk).exclude(user__isnull=True)
-            return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+            designs = designs_model.Design.objects.filter(product=pk).exclude(
+                user__isnull=True
+            )
+            return sorted(designs, key=lambda design: design.total_likes, reverse=True)
+
+    # チャットページ
+    class Chat(View):
+        def get(self, *args, **kwargs):
+            if self.request.user.is_active and self.request.user.is_staff:
+                has_permission = True
+            else:
+                has_permission = False
+            context = {}
+            context["site_title"] = ConfigAdminSite.site_title
+            context["site_header"] = ConfigAdminSite.site_header
+            context["site_url"] = ConfigAdminSite.site_url
+            context["has_permission"] = has_permission
+            context["is_popup"] = False
+            return render(self.request, "admin/chat.html", context)
 
     def switch_year(self, request):
         year = request.GET.get("year", None)
@@ -495,5 +535,8 @@ class ConfigAdminSite(AdminSite):
             request.session["year"] = year
         return HttpResponse(status=200)
 
-    def chat(self, request):
-        return render(request, "admin/chat.html")
+    def switch_language(request):
+        lang = request.GET.get("lang", None)
+        if lang is not None:
+            request.session[translation.LANGUAGE_SESSION_KEY] = lang
+        return HttpResponse(status=200)
