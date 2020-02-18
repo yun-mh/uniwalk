@@ -78,7 +78,6 @@
           </li>`
         );
         $(".msgs").scrollTop($(".msgs")[0].scrollHeight);
-        console.log($(".msgs")[0].scrollHeight);
       }
     },
 

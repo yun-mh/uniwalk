@@ -1,41 +1,33 @@
 {% extends 'admin/base.html' %}
 {% load static i18n humanize %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-<link rel="stylesheet" href="{% static 'css/admin.css' %}">
-<div class="container-fluid">
-    <div class="row" id="mainrow">
-        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-            <ul class="nav nav-pills flex-column" id="rooms">
-            </ul>
-        </nav>
-        <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3" id="main">
-            <h1>Chats</h1>
-            <p>👈 Select a chat to load the messages</p>
-            <p>&nbsp;</p>
-            <div class="chat" style="margin-bottom:150px">
-                <h5 id="room-title"></h5>
-                <p>&nbsp;</p>
-                <div class="response">
-                    <form id="replyMessage">
-                        <div class="form-group">
-                            <input type="text" placeholder="Enter Message" class="form-control" name="message" />
-                        </div>
-                    </form>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <tbody id="chat-msgs">
-                        </tbody>
-                    </table>
-                </div>
-        </main>
-    </div>
+<div class="w-full flex">
+    <nav class="w-1/4 mr-10">
+        <h2 class="font-semibold mb-5 overflow-y-auto">{% trans 'チャットリスト' %}</h2>
+        <ul class="nav nav-pills flex-column" id="rooms">
+        </ul>
+    </nav>
+    <main role="main" class="w-3/4" id="main">
+        <div class="chat">
+            <div class="bg-gray-200 p-5 text-lg font-semibold mb-5">
+                <span>{% trans 'チャットルーム　' %}</span>
+                <span id="room-title"></span>
+            </div>
+            <div class="response mb-5">
+                <form id="replyMessage">
+                    <input type="text" placeholder="{% trans 'メッセージ入力' %}" class="w-full" name="message" />
+                </form>
+            </div>
+            <div class="w-full">
+                <table class="w-full">
+                    <tbody id="chat-msgs">
+                    </tbody>
+                </table>
+            </div>
+    </main>
 </div>
 <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-<script src="{% static 'js/chat/popper.js' %}"></script>
-<script src="{% static 'js/chat/bootstrap.js' %}"></script>
 <script src="{% static 'js/chat/axios.js' %}"></script>
 <script src="{% static 'js/chat/admin.js' %}"></script>
 {% endblock %}

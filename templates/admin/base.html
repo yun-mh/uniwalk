@@ -34,7 +34,7 @@
                     </a>
                 </div>
                 <div class="w-1/2 pr-0">
-                    <div class="flex relative inline-block float-right">
+                    <div class="flex relative items-center inline-block float-right">
                         {% if has_permission %}
                         <div id="user-tools" class="hidden lg:block text-sm">
                             <strong>{% firstof user.email %}</strong>
@@ -55,7 +55,21 @@
                             <a href="{% url 'admin:logout' %}" class="btn-link text-gray-600">{% trans 'Log out' %}</a>
                         </div>
                         {% endif %}
-
+                        <div class="w-auto ml-5">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            <select class="h-6" id="js-lang">
+                                <option value="ja" {% if LANGUAGE_CODE == 'ja' %}selected{% endif %}>日本語</option>
+                                <option value="ko" {% if LANGUAGE_CODE == 'ko' %}selected{% endif %}>한국어</option>
+                                <option value="id" {% if LANGUAGE_CODE == 'id' %}selected{% endif %}>Bahasa Indonesia
+                                </option>
+                                <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+                                <option value="zh-hans" {% if LANGUAGE_CODE == 'zh-hans' %}selected{% endif %}>中文
+                                </option>
+                                <option value="pt-br" {% if LANGUAGE_CODE == 'pt-br' %}selected{% endif %}>
+                                    Português(Brasil)
+                                </option>
+                            </select>
+                        </div>
                         <div class="block lg:hidden pr-4">
                             <button id="nav-toggle"
                                 class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-teal-500 appearance-none focus:outline-none">
@@ -244,14 +258,14 @@
         }
 
         // 各種メニューバー
-        var productsBtn = document.getElementById("productsBtn");
-        var productsDropdown = document.querySelector(".products-dropdown");
-        var usersBtn = document.getElementById("usersBtn");
-        var usersDropdown = document.querySelector(".users-dropdown");
-        var ordersBtn = document.getElementById("ordersBtn");
-        var ordersDropdown = document.querySelector(".orders-dropdown");
-        var analyticsBtn = document.getElementById("analyticsBtn");
-        var analyticsDropdown = document.querySelector(".analytics-dropdown");
+        const productsBtn = document.getElementById("productsBtn");
+        const productsDropdown = document.querySelector(".products-dropdown");
+        const usersBtn = document.getElementById("usersBtn");
+        const usersDropdown = document.querySelector(".users-dropdown");
+        const ordersBtn = document.getElementById("ordersBtn");
+        const ordersDropdown = document.querySelector(".orders-dropdown");
+        const analyticsBtn = document.getElementById("analyticsBtn");
+        const analyticsDropdown = document.querySelector(".analytics-dropdown");
 
         productsBtn.addEventListener("click", () => {
             productsDropdown.classList.toggle("hidden");
@@ -285,6 +299,14 @@
                 productsDropdown.classList.add("hidden");
             }
         });
+    </script>
+    <script>
+        const langSelect = document.getElementById("js-lang");
+        const handleLangChange = () => {
+            const selected = langSelect.value;
+            fetch(`{% url 'users:switch-language' %}?lang=${selected}`).then(() => window.location.reload());
+        }
+        langSelect.addEventListener("change", handleLangChange);
     </script>
 </body>
 

@@ -1,4 +1,3 @@
-// File: static/js/admin.js
 (function() {
   "use strict";
 
@@ -55,14 +54,25 @@
 
     displayChatMessage: message => {
       if (message.email === chat.currentRoom) {
-        $("#chat-msgs").prepend(
-          `<tr>
-                        <td>
-                            <div class="sender">${message.sender} @ <span class="date">${message.createdAt}</span></div>
-                            <div class="message">${message.text}</div>
-                        </td>
-                    </tr>`
-        );
+        if (message.sender === "Support") {
+          $("#chat-msgs").prepend(
+            `<tr class="bg-yellow-100">
+                <td>
+                    <div class="font-semibold">${message.sender} <span class="date">${message.createdAt}</span></div>
+                    <div class="message">${message.text}</div>
+                </td>
+            </tr>`
+          );
+        } else {
+          $("#chat-msgs").prepend(
+            `<tr class="bg-blue-100">
+                <td>
+                    <div class="font-semibold">${message.sender} <span class="date">${message.createdAt}</span></div>
+                    <div class="message">${message.text}</div>
+                </td>
+            </tr>`
+          );
+        }
       }
     },
 
@@ -100,14 +110,14 @@
         "client-support-new-message",
         {
           name: "Admin",
-          email: "Admin",
+          email: chat.currentRoom,
           text: message,
           createdAt: createdAt
         }
       );
 
       helpers.displayChatMessage({
-        email: "Admin",
+        email: chat.currentRoom,
         sender: "Support",
         text: message,
         createdAt: createdAt
@@ -130,7 +140,7 @@
     $("#rooms").html("");
     chat.subscribedUsers.forEach(function(user, index) {
       $("#rooms").append(
-        `<li class="nav-item"><a data-room-id="${user.email}" data-channel-id="${index}" class="nav-link" href="#">${user.name}</a></li>`
+        `<li class="p-5 text-center rounded bg-white shadow"><a data-room-id="${user.email}" data-channel-id="${index}" class="nav-link" href="#">${user.email}</a></li>`
       );
     });
   });
