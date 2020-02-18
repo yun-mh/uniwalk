@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-18 13:58+0900\n"
+"POT-Creation-Date: 2020-02-18 15:13+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -738,19 +738,19 @@ msgstr "Log out"
 msgid "注文状況"
 msgstr "Order status"
 
-#: .\templates\admin\base.html:112 .\vinaigrette-deleteme.py:5
+#: .\templates\admin\base.html:112 .\vinaigrette-deleteme.py:7
 msgid "入金前"
 msgstr "Before transfer"
 
-#: .\templates\admin\base.html:118 .\vinaigrette-deleteme.py:6
+#: .\templates\admin\base.html:118 .\vinaigrette-deleteme.py:8
 msgid "決済処理中"
 msgstr "Processing billing"
 
-#: .\templates\admin\base.html:124 .\vinaigrette-deleteme.py:7
+#: .\templates\admin\base.html:124 .\vinaigrette-deleteme.py:9
 msgid "決済確認済み"
 msgstr "Billing checked"
 
-#: .\templates\admin\base.html:130 .\vinaigrette-deleteme.py:8
+#: .\templates\admin\base.html:130 .\vinaigrette-deleteme.py:10
 msgid "対応中"
 msgstr "Processing"
 
@@ -1202,58 +1202,58 @@ msgstr "Processing the images."
 msgid "デザイン確定"
 msgstr "Confirm"
 
-#: .\templates\designs\design-customize.html:282
+#: .\templates\designs\design-customize.html:281
 msgid "色(左)"
 msgstr "Color(Left)"
+
+#: .\templates\designs\design-customize.html:282
+#: .\templates\designs\design-customize.html:290
+#: .\templates\designs\design-customize.html:298
+#: .\templates\designs\design-customize.html:306
+#: .\templates\documents\specification.html:183
+msgid "シューレス"
+msgstr "Shoelace"
 
 #: .\templates\designs\design-customize.html:283
 #: .\templates\designs\design-customize.html:291
 #: .\templates\designs\design-customize.html:299
 #: .\templates\designs\design-customize.html:307
-#: .\templates\documents\specification.html:183
-msgid "シューレス"
-msgstr "Shoelace"
+msgid "アッパーソール"
+msgstr "Uppersole"
 
 #: .\templates\designs\design-customize.html:284
 #: .\templates\designs\design-customize.html:292
 #: .\templates\designs\design-customize.html:300
 #: .\templates\designs\design-customize.html:308
-msgid "アッパーソール"
-msgstr "Uppersole"
+#: .\templates\documents\specification.html:200
+msgid "タン"
+msgstr "Tongue"
 
 #: .\templates\designs\design-customize.html:285
 #: .\templates\designs\design-customize.html:293
 #: .\templates\designs\design-customize.html:301
 #: .\templates\designs\design-customize.html:309
-#: .\templates\documents\specification.html:200
-msgid "タン"
-msgstr "Tongue"
+#: .\templates\documents\specification.html:131
+msgid "ミッドソール"
+msgstr "Midsole"
 
 #: .\templates\designs\design-customize.html:286
 #: .\templates\designs\design-customize.html:294
 #: .\templates\designs\design-customize.html:302
 #: .\templates\designs\design-customize.html:310
-#: .\templates\documents\specification.html:131
-msgid "ミッドソール"
-msgstr "Midsole"
-
-#: .\templates\designs\design-customize.html:287
-#: .\templates\designs\design-customize.html:295
-#: .\templates\designs\design-customize.html:303
-#: .\templates\designs\design-customize.html:311
 #: .\templates\documents\specification.html:108
 msgid "アウトソール"
 msgstr "Outsole"
 
-#: .\templates\designs\design-customize.html:290
+#: .\templates\designs\design-customize.html:289
 msgid "色(右)"
 msgstr "Color(Right)"
 
-#: .\templates\designs\design-customize.html:298
+#: .\templates\designs\design-customize.html:297
 msgid "素材(左)"
 msgstr "Material(Left)"
 
-#: .\templates\designs\design-customize.html:306
+#: .\templates\designs\design-customize.html:305
 msgid "素材(右)"
 msgstr "Material(Right)"
 
@@ -1825,7 +1825,7 @@ msgstr "Order detail"
 
 #: .\templates\mixins\orders\order-card.html:29
 #: .\templates\mixins\orders\order-detail-card.html:39
-#: .\templates\orders\search-order-detail.html:59 .\vinaigrette-deleteme.py:10
+#: .\templates\orders\search-order-detail.html:59 .\vinaigrette-deleteme.py:12
 msgid "注文取消"
 msgstr "Cancel orders"
 
@@ -2615,24 +2615,28 @@ msgid "会員様のメールアドレスとは違います。"
 msgstr "Incorrect email address."
 
 #: .\vinaigrette-deleteme.py:2
-#, fuzzy
-#| msgid "ホーム"
 msgid "ラバー"
-msgstr "Home"
+msgstr "rubber"
 
 #: .\vinaigrette-deleteme.py:3
 msgid "キャンバス"
-msgstr ""
+msgstr "canvas"
 
 #: .\vinaigrette-deleteme.py:4
-#, fuzzy
-#| msgid "ユーザー"
 msgid "レザー"
-msgstr "User"
+msgstr "leather"
 
-#: .\vinaigrette-deleteme.py:9
-msgid "発送済み"
+#: .\vinaigrette-deleteme.py:5
+msgid "Uniwalkのベーシックライン。どんなファッションにもよく合う！"
+msgstr "The basic line of Uniwalk. Fits well to any fashions!"
+
+#: .\vinaigrette-deleteme.py:6
+msgid "test"
 msgstr ""
+
+#: .\vinaigrette-deleteme.py:11
+msgid "発送済み"
+msgstr "Shipped"
 
 #, python-format
 #~ msgid "Password reset on %(site_name)s"

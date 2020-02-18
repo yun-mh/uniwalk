@@ -74,7 +74,7 @@
     var camera = new THREE.PerspectiveCamera(90, screen.clientWidth / screen.clientHeight, 1, 1000);
     camera.aspect = screen.clientWidth / screen.clientHeight;
     camera.updateProjectionMatrix();
-    camera.position.z = 4;
+    camera.position.z = 5;
 
     window.addEventListener('resize', function () {
         var width = screen.clientWidth;
@@ -86,11 +86,10 @@
 
 
     controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.minDistance = 3.2;
-    controls.maxDistance = 5;
+    controls.minDistance = 3.7;
+    controls.maxDistance = 7;
 
     var loader = new THREE.GLTFLoader();
-
 
     // デザインカスタマイズ用テンプレートのロード
     var shoelace_left_data, tongue_left_data, upper_left_data, midsole_left_data, outsole_left_data, liner_left_data, shoelace_right_data, tongue_right_data, upper_right_data, midsole_right_data, outsole_right_data, liner_right_data;

@@ -21,7 +21,7 @@
             <h2 class="font-bold text-3xl pb-2">{{ product.name }}</h2>
             <span class="text-gray-600 mr-5">{{ product.category }}</span>
             <i class="fas fa-star text-yellow-500"></i> {{ product.total_rating }}
-            <div class="w-32 text-lg font-semibold flex-shrink-0 pt-5 pb-3 text-indigo-800">&yen;
+            <div class="text-lg font-semibold flex-shrink-0 pt-5 pb-3 text-indigo-800">&yen;
                 {{ product.price | intcomma }}
                 <span> ({% trans '税込' %})</span>
             </div>
@@ -85,7 +85,8 @@
                     </div>
                     <span class="text-sm text-gray-500">{{ r.created|date:'Y-m-d' }}</span>
                 </div>
-                <p id="text-{{ r.pk }}" class="text-justify px-5 pt-3">{{ r.text|truncatechars:200 }}</p>
+                <p class="px-5 font-semibold">{{ r.title }}</p>
+                <p id="text-{{ r.pk }}" class="text-justify px-5 pt-3">{{ r.text|truncatechars:150 }}</p>
                 {% if r.text|length > 250 %}
                 <div class="text-center">
                     <a id="{{ r.pk }}" class="text-sm text-indigo-800 cursor-pointer"
