@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-15 15:37+0900\n"
+"POT-Creation-Date: 2020-02-18 13:58+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,39 +21,39 @@ msgstr ""
 #: .\carts\models.py:14 .\templates\carts\cart.html:5
 #: .\templates\mixins\orders\order-summary-card.html:16
 msgid "カート"
-msgstr ""
+msgstr "Kartu kredit"
 
 #: .\carts\models.py:19 .\designs\models.py:178 .\designs\models.py:179
-#: .\templates\statics\home.html:41
+#: .\templates\statics\home.html:40
 msgid "デザイン"
-msgstr ""
+msgstr "Desain"
 
 #: .\carts\models.py:26 .\designs\models.py:76 .\orders\models.py:173
 #: .\products\models.py:32 .\products\models.py:81 .\products\models.py:173
 #: .\products\models.py:174 .\reviews\models.py:13
 #: .\templates\admin\extra_nav.html:20 .\templates\partials\nav.html:116
 msgid "商品"
-msgstr ""
+msgstr "Produk"
 
 #: .\carts\models.py:28 .\feet\models.py:21 .\orders\models.py:206
 #: .\templates\admin\footsize-analytics.html:8
 msgid "足長(左)"
-msgstr ""
+msgstr "Panjang kaki (kiri)"
 
 #: .\carts\models.py:29 .\feet\models.py:22 .\orders\models.py:207
 #: .\templates\admin\footsize-analytics.html:19
 msgid "足長(右)"
-msgstr ""
+msgstr "Panjang kaki (kanan)"
 
 #: .\carts\models.py:30 .\feet\models.py:23 .\orders\models.py:208
 #: .\templates\admin\footsize-analytics.html:30
 msgid "足幅(左)"
-msgstr ""
+msgstr "Lebar kaki(kiri)"
 
 #: .\carts\models.py:31 .\feet\models.py:24 .\orders\models.py:209
 #: .\templates\admin\footsize-analytics.html:41
 msgid "足幅(右)"
-msgstr ""
+msgstr "Lebar kaki(kanan)"
 
 #: .\carts\models.py:32 .\orders\models.py:179
 #: .\templates\documents\bill.html:95 .\templates\documents\invoice.html:61
@@ -67,334 +67,334 @@ msgstr ""
 #: .\templates\orders\search-order-detail.html:34
 #: .\templates\orders\search-order-detail.html:47
 msgid "数量"
-msgstr ""
+msgstr "Jumlah"
 
 #: .\carts\models.py:33 .\users\models.py:125
 msgid "活性化"
-msgstr ""
+msgstr "Aktivasi"
 
 #: .\carts\models.py:44 .\templates\admin\member-analytics.html:83
 msgid "会員"
-msgstr ""
+msgstr "Member"
 
 #: .\carts\models.py:46
 msgid "カートセッションキー"
-msgstr ""
+msgstr "Kunci sesi"
 
 #: .\core\models.py:13
 msgid "登録日時"
-msgstr ""
+msgstr "Tanggal dan waktu pendaftaran"
 
 #: .\core\models.py:14
 msgid "更新日時"
-msgstr ""
+msgstr "Tanggal dan waktu pabaru"
 
 #: .\core\models.py:24
 msgid "日本地域コード (2桁)"
-msgstr ""
+msgstr "Kode wilayah jepang(2-digit)"
 
 #: .\core\models.py:41
 msgid "日本郵便番号：数字７桁"
-msgstr ""
+msgstr "Kode pos jepang, 7 digit"
 
 #: .\designs\admin.py:17
 msgid "素材情報"
-msgstr ""
+msgstr "Informasi material"
 
 #: .\designs\admin.py:32
 msgid "デザイン情報"
-msgstr ""
+msgstr "Informasi desain"
 
 #: .\designs\admin.py:43
 msgid "デザイン詳細"
-msgstr ""
+msgstr "Detail desain"
 
 #: .\designs\models.py:24
 msgid "素材名"
-msgstr ""
+msgstr "Nama material"
 
 #: .\designs\models.py:25
 msgid "素材画像"
-msgstr ""
+msgstr "Gambar material"
 
 #: .\designs\models.py:26
 msgid "素材コード"
-msgstr ""
+msgstr "Kode material"
 
 #: .\designs\models.py:29 .\designs\models.py:30
-#: .\templates\statics\home.html:37
+#: .\templates\statics\home.html:36
 msgid "素材"
-msgstr ""
+msgstr "Material"
 
 #: .\designs\models.py:43
 msgid "デザインid"
-msgstr ""
+msgstr "Id desain"
 
 #: .\designs\models.py:48 .\orders\models.py:181
 msgid "正面"
-msgstr ""
+msgstr "Depan"
 
 #: .\designs\models.py:49 .\orders\models.py:182
 msgid "側面"
-msgstr ""
+msgstr "Samping"
 
 #: .\designs\models.py:50 .\orders\models.py:183
 msgid "上面"
-msgstr ""
+msgstr "Atas"
 
 #: .\designs\models.py:51 .\orders\models.py:184
 msgid "下面"
-msgstr ""
+msgstr "Bawah"
 
 #: .\designs\models.py:54 .\designs\models.py:55
 #: .\templates\documents\specification.html:76
 msgid "デザインイメージ"
-msgstr ""
+msgstr "Gambar desain"
 
 #: .\designs\models.py:68
 msgid "ユーザ"
-msgstr ""
+msgstr "User"
 
 #: .\designs\models.py:84
 msgid "アウトソール素材(左)"
-msgstr ""
+msgstr "Material outsol (kiri)"
 
 #: .\designs\models.py:93
 msgid "ミッドソール素材(左)"
-msgstr ""
+msgstr "Material midsole (kiri)"
 
 #: .\designs\models.py:102
 msgid "アッパーソール素材(左)"
-msgstr ""
+msgstr "Material uppersole (kiri)"
 
 #: .\designs\models.py:111
 msgid "シューレース素材(左)"
-msgstr ""
+msgstr "Material tali sepatu (kiri)"
 
 #: .\designs\models.py:120
 msgid "タン素材(左)"
-msgstr ""
+msgstr "Material lidah sepatu (kiri)"
 
 #: .\designs\models.py:129
 msgid "アウトソール素材(右)"
-msgstr ""
+msgstr "Material outsol (kanan)"
 
 #: .\designs\models.py:138
 msgid "ミッドソール素材(右)"
-msgstr ""
+msgstr "Material midsole (kanan)"
 
 #: .\designs\models.py:147
 msgid "アッパーソール素材(右)"
-msgstr ""
+msgstr "Material uppersole (kanan)"
 
 #: .\designs\models.py:156
 msgid "シューレース素材(右)"
-msgstr ""
+msgstr "Material tali sepatu (kanan)"
 
 #: .\designs\models.py:165
 msgid "タン素材(右)"
-msgstr ""
+msgstr "Material lidah sepatu (kanan)"
 
 #: .\designs\models.py:172 .\products\models.py:126
 msgid "番号"
-msgstr ""
+msgstr "Nomor"
 
 #: .\designs\models.py:174 .\orders\models.py:205
 #: .\templates\documents\specification.html:51
 msgid "カスタマイズデザインコード"
-msgstr ""
+msgstr "Kode kustomisasi desain "
 
 #: .\designs\models.py:175
 msgid "いいねユーザ"
-msgstr ""
+msgstr "Pengguna yang menyukai"
 
 #: .\orders\admin.py:18 .\orders\admin.py:19 .\orders\models.py:167
 msgid "注文アイテム"
-msgstr ""
+msgstr "Barang pesanan"
 
 #: .\orders\admin.py:26 .\orders\admin.py:36 .\orders\admin.py:46
 #: .\orders\admin.py:56 .\orders\admin.py:66 .\orders\admin.py:76
 msgid "1件の注文の対応を"
-msgstr ""
+msgstr "1 respons pesanan"
 
 #: .\orders\admin.py:28 .\orders\admin.py:38 .\orders\admin.py:48
 #: .\orders\admin.py:58 .\orders\admin.py:68 .\orders\admin.py:78
 #, python-format
 msgid "%s 注文の対応を"
-msgstr ""
+msgstr "%s Penanganan pesanan"
 
 #: .\orders\admin.py:29
 #, python-format
 msgid "%s 入金前に変更しました。"
-msgstr ""
+msgstr "%s Perubahan sebelum pembayaran"
 
 #: .\orders\admin.py:30 .\orders\admin.py:80
 msgid "選択した注文を入金前に変更"
-msgstr ""
+msgstr "Perbarui pilihan pesanan sebelum pembayaran"
 
 #: .\orders\admin.py:39
 #, python-format
 msgid "%s 決済処理中に変更しました。"
-msgstr ""
+msgstr "%s Berubah selama pemrosesan pembayaran."
 
 #: .\orders\admin.py:40
 msgid "選択した注文を決済処理中に変更"
-msgstr ""
+msgstr "Ubah pesanan yang dipilih selama proses pembayaran"
 
 #: .\orders\admin.py:49
 #, python-format
 msgid "%s 決済確認済みに変更しました。"
-msgstr ""
+msgstr "%s Perubahan ke pembayaran dikonfirmasi."
 
 #: .\orders\admin.py:50
 msgid "選択した注文を決済確認済みに変更"
-msgstr ""
+msgstr "Ubah pesanan yang dipilih ke pembayaran dikonfirmasi"
 
 #: .\orders\admin.py:59
 #, python-format
 msgid "%s 対応中に変更しました。"
-msgstr ""
+msgstr "%s Mengubah menjadi proses korespondensi."
 
 #: .\orders\admin.py:60
 msgid "選択した注文を対応中に変更"
-msgstr ""
+msgstr "Ubah menjadi dalam proses korespondensi"
 
 #: .\orders\admin.py:69
 #, python-format
 msgid "%s 発送済みに変更しました。"
-msgstr ""
+msgstr "%s Ubah menjadi proses pengiriman "
 
 #: .\orders\admin.py:70
 msgid "選択した注文を発送済みに変更"
-msgstr ""
+msgstr "Ubah pilihan menjadi dalam proses pengiriman"
 
 #: .\orders\admin.py:79
 #, python-format
 msgid "%s 注文取消しに変更しました。"
-msgstr ""
+msgstr "%s Ubah menjadi pembatalan pesanan"
 
 #: .\orders\admin.py:92
 msgid "注文情報"
-msgstr ""
+msgstr "Informasi pesanan"
 
 #: .\orders\admin.py:106
 msgid "注文者情報"
-msgstr ""
+msgstr "Informasi pemesan"
 
 #: .\orders\admin.py:122
 msgid "配送先情報"
-msgstr ""
+msgstr "Informasi pengiriman"
 
 #: .\orders\admin.py:204 .\templates\admin\order_changeform.html:7
 #: .\templates\documents\bill.html:16 .\templates\documents\bill.html:22
 #: .\templates\orders\bill.html:10 .\templates\orders\bill.html:16
 msgid "請求書"
-msgstr ""
+msgstr "Faktur"
 
 #: .\orders\admin.py:233 .\templates\admin\order_changeform.html:10
 #: .\templates\documents\receipt.html:16 .\templates\documents\receipt.html:22
 #: .\templates\orders\receipt.html:10 .\templates\orders\receipt.html:16
 msgid "領収書"
-msgstr ""
+msgstr "Resi"
 
 #: .\orders\admin.py:258 .\templates\admin\order_changeform.html:13
 #: .\templates\documents\ordersheet.html:16
 #: .\templates\documents\ordersheet.html:22
 msgid "発注書"
-msgstr ""
+msgstr "Bon pesanan"
 
 #: .\orders\admin.py:283 .\templates\admin\order_changeform.html:14
 msgid "仕様書"
-msgstr ""
+msgstr "Spesifikasi"
 
 #: .\orders\admin.py:309 .\templates\admin\order_changeform.html:17
 #: .\templates\documents\invoice.html:21 .\templates\documents\invoice.html:27
 msgid "納品書"
-msgstr ""
+msgstr "Catanan pengiriman"
 
 #: .\orders\admin.py:327
 msgid "顧客名"
-msgstr ""
+msgstr "Nama pelanggan"
 
 #: .\orders\admin.py:332
 msgid "顧客名(カナ)"
-msgstr ""
+msgstr "Nama pelanggan (katakana)"
 
 #: .\orders\admin.py:340
 msgid "対応情報"
-msgstr ""
+msgstr "Informasi korespondensi"
 
 #: .\orders\forms.py:11 .\orders\models.py:51
 #: .\templates\orders\order-check.html:49
 #: .\templates\partials\mypage-menu.html:17
 msgid "クレジットカード"
-msgstr ""
+msgstr "Kartu kredit"
 
 #: .\orders\forms.py:11 .\orders\models.py:51
 #: .\templates\orders\order-check.html:51
 msgid "振込"
-msgstr ""
+msgstr "Transfer"
 
 #: .\orders\forms.py:16 .\orders\forms.py:196 .\orders\forms.py:197
-#: .\templates\partials\footer.html:130 .\users\forms.py:13 .\users\forms.py:49
+#: .\templates\partials\footer.html:128 .\users\forms.py:13 .\users\forms.py:49
 #: .\users\forms.py:117 .\users\forms.py:190 .\users\forms.py:217
 #: .\users\models.py:45 .\users\models.py:124
 msgid "メールアドレス"
-msgstr ""
+msgstr "Alamat email"
 
 #: .\orders\forms.py:36 .\orders\forms.py:60 .\orders\forms.py:118
 #: .\orders\forms.py:136 .\templates\users\signup-check.html:22
 #: .\users\forms.py:52 .\users\forms.py:122
 msgid "姓"
-msgstr ""
+msgstr "Nama belakang"
 
 #: .\orders\forms.py:37 .\orders\forms.py:63 .\orders\forms.py:119
 #: .\orders\forms.py:139 .\templates\users\signup-check.html:23
 #: .\users\forms.py:55 .\users\forms.py:125
 msgid "名"
-msgstr ""
+msgstr "Nama depan"
 
 #: .\orders\forms.py:39 .\orders\forms.py:66 .\orders\forms.py:68
 #: .\orders\forms.py:121 .\orders\forms.py:142 .\orders\forms.py:144
 #: .\templates\users\signup-check.html:24 .\users\forms.py:58
 #: .\users\forms.py:128 .\users\models.py:47
 msgid "姓(カナ)"
-msgstr ""
+msgstr "Nama belakang(katakana)"
 
 #: .\orders\forms.py:42 .\orders\forms.py:71 .\orders\forms.py:73
 #: .\orders\forms.py:124 .\orders\forms.py:147 .\orders\forms.py:149
 #: .\templates\users\signup-check.html:25 .\users\forms.py:61
 #: .\users\forms.py:131 .\users\models.py:46
 msgid "名(カナ)"
-msgstr ""
+msgstr "Nama depan(katakana)"
 
 #: .\orders\forms.py:45 .\orders\forms.py:76 .\orders\forms.py:78
 #: .\orders\forms.py:126 .\orders\forms.py:152 .\orders\forms.py:154
 #: .\users\forms.py:136 .\users\models.py:52
 msgid "電話番号"
-msgstr ""
+msgstr "Nomor telefon"
 
 #: .\orders\forms.py:48 .\users\models.py:54
 msgid "都道府県"
-msgstr ""
+msgstr "Provinsi"
 
 #: .\orders\forms.py:51 .\orders\forms.py:81 .\orders\forms.py:83
 #: .\orders\forms.py:128 .\orders\forms.py:157 .\orders\forms.py:159
 #: .\users\forms.py:137 .\users\models.py:55
 msgid "市区町村番地"
-msgstr ""
+msgstr "Kota kecamatan"
 
 #: .\orders\forms.py:54 .\orders\forms.py:86 .\orders\forms.py:88
 #: .\orders\forms.py:130 .\orders\forms.py:162 .\orders\forms.py:164
 #: .\users\forms.py:138 .\users\models.py:56
 msgid "建物名・号室"
-msgstr ""
+msgstr "Nama bangunan/nomor bangunan"
 
 #: .\orders\forms.py:91 .\orders\forms.py:93 .\orders\forms.py:127
 #: .\orders\forms.py:167 .\orders\forms.py:169 .\users\forms.py:147
 #: .\users\models.py:53
 msgid "郵便番号"
-msgstr ""
+msgstr "Kode pos"
 
 #: .\orders\forms.py:192 .\orders\forms.py:193 .\orders\models.py:120
 #: .\templates\documents\invoice.html:43
@@ -406,123 +406,123 @@ msgstr ""
 #: .\templates\orders\checkout-done.html:19 .\templates\orders\receipt.html:23
 #: .\templates\orders\search-order-detail.html:24
 msgid "注文番号"
-msgstr ""
+msgstr "Nomor pesanan"
 
 #: .\orders\models.py:32
 msgid "対応コード"
-msgstr ""
+msgstr "Kode korespondensi"
 
 #: .\orders\models.py:33
 msgid "対応名"
-msgstr ""
+msgstr "Nama korespondensi"
 
 #: .\orders\models.py:40 .\orders\models.py:41
 msgid "対応"
-msgstr ""
+msgstr "Korespondensi"
 
 #: .\orders\models.py:56 .\reviews\models.py:18
 msgid "ユーザー"
-msgstr ""
+msgstr "Pengguna"
 
 #: .\orders\models.py:64 .\templates\admin\member-analytics.html:84
 #: .\users\models.py:128 .\users\models.py:129
 msgid "ゲスト"
-msgstr ""
+msgstr "Tamu"
 
 #: .\orders\models.py:69
 msgid "姓(ご請求書先)"
-msgstr ""
+msgstr "Nama belakang (Alamat tagihan)"
 
 #: .\orders\models.py:70
 msgid "名(ご請求書先)"
-msgstr ""
+msgstr "Nama depan (Alamat tagihan)"
 
 #: .\orders\models.py:71
 msgid "姓(ご請求書先,カナ)"
-msgstr ""
+msgstr "Nama belakang (Alamat tagihan, katakana)"
 
 #: .\orders\models.py:72
 msgid "名(ご請求書先,カナ)"
-msgstr ""
+msgstr "Nama depan (Alamat tagihan, katakana)"
 
 #: .\orders\models.py:73
 msgid "電話番号(ご請求書先)"
-msgstr ""
+msgstr "Nomor telefon (Alamat tagihan)"
 
 #: .\orders\models.py:74
 msgid "郵便番号(ご請求書先)"
-msgstr ""
+msgstr "Kode pos (Alamat tagihan)"
 
 #: .\orders\models.py:75
 msgid "都道府県(ご請求書先)"
-msgstr ""
+msgstr "Provinsi (Alamat tagihan)"
 
 #: .\orders\models.py:76
 msgid "市区町村(ご請求書先)"
-msgstr ""
+msgstr "Kota kecamatan (Alamat tagihan)"
 
 #: .\orders\models.py:77
 msgid "建物名・部屋番号(ご請求書先)"
-msgstr ""
+msgstr "Nama bangunan/nomor bangunan (Alamat tagihan)"
 
 #: .\orders\models.py:79
 msgid "姓(お届け先)"
-msgstr ""
+msgstr "Nama belakang (Penerima)"
 
 #: .\orders\models.py:82
 msgid "名(お届け先)"
-msgstr ""
+msgstr "Nama depan (Penerima)"
 
 #: .\orders\models.py:85
 msgid "姓(カナ, お届け先)"
-msgstr ""
+msgstr "Nama belakang (Katakana, penerima)"
 
 #: .\orders\models.py:88
 msgid "名(カナ, お届け先)"
-msgstr ""
+msgstr "Nama depan (Katakana, penerima)"
 
 #: .\orders\models.py:91
 msgid "電話番号(お届け先)"
-msgstr ""
+msgstr "Nomor telefon (Penerima)"
 
 #: .\orders\models.py:94
 msgid "郵便番号(お届け先)"
-msgstr ""
+msgstr "Kode pos (Penerima)"
 
 #: .\orders\models.py:97
 msgid "都道府県(お届け先)"
-msgstr ""
+msgstr "Provinsi (Penerima)"
 
 #: .\orders\models.py:100
 msgid "市区町村(お届け先)"
-msgstr ""
+msgstr "Kota kecamatan (Penerima)"
 
 #: .\orders\models.py:103
 msgid "建物名・部屋番号(お届け先)"
-msgstr ""
+msgstr "Nama bangunan/nomor bangunan (Penerima)"
 
 #: .\orders\models.py:105 .\templates\mixins\orders\order-card.html:7
 #: .\templates\mixins\orders\order-detail-card.html:7
 #: .\templates\orders\search-order-detail.html:25
 msgid "注文日時"
-msgstr ""
+msgstr "Waktu dan tanggal pemesanan"
 
 #: .\orders\models.py:106
 msgid "支払方法"
-msgstr ""
+msgstr "Cara pembayaran"
 
 #: .\orders\models.py:111
 msgid "対応状況"
-msgstr ""
+msgstr "Kondisi korespondensi"
 
 #: .\orders\models.py:116
 msgid "支払総額"
-msgstr ""
+msgstr "Total pembayaran"
 
 #: .\orders\models.py:124 .\orders\models.py:125
 #: .\templates\admin\extra_nav.html:64
 msgid "注文"
-msgstr ""
+msgstr "Pesanan"
 
 #: .\orders\models.py:180 .\templates\carts\cart.html:48
 #: .\templates\documents\receipt.html:66
@@ -530,123 +530,131 @@ msgstr ""
 #: .\templates\orders\bill.html:91 .\templates\orders\receipt.html:60
 #: .\templates\orders\search-order-detail.html:46
 msgid "単価"
-msgstr ""
+msgstr "Harga per item"
 
-#: .\orders\views.py:226 .\orders\views.py:579 .\orders\views.py:585
-#: .\orders\views.py:588
+#: .\orders\views.py:226 .\orders\views.py:581 .\orders\views.py:589
+#: .\orders\views.py:593
 msgid "入力した情報をもう一度確認してください。"
-msgstr ""
+msgstr "Periksa informasi yang anda masukan"
 
 #: .\orders\views.py:382
 msgid "支払限度を超過しました。"
-msgstr ""
+msgstr "Melewati batas tanggal pembayaran"
 
 #: .\orders\views.py:386
 msgid "無効なペラメタです。"
-msgstr ""
+msgstr "Parameter tidak valid"
 
 #: .\orders\views.py:389
 msgid "認証できませんでした。"
-msgstr ""
+msgstr "Tidak bisa mengonfirmasi"
 
 #: .\orders\views.py:393
 msgid "ネットワークに問題があります。"
-msgstr ""
+msgstr "Ada permasalahan pada network"
 
-#: .\orders\views.py:397 .\users\views.py:988 .\users\views.py:1020
-#: .\users\views.py:1078 .\users\views.py:1083
+#: .\orders\views.py:397 .\users\views.py:1015 .\users\views.py:1047
+#: .\users\views.py:1105 .\users\views.py:1110
 msgid "問題が発生しました。もう一度試してみてください。"
-msgstr ""
+msgstr "Ada masalah. silahkan coba lagi"
 
 #: .\orders\views.py:401
 msgid "エラーが発生しました。"
-msgstr ""
+msgstr "Terjadi kesalahan"
 
 #: .\orders\views.py:539
-msgid "UniWalk　ご注文ありがとうございます。"
+#, fuzzy
+#| msgid "UniWalk　ご注文ありがとうございます。"
+msgid "Uniwalk ご注文ありがとうございます。"
+msgstr "Terima kasih telah menggunakan Uniwalk"
+
+#: .\orders\views.py:629 .\users\views.py:302 .\users\views.py:345
+msgid "Uniwalk ご注文取消しのご連絡"
 msgstr ""
 
-#: .\orders\views.py:614 .\users\views.py:295 .\users\views.py:325
-msgid "注文を取消しました。"
-msgstr ""
+#: .\orders\views.py:637
+#, fuzzy
+#| msgid "注文を取消しました。"
+msgid "注文を取り消しました。"
+msgstr "Menghapus pesanan"
 
 #: .\products\admin.py:11 .\products\admin.py:12 .\products\models.py:85
 #: .\products\models.py:86
 msgid "商品イメージ"
-msgstr ""
+msgstr "Gambar produk"
 
 #: .\products\admin.py:19 .\products\admin.py:20 .\products\models.py:68
 #: .\products\models.py:69
 msgid "テンプレート"
-msgstr ""
+msgstr "Template"
 
 #: .\products\admin.py:32
 msgid "商品情報"
-msgstr ""
+msgstr "Informasi produk"
 
 #: .\products\admin.py:65
 msgid "サムネイル"
-msgstr ""
+msgstr "Gambar kecil"
 
 #: .\products\admin.py:73
 msgid "カテゴリー情報"
-msgstr ""
+msgstr "Informasi kategori"
 
 #: .\products\models.py:37
 msgid "シューレス(左)"
-msgstr ""
+msgstr "Tali sepatu (kiri)"
 
 #: .\products\models.py:40
 msgid "タン(左)"
-msgstr ""
+msgstr "Lidah sepatu (kiri)"
 
 #: .\products\models.py:43
 msgid "アッパーソール(左)"
-msgstr ""
+msgstr "Uppersole (kiri)"
 
 #: .\products\models.py:46
 msgid "ミッドソール(左)"
-msgstr ""
+msgstr "Midsole (kiri)"
 
 #: .\products\models.py:49
 msgid "アウトソール(左)"
-msgstr ""
+msgstr "Outsole (kiri)"
 
 #: .\products\models.py:52
 msgid "シューレス(右)"
-msgstr ""
+msgstr "Tali sepatu (kanan)"
 
 #: .\products\models.py:55
 msgid "タン(右)"
-msgstr ""
+msgstr "Lidah sepatu (kanan)"
 
 #: .\products\models.py:58
 msgid "アッパーソール(右)"
-msgstr ""
+msgstr "Uppersole (kanan)"
 
 #: .\products\models.py:61
 msgid "ミッドソール(右)"
-msgstr ""
+msgstr "Midsole (kanan)"
 
 #: .\products\models.py:64
 msgid "アウトソール(右)"
-msgstr ""
+msgstr "Outsole (kanan)"
 
 #: .\products\models.py:79
 msgid "イメージ"
-msgstr ""
+msgstr "Gambar"
 
 #: .\products\models.py:93
 msgid "商品タイプ名"
-msgstr ""
+msgstr "Nama tipe produk"
 
 #: .\products\models.py:94
 msgid "タイプコード"
-msgstr ""
+msgstr "Kode tipe"
 
 #: .\products\models.py:97 .\products\models.py:98
 msgid "カテゴリー"
-msgstr ""
+msgstr "Kategori "
 
 #: .\products\models.py:115 .\templates\documents\invoice.html:58
 #: .\templates\documents\ordersheet.html:77
@@ -655,174 +663,174 @@ msgstr ""
 #: .\templates\mixins\orders\order-detail-card.html:26
 #: .\templates\orders\search-order-detail.html:45
 msgid "商品名"
-msgstr ""
+msgstr "Nama produk"
 
 #: .\products\models.py:118 .\templates\products\product-list.html:15
 msgid "商品カテゴリー"
-msgstr ""
+msgstr "Kategari produk"
 
 #: .\products\models.py:122
 msgid "価格"
-msgstr ""
+msgstr "Harga"
 
 #: .\products\models.py:123
 msgid "詳細説明"
-msgstr ""
+msgstr "Spesifikasi inforamsi"
 
 #: .\products\models.py:124
 msgid "販売中"
-msgstr ""
+msgstr "Sale"
 
 #: .\products\models.py:128 .\templates\documents\invoice.html:55
 msgid "商品番号"
-msgstr ""
+msgstr "Nomor produk"
 
 #: .\products\models.py:142 .\reviews\models.py:23
 msgid "評点"
-msgstr ""
+msgstr "Peringkat"
 
 #: .\reviews\admin.py:11
 msgid "レビュー情報"
-msgstr ""
+msgstr "Informasi review"
 
 #: .\reviews\forms.py:16
 msgid "レビュータイトル"
-msgstr ""
+msgstr "Judul review"
 
 #: .\reviews\forms.py:18
 msgid "レビュー本文"
-msgstr ""
+msgstr "Teks review"
 
 #: .\reviews\models.py:20
 msgid "タイトル"
-msgstr ""
+msgstr "Judul"
 
 #: .\reviews\models.py:21
 msgid "本文"
-msgstr ""
+msgstr "Teks"
 
 #: .\reviews\models.py:27 .\reviews\models.py:28 .\users\admin.py:13
 #: .\users\admin.py:14
 msgid "レビュー"
-msgstr ""
+msgstr "Review"
 
 #: .\reviews\views.py:55
 msgid "レビューを投稿しました。"
-msgstr ""
+msgstr "Memposting review"
 
 #: .\templates\admin\base.html:10 .\templates\admin\base.html:33
 msgid "Uniwalk 管理者モード"
-msgstr ""
+msgstr "Mode adminstrator Uniwalk"
 
 #: .\templates\admin\base.html:42 .\templates\admin\extra_nav.html:6
 msgid "View site"
-msgstr ""
+msgstr "Melihat situs"
 
 #: .\templates\admin\base.html:47
 msgid "Documentation"
-msgstr ""
+msgstr "Dokumentasi"
 
 #: .\templates\admin\base.html:52 .\templates\admin\extra_nav.html:7
 msgid "Change password"
-msgstr ""
+msgstr "Mengubah password"
 
 #: .\templates\admin\base.html:55 .\templates\admin\extra_nav.html:9
 msgid "Log out"
-msgstr ""
+msgstr "Keluar"
 
-#: .\templates\admin\base.html:92
+#: .\templates\admin\base.html:106
 msgid "注文状況"
-msgstr ""
+msgstr "Status pemesanan"
 
-#: .\templates\admin\base.html:98
+#: .\templates\admin\base.html:112 .\vinaigrette-deleteme.py:5
 msgid "入金前"
-msgstr ""
+msgstr "Sebelum pembayaran"
 
-#: .\templates\admin\base.html:104
+#: .\templates\admin\base.html:118 .\vinaigrette-deleteme.py:6
 msgid "決済処理中"
-msgstr ""
+msgstr "Dalam proses pembayaran"
 
-#: .\templates\admin\base.html:110
+#: .\templates\admin\base.html:124 .\vinaigrette-deleteme.py:7
 msgid "決済確認済み"
-msgstr ""
+msgstr "Pembayaran telah dikonfirmasi"
 
-#: .\templates\admin\base.html:116
+#: .\templates\admin\base.html:130 .\vinaigrette-deleteme.py:8
 msgid "対応中"
-msgstr ""
+msgstr "Dalam proses korespondensi"
 
-#: .\templates\admin\base.html:125 .\templates\products\product-detail.html:92
+#: .\templates\admin\base.html:139 .\templates\products\product-detail.html:92
 msgid "詳しく見る"
-msgstr ""
+msgstr "Lihat lebih detail"
 
-#: .\templates\admin\base.html:134
+#: .\templates\admin\base.html:148
 msgid "ショップ状況"
-msgstr ""
+msgstr "Status toko"
 
-#: .\templates\admin\base.html:140
+#: .\templates\admin\base.html:154
 msgid "取扱商品数"
-msgstr ""
+msgstr "Jumlah produk dalam proses"
 
-#: .\templates\admin\base.html:146 .\templates\admin\member-analytics.html:16
+#: .\templates\admin\base.html:160 .\templates\admin\member-analytics.html:16
 msgid "会員数"
-msgstr ""
-
-#: .\templates\admin\base.html:152
-msgid "登録カスタムデザイン数"
-msgstr ""
+msgstr "Jumlah pengguna"
 
 #: .\templates\admin\base.html:166
+msgid "登録カスタムデザイン数"
+msgstr "Jumlah desain kostumisasi yang terdaftar"
+
+#: .\templates\admin\base.html:180
 msgid "今月状況"
-msgstr ""
+msgstr "Status bulan ini"
 
-#: .\templates\admin\base.html:170
+#: .\templates\admin\base.html:184
 msgid "年"
-msgstr ""
+msgstr "Tahun"
 
-#: .\templates\admin\base.html:170
+#: .\templates\admin\base.html:184
 msgid "月"
-msgstr ""
+msgstr "Bulan"
 
-#: .\templates\admin\base.html:172 .\templates\admin\base.html:182
-#: .\templates\admin\base.html:190
+#: .\templates\admin\base.html:186 .\templates\admin\base.html:196
+#: .\templates\admin\base.html:204
 msgid "件"
-msgstr ""
+msgstr "Kasus"
 
-#: .\templates\admin\base.html:178
+#: .\templates\admin\base.html:192
 msgid "今日売上実績"
-msgstr ""
+msgstr "Kinerja penjualan bulan ini"
 
-#: .\templates\admin\base.html:186
+#: .\templates\admin\base.html:200
 msgid "昨日売上実績"
-msgstr ""
+msgstr "Kinerja penjualan bulan lalu"
 
 #: .\templates\admin\change_list.html:45
 #, python-format
 msgid "Add %(name)s"
-msgstr ""
+msgstr "Tambah %(name)s"
 
 #: .\templates\admin\change_list.html:54
 msgid "Please correct the error below."
-msgstr ""
+msgstr "Silahkan membenarkan kesalahan di bawah"
 
 #: .\templates\admin\change_list.html:54
 msgid "Please correct the errors below."
-msgstr ""
+msgstr "Silahkan membenarkan kesalahan di bawah"
 
 #: .\templates\admin\change_list.html:71
 msgid "Filter"
-msgstr ""
+msgstr "Menyaring"
 
 #: .\templates\admin\change_list.html:94
 msgid "Run the selected action"
-msgstr ""
+msgstr "Menjalankan pilihan"
 
 #: .\templates\admin\change_list.html:95
 msgid "Go"
-msgstr ""
+msgstr "Pergi"
 
 #: .\templates\admin\change_list.html:104
 msgid "Click here to select the objects across all pages"
-msgstr ""
+msgstr "Klik disini untuk memilih semua object"
 
 #: .\templates\admin\change_list.html:104
 #, python-format
@@ -830,15 +838,33 @@ msgid ""
 "Select\n"
 "                        all %(total_count)s %(module_name)s"
 msgstr ""
+"Pilih\n"
+"                       semua %(total_count)s %(module_name)s"
 
 #: .\templates\admin\change_list.html:107
 msgid "Clear selection"
-msgstr ""
+msgstr "Kosongkan pilihan"
+
+#: .\templates\admin\chat.html:6
+#, fuzzy
+#| msgid "チャットする"
+msgid "チャットリスト"
+msgstr "Chat"
+
+#: .\templates\admin\chat.html:13
+#, fuzzy
+#| msgid "チャットする"
+msgid "チャットルーム　"
+msgstr "Chat"
+
+#: .\templates\admin\chat.html:18 .\templates\partials\footer.html:144
+msgid "メッセージ入力"
+msgstr "Masukan pesan"
 
 #: .\templates\admin\design-analytics.html:8
 #: .\templates\galleries\galleries_list.html:22
 msgid "カテゴリー別"
-msgstr ""
+msgstr "Menurut kategori"
 
 #: .\templates\admin\design-analytics.html:11
 #: .\templates\admin\design-analytics.html:26
@@ -846,12 +872,12 @@ msgstr ""
 #: .\templates\galleries\galleries_list.html:40
 #: .\templates\products\product-list.html:19
 msgid "すべて"
-msgstr ""
+msgstr "Semua"
 
 #: .\templates\admin\design-analytics.html:23
 #: .\templates\galleries\galleries_list.html:37
 msgid "商品別"
-msgstr ""
+msgstr "Menurut produk"
 
 #: .\templates\admin\design-analytics.html:80
 #, python-format
@@ -859,81 +885,89 @@ msgid ""
 "\n"
 "                    %(current_page)s ページ"
 msgstr ""
+"\n"
+"                    %(current_page)s halaman"
 
 #: .\templates\admin\extra_nav.html:14 .\templates\statics\home.html:5
 msgid "ホーム"
-msgstr ""
+msgstr "Beranda"
 
 #: .\templates\admin\extra_nav.html:25
 msgid "商品一覧"
-msgstr ""
+msgstr "Daftar produk"
 
 #: .\templates\admin\extra_nav.html:29
 msgid "カテゴリー一覧"
-msgstr ""
+msgstr "Daftar kategori"
 
 #: .\templates\admin\extra_nav.html:33
 msgid "素材一覧"
-msgstr ""
+msgstr "Daftar material"
 
 #: .\templates\admin\extra_nav.html:37
 #: .\templates\products\product-detail.html:42
 msgid "デザイン一覧"
-msgstr ""
+msgstr "Daftar desain"
 
 #: .\templates\admin\extra_nav.html:41 .\templates\reviews\review-list.html:16
 msgid "レビュー一覧"
-msgstr ""
+msgstr "Daftar review"
 
 #: .\templates\admin\extra_nav.html:48
 msgid "顧客"
-msgstr ""
+msgstr "Pelanggan"
 
 #: .\templates\admin\extra_nav.html:53
 msgid "会員一覧"
-msgstr ""
+msgstr "Daftar pelanggan"
 
 #: .\templates\admin\extra_nav.html:57
 msgid "ゲスト一覧"
-msgstr ""
+msgstr "Daftar tamu"
 
 #: .\templates\admin\extra_nav.html:69
 msgid "注文一覧"
-msgstr ""
+msgstr "Daftar pesanan"
 
 #: .\templates\admin\extra_nav.html:73
 msgid "対応コードリスト"
-msgstr ""
+msgstr "List kode korespondensi"
 
 #: .\templates\admin\extra_nav.html:80
 msgid "統計"
-msgstr ""
+msgstr "Statistik"
 
 #: .\templates\admin\extra_nav.html:85
 msgid "会員分析"
-msgstr ""
+msgstr "Analisis pengguna"
 
 #: .\templates\admin\extra_nav.html:89
 msgid "販売実績分析"
-msgstr ""
+msgstr "Analisis kinerja penjualan"
 
 #: .\templates\admin\extra_nav.html:93
 msgid "足サイズ分析"
-msgstr ""
+msgstr "Analisis ukuran kaki"
 
 #: .\templates\admin\extra_nav.html:97
 msgid "人気デザイン分析"
-msgstr ""
+msgstr "Analisis desain populer"
+
+#: .\templates\admin\extra_nav.html:105
+#, fuzzy
+#| msgid "相談チャット"
+msgid "チャット"
+msgstr "Chat konsultasi"
 
 #: .\templates\admin\footsize-analytics.html:62
 #: .\templates\admin\footsize-analytics.html:106
 msgid "80以下"
-msgstr ""
+msgstr "Dibawah 80"
 
 #: .\templates\admin\footsize-analytics.html:66
 #: .\templates\admin\footsize-analytics.html:110
 msgid "~110以上"
-msgstr ""
+msgstr "Diatas 110"
 
 #: .\templates\admin\footsize-analytics.html:69
 #: .\templates\admin\footsize-analytics.html:113
@@ -944,7 +978,7 @@ msgstr ""
 #: .\templates\users\signup-check.html:36 .\users\forms.py:66
 #: .\users\models.py:36
 msgid "男性"
-msgstr ""
+msgstr "Pria"
 
 #: .\templates\admin\footsize-analytics.html:75
 #: .\templates\admin\footsize-analytics.html:119
@@ -955,88 +989,88 @@ msgstr ""
 #: .\templates\users\signup-check.html:38 .\users\forms.py:66
 #: .\users\models.py:37
 msgid "女性"
-msgstr ""
+msgstr "Wanita"
 
 #: .\templates\admin\footsize-analytics.html:150
 #: .\templates\admin\footsize-analytics.html:197
 msgid "230未満"
-msgstr ""
+msgstr "Kurang dari 230"
 
 #: .\templates\admin\footsize-analytics.html:157
 #: .\templates\admin\footsize-analytics.html:204
 msgid "290以上"
-msgstr ""
+msgstr "Diatas 290"
 
 #: .\templates\admin\member-analytics.html:8
 msgid "全体顧客対比会員割合"
-msgstr ""
+msgstr "Rasio angota dari total pelanggan"
 
 #: .\templates\admin\member-analytics.html:12
 msgid "全体ユーザ数"
-msgstr ""
+msgstr "Jumlah pelanggan"
 
 #: .\templates\admin\member-analytics.html:20
 msgid "ゲスト数"
-msgstr ""
+msgstr "Jumlah tamu"
 
 #: .\templates\admin\member-analytics.html:33
 msgid "会員性別割合"
-msgstr ""
+msgstr "Rasio jenis kelamin pengguna"
 
 #: .\templates\admin\member-analytics.html:37
 msgid "全体会員数"
-msgstr ""
+msgstr "Jumlah seluruh pengguna"
 
 #: .\templates\admin\member-analytics.html:49
 #: .\templates\admin\member-analytics.html:115
 #: .\templates\users\signup-check.html:40 .\users\forms.py:66
 #: .\users\models.py:38
 msgid "その他"
-msgstr ""
+msgstr "dst"
 
 #: .\templates\admin\member-analytics.html:62
 msgid "会員年齢分布"
-msgstr ""
+msgstr "Analisis umur pengguna"
 
 #: .\templates\admin\member-analytics.html:145
 msgid "10歳未満"
-msgstr ""
+msgstr "Diatas umur 10 tahun"
 
 #: .\templates\admin\member-analytics.html:146
 msgid "10代"
-msgstr ""
+msgstr "Umur 10an"
 
 #: .\templates\admin\member-analytics.html:147
 msgid "20代"
-msgstr ""
+msgstr "Umur 20an"
 
 #: .\templates\admin\member-analytics.html:148
 msgid "30代"
-msgstr ""
+msgstr "Umur 30an"
 
 #: .\templates\admin\member-analytics.html:149
 msgid "40代"
-msgstr ""
+msgstr "Umur 40an"
 
 #: .\templates\admin\member-analytics.html:150
 msgid "50代"
-msgstr ""
+msgstr "Umur 50an"
 
 #: .\templates\admin\member-analytics.html:151
 msgid "60代以上"
-msgstr ""
+msgstr "Diatas 60"
 
 #: .\templates\admin\order_changeform.html:19
 msgid "History"
-msgstr ""
+msgstr "Sejarah"
 
 #: .\templates\admin\order_changeform.html:21
 msgid "View on site"
-msgstr ""
+msgstr "Melihat di situs"
 
 #: .\templates\admin\sales-analytics.html:8
 msgid "年間売上実績"
-msgstr ""
+msgstr "Kinerja penjualan tahunan"
 
 #: .\templates\admin\sales-analytics.html:12
 msgid "年度"
@@ -1044,59 +1078,59 @@ msgstr ""
 
 #: .\templates\admin\sales-analytics.html:26
 msgid "商品別販売実績(商品別販売個数)"
-msgstr ""
+msgstr "Tahun"
 
 #: .\templates\admin\sales-analytics.html:42
 msgid "1月"
-msgstr ""
+msgstr "Januari"
 
 #: .\templates\admin\sales-analytics.html:43
 msgid "2月"
-msgstr ""
+msgstr "Febuari"
 
 #: .\templates\admin\sales-analytics.html:44
 msgid "3月"
-msgstr ""
+msgstr "Maret"
 
 #: .\templates\admin\sales-analytics.html:45
 msgid "4月"
-msgstr ""
+msgstr "April"
 
 #: .\templates\admin\sales-analytics.html:46
 msgid "5月"
-msgstr ""
+msgstr "Mei"
 
 #: .\templates\admin\sales-analytics.html:47
 msgid "6月"
-msgstr ""
+msgstr "Juni"
 
 #: .\templates\admin\sales-analytics.html:48
 msgid "7月"
-msgstr ""
+msgstr "Juli"
 
 #: .\templates\admin\sales-analytics.html:49
 msgid "8月"
-msgstr ""
+msgstr "Agustus"
 
 #: .\templates\admin\sales-analytics.html:50
 msgid "9月"
-msgstr ""
+msgstr "September"
 
 #: .\templates\admin\sales-analytics.html:51
 msgid "10月"
-msgstr ""
+msgstr "Oktober"
 
 #: .\templates\admin\sales-analytics.html:52
 msgid "11月"
-msgstr ""
+msgstr "November"
 
 #: .\templates\admin\sales-analytics.html:53
 msgid "12月"
-msgstr ""
+msgstr "Desember"
 
 #: .\templates\cards\card-list.html:5 .\templates\cards\card-list.html:23
 msgid "クレジットカード一覧"
-msgstr ""
+msgstr "Daftar kartu kredit"
 
 #: .\templates\cards\card-list.html:38 .\templates\designs\design-list.html:38
 #: .\templates\designs\select-products.html:40
@@ -1106,73 +1140,75 @@ msgid ""
 "\n"
 "                        %(current_page)s ページ"
 msgstr ""
+"\n"
+"                       %(current_page)s halaman"
 
 #: .\templates\cards\card-list.html:52
 msgid "登録したカードが存在しません。"
-msgstr ""
+msgstr "Kartu yang terdaftar tidak ada "
 
 #: .\templates\cards\card-list.html:56
 #: .\templates\cards\card-registration.html:44
 msgid "カードを登録する"
-msgstr ""
+msgstr "Daftarkan kartu"
 
 #: .\templates\cards\card-registration.html:5
 #: .\templates\cards\card-registration.html:23
 msgid "クレジットカード登録"
-msgstr ""
+msgstr "Daftar kartu kredit"
 
 #: .\templates\carts\cart.html:19
 msgid "ショッピングカート"
-msgstr ""
+msgstr "Keranjang belanja"
 
 #: .\templates\carts\cart.html:40
 msgid "左足"
-msgstr ""
+msgstr "Kaki kiri"
 
 #: .\templates\carts\cart.html:41 .\templates\carts\cart.html:44
 msgid "(足長)"
-msgstr ""
+msgstr "(Panjang kaki)"
 
 #: .\templates\carts\cart.html:42 .\templates\carts\cart.html:45
 msgid "(足幅)"
-msgstr ""
+msgstr "(Lebar kaki)"
 
 #: .\templates\carts\cart.html:43
 msgid "右足"
-msgstr ""
+msgstr "Kaki kanan"
 
 #: .\templates\carts\cart.html:74
 msgid "カートに商品が入っていません。"
-msgstr ""
+msgstr "Keranjang anda kosong"
 
 #: .\templates\carts\cart.html:82
 #: .\templates\mixins\orders\order-summary-card.html:4
 msgid "ご注文金額"
-msgstr ""
+msgstr "Jumlah belanja"
 
 #: .\templates\carts\cart.html:86
 msgid "合計（税込）"
-msgstr ""
+msgstr "Total (Termasuk pajak)"
 
 #: .\templates\carts\cart.html:90
 msgid "購入手続きへ"
-msgstr ""
+msgstr "Prosedur pembelian"
 
 #: .\templates\designs\design-customize.html:5
 msgid "デザインカスタマイズ"
-msgstr ""
+msgstr "Kostumisasi desain"
 
 #: .\templates\designs\design-customize.html:22
 msgid "画像を抽出しています。"
-msgstr ""
+msgstr "Pengambilan gambar"
 
 #: .\templates\designs\design-customize.html:29
 msgid "デザイン確定"
-msgstr ""
+msgstr "Konfirmasi desain"
 
 #: .\templates\designs\design-customize.html:282
 msgid "色(左)"
-msgstr ""
+msgstr "Warna (kiri)"
 
 #: .\templates\designs\design-customize.html:283
 #: .\templates\designs\design-customize.html:291
@@ -1180,14 +1216,14 @@ msgstr ""
 #: .\templates\designs\design-customize.html:307
 #: .\templates\documents\specification.html:183
 msgid "シューレス"
-msgstr ""
+msgstr "Tali sepatu"
 
 #: .\templates\designs\design-customize.html:284
 #: .\templates\designs\design-customize.html:292
 #: .\templates\designs\design-customize.html:300
 #: .\templates\designs\design-customize.html:308
 msgid "アッパーソール"
-msgstr ""
+msgstr "Uppersole"
 
 #: .\templates\designs\design-customize.html:285
 #: .\templates\designs\design-customize.html:293
@@ -1195,7 +1231,7 @@ msgstr ""
 #: .\templates\designs\design-customize.html:309
 #: .\templates\documents\specification.html:200
 msgid "タン"
-msgstr ""
+msgstr "Lidah sepatu"
 
 #: .\templates\designs\design-customize.html:286
 #: .\templates\designs\design-customize.html:294
@@ -1203,7 +1239,7 @@ msgstr ""
 #: .\templates\designs\design-customize.html:310
 #: .\templates\documents\specification.html:131
 msgid "ミッドソール"
-msgstr ""
+msgstr "Midsole"
 
 #: .\templates\designs\design-customize.html:287
 #: .\templates\designs\design-customize.html:295
@@ -1211,75 +1247,75 @@ msgstr ""
 #: .\templates\designs\design-customize.html:311
 #: .\templates\documents\specification.html:108
 msgid "アウトソール"
-msgstr ""
+msgstr "Outsole"
 
 #: .\templates\designs\design-customize.html:290
 msgid "色(右)"
-msgstr ""
+msgstr "Warna (kanan)"
 
 #: .\templates\designs\design-customize.html:298
 msgid "素材(左)"
-msgstr ""
+msgstr "Material (kiri)"
 
 #: .\templates\designs\design-customize.html:306
 msgid "素材(右)"
-msgstr ""
+msgstr "Material (kanan)"
 
 #: .\templates\designs\design-list.html:5
 #: .\templates\designs\design-list.html:23
 #: .\templates\partials\mypage-menu.html:22
 msgid "マイデザイン"
-msgstr ""
+msgstr "Desain saya"
 
 #: .\templates\designs\design-list.html:52
 msgid "まだ作成したデザインがありません。"
-msgstr ""
+msgstr "Belum ada desain"
 
 #: .\templates\designs\design-list.html:56
 msgid "デザインする"
-msgstr ""
+msgstr "Desain"
 
 #: .\templates\designs\select-products.html:5
 #: .\templates\designs\select-products.html:23
 msgid "商品選択"
-msgstr ""
+msgstr "Memilih produk"
 
 #: .\templates\designs\select-products.html:54
 #: .\templates\products\product-list.html:70
 msgid "商品が存在しません。"
-msgstr ""
+msgstr "Produk tidak ada"
 
 #: .\templates\documents\bill.html:41 .\templates\documents\invoice.html:36
 #: .\templates\documents\receipt.html:50 .\templates\documents\receipt.html:107
 #: .\templates\orders\bill.html:35 .\templates\orders\receipt.html:44
 #: .\templates\orders\receipt.html:101 .\templates\orders\receipt.html:146
 msgid "様"
-msgstr ""
+msgstr "Yth"
 
 #: .\templates\documents\bill.html:48 .\templates\documents\invoice.html:30
 #: .\templates\documents\receipt.html:33
 #: .\templates\documents\specification.html:43 .\templates\orders\bill.html:42
 #: .\templates\orders\receipt.html:27
 msgid "発行日"
-msgstr ""
+msgstr "Tanggal penerbitan"
 
 #: .\templates\documents\bill.html:57 .\templates\documents\ordersheet.html:57
 #: .\templates\orders\bill.html:51
 msgid "愛知県名古屋市中村区名駅4丁目27-1"
-msgstr ""
+msgstr "Aichi-ken nagoya-shi nakamura-ku meieki 4 chome 27-1"
 
 #: .\templates\documents\bill.html:60 .\templates\documents\ordersheet.html:60
 #: .\templates\orders\bill.html:54
 msgid "総合校舎スパイラルタワーズ Uniwalk"
-msgstr ""
+msgstr "Gedung sekolah spiral tower Uniwalk"
 
 #: .\templates\documents\bill.html:69 .\templates\orders\bill.html:63
 msgid "振込銀行"
-msgstr ""
+msgstr "Transfer bank"
 
 #: .\templates\documents\bill.html:73 .\templates\orders\bill.html:67
 msgid "OO銀行"
-msgstr ""
+msgstr "Bank OO"
 
 #: .\templates\documents\bill.html:80 .\templates\orders\bill.html:74
 msgid "下記の通りご請求致します。"
@@ -1290,343 +1326,477 @@ msgstr ""
 #: .\templates\orders\bill.html:78 .\templates\orders\receipt.html:149
 #: .\templates\orders\search-order-detail.html:29
 msgid "合計金額"
-msgstr ""
+msgstr "JUmlah total"
 
 #: .\templates\documents\bill.html:85 .\templates\orders\bill.html:78
 msgid "(税込)"
-msgstr ""
+msgstr "(termasuk pajak)"
 
 #: .\templates\documents\bill.html:92 .\templates\documents\receipt.html:60
 #: .\templates\orders\bill.html:85 .\templates\orders\receipt.html:54
 msgid "注文商品"
-msgstr ""
+msgstr "Produk pesanan"
 
 #: .\templates\documents\bill.html:98
 msgid "単価(円)"
-msgstr ""
+msgstr "Harga (yen)"
 
 #: .\templates\documents\bill.html:101
 msgid "金額(円)"
-msgstr ""
+msgstr "Jumlah (yen)"
 
 #: .\templates\documents\bill.html:104 .\templates\orders\bill.html:97
 msgid "備考"
-msgstr ""
+msgstr "Komentar"
 
 #: .\templates\documents\bill.html:136
 msgid "合計(円)"
-msgstr ""
+msgstr "Total (yen)"
 
 #: .\templates\documents\bill.html:151
 #: .\templates\documents\ordersheet.html:116 .\templates\orders\bill.html:144
 msgid "特記事項"
-msgstr ""
+msgstr "Catatan khusus"
 
 #: .\templates\documents\invoice.html:40 .\templates\documents\receipt.html:37
 #: .\templates\documents\specification.html:59
 #: .\templates\orders\receipt.html:31
 msgid "注文日"
-msgstr ""
+msgstr "Tanggal pesanan"
 
 #: .\templates\documents\invoice.html:64
 msgid "単価(税込)"
-msgstr ""
+msgstr "Harga (Termasuk pajak)"
 
 #: .\templates\documents\invoice.html:67
 msgid "金額(税込)"
-msgstr ""
+msgstr "Jumlah (Termasuk pajak)"
 
 #: .\templates\documents\invoice.html:113
 #: .\templates\mixins\orders\order-summary-card.html:8
 msgid "合計(税込)"
-msgstr ""
+msgstr "Total (Termasuk pajak)"
 
 #: .\templates\documents\invoice.html:121
 #: .\templates\mixins\orders\order-detail-card.html:16
 #: .\templates\orders\order-check.html:47
 #: .\templates\orders\search-order-detail.html:35
 msgid "お支払い方法"
-msgstr ""
+msgstr "Cara pembayaran"
 
 #: .\templates\documents\ordersheet.html:29
 msgid "OO制作工場"
-msgstr ""
+msgstr "Pabrik produksi OO"
 
 #: .\templates\documents\ordersheet.html:29
 msgid "御中"
-msgstr ""
+msgstr "Anda"
 
 #: .\templates\documents\ordersheet.html:41
 #: .\templates\documents\specification.html:63
 msgid "納期"
-msgstr ""
+msgstr "Tanggal pengiriman"
 
 #: .\templates\documents\ordersheet.html:48
 msgid "発注日"
-msgstr ""
+msgstr "Tanggal pemesanan"
 
 #: .\templates\documents\ordersheet.html:67
 msgid "下記の通り、発注致します。"
-msgstr ""
+msgstr "Kami akan melakukan pemesanan sebagai berikut."
 
 #: .\templates\documents\ordersheet.html:74
 msgid "項番"
-msgstr ""
+msgstr "Nomor"
 
 #: .\templates\documents\ordersheet.html:83
 msgid "カスタマイズコード"
-msgstr ""
+msgstr "Kode kostumisasi"
 
 #: .\templates\documents\receipt.html:41 .\templates\orders\receipt.html:35
 msgid "ご請求額"
-msgstr ""
+msgstr "Jumlah faktur"
 
 #: .\templates\documents\receipt.html:90 .\templates\orders\receipt.html:84
 msgid "お届け先住所"
-msgstr ""
+msgstr "Alamat pengiriman"
 
 #: .\templates\documents\receipt.html:101
 #: .\templates\documents\receipt.html:138 .\templates\orders\receipt.html:95
 #: .\templates\orders\receipt.html:132
 msgid "住所"
-msgstr ""
+msgstr "Alamat"
 
 #: .\templates\documents\receipt.html:116 .\templates\orders\receipt.html:110
 msgid "お支払い情報"
-msgstr ""
+msgstr "Informasi pembayaran"
 
 #: .\templates\documents\receipt.html:122 .\templates\orders\receipt.html:116
 msgid "支払い方法"
-msgstr ""
+msgstr "Cara pembayaran"
 
 #: .\templates\documents\receipt.html:133 .\templates\orders\receipt.html:127
 msgid "商品小計"
-msgstr ""
+msgstr "Subtotal produk"
 
 #: .\templates\documents\specification.html:29
 #: .\templates\documents\specification.html:39
 msgid "製造仕様書"
-msgstr ""
+msgstr "Spesifikasi manufaktur"
 
 #: .\templates\documents\specification.html:99
 msgid "部品"
-msgstr ""
+msgstr "Bagian"
 
 #: .\templates\documents\specification.html:100
 msgid "色(左・右)"
-msgstr ""
+msgstr "Warna (kiri / kanan)"
 
 #: .\templates\documents\specification.html:101
 msgid "素材(左・右)"
-msgstr ""
+msgstr "Material (kiri / kanan)"
 
 #: .\templates\documents\specification.html:102
 msgid "サイズ"
-msgstr ""
+msgstr "Ukuran"
 
 #: .\templates\documents\specification.html:123
 #: .\templates\feet\feet-list.html:31 .\templates\feet\feet-measure.html:190
 #: .\templates\feet\feet-measure.html:219
 msgid "左"
-msgstr ""
+msgstr "Kiri"
 
 #: .\templates\documents\specification.html:126
 #: .\templates\feet\feet-list.html:47 .\templates\feet\feet-measure.html:198
 #: .\templates\feet\feet-measure.html:233
 msgid "右"
-msgstr ""
+msgstr "Kanan"
 
 #: .\templates\documents\specification.html:146
 #: .\templates\documents\specification.html:152
 #: .\templates\feet\feet-list.html:38 .\templates\feet\feet-list.html:54
 #: .\templates\feet\feet-measure.html:120
 #: .\templates\feet\feet-measure.html:226
-#: .\templates\feet\feet-measure.html:240 .\templates\statics\home.html:58
+#: .\templates\feet\feet-measure.html:240 .\templates\statics\home.html:57
 msgid "足幅"
-msgstr ""
+msgstr "Lebar kaki"
 
 #: .\templates\documents\specification.html:149
 #: .\templates\documents\specification.html:155
 #: .\templates\feet\feet-list.html:33 .\templates\feet\feet-list.html:49
 #: .\templates\feet\feet-measure.html:111
 #: .\templates\feet\feet-measure.html:221
-#: .\templates\feet\feet-measure.html:235 .\templates\statics\home.html:62
+#: .\templates\feet\feet-measure.html:235 .\templates\statics\home.html:61
 msgid "足長"
-msgstr ""
+msgstr "Panjang kaki"
 
 #: .\templates\documents\specification.html:160
 msgid "アッパー"
+msgstr "Upper"
+
+#: .\templates\emails\cancel-done.html:11
+msgid "ご注文の取消しのご連絡"
 msgstr ""
 
-#: .\templates\emails\password-reset-email.html:4
+#: .\templates\emails\cancel-done.html:17
+#, python-format
 msgid ""
 "\n"
-"顧客様からの要請により、パスワード再設定関連のメールをご送信いたしました。\n"
+"                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
+"す。<br>\n"
+"                    ご注文の取消しを完了いたしました。<br>\n"
+"                    取り消された注文番号は以下のとおりです。<br>\n"
+"                    注文番号：%(order_code)s\n"
+"                    "
 msgstr ""
 
-#: .\templates\emails\password-reset-email.html:8
-msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。"
+#: .\templates\emails\password-change-done.html:11
+#, fuzzy
+#| msgid "パスワード変更"
+msgid "パスワード変更完了"
+msgstr "Ubah kata sandi"
+
+#: .\templates\emails\password-change-done.html:17
+msgid ""
+"\n"
+"                    いつもUniWalkサイトをご利用いただきまして誠にありがとうご"
+"ざいます。<br>\n"
+"                    パスワードの変更が完了しました。<br>\n"
+"                    パスワードの変更にお心当たりがない場合、Uniwalkのお問い合"
+"わせにご連絡ください。\n"
+"                    "
 msgstr ""
 
-#: .\templates\emails\password-reset-email.html:12
-msgid "顧客様のIDは次のどおりです："
-msgstr ""
+#: .\templates\emails\password-reset-done.html:11
+#: .\templates\users\password-reset-complete.html:5
+#: .\templates\users\password-reset-complete.html:16
+msgid "パスワード再設定完了"
+msgstr "Berhasil menyetel ulang kata sandi"
 
-#: .\templates\emails\password-reset-email.html:14
-msgid "いつものご利用ありがとうございます！"
+#: .\templates\emails\password-reset-done.html:17
+msgid ""
+"\n"
+"                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
+"す。<br>\n"
+"                    パスワードの再設定が完了しました。<br>\n"
+"                    パスワードの再設定にお心当たりがない場合、Uniwalkのお問い"
+"合わせにご連絡ください。\n"
+"                    "
 msgstr ""
 
 #: .\templates\emails\password-reset-subject.txt:3
+#, fuzzy
+#| msgid "パスワード再設定"
+msgid "Uniwalk パスワード再設定"
+msgstr "Setel ulang kata sandi"
+
+#: .\templates\emails\password_reset_form.html:12
+#, fuzzy
+#| msgid "パスワード再設定申込み"
+msgid "パスワード再設定用リンクの配布"
+msgstr "Pendaftaran penyetelan ulang kata sandi"
+
+#: .\templates\emails\password_reset_form.html:18
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "顧客様からの要請により、パスワード再設定関連のメールをご送信いたしまし"
+#| "た。\n"
+msgid ""
+"\n"
+"                    お客様からの要請により、パスワード再設定のメールをご送信"
+"いたしました。<br>\n"
+"                    "
+msgstr ""
+"\n"
+"Atas permintaan pelanggan, email berkaitan dengan setel ulang kata sandi "
+"telah dikirim ke alamat email terkait. \n"
+
+#: .\templates\emails\password_reset_form.html:21
+#, fuzzy
+#| msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。"
+msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。<br>"
+msgstr "Silahkan akses link di bawah ini dan setel uang kata sandi anda"
+
+#: .\templates\emails\password_reset_form.html:28
+#, fuzzy
+#| msgid "顧客様のIDは次のどおりです："
+msgid "<br>お客様のIDは次のどおりです："
+msgstr "Berikut adalah id anda"
+
+#: .\templates\emails\password_reset_form.html:29
+msgid "いつものご利用ありがとうございます！"
+msgstr "Terima kasih telah manggunakan jasa kami"
+
+#: .\templates\emails\profile-change-done.html:11
+#, fuzzy
+#| msgid "情報修正"
+msgid "会員情報修正完了"
+msgstr "Mengubah informasi"
+
+#: .\templates\emails\profile-change-done.html:17
+msgid ""
+"\n"
+"                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
+"す。<br>\n"
+"                    会員情報の修正が完了しました。<br>\n"
+"                    会員情報の修正にお心当たりがない場合、Uniwalkのお問い合わ"
+"せにご連絡ください。\n"
+"                    "
+msgstr ""
+
+#: .\templates\emails\purchase-done.html:11
+#: .\templates\orders\checkout-done.html:5
+#: .\templates\orders\checkout-done.html:16
+msgid "注文完了"
+msgstr "Pemesanan berhasik"
+
+#: .\templates\emails\purchase-done.html:17
 #, python-format
-msgid "Password reset on %(site_name)s"
+msgid ""
+"\n"
+"                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
+"す。<br>\n"
+"                    ご注文を確かに承りました。<br>\n"
+"                    注文番号は以下のとおりです。<br>\n"
+"                    注文番号：%(order_code)s <br>\n"
+"                    注文情報はマイページか注文検索からご覧になれます。\n"
+"                    "
+msgstr ""
+
+#: .\templates\emails\registration-done.html:11
+#: .\templates\users\signup-success.html:5
+#: .\templates\users\signup-success.html:15
+msgid "会員登録完了"
+msgstr "Berhasil menjadi member"
+
+#: .\templates\emails\registration-done.html:17
+msgid ""
+"\n"
+"                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
+"す。<br>\n"
+"                    会員登録が完了いたしました。<br>\n"
+"                    ご登録ありがとうございます。 <br>\n"
+"                    お客様からのご注文お待ちしております！ <br>\n"
+"                    "
 msgstr ""
 
 #: .\templates\feet\feet-check.html:5
 msgid "足サイズデータチェック"
-msgstr ""
+msgstr "Memeriksa data ukuran kaki"
 
 #: .\templates\feet\feet-check.html:16
 msgid "足サイズが既に登録されています。"
-msgstr ""
+msgstr "Ukuran kaki telah ter registrasi"
 
 #: .\templates\feet\feet-check.html:18
 msgid "利用する項目のボタンを押してください。"
-msgstr ""
+msgstr "Tekan tombol untuk menggunakan item"
 
 #: .\templates\feet\feet-check.html:21
 msgid "既存データで進む"
-msgstr ""
+msgstr "Lanjutkan dengan data yang ada"
 
 #: .\templates\feet\feet-check.html:22
 msgid "新しく測定する"
-msgstr ""
+msgstr "Mengukur ulang"
 
 #: .\templates\feet\feet-cropper-left.html:5
 msgid "左足イメージクロップ"
-msgstr ""
+msgstr "Mengkrop gambar foto kaki kiri"
 
 #: .\templates\feet\feet-cropper-right.html:5
 msgid "右足イメージクロップ"
-msgstr ""
+msgstr "Mengkrop gambar foto kaki kanan"
 
 #: .\templates\feet\feet-list.html:5 .\templates\feet\feet-list.html:23
 #: .\templates\partials\mypage-menu.html:27
 msgid "マイ足サイズ"
-msgstr ""
+msgstr "Ukuran kaki saya"
 
 #: .\templates\feet\feet-list.html:63
 msgid "まだ足サイズの測定データがありません。"
-msgstr ""
+msgstr "Tidak ada data ukuran kaki yang terdaftar"
 
 #: .\templates\feet\feet-list.html:67 .\templates\feet\feet-measure.html:204
 msgid "測定する"
-msgstr ""
+msgstr "Mengukur"
 
 #: .\templates\feet\feet-measure.html:5 .\templates\feet\feet-measure.html:172
 msgid "足サイズ測定"
-msgstr ""
+msgstr "Mengukur kaki"
 
 #: .\templates\feet\feet-measure.html:103
 msgid "足の測り方"
-msgstr ""
+msgstr "Cara mengukur kaki"
 
 #: .\templates\feet\feet-measure.html:113
 msgid ""
 "メジャーを用い、足のカカトから一番出ている足の指までの長さを垂直で測ります。"
 msgstr ""
+"Menggunakan ukuran kaki dengan mengukur panjang dari tumit kaki ke ujung "
+"paling menonjol secara vertikal."
 
 #: .\templates\feet\feet-measure.html:122
 msgid ""
 "親指の関節の１番出ている部分から小指の関節の１番出ている部分までの長さをメ"
 "ジャーで測ります。"
 msgstr ""
+"Ukur panjang dari atas sendi ibu jari ke atas sendi jari kelingking.dengan "
+"ukuran"
 
 #: .\templates\feet\feet-measure.html:132
 msgid "足イメージの撮り方"
-msgstr ""
+msgstr "Cara mengambil foto kaki"
 
 #: .\templates\feet\feet-measure.html:157
 msgid ""
 "きれいなA4サイズの黒紙を用意してください。破れた紙、印刷されている紙、しわく"
 "ちゃな紙の場合は測定できないため注意してください。"
 msgstr ""
+"Harap siapkan kertas hitam ukuran A4 yang indah. Perhatikan bahwa kertas "
+"sobek, dicetak, atau kusut tidak dapat diukur."
 
 #: .\templates\feet\feet-measure.html:160
 msgid ""
 "写真を撮るときには写真に影響を及ぼすものがないようにきれいな床で撮ってくださ"
 "い。"
 msgstr ""
+"Saat mengambil gambar, ambil gambar di lantai yang bersih sehingga tidak ada "
+"yang memengaruhi gambar."
 
 #: .\templates\feet\feet-measure.html:163
 msgid ""
 "カカトを紙の端に置き、人差し指が紙の垂直中央線に位置するようにしてください。"
 msgstr ""
+"Letakkan tumit di tepi kertas dan pastikan jari telunjuk Anda berada di "
+"garis tengah vertikal kertas."
 
 #: .\templates\feet\feet-measure.html:173
 msgid "足サイズ記入"
-msgstr ""
+msgstr "Masukan ukuran kaki"
 
 #: .\templates\feet\feet-measure.html:179
 msgid "測定するイメージファイルをアップロードしてください。"
-msgstr ""
+msgstr "Unggah file gambar untuk diukur."
 
 #: .\templates\feet\feet-measure.html:183
 #: .\templates\feet\feet-measure.html:213
 msgid "足サイズ測定方法"
-msgstr ""
+msgstr "Cara mengukur kaki"
 
 #: .\templates\feet\feet-measure.html:210
 msgid "足サイズを記入してください。"
-msgstr ""
+msgstr "Masukan ukuran kaki"
 
 #: .\templates\feet\feet-measure.html:246
 msgid "決定する"
-msgstr ""
+msgstr "Lanjutkan"
 
 #: .\templates\galleries\galleries_list.html:5
 msgid "デザインギャラリー"
-msgstr ""
+msgstr "Galeri desain"
 
 #: .\templates\galleries\galleries_list.html:16
 #: .\templates\partials\nav.html:118
 msgid "ギャラリー"
-msgstr ""
+msgstr "Galeri"
 
 #: .\templates\mixins\cards\card-card.html:16
 msgid "登録解除"
-msgstr ""
+msgstr "Batalkan registrasi"
 
 #: .\templates\mixins\cards\card-card.html:24
 msgid "有効期限(月/年)"
-msgstr ""
+msgstr "Tanggal expire (bulan / tahun)"
 
 #: .\templates\mixins\designs\design-card.html:5
 msgid "作成日"
-msgstr ""
+msgstr "Tanggal pembuatan"
 
 #: .\templates\mixins\designs\design-card.html:23
 #: .\templates\users\password-change.html:25
 #: .\templates\users\update-profile.html:44
 msgid "変更する"
-msgstr ""
+msgstr "Ubah"
 
 #: .\templates\mixins\designs\design-card.html:28
 msgid "削除する"
-msgstr ""
+msgstr "Hapus"
 
 #: .\templates\mixins\designs\related_design_card.html:66
 msgid "デザインパレットが存在しません。"
-msgstr ""
+msgstr "Palet desain tidak ada"
 
 #: .\templates\mixins\orders\order-card.html:20
 msgid "支払金額"
-msgstr ""
+msgstr "Jumlah pembayaran"
 
 #: .\templates\mixins\orders\order-card.html:21
 #: .\templates\mixins\orders\order-detail-card.html:17
 #: .\templates\orders\search-order-detail.html:36
 msgid "処理状況"
-msgstr ""
+msgstr "Status proses"
 
 #: .\templates\mixins\orders\order-card.html:27
 #: .\templates\orders\order-detail.html:5
@@ -1634,206 +1804,201 @@ msgstr ""
 #: .\templates\orders\search-order-detail.html:5
 #: .\templates\orders\search-order-detail.html:16
 msgid "注文詳細"
-msgstr ""
+msgstr "Detail pemesanan"
 
 #: .\templates\mixins\orders\order-card.html:29
 #: .\templates\mixins\orders\order-detail-card.html:39
-#: .\templates\orders\search-order-detail.html:59
+#: .\templates\orders\search-order-detail.html:59 .\vinaigrette-deleteme.py:10
 msgid "注文取消"
-msgstr ""
+msgstr "Menghapus pesanan"
 
 #: .\templates\mixins\orders\order-detail-card.html:12
 #: .\templates\orders\search-order-detail.html:30
 msgid "注文者"
-msgstr ""
+msgstr "Pemesan"
 
 #: .\templates\mixins\orders\order-detail-card.html:13
 #: .\templates\orders\search-order-detail.html:31
 msgid "お届け先"
-msgstr ""
+msgstr "Alamat pemesan"
 
 #: .\templates\mixins\orders\order-detail-card.html:29
 #: .\templates\orders\search-order-detail.html:48
 msgid "足サイズ(左)"
-msgstr ""
+msgstr "Ukuran kaki (kiri)"
 
 #: .\templates\mixins\orders\order-detail-card.html:30
 #: .\templates\orders\search-order-detail.html:50
 msgid "足サイズ(右)"
-msgstr ""
+msgstr "Ukura kaki (kanan)"
 
 #: .\templates\mixins\orders\order-detail-card.html:43
 #: .\templates\orders\search-order-detail.html:63
 msgid "請求書発行"
-msgstr ""
+msgstr "Faktur"
 
 #: .\templates\mixins\orders\order-detail-card.html:47
 #: .\templates\orders\search-order-detail.html:67
 msgid "領収書発行"
-msgstr ""
+msgstr "Masalah penerima"
 
 #: .\templates\mixins\orders\order-summary-card.html:29
 msgid "小計"
-msgstr ""
+msgstr "subtotal"
 
 #: .\templates\orders\bill.html:94
 msgid "金額"
-msgstr ""
+msgstr "Jumlah"
 
 #: .\templates\orders\bill.html:129
 msgid "合計"
-msgstr ""
+msgstr " Total"
 
 #: .\templates\orders\bill.html:157 .\templates\orders\receipt.html:155
 msgid "印刷する"
-msgstr ""
-
-#: .\templates\orders\checkout-done.html:5
-#: .\templates\orders\checkout-done.html:16
-msgid "注文完了"
-msgstr ""
+msgstr "Print"
 
 #: .\templates\orders\checkout-done.html:17
 msgid "ご注文が完了いたしました。"
-msgstr ""
+msgstr "Terima kasih telah memesan"
 
 #: .\templates\orders\checkout-done.html:23
 msgid "またのご注文をお待ちしております。"
-msgstr ""
+msgstr "Kami menantikan pesanan anda berikutnya"
 
 #: .\templates\orders\checkout-done.html:24
 #: .\templates\users\signup-success.html:20
 msgid "今後ともご愛顧賜りますようよろしくお願い申し上げます。"
-msgstr ""
+msgstr "Kami menantikan kunjungan anda yang selanjutnya"
 
 #: .\templates\orders\checkout-done.html:27
 #: .\templates\users\withdrawal-done.html:20
 msgid "ホームへ"
-msgstr ""
+msgstr "Beranda"
 
 #: .\templates\orders\checkout.html:5 .\templates\orders\checkout.html:16
 #: .\templates\orders\order-check.html:5 .\templates\orders\order-check.html:17
 #: .\templates\orders\select-payment.html:5
 #: .\templates\orders\select-payment.html:16
 msgid "ご購入の手続き"
-msgstr ""
+msgstr "Prosedur pembelian"
 
 #: .\templates\orders\checkout.html:23 .\templates\orders\order-check.html:23
 #: .\templates\orders\select-payment.html:23
 msgid "1. お届け先情報"
-msgstr ""
+msgstr "1. Informasi penerima"
 
 #: .\templates\orders\checkout.html:27
 msgid "会員情報からデータを取得する"
-msgstr ""
+msgstr "Mengunakan informasi pengguna"
 
 #: .\templates\orders\checkout.html:103
 msgid "お支払い方法の選択へ"
-msgstr ""
+msgstr "Pilih cara pembayaran"
 
 #: .\templates\orders\checkout.html:108 .\templates\orders\order-check.html:45
 #: .\templates\orders\select-payment.html:45
 msgid "2. お支払い方法・ご請求先情報"
-msgstr ""
+msgstr "2. Cara pembayaran / Informasi tagihan"
 
 #: .\templates\orders\checkout.html:111 .\templates\orders\order-check.html:88
 #: .\templates\orders\select-payment.html:172
 msgid "3. ご注文の確定"
-msgstr ""
+msgstr "3. Memastikan pesanan"
 
 #: .\templates\orders\member-or-guest.html:5
 msgid "会員・メンバログイン"
-msgstr ""
+msgstr "Member / login"
 
 #: .\templates\orders\member-or-guest.html:16
 msgid "ご購入の手続き方法を選択してください"
-msgstr ""
+msgstr "Silahkan pilih prosedur pembelian"
 
 #: .\templates\orders\member-or-guest.html:21
 msgid "ログインして購入する"
-msgstr ""
+msgstr "Login untuk membeli"
 
 #: .\templates\orders\member-or-guest.html:24 .\templates\users\login.html:5
 #: .\templates\users\login.html:16 .\templates\users\login.html:19
 #: .\templates\users\password-reset.html:25
 #: .\templates\users\signup-success.html:23 .\templates\users\signup.html:25
 msgid "ログイン"
-msgstr ""
+msgstr "Login"
 
 #: .\templates\orders\member-or-guest.html:28 .\templates\users\login.html:23
 msgid "パスワードを忘れた方は"
-msgstr ""
+msgstr "Lupa kata sandi"
 
 #: .\templates\orders\member-or-guest.html:29 .\templates\users\login.html:24
 msgid "パスワード再発行"
-msgstr ""
+msgstr "Setel ulang kata sandi"
 
 #: .\templates\orders\member-or-guest.html:33 .\templates\users\login.html:28
 msgid "アカウントをお持ちでない方は"
-msgstr ""
+msgstr "Jika tidak memiliki akun"
 
 #: .\templates\orders\member-or-guest.html:35 .\templates\users\login.html:30
 #: .\templates\users\signup-check.html:57 .\templates\users\signup.html:5
 #: .\templates\users\signup.html:16 .\templates\users\signup.html:19
 msgid "会員登録"
-msgstr ""
+msgstr "Registrasi member"
 
 #: .\templates\orders\member-or-guest.html:42
 msgid "ゲストとして購入する"
-msgstr ""
+msgstr "Pesan sebagai tamu"
 
 #: .\templates\orders\member-or-guest.html:46
 msgid "購入手続へ(ゲスト)"
-msgstr ""
+msgstr "Prosedur pembelian (Tamu)"
 
 #: .\templates\orders\order-check.html:26
 #: .\templates\orders\select-payment.html:26
 msgid "配送先住所"
-msgstr ""
+msgstr "Alamat pengiriman"
 
 #: .\templates\orders\order-check.html:53
 #: .\templates\orders\select-payment.html:64
 msgid "請求先情報"
-msgstr ""
+msgstr "Informasi faktur"
 
 #: .\templates\orders\order-check.html:99
 msgid "登録外のカードで支払う"
-msgstr ""
+msgstr "Bayar menggunakan kartu kredit yang tidak terdaftar di akun"
 
 #: .\templates\orders\order-check.html:104
 msgid "登録済みのカード"
-msgstr ""
+msgstr "Menggunakan kartu kredit yang terdaftar di akun"
 
 #: .\templates\orders\order-check.html:117
 #: .\templates\orders\order-check.html:152
 #: .\templates\orders\order-check.html:162
 msgid "注文を確定する"
-msgstr ""
+msgstr "Memastikan pesanan"
 
 #: .\templates\orders\order-check.html:147
 msgid "カード情報をアカウントに登録する"
-msgstr ""
+msgstr "Memasukan informasi kartu kredit ke akun"
 
 #: .\templates\orders\order-check.html:160
 msgid "振込可能期間は注文時点から1週間以内になっております。"
-msgstr ""
+msgstr "Jangka waktu pembayaran adalah satu minggu setelah pemesanan"
 
 #: .\templates\orders\order-list.html:5 .\templates\orders\order-list.html:23
 #: .\templates\partials\mypage-menu.html:12
 msgid "注文履歴"
-msgstr ""
+msgstr "Sejarah pesanan"
 
 #: .\templates\orders\order-list.html:52
 msgid "注文履歴が存在しません。"
-msgstr ""
+msgstr "Sejarah pesanan tidak ada"
 
 #: .\templates\orders\order-list.html:56
 msgid "新しいスニーカーはいかがですか？"
-msgstr ""
+msgstr "Bagaimana dengan snekaers baru?"
 
 #: .\templates\orders\order-list.html:57
 msgid "商品を見る"
-msgstr ""
+msgstr "Melihat produk"
 
 #: .\templates\orders\order-search.html:5
 #: .\templates\orders\order-search.html:16
@@ -1842,137 +2007,133 @@ msgstr ""
 
 #: .\templates\orders\order-search.html:18
 msgid "注文の詳細情報をご覧頂けます。"
-msgstr ""
+msgstr "Bisa melihat informasi pemesanan dengan detail"
 
 #: .\templates\orders\order-search.html:19
 msgid "検索する"
-msgstr ""
+msgstr "Mencari"
 
 #: .\templates\orders\select-payment.html:48
 msgid "お支払い方法の選択"
-msgstr ""
+msgstr "Memilih cara pembayaran"
 
 #: .\templates\orders\select-payment.html:66
 msgid "請求先住所が配送先と同じ"
-msgstr ""
+msgstr "Menyamakan alamat faktur dan alamt pengiriman"
 
 #: .\templates\orders\select-payment.html:144
 #: .\templates\orders\select-payment.html:168
 msgid "ご注文内容の確認へ"
-msgstr ""
+msgstr "Memestikan pesanan"
 
 #: .\templates\orders\select-payment.html:149
 msgid "振込先案内"
-msgstr ""
+msgstr "Informasi transfer"
 
 #: .\templates\orders\select-payment.html:152
 msgid "振込先：OO銀行"
-msgstr ""
+msgstr "Transfer: Bank OO"
 
 #: .\templates\orders\select-payment.html:155
 msgid "支店名：OOO支店(支店番号111)"
-msgstr ""
+msgstr "Cabang: Cabang OO (nomor cabang 111)"
 
 #: .\templates\orders\select-payment.html:158
 msgid "取引種類：普通"
-msgstr ""
+msgstr "Bentuk Transaksi: normal"
 
 #: .\templates\orders\select-payment.html:161
 msgid "口座番号：XXX-XXXX"
-msgstr ""
+msgstr "Nomor rekening: XXX-XXXX"
 
 #: .\templates\orders\select-payment.html:164
 msgid "口座名義：UNIWALK"
-msgstr ""
+msgstr "Nama rekening: UNIWALK"
 
-#: .\templates\partials\footer.html:122
+#: .\templates\partials\footer.html:120
 msgid "相談チャット"
-msgstr ""
+msgstr "Chat konsultasi"
 
-#: .\templates\partials\footer.html:131
+#: .\templates\partials\footer.html:129
 msgid "チャットする"
-msgstr ""
+msgstr "Chat"
 
 #: .\templates\partials\footer.html:146
-msgid "メッセージ入力"
-msgstr ""
-
-#: .\templates\partials\footer.html:148
 msgid "送信する"
-msgstr ""
+msgstr "Mengirim"
 
 #: .\templates\partials\mypage-menu.html:7
 #: .\templates\users\update-profile.html:5
 #: .\templates\users\update-profile.html:23
 msgid "会員情報変更"
-msgstr ""
+msgstr "Ubah informasi member"
 
 #: .\templates\partials\mypage-menu.html:32
 #: .\templates\users\withdrawal-check.html:24
 msgid "会員脱退"
-msgstr ""
+msgstr "Keluar dari member"
 
 #: .\templates\partials\nav.html:72
 msgid "マイページ"
-msgstr ""
+msgstr "Halaman saya"
 
 #: .\templates\partials\nav.html:74
 msgid "ログアウト"
-msgstr ""
+msgstr "Keluar"
 
 #: .\templates\partials\nav.html:77
 msgid "管理者モード"
-msgstr ""
+msgstr "Mode administrasi"
 
 #: .\templates\partials\nav.html:82
 msgid "会員登録・ログイン"
-msgstr ""
+msgstr "Daftar member / Login"
 
 #: .\templates\partials\nav.html:114
 msgid "紹介"
-msgstr ""
+msgstr "Introduksi"
 
 #: .\templates\products\product-detail.html:5
 #, python-format
 msgid "%(product_name)s"
-msgstr ""
+msgstr "%(product_name)s"
 
 #: .\templates\products\product-detail.html:26
 msgid "税込"
-msgstr ""
+msgstr "Termasuk pajak"
 
 #: .\templates\products\product-detail.html:34
 msgid "カスタマイズして購入"
-msgstr ""
+msgstr "Kostumisasi dan beli"
 
 #: .\templates\products\product-detail.html:56
 msgid "全てのデザインを見る"
-msgstr ""
+msgstr "Melihat semua desain"
 
 #: .\templates\products\product-detail.html:60
 msgid "デザインデータがまだ存在しません。"
-msgstr ""
+msgstr "Desain data tidak ada"
 
 #: .\templates\products\product-detail.html:68
 msgid "全てのレビュー"
-msgstr ""
+msgstr "Semua review"
 
 #: .\templates\products\product-detail.html:72
 msgid "レビューを書く"
-msgstr ""
+msgstr "Menulis review"
 
 #: .\templates\products\product-detail.html:99
 msgid "全てのレビューを見る"
-msgstr ""
+msgstr "Melihat semua review"
 
 #: .\templates\products\product-detail.html:103
 #: .\templates\reviews\review-list.html:89
 msgid "レビューがまだ存在しません。"
-msgstr ""
+msgstr "Review tidak ada"
 
 #: .\templates\products\product-list.html:5 .\templates\statics\home.html:95
 msgid "商品リスト"
-msgstr ""
+msgstr "Daftar produk"
 
 #: .\templates\products\product-list.html:57
 #, python-format
@@ -1980,16 +2141,18 @@ msgid ""
 "\n"
 "                    %(current_page)s ページ "
 msgstr ""
+"\n"
+"                    %(current_page)s halaman "
 
 #: .\templates\reviews\review-list.html:5
 msgid "レビューリスト"
-msgstr ""
+msgstr "Daftar review"
 
 #: .\templates\reviews\review-list.html:42
 #: .\templates\reviews\review-post.html:42
 #, python-format
 msgid "全 %(review_count)s 件"
-msgstr ""
+msgstr "semua %(review_count)s kasus"
 
 #: .\templates\reviews\review-list.html:75
 #, python-format
@@ -1997,23 +2160,25 @@ msgid ""
 "\n"
 "                                %(current_page)s ページ"
 msgstr ""
+"\n"
+"                                %(current_page)s halaman"
 
 #: .\templates\reviews\review-post.html:5
 #: .\templates\reviews\review-post.html:16
 msgid "レビュー投稿"
-msgstr ""
+msgstr "Posting review"
 
 #: .\templates\reviews\review-post.html:55
 msgid "投稿する"
-msgstr ""
+msgstr "Posting"
 
 #: .\templates\statics\about.html:5
 msgid "アバウト"
-msgstr ""
+msgstr "Tentang"
 
 #: .\templates\statics\about.html:16
 msgid "Uniwalkは"
-msgstr ""
+msgstr "Uniwalk"
 
 #: .\templates\statics\about.html:31
 msgid ""
@@ -2026,10 +2191,17 @@ msgid ""
 "                    後はあなたのもとにシューズが届くのを待つだけ！きっとお気"
 "に入りのシューズが手に入ります。"
 msgstr ""
+"Bagi anda yang mencari sepatu yang ideal「Uniwalk」ada untuk anda<br>\n"
+"                    Pilih warna kesukaan dan desain kesukaan anda dan "
+"jugaukuran anda dan 「Uniwalk」 akan membuatnya untuk anda。<br>\n"
+"                    Memilih sepatu terbaik, warna kesukaan, ukur kaki anda。"
+"<br>\n"
+"                    Selanjutnya hanya tinggal menunggu pesanan anda!anda "
+"akan mendapatkan sepatu impian anda."
 
 #: .\templates\statics\about.html:40
 msgid "アクセス"
-msgstr ""
+msgstr "Akses"
 
 #: .\templates\statics\about.html:49
 msgid ""
@@ -2039,178 +2211,192 @@ msgid ""
 "00<br>\n"
 "                    定休日 月曜日定休"
 msgstr ""
+"Alamat 〒450-0002 Aichi-ken nagoya-shi nakamura-ku meieki 4 chome 27-1Gedung "
+"sekolah spiral tower <br>\n"
+"                    Jam kerja hari biasa ：13：00～20：00　Sabtu/Minggu：10："
+"00～18：00<br>\n"
+"                    Tutup hari senin"
 
 #: .\templates\statics\home.html:12
 msgid "オリジナルスニーカーが作れる！"
-msgstr ""
+msgstr "Membuat sepatu orisinil"
+
+#: .\templates\statics\home.html:26
+msgid "デザインをカスタマイズする"
+msgstr "Mengkostumisasi desain"
 
 #: .\templates\statics\home.html:28
-msgid "デザインをカスタマイズする"
-msgstr ""
-
-#: .\templates\statics\home.html:30
 msgid ""
 "素材・色を変更し両足ともに自分の個性を表現できます。他のユーザが作ったデザイ"
 "ンを参照することもできます！"
 msgstr ""
+"mengubah bahan dan warna sepatu sesuka anda dan tampilkan kelebihan anda dan "
+"anda juga bisamenggunakan desain yang anda suka!"
 
-#: .\templates\statics\home.html:33
+#: .\templates\statics\home.html:32
 msgid "色"
-msgstr ""
+msgstr "warna"
 
-#: .\templates\statics\home.html:54
+#: .\templates\statics\home.html:52
 msgid "足サイズを測定する"
-msgstr ""
+msgstr "Mengukur ukuran kaki"
 
-#: .\templates\statics\home.html:55
+#: .\templates\statics\home.html:53
 msgid ""
 "足の写真をアップロードし、両足ずつ足長・足幅のサイズを測定することができま"
 "す。"
 msgstr ""
+"Dengan mengirim foto kaki anda, kami akan mengukur panjang kaki / lebar kaki "
+"anda secaraotomatis."
 
-#: .\templates\statics\home.html:77
+#: .\templates\statics\home.html:75
 msgid "依頼どおりスニーカーを制作する"
-msgstr ""
+msgstr "Membuat sepatu sesuai denga pesanan"
 
-#: .\templates\statics\home.html:78
+#: .\templates\statics\home.html:76
 msgid "デザインと足サイズをもとにあなたのためのスニーカーを制作します！"
+msgstr "Membuat sepatu untuk anda dari desain dan ukuran anda"
+
+#: .\templates\statics\home.html:80
+msgid "カスタム制作"
 msgstr ""
 
-#: .\templates\statics\home.html:108
-msgid "もっと見る"
+#: .\templates\statics\home.html:84
+msgid "配送"
 msgstr ""
+
+#: .\templates\statics\home.html:110
+msgid "もっと見る"
+msgstr "Lihat lebih"
 
 #: .\templates\users\password-change.html:5
 #: .\templates\users\password-reset-confirm.html:5
 #: .\templates\users\password-reset-confirm.html:17
 msgid "パスワード再設定"
-msgstr ""
+msgstr "Setel ulang kata sandi"
 
 #: .\templates\users\password-change.html:23
 #: .\templates\users\update-profile.html:27
 msgid "パスワード変更"
-msgstr ""
-
-#: .\templates\users\password-reset-complete.html:5
-#: .\templates\users\password-reset-complete.html:16
-msgid "パスワード再設定完了"
-msgstr ""
+msgstr "Ubah kata sandi"
 
 #: .\templates\users\password-reset-complete.html:17
 msgid "パスワード再設定が完了しました。"
-msgstr ""
+msgstr "Berhasil menyetel ulang kata sandi"
 
 #: .\templates\users\password-reset-complete.html:19
 msgid "下のボタンを押すとログインページに移動します。"
-msgstr ""
+msgstr "Klik tombol di bawah ini untuk pindah ke halaman login"
 
 #: .\templates\users\password-reset-complete.html:21
 msgid "ログインへ"
-msgstr ""
+msgstr "Login"
 
 #: .\templates\users\password-reset-confirm.html:19
 msgid "新しいパスワードを設定してください。"
-msgstr ""
+msgstr "Silahkan setel kata sandi anda"
 
 #: .\templates\users\password-reset-confirm.html:21
 msgid "設定する"
-msgstr ""
+msgstr "Setel"
 
 #: .\templates\users\password-reset-confirm.html:29
 msgid "エラー"
-msgstr ""
+msgstr "Error"
 
 #: .\templates\users\password-reset-confirm.html:32
 msgid ""
 "パスワード再設定用リンクが無効です。新たにパスワード再設定を申し込んでくださ"
 "い。"
 msgstr ""
+"Link untuk mereset kata sandi tidak valid silahkan daftar ulanguntuk "
+"pendaftaran."
 
 #: .\templates\users\password-reset-done.html:5
 msgid "パスワード再設定申込み完了"
-msgstr ""
+msgstr "Berhasil mendaftar setel ulang kata sandi"
 
 #: .\templates\users\password-reset-done.html:15
 msgid "パスワード再発行申込み完了"
-msgstr ""
+msgstr "Berhasil mendaftar setel ulang kata sandi"
 
 #: .\templates\users\password-reset-done.html:16
 msgid "ご登録のメールアドレス宛にパスワード再発行用メールを送信いたしました。"
 msgstr ""
+"Email yang diterbitkan unutk mengulang kata sandi telah dikirim ke alamat "
+"email Anda yang terdaftar."
 
 #: .\templates\users\password-reset-done.html:18
 msgid "メールの内容をご確認いただきますよう、お願いいたします。"
-msgstr ""
+msgstr "Tolong periksa isi email anda"
 
 #: .\templates\users\password-reset-done.html:18
 msgid "※メールが届かない場合はメールアドレスをご確認の上、再度お試しください。"
 msgstr ""
+"※Jika tidak menerima email tolong periksa alamat email anda dan coba lagi"
 
 #: .\templates\users\password-reset.html:5
 #: .\templates\users\password-reset.html:16
 msgid "パスワード再設定申込み"
-msgstr ""
+msgstr "Pendaftaran penyetelan ulang kata sandi"
 
 #: .\templates\users\password-reset.html:19
 msgid "申し込む"
-msgstr ""
+msgstr "Daftar"
 
 #: .\templates\users\password-reset.html:23
 msgid "パスワードを思い出した方は"
-msgstr ""
+msgstr "Cara mengingat password"
 
 #: .\templates\users\signup-check.html:5 .\templates\users\signup-check.html:16
 msgid "会員登録情報確認"
-msgstr ""
+msgstr "Memeriksa informasi member"
 
 #: .\templates\users\signup-check.html:26 .\users\models.py:49
 msgid "性別"
-msgstr ""
+msgstr "Jenis kelamin"
 
 #: .\templates\users\signup-check.html:49
 msgid "下記の内容でよろしいですか？"
-msgstr ""
+msgstr "Apakah data yang di bawah benar?"
 
 #: .\templates\users\signup-check.html:50
 msgid "「会員登録」ボタンをクリックすると登録手続きが行われます。"
-msgstr ""
+msgstr "klik 「daftar member」dan lakukan proses selanjutnya"
 
 #: .\templates\users\signup-check.html:51
 msgid "登録情報を修正する場合は「情報修正」ボタンをクリックしてください。"
-msgstr ""
+msgstr "Klik tombol [Ubah informasi] untuk mengubah informasi yang terdaftar."
 
 #: .\templates\users\signup-check.html:55
 msgid "情報修正"
-msgstr ""
-
-#: .\templates\users\signup-success.html:5
-#: .\templates\users\signup-success.html:15
-msgid "会員登録完了"
-msgstr ""
+msgstr "Mengubah informasi"
 
 #: .\templates\users\signup-success.html:16
 msgid "本登録が完了いたしました。"
-msgstr ""
+msgstr "Pendaftaran berhasil"
 
 #: .\templates\users\signup-success.html:18
 msgid "それではショッピングをお楽しみください。"
-msgstr ""
+msgstr "Silahkan menikmati belanja anda"
 
 #: .\templates\users\signup-success.html:19
 msgid "お届け住所や連絡先などの詳細情報は、「マイアカウント」で登録できます。"
 msgstr ""
+"Informasi lainnya seperti alamat pengiriman dapat di daftarkan di 「halaman "
+"saya」 "
 
 #: .\templates\users\signup.html:23
 msgid "既にアカウントを持っていますか?"
-msgstr ""
+msgstr "Apakah anda sudah memiliki akun?"
 
 #: .\templates\users\update-profile.html:26
 msgid "パスワード変更の場合は、右のボタンを押してください。"
-msgstr ""
+msgstr "Untuk mengubah kata sandi silahkan klik tombol di sebelah kanan"
 
 #: .\templates\users\withdrawal-check.html:5
 msgid "会員脱退確認"
-msgstr ""
+msgstr "Memastikan keluar dari member"
 
 #: .\templates\users\withdrawal-check.html:26
 msgid ""
@@ -2218,193 +2404,233 @@ msgid ""
 "text-red-500 wow fadeIn\">すべて削除</span>されます。<br>よろしければ、下のボ"
 "タンを押してください。"
 msgstr ""
+"Menghapus semua informasi yang disimpan saat ini seperti <span class=\"font-"
+"semibold text-red-500 wow fadeIn\">riwayat pembelian dan alamat pengiriman</"
+"span><br>Silahkan klik tombol di bawahjika tidak ada masalah"
 
 #: .\templates\users\withdrawal-check.html:30
 msgid "脱退する"
-msgstr ""
+msgstr "Keluar dari member"
 
 #: .\templates\users\withdrawal-done.html:5
 #: .\templates\users\withdrawal-done.html:16
 msgid "会員脱退完了"
-msgstr ""
+msgstr "Berhasil keluar dari member"
 
 #: .\templates\users\withdrawal-done.html:17
 msgid "会員脱退が完了しました。"
-msgstr ""
+msgstr "Berhasil keluar dari member"
 
 #: .\templates\users\withdrawal-done.html:18
 msgid "またのご利用お待ちしております！"
-msgstr ""
+msgstr "Kami menunggu kunjungan anda selanjutnya"
 
 #: .\templates\users\withdrawal.html:5
 msgid "会員脱退申込み"
-msgstr ""
+msgstr "Daftar untuk keluar dari member"
 
 #: .\templates\users\withdrawal.html:24
 msgid "会員脱退申し込み"
-msgstr ""
+msgstr "Daftar untuk keluar dari member"
 
 #: .\templates\users\withdrawal.html:25
 msgid "会員脱退処理を行うために、もう一度会員認証を行ってください。"
 msgstr ""
+"Silakan lakukan otentikasi member untuk melakukan proses keluar dari member."
 
 #: .\templates\users\withdrawal.html:27
 msgid "認証する"
-msgstr ""
+msgstr "Memastikan"
 
 #: .\users\admin.py:21 .\users\admin.py:22
 msgid "足サイズ"
-msgstr ""
+msgstr "Ukuran kaki"
 
 #: .\users\admin.py:28
 msgid "ゲスト情報"
-msgstr ""
+msgstr "Informasi tamu"
 
 #: .\users\admin.py:42
 msgid "会員情報"
-msgstr ""
+msgstr "Informasi member"
 
 #: .\users\admin.py:64
 msgid "認証・権限"
-msgstr ""
+msgstr "Autentikasi / Otorisasi"
 
 #: .\users\admin.py:114
 msgid "会員名"
-msgstr ""
+msgstr "Nama member"
 
 #: .\users\forms.py:16 .\users\forms.py:69 .\users\forms.py:220
 msgid "パスワード"
-msgstr ""
+msgstr "Kata sandi"
 
-#: .\users\forms.py:28 .\users\forms.py:162 .\users\views.py:1108
+#: .\users\forms.py:28 .\users\forms.py:162 .\users\views.py:1135
 msgid "パスワードをもう一度確認してください。"
-msgstr ""
+msgstr "Pastikan kata sandi anda"
 
 #: .\users\forms.py:31
 msgid "登録されていないメールアドレスです。"
-msgstr ""
+msgstr "Tidak ada alamat email yang terdaftar"
 
 #: .\users\forms.py:72 .\users\forms.py:73 .\users\forms.py:184
 #: .\users\forms.py:204 .\users\forms.py:206
 msgid "パスワード確認"
-msgstr ""
+msgstr "Memastikan kata sandi"
 
 #: .\users\forms.py:80
 msgid "既に登録されているメールアドレスです。"
-msgstr ""
+msgstr "Alamat email sudah terdaftar"
 
 #: .\users\forms.py:89
 msgid "パスワードが一致しません。"
-msgstr ""
+msgstr "Kata sandi tidak tepat"
 
 #: .\users\forms.py:119 .\users\forms.py:142 .\users\forms.py:143
 msgid "現在のパスワード"
-msgstr ""
+msgstr "Kata sandi sekarang"
 
 #: .\users\forms.py:134 .\users\models.py:51
 msgid "生年月日"
-msgstr ""
+msgstr "Tanggal lahir"
 
 #: .\users\forms.py:172
 msgid "Old password"
-msgstr ""
+msgstr "Kata sandi lama"
 
 #: .\users\forms.py:174
 msgid "現在パスワード"
-msgstr ""
+msgstr "Kata sandi sekarang"
 
 #: .\users\forms.py:177
 msgid "new password"
-msgstr ""
+msgstr "Kata sandi baru"
 
 #: .\users\forms.py:179 .\users\forms.py:198 .\users\forms.py:199
 msgid "新しいパスワード"
-msgstr ""
+msgstr "Kata sandir baru"
 
 #: .\users\forms.py:182
 msgid "check password"
-msgstr ""
+msgstr "Periksa kata sandi"
 
 #: .\users\forms.py:191
 msgid "Email"
-msgstr ""
+msgstr "Alamat email"
 
 #: .\users\managers.py:18
 msgid "メールアドレスを入力してください。"
-msgstr ""
+msgstr "Masukan alamat email"
 
 #: .\users\managers.py:36
 msgid "スーパーユーザにはスタフ権限が必須です。"
-msgstr ""
+msgstr "Pengguna super harus memiliki hak staf."
 
 #: .\users\managers.py:38
 msgid "スーパーユーザにはスーパーユーザ権限が必須です。"
-msgstr ""
+msgstr "Superuser harus memiliki hak superuser."
 
 #: .\users\mixins.py:13
 msgid "アクセスできません。"
-msgstr ""
+msgstr "Akses ditolak"
 
 #: .\users\models.py:35
 msgid "--性別--"
-msgstr ""
+msgstr "--Jenis Kelamin--"
 
 #: .\users\models.py:61
 msgid "会員番号"
-msgstr ""
+msgstr "Nomor pengguna"
 
 #: .\users\views.py:75
 msgid "ログインしました。"
-msgstr ""
+msgstr "Login berhasil"
 
 #: .\users\views.py:90
 msgid "ログアウトしました。"
-msgstr ""
+msgstr "Keluar"
 
 #: .\users\views.py:147
-msgid "UniWalk　会員登録ありがとうございます。"
-msgstr ""
+#, fuzzy
+#| msgid "UniWalk　会員登録ありがとうございます。"
+msgid "Uniwalk 会員登録ありがとうございます。"
+msgstr "Terima kasih telah daftar di Uniwalk"
 
-#: .\users\views.py:196
-msgid "パスワード再設定完了のお知らせ"
-msgstr ""
+#: .\users\views.py:197
+#, fuzzy
+#| msgid "パスワード再設定完了のお知らせ"
+msgid "Uniwalk パスワード再設定完了のお知らせ"
+msgstr "Pemberitahuan akan penyetelan ulang kata sandi"
 
-#: .\users\views.py:219
+#: .\users\views.py:220
 msgid "会員情報を変更しました。"
-msgstr ""
+msgstr "Menubah informasi pengguna"
 
-#: .\users\views.py:233
-msgid "UniWalk会員情報変更のお知らせ"
-msgstr ""
+#: .\users\views.py:234
+#, fuzzy
+#| msgid "UniWalk会員情報変更のお知らせ"
+msgid "Uniwalk 会員情報変更のお知らせ"
+msgstr "Pemberitahuan akan pengubahan informasi pengguna UniWalk"
 
-#: .\users\views.py:258
-msgid "UniWalkパスワード変更のお知らせ"
-msgstr ""
+#: .\users\views.py:259
+#, fuzzy
+#| msgid "UniWalkパスワード変更のお知らせ"
+msgid "UniWalk パスワード変更のお知らせ"
+msgstr "Pemberitahuan akan perubahan kata sandi Uniwalk"
 
-#: .\users\views.py:266
+#: .\users\views.py:267
 msgid "パスワードを変更しました。"
-msgstr ""
+msgstr "Berhasil mengubah kata sandi"
 
-#: .\users\views.py:362
+#: .\users\views.py:309 .\users\views.py:352
+msgid "注文を取消しました。"
+msgstr "Menghapus pesanan"
+
+#: .\users\views.py:389
 msgid "カードを登録解除しました。"
-msgstr ""
+msgstr "Menghapus kartu kredit yang terdaftar"
 
-#: .\users\views.py:418
+#: .\users\views.py:445
 msgid "カードを登録しました。"
-msgstr ""
+msgstr "Pendaftara Kartu kredit berhasil"
 
-#: .\users\views.py:421
+#: .\users\views.py:448
 msgid "カード登録に失敗しました。"
-msgstr ""
+msgstr "Gagal mendaftarkan kartu kredit"
 
-#: .\users\views.py:447
+#: .\users\views.py:474
 msgid "デザインを削除しました。"
-msgstr ""
+msgstr "Menghapus desain"
 
-#: .\users\views.py:947 .\users\views.py:1085
+#: .\users\views.py:974 .\users\views.py:1112
 msgid "足サイズを登録しました。"
+msgstr "Pendaftaran ukuran kaki berhasil"
+
+#: .\users\views.py:1128
+msgid "会員様のメールアドレスとは違います。"
+msgstr "Alamat email anda salah"
+
+#: .\vinaigrette-deleteme.py:2
+#, fuzzy
+#| msgid "ホーム"
+msgid "ラバー"
+msgstr "Beranda"
+
+#: .\vinaigrette-deleteme.py:3
+msgid "キャンバス"
 msgstr ""
 
-#: .\users\views.py:1101
-msgid "会員様のメールアドレスとは違います。"
+#: .\vinaigrette-deleteme.py:4
+#, fuzzy
+#| msgid "ユーザー"
+msgid "レザー"
+msgstr "Pengguna"
+
+#: .\vinaigrette-deleteme.py:9
+msgid "発送済み"
 msgstr ""
+
+#, python-format
+#~ msgid "Password reset on %(site_name)s"
+#~ msgstr "Setel ulang kata sandi di %(site_name)s"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-15 19:09+0900\n"
+"POT-Creation-Date: 2020-02-18 13:58+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -336,7 +336,7 @@ msgid "振込"
 msgstr "계좌이체"
 
 #: .\orders\forms.py:16 .\orders\forms.py:196 .\orders\forms.py:197
-#: .\templates\partials\footer.html:130 .\users\forms.py:13 .\users\forms.py:49
+#: .\templates\partials\footer.html:128 .\users\forms.py:13 .\users\forms.py:49
 #: .\users\forms.py:117 .\users\forms.py:190 .\users\forms.py:217
 #: .\users\models.py:45 .\users\models.py:124
 msgid "メールアドレス"
@@ -734,68 +734,68 @@ msgstr "비밀번호 변경"
 msgid "Log out"
 msgstr "로그아웃"
 
-#: .\templates\admin\base.html:92
+#: .\templates\admin\base.html:106
 msgid "注文状況"
 msgstr "주문 현황"
 
-#: .\templates\admin\base.html:98
+#: .\templates\admin\base.html:112 .\vinaigrette-deleteme.py:5
 msgid "入金前"
 msgstr "입금전"
 
-#: .\templates\admin\base.html:104
+#: .\templates\admin\base.html:118 .\vinaigrette-deleteme.py:6
 msgid "決済処理中"
 msgstr "결제처리중"
 
-#: .\templates\admin\base.html:110
+#: .\templates\admin\base.html:124 .\vinaigrette-deleteme.py:7
 msgid "決済確認済み"
 msgstr "결제확인완료"
 
-#: .\templates\admin\base.html:116
+#: .\templates\admin\base.html:130 .\vinaigrette-deleteme.py:8
 msgid "対応中"
 msgstr "대응중"
 
-#: .\templates\admin\base.html:125 .\templates\products\product-detail.html:92
+#: .\templates\admin\base.html:139 .\templates\products\product-detail.html:92
 msgid "詳しく見る"
 msgstr "자세히 보기"
 
-#: .\templates\admin\base.html:134
+#: .\templates\admin\base.html:148
 msgid "ショップ状況"
 msgstr "샵 현황"
 
-#: .\templates\admin\base.html:140
+#: .\templates\admin\base.html:154
 msgid "取扱商品数"
 msgstr "취급상품수"
 
-#: .\templates\admin\base.html:146 .\templates\admin\member-analytics.html:16
+#: .\templates\admin\base.html:160 .\templates\admin\member-analytics.html:16
 msgid "会員数"
 msgstr "회원수"
 
-#: .\templates\admin\base.html:152
+#: .\templates\admin\base.html:166
 msgid "登録カスタムデザイン数"
 msgstr "등록 커스텀 디자인 수"
 
-#: .\templates\admin\base.html:166
+#: .\templates\admin\base.html:180
 msgid "今月状況"
 msgstr "이번 달 현황"
 
-#: .\templates\admin\base.html:170
+#: .\templates\admin\base.html:184
 msgid "年"
 msgstr "년"
 
-#: .\templates\admin\base.html:170
+#: .\templates\admin\base.html:184
 msgid "月"
 msgstr "월"
 
-#: .\templates\admin\base.html:172 .\templates\admin\base.html:182
-#: .\templates\admin\base.html:190
+#: .\templates\admin\base.html:186 .\templates\admin\base.html:196
+#: .\templates\admin\base.html:204
 msgid "件"
 msgstr "건"
 
-#: .\templates\admin\base.html:178
+#: .\templates\admin\base.html:192
 msgid "今日売上実績"
 msgstr "오늘 판매실적"
 
-#: .\templates\admin\base.html:186
+#: .\templates\admin\base.html:200
 msgid "昨日売上実績"
 msgstr "어제 판매실적"
 
@@ -840,6 +840,22 @@ msgstr ""
 #: .\templates\admin\change_list.html:107
 msgid "Clear selection"
 msgstr "선택 해제"
+
+#: .\templates\admin\chat.html:6
+#, fuzzy
+#| msgid "チャットする"
+msgid "チャットリスト"
+msgstr "채팅하기"
+
+#: .\templates\admin\chat.html:13
+#, fuzzy
+#| msgid "チャットする"
+msgid "チャットルーム　"
+msgstr "채팅하기"
+
+#: .\templates\admin\chat.html:18 .\templates\partials\footer.html:144
+msgid "メッセージ入力"
+msgstr "메시지 입력"
 
 #: .\templates\admin\design-analytics.html:8
 #: .\templates\galleries\galleries_list.html:22
@@ -932,6 +948,12 @@ msgstr "발사이즈분석"
 #: .\templates\admin\extra_nav.html:97
 msgid "人気デザイン分析"
 msgstr "인기디자인 분석"
+
+#: .\templates\admin\extra_nav.html:105
+#, fuzzy
+#| msgid "相談チャット"
+msgid "チャット"
+msgstr "상담 채팅"
 
 #: .\templates\admin\footsize-analytics.html:62
 #: .\templates\admin\footsize-analytics.html:106
@@ -1483,6 +1505,12 @@ msgid ""
 "                    注文番号：%(order_code)s\n"
 "                    "
 msgstr ""
+"\n"
+"                    UniWalk를 이용해주셔서 감사의 말씀 드립니다.<br>\n"
+"                    주문이 성공적으로 취소 처리되었습니다.<br>\n"
+"                    취소된 주문번호는 아래와 같습니다.<br>\n"
+"                    주문번호：%(order_code)s\n"
+"                    "
 
 #: .\templates\emails\password-change-done.html:11
 msgid "パスワード変更完了"
@@ -1499,11 +1527,10 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"                    항상 UniWalk를 이용해주셔서 감사의 말씀 "
-"드립니다.<br>\n"
+"                    항상 UniWalk를 이용해주셔서 감사의 말씀 드립니다.<br>\n"
 "                    비밀번호 변경이 완료되었습니다.<br>\n"
-"                    비밀번호 변경을 하신 적이 없는 경우, Uniwalk에"
-"문의하여 주시기 바랍니다.\n"
+"                    비밀번호 변경을 하신 적이 없는 경우, Uniwalk에문의하여 주"
+"시기 바랍니다.\n"
 "                    "
 
 #: .\templates\emails\password-reset-done.html:11
@@ -1523,11 +1550,10 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"                    항상 UniWalk를 이용해주셔서 감사의 말씀 "
-"드립니다.<br>\n"
+"                    항상 UniWalk를 이용해주셔서 감사의 말씀 드립니다.<br>\n"
 "                    비밀번호 재설정이 완료되었습니다.<br>\n"
-"                    비밀번호 재설정을 하신 적이 없다면, Uniwalk에 "
-"문의하여 주시기 바랍니다.\n"
+"                    비밀번호 재설정을 하신 적이 없다면, Uniwalk에 문의하여 주"
+"시기 바랍니다.\n"
 "                    "
 
 #: .\templates\emails\password-reset-subject.txt:3
@@ -1546,8 +1572,7 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"고객님의 요청으로, 비밀번호 재설정 메일을 "
-"송신하였습니다.<br>\n"
+"고객님의 요청으로, 비밀번호 재설정 메일을 송신하였습니다.<br>\n"
 "                    "
 
 #: .\templates\emails\password_reset_form.html:21
@@ -1577,11 +1602,10 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"                    UniWalk를 이용해주셔서 감사의 말씀 "
-"드립니다.<br>\n"
+"                    UniWalk를 이용해주셔서 감사의 말씀 드립니다.<br>\n"
 "                    회원정보 수정이 완료되었습니다.<br>\n"
-"                    회원정보를 변경하신 적이 없으시다면, Uniwalk에 "
-"문의하여 주시기 바랍니다. \n"
+"                    회원정보를 변경하신 적이 없으시다면, Uniwalk에 문의하여 "
+"주시기 바랍니다. \n"
 "                    "
 
 #: .\templates\emails\purchase-done.html:11
@@ -1603,12 +1627,12 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"                    UniWalk를 이용해주셔서 감사의 말씀 "
-"드립니다.<br>\n"
+"                    UniWalk를 이용해주셔서 감사의 말씀 드립니다.<br>\n"
 "                    주문이 완료되었습니다.<br>\n"
 "                    주문번호는 아래와 같습니다.<br>\n"
 "                    주문번호：%(order_code)s <br>\n"
-"                    주문정보는 마이페이지 또는 주문검색에서 확인 가능합니다.\n"
+"                    주문정보는 마이페이지 또는 주문검색에서 확인 가능합니"
+"다.\n"
 "                    "
 
 #: .\templates\emails\registration-done.html:11
@@ -1628,8 +1652,7 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"                    UniWalk를 이용해주셔서 감사의 말씀 "
-"드립니다.<br>\n"
+"                    UniWalk를 이용해주셔서 감사의 말씀 드립니다.<br>\n"
 "                    회원등록이 완료되었습니다.<br>\n"
 "                    등록하여 주셔서 감사합니다. <br>\n"
 "                    앞으로의 주문 기대하고 있겠습니다! <br>\n"
@@ -1802,7 +1825,7 @@ msgstr "주문상세"
 
 #: .\templates\mixins\orders\order-card.html:29
 #: .\templates\mixins\orders\order-detail-card.html:39
-#: .\templates\orders\search-order-detail.html:59
+#: .\templates\orders\search-order-detail.html:59 .\vinaigrette-deleteme.py:10
 msgid "注文取消"
 msgstr "주문취소"
 
@@ -2044,19 +2067,15 @@ msgstr "계좌번호：XXX-XXXX"
 msgid "口座名義：UNIWALK"
 msgstr "계좌명：UNIWALK"
 
-#: .\templates\partials\footer.html:122
+#: .\templates\partials\footer.html:120
 msgid "相談チャット"
 msgstr "상담 채팅"
 
-#: .\templates\partials\footer.html:131
+#: .\templates\partials\footer.html:129
 msgid "チャットする"
 msgstr "채팅하기"
 
 #: .\templates\partials\footer.html:146
-msgid "メッセージ入力"
-msgstr "메시지 입력"
-
-#: .\templates\partials\footer.html:148
 msgid "送信する"
 msgstr "보내기"
 
@@ -2196,7 +2215,7 @@ msgstr ""
 "                    베이스가 되는 운동화를 골라, 좋아하는 색으로 디자인하여, "
 "발사이즈를 측정합니다.<br>\n"
 "                    그 다음엔 고객님 앞으로 운동화가 배송되는 걸 기다리기만 "
-"하시면 됩니다!분명 마음에 드시는 운동화를 받으실 수 있을 거라고 확신합니다."
+"하시면 됩니다! 분명 마음에 드시는 운동화를 받으실 수 있을 거라고 확신합니다."
 
 #: .\templates\statics\about.html:40
 msgid "アクセス"
@@ -2218,7 +2237,7 @@ msgstr ""
 
 #: .\templates\statics\home.html:12
 msgid "オリジナルスニーカーが作れる！"
-msgstr "고객님만의 운동화를 만들 수 있어요!"
+msgstr "나만의 운동화를 만들 수 있어요!"
 
 #: .\templates\statics\home.html:26
 msgid "デザインをカスタマイズする"
@@ -2230,7 +2249,7 @@ msgid ""
 "ンを参照することもできます！"
 msgstr ""
 "소재, 색을 변경해 양발 모두 자신만의 개성을 표현할 수 있습니다. 다른 고객님"
-"이 만드신디자인을 참조하는 것도 가능해요!"
+"이 만드신 디자인을 참조하는 것도 가능해요!"
 
 #: .\templates\statics\home.html:32
 msgid "色"
@@ -2397,8 +2416,8 @@ msgid ""
 "タンを押してください。"
 msgstr ""
 "현재 저장된 구매이력이나 배송지 등의 정보는, <span class=\"font-semibold "
-"text-red-500\">모두 삭제</span>됩니다. <br>괜찮으시다면 아래의 버튼을 눌러주"
-"세요."
+"text-red-500 wow fadeIn\">모두 삭제</span>됩니다. <br>괜찮으시다면 아래의 버"
+"튼을 눌러주세요."
 
 #: .\templates\users\withdrawal-check.html:30
 msgid "脱退する"
@@ -2593,6 +2612,22 @@ msgstr "발 사이즈를 등록하였습니다."
 #: .\users\views.py:1128
 msgid "会員様のメールアドレスとは違います。"
 msgstr "회원님의 이메일 주소와 다릅니다."
+
+#: .\vinaigrette-deleteme.py:2
+msgid "ラバー"
+msgstr "고무"
+
+#: .\vinaigrette-deleteme.py:3
+msgid "キャンバス"
+msgstr "캔버스"
+
+#: .\vinaigrette-deleteme.py:4
+msgid "レザー"
+msgstr "가죽"
+
+#: .\vinaigrette-deleteme.py:9
+msgid "発送済み"
+msgstr "발송완료"
 
 #, python-format
 #~ msgid "Password reset on %(site_name)s"

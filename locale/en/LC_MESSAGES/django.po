@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-15 19:09+0900\n"
+"POT-Creation-Date: 2020-02-18 13:58+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -336,7 +336,7 @@ msgid "振込"
 msgstr "Bank transfer"
 
 #: .\orders\forms.py:16 .\orders\forms.py:196 .\orders\forms.py:197
-#: .\templates\partials\footer.html:130 .\users\forms.py:13 .\users\forms.py:49
+#: .\templates\partials\footer.html:128 .\users\forms.py:13 .\users\forms.py:49
 #: .\users\forms.py:117 .\users\forms.py:190 .\users\forms.py:217
 #: .\users\models.py:45 .\users\models.py:124
 msgid "メールアドレス"
@@ -563,18 +563,14 @@ msgid "エラーが発生しました。"
 msgstr "Error."
 
 #: .\orders\views.py:539
-#, fuzzy
-#| msgid "UniWalk　ご注文ありがとうございます。"
 msgid "Uniwalk ご注文ありがとうございます。"
 msgstr "UniWalk Thank you for ordering our products."
 
 #: .\orders\views.py:629 .\users\views.py:302 .\users\views.py:345
 msgid "Uniwalk ご注文取消しのご連絡"
-msgstr ""
+msgstr "Uniwalk Your order has been canceled"
 
 #: .\orders\views.py:637
-#, fuzzy
-#| msgid "注文を取消しました。"
 msgid "注文を取り消しました。"
 msgstr "Canceled the order."
 
@@ -738,68 +734,68 @@ msgstr "Change password"
 msgid "Log out"
 msgstr "Log out"
 
-#: .\templates\admin\base.html:92
+#: .\templates\admin\base.html:106
 msgid "注文状況"
 msgstr "Order status"
 
-#: .\templates\admin\base.html:98
+#: .\templates\admin\base.html:112 .\vinaigrette-deleteme.py:5
 msgid "入金前"
 msgstr "Before transfer"
 
-#: .\templates\admin\base.html:104
+#: .\templates\admin\base.html:118 .\vinaigrette-deleteme.py:6
 msgid "決済処理中"
 msgstr "Processing billing"
 
-#: .\templates\admin\base.html:110
+#: .\templates\admin\base.html:124 .\vinaigrette-deleteme.py:7
 msgid "決済確認済み"
 msgstr "Billing checked"
 
-#: .\templates\admin\base.html:116
+#: .\templates\admin\base.html:130 .\vinaigrette-deleteme.py:8
 msgid "対応中"
 msgstr "Processing"
 
-#: .\templates\admin\base.html:125 .\templates\products\product-detail.html:92
+#: .\templates\admin\base.html:139 .\templates\products\product-detail.html:92
 msgid "詳しく見る"
 msgstr "More"
 
-#: .\templates\admin\base.html:134
+#: .\templates\admin\base.html:148
 msgid "ショップ状況"
 msgstr "Shop status"
 
-#: .\templates\admin\base.html:140
+#: .\templates\admin\base.html:154
 msgid "取扱商品数"
 msgstr "The number of products treated"
 
-#: .\templates\admin\base.html:146 .\templates\admin\member-analytics.html:16
+#: .\templates\admin\base.html:160 .\templates\admin\member-analytics.html:16
 msgid "会員数"
 msgstr "The number of members"
 
-#: .\templates\admin\base.html:152
+#: .\templates\admin\base.html:166
 msgid "登録カスタムデザイン数"
 msgstr "The number of customized designs"
 
-#: .\templates\admin\base.html:166
+#: .\templates\admin\base.html:180
 msgid "今月状況"
 msgstr "Status of this month"
 
-#: .\templates\admin\base.html:170
+#: .\templates\admin\base.html:184
 msgid "年"
 msgstr "Year"
 
-#: .\templates\admin\base.html:170
+#: .\templates\admin\base.html:184
 msgid "月"
 msgstr "Month"
 
-#: .\templates\admin\base.html:172 .\templates\admin\base.html:182
-#: .\templates\admin\base.html:190
+#: .\templates\admin\base.html:186 .\templates\admin\base.html:196
+#: .\templates\admin\base.html:204
 msgid "件"
 msgstr " "
 
-#: .\templates\admin\base.html:178
+#: .\templates\admin\base.html:192
 msgid "今日売上実績"
 msgstr "Today's result"
 
-#: .\templates\admin\base.html:186
+#: .\templates\admin\base.html:200
 msgid "昨日売上実績"
 msgstr "Yesterday's result"
 
@@ -844,6 +840,22 @@ msgstr ""
 #: .\templates\admin\change_list.html:107
 msgid "Clear selection"
 msgstr "Clear selection"
+
+#: .\templates\admin\chat.html:6
+#, fuzzy
+#| msgid "チャットする"
+msgid "チャットリスト"
+msgstr "Start chatting"
+
+#: .\templates\admin\chat.html:13
+#, fuzzy
+#| msgid "チャットする"
+msgid "チャットルーム　"
+msgstr "Start chatting"
+
+#: .\templates\admin\chat.html:18 .\templates\partials\footer.html:144
+msgid "メッセージ入力"
+msgstr "Send a message"
 
 #: .\templates\admin\design-analytics.html:8
 #: .\templates\galleries\galleries_list.html:22
@@ -936,6 +948,12 @@ msgstr "Footsizes analytics"
 #: .\templates\admin\extra_nav.html:97
 msgid "人気デザイン分析"
 msgstr "Design Rank"
+
+#: .\templates\admin\extra_nav.html:105
+#, fuzzy
+#| msgid "相談チャット"
+msgid "チャット"
+msgstr "Contact"
 
 #: .\templates\admin\footsize-analytics.html:62
 #: .\templates\admin\footsize-analytics.html:106
@@ -1152,10 +1170,8 @@ msgid "(足幅)"
 msgstr "(Foot width)"
 
 #: .\templates\carts\cart.html:43
-#, fuzzy
-#| msgid "右"
 msgid "右足"
-msgstr "Right"
+msgstr "Right foot"
 
 #: .\templates\carts\cart.html:74
 msgid "カートに商品が入っていません。"
@@ -1476,7 +1492,7 @@ msgstr "Uppersole"
 
 #: .\templates\emails\cancel-done.html:11
 msgid "ご注文の取消しのご連絡"
-msgstr ""
+msgstr "Your order has been canceled"
 
 #: .\templates\emails\cancel-done.html:17
 #, python-format
@@ -1489,12 +1505,17 @@ msgid ""
 "                    注文番号：%(order_code)s\n"
 "                    "
 msgstr ""
+"\n"
+"                    Thank you for using UniWalk!<br>\n"
+"                    Your order has been successfully canceled.<br>\n"
+"                    The order code which has been canceled is like below."
+"<br>\n"
+"                    Order code：%(order_code)s\n"
+"                    "
 
 #: .\templates\emails\password-change-done.html:11
-#, fuzzy
-#| msgid "パスワード変更"
 msgid "パスワード変更完了"
-msgstr "Change password"
+msgstr "Change password done"
 
 #: .\templates\emails\password-change-done.html:17
 msgid ""
@@ -1506,6 +1527,12 @@ msgid ""
 "わせにご連絡ください。\n"
 "                    "
 msgstr ""
+"\n"
+"                    Thank you for using UniWalk.<br>\n"
+"                    Your password has been successfully changed.<br>\n"
+"                   If you have not changed your password before, Please "
+"contact us immediately.\n"
+"                    "
 
 #: .\templates\emails\password-reset-done.html:11
 #: .\templates\users\password-reset-complete.html:5
@@ -1523,25 +1550,22 @@ msgid ""
 "合わせにご連絡ください。\n"
 "                    "
 msgstr ""
+"\n"
+"                    Thank you for using UniWalk.<br>\n"
+"                    Your password has been successfully reset.<br>\n"
+"                    If you have not reset your password before, please "
+"contact us immediately.\n"
+"                    "
 
 #: .\templates\emails\password-reset-subject.txt:3
-#, fuzzy
-#| msgid "パスワード再設定"
 msgid "Uniwalk パスワード再設定"
-msgstr "Reset my password"
+msgstr "Uniwalk Password reset"
 
 #: .\templates\emails\password_reset_form.html:12
-#, fuzzy
-#| msgid "パスワード再設定申込み"
 msgid "パスワード再設定用リンクの配布"
-msgstr "Request for resetting password"
+msgstr "A link for resetting password"
 
 #: .\templates\emails\password_reset_form.html:18
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "顧客様からの要請により、パスワード再設定関連のメールをご送信いたしまし"
-#| "た。\n"
 msgid ""
 "\n"
 "                    お客様からの要請により、パスワード再設定のメールをご送信"
@@ -1549,29 +1573,24 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"We have sent a password resetting email to you by your request.\n"
+"We have sent a password resetting email to you by your request.<br>\n"
+"                    "
 
 #: .\templates\emails\password_reset_form.html:21
-#, fuzzy
-#| msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。"
 msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。<br>"
-msgstr "Please reset your password through the link below."
+msgstr "Please reset your password through the link below.<br>"
 
 #: .\templates\emails\password_reset_form.html:28
-#, fuzzy
-#| msgid "顧客様のIDは次のどおりです："
 msgid "<br>お客様のIDは次のどおりです："
-msgstr "Your ID: "
+msgstr "<br>Your ID: "
 
 #: .\templates\emails\password_reset_form.html:29
 msgid "いつものご利用ありがとうございます！"
-msgstr "We always appreciate your usual use of our site."
+msgstr "We always appreciate your usual use of our site!"
 
 #: .\templates\emails\profile-change-done.html:11
-#, fuzzy
-#| msgid "情報修正"
 msgid "会員情報修正完了"
-msgstr "Modify"
+msgstr "Your user data has been changed"
 
 #: .\templates\emails\profile-change-done.html:17
 msgid ""
@@ -1583,6 +1602,12 @@ msgid ""
 "せにご連絡ください。\n"
 "                    "
 msgstr ""
+"\n"
+"                    Thank you for using UniWalk.<br>\n"
+"                    Your user data has been successfully changed.<br>\n"
+"                    If you have not changed your user data before, please "
+"contact us immediately.\n"
+"                    "
 
 #: .\templates\emails\purchase-done.html:11
 #: .\templates\orders\checkout-done.html:5
@@ -1602,6 +1627,14 @@ msgid ""
 "                    注文情報はマイページか注文検索からご覧になれます。\n"
 "                    "
 msgstr ""
+"\n"
+"                    Thank you for using Uniwalk.<br>\n"
+"                    Your order has been successfully confirmed.<br>\n"
+"                    Your order code is like below.<br>\n"
+"                    Order code：%(order_code)s <br>\n"
+"                    The information about your order like order status can "
+"be checked in my page or order search page.\n"
+"                    "
 
 #: .\templates\emails\registration-done.html:11
 #: .\templates\users\signup-success.html:5
@@ -1619,6 +1652,13 @@ msgid ""
 "                    お客様からのご注文お待ちしております！ <br>\n"
 "                    "
 msgstr ""
+"\n"
+"                    Thank you for using Uniwalk.<br>\n"
+"                    Your member registration has been successfully completed."
+"<br>\n"
+"                    Thanks for your regstration.<br>\n"
+"                    We hope you enjoy your shopping!<br>\n"
+"                    "
 
 #: .\templates\feet\feet-check.html:5
 msgid "足サイズデータチェック"
@@ -1785,7 +1825,7 @@ msgstr "Order detail"
 
 #: .\templates\mixins\orders\order-card.html:29
 #: .\templates\mixins\orders\order-detail-card.html:39
-#: .\templates\orders\search-order-detail.html:59
+#: .\templates\orders\search-order-detail.html:59 .\vinaigrette-deleteme.py:10
 msgid "注文取消"
 msgstr "Cancel orders"
 
@@ -2027,21 +2067,17 @@ msgstr "Bank account: XXX-XXXX"
 msgid "口座名義：UNIWALK"
 msgstr "Account holder: UNIWALK"
 
-#: .\templates\partials\footer.html:122
+#: .\templates\partials\footer.html:120
 msgid "相談チャット"
-msgstr ""
+msgstr "Contact"
 
-#: .\templates\partials\footer.html:131
+#: .\templates\partials\footer.html:129
 msgid "チャットする"
-msgstr ""
+msgstr "Start chatting"
 
 #: .\templates\partials\footer.html:146
-msgid "メッセージ入力"
-msgstr ""
-
-#: .\templates\partials\footer.html:148
 msgid "送信する"
-msgstr ""
+msgstr "Send"
 
 #: .\templates\partials\mypage-menu.html:7
 #: .\templates\users\update-profile.html:5
@@ -2088,16 +2124,12 @@ msgid "カスタマイズして購入"
 msgstr "Purchase"
 
 #: .\templates\products\product-detail.html:56
-#, fuzzy
-#| msgid "デザインする"
 msgid "全てのデザインを見る"
-msgstr "Make designs"
+msgstr "View all designs"
 
 #: .\templates\products\product-detail.html:60
-#, fuzzy
-#| msgid "レビューがまだ存在しません。"
 msgid "デザインデータがまだ存在しません。"
-msgstr "No reviews written."
+msgstr "No designs existed."
 
 #: .\templates\products\product-detail.html:68
 msgid "全てのレビュー"
@@ -2203,8 +2235,6 @@ msgstr ""
 "                    Closed on every Monday"
 
 #: .\templates\statics\home.html:12
-#, fuzzy
-#| msgid "オリジナルスニーカーが作られる！"
 msgid "オリジナルスニーカーが作れる！"
 msgstr "You can create your own sneakers!"
 
@@ -2222,7 +2252,7 @@ msgstr ""
 
 #: .\templates\statics\home.html:32
 msgid "色"
-msgstr ""
+msgstr "Colors"
 
 #: .\templates\statics\home.html:52
 msgid "足サイズを測定する"
@@ -2246,11 +2276,11 @@ msgstr ""
 
 #: .\templates\statics\home.html:80
 msgid "カスタム制作"
-msgstr ""
+msgstr "Manufacturing"
 
 #: .\templates\statics\home.html:84
 msgid "配送"
-msgstr ""
+msgstr "Shipping"
 
 #: .\templates\statics\home.html:110
 msgid "もっと見る"
@@ -2381,19 +2411,14 @@ msgid "会員脱退確認"
 msgstr "Checking for withdrawal"
 
 #: .\templates\users\withdrawal-check.html:26
-#, fuzzy
-#| msgid ""
-#| "現在保存されている購入履歴やお届け先等の情報は、<span class=\"font-"
-#| "semibold text-red-500\">すべて削除</span>されます。<br>よろしければ、下の"
-#| "ボタンを押してください。"
 msgid ""
 "現在保存されている購入履歴やお届け先等の情報は、<span class=\"font-semibold "
 "text-red-500 wow fadeIn\">すべて削除</span>されます。<br>よろしければ、下のボ"
 "タンを押してください。"
 msgstr ""
-"Saved data in your account will be <span class=\"font-semibold text-"
-"red-500\">ALL DELETED</span><br>Click the button below if you would like "
-"toproceed"
+"Saved data in your account will be <span class=\"font-semibold text-red-500 "
+"wow fadeIn\">ALL DELETED</span><br>Click the button below if you would like "
+"to proceed."
 
 #: .\templates\users\withdrawal-check.html:30
 msgid "脱退する"
@@ -2538,30 +2563,22 @@ msgid "ログアウトしました。"
 msgstr "Logged out."
 
 #: .\users\views.py:147
-#, fuzzy
-#| msgid "UniWalk　会員登録ありがとうございます。"
 msgid "Uniwalk 会員登録ありがとうございます。"
 msgstr "UniWalk　Thank you for registration."
 
 #: .\users\views.py:197
-#, fuzzy
-#| msgid "パスワード再設定完了のお知らせ"
 msgid "Uniwalk パスワード再設定完了のお知らせ"
-msgstr "Resetting password completed"
+msgstr "Uniwalk Password successfully reset"
 
 #: .\users\views.py:220
 msgid "会員情報を変更しました。"
-msgstr "Your member info has been changed."
+msgstr "Your user data has been changed."
 
 #: .\users\views.py:234
-#, fuzzy
-#| msgid "UniWalk会員情報変更のお知らせ"
 msgid "Uniwalk 会員情報変更のお知らせ"
-msgstr "UniWalk Changing member info completed"
+msgstr "UniWalk Changing user data completed"
 
 #: .\users\views.py:259
-#, fuzzy
-#| msgid "UniWalkパスワード変更のお知らせ"
 msgid "UniWalk パスワード変更のお知らせ"
 msgstr "UniWalk Changing password completed"
 
@@ -2590,14 +2607,32 @@ msgid "デザインを削除しました。"
 msgstr "Deleted your design."
 
 #: .\users\views.py:974 .\users\views.py:1112
-#, fuzzy
-#| msgid "カードを登録しました。"
 msgid "足サイズを登録しました。"
-msgstr "Saved your card data."
+msgstr "Saved your footsize data."
 
 #: .\users\views.py:1128
 msgid "会員様のメールアドレスとは違います。"
 msgstr "Incorrect email address."
+
+#: .\vinaigrette-deleteme.py:2
+#, fuzzy
+#| msgid "ホーム"
+msgid "ラバー"
+msgstr "Home"
+
+#: .\vinaigrette-deleteme.py:3
+msgid "キャンバス"
+msgstr ""
+
+#: .\vinaigrette-deleteme.py:4
+#, fuzzy
+#| msgid "ユーザー"
+msgid "レザー"
+msgstr "User"
+
+#: .\vinaigrette-deleteme.py:9
+msgid "発送済み"
+msgstr ""
 
 #, python-format
 #~ msgid "Password reset on %(site_name)s"
