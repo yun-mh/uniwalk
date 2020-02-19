@@ -4,10 +4,10 @@
         class="flex w-full items-center justify-between flex-wrap bg-universe-dark h-12 fixed inset-0 z-50 shadow-dark">
         <div class="flex w-full justify-between h-full">
             <div class="flex items-center w-36">
-                <div class="w-12 h-full flex relative border-r border-universe-lighter">
+                <div class="w-12 h-full flex relative border-r border-universe-lighter hover:bg-universe-lighter">
                     {% get_current_language as LANGUAGE_CODE %}
-                    <a class="flex items-center lang-btn cursor-pointer mx-auto">
-                        <i class="fas fa-language fa-lg text-gray-300"></i>
+                    <a class="flex items-center lang-btn cursor-pointer w-full">
+                        <i class="fas fa-language fa-lg text-gray-300 mx-auto"></i>
                     </a>
                     <div class="lang-dropdown bg-universe-lighter w-40 hidden absolute shadow-dark" style="top: 100%;">
                         <a class="ja text-sm text-gray-300 block border-b border-universe-dark p-2 cursor-pointer hover:text-gray-600"
@@ -61,9 +61,10 @@
             </h1>
 
             <div class="flex items-center w-36">
-                <div class="w-12 h-full flex relative border-r border-l-2 border-universe-lighter">
-                    <a class="user-btn flex items-center cursor-pointer mx-auto">
-                        <i class="fas fa-user fa-md text-gray-300"></i>
+                <div
+                    class="w-12 h-full flex relative border-r border-l-2 border-universe-lighter hover:bg-universe-lighter">
+                    <a class="user-btn flex w-full items-center cursor-pointer">
+                        <i class="fas fa-user fa-md text-gray-300 mx-auto"></i>
                     </a>
                     <div class="dropdown-content bg-universe-lighter w-40 hidden absolute shadow-dark"
                         style="top: 100%; right: 0%;">
@@ -84,14 +85,14 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="w-12 h-full flex relative border-r border-universe-lighter">
-                    <a href="{% url 'orders:search' %}" class="flex items-center cursor-pointer mx-auto">
-                        <i class="fas fa-search fa-md text-gray-300"></i>
+                <div class="w-12 h-full flex relative border-r border-universe-lighter hover:bg-universe-lighter">
+                    <a href="{% url 'orders:search' %}" class="flex items-center cursor-pointer w-full">
+                        <i class="fas fa-search fa-md text-gray-300 mx-auto"></i>
                     </a>
                 </div>
-                <div class="w-12 h-full flex relative">
-                    <a href="{% url 'carts:cart' %}" class="flex items-center cursor-pointer mx-auto">
-                        <i class="fas fa-shopping-cart fa-md text-gray-300 relative"></i>
+                <div class="w-12 h-full flex relative hover:bg-universe-lighter">
+                    <a href="{% url 'carts:cart' %}" class="flex items-center cursor-pointer w-full">
+                        <i class="fas fa-shopping-cart fa-md text-gray-300 mx-auto relative"></i>
                         {% if item_count != 0 %}
                         <span
                             class="inline-block text-xs w-4 h-4 rounded-full bg-red-500 text-white text-center absolute"
@@ -105,7 +106,8 @@
 
     <div class="h-64">
         <div class="h-full flex flex-col justify-center">
-            <h2 class="text-center text-purple-900 text-4xl font-extrabold -mt-16 antialiased">
+            <h2 class="text-center text-purple-900 text-4xl font-extrabold -mt-16 antialiased"
+                style="text-shadow: 2px 2px rgba(0, 0, 0, 0.3);">
                 Create what you want!
             </h2>
             <div class="flex mx-auto min-w-1/5 justify-center text-gray-400 text-lg rounded-lg mt-5 -mb-8 p-3"

@@ -9,7 +9,7 @@ from core import models as core_models
 from localflavor.jp.jp_prefectures import JP_PREFECTURES, JP_PREFECTURE_CODES
 from datetime import date
 
-# Create your models here.
+
 def create_member_number():
     last_member = User.objects.all().order_by("pk").last()
     if not last_member:
@@ -44,7 +44,7 @@ class User(AbstractUser):
 
     email = models.EmailField(_("メールアドレス"), unique=True)
     first_name_kana = models.CharField(_("名(カナ)"), blank=True, max_length=30)
-    last_name_kana = models.CharField(_("姓(カナ)"), blank=True, max_length=150)
+    last_name_kana = models.CharField(_("姓(カナ)"), blank=True, max_length=30)
     gender = models.CharField(
         _("性別"), blank=True, choices=GENDER_CHOICES, max_length=10
     )

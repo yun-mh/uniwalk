@@ -27,9 +27,9 @@
                             style="background-image: url('{{ image.front.url }}');">
                         </div>
                         {% endwith %}
-                        <div class="w-full flex justify-between px-5 items-center">
-                            <div class="flex flex-col justify-between h-full">
-                                <div class="flex flex-row justify-between items-center">
+                        <div class="w-full flex px-5 items-center">
+                            <div class="w-full flex flex-col justify-between h-full">
+                                <div class="flex justify-between items-center">
                                     <span class="text-lg">{{ cart_item.product.name }}</span>
                                     <div class="text-indigo-600">
                                         &yen; {{ cart_item.sub_total | intcomma }}
@@ -44,7 +44,7 @@
                                         {{ cart_item.length_right }}mm {% trans '(足長)' %}
                                         {{ cart_item.width_right }}mm {% trans '(足幅)' %}</span>
                                 </div>
-                                <div class="flex flex-row mt-3">
+                                <div class="flex justify-between items-center mt-3">
                                     <span class="text-sm">{% trans '単価' %}　&yen;
                                         {{ cart_item.product.price | intcomma }}</span>
                                     <div class="text-xs ml-5">
@@ -56,7 +56,7 @@
                                             <i class="fas fa-minus-circle fa-lg text-indigo-600"></i>
                                         </a>
                                     </div>
-                                    <div class="text-sm ml-56">
+                                    <div class="text-sm">
                                         <a href="{% url 'carts:delete' cart_item.product.pk cart_item.design.pk %}"
                                             class="bg-red-500 py-1 px-5 rounded">
                                             <span><i class="fas fa-trash-alt text-white"></i></span>

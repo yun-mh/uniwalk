@@ -169,17 +169,17 @@ class UpdateProfileForm(forms.ModelForm):
 
 class PasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(
-        label=_("Old password"),
+        label=_("現在パスワード"),
         strip=False,
         widget=forms.PasswordInput(attrs={"placeholder": _("現在パスワード")}),
     )
     new_password1 = forms.CharField(
-        label=_("new password"),
+        label=_("新しいパスワード"),
         strip=False,
         widget=forms.PasswordInput(attrs={"placeholder": _("新しいパスワード")}),
     )
     new_password2 = forms.CharField(
-        label=_("check password"),
+        label=_("パスワード確認"),
         strip=False,
         widget=forms.PasswordInput(attrs={"placeholder": _("パスワード確認")}),
     )
@@ -191,6 +191,13 @@ class PasswordResetForm(PasswordResetForm):
         label=_("Email"),
         max_length=254,
     )
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if not models.User.objects.filter(email__iexact=email, is_active=True).exists():
+            msg = _("登録されていないメールアドレスです。")
+            self.add_error("email", msg)
+        return email
 
 
 class SetPasswordForm(SetPasswordForm):
@@ -212,11 +219,10 @@ class AddCardForm(forms.Form):
 
 
 class WithdrawalForm(forms.Form):
-
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
+        label=_("メールアドレス"), widget=forms.EmailInput(attrs={"placeholder": _("メールアドレス")})
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
+        label=_("パスワード"), widget=forms.PasswordInput(attrs={"placeholder": _("パスワード")})
     )
 
