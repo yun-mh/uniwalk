@@ -1,5 +1,5 @@
 const utils = new Utils("errorMessage");
-const imageUsed = document.getElementById("sample").getAttribute("src");
+const imageUsed = document.getElementById("target").getAttribute("src");
 const applyButton = document.getElementById("apply");
 const submitButton = document.getElementById("fix");
 let image_data = document.getElementById("id_image_data");

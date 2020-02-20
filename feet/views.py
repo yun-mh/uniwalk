@@ -21,8 +21,6 @@ def have_footsize(request, *arg, **kwargs):
 
     """ 足サイズデータを既に持っているかどうかチェックする """
 
-    pk = request.session["product"]
-    design_pk = request.session["design"]
     if request.user.is_authenticated:
         user = request.user
         try:
@@ -93,7 +91,7 @@ def footsizes_measure(request, *args, **kwargs):
                     foot_right=request.FILES["image-foot_right"],
                 )
                 foot_images.save()
-                return redirect("feet:crop-left", pk=foot_images.pk)
+                return redirect("feet:rotation", pk=foot_images.pk)
             footsize_fill_form = forms.FootsizeFillForm(prefix="fill")
     else:
         footsize_fill_form = forms.FootsizeFillForm(prefix="fill")
@@ -103,6 +101,31 @@ def footsizes_measure(request, *args, **kwargs):
         "footsize_image_form": footsize_image_form,
     }
     return render(request, "feet/feet-measure.html", context)
+
+
+class FootImageRotationView(DetailView):
+
+    """ 足イメージをローテートするためのツールを提供する """
+
+    model = models.FootImage
+    context_object_name = "foot_images"
+    template_name = "feet/feet-rotation.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = forms.FootImageRotationForm()
+        return context
+
+    def post(self, *args, **kwargs):
+        pk = kwargs.get("pk")
+        feet = models.FootImage.objects.get(pk=pk)
+        # 画像情報をデータベースに反映する
+        image_data_left = self.request.POST.get("image_data_left")
+        image_data_right = self.request.POST.get("image_data_right")
+        feet.foot_left = base64_file(image_data_left)
+        feet.foot_right = base64_file(image_data_right)
+        feet.save()
+        return redirect("feet:crop-left", pk=pk)
 
 
 class LeftFootsizePerspeciveCropperView(DetailView):

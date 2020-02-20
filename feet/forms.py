@@ -23,5 +23,10 @@ class FootsizeImageForm(forms.ModelForm):
         )
 
 
+class FootImageRotationForm(forms.Form):
+    image_data_left = forms.CharField(widget=forms.HiddenInput(), required=False)
+    image_data_right = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+
 class FootImageDataForm(forms.Form):
     image_data = forms.CharField(widget=forms.HiddenInput(), required=False)

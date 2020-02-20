@@ -7,6 +7,11 @@ urlpatterns = [
     path("check/", views.have_footsize, name="check"),
     path("measure/", views.footsizes_measure, name="measure"),
     path(
+        "measure/rotation/<int:pk>/",
+        views.FootImageRotationView.as_view(),
+        name="rotation",
+    ),
+    path(
         "measure/cropper/<int:pk>-left/",
         views.LeftFootsizePerspeciveCropperView.as_view(),
         name="crop-left",

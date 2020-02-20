@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% load i18n static humanize %}
+
+{% block page_title %}
+{% trans '足イメージ回転' %}
+{% endblock page_title %}
+
+{% block content %}
+<div id="blur" class="hidden flex items-center justify-center"
+    style="position: fixed; top:0; left: 0; width: 100vw; height: 100vh; background: rgba(10, 10, 10, 0.9); z-index: 1000;">
+    <span class="text-4xl font-bold text-gray-300">{% trans '画像を取得しています。' %}</span>
+</div>
+<div class="mx-auto min-h-75vh px-16 py-10 rounded-xl"
+    style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
+    <div class="w-full mx-auto bg-white rounded-xl py-10">
+        <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold text-center">{% trans '足イメージ回転' %}</h2>
+        <div class="w-full px-10 flex justify-between mb-5">
+            <h3 class="text-center text-indigo-800 text-xl" style="width: 500px;">{% trans '左' %}</h3>
+            <h3 class="text-center text-indigo-800 text-xl" style="width: 500px;">{% trans '右' %}</h3>
+        </div>
+        <div class="w-full px-10 flex justify-between mb-5">
+            <div class="text-center" style="width: 500px;">
+                <button id="rotateLeft" class="w-10 h-10 bg-gray-600 text-white rounded-full">
+                    <i class="fas fa-redo-alt"></i>
+                </button>
+            </div>
+            <div class="text-center" style="width: 500px;">
+                <button id="rotateRight" class="w-10 h-10 bg-gray-600 text-white rounded-full">
+                    <i class="fas fa-redo-alt"></i>
+                </button>
+            </div>
+        </div>
+        <div class="flex justify-between">
+            <div class="ml-10 relative" id="background">
+                <canvas id="imageLeft"></canvas>
+            </div>
+            <div class="mr-10">
+                <canvas id="imageRight"></canvas>
+            </div>
+        </div>
+        <div class="w-full flex justify-center items-center mt-8">
+            <form method="POST" id="main-form">
+                {% csrf_token %}
+                {{ form }}
+                <button id="fix" class="ml-12 w-64 btn">{% trans '確定する' %}</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const canvasLeft = document.getElementById("imageLeft");
+    const canvasRight = document.getElementById("imageRight");
+    const rotateLeftBtn = document.getElementById("rotateLeft");
+    const rotateRightBtn = document.getElementById("rotateRight");
+    const ctxLeft = canvasLeft.getContext("2d");
+    const ctxRight = canvasRight.getContext("2d");
+    let image_data_left = document.getElementById("id_image_data_left");
+    let image_data_right = document.getElementById("id_image_data_right");
+
+    let degreesLeft = 0;
+    let degreesRight = 0;
+
+    window.onload = function () {
+        const imgL = new Image();
+        imgL.src = "{{ foot_images.foot_left.url }}";
+        imgL.onload = function () {
+            const imgWidth = imgL.width;
+            const imgHeight = imgL.height;
+            canvasLeft.width = imgWidth;
+            canvasLeft.height = imgHeight;
+            ctxLeft.drawImage(imgL, 0, 0);
+        }
+
+        const imgR = new Image();
+        imgR.src = "{{ foot_images.foot_right.url }}";
+        imgR.onload = function () {
+            const imgWidth = imgR.width;
+            const imgHeight = imgR.height;
+            canvasRight.width = imgWidth;
+            canvasRight.height = imgHeight;
+            ctxRight.drawImage(imgR, 0, 0);
+        }
+    }
+
+    function drawRotatedLeft(status, image, canvas, ctx, degrees) {
+        const cvWidthLeft = canvas.width
+        const cvHeightLeft = canvas.height
+        let isHorizontalLeft;
+
+        if (cvWidthLeft > cvHeightLeft) {
+            isHorizontalLeft = true;
+        } else {
+            isHorizontalLeft = false;
+        }
+
+        if (status === "portrait") {
+            if (isHorizontalLeft === true) {
+                ctx.clearRect(0, 0, cvWidthLeft, cvHeightLeft);
+                ctx.save();
+                canvas.width = 500
+                canvas.height = 500 / cvHeightLeft * cvWidthLeft;
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(degrees * Math.PI / 180);
+                ctx.drawImage(image, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+            } else {
+                ctx.clearRect(0, 0, cvWidthLeft, cvHeightLeft);
+                ctx.save();
+                canvas.width = 500
+                canvas.height = 500 / cvHeightLeft * cvWidthLeft;
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(degrees * Math.PI / 180);
+                ctx.drawImage(image, -canvas.height / 2, -canvas.width / 2, canvas.height, canvas.width);
+            }
+            ctx.restore();
+        } else if (status === "horizontal") {
+            if (isHorizontalLeft === true) {
+                ctx.clearRect(0, 0, cvWidthLeft, cvHeightLeft);
+                ctx.save();
+                canvas.width = 500
+                canvas.height = 500 / cvHeightLeft * cvWidthLeft;
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(degrees * Math.PI / 180);
+                ctx.drawImage(image, -canvas.height / 2, -canvas.width / 2, canvas.height, canvas.width);
+            } else {
+                ctx.clearRect(0, 0, cvWidthLeft, cvHeightLeft);
+                ctx.save();
+                canvas.width = 500
+                canvas.height = 500 / cvHeightLeft * cvWidthLeft;
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(degrees * Math.PI / 180);
+                ctx.drawImage(image, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+            }
+            ctx.restore();
+        }
+    }
+
+    function drawRotatedRight(status, image, canvas, ctx, degrees) {
+        const cvWidthRight = canvas.width
+        const cvHeightRight = canvas.height
+        let isHorizontalRight;
+
+        if (cvWidthRight > cvHeightRight) {
+            isHorizontalRight = true;
+        } else {
+            isHorizontalRight = false;
+        }
+
+        if (status === "portrait") {
+            if (isHorizontalRight === true) {
+                ctx.clearRect(0, 0, cvWidthRight, cvHeightRight);
+                ctx.save();
+                canvas.width = 500
+                canvas.height = 500 / cvHeightRight * cvWidthRight;
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(degrees * Math.PI / 180);
+                ctx.drawImage(image, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+            } else {
+                ctx.clearRect(0, 0, cvWidthRight, cvHeightRight);
+                ctx.save();
+                canvas.width = 500
+                canvas.height = 500 / cvHeightRight * cvWidthRight;
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(degrees * Math.PI / 180);
+                ctx.drawImage(image, -canvas.height / 2, -canvas.width / 2, canvas.height, canvas.width);
+            }
+            ctx.restore();
+        } else if (status === "horizontal") {
+            if (isHorizontalRight === true) {
+                ctx.clearRect(0, 0, cvWidthRight, cvHeightRight);
+                ctx.save();
+                canvas.width = 500
+                canvas.height = 500 / cvHeightRight * cvWidthRight;
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(degrees * Math.PI / 180);
+                ctx.drawImage(image, -canvas.height / 2, -canvas.width / 2, canvas.height, canvas.width);
+            } else {
+                ctx.clearRect(0, 0, cvWidthRight, cvHeightRight);
+                ctx.save();
+                canvas.width = 500
+                canvas.height = 500 / cvHeightRight * cvWidthRight;
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(degrees * Math.PI / 180);
+                ctx.drawImage(image, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+            }
+            ctx.restore();
+        }
+    }
+
+    let firstStatusLeft, firstStatusRight;
+
+    rotateLeftBtn.addEventListener("click", () => {
+        const imgL = new Image();
+        imgL.src = "{{ foot_images.foot_left.url }}";
+        if (imgL.width > imgL.height) {
+            firstStatusLeft = "horizontal";
+        } else {
+            firstStatusLeft = "portrait";
+        }
+        degreesLeft += 90;
+        drawRotatedLeft(firstStatusLeft, imgL, canvasLeft, ctxLeft, degreesLeft);
+    });
+
+    rotateRightBtn.addEventListener("click", () => {
+        const imgR = new Image();
+        imgR.src = "{{ foot_images.foot_right.url }}";
+        if (imgR.width > imgR.height) {
+            firstStatusRight = "horizontal";
+        } else {
+            firstStatusRight = "portrait";
+        }
+        degreesRight += 90;
+        drawRotatedRight(firstStatusRight, imgR, canvasRight, ctxRight, degreesRight);
+    });
+
+    $('#main-form').submit(function (e) {
+        const form = this;
+
+        e.preventDefault();
+
+        document.getElementById("blur").style.display = "flex";
+
+        // スクリーンショットを取る
+        setTimeout(function () {
+            let footLeft = canvasLeft.toDataURL('image/jpg');
+            let footRight = canvasRight.toDataURL('image/jpg');
+            image_data_left.value = footLeft;
+            image_data_right.value = footRight;
+            setTimeout(function () {
+                form.submit()
+            }, 2000)
+        }, 500)
+    });
+</script>
+{% endblock content %}

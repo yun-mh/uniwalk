@@ -63,6 +63,11 @@ urlpatterns = [
     path("mypage/footsizes/", views.FootSizeView.as_view(), name="footsizes",),
     path("mypage/footsizes/measure/", views.footsizes_measure, name="measure"),
     path(
+        "mypage/footsizes/measure/rotation/",
+        views.FootImageRotationView.as_view(),
+        name="rotation",
+    ),
+    path(
         "mypage/footsizes/measure/cropper/left/",
         views.LeftFootsizePerspeciveCropperView.as_view(),
         name="crop-left",

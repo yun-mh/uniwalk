@@ -986,7 +986,7 @@ def footsizes_measure(request, *args, **kwargs):
                 )
                 foot_images.save()
                 request.session["foot_images"] = foot_images.pk
-                return redirect("users:crop-left")
+                return redirect("users:rotation")
             footsize_fill_form = feet_forms.FootsizeFillForm(prefix="fill")
     else:
         footsize_fill_form = feet_forms.FootsizeFillForm(prefix="fill")
@@ -996,6 +996,39 @@ def footsizes_measure(request, *args, **kwargs):
         "footsize_image_form": footsize_image_form,
     }
     return render(request, "feet/feet-measure.html", context)
+
+
+class FootImageRotationView(mixins.LoggedInOnlyView, DetailView):
+
+    """ 足イメージをローテートするためのツールを提供する """
+
+    model = feet_models.FootImage
+    context_object_name = "foot_images"
+    template_name = "feet/feet-rotation.html"
+
+    def get_object(self, queryset=None):
+        try:
+            return feet_models.FootImage.objects.get(
+                pk=self.request.session["foot_images"]
+            )
+        except KeyError:
+            messages.error(self.request, _("問題が発生しました。もう一度試してみてください。"))
+            return redirect(reverse("users:footsizes"), permanent=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = feet_forms.FootImageRotationForm()
+        return context
+
+    def post(self, *args, **kwargs):
+        feet = feet_models.FootImage.objects.get(pk=self.request.session["foot_images"])
+        # 画像情報をデータベースに反映する
+        image_data_left = self.request.POST.get("image_data_left")
+        image_data_right = self.request.POST.get("image_data_right")
+        feet.foot_left = base64_file(image_data_left)
+        feet.foot_right = base64_file(image_data_right)
+        feet.save()
+        return redirect("users:crop-left")
 
 
 class LeftFootsizePerspeciveCropperView(mixins.LoggedInOnlyView, DetailView):

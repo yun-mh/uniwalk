@@ -34,15 +34,17 @@ class CustomizeView(ListView):
 
     def get_queryset(self):
         pk = self.kwargs.get("pk")
-        designs = models.Design.objects.filter(product=pk).exclude(user__isnull=True).all()
-        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+        designs = (
+            models.Design.objects.filter(product=pk).exclude(user__isnull=True).all()
+        )
+        return sorted(designs, key=lambda design: design.total_likes, reverse=True)
 
     def get_context_data(self, *args, **kwargs):
         pk = self.kwargs.get("pk")
         materials = design_models.Material.objects.all().order_by("created")
         context = super(CustomizeView, self).get_context_data(*args, **kwargs)
         for material in materials:
-            context["mat" + str(material.pk) ] = material
+            context["mat" + str(material.pk)] = material
         context["product"] = product_models.Product.objects.get(pk=pk)
         context["template"] = product_models.Template.objects.get(product=pk)
         context["form"] = forms.CustomizeForm()
@@ -69,7 +71,9 @@ class CustomizeView(ListView):
             "tongue_material_left": self.request.POST.get("tongue_material_left"),
             "outsole_material_right": self.request.POST.get("outsole_material_right"),
             "midsole_material_right": self.request.POST.get("midsole_material_right"),
-            "uppersole_material_right": self.request.POST.get("uppersole_material_right"),
+            "uppersole_material_right": self.request.POST.get(
+                "uppersole_material_right"
+            ),
             "shoelace_material_right": self.request.POST.get("shoelace_material_right"),
             "tongue_material_right": self.request.POST.get("tongue_material_right"),
         }
@@ -88,16 +92,36 @@ class CustomizeView(ListView):
                 uppersole_color_right=customize_data["uppersole_color_right"],
                 shoelace_color_right=customize_data["shoelace_color_right"],
                 tongue_color_right=customize_data["tongue_color_right"],
-                outsole_material_left=models.Material.objects.get(pk=customize_data["outsole_material_left"]),
-                midsole_material_left=models.Material.objects.get(pk=customize_data["midsole_material_left"]),
-                uppersole_material_left=models.Material.objects.get(pk=customize_data["uppersole_material_left"]),
-                shoelace_material_left=models.Material.objects.get(pk=customize_data["shoelace_material_left"]),
-                tongue_material_left=models.Material.objects.get(pk=customize_data["tongue_material_left"]),
-                outsole_material_right=models.Material.objects.get(pk=customize_data["outsole_material_right"]),
-                midsole_material_right=models.Material.objects.get(pk=customize_data["midsole_material_right"]),
-                uppersole_material_right=models.Material.objects.get(pk=customize_data["uppersole_material_right"]),
-                shoelace_material_right=models.Material.objects.get(pk=customize_data["shoelace_material_right"]),
-                tongue_material_right=models.Material.objects.get(pk=customize_data["tongue_material_right"]),
+                outsole_material_left=models.Material.objects.get(
+                    pk=customize_data["outsole_material_left"]
+                ),
+                midsole_material_left=models.Material.objects.get(
+                    pk=customize_data["midsole_material_left"]
+                ),
+                uppersole_material_left=models.Material.objects.get(
+                    pk=customize_data["uppersole_material_left"]
+                ),
+                shoelace_material_left=models.Material.objects.get(
+                    pk=customize_data["shoelace_material_left"]
+                ),
+                tongue_material_left=models.Material.objects.get(
+                    pk=customize_data["tongue_material_left"]
+                ),
+                outsole_material_right=models.Material.objects.get(
+                    pk=customize_data["outsole_material_right"]
+                ),
+                midsole_material_right=models.Material.objects.get(
+                    pk=customize_data["midsole_material_right"]
+                ),
+                uppersole_material_right=models.Material.objects.get(
+                    pk=customize_data["uppersole_material_right"]
+                ),
+                shoelace_material_right=models.Material.objects.get(
+                    pk=customize_data["shoelace_material_right"]
+                ),
+                tongue_material_right=models.Material.objects.get(
+                    pk=customize_data["tongue_material_right"]
+                ),
             )
         else:
             new_design = design_models.Design.objects.create(
@@ -112,16 +136,36 @@ class CustomizeView(ListView):
                 uppersole_color_right=customize_data["uppersole_color_right"],
                 shoelace_color_right=customize_data["shoelace_color_right"],
                 tongue_color_right=customize_data["tongue_color_right"],
-                outsole_material_left=models.Material.objects.get(pk=customize_data["outsole_material_left"]),
-                midsole_material_left=models.Material.objects.get(pk=customize_data["midsole_material_left"]),
-                uppersole_material_left=models.Material.objects.get(pk=customize_data["uppersole_material_left"]),
-                shoelace_material_left=models.Material.objects.get(pk=customize_data["shoelace_material_left"]),
-                tongue_material_left=models.Material.objects.get(pk=customize_data["tongue_material_left"]),
-                outsole_material_right=models.Material.objects.get(pk=customize_data["outsole_material_right"]),
-                midsole_material_right=models.Material.objects.get(pk=customize_data["midsole_material_right"]),
-                uppersole_material_right=models.Material.objects.get(pk=customize_data["uppersole_material_right"]),
-                shoelace_material_right=models.Material.objects.get(pk=customize_data["shoelace_material_right"]),
-                tongue_material_right=models.Material.objects.get(pk=customize_data["tongue_material_right"]),
+                outsole_material_left=models.Material.objects.get(
+                    pk=customize_data["outsole_material_left"]
+                ),
+                midsole_material_left=models.Material.objects.get(
+                    pk=customize_data["midsole_material_left"]
+                ),
+                uppersole_material_left=models.Material.objects.get(
+                    pk=customize_data["uppersole_material_left"]
+                ),
+                shoelace_material_left=models.Material.objects.get(
+                    pk=customize_data["shoelace_material_left"]
+                ),
+                tongue_material_left=models.Material.objects.get(
+                    pk=customize_data["tongue_material_left"]
+                ),
+                outsole_material_right=models.Material.objects.get(
+                    pk=customize_data["outsole_material_right"]
+                ),
+                midsole_material_right=models.Material.objects.get(
+                    pk=customize_data["midsole_material_right"]
+                ),
+                uppersole_material_right=models.Material.objects.get(
+                    pk=customize_data["uppersole_material_right"]
+                ),
+                shoelace_material_right=models.Material.objects.get(
+                    pk=customize_data["shoelace_material_right"]
+                ),
+                tongue_material_right=models.Material.objects.get(
+                    pk=customize_data["tongue_material_right"]
+                ),
             )
 
         # 画像情報をデータベースに反映する
@@ -130,7 +174,7 @@ class CustomizeView(ListView):
         image_data_up = self.request.POST.get("image_data_up")
         image_data_down = self.request.POST.get("image_data_down")
         design_models.Image.objects.create(
-            design=new_design, 
+            design=new_design,
             front=base64_file(image_data_front),
             side=base64_file(image_data_side),
             up=base64_file(image_data_up),
@@ -156,26 +200,66 @@ def get_palette(request):
         uppersole_color_right = request.POST.get("uppersole_color_right")
         shoelace_color_right = request.POST.get("shoelace_color_right")
         tongue_color_right = request.POST.get("tongue_color_right")
-        name_outsole_material_left = models.Material.objects.get(pk=request.POST.get("outsole_material_left")).name
-        name_midsole_material_left = models.Material.objects.get(pk=request.POST.get("midsole_material_left")).name
-        name_uppersole_material_left = models.Material.objects.get(pk=request.POST.get("uppersole_material_left")).name
-        name_shoelace_material_left = models.Material.objects.get(pk=request.POST.get("shoelace_material_left")).name
-        name_tongue_material_left = models.Material.objects.get(pk=request.POST.get("tongue_material_left")).name
-        name_outsole_material_right = models.Material.objects.get(pk=request.POST.get("outsole_material_right")).name
-        name_midsole_material_right = models.Material.objects.get(pk=request.POST.get("midsole_material_right")).name
-        name_uppersole_material_right = models.Material.objects.get(pk=request.POST.get("uppersole_material_right")).name
-        name_shoelace_material_right = models.Material.objects.get(pk=request.POST.get("shoelace_material_right")).name
-        name_tongue_material_right = models.Material.objects.get(pk=request.POST.get("tongue_material_right")).name
-        outsole_material_left = models.Material.objects.get(pk=request.POST.get("outsole_material_left")).file.url
-        midsole_material_left = models.Material.objects.get(pk=request.POST.get("midsole_material_left")).file.url
-        uppersole_material_left = models.Material.objects.get(pk=request.POST.get("uppersole_material_left")).file.url
-        shoelace_material_left = models.Material.objects.get(pk=request.POST.get("shoelace_material_left")).file.url
-        tongue_material_left = models.Material.objects.get(pk=request.POST.get("tongue_material_left")).file.url
-        outsole_material_right = models.Material.objects.get(pk=request.POST.get("outsole_material_right")).file.url
-        midsole_material_right = models.Material.objects.get(pk=request.POST.get("midsole_material_right")).file.url
-        uppersole_material_right = models.Material.objects.get(pk=request.POST.get("uppersole_material_right")).file.url
-        shoelace_material_right = models.Material.objects.get(pk=request.POST.get("shoelace_material_right")).file.url
-        tongue_material_right = models.Material.objects.get(pk=request.POST.get("tongue_material_right")).file.url
+        name_outsole_material_left = models.Material.objects.get(
+            pk=request.POST.get("outsole_material_left")
+        ).name
+        name_midsole_material_left = models.Material.objects.get(
+            pk=request.POST.get("midsole_material_left")
+        ).name
+        name_uppersole_material_left = models.Material.objects.get(
+            pk=request.POST.get("uppersole_material_left")
+        ).name
+        name_shoelace_material_left = models.Material.objects.get(
+            pk=request.POST.get("shoelace_material_left")
+        ).name
+        name_tongue_material_left = models.Material.objects.get(
+            pk=request.POST.get("tongue_material_left")
+        ).name
+        name_outsole_material_right = models.Material.objects.get(
+            pk=request.POST.get("outsole_material_right")
+        ).name
+        name_midsole_material_right = models.Material.objects.get(
+            pk=request.POST.get("midsole_material_right")
+        ).name
+        name_uppersole_material_right = models.Material.objects.get(
+            pk=request.POST.get("uppersole_material_right")
+        ).name
+        name_shoelace_material_right = models.Material.objects.get(
+            pk=request.POST.get("shoelace_material_right")
+        ).name
+        name_tongue_material_right = models.Material.objects.get(
+            pk=request.POST.get("tongue_material_right")
+        ).name
+        outsole_material_left = models.Material.objects.get(
+            pk=request.POST.get("outsole_material_left")
+        ).file.url
+        midsole_material_left = models.Material.objects.get(
+            pk=request.POST.get("midsole_material_left")
+        ).file.url
+        uppersole_material_left = models.Material.objects.get(
+            pk=request.POST.get("uppersole_material_left")
+        ).file.url
+        shoelace_material_left = models.Material.objects.get(
+            pk=request.POST.get("shoelace_material_left")
+        ).file.url
+        tongue_material_left = models.Material.objects.get(
+            pk=request.POST.get("tongue_material_left")
+        ).file.url
+        outsole_material_right = models.Material.objects.get(
+            pk=request.POST.get("outsole_material_right")
+        ).file.url
+        midsole_material_right = models.Material.objects.get(
+            pk=request.POST.get("midsole_material_right")
+        ).file.url
+        uppersole_material_right = models.Material.objects.get(
+            pk=request.POST.get("uppersole_material_right")
+        ).file.url
+        shoelace_material_right = models.Material.objects.get(
+            pk=request.POST.get("shoelace_material_right")
+        ).file.url
+        tongue_material_right = models.Material.objects.get(
+            pk=request.POST.get("tongue_material_right")
+        ).file.url
         response = json.dumps(
             {
                 "outsole_color_left": outsole_color_left,
@@ -233,13 +317,13 @@ class GalleriesListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         designs = models.Design.objects.filter(likes=self.request.user.pk)
-        check_like = [ design.pk for design in designs ]
+        check_like = [design.pk for design in designs]
         context["check_like"] = check_like
         return context
 
     def get_queryset(self):
         designs = models.Design.objects.all().exclude(user__isnull=True)
-        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+        return sorted(designs, key=lambda design: design.total_likes, reverse=True)
 
 
 class GalleriesListByCategoryView(ListView):
@@ -260,14 +344,16 @@ class GalleriesListByCategoryView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         designs = models.Design.objects.filter(likes=self.request.user.pk)
-        check_like = [ design.pk for design in designs ]
+        check_like = [design.pk for design in designs]
         context["check_like"] = check_like
         return context
 
     def get_queryset(self):
         pk = self.kwargs.get("pk")
-        designs = models.Design.objects.filter(product__category=pk).exclude(user__isnull=True)
-        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+        designs = models.Design.objects.filter(product__category=pk).exclude(
+            user__isnull=True
+        )
+        return sorted(designs, key=lambda design: design.total_likes, reverse=True)
 
 
 class GalleriesListByProductView(ListView):
@@ -288,21 +374,21 @@ class GalleriesListByProductView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         designs = models.Design.objects.filter(likes=self.request.user.pk)
-        check_like = [ design.pk for design in designs ]
+        check_like = [design.pk for design in designs]
         context["check_like"] = check_like
         return context
 
     def get_queryset(self):
         pk = self.kwargs.get("pk")
         designs = models.Design.objects.filter(product=pk).exclude(user__isnull=True)
-        return sorted(designs, key= lambda design: design.total_likes, reverse=True)
+        return sorted(designs, key=lambda design: design.total_likes, reverse=True)
 
 
 # デザインに対した「いいね！」機能
 def design_like(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         user = request.user
-        design_pk = request.POST.get('pk', None)
+        design_pk = request.POST.get("pk", None)
         design = models.Design.objects.get(pk=design_pk)
 
         if design.likes.filter(email=user.email).exists():
@@ -312,5 +398,8 @@ def design_like(request):
             design.likes.add(user)
             check_like = True
         likes_count = str(design.total_likes)
-        response = json.dumps({'likes_count': likes_count, "check_like": str(check_like)})
-    return HttpResponse(response, content_type='application/json')
+        response = json.dumps(
+            {"likes_count": likes_count, "check_like": str(check_like)}
+        )
+    return HttpResponse(response, content_type="application/json")
+
