@@ -1,6 +1,6 @@
 {% load i18n static date %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -171,11 +171,17 @@
                     <td class="border">
                         {{ order_item.uppersole_material_right }}
                     </td>
-                    <td class="border text-center" colspan="2" rowspan="3">
-                        size
+                    <td class="border text-center" rowspan="3">
+                        {{ order_item.width_left }}
                     </td>
-                    <td class="border text-center" colspan="2" rowspan="3">
-                        size
+                    <td class="border text-center" rowspan="3">
+                        {{ order_item.length_left }}
+                    </td>
+                    <td class="border text-center" rowspan="3">
+                        {{ order_item.width_right }}
+                    </td>
+                    <td class="border text-center" rowspan="3">
+                        {{ order_item.length_right }}
                     </td>
                 </tr>
                 <tr>

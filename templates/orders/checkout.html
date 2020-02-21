@@ -103,14 +103,11 @@
                             <button class="btn mb-4">{% trans 'お支払い方法の選択へ' %}</button>
                         </div>
                     </div>
-
                     <h3 class="w-full font-semibold text-xl mb-3 text-white bg-gray-900 p-3 rounded-lg">
                         {% trans '2. お支払い方法・ご請求先情報' %}</h3>
-
                     <h3 class="w-full font-semibold text-xl text-white bg-gray-900 p-3 rounded-lg">
                         {% trans '3. ご注文の確定' %}
                     </h3>
-
                 </form>
             </div>
             <div
@@ -122,6 +119,8 @@
 </div>
 
 <script>
+    //// 会員情報からデータを取得するための処理
+    // DOMの取得
     const get_user_data_btn = document.querySelector("#get_user_data");
     const data = {{ recipient_info | js }};
     const first_name = document.querySelector("#id_first_name_recipient");
@@ -133,6 +132,8 @@
     const prefecture = document.querySelector("#id_prefecture_recipient");
     const address_city = document.querySelector("#id_address_city_recipient");
     const address_detail = document.querySelector("#id_address_detail_recipient");
+
+    // フォームに取得したデータを入れる
     get_user_data_btn.addEventListener("click", () => {
         first_name.value = data["first_name"];
         last_name.value = data["last_name"];

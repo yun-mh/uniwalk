@@ -12,7 +12,6 @@
         <div class="flex items-center justify-center bg-indigo-600 w-24 h-24 rounded-full absolute" style="top: -3rem;">
             <i class="fas fa-check fa-3x text-white wow fadeIn"></i>
         </div>
-
         <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans "注文完了" %}</h2>
         <h3 class="font-medium text-xl mb-5">{% trans "ご注文が完了いたしました。" %}</h3>
         <p class="text-center mb-5 wow fadeIn">
@@ -26,12 +25,9 @@
         <a href="{% url 'core:home' %}" class="btn mt-5">
             {% trans "ホームへ" %}
         </a>
-
     </div>
 </div>
-
 {% endblock content %}
 
 {% block javascript %}
-
 {% endblock %}

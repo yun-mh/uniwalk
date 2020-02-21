@@ -69,11 +69,12 @@
 </div>
 <script src="{% static 'js/Chart.min.js' %}"></script>
 <script>
+    //// 会員分析
+    // DOMの取得
     var memberProp = document.getElementById('memberProp').getContext('2d');
     var genderProp = document.getElementById('genderProp').getContext('2d');
     var ageHist = document.getElementById('ageHist').getContext('2d');
 
-    // 会員分析
     // 全体顧客対比会員割合
     if (typeof memberProp !== 'undefined') {
         var memberPropPieChart = new Chart(memberProp, {

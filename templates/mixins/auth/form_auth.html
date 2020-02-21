@@ -1,6 +1,5 @@
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-
     <div class="rounded-lg bg-white px-3 py-3 mb-5 wow fadeIn">
         {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
@@ -12,6 +11,5 @@
         {% include 'mixins/auth/form_input.html' with field=field %}
         {% endfor %}
     </div>
-
     <button class="btn" {% if btn_name %}name="{{ btn_name }}" {% endif %}>{{ cta }}</button>
 </form>

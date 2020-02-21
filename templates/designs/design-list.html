@@ -21,44 +21,37 @@
                     <i class="fas fa-palette fa-3x text-white wow fadeIn"></i>
                 </div>
                 <h2 class="text-indigo-800 mt-3 mb-5 text-3xl font-semibold">{% trans 'マイデザイン' %}</h2>
-
                 {% if designs %}
                 {% for design in designs %}
                 {% include 'mixins/designs/design-card.html' with design=design %}
                 {% endfor %}
-
                 <div class="flex items-center justify-center mx-auto container mb-10">
                     {% if page_obj.has_previous %}
                     <a href="?page={{ page_obj.previous_page_number }}" class="text-purple-500">
                         <i class="fas fa-arrow-left fa-lg"></i>
                     </a>
                     {% endif %}
-
                     <span class="mx-3 font-medium text-lg">
                         {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}
                         {{ current_page }} ページ{% endblocktrans %}
                     </span>
-
                     {% if page_obj.has_next %}
                     <a href="?page={{ page_obj.next_page_number }}" class="text-purple-500">
                         <i class="fas fa-arrow-right fa-lg"></i>
                     </a>
                     {% endif %}
                 </div>
-
                 {% else %}
                 <p class="flex justify-center items-center font-semibold h-full w-full text-center text-2xl my-5">
                     <i class="fas fa-dizzy fa-2x text-purple-500"></i> <span
                         class="ml-5">{% trans 'まだ作成したデザインがありません。' %}</span>
                 </p>
                 {% endif %}
-
                 <a href="{% url 'users:select-product' %}" class="btn w-2/3 mx-auto">{% trans 'デザインする' %}</a>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock content %}
 
 {% block javascript %}

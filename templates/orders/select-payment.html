@@ -183,12 +183,15 @@
 </div>
 
 <script>
+    //// 決済方法別のボックスを操作する
+    // DOMの取得
     const form = document.querySelector("#form");
     const method_card = document.querySelector("#id_payment_0");
     const method_transfer = document.querySelector("#id_payment_1");
     const for_card = document.querySelector("#for_card");
     const for_transfer = document.querySelector("#for_transfer");
 
+    // 各ボックスをトグルする
     if (method_card.checked == true || method_transfer.checked == true) {
         method_card.checked = false;
         method_transfer.checked = false;
@@ -206,6 +209,8 @@
         form.setAttribute("novalidate", true);
     });
 
+    //// 前の画面に入力したデータを取得する
+    // DOMの取得
     const get_prev_data_btn = document.querySelector("#get_prev_data");
     const data = {{ recipient_data | js }};
     const first_name = document.querySelector("#id_first_name_orderer");
@@ -217,6 +222,8 @@
     const prefecture = document.querySelector("#id_prefecture_orderer");
     const address_city = document.querySelector("#id_address_city_orderer");
     const address_detail = document.querySelector("#id_address_detail_orderer");
+
+    // フォームに取得したデータを入れる
     get_prev_data_btn.addEventListener("click", () => {
         first_name.value = data["first_name_recipient"];
         last_name.value = data["last_name_recipient"];
@@ -228,6 +235,5 @@
         address_city.value = data["address_city_recipient"];
         address_detail.value = data["address_detail_recipient"];
     });
-
 </script>
 {% endblock content %}

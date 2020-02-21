@@ -1,4 +1,4 @@
-{% load i18n static %}
+{% load i18n static humanize %}
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl" {% endif %}>
@@ -18,7 +18,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"
         integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
 </head>
-{% load i18n humanize %}
 
 <body
     class="bg-gray-100 font-sans leading-normal tracking-normal {% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
@@ -70,12 +69,11 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="block lg:hidden pr-4">
+                        <div class="block lg:hidden ml-3 pr-4">
                             <button id="nav-toggle"
                                 class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-teal-500 appearance-none focus:outline-none">
                                 <svg class="fill-current h-3 w-3" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <title>Menu</title>
                                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                                 </svg>
                             </button>
@@ -98,7 +96,6 @@
 
         <div class="w-full px-4 md:px-0 md:mt-12 mb-16 text-gray-800 leading-normal">
             {% block content %}
-
             <div class="flex flex-row flex-wrap flex-grow mt-2">
                 <div class="w-full md:w-1/2 p-3">
                     <div class="bg-white border rounded shadow">
@@ -267,6 +264,7 @@
         const analyticsBtn = document.getElementById("analyticsBtn");
         const analyticsDropdown = document.querySelector(".analytics-dropdown");
 
+        // 商品ボタンのクリック時
         productsBtn.addEventListener("click", () => {
             productsDropdown.classList.toggle("hidden");
             if (!usersDropdown.classList.contains("hidden") || !ordersDropdown.classList.contains("hidden") || !analyticsDropdown.classList.contains("hidden")) {
@@ -275,6 +273,8 @@
                 analyticsDropdown.classList.add("hidden");
             }
         });
+
+        // ユーザーボタンのクリック時
         usersBtn.addEventListener("click", () => {
             usersDropdown.classList.toggle("hidden");
             if (!productsDropdown.classList.contains("hidden") || !ordersDropdown.classList.contains("hidden") || !analyticsDropdown.classList.contains("hidden")) {
@@ -283,6 +283,8 @@
                 analyticsDropdown.classList.add("hidden");
             }
         });
+
+        // 注文ボタンのクリック時
         ordersBtn.addEventListener("click", () => {
             ordersDropdown.classList.toggle("hidden");
             if (!usersDropdown.classList.contains("hidden") || !productsDropdown.classList.contains("hidden") || !analyticsDropdown.classList.contains("hidden")) {
@@ -291,6 +293,8 @@
                 analyticsDropdown.classList.add("hidden");
             }
         });
+
+        // 統計ボタンのクリック時
         analyticsBtn.addEventListener("click", () => {
             analyticsDropdown.classList.toggle("hidden");
             if (!usersDropdown.classList.contains("hidden") || !ordersDropdown.classList.contains("hidden") || !productsDropdown.classList.contains("hidden")) {
@@ -301,6 +305,7 @@
         });
     </script>
     <script>
+        // 言語切り替えの実装
         const langSelect = document.getElementById("js-lang");
         const handleLangChange = () => {
             const selected = langSelect.value;

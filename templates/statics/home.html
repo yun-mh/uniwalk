@@ -7,11 +7,10 @@
 
 {% block content %}
 <section class="bg-center object-cover relative rounded-t-xl bg-home-gray">
-    <div class="w-full h-48 rounded-t-xl bg-home-blue">
-        <p class="text-6xl text-center pt-24 text-white wow fadeIn" style="text-shadow: 5px 5px rgba(51, 51, 51, 0.2);">
-            {% trans 'オリジナルスニーカーが作れる！' %}</p>
-    </div>
-    <img src="{% static 'images/home-main.png' %}" class="block relative">
+    <h1 class="w-full text-6xl text-center text-white wow fadeIn absolute z-40"
+        style="top: 4rem; text-shadow: 5px 5px rgba(51, 51, 51, 0.2);">
+        {% trans 'オリジナルスニーカーが作れる！' %}</h1>
+    <img src="{% static 'images/home-main.png' %}" class="block relative rounded-t-xl">
     <div class="flex justify-center items-center w-64 h-64 mx-auto -mt-8 rounded-full border-home-blue p-10 absolute"
         style="background-color: #26232c; border-width: 16px; left: 50%; bottom: -15%; transform: translateX(-8rem);">
         <img src="{% static 'images/logo_white.png' %}" class="wow bounce">
@@ -110,9 +109,7 @@
         <a href="{% url 'products:list' %}" class="btn-home block w-3/4 mx-auto">{% trans 'もっと見る' %}</a>
     </div>
 </section>
-
 {% endblock content %}
 
 {% block javascript %}
-
 {% endblock %}

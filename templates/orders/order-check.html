@@ -6,7 +6,6 @@
 {% endblock page_title %}
 
 {% block content %}
-
 <div class="min-h-75vh rounded-xl mx-auto py-16"
     style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
     <div class="w-5/6 flex flex-col items-center container mx-auto bg-white p-12 my-10 rounded-xl relative">
@@ -116,7 +115,6 @@
                                         <div class="stripe-form-row">
                                             <button class="btn">{% trans '注文を確定する' %}</button>
                                         </div>
-                                        <div id="card-errors" role="alert"></div>
                                     </div>
                                 </form>
                             </div>
@@ -138,6 +136,7 @@
                                                     style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
                                             </div>
                                         </div>
+                                        <div id="card-errors" class="text-red-500 mb-3" role="alert"></div>
                                     </div>
                                 </div>
                                 {% if user.is_authenticated %}
@@ -148,7 +147,6 @@
                                     </div>
                                 </div>
                                 {% endif %}
-                                <div id="card-errors" role="alert"></div>
                                 <button class="btn">{% trans '注文を確定する' %}</button>
                             </form>
                         </div>
@@ -172,20 +170,23 @@
         </div>
     </div>
 </div>
-
 {% endblock content %}
 
 {% block javascript %}
 <script src="https://js.stripe.com/v3/"></script>
-
 <script>
+    // カード決済のとき、カード入力か呼出しかを決めるためのボックスを操作する
     const current_card = document.querySelector("#current-card");
     const new_card = document.querySelector("#new-card");
     const show_new_card_check = document.querySelector("#show-new-card");
     const save_card_info = document.querySelector("#save_card_info");
+
+    // 既に登録されているカードのためのボックスを開いた場合
     if (current_card) {
         new_card.classList.add("hidden");
     }
+
+    // 新しいカードで決済するためのボックスを開いた場合
     if (show_new_card_check) {
         show_new_card_check.addEventListener("change", () => {
             current_card.classList.toggle("hidden");
@@ -194,12 +195,13 @@
     }
 </script>
 <script nonce="">
-    // stripe.js クレジットカード
+    // stripe.jsのAPIキーを取得する
     var stripe = Stripe('pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik');
 
-    // Create an instance of Elements.
+    // Stripe Elementを生成する
     var elements = stripe.elements();
 
+    // カード情報入力欄のスタイルを指定する
     var style = {
         base: {
             color: 'black',
@@ -217,13 +219,11 @@
         }
     };
 
+    // Stripe Elementの中に入力フォームを作り、実装する
     var card = elements.create('card', { hidePostalCode: true, style: style });
-
-    // if (current_card) {
     card.mount('#card-element');
-    // }
 
-    // Handle real-time validation errors from the card Element.
+    // リアルタイムで有効性検査を行う
     card.addEventListener('change', function (event) {
         var displayError = document.getElementById('card-errors');
         if (event.error) {
@@ -233,34 +233,30 @@
         }
     });
 
-    // Handle form submission.
+    // フォームをサブミットするときの作業を指定する
     var form = document.getElementById('stripe-form');
     if (form) {
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             stripe.createToken(card).then(function (result) {
                 if (result.error) {
-                    // Inform the user if there was an error.
                     var errorElement = document.getElementById('card-errors');
                     errorElement.textContent = result.error.message;
                 } else {
-                    // Send the token to your server.
                     stripeTokenHandler(result.token);
                 }
             });
         });
     }
 
-    // Submit the form with the token ID.
+    // トークンIDでフォームをサブミットする
     function stripeTokenHandler(token) {
-        // Insert the token ID into the form so it gets submitted to the server
         var form = document.getElementById('stripe-form');
         var hiddenInput = document.createElement('input');
         hiddenInput.setAttribute('type', 'hidden');
         hiddenInput.setAttribute('name', 'stripeToken');
         hiddenInput.setAttribute('value', token.id);
         form.appendChild(hiddenInput);
-        // Submit the form
         form.submit();
     }
 </script>

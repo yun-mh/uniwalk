@@ -81,7 +81,8 @@
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-            .attr("id", "window_g");
+            .attr("id", "window_g")
+            .attr("class", "svg-grid");
 
         var line = svg.selectAll(".line")
             .data(d3.range(0, width + 1, width / 10).map(function (x) { return [[x, 0], [x, height]]; })

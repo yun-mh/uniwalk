@@ -1,6 +1,6 @@
 {% load i18n static humanize %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -149,7 +149,7 @@
                 </tr>
                 <tr>
                     <td>
-                        {{ order.last_name_orderer }} {{ order.first_name_orderer }}　様
+                        {{ order.last_name_orderer }} {{ order.first_name_orderer }}　{% trans '様' %}
                     </td>
                     <td>
                         {% trans '合計金額' %}：&yen; {{ order.amount | intcomma }}

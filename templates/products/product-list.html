@@ -6,10 +6,8 @@
 {% endblock page_title %}
 
 {% block content %}
-
 <div class="min-h-75vh rounded-xl mx-auto"
     style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
-
     <div class="flex p-10">
         <div class="w-1/6 shadow-lg bg-white rounded-lg ml-6 mr-3 h-2/3">
             <h2 class="text-lg font-extrabold py-2 mb-1 pl-3 bg-gray-900 text-white rounded-t-lg">{% trans '商品カテゴリー' %}
@@ -27,7 +25,6 @@
                 {% endfor %}
             </ul>
         </div>
-
         <div class="w-5/6 flex flex-wrap mr-10 ml-3 rounded-lg p-5 bg-white">
             <h2 class="w-full text-indigo-800 mt-3 mb-5 text-3xl text-center font-semibold">
                 {% if '/category-1/' in request.path %}
@@ -44,7 +41,6 @@
             {% for product in products %}
             {% include 'mixins/products/product-card.html' with product=product %}
             {% endfor %}
-
             <div
                 class="flex h-12 items-center justify-center mx-auto container border border-gray-300 mt-5 bg-gray-100">
                 {% if page_obj.has_previous %}
@@ -52,19 +48,16 @@
                     <i class="fas fa-arrow-left fa-lg"></i>
                 </a>
                 {% endif %}
-
                 <span class="mx-3 font-medium text-sm">
                     {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}
                     {{ current_page }} ページ {% endblocktrans %}
                 </span>
-
                 {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}" class="text-blue-500">
                     <i class="fas fa-arrow-right fa-lg"></i>
                 </a>
                 {% endif %}
             </div>
-
             {% else %}
             <p class="flex justify-center items-center font-semibold w-full h-50vh text-center text-2xl">
                 <i class="fas fa-dizzy fa-2x text-teal-500"></i> <span class="ml-5">{% trans '商品が存在しません。' %}</span>

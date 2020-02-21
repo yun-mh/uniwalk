@@ -48,6 +48,8 @@
     </div>
 </div>
 <script>
+    //// イメージ回転の実装
+    // DOMの取得
     const canvasLeft = document.getElementById("imageLeft");
     const canvasRight = document.getElementById("imageRight");
     const rotateLeftBtn = document.getElementById("rotateLeft");
@@ -57,9 +59,11 @@
     let image_data_left = document.getElementById("id_image_data_left");
     let image_data_right = document.getElementById("id_image_data_right");
 
+    // 角度のデフォルトを設定する
     let degreesLeft = 0;
     let degreesRight = 0;
 
+    // canvasに初期状態のイメージを表示する
     window.onload = function () {
         const imgL = new Image();
         imgL.src = "{{ foot_images.foot_left.url }}";
@@ -82,17 +86,20 @@
         }
     }
 
+    // 左足の回転操作関数
     function drawRotatedLeft(status, image, canvas, ctx, degrees) {
         const cvWidthLeft = canvas.width
         const cvHeightLeft = canvas.height
         let isHorizontalLeft;
 
+        // 画像の横と縦を比較し、イメージの方向を把握する
         if (cvWidthLeft > cvHeightLeft) {
             isHorizontalLeft = true;
         } else {
             isHorizontalLeft = false;
         }
 
+        // イメージが縦長の場合
         if (status === "portrait") {
             if (isHorizontalLeft === true) {
                 ctx.clearRect(0, 0, cvWidthLeft, cvHeightLeft);
@@ -113,6 +120,7 @@
             }
             ctx.restore();
         } else if (status === "horizontal") {
+            // イメージが横長の場合
             if (isHorizontalLeft === true) {
                 ctx.clearRect(0, 0, cvWidthLeft, cvHeightLeft);
                 ctx.save();
@@ -134,17 +142,20 @@
         }
     }
 
+    // 右足の回転操作関数
     function drawRotatedRight(status, image, canvas, ctx, degrees) {
         const cvWidthRight = canvas.width
         const cvHeightRight = canvas.height
         let isHorizontalRight;
 
+        // 画像の横と縦を比較し、イメージの方向を把握する
         if (cvWidthRight > cvHeightRight) {
             isHorizontalRight = true;
         } else {
             isHorizontalRight = false;
         }
 
+        // イメージが縦長の場合
         if (status === "portrait") {
             if (isHorizontalRight === true) {
                 ctx.clearRect(0, 0, cvWidthRight, cvHeightRight);
@@ -165,6 +176,7 @@
             }
             ctx.restore();
         } else if (status === "horizontal") {
+            // イメージが横長の場合
             if (isHorizontalRight === true) {
                 ctx.clearRect(0, 0, cvWidthRight, cvHeightRight);
                 ctx.save();
@@ -186,8 +198,10 @@
         }
     }
 
+    //// 初期状態を確認し、ボタンのクリック時に実際の回転処理を行う
     let firstStatusLeft, firstStatusRight;
 
+    // 左ボタンのクリック時
     rotateLeftBtn.addEventListener("click", () => {
         const imgL = new Image();
         imgL.src = "{{ foot_images.foot_left.url }}";
@@ -200,6 +214,7 @@
         drawRotatedLeft(firstStatusLeft, imgL, canvasLeft, ctxLeft, degreesLeft);
     });
 
+    // 右ボタンのクリック時
     rotateRightBtn.addEventListener("click", () => {
         const imgR = new Image();
         imgR.src = "{{ foot_images.foot_right.url }}";
@@ -212,9 +227,9 @@
         drawRotatedRight(firstStatusRight, imgR, canvasRight, ctxRight, degreesRight);
     });
 
+    // フォームの操作
     $('#main-form').submit(function (e) {
         const form = this;
-
         e.preventDefault();
 
         document.getElementById("blur").style.display = "flex";

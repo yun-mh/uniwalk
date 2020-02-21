@@ -48,12 +48,14 @@
 </div>
 <script src="{% static 'js/Chart.min.js' %}"></script>
 <script>
+    //// 足サイズの統計処理
+    // DOMの取得
     var footLengthHistLeft = document.getElementById('footLengthHistLeft').getContext('2d');
     var footLengthHistRight = document.getElementById('footLengthHistRight').getContext('2d');
     var footWidthHistLeft = document.getElementById('footWidthHistLeft').getContext('2d');
     var footWidthHistRight = document.getElementById('footWidthHistRight').getContext('2d');
 
-    // 足幅(左)
+    // 足幅(左)の処理
     if (typeof footWidthHistLeft !== 'undefined') {
         var footWidthHistBarChart = new Chart(footWidthHistLeft, {
             type: 'bar',
@@ -97,7 +99,7 @@
         });
     }
 
-    // 足幅(右)
+    // 足幅(右)の処理
     if (typeof footWidthHistRight !== 'undefined') {
         var footWidthHistBarChart = new Chart(footWidthHistRight, {
             type: 'bar',
@@ -141,7 +143,7 @@
         });
     }
 
-    // 足長(左)
+    // 足長(左)の処理
     if (typeof footLengthHistLeft !== 'undefined') {
         var footLengthHistBarChart = new Chart(footLengthHistLeft, {
             type: 'bar',
@@ -188,7 +190,7 @@
         });
     }
 
-    // 足長(右)
+    // 足長(右)の処理
     if (typeof footLengthHistRight !== 'undefined') {
         var footLengthHistBarChart = new Chart(footLengthHistRight, {
             type: 'bar',

@@ -54,14 +54,14 @@
 
 {% block javascript %}
 <script src="https://js.stripe.com/v3/"></script>
-
 <script nonce="">
-    // stripe.js クレジットカード
+    // stripe.jsのAPIキーを取得する
     var stripe = Stripe('pk_test_l8WeXDITD36aGElnqRag5TWP00dupOaKik');
 
-    // Create an instance of Elements.
+    // Stripe Elementを生成する
     var elements = stripe.elements();
 
+    // カード情報入力欄のスタイルを指定する
     var style = {
         base: {
             color: 'black',
@@ -78,11 +78,11 @@
         }
     };
 
+    // Stripe Elementの中に入力フォームを作り、実装する
     var card = elements.create('card', { hidePostalCode: true, style: style });
-
     card.mount('#card-element');
 
-    // Handle real-time validation errors from the card Element.
+    // リアルタイムで有効性検査を行う
     card.addEventListener('change', function (event) {
         var displayError = document.getElementById('card-errors');
         if (event.error) {
@@ -92,32 +92,28 @@
         }
     });
 
-    // Handle form submission.
+    // フォームをサブミットするときの作業を指定する
     var form = document.getElementById('stripe-form');
     form.addEventListener('submit', function (event) {
         event.preventDefault();
         stripe.createToken(card).then(function (result) {
             if (result.error) {
-                // Inform the user if there was an error.
                 var errorElement = document.getElementById('card-errors');
                 errorElement.textContent = result.error.message;
             } else {
-                // Send the token to your server.
                 stripeTokenHandler(result.token);
             }
         });
     });
 
-    // Submit the form with the token ID.
+    // トークンIDでフォームをサブミットする
     function stripeTokenHandler(token) {
-        // Insert the token ID into the form so it gets submitted to the server
         var form = document.getElementById('stripe-form');
         var hiddenInput = document.createElement('input');
         hiddenInput.setAttribute('type', 'hidden');
         hiddenInput.setAttribute('name', 'stripeToken');
         hiddenInput.setAttribute('value', token.id);
         form.appendChild(hiddenInput);
-        // Submit the form
         form.submit();
     }
 </script>

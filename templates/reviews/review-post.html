@@ -6,7 +6,6 @@
 {% endblock page_title %}
 
 {% block content %}
-
 <div class="flex min-h-75vh rounded-xl py-16"
     style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
     <div class="container bg-white w-4/5 rounded-xl h-full mx-auto my-10 flex flex-col items-center p-12 relative">
@@ -46,7 +45,6 @@
                     <span class="block mt-2 text-2xl">{{ product.total_rating }}</span>
                 </div>
             </div>
-
             <div class="w-2/3 py-5 flex flex-col mb-10 mr-2">
                 <div>
                     <form action="{% url 'reviews:post' product.pk %}" method="POST" class="w-full mx-auto">

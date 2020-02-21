@@ -6,17 +6,6 @@
 {% endblock page_title %}
 
 {% block content %}
-<style>
-    .dg .c select {
-        background-color: rgb(48, 48, 48);
-        height: 27px;
-    }
-
-    .dg .c input[type=text] {
-        height: 27px;
-        line-height: 27px;
-    }
-</style>
 <div id="blur" class="hidden flex items-center justify-center"
     style="position: fixed; top:0; left: 0; width: 100vw; height: 100vh; background: rgba(10, 10, 10, 0.9); z-index: 1000;">
     <span class="text-4xl font-bold text-gray-300">{% trans '画像を抽出しています。' %}</span>
@@ -25,31 +14,29 @@
     <form method="POST" id="main-form">
         {% csrf_token %}
         <div id="screen" class="w-full h-75vh relative">
-            <div id="guiContainer" class="absolute" style="right: 0px;"></div>
+            <div id="guiContainer" class="absolute" style="left: 1rem; top: 1rem"></div>
             <button class="btn w-64 absolute" style="bottom: 1rem; right: 1rem;">{% trans 'デザイン確定' %}</button>
         </div>
         {{ form }}
     </form>
     <div class="w-full flex">
-        <div class="w-12 bg-gray-300">
-            <a href="" id="prev_page" class="hidden w-full block h-56 flex items-center justify-center">
+        <div class="w-12 bg-indigo-400">
+            <a href="" id="prev_page" class="hidden w-full block h-56 flex items-center justify-center text-white">
                 <i class="fas fa-chevron-left fa-2x"></i>
             </a>
         </div>
         <ul id="design_list" class="w-full h-56 flex">
             {% include 'mixins/designs/related_design_card.html' %}
         </ul>
-        <div class="w-12 bg-gray-300">
+        <div class="w-12 bg-indigo-400">
             {% if page_obj.has_next %}
-            <a href="" id="next_page" class="w-full block h-56 flex items-center justify-center">
+            <a href="" id="next_page" class="w-full block h-56 flex items-center justify-center text-white">
                 <i class="fas fa-chevron-right fa-2x"></i>
             </a>
             {% endif %}
         </div>
     </div>
 </div>
-
-
 {% endblock content %}
 
 {% block javascript %}
@@ -63,6 +50,7 @@
     var scene = new THREE.Scene();
     var screen = document.getElementById("screen");
 
+    // rendererの設定及び実装
     var renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.shadowMap.enabled = true;
     renderer.setSize(screen.clientWidth, screen.clientHeight);
@@ -84,16 +72,16 @@
         camera.updateProjectionMatrix();
     });
 
-
+    // UIコントロールの設定
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.minDistance = 3.7;
     controls.maxDistance = 7;
 
+    // .glbファイルを呼び出すためのローダの設定
     var loader = new THREE.GLTFLoader();
 
     // デザインカスタマイズ用テンプレートのロード
     var shoelace_left_data, tongue_left_data, upper_left_data, midsole_left_data, outsole_left_data, liner_left_data, shoelace_right_data, tongue_right_data, upper_right_data, midsole_right_data, outsole_right_data, liner_right_data;
-
     {% if template.shoelace_left %}
     shoelace_left_data = "{{ template.shoelace_left.url }}";
     {% endif %}
@@ -131,6 +119,8 @@
     liner_right_data = "{{ template.liner_right.url }}";
     {% endif %}
 
+    //// 靴の部分ごとにロードする
+    // 左のシューレス
     if (shoelace_left_data) {
         loader.load(shoelace_left_data, load_left_shoelace);
     }
@@ -142,6 +132,7 @@
         scene.add(left_shoelace);
     }
 
+    //　左のタン
     if (tongue_left_data) {
         loader.load(tongue_left_data, load_left_tongue);
     }
@@ -153,6 +144,7 @@
         scene.add(left_tongue);
     }
 
+    //　左のアッパー
     if (upper_left_data) {
         loader.load(upper_left_data, load_left_upper);
     }
@@ -164,6 +156,7 @@
         scene.add(left_upper);
     }
 
+    //　左のミッドソール
     if (midsole_left_data) {
         loader.load(midsole_left_data, load_left_bottom);
     }
@@ -175,6 +168,7 @@
         scene.add(left_bottom);
     }
 
+    //　左のアウトソール
     if (outsole_left_data) {
         loader.load(outsole_left_data, load_left_sole);
     }
@@ -186,7 +180,7 @@
         scene.add(left_sole);
     }
 
-
+    //　右のシューレス
     if (shoelace_right_data) {
         loader.load(shoelace_right_data, load_right_shoelace);
     }
@@ -198,6 +192,7 @@
         scene.add(right_shoelace);
     }
 
+    //右のタン
     if (tongue_right_data) {
         loader.load(tongue_right_data, load_right_tongue);
     }
@@ -209,6 +204,7 @@
         scene.add(right_tongue);
     }
 
+    //右のアッパー
     if (upper_right_data) {
         loader.load(upper_right_data, load_right_upper);
     }
@@ -220,6 +216,7 @@
         scene.add(right_upper);
     }
 
+    //右のミッドソール
     if (midsole_right_data) {
         loader.load(midsole_right_data, load_right_bottom);
     }
@@ -231,6 +228,7 @@
         scene.add(right_bottom);
     }
 
+    //右のアウトソール
     var right_sole;
     if (outsole_right_data) {
         loader.load(outsole_right_data, load_right_sole);
@@ -244,8 +242,8 @@
 
     // GUIの設定
     var gui = new dat.GUI();
-
     var parameters, left, right, left_m, right_m, l_shoelace, l_upper, l_tongue, l_bottom, l_sole, r_shoelace, r_upper, r_tongue, r_bottom, r_sole
+
     function displaygui() {
         parameters = {
             // 左足の色のデフォルト値
@@ -501,6 +499,8 @@
         gui.open();
 
     }
+
+    //OrbitControlsの限界を設定し、マウスの操作に制限をかける
     var guiContainer = document.getElementById('guiContainer');
     guiContainer.appendChild(gui.domElement);
     screen.addEventListener('mouseenter', function () {
@@ -516,6 +516,7 @@
         controls.enabled = true;
     })
 
+    // シーンにライトをつける
     var ambientLight = new THREE.AmbientLight(0x888888, 0.9);
     scene.add(ambientLight);
 
@@ -524,6 +525,7 @@
     shadowLight.castShadow = true;
     scene.add(shadowLight);
 
+    // 以上の処理を実行する
     var render = function () {
         renderer.render(scene, camera);
     };
@@ -536,8 +538,9 @@
     GameLoop();
     displaygui();
 </script>
-
 <script>
+    //// スクリーンショットを取るためのカメラ操作の設定
+    // 側面を見るようにカメラを位置する関数
     function cameraSide() {
         camera.position.x = 0;
         camera.position.y = 0;
@@ -550,6 +553,7 @@
         scene.rotation.y = -45 * (Math.PI / 180);
     }
 
+    // 正面を見るようにカメラを位置する関数
     function cameraFront() {
         camera.position.x = 0;
         camera.position.y = 0;
@@ -562,6 +566,7 @@
         scene.rotation.z = 0;
     }
 
+    // 上面を見るようにカメラを位置する関数
     function cameraUp() {
         camera.position.x = 0;
         camera.position.y = 0;
@@ -574,6 +579,7 @@
         scene.rotation.z = 0;
     }
 
+    // 下面を見るようにカメラを位置する関数
     function cameraBottom() {
         camera.position.x = 0;
         camera.position.y = 0;
@@ -586,7 +592,8 @@
         scene.rotation.z = 0;
     }
 
-    // 確定後の処理
+    //// 確定後の処理
+    // DOMの取得
     var submit = document.getElementById("submit");
 
     var outsole_color_left = document.getElementById("id_outsole_color_left");
@@ -616,9 +623,11 @@
     var image_up = document.getElementById("id_image_data_up");
     var image_down = document.getElementById("id_image_data_down");
 
+    // フォームのサブミット時の処理
     $('#main-form').submit(function (e) {
         var form = this;
         e.preventDefault();
+
         // 色情報を取得する
         outsole_color_left.value = "#" + left_sole.material.color.getHexString();
         midsole_color_left.value = "#" + left_bottom.material.color.getHexString();
@@ -645,7 +654,6 @@
 
         //// スクリーンショットを取る
         var canvas = document.getElementsByTagName("canvas")[0];
-
         document.getElementById("blur").style.display = "flex";
         setTimeout(function () {
             cameraFront();
@@ -676,10 +684,9 @@
         }, 500);
     });
 </script>
-
 <script>
+    //// デザインパレットのページネーション機能
     $(document).ready(function () {
-        // ページ機能
         var cur_page = parseInt('{{ page_obj.number }}');
         var next_page = parseInt('{% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}');
         var last_page = parseInt('{{ page_obj.paginator.num_pages }}');
@@ -715,7 +722,7 @@
             return false;
         });
 
-        // パレットからのデザイン反映
+        //// パレットからのデザイン反映するための処理
         $('body').on("click", ".design-form", function (e) {
             e.preventDefault();
             var pk = $(this).attr("id").split("_")[1];
@@ -749,7 +756,7 @@
                     right_shoelace.material.map = new THREE.TextureLoader().load(response["shoelace_material_right"]);
                     right_tongue.material.map = new THREE.TextureLoader().load(response["tongue_material_right"]);
 
-                    // GUIへの反映
+                    //// GUIへの反映
                     // 色
                     l_shoelace.setValue(response["shoelace_color_left"]);
                     l_upper.setValue(response["uppersole_color_left"]);

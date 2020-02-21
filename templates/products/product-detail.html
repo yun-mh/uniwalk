@@ -6,7 +6,6 @@
 {% endblock page_title %}
 
 {% block content %}
-
 <div class="container max-w-full w-full mx-auto flex px-20 py-24 bg-white px-64 rounded-xl">
     <div class="w-3/5 flex flex-wrap mx-5 wow fadeIn">
         <div class="w-full h-2/3 bg-cover bg-center"
@@ -72,7 +71,6 @@
         <a href="{% url 'reviews:post' product.pk %}" class="w-48 btn py-2 mt-3">{% trans 'レビューを書く' %}</a>
         {% endif %}
     </div>
-
     {% if rev %}
     <div class="flex flex-wrap -mx-5 my-3 wow fadeIn">
         {% for r in rev %}
@@ -105,8 +103,11 @@
     </p>
     {% endif %}
 </div>
+{% endblock %}
 
+{% block javascript %}
 <script>
+    // 取得した代表レビューを折りたたみ式で表示する
     var texts = {{ reviews_text | js }};
     const openCards = (id) => {
         const card = document.getElementById("card-" + id);
@@ -118,5 +119,4 @@
         document.getElementById(id).remove();
     };
 </script>
-
 {% endblock %}

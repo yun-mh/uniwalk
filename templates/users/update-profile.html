@@ -47,7 +47,6 @@
         </div>
     </div>
 </div>
-
 {% endblock content %}
 
 {% block javascript %}
@@ -55,6 +54,7 @@
 <script src="{% static 'js/datepicker.min.js' %}"></script>
 <script src="{% static 'js/i18n/datepicker.ja-JP.js' %}"></script>
 <script>
+    // 日付設定用カレンダーウィジェットを呼び出す
     $(function () {
         $(".datepicker").datepicker({
             format: 'yyyy-mm-dd',

@@ -129,7 +129,13 @@ class CheckoutView(FormView):
             }
             self.request.session["recipient_data"] = recipient_data
             return redirect(reverse("orders:select-payment"))
+        else:
+            messages.error(self.request, _("入力した情報をもう一度確認してください。"))
         return render(self.request, "orders/checkout.html", context)
+
+    def form_invalid(self, form):
+        messages.error(self.request, _("入力した情報をもう一度確認してください。"))
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 class SelectPaymentView(FormView):

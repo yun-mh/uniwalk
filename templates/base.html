@@ -1,6 +1,6 @@
 {% load static i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
   <meta charset="UTF-8" />
@@ -12,6 +12,10 @@
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
   <script src="{% static 'js/wow.min.js' %}"></script>
   <script src="https://kit.fontawesome.com/d7ead653ba.js" crossorigin="anonymous"></script>
+  <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/chat/axios.js' %}"></script>
+  <script src="{% static 'js/chat/app.js' %}"></script>
   <title>{% block page_title %}{% endblock page_title %}| UniWalk</title>
 </head>
 
@@ -29,6 +33,8 @@
   {% include "partials/footer.html" %}
 
   <script>
+    //// ナビゲーションバーの操作
+    // ユーザボタンを押した場合
     const userBtn = document.querySelector(".user-btn");
     if (userBtn) {
       const userDropdown = document.querySelector(".dropdown-content");
@@ -36,24 +42,30 @@
         userDropdown.classList.toggle("hidden");
       });
     }
+
+    // 言語切り替えボタンを押した場合
     const langBtn = document.querySelector(".lang-btn");
     const langDropdown = document.querySelector(".lang-dropdown");
     langBtn.addEventListener("click", () => {
       langDropdown.classList.toggle("hidden");
     });
-  </script>
 
-  <script>
+    //// 言語切り替え時に取得した言語で実際切り替える処理
+    // ボタンの取得
     const ja = document.querySelector(".ja");
     const ko = document.querySelector(".ko");
     const id = document.querySelector(".id");
     const en = document.querySelector(".en");
     const zh_hans = document.querySelector(".zh-hans");
     const pt_br = document.querySelector(".pt-br");
+
+    // 言語を切り替える
     const handleLangChange = (e) => {
       const selected = e.target.hreflang;
       fetch(`{% url 'users:switch-language' %}?lang=${selected}`).then(() => window.location.reload());
     }
+
+    // ボタンを押したときの処理
     ja.addEventListener("click", handleLangChange);
     ko.addEventListener("click", handleLangChange);
     id.addEventListener("click", handleLangChange);
@@ -62,12 +74,11 @@
     pt_br.addEventListener("click", handleLangChange);
   </script>
   <script>
+    // アニメーション効果のためのライブラリー初期化
     new WOW().init();
   </script>
   {% block javascript %}
-
   {% endblock %}
-
 </body>
 
 </html>
