@@ -1,35 +1,25 @@
 (function() {
-  "use strict";
-
+  // pusherのAPI設定
   var pusher = new Pusher("768af5bb1417be83adc3", {
     authEndpoint: "/chats/pusher/auth/",
     cluster: "ap3",
     encrypted: true
   });
 
-  // ----------------------------------------------------
-  // Chat Details
-  // ----------------------------------------------------
-
+  // チャットのデフォルト設定
   let chat = {
     email: undefined,
     myChannel: undefined
   };
 
-  // ----------------------------------------------------
-  // Targeted Elements
-  // ----------------------------------------------------
-
+  // DOMの取得
   const chatPage = $(document);
   const chatBtn = $(".chatbubble");
   const chatCloseBtn = $(".closeBtn");
   const chatWindow = $(".chat-window");
   const chatBody = $(".chat-window");
 
-  // ----------------------------------------------------
-  // Register helpers
-  // ----------------------------------------------------
-
+  // UIを操作する関数の定義
   let helpers = {
     // チャットウィンドウの操作
     ToggleChatWindow: function() {
@@ -61,10 +51,7 @@
       }, 2000);
     },
 
-    // ----------------------------------------------------
-    // Append a message to the chat messages UI.
-    // ----------------------------------------------------
-
+    // チャットウィンドウにメッセージを入れる
     NewChatMessage: function(message) {
       if (message !== undefined) {
         const messageClass = message.sender !== chat.email ? "support" : "user";
@@ -81,10 +68,7 @@
       }
     },
 
-    // ----------------------------------------------------
-    // Send a message to the chat channel.
-    // ----------------------------------------------------
-
+    // 管理者にメッセージを送る
     SendMessageToSupport: function(evt) {
       evt.preventDefault();
 
@@ -113,17 +97,13 @@
       $("#newMessage").val("");
     },
 
-    // ----------------------------------------------------
-    // Logs user into a chat session.
-    // ----------------------------------------------------
-
+    // チャットセッションにアクセスする
     LogIntoChatSession: function(evt) {
       const email = $("#email")
         .val()
         .trim()
         .toLowerCase();
 
-      // Disable the form
       chatBody
         .find("#loginScreenForm input, #loginScreenForm button")
         .attr("disabled", true);
@@ -142,18 +122,12 @@
     }
   };
 
-  // ------------------------------------------------------------------
-  // Listen for a new message event from the admin
-  // ------------------------------------------------------------------
-
+  // 管理者からのメッセージを受信する
   pusher.bind("client-support-new-message", function(data) {
     helpers.NewChatMessage(data);
   });
 
-  // ----------------------------------------------------
-  // Register page event listeners
-  // ----------------------------------------------------
-
+  // イベントリスナーの定義
   chatPage.ready(helpers.ShowAppropriateChatDisplay);
   chatBtn.on("click", helpers.ToggleChatWindow);
   chatCloseBtn.on("click", helpers.ToggleChatWindow);

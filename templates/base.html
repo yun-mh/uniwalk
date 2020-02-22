@@ -14,8 +14,6 @@
   <script src="https://kit.fontawesome.com/d7ead653ba.js" crossorigin="anonymous"></script>
   <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-  <script src="{% static 'js/chat/axios.js' %}"></script>
-  <script src="{% static 'js/chat/app.js' %}"></script>
   <title>{% block page_title %}{% endblock page_title %}| UniWalk</title>
 </head>
 
@@ -77,6 +75,8 @@
     // アニメーション効果のためのライブラリー初期化
     new WOW().init();
   </script>
+  <script src="{% static 'js/chat/axios.js' %}"></script>
+  <script src="{% static 'js/chat/app.js' %}"></script>
   {% block javascript %}
   {% endblock %}
 </body>

@@ -1,15 +1,18 @@
+// 各種DOMの取得
 const utils = new Utils("errorMessage");
 const imageUsed = document.getElementById("target").getAttribute("src");
 const applyButton = document.getElementById("apply");
 const submitButton = document.getElementById("fix");
 let image_data = document.getElementById("id_image_data");
 
+// 確定ボタンの設定
 const setUpApplyButton = function() {
   let pointsArray = [];
   const children = document.querySelectorAll("#window_g .handle");
+
+  // 各ハンドルから点の座標を取得し、配列に入れる
   children.forEach(e => {
     const pos = e.getAttribute("transform");
-    console.dir(pos);
     const point = pos
       .replace("translate(", "")
       .replace(")", "")
@@ -18,6 +21,7 @@ const setUpApplyButton = function() {
     pointsArray.push(point[1]);
   });
 
+  // 原本のイメージを一回表示する
   utils.loadImageToCanvas(imageUsed, "imageInit");
 
   setTimeout(() => {
@@ -34,6 +38,7 @@ const setUpApplyButton = function() {
       return num;
     });
 
+    //// 画像の幾何学変換を行うためのデータを取得し設定する
     let dst = new cv.Mat();
     let dsize = new cv.Size(500, 707);
     let srcTri = cv.matFromArray(4, 1, cv.CV_32FC2, pointsArray);
@@ -47,6 +52,9 @@ const setUpApplyButton = function() {
       0,
       707
     ]);
+
+    //// イメージの幾何学変換を行う
+    // 透視変換
     let M = cv.getPerspectiveTransform(srcTri, dstTri);
     cv.warpPerspective(
       src,
@@ -57,6 +65,8 @@ const setUpApplyButton = function() {
       cv.BORDER_CONSTANT,
       new cv.Scalar()
     );
+
+    //　変換した結果をDOMに表示
     document.getElementById("imageInit").style.display = "none";
     cv.imshow("imageResult", dst);
     src.delete();
@@ -67,6 +77,8 @@ const setUpApplyButton = function() {
     submitButton.classList.toggle("hidden");
   }, 500);
 };
+
+// 画像変換時に確定ボタンの操作を一時的に不可にする
 applyButton.setAttribute("disabled", "true");
 applyButton.onclick = setUpApplyButton;
 utils.loadOpenCv(() => {
@@ -75,6 +87,7 @@ utils.loadOpenCv(() => {
   }, 500);
 });
 
+// フォームの処理
 $("#main-form").submit(function(e) {
   var form = this;
   e.preventDefault();

@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.core.files.base import ContentFile
+from django.shortcuts import render, redirect
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView
 from designs import models as design_models
 from products import models as product_models
@@ -80,6 +82,8 @@ def footsizes_measure(request, *args, **kwargs):
                 request.session["width_left"] = int(width_left)
                 request.session["width_right"] = int(width_right)
                 return redirect("carts:add_cart", pk=pk, design_pk=design_pk)
+            else:
+                messages.error(request, _("入力した情報をもう一度確認してください。"))
             footsize_image_form = forms.FootsizeImageForm(prefix="image")
         elif "footsize-image" in request.POST:
             footsize_image_form = forms.FootsizeImageForm(

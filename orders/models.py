@@ -75,9 +75,7 @@ class Order(models.Model):
     prefecture_recipient = JPPrefectureField(_("都道府県(ご請求書先)"), max_length=2)
     address_city_recipient = models.CharField(_("市区町村(ご請求書先)"), max_length=40)
     address_detail_recipient = models.CharField(_("建物名・部屋番号(ご請求書先)"), max_length=40)
-    last_name_orderer = models.CharField(
-        _("姓(お届け先)"), max_length=30
-    )
+    last_name_orderer = models.CharField(_("姓(お届け先)"), max_length=30)
     first_name_orderer = models.CharField(
         _("名(お届け先)"), max_length=30, null=True, blank=True
     )
@@ -203,10 +201,10 @@ class OrderItem(models.Model):
     tongue_color_right = models.CharField("タン色(右)", max_length=7)
     tongue_material_right = models.CharField("タン素材(右)", max_length=20)
     customize_code = models.CharField(_("カスタマイズデザインコード"), max_length=11)
-    length_left = models.DecimalField(_("足長(左)"), max_digits=4, decimal_places=1)
-    length_right = models.DecimalField(_("足長(右)"), max_digits=4, decimal_places=1)
-    width_left = models.DecimalField(_("足幅(左)"), max_digits=4, decimal_places=1)
-    width_right = models.DecimalField(_("足幅(右)"), max_digits=4, decimal_places=1)
+    length_left = models.DecimalField(_("足長(左)"), max_digits=3, decimal_places=0)
+    length_right = models.DecimalField(_("足長(右)"), max_digits=3, decimal_places=0)
+    width_left = models.DecimalField(_("足幅(左)"), max_digits=3, decimal_places=0)
+    width_right = models.DecimalField(_("足幅(右)"), max_digits=3, decimal_places=0)
 
     def sub_total(self):
         return self.quantity * self.price

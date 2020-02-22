@@ -15,7 +15,6 @@ def rotate_image(path):
             if ExifTags.TAGS[orientation] == "Orientation":
                 break
         exif = dict(image._getexif().items())
-        print(exif)
         # イメージを正しい方向にローテートする（回転方向は反時計回り）
         if exif[orientation] == 3:
             image = image.rotate(180, expand=True)
@@ -41,10 +40,10 @@ class Footsize(core_models.TimeStampedModel):
         null=True,
         blank=True,
     )
-    length_left = models.DecimalField(_("足長(左)"), max_digits=4, decimal_places=1)
-    length_right = models.DecimalField(_("足長(右)"), max_digits=4, decimal_places=1)
-    width_left = models.DecimalField(_("足幅(左)"), max_digits=4, decimal_places=1)
-    width_right = models.DecimalField(_("足幅(右)"), max_digits=4, decimal_places=1)
+    length_left = models.DecimalField(_("足長(左)"), max_digits=3, decimal_places=0)
+    length_right = models.DecimalField(_("足長(右)"), max_digits=3, decimal_places=0)
+    width_left = models.DecimalField(_("足幅(左)"), max_digits=3, decimal_places=0)
+    width_right = models.DecimalField(_("足幅(右)"), max_digits=3, decimal_places=0)
 
     def __str__(self):
         return str(self.user)

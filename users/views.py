@@ -973,6 +973,8 @@ def footsizes_measure(request, *args, **kwargs):
                 # 登録完了のメッセージを表示し、元の画面に戻る
                 messages.success(request, _("足サイズを登録しました。"))
                 return redirect("users:footsizes")
+            else:
+                messages.error(request, _("入力した情報をもう一度確認してください。"))
             footsize_image_form = feet_forms.FootsizeImageForm(prefix="image")
         # イメージ測定を選んだ場合
         elif "footsize-image" in request.POST:
