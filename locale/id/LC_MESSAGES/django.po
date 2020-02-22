@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-21 14:15+0900\n"
+"POT-Creation-Date: 2020-02-21 15:18+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -742,19 +742,19 @@ msgstr "Keluar"
 msgid "注文状況"
 msgstr "Status pemesanan"
 
-#: .\templates\admin\base.html:109
+#: .\templates\admin\base.html:109 .\vinaigrette-deleteme.py:7
 msgid "入金前"
 msgstr "Sebelum pembayaran"
 
-#: .\templates\admin\base.html:115
+#: .\templates\admin\base.html:115 .\vinaigrette-deleteme.py:8
 msgid "決済処理中"
 msgstr "Dalam proses pembayaran"
 
-#: .\templates\admin\base.html:121
+#: .\templates\admin\base.html:121 .\vinaigrette-deleteme.py:9
 msgid "決済確認済み"
 msgstr "Pembayaran telah dikonfirmasi"
 
-#: .\templates\admin\base.html:127
+#: .\templates\admin\base.html:127 .\vinaigrette-deleteme.py:10
 msgid "対応中"
 msgstr "Dalam proses korespondensi"
 
@@ -1464,14 +1464,14 @@ msgstr "Ukuran"
 
 #: .\templates\documents\specification.html:123
 #: .\templates\feet\feet-list.html:31 .\templates\feet\feet-measure.html:97
-#: .\templates\feet\feet-measure.html:126
+#: .\templates\feet\feet-measure.html:128
 #: .\templates\feet\feet-rotation.html:18
 msgid "左"
 msgstr "Kiri"
 
 #: .\templates\documents\specification.html:126
 #: .\templates\feet\feet-list.html:47 .\templates\feet\feet-measure.html:105
-#: .\templates\feet\feet-measure.html:140
+#: .\templates\feet\feet-measure.html:146
 #: .\templates\feet\feet-rotation.html:19
 msgid "右"
 msgstr "Kanan"
@@ -1479,16 +1479,16 @@ msgstr "Kanan"
 #: .\templates\documents\specification.html:146
 #: .\templates\documents\specification.html:152
 #: .\templates\feet\feet-list.html:38 .\templates\feet\feet-list.html:54
-#: .\templates\feet\feet-measure.html:30 .\templates\feet\feet-measure.html:133
-#: .\templates\feet\feet-measure.html:147 .\templates\statics\home.html:56
+#: .\templates\feet\feet-measure.html:30 .\templates\feet\feet-measure.html:137
+#: .\templates\feet\feet-measure.html:155 .\templates\statics\home.html:56
 msgid "足幅"
 msgstr "Lebar kaki"
 
 #: .\templates\documents\specification.html:149
 #: .\templates\documents\specification.html:155
 #: .\templates\feet\feet-list.html:33 .\templates\feet\feet-list.html:49
-#: .\templates\feet\feet-measure.html:21 .\templates\feet\feet-measure.html:128
-#: .\templates\feet\feet-measure.html:142 .\templates\statics\home.html:60
+#: .\templates\feet\feet-measure.html:21 .\templates\feet\feet-measure.html:130
+#: .\templates\feet\feet-measure.html:148 .\templates\statics\home.html:60
 msgid "足長"
 msgstr "Panjang kaki"
 
@@ -1729,7 +1729,7 @@ msgstr "Ukuran kaki saya"
 msgid "まだ足サイズの測定データがありません。"
 msgstr "Tidak ada data ukuran kaki yang terdaftar"
 
-#: .\templates\feet\feet-list.html:67 .\templates\feet\feet-measure.html:111
+#: .\templates\feet\feet-list.html:67 .\templates\feet\feet-measure.html:113
 msgid "測定する"
 msgstr "Mengukur"
 
@@ -1791,15 +1791,15 @@ msgstr "Masukan ukuran kaki"
 msgid "測定するイメージファイルをアップロードしてください。"
 msgstr "Unggah file gambar untuk diukur."
 
-#: .\templates\feet\feet-measure.html:90 .\templates\feet\feet-measure.html:120
+#: .\templates\feet\feet-measure.html:90 .\templates\feet\feet-measure.html:122
 msgid "足サイズ測定方法"
 msgstr "Cara mengukur kaki"
 
-#: .\templates\feet\feet-measure.html:117
+#: .\templates\feet\feet-measure.html:119
 msgid "足サイズを記入してください。"
 msgstr "Masukan ukuran kaki"
 
-#: .\templates\feet\feet-measure.html:153
+#: .\templates\feet\feet-measure.html:163
 msgid "決定する"
 msgstr "Lanjutkan"
 
@@ -1864,7 +1864,7 @@ msgstr "Detail pemesanan"
 
 #: .\templates\mixins\orders\order-card.html:29
 #: .\templates\mixins\orders\order-detail-card.html:39
-#: .\templates\orders\search-order-detail.html:59
+#: .\templates\orders\search-order-detail.html:59 .\vinaigrette-deleteme.py:12
 msgid "注文取消"
 msgstr "Menghapus pesanan"
 
@@ -2647,15 +2647,33 @@ msgstr "Pendaftaran ukuran kaki berhasil"
 msgid "会員様のメールアドレスとは違います。"
 msgstr "Alamat email anda salah"
 
+#: .\vinaigrette-deleteme.py:2
 #, fuzzy
-#~| msgid "ホーム"
-#~ msgid "ラバー"
-#~ msgstr "Beranda"
+#| msgid "ホーム"
+msgid "ラバー"
+msgstr "Beranda"
 
+#: .\vinaigrette-deleteme.py:3
+msgid "キャンバス"
+msgstr ""
+
+#: .\vinaigrette-deleteme.py:4
 #, fuzzy
-#~| msgid "ユーザー"
-#~ msgid "レザー"
-#~ msgstr "Pengguna"
+#| msgid "ユーザー"
+msgid "レザー"
+msgstr "Pengguna"
+
+#: .\vinaigrette-deleteme.py:5
+msgid "Uniwalkのベーシックライン。どんなファッションにもよく合う！"
+msgstr ""
+
+#: .\vinaigrette-deleteme.py:6
+msgid "test"
+msgstr ""
+
+#: .\vinaigrette-deleteme.py:11
+msgid "発送済み"
+msgstr ""
 
 #, python-format
 #~ msgid ""
