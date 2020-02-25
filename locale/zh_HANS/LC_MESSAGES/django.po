@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-21 15:18+0900\n"
+"POT-Creation-Date: 2020-02-25 10:39+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,34 +28,34 @@ msgstr "购物车"
 msgid "デザイン"
 msgstr "DIY"
 
-#: .\carts\models.py:26 .\designs\models.py:76 .\orders\models.py:173
+#: .\carts\models.py:26 .\designs\models.py:76 .\orders\models.py:204
 #: .\products\models.py:32 .\products\models.py:81 .\products\models.py:173
 #: .\products\models.py:174 .\reviews\models.py:13
-#: .\templates\admin\extra_nav.html:20 .\templates\partials\nav.html:118
+#: .\templates\admin\extra_nav.html:20 .\templates\partials\nav.html:116
 msgid "商品"
 msgstr "商品"
 
-#: .\carts\models.py:28 .\feet\models.py:44 .\orders\models.py:206
+#: .\carts\models.py:28 .\feet\models.py:43 .\orders\models.py:237
 #: .\templates\admin\footsize-analytics.html:8
 msgid "足長(左)"
 msgstr "左脚尺寸"
 
-#: .\carts\models.py:29 .\feet\models.py:45 .\orders\models.py:207
+#: .\carts\models.py:29 .\feet\models.py:44 .\orders\models.py:238
 #: .\templates\admin\footsize-analytics.html:19
 msgid "足長(右)"
 msgstr "右脚尺寸"
 
-#: .\carts\models.py:30 .\feet\models.py:46 .\orders\models.py:208
+#: .\carts\models.py:30 .\feet\models.py:45 .\orders\models.py:239
 #: .\templates\admin\footsize-analytics.html:30
 msgid "足幅(左)"
 msgstr "左脚脚宽"
 
-#: .\carts\models.py:31 .\feet\models.py:47 .\orders\models.py:209
+#: .\carts\models.py:31 .\feet\models.py:46 .\orders\models.py:240
 #: .\templates\admin\footsize-analytics.html:41
 msgid "足幅(右)"
 msgstr "右脚脚宽"
 
-#: .\carts\models.py:32 .\orders\models.py:179
+#: .\carts\models.py:32 .\orders\models.py:210
 #: .\templates\documents\bill.html:95 .\templates\documents\invoice.html:61
 #: .\templates\documents\ordersheet.html:86
 #: .\templates\documents\receipt.html:63
@@ -69,7 +69,7 @@ msgstr "右脚脚宽"
 msgid "数量"
 msgstr "数量"
 
-#: .\carts\models.py:33 .\users\models.py:125
+#: .\carts\models.py:33 .\users\models.py:144
 msgid "活性化"
 msgstr "激活"
 
@@ -130,19 +130,19 @@ msgstr "材质"
 msgid "デザインid"
 msgstr "DIY ID"
 
-#: .\designs\models.py:48 .\orders\models.py:181
+#: .\designs\models.py:48 .\orders\models.py:212
 msgid "正面"
 msgstr "正面"
 
-#: .\designs\models.py:49 .\orders\models.py:182
+#: .\designs\models.py:49 .\orders\models.py:213
 msgid "側面"
 msgstr "侧面"
 
-#: .\designs\models.py:50 .\orders\models.py:183
+#: .\designs\models.py:50 .\orders\models.py:214
 msgid "上面"
 msgstr "上面"
 
-#: .\designs\models.py:51 .\orders\models.py:184
+#: .\designs\models.py:51 .\orders\models.py:215
 msgid "下面"
 msgstr "下面"
 
@@ -199,7 +199,7 @@ msgstr "鞋舌材质（右侧）"
 msgid "番号"
 msgstr "号码"
 
-#: .\designs\models.py:174 .\orders\models.py:205
+#: .\designs\models.py:174 .\orders\models.py:236
 #: .\templates\documents\specification.html:51
 msgid "カスタマイズデザインコード"
 msgstr "DIY代号"
@@ -208,7 +208,13 @@ msgstr "DIY代号"
 msgid "いいねユーザ"
 msgstr "已点赞用户"
 
-#: .\orders\admin.py:18 .\orders\admin.py:19 .\orders\models.py:167
+#: .\feet\views.py:86 .\orders\views.py:149 .\orders\views.py:249
+#: .\orders\views.py:632 .\orders\views.py:640 .\orders\views.py:644
+#: .\users\views.py:985
+msgid "入力した情報をもう一度確認してください。"
+msgstr "请再次确认已输入的信息"
+
+#: .\orders\admin.py:18 .\orders\admin.py:19 .\orders\models.py:198
 msgid "注文アイテム"
 msgstr "订单项目"
 
@@ -324,13 +330,13 @@ msgstr "顾客名（片假名）"
 msgid "対応情報"
 msgstr "售后信息"
 
-#: .\orders\forms.py:11 .\orders\models.py:51
+#: .\orders\forms.py:11 .\orders\models.py:52
 #: .\templates\orders\order-check.html:48
 #: .\templates\partials\mypage-menu.html:17
 msgid "クレジットカード"
 msgstr "信用卡"
 
-#: .\orders\forms.py:11 .\orders\models.py:51
+#: .\orders\forms.py:11 .\orders\models.py:52
 #: .\templates\orders\order-check.html:50
 msgid "振込"
 msgstr "汇款"
@@ -338,7 +344,7 @@ msgstr "汇款"
 #: .\orders\forms.py:16 .\orders\forms.py:196 .\orders\forms.py:197
 #: .\templates\partials\footer.html:60 .\users\forms.py:13 .\users\forms.py:49
 #: .\users\forms.py:117 .\users\forms.py:190 .\users\forms.py:223
-#: .\users\models.py:45 .\users\models.py:124
+#: .\users\models.py:46 .\users\models.py:143
 msgid "メールアドレス"
 msgstr "电子邮箱"
 
@@ -357,46 +363,46 @@ msgstr "名"
 #: .\orders\forms.py:39 .\orders\forms.py:66 .\orders\forms.py:68
 #: .\orders\forms.py:121 .\orders\forms.py:142 .\orders\forms.py:144
 #: .\templates\users\signup-check.html:24 .\users\forms.py:58
-#: .\users\forms.py:128 .\users\models.py:47
+#: .\users\forms.py:128 .\users\models.py:58
 msgid "姓(カナ)"
 msgstr "姓（片假名）"
 
 #: .\orders\forms.py:42 .\orders\forms.py:71 .\orders\forms.py:73
 #: .\orders\forms.py:124 .\orders\forms.py:147 .\orders\forms.py:149
 #: .\templates\users\signup-check.html:25 .\users\forms.py:61
-#: .\users\forms.py:131 .\users\models.py:46
+#: .\users\forms.py:131 .\users\models.py:48
 msgid "名(カナ)"
 msgstr "名（片假名）"
 
 #: .\orders\forms.py:45 .\orders\forms.py:76 .\orders\forms.py:78
 #: .\orders\forms.py:126 .\orders\forms.py:152 .\orders\forms.py:154
-#: .\users\forms.py:136 .\users\models.py:52
+#: .\users\forms.py:136 .\users\models.py:71
 msgid "電話番号"
 msgstr "电话号码"
 
-#: .\orders\forms.py:48 .\users\models.py:54
+#: .\orders\forms.py:48 .\users\models.py:73
 msgid "都道府県"
 msgstr "都道府县"
 
 #: .\orders\forms.py:51 .\orders\forms.py:81 .\orders\forms.py:83
 #: .\orders\forms.py:128 .\orders\forms.py:157 .\orders\forms.py:159
-#: .\users\forms.py:137 .\users\models.py:55
+#: .\users\forms.py:137 .\users\models.py:74
 msgid "市区町村番地"
 msgstr "市区町村番地"
 
 #: .\orders\forms.py:54 .\orders\forms.py:86 .\orders\forms.py:88
 #: .\orders\forms.py:130 .\orders\forms.py:162 .\orders\forms.py:164
-#: .\users\forms.py:138 .\users\models.py:56
+#: .\users\forms.py:138 .\users\models.py:75
 msgid "建物名・号室"
 msgstr "建筑物名·房间号"
 
 #: .\orders\forms.py:91 .\orders\forms.py:93 .\orders\forms.py:127
 #: .\orders\forms.py:167 .\orders\forms.py:169 .\users\forms.py:147
-#: .\users\models.py:53
+#: .\users\models.py:72
 msgid "郵便番号"
 msgstr "邮政编码"
 
-#: .\orders\forms.py:192 .\orders\forms.py:193 .\orders\models.py:120
+#: .\orders\forms.py:192 .\orders\forms.py:193 .\orders\models.py:151
 #: .\templates\documents\invoice.html:43
 #: .\templates\documents\ordersheet.html:80
 #: .\templates\documents\receipt.html:29
@@ -408,123 +414,128 @@ msgstr "邮政编码"
 msgid "注文番号"
 msgstr "订单编号"
 
-#: .\orders\models.py:32
+#: .\orders\models.py:33
 msgid "対応コード"
 msgstr "售后代号"
 
-#: .\orders\models.py:33
+#: .\orders\models.py:34
 msgid "対応名"
 msgstr "售后名"
 
-#: .\orders\models.py:40 .\orders\models.py:41
+#: .\orders\models.py:41 .\orders\models.py:42
 msgid "対応"
 msgstr "售后"
 
-#: .\orders\models.py:56 .\reviews\models.py:18
+#: .\orders\models.py:57 .\reviews\models.py:18
 msgid "ユーザー"
 msgstr "用户"
 
-#: .\orders\models.py:64 .\templates\admin\member-analytics.html:85
-#: .\users\models.py:128 .\users\models.py:129
+#: .\orders\models.py:65 .\templates\admin\member-analytics.html:85
+#: .\users\models.py:147 .\users\models.py:148
 msgid "ゲスト"
 msgstr "游客"
 
-#: .\orders\models.py:69
+#: .\orders\models.py:70
 msgid "姓(ご請求書先)"
 msgstr "姓（付款人）"
 
-#: .\orders\models.py:70
+#: .\orders\models.py:71
 msgid "名(ご請求書先)"
 msgstr "名（付款人）"
 
-#: .\orders\models.py:71
+#: .\orders\models.py:73
 msgid "姓(ご請求書先,カナ)"
 msgstr "姓（付款人，片假名）"
 
-#: .\orders\models.py:72
+#: .\orders\models.py:77 .\orders\models.py:86 .\orders\models.py:106
+#: .\orders\models.py:117 .\users\models.py:53 .\users\models.py:63
+msgid "全角カタカナで入力してください。"
+msgstr "请用全角的片假名记入"
+
+#: .\orders\models.py:82
 msgid "名(ご請求書先,カナ)"
 msgstr "名（付款人，片假名）"
 
-#: .\orders\models.py:73
+#: .\orders\models.py:90
 msgid "電話番号(ご請求書先)"
 msgstr "电话号码（付款人）"
 
-#: .\orders\models.py:74
+#: .\orders\models.py:91
 msgid "郵便番号(ご請求書先)"
 msgstr "邮政编码（付款人）"
 
-#: .\orders\models.py:75
+#: .\orders\models.py:92
 msgid "都道府県(ご請求書先)"
 msgstr "都道府县（付款人）"
 
-#: .\orders\models.py:76
+#: .\orders\models.py:93
 msgid "市区町村(ご請求書先)"
 msgstr "市区町村(付款人)"
 
-#: .\orders\models.py:77
+#: .\orders\models.py:94
 msgid "建物名・部屋番号(ご請求書先)"
 msgstr "建筑名称·房间号(付款人)"
 
-#: .\orders\models.py:79
+#: .\orders\models.py:95
 msgid "姓(お届け先)"
 msgstr "姓（收件人）"
 
-#: .\orders\models.py:82
+#: .\orders\models.py:97
 msgid "名(お届け先)"
 msgstr "名（收件人）"
 
-#: .\orders\models.py:85
+#: .\orders\models.py:100
 msgid "姓(カナ, お届け先)"
 msgstr "姓（片假名，收件人）"
 
-#: .\orders\models.py:88
+#: .\orders\models.py:111
 msgid "名(カナ, お届け先)"
 msgstr "名（片假名，收件人）"
 
-#: .\orders\models.py:91
+#: .\orders\models.py:122
 msgid "電話番号(お届け先)"
 msgstr "电话号码（收件人）"
 
-#: .\orders\models.py:94
+#: .\orders\models.py:125
 msgid "郵便番号(お届け先)"
 msgstr "邮政编码（收件人）"
 
-#: .\orders\models.py:97
+#: .\orders\models.py:128
 msgid "都道府県(お届け先)"
 msgstr "都道府县（收件人）"
 
-#: .\orders\models.py:100
+#: .\orders\models.py:131
 msgid "市区町村(お届け先)"
 msgstr "市区町村（收件人）"
 
-#: .\orders\models.py:103
+#: .\orders\models.py:134
 msgid "建物名・部屋番号(お届け先)"
 msgstr "建筑物名·房间号（收件人）"
 
-#: .\orders\models.py:105 .\templates\mixins\orders\order-card.html:7
+#: .\orders\models.py:136 .\templates\mixins\orders\order-card.html:7
 #: .\templates\mixins\orders\order-detail-card.html:7
 #: .\templates\orders\search-order-detail.html:25
 msgid "注文日時"
 msgstr "订单日期"
 
-#: .\orders\models.py:106
+#: .\orders\models.py:137
 msgid "支払方法"
 msgstr "支付方式"
 
-#: .\orders\models.py:111
+#: .\orders\models.py:142
 msgid "対応状況"
 msgstr "售后情况"
 
-#: .\orders\models.py:116
+#: .\orders\models.py:147
 msgid "支払総額"
 msgstr "支付总额"
 
-#: .\orders\models.py:124 .\orders\models.py:125
+#: .\orders\models.py:155 .\orders\models.py:156
 #: .\templates\admin\extra_nav.html:64
 msgid "注文"
 msgstr "订单"
 
-#: .\orders\models.py:180 .\templates\carts\cart.html:47
+#: .\orders\models.py:211 .\templates\carts\cart.html:47
 #: .\templates\documents\receipt.html:66
 #: .\templates\mixins\orders\order-detail-card.html:27
 #: .\templates\orders\bill.html:91 .\templates\orders\receipt.html:60
@@ -532,45 +543,44 @@ msgstr "订单"
 msgid "単価"
 msgstr "单价"
 
-#: .\orders\views.py:133 .\orders\views.py:137 .\orders\views.py:232
-#: .\orders\views.py:587 .\orders\views.py:595 .\orders\views.py:599
-msgid "入力した情報をもう一度確認してください。"
-msgstr "请再次确认已输入的信息"
+#: .\orders\views.py:273 .\users\mixins.py:13
+msgid "アクセスできません。"
+msgstr "连接失败"
 
-#: .\orders\views.py:388
+#: .\orders\views.py:426
 msgid "支払限度を超過しました。"
 msgstr "已经超过了支付的额度"
 
-#: .\orders\views.py:392
+#: .\orders\views.py:430
 msgid "無効なペラメタです。"
 msgstr "无效的参数"
 
-#: .\orders\views.py:395
+#: .\orders\views.py:433
 msgid "認証できませんでした。"
 msgstr "验证失败"
 
-#: .\orders\views.py:399
+#: .\orders\views.py:437
 msgid "ネットワークに問題があります。"
 msgstr "存在网络故障"
 
-#: .\orders\views.py:403 .\users\views.py:1015 .\users\views.py:1048
-#: .\users\views.py:1080 .\users\views.py:1138 .\users\views.py:1143
+#: .\orders\views.py:441 .\users\views.py:1023 .\users\views.py:1063
+#: .\users\views.py:1104 .\users\views.py:1171 .\users\views.py:1176
 msgid "問題が発生しました。もう一度試してみてください。"
 msgstr "发生了错误。请再试一次！"
 
-#: .\orders\views.py:407
+#: .\orders\views.py:445
 msgid "エラーが発生しました。"
 msgstr "发生了错误"
 
-#: .\orders\views.py:545
+#: .\orders\views.py:589
 msgid "Uniwalk ご注文ありがとうございます。"
 msgstr "感谢您使用 Uniwalk！"
 
-#: .\orders\views.py:635 .\users\views.py:302 .\users\views.py:345
+#: .\orders\views.py:680 .\users\views.py:302 .\users\views.py:345
 msgid "Uniwalk ご注文取消しのご連絡"
 msgstr "Uniwalk 关于取消订单的联络"
 
-#: .\orders\views.py:643
+#: .\orders\views.py:688
 msgid "注文を取り消しました。"
 msgstr "已取消了订单"
 
@@ -738,19 +748,19 @@ msgstr "登出"
 msgid "注文状況"
 msgstr "订单情况"
 
-#: .\templates\admin\base.html:109 .\vinaigrette-deleteme.py:7
+#: .\templates\admin\base.html:109 .\vinaigrette-deleteme.py:8
 msgid "入金前"
 msgstr "支付前"
 
-#: .\templates\admin\base.html:115 .\vinaigrette-deleteme.py:8
+#: .\templates\admin\base.html:115 .\vinaigrette-deleteme.py:9
 msgid "決済処理中"
 msgstr "支付处理中"
 
-#: .\templates\admin\base.html:121 .\vinaigrette-deleteme.py:9
+#: .\templates\admin\base.html:121 .\vinaigrette-deleteme.py:10
 msgid "決済確認済み"
 msgstr "支付已确认"
 
-#: .\templates\admin\base.html:127 .\vinaigrette-deleteme.py:10
+#: .\templates\admin\base.html:127 .\vinaigrette-deleteme.py:11
 msgid "対応中"
 msgstr "售后中"
 
@@ -880,7 +890,7 @@ msgstr ""
 "\n"
 "                    %(current_page)s 页"
 
-#: .\templates\admin\extra_nav.html:14 .\templates\statics\home.html:5
+#: .\templates\admin\extra_nav.html:14
 msgid "ホーム"
 msgstr "主页"
 
@@ -966,7 +976,7 @@ msgstr "110以上"
 #: .\templates\admin\member-analytics.html:41
 #: .\templates\admin\member-analytics.html:114
 #: .\templates\users\signup-check.html:36 .\users\forms.py:66
-#: .\users\models.py:36
+#: .\users\models.py:37
 msgid "男性"
 msgstr "男性"
 
@@ -977,7 +987,7 @@ msgstr "男性"
 #: .\templates\admin\member-analytics.html:45
 #: .\templates\admin\member-analytics.html:115
 #: .\templates\users\signup-check.html:38 .\users\forms.py:66
-#: .\users\models.py:37
+#: .\users\models.py:38
 msgid "女性"
 msgstr "女性"
 
@@ -1014,7 +1024,7 @@ msgstr "全体会员数"
 #: .\templates\admin\member-analytics.html:49
 #: .\templates\admin\member-analytics.html:116
 #: .\templates\users\signup-check.html:40 .\users\forms.py:66
-#: .\users\models.py:38
+#: .\users\models.py:39
 msgid "その他"
 msgstr "其他"
 
@@ -1574,10 +1584,8 @@ msgid "下記のリンクへアクセスし、パスワード再設定を行っ�
 msgstr "请点击下方链接进行密码重置的设定<br>"
 
 #: .\templates\emails\password_reset_form.html:25
-#, fuzzy
-#| msgid "パスワード再設定"
 msgid "パスワード再設定へ移動する"
-msgstr "重置密码"
+msgstr "点击进行重置密码"
 
 #: .\templates\emails\password_reset_form.html:28
 msgid "<br>お客様のIDは次のどおりです："
@@ -1591,16 +1599,7 @@ msgstr "一直以来感谢您的使用！"
 msgid "会員情報修正完了"
 msgstr "修改会员信息成功"
 
-#: .\templates\emails\profile-change-done.html:17
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "                    UniWalkサイトをご利用いただきまして誠にありがとうござ"
-#| "います。<br>\n"
-#| "                    パスワードの再設定が完了しました。<br>\n"
-#| "                    パスワードの再設定にお心当たりがない場合、Uniwalkのお"
-#| "問い合わせにご連絡ください。\n"
-#| "                    "
+#: .\templates\emails\profile-change-done.html:17         "
 msgid ""
 "\n"
 "                    UniWalkサイトをご利用いただきまして誠にありがとうございま"
@@ -1692,14 +1691,10 @@ msgstr "屏蔽左脚图像"
 #: .\templates\feet\feet-cropper-left.html:33
 #: .\templates\feet\feet-cropper-right.html:33
 #: .\templates\feet\feet-rotation.html:11
-#, fuzzy
-#| msgid "画像を抽出しています。"
 msgid "画像を取得しています。"
 msgstr "正在抽出图像"
 
 #: .\templates\feet\feet-cropper-left.html:38
-#, fuzzy
-#| msgid "左足イメージクロップ"
 msgid "左足のイメージクロップ"
 msgstr "屏蔽左脚图像"
 
@@ -1721,18 +1716,14 @@ msgstr ""
 #: .\templates\feet\feet-cropper-left.html:57
 #: .\templates\feet\feet-cropper-right.html:57
 #: .\templates\feet\feet-rotation.html:45
-#, fuzzy
-#| msgid "注文を確定する"
 msgid "確定する"
-msgstr "确认订单"
+msgstr "确认"
 
 #: .\templates\feet\feet-cropper-right.html:5
 msgid "右足イメージクロップ"
 msgstr "屏蔽右脚图像"
 
 #: .\templates\feet\feet-cropper-right.html:38
-#, fuzzy
-#| msgid "右足イメージクロップ"
 msgid "右足のイメージクロップ"
 msgstr "屏蔽右脚图像"
 
@@ -1810,17 +1801,15 @@ msgid "決定する"
 msgstr "确认提交"
 
 #: .\templates\feet\feet-rotation.html:5 .\templates\feet\feet-rotation.html:16
-#, fuzzy
-#| msgid "イメージ"
 msgid "足イメージ回転"
-msgstr "形象"
+msgstr "翻转图片"
 
 #: .\templates\galleries\galleries_list.html:5
 msgid "デザインギャラリー"
 msgstr "DIY人气排行"
 
 #: .\templates\galleries\galleries_list.html:15
-#: .\templates\partials\nav.html:120
+#: .\templates\partials\nav.html:118
 msgid "ギャラリー"
 msgstr "人气"
 
@@ -1870,7 +1859,7 @@ msgstr "订单详情"
 
 #: .\templates\mixins\orders\order-card.html:29
 #: .\templates\mixins\orders\order-detail-card.html:39
-#: .\templates\orders\search-order-detail.html:59 .\vinaigrette-deleteme.py:12
+#: .\templates\orders\search-order-detail.html:59 .\vinaigrette-deleteme.py:13
 msgid "注文取消"
 msgstr "取消订单"
 
@@ -1935,8 +1924,8 @@ msgstr "今后也承蒙您的惠顾"
 
 #: .\templates\orders\checkout-done.html:26
 #: .\templates\users\withdrawal-done.html:19
-msgid "ホームへ"
-msgstr "回到主页"
+msgid "トップへ"
+msgstr ""
 
 #: .\templates\orders\checkout.html:5 .\templates\orders\checkout.html:16
 #: .\templates\orders\order-check.html:5 .\templates\orders\order-check.html:16
@@ -2151,7 +2140,11 @@ msgstr "管理员模式"
 msgid "会員登録・ログイン"
 msgstr "会员登陆"
 
-#: .\templates\partials\nav.html:116
+#: .\templates\partials\nav.html:112 .\templates\statics\home.html:5
+msgid "トップ"
+msgstr "主页"
+
+#: .\templates\partials\nav.html:114
 msgid "紹介"
 msgstr "介绍"
 
@@ -2394,7 +2387,7 @@ msgstr "我想起了密码"
 msgid "会員登録情報確認"
 msgstr "确认会员登陆信息"
 
-#: .\templates\users\signup-check.html:26 .\users\models.py:49
+#: .\templates\users\signup-check.html:26 .\users\models.py:68
 msgid "性別"
 msgstr "性别"
 
@@ -2504,7 +2497,7 @@ msgstr "会员名"
 msgid "パスワード"
 msgstr "密码"
 
-#: .\users\forms.py:28 .\users\forms.py:162 .\users\views.py:1168
+#: .\users\forms.py:28 .\users\forms.py:162 .\users\views.py:1201
 msgid "パスワードをもう一度確認してください。"
 msgstr "请再次确认密码"
 
@@ -2529,7 +2522,7 @@ msgstr "密码不一致"
 msgid "現在のパスワード"
 msgstr "旧的密码"
 
-#: .\users\forms.py:134 .\users\models.py:51
+#: .\users\forms.py:134 .\users\models.py:70
 msgid "生年月日"
 msgstr "出生年月"
 
@@ -2558,15 +2551,11 @@ msgstr "超级用户必须有相关人员的权限"
 msgid "スーパーユーザにはスーパーユーザ権限が必須です。"
 msgstr "超级用户必须有超级用户权限"
 
-#: .\users\mixins.py:13
-msgid "アクセスできません。"
-msgstr "连接失败"
-
-#: .\users\models.py:35
+#: .\users\models.py:36
 msgid "--性別--"
 msgstr "--性别--"
 
-#: .\users\models.py:61
+#: .\users\models.py:80
 msgid "会員番号"
 msgstr "会员号码"
 
@@ -2610,23 +2599,27 @@ msgstr "已取消了订单"
 msgid "カードを登録解除しました。"
 msgstr "已取消加入购物车"
 
-#: .\users\views.py:445
+#: .\users\views.py:422
+msgid "既に登録されているカードです。"
+msgstr "已经登陆过此信用卡"
+
+#: .\users\views.py:434 .\users\views.py:453
 msgid "カードを登録しました。"
 msgstr "加入购物车成功"
 
-#: .\users\views.py:448
+#: .\users\views.py:456
 msgid "カード登録に失敗しました。"
 msgstr "加入购物车失败"
 
-#: .\users\views.py:474
+#: .\users\views.py:482
 msgid "デザインを削除しました。"
 msgstr "删除此项"
 
-#: .\users\views.py:974 .\users\views.py:1145
+#: .\users\views.py:982 .\users\views.py:1178
 msgid "足サイズを登録しました。"
 msgstr "脚部尺寸登陆成功"
 
-#: .\users\views.py:1161
+#: .\users\views.py:1194
 msgid "会員様のメールアドレスとは違います。"
 msgstr "会员邮箱输入有误"
 
@@ -2636,7 +2629,7 @@ msgstr "胶底"
 
 #: .\vinaigrette-deleteme.py:3
 msgid "キャンバス"
-msgstr ""
+msgstr "帆布"
 
 #: .\vinaigrette-deleteme.py:4
 msgid "レザー"
@@ -2644,46 +2637,57 @@ msgstr "皮革"
 
 #: .\vinaigrette-deleteme.py:5
 msgid "Uniwalkのベーシックライン。どんなファッションにもよく合う！"
-msgstr ""
+msgstr "Uniwalk 打造符合您的时尚运动装备！"
 
 #: .\vinaigrette-deleteme.py:6
-msgid "test"
-msgstr ""
+msgid "Uniwalk自慢のローカット。カジュアルで心地良いのがポイント！"
+msgstr "Uniwalk 低帮鞋。休闲舒适的最佳之选！"
 
-#: .\vinaigrette-deleteme.py:11
+#: .\vinaigrette-deleteme.py:7
+msgid ""
+"Uniwalkのハイカットライン。機能デザイン共に向上したHUMBLEで快適なライフスタイ"
+"ルを！"
+msgstr ""
+"Uniwalk 高帮鞋。兼顾外观与舒适性的设计！"
+""
+
+#: .\vinaigrette-deleteme.py:12
 msgid "発送済み"
+msgstr "发送完成"
+
+#~ msgid "ホームへ"
+#~ msgstr "回到主页"
+
+msgid ""
+"\n"
+"顧客様からの要請により、パスワード再設定関連のメールをご送信いたしまし"
+"た。\n"
 msgstr ""
+"\n"
+"根据您的要求，密码重置的邮件已经发送至相关邮箱。\n"
 
-#~ msgid ""
-#~ "\n"
-#~ "顧客様からの要請により、パスワード再設定関連のメールをご送信いたしまし"
-#~ "た。\n"
-#~ msgstr ""
-#~ "\n"
-#~ "根据您的要求，密码重置的邮件已经发送至相关邮箱。\n"
+msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。"
+msgstr "请点击下方链接进行密码重置的设定"
 
-#~ msgid "下記のリンクへアクセスし、パスワード再設定を行ってください。"
-#~ msgstr "请点击下方链接进行密码重置的设定"
-
-#~ msgid "顧客様のIDは次のどおりです："
-#~ msgstr "您的密码如下："
+msgid "顧客様のIDは次のどおりです："
+msgstr "您的密码如下："
 
 #, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                                %(current_page)s ページ"
-#~ msgstr ""
-#~ "\n"
-#~ "                                %(current_page)s 页"
+msgid ""
+"\n"
+"                                %(current_page)s ページ"
+msgstr ""
+"\n"
+"                                %(current_page)s 页"
 
-#~ msgid "Old password"
-#~ msgstr "旧的密码"
+msgid "Old password"
+msgstr "旧的密码"
 
-#~ msgid "new password"
-#~ msgstr "新的密码"
+msgid "new password"
+msgstr "新的密码"
 
-#~ msgid "check password"
-#~ msgstr "检查密码"
+msgid "check password"
+msgstr "检查密码"
 
-#~ msgid "Password reset on %(site_name)s"
-#~ msgstr "密码重置 %(site_name)s"
+msgid "Password reset on %(site_name)s"
+msgstr "密码重置 %(site_name)s"
