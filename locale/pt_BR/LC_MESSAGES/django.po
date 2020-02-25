@@ -2246,7 +2246,7 @@ msgstr ""
 "O Uniwalk nasceu para você que está sempre procurando os sapatos ideais."
 "<br>\n"
 "                    O Uniwalk cria sapatos para você nas suas cores, "
-"desenhos e tamanhos favoritos. 。<br>\n"
+"desenhos e tamanhos favoritos. <br>\n"
 "                    Escolha seus sapatos básicos, crie na sua cor favorita e "
 "meça o tamanho do pé.<br>\n"
 "                    Então é só esperar que seus sapatos cheguem até você! "
@@ -2267,12 +2267,12 @@ msgstr ""
 "住所 〒450-0002 愛知県名古屋市中村区名駅４丁目２７−１ 総合校舎スパイラルタ"
 "ワーズ<br>\n"
 "                   Horário comercial Nos meio de semana：13：00～20：00　"
-"Fins de semana e feriados：10：00～18：0000<br>\n"
+"Fins de semana e feriados：10：00～18：00<br>\n"
 "                    Fechado as Segunda-feira"
 
 #: .\templates\statics\home.html:12
 msgid "オリジナルスニーカーが作れる！"
-msgstr "Você pode criar um sdjapato só seu!!!!"
+msgstr "Você pode criar um sapato só seu!!!!"
 
 #: .\templates\statics\home.html:25
 msgid "デザインをカスタマイズする"

@@ -136,7 +136,7 @@ class ConfigAdminSite(AdminSite):
         ]
         return custom_urls + urls
 
-    # 会員分析
+    # 会員分析W
     def member_analytics(self, request):
         guests = users_model.Guest.objects.all()
         users = users_model.User.objects.all()
@@ -239,6 +239,7 @@ class ConfigAdminSite(AdminSite):
         footsizes = feet_model.Footsize.objects.all()
         male_sizes = footsizes.filter(user__gender__contains="M")
         female_sizes = footsizes.filter(user__gender__contains="F")
+        others_sizes = footsizes.filter(user__gender__contains="O")
         ## 男性のサイズ分類
         # 足長
         length_male_left = {
@@ -260,7 +261,6 @@ class ConfigAdminSite(AdminSite):
         length_male_left[230] = left_under230
         left_over290 = len(male_sizes.filter(length_left__gte=290))
         length_male_left[300] = left_over290
-
         length_male_right = {
             230: 0,
             240: 0,
@@ -280,7 +280,6 @@ class ConfigAdminSite(AdminSite):
         length_male_right[230] = right_under230
         right_over290 = len(male_sizes.filter(length_right__gte=290))
         length_male_right[300] = right_over290
-
         # 足幅
         width_male_left = {
             80: 0,
@@ -298,7 +297,6 @@ class ConfigAdminSite(AdminSite):
         width_male_left[80] = left_under80
         left_over110 = len(male_sizes.filter(width_left__gte=110))
         width_male_left[120] = left_over110
-
         width_male_right = {
             80: 0,
             90: 0,
@@ -393,6 +391,83 @@ class ConfigAdminSite(AdminSite):
         right_over110 = len(female_sizes.filter(width_right__gte=110))
         width_female_right[120] = right_over110
 
+        ## その他の性別のサイズ分類
+        # 足長
+        length_others_left = {
+            230: 0,
+            240: 0,
+            250: 0,
+            260: 0,
+            270: 0,
+            280: 0,
+            290: 0,
+            300: 0,
+        }
+        for size in range(230, 290, 10):
+            items_num = len(
+                others_sizes.filter(length_left__gte=size, length_left__lt=size + 10)
+            )
+            length_others_left[size + 10] = items_num
+        left_under230 = len(female_sizes.filter(length_left__lt=230))
+        length_others_left[230] = left_under230
+        left_over290 = len(others_sizes.filter(length_left__gte=290))
+        length_others_left[300] = left_over290
+
+        length_others_right = {
+            230: 0,
+            240: 0,
+            250: 0,
+            260: 0,
+            270: 0,
+            280: 0,
+            290: 0,
+            300: 0,
+        }
+        for size in range(230, 290, 10):
+            items_num = len(
+                others_sizes.filter(length_right__gte=size, length_right__lt=size + 10)
+            )
+            length_others_right[size + 10] = items_num
+        right_under230 = len(others_sizes.filter(length_right__lt=230))
+        length_others_right[230] = right_under230
+        right_over290 = len(others_sizes.filter(length_right__gte=290))
+        length_others_right[300] = right_over290
+
+        # 足幅
+        width_others_left = {
+            80: 0,
+            90: 0,
+            100: 0,
+            110: 0,
+            120: 0,
+        }
+        for size in range(80, 110, 10):
+            items_num = len(
+                others_sizes.filter(width_left__gte=size, width_left__lt=size + 10)
+            )
+            width_others_left[size + 10] = items_num
+        left_under80 = len(others_sizes.filter(width_left__lt=80))
+        width_others_left[80] = left_under80
+        left_over110 = len(others_sizes.filter(width_left__gte=110))
+        width_others_left[120] = left_over110
+
+        width_others_right = {
+            80: 0,
+            90: 0,
+            100: 0,
+            110: 0,
+            120: 0,
+        }
+        for size in range(80, 110, 10):
+            items_num = len(
+                others_sizes.filter(width_right__gte=size, width_right__lt=size + 10)
+            )
+            width_others_right[size + 10] = items_num
+        right_under80 = len(others_sizes.filter(width_right__lt=80))
+        width_others_right[80] = right_under80
+        right_over110 = len(others_sizes.filter(width_right__gte=110))
+        width_others_right[120] = right_over110
+
         context = {
             "length_male_left": length_male_left,
             "length_male_right": length_male_right,
@@ -402,6 +477,10 @@ class ConfigAdminSite(AdminSite):
             "length_female_right": length_female_right,
             "width_female_left": width_female_left,
             "width_female_right": width_female_right,
+            "length_others_left": length_others_left,
+            "length_others_right": length_others_right,
+            "width_others_left": width_others_left,
+            "width_others_right": width_others_right,
             "site_title": self.site_title,
             "site_header": self.site_header,
             "site_url": self.site_url,

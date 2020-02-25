@@ -79,6 +79,12 @@
     backgroundColor: '#FF6384',
         borderColor: '#FF6384',
             borderWidth: 1
+        }, {
+        label: '{% trans "その他" %}',
+            data: [{% for key, value in width_others_left.items %} '{{ value }}', {% endfor %}],
+    backgroundColor: '#6AB187',
+        borderColor: '#6AB187',
+            borderWidth: 1
         }]
             },
     options: {
@@ -122,6 +128,12 @@
             data: [{% for key, value in width_female_right.items %}'{{ value }}', {% endfor %}],
     backgroundColor: '#FF6384',
         borderColor: '#FF6384',
+            borderWidth: 1
+        }, {
+        label: '{% trans "その他" %}',
+            data: [{% for key, value in width_others_right.items %} '{{ value }}', {% endfor %}],
+    backgroundColor: '#6AB187',
+        borderColor: '#6AB187',
             borderWidth: 1
         }]
             },
@@ -170,6 +182,12 @@
     backgroundColor: '#FF6384',
         borderColor: '#FF6384',
             borderWidth: 1
+        }, {
+        label: '{% trans "その他" %}',
+            data: [{% for key, value in length_others_left.items %} '{{ value }}', {% endfor %}],
+    backgroundColor: '#6AB187',
+        borderColor: '#6AB187',
+            borderWidth: 1
         }]
             },
     options: {
@@ -216,6 +234,12 @@
             data: [{% for key, value in length_female_right.items %}'{{ value }}', {% endfor %}],
     backgroundColor: '#FF6384',
         borderColor: '#FF6384',
+            borderWidth: 1
+        }, {
+        label: '{% trans "その他" %}',
+            data: [{% for key, value in length_others_right.items %} '{{ value }}', {% endfor %}],
+    backgroundColor: '#6AB187',
+        borderColor: '#6AB187',
             borderWidth: 1
         }]
             },

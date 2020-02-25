@@ -175,6 +175,7 @@ class RightFootsizePerspeciveCropperView(DetailView):
         image_data = self.request.POST.get("image_data")
         processed_foot = models.ProcessedFootImage.objects.get(pk=processed_foot_pk)
         processed_foot.foot_right = base64_file(image_data)
+        processed_foot.is_finished = True
         processed_foot.save()
         return redirect("feet:analyze", pk=processed_foot.pk)
 

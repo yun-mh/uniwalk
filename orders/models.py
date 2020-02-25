@@ -1,5 +1,6 @@
 import random, string
 from datetime import datetime, date
+from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -68,8 +69,24 @@ class Order(models.Model):
     )
     last_name_recipient = models.CharField(_("姓(ご請求書先)"), max_length=30)
     first_name_recipient = models.CharField(_("名(ご請求書先)"), max_length=30)
-    last_name_recipient_kana = models.CharField(_("姓(ご請求書先,カナ)"), max_length=30)
-    first_name_recipient_kana = models.CharField(_("名(ご請求書先,カナ)"), max_length=30)
+    last_name_recipient_kana = models.CharField(
+        _("姓(ご請求書先,カナ)"),
+        max_length=30,
+        validators=[
+            RegexValidator(
+                regex="[ア-ンー]", message=_("全角カタカナで入力してください。"), code="invalid",
+            ),
+        ],
+    )
+    first_name_recipient_kana = models.CharField(
+        _("名(ご請求書先,カナ)"),
+        max_length=30,
+        validators=[
+            RegexValidator(
+                regex="[ア-ンー]", message=_("全角カタカナで入力してください。"), code="invalid",
+            ),
+        ],
+    )
     phone_number_recipient = PhoneNumberField(_("電話番号(ご請求書先)"), max_length=15)
     postal_code_recipient = models.CharField(_("郵便番号(ご請求書先)"), max_length=7)
     prefecture_recipient = JPPrefectureField(_("都道府県(ご請求書先)"), max_length=2)
@@ -80,10 +97,26 @@ class Order(models.Model):
         _("名(お届け先)"), max_length=30, null=True, blank=True
     )
     last_name_orderer_kana = models.CharField(
-        _("姓(カナ, お届け先)"), max_length=30, null=True, blank=True
+        _("姓(カナ, お届け先)"),
+        max_length=30,
+        null=True,
+        blank=True,
+        validators=[
+            RegexValidator(
+                regex="[ア-ンー]", message=_("全角カタカナで入力してください。"), code="invalid",
+            ),
+        ],
     )
     first_name_orderer_kana = models.CharField(
-        _("名(カナ, お届け先)"), max_length=30, null=True, blank=True
+        _("名(カナ, お届け先)"),
+        max_length=30,
+        null=True,
+        blank=True,
+        validators=[
+            RegexValidator(
+                regex="[ア-ンー]", message=_("全角カタカナで入力してください。"), code="invalid",
+            ),
+        ],
     )
     phone_number_orderer = PhoneNumberField(
         _("電話番号(お届け先)"), max_length=15, null=True, blank=True

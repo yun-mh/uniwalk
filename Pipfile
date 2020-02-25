@@ -21,6 +21,7 @@ opencv-python = "*"
 python-resize-image = "*"
 django-vinaigrette = "*"
 pusher = "*"
+django-seed = "*"
 
 [requires]
 python_version = "3.7"

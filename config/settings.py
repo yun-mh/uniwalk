@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = [
     "localflavor",
     "stripe",
     "vinaigrette",
+    "django_seed",
 ]
 
 PROJECT_APPS = [

@@ -27,9 +27,12 @@ def member_or_guest_login(request):
 
     """ 会員・ゲスト確認ビュー """
 
+    # 会員がログイン中の場合すぐチェックアウト画面に移動する
     if request.user.is_authenticated:
         return redirect("orders:checkout")
+    # リクエストがPOSTの場合
     if request.method == "POST":
+        # 会員ログインを選択した場合の処理
         if "member_login" in request.POST:
             member_form = user_forms.LoginForm(request.POST, prefix="member")
             if member_form.is_valid():
@@ -42,6 +45,7 @@ def member_or_guest_login(request):
                     login(request, user)
                     return redirect(reverse("orders:checkout"))
             guest_form = forms.GuestForm(prefix="guest")
+        # ゲストログインの場合の処理
         elif "guest_login" in request.POST:
             guest_form = forms.GuestForm(request.POST, prefix="guest")
             if guest_form.is_valid():
@@ -53,6 +57,7 @@ def member_or_guest_login(request):
                 request.session["guest_email"] = guest_email
                 return redirect(reverse("orders:checkout"))
             member_form = user_forms.LoginForm(prefix="member")
+    # リクエストがPOST以外の場合
     else:
         guest_form = forms.GuestForm(prefix="guest")
         member_form = user_forms.LoginForm(prefix="member")
@@ -65,7 +70,9 @@ class CheckoutView(FormView):
     """ 注文情報入力 """
 
     def get(self, *args, **kwargs):
+        # ページを表示するための情報を取得する
         recipient_form = forms.CheckoutForm()
+        # カートデータを取得する
         cart = cart_models.Cart.objects.get(
             session_key=self.request.session.session_key
         )
@@ -78,13 +85,16 @@ class CheckoutView(FormView):
             "cart": cart,
             "total": total,
         }
+        # 会員ログインの場合、自動入力のための会員情報を取得する
         if self.request.user.is_authenticated:
             recipient = user_models.User.objects.get(email=self.request.user).as_dict()
             context["recipient_info"] = recipient
         return render(self.request, "orders/checkout.html", context)
 
     def post(self, *args, **kwargs):
+        # ページを表示するための情報を取得する
         recipient_form = forms.CheckoutForm(self.request.POST)
+        # カートデータを取得する
         cart = cart_models.Cart.objects.get(
             session_key=self.request.session.session_key
         )
@@ -97,6 +107,11 @@ class CheckoutView(FormView):
             "cart": cart,
             "total": total,
         }
+        # 会員ログインの場合、自動入力のための会員情報を取得する
+        if self.request.user.is_authenticated:
+            recipient = user_models.User.objects.get(email=self.request.user).as_dict()
+            context["recipient_info"] = recipient
+        # 入力した配送先の情報が有効な場合
         if recipient_form.is_valid():
             recipient_data = {
                 "last_name_recipient": recipient_form.cleaned_data.get(
@@ -129,13 +144,10 @@ class CheckoutView(FormView):
             }
             self.request.session["recipient_data"] = recipient_data
             return redirect(reverse("orders:select-payment"))
+        # 有効でない場合
         else:
             messages.error(self.request, _("入力した情報をもう一度確認してください。"))
         return render(self.request, "orders/checkout.html", context)
-
-    def form_invalid(self, form):
-        messages.error(self.request, _("入力した情報をもう一度確認してください。"))
-        return self.render_to_response(self.get_context_data(form=form))
 
 
 class SelectPaymentView(FormView):
@@ -143,8 +155,10 @@ class SelectPaymentView(FormView):
     """ 決済手段入力 """
 
     def get(self, *args, **kwargs):
+        # ページを表示するための情報を取得する
         orderer_form = forms.SelectPaymentForm()
         recipient_data = self.request.session["recipient_data"]
+        # カートデータを取得する
         cart = cart_models.Cart.objects.get(
             session_key=self.request.session.session_key
         )
@@ -164,8 +178,10 @@ class SelectPaymentView(FormView):
         return render(self.request, "orders/select-payment.html", context)
 
     def post(self, *args, **kwargs):
+        # ページを表示するための情報を取得する
         orderer_form = forms.SelectPaymentForm(self.request.POST)
         recipient_data = self.request.session["recipient_data"]
+        # カートデータを取得する
         cart = cart_models.Cart.objects.get(
             session_key=self.request.session.session_key
         )
@@ -182,7 +198,7 @@ class SelectPaymentView(FormView):
             "cart": cart,
             "total": total,
         }
-        recipient_data = self.request.session["recipient_data"]
+        # フォームの入力が有効な場合
         if orderer_form.is_valid():
             orderer_data = {
                 "payment": orderer_form.cleaned_data.get("payment"),
@@ -214,6 +230,7 @@ class SelectPaymentView(FormView):
             }
             self.request.session["orderer_data"] = orderer_data
             return redirect(reverse("orders:order-check"))
+        # 決済方法が銀行振込の場合
         if orderer_form.cleaned_data.get("payment") == "P2":
             orderer_data = {
                 "payment": orderer_form.cleaned_data.get("payment"),
@@ -238,28 +255,39 @@ class OrderCheckView(FormView):
     """ 注文情報確認及びカード情報入力(カード決済時) """
 
     def get(self, *args, **kwargs):
+        # ページを表示するための情報を取得する
         card_form = forms.CardForm()
         recipient_data = self.request.session["recipient_data"]
         orderer_data = self.request.session["orderer_data"]
-        cart = cart_models.Cart.objects.get(
-            session_key=self.request.session.session_key
-        )
-        cart_items = cart_models.CartItem.objects.filter(cart=cart)
-        total = 0
-        for cart_item in cart_items:
-            total += cart_item.product.price * cart_item.quantity
+        # カートデータを取得する
+        try:
+            cart = cart_models.Cart.objects.get(
+                session_key=self.request.session.session_key
+            )
+            cart_items = cart_models.CartItem.objects.filter(cart=cart)
+            total = 0
+            for cart_item in cart_items:
+                total += cart_item.product.price * cart_item.quantity
+        # カートデータが存在しないときにトップに移動する(一回注文完了してからブラウザーの全画面に戻るボタンを押したときに発生する問題の防止)
+        except cart_models.Cart.DoesNotExist:
+            messages.error(self.request, _("アクセスできません。"))
+            return redirect("core:home")
+        # 会員がログイン時の場合、ユーザデータからカード情報を取得する
         if self.request.user.is_authenticated:
             user = self.request.user
+            # カードデータが登録されている場合
             try:
                 cards = stripe.Customer.list_sources(
                     user.stripe_customer_id, object="card"
                 )
+            # カードデータが登録されていない場合
             except:
                 cards = {"data": []}
             card_list = cards["data"]
             context = {}
             if len(card_list) > 0:
                 cards = (card_list,)
+        # ゲストの場合
         else:
             cards = {"data": []}
             card_list = cards["data"]
@@ -280,6 +308,7 @@ class OrderCheckView(FormView):
         return render(self.request, "orders/order-check.html", context)
 
     def post(self, *args, **kwargs):
+        # ページを表示するための情報を取得する
         card_form = forms.CardForm(self.request.POST)
         recipient_data = self.request.session["recipient_data"]
         orderer_data = self.request.session["orderer_data"]
@@ -290,17 +319,19 @@ class OrderCheckView(FormView):
         total = 0
         for cart_item in cart_items:
             total += cart_item.product.price * cart_item.quantity
-
+        # 決済情報の入力が有効な場合
         if card_form.is_valid():
             payment = orderer_data["payment"]
             token = card_form.cleaned_data.get("stripeToken")
             save = card_form.cleaned_data.get("save")
             use_default = card_form.cleaned_data.get("use_default")
-
+            # カード決済の場合
             if payment == "P1":
                 if self.request.user.is_authenticated:
                     user = user_models.User.objects.get(email=self.request.user)
+                # 入力したカード情報をユーザーデータに入れることを選択した場合
                 if save:
+                    # ユーザーにstripe_customer_idの情報が既にある場合、そのデータを利用してstripeAPIにカード情報を入れる
                     if (
                         user.stripe_customer_id != ""
                         and user.stripe_customer_id is not None
@@ -312,6 +343,7 @@ class OrderCheckView(FormView):
                         ).card.fingerprint
                         current_exp_month = stripe.Token.retrieve(token).card.exp_month
                         current_exp_year = stripe.Token.retrieve(token).card.exp_year
+                        # stripeAPIに既に同じカードが登録されている場合、登録処理を無視する
                         try:
                             used = card_models.Card.objects.get(
                                 fingerprint=current_fingerprint,
@@ -324,6 +356,7 @@ class OrderCheckView(FormView):
                                 )
                             except:
                                 pass
+                        # stripeAPIに同じカードが登録されていない場合、stripeAPIとデータベースにカードデータを入れる
                         except card_models.Card.DoesNotExist:
                             source = customer.create_source(
                                 user.stripe_customer_id, source=token
@@ -335,6 +368,7 @@ class OrderCheckView(FormView):
                                 exp_month=current_exp_month,
                                 exp_year=current_exp_year,
                             )
+                    # ユーザーにstripe_customer_idの情報がない場合、stripeAPIにstripe_customer_idを生成し、カードのデータを入れる
                     else:
                         current_fingerprint = stripe.Token.retrieve(
                             token
@@ -356,7 +390,9 @@ class OrderCheckView(FormView):
                             exp_month=current_exp_month,
                             exp_year=current_exp_year,
                         )
+                # stripeAPIを利用し、実際の決済処理を行う
                 try:
+                    # 新しいカードで、カードデータを保存しようとする場合の決済処理
                     if save:
                         charge = stripe.Charge.create(
                             amount=total,
@@ -364,6 +400,7 @@ class OrderCheckView(FormView):
                             customer=user.stripe_customer_id,
                             source=source,
                         )
+                    # 既存のカードデータで決済する場合
                     elif use_default:
                         source = self.request.POST.get("use_default_card")
                         charge = stripe.Charge.create(
@@ -372,55 +409,63 @@ class OrderCheckView(FormView):
                             customer=user.stripe_customer_id,
                             source=source,
                         )
+                    # 上の方法以外の決済処理の場合
                     else:
                         charge = stripe.Charge.create(
                             amount=total, currency="JPY", source=token
                         )
                     stripe_charge_id = charge["id"]
-
+                # 決済処理にエラーなどが発生した場合の処理
                 except stripe.error.CardError as e:
                     body = e.json_body
                     err = body.get("error", {})
                     messages.warning(self.request, f"{err.get('message')}")
                     return redirect("/")
-
+                # カードの支払限度の超過の場合
                 except stripe.error.RateLimitError as e:
                     messages.warning(self.request, _("支払限度を超過しました。"))
                     return redirect("/")
-
+                # 正常的でないリクエストの場合
                 except stripe.error.InvalidRequestError as e:
                     messages.warning(self.request, _("無効なペラメタです。"))
-
+                # stripe認証のエラー時
                 except stripe.error.AuthenticationError as e:
                     messages.warning(self.request, _("認証できませんでした。"))
                     return redirect("/")
-
+                # stripeAPIへのアクセスに失敗したとき
                 except stripe.error.APIConnectionError as e:
                     messages.warning(self.request, _("ネットワークに問題があります。"))
                     return redirect("/")
-
+                # stripe内のエラー発生時に
                 except stripe.error.StripeError as e:
                     messages.warning(self.request, _("問題が発生しました。もう一度試してみてください。"))
                     return redirect("/")
-
+                # その他の場合
                 except Exception as e:
                     messages.warning(self.request, _("エラーが発生しました。"))
                     return redirect("/")
+            # 銀行振込決済の場合
             else:
                 stripe_charge_id = None
 
+            # 会員ログイン時の場合はユーザデータを、ゲストログイン時はゲストデータを取得する
             if self.request.user.is_authenticated:
                 user = self.request.user
                 guest = None
+                email = self.request.user.email
             else:
                 user = None
                 guest = user_models.Guest.objects.get(
                     email=self.request.session["guest_email"]
                 )
+                email = self.request.session["guest_email"]
+            # カード決済の場合、注文の対応情報を決済処理中に設定する
             if payment == "P1":
                 step = models.Step.objects.get(step_code="T02")
+            # 銀行振込決済の場合、注文の対応情報を入金前に設定する
             else:
                 step = models.Step.objects.get(step_code="T01")
+            # 注文テーブルに注文を生成する
             new_order = models.Order.objects.create(
                 user=user,
                 guest=guest,
@@ -447,6 +492,7 @@ class OrderCheckView(FormView):
                 amount=total,
                 stripe_charge_id=stripe_charge_id,
             )
+            # 注文に対応する各注文アイテムをデータベースに生成する
             for cart_item in cart_items:
                 models.OrderItem.objects.create(
                     order=new_order,
@@ -531,13 +577,11 @@ class OrderCheckView(FormView):
                     width_left=int(cart_item.width_left),
                     width_right=int(cart_item.width_right),
                 )
-            try:
-                email = self.request.user.email
-            except:
-                email = self.request.session["guest_email"]
-            order_code = new_order.order_code
             cart_items.update(active=False)
+            # カートをリセットするためにセッションキーをリセットする
             self.request.session.cycle_key_after_purchase()
+            # 注文完了のお知らせメールを送信する
+            order_code = new_order.order_code
             html_message = render_to_string(
                 "emails/purchase-done.html", {"order_code": order_code}
             )
@@ -549,6 +593,7 @@ class OrderCheckView(FormView):
                 fail_silently=False,
                 html_message=html_message,
             )
+            # もう要らなくなったセッションの値を削除する
             try:
                 del self.request.session["guest_email"]
                 del self.request.session["recipient_data"]

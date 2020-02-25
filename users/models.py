@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from .managers import CustomUserManager
 from core.models import JPPrefectureField, JPPostalCodeModelField
@@ -43,8 +44,26 @@ class User(AbstractUser):
     username = None
 
     email = models.EmailField(_("メールアドレス"), unique=True)
-    first_name_kana = models.CharField(_("名(カナ)"), blank=True, max_length=30)
-    last_name_kana = models.CharField(_("姓(カナ)"), blank=True, max_length=30)
+    first_name_kana = models.CharField(
+        _("名(カナ)"),
+        blank=True,
+        max_length=30,
+        validators=[
+            RegexValidator(
+                regex="[ア-ンー]", message=_("全角カタカナで入力してください。"), code="invalid",
+            ),
+        ],
+    )
+    last_name_kana = models.CharField(
+        _("姓(カナ)"),
+        blank=True,
+        max_length=30,
+        validators=[
+            RegexValidator(
+                regex="[ア-ンー]", message=_("全角カタカナで入力してください。"), code="invalid",
+            ),
+        ],
+    )
     gender = models.CharField(
         _("性別"), blank=True, choices=GENDER_CHOICES, max_length=10
     )

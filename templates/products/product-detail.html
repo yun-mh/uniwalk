@@ -84,8 +84,8 @@
                     <span class="text-sm text-gray-500">{{ r.created|date:'Y-m-d' }}</span>
                 </div>
                 <p class="px-5 font-semibold">{{ r.title }}</p>
-                <p id="text-{{ r.pk }}" class="text-justify px-5 pt-3">{{ r.text|truncatechars:150 }}</p>
-                {% if r.text|length > 250 %}
+                <p id="text-{{ r.pk }}" class="text-justify px-5 pt-3">{{ r.text|truncatechars:70 }}</p>
+                {% if r.text|length > 70 %}
                 <div class="text-center">
                     <a id="{{ r.pk }}" class="text-sm text-indigo-800 cursor-pointer"
                         onclick="openCards(this.id)">{% trans '詳しく見る' %}</a>

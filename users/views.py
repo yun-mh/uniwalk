@@ -405,18 +405,23 @@ class CardsAddView(mixins.LoggedInOnlyView, View):
         if add_card_form.is_valid():
             user = models.User.objects.get(email=self.request.user)
             token = add_card_form.cleaned_data.get("stripeToken")
+            # ユーザにstripe_customer_idが存在する場合
             if user.stripe_customer_id != "" and user.stripe_customer_id is not None:
                 customer = stripe.Customer.retrieve(user.stripe_customer_id)
                 card_id = stripe.Token.retrieve(token).card.id
                 current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
                 current_exp_month = stripe.Token.retrieve(token).card.exp_month
                 current_exp_year = stripe.Token.retrieve(token).card.exp_year
+                # カードテーブルからデータを取得してみる
                 try:
                     card_models.Card.objects.get(
                         fingerprint=current_fingerprint,
                         exp_month=current_exp_month,
                         exp_year=current_exp_year,
                     )
+                    messages.error(self.request, _("既に登録されているカードです。"))
+                    return redirect(reverse("users:cards"))
+                # カードテーブルにデータが存在しない場合、データを入れる
                 except card_models.Card.DoesNotExist:
                     customer.sources.create(card=token)
                     card_models.Card.objects.create(
@@ -426,6 +431,9 @@ class CardsAddView(mixins.LoggedInOnlyView, View):
                         exp_month=current_exp_month,
                         exp_year=current_exp_year,
                     )
+                    messages.success(self.request, _("カードを登録しました。"))
+                    return redirect("users:cards")
+            # ユーザにstripe_customer_idが存在しない場合
             else:
                 card_id = stripe.Token.retrieve(token).card.id
                 current_fingerprint = stripe.Token.retrieve(token).card.fingerprint
@@ -442,8 +450,8 @@ class CardsAddView(mixins.LoggedInOnlyView, View):
                     exp_month=current_exp_month,
                     exp_year=current_exp_year,
                 )
-            messages.success(self.request, _("カードを登録しました。"))
-            return redirect("users:cards")
+                messages.success(self.request, _("カードを登録しました。"))
+                return redirect("users:cards")
         else:
             messages.error(self.request, _("カード登録に失敗しました。"))
             return redirect(reverse("users:add-card"))
@@ -957,7 +965,7 @@ def footsizes_measure(request, *args, **kwargs):
                     footsize.width_right = width_right
                     footsize.save()
                 # 会員に足サイズデータが存在しない場合、データを新規登録する
-                except models.Footsize.DoesNotExist:
+                except feet_models.Footsize.DoesNotExist:
                     footsize = feet_models.Footsize.objects.create(
                         user=user,
                         length_left=length_left,
@@ -1008,14 +1016,21 @@ class FootImageRotationView(mixins.LoggedInOnlyView, DetailView):
     context_object_name = "foot_images"
     template_name = "feet/feet-rotation.html"
 
+    def get(self, request, *args, **kwargs):
+        try:
+            foot = self.request.session["foot_images"]
+        except KeyError:
+            messages.error(self.request, _("問題が発生しました。もう一度試してみてください。"))
+            return redirect(reverse("users:footsizes"))
+        return super().get(request, *args, **kwargs)
+
     def get_object(self, queryset=None):
         try:
             return feet_models.FootImage.objects.get(
                 pk=self.request.session["foot_images"]
             )
         except KeyError:
-            messages.error(self.request, _("問題が発生しました。もう一度試してみてください。"))
-            return redirect(reverse("users:footsizes"), permanent=True)
+            pass
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1041,14 +1056,21 @@ class LeftFootsizePerspeciveCropperView(mixins.LoggedInOnlyView, DetailView):
     context_object_name = "foot_images"
     template_name = "feet/feet-cropper-left.html"
 
+    def get(self, request, *args, **kwargs):
+        try:
+            foot = self.request.session["foot_images"]
+        except KeyError:
+            messages.error(self.request, _("問題が発生しました。もう一度試してみてください。"))
+            return redirect(reverse("users:footsizes"))
+        return super().get(request, *args, **kwargs)
+
     def get_object(self, queryset=None):
         try:
             return feet_models.FootImage.objects.get(
                 pk=self.request.session["foot_images"]
             )
         except KeyError:
-            messages.error(self.request, _("問題が発生しました。もう一度試してみてください。"))
-            return redirect(reverse("users:footsizes"), permanent=True)
+            pass
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1073,14 +1095,23 @@ class RightFootsizePerspeciveCropperView(mixins.LoggedInOnlyView, DetailView):
     context_object_name = "foot_images"
     template_name = "feet/feet-cropper-right.html"
 
+    def get(self, request, *args, **kwargs):
+        # セッションから足イメージの情報を取得してみる
+        try:
+            foot = self.request.session["foot_images"]
+        # セッションに足イメージの情報が無かったらマイ足サイズ画面に戻る
+        except KeyError:
+            messages.error(self.request, _("問題が発生しました。もう一度試してみてください。"))
+            return redirect(reverse("users:footsizes"))
+        return super().get(request, *args, **kwargs)
+
     def get_object(self, queryset=None):
         try:
             return feet_models.FootImage.objects.get(
                 pk=self.request.session["foot_images"]
             )
         except KeyError:
-            messages.error(self.request, _("問題が発生しました。もう一度試してみてください。"))
-            return redirect(reverse("users:footsizes"))
+            pass
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
