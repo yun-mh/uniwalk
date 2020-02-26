@@ -5,6 +5,7 @@ from users.models import User
 from feet.models import Footsize
 
 
+# テストデータ用コマンドの作成
 class Command(BaseCommand):
 
     help = "This command creates footsizes."

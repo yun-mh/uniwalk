@@ -3,6 +3,7 @@ from django_seed import Seed
 from users.models import Guest
 
 
+# テストデータ用コマンドの作成
 class Command(BaseCommand):
 
     help = "This command creates guests."

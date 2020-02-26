@@ -7,6 +7,7 @@ from orders.models import Order, Step
 from users.models import User
 
 
+# テストデータ用コマンドの作成
 def str_time_prop(start, end, format, prop):
     stime = time.mktime(time.strptime(start, format))
     etime = time.mktime(time.strptime(end, format))

@@ -7,6 +7,7 @@ from products.models import Product
 from users.models import User
 
 
+# テストデータ用コマンドの作成
 class Command(BaseCommand):
 
     help = "This command creates reviews."
