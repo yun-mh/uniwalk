@@ -38,11 +38,21 @@ def member_or_guest_login(request):
             if member_form.is_valid():
                 member_email = member_form.cleaned_data.get("email")
                 member_password = member_form.cleaned_data.get("password")
+                # ログイン処理を行う
                 user = authenticate(
                     request, email=member_email, password=member_password
                 )
                 if user is not None:
                     login(request, user)
+                    # 既に作成したデザインをユーザに登録する
+                    try:
+                        design = design_models.Design.objects.get(
+                            pk=request.session["design"]
+                        )
+                        design.user = user
+                        design.save()
+                    except:
+                        pass
                     return redirect(reverse("orders:checkout"))
             guest_form = forms.GuestForm(prefix="guest")
         # ゲストログインの場合の処理
@@ -169,7 +179,7 @@ class SelectPaymentView(FormView):
         context = {
             "recipient_data": recipient_data,
             "recipient_pref": JP_PREFECTURE_CODES[
-                int(recipient_data["prefecture_recipient"])
+                int(recipient_data["prefecture_recipient"]) - 1
             ][1],
             "orderer_form": orderer_form,
             "cart": cart,
@@ -192,7 +202,7 @@ class SelectPaymentView(FormView):
         context = {
             "recipient_data": recipient_data,
             "recipient_pref": JP_PREFECTURE_CODES[
-                int(recipient_data["prefecture_recipient"])
+                int(recipient_data["prefecture_recipient"]) - 1
             ][1],
             "orderer_form": orderer_form,
             "cart": cart,
@@ -294,11 +304,11 @@ class OrderCheckView(FormView):
         context = {
             "recipient_data": recipient_data,
             "recipient_pref": JP_PREFECTURE_CODES[
-                int(recipient_data["prefecture_recipient"])
+                int(recipient_data["prefecture_recipient"]) - 1
             ][1],
             "orderer_data": orderer_data,
             "orderer_pref": JP_PREFECTURE_CODES[
-                int(orderer_data["prefecture_orderer"])
+                int(orderer_data["prefecture_orderer"]) - 1
             ][1],
             "card_form": card_form,
             "cart": cart,
@@ -447,7 +457,6 @@ class OrderCheckView(FormView):
             # 銀行振込決済の場合
             else:
                 stripe_charge_id = None
-
             # 会員ログイン時の場合はユーザデータを、ゲストログイン時はゲストデータを取得する
             if self.request.user.is_authenticated:
                 user = self.request.user
