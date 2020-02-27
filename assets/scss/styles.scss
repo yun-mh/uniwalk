@@ -624,7 +624,7 @@ textarea {
 // メッセージ
 .message {
   @apply rounded-lg fixed;
-  animation: messageFadeIn 3s ease-in-out forwards;
+  animation: messageFadeIn 2s ease-in-out forwards;
   &.error {
     @apply bg-red-500;
   }
