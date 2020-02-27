@@ -19,6 +19,7 @@ class OrderItemInline(admin.TabularInline):
     verbose_name_plural = _("注文アイテム")
 
 
+# 対応状況を設定するための関数のまとまり
 def make_step_new(self, request, queryset):
     step = models.Step.objects.get(step_code="T01")
     rows_updated = queryset.update(step=step)
@@ -27,7 +28,10 @@ def make_step_new(self, request, queryset):
     else:
         message_bit = _("%s 注文の対応を") % rows_updated
     self.message_user(request, _("%s 入金前に変更しました。") % message_bit)
+
+
 make_step_new.short_description = _("選択した注文を入金前に変更")
+
 
 def make_step_payment_check(self, request, queryset):
     step = models.Step.objects.get(step_code="T02")
@@ -37,7 +41,10 @@ def make_step_payment_check(self, request, queryset):
     else:
         message_bit = _("%s 注文の対応を") % rows_updated
     self.message_user(request, _("%s 決済処理中に変更しました。") % message_bit)
+
+
 make_step_payment_check.short_description = _("選択した注文を決済処理中に変更")
+
 
 def make_step_payment_done(self, request, queryset):
     step = models.Step.objects.get(step_code="T03")
@@ -47,7 +54,10 @@ def make_step_payment_done(self, request, queryset):
     else:
         message_bit = _("%s 注文の対応を") % rows_updated
     self.message_user(request, _("%s 決済確認済みに変更しました。") % message_bit)
+
+
 make_step_payment_done.short_description = _("選択した注文を決済確認済みに変更")
+
 
 def make_step_dealing_with(self, request, queryset):
     step = models.Step.objects.get(step_code="T11")
@@ -57,7 +67,10 @@ def make_step_dealing_with(self, request, queryset):
     else:
         message_bit = _("%s 注文の対応を") % rows_updated
     self.message_user(request, _("%s 対応中に変更しました。") % message_bit)
+
+
 make_step_dealing_with.short_description = _("選択した注文を対応中に変更")
+
 
 def make_step_shipping_done(self, request, queryset):
     step = models.Step.objects.get(step_code="T21")
@@ -67,7 +80,10 @@ def make_step_shipping_done(self, request, queryset):
     else:
         message_bit = _("%s 注文の対応を") % rows_updated
     self.message_user(request, _("%s 発送済みに変更しました。") % message_bit)
+
+
 make_step_shipping_done.short_description = _("選択した注文を発送済みに変更")
+
 
 def make_step_cancel(self, request, queryset):
     step = models.Step.objects.get(step_code="T99")
@@ -77,6 +93,8 @@ def make_step_cancel(self, request, queryset):
     else:
         message_bit = _("%s 注文の対応を") % rows_updated
     self.message_user(request, _("%s 注文取消しに変更しました。") % message_bit)
+
+
 make_step_cancel.short_description = _("選択した注文を入金前に変更")
 
 
@@ -158,15 +176,25 @@ class OrderAdmin(admin.ModelAdmin):
 
     list_per_page = 20
 
-    actions = [make_step_new, make_step_payment_check, make_step_payment_done, make_step_dealing_with, make_step_shipping_done, make_step_cancel]
+    actions = [
+        make_step_new,
+        make_step_payment_check,
+        make_step_payment_done,
+        make_step_dealing_with,
+        make_step_shipping_done,
+        make_step_cancel,
+    ]
 
     inlines = (OrderItemInline,)
 
+    # アドミンページのカスタマイズ
     def get_urls(self):
         urls = super().get_urls()
         custom_urls = [
             path(
-                "bill/<int:pk>/", self.admin_site.admin_view(self.bill_pdf), name="bill",
+                "bill/<int:pk>/",
+                self.admin_site.admin_view(self.bill_pdf),
+                name="bill",
             ),
             path(
                 "receipt/<int:pk>/",

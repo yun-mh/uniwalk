@@ -18,12 +18,17 @@ from products import models as products_model
 from users import models as users_model
 
 
+# カスタムアドミンの作成
 class ConfigAdminSite(AdminSite):
     index_template = "admin/base.html"
 
     @never_cache
     def index(self, request, extra_context=None):
+
+        # アドミンインデクスのカスタマイズ
+
         app_list = self.get_app_list(request)
+        # 表示するデータを各モデルから取得する
         orders = orders_model.Order.objects.all()
         products = products_model.Product.objects.all()
         designs = designs_model.Design.objects.all()
@@ -91,12 +96,13 @@ class ConfigAdminSite(AdminSite):
             "app_list": app_list,
             **(extra_context or {}),
         }
-
         request.current_app = self.name
-
         return TemplateResponse(request, self.index_template, context)
 
     def get_urls(self):
+
+        # アドミンページのURL情報を定義する
+
         urls = super().get_urls()
         custom_urls = [
             path(
@@ -136,7 +142,7 @@ class ConfigAdminSite(AdminSite):
         ]
         return custom_urls + urls
 
-    # 会員分析W
+    # 会員分析
     def member_analytics(self, request):
         guests = users_model.Guest.objects.all()
         users = users_model.User.objects.all()
@@ -355,7 +361,6 @@ class ConfigAdminSite(AdminSite):
         length_female_right[230] = right_under230
         right_over290 = len(female_sizes.filter(length_right__gte=290))
         length_female_right[300] = right_over290
-
         # 足幅
         width_female_left = {
             80: 0,
@@ -373,7 +378,6 @@ class ConfigAdminSite(AdminSite):
         width_female_left[80] = left_under80
         left_over110 = len(female_sizes.filter(width_left__gte=110))
         width_female_left[120] = left_over110
-
         width_female_right = {
             80: 0,
             90: 0,
@@ -412,7 +416,6 @@ class ConfigAdminSite(AdminSite):
         length_others_left[230] = left_under230
         left_over290 = len(others_sizes.filter(length_left__gte=290))
         length_others_left[300] = left_over290
-
         length_others_right = {
             230: 0,
             240: 0,
@@ -432,7 +435,6 @@ class ConfigAdminSite(AdminSite):
         length_others_right[230] = right_under230
         right_over290 = len(others_sizes.filter(length_right__gte=290))
         length_others_right[300] = right_over290
-
         # 足幅
         width_others_left = {
             80: 0,
@@ -450,7 +452,6 @@ class ConfigAdminSite(AdminSite):
         width_others_left[80] = left_under80
         left_over110 = len(others_sizes.filter(width_left__gte=110))
         width_others_left[120] = left_over110
-
         width_others_right = {
             80: 0,
             90: 0,
@@ -608,12 +609,14 @@ class ConfigAdminSite(AdminSite):
             context["is_popup"] = False
             return render(self.request, "admin/chat.html", context)
 
+    # 販売実績ページの年度切り替え
     def switch_year(self, request):
         year = request.GET.get("year", None)
         if year is not None:
             request.session["year"] = year
         return HttpResponse(status=200)
 
+    # アドミンページの言語切り替え
     def switch_language(request):
         lang = request.GET.get("lang", None)
         if lang is not None:

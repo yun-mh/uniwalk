@@ -2,6 +2,7 @@ from django.apps import AppConfig
 import vinaigrette
 
 
+# 対応状況のデータを翻訳するためのコード
 class OrdersConfig(AppConfig):
     name = "orders"
 

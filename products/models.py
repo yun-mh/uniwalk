@@ -5,6 +5,7 @@ from orders import models as order_models
 from designs import models as design_models
 
 
+# 商品番号の生成のための関数
 def create_product_code():
     last_product = Product.objects.all().order_by("pk").last()
     if not last_product:
@@ -18,6 +19,7 @@ def create_product_code():
     return new_product_number
 
 
+# 商品の3Dテンプレートの保存先を指定する関数
 def generate_path(self, filename):
     url = "product_templates/%s/%s" % (self.product.pk, filename)
     return url

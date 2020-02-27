@@ -5,6 +5,6 @@ from . import models
 @admin.register(models.Card)
 class CardAdmin(admin.ModelAdmin):
 
-    """ アドミンにカートテーブルを定義する """
+    """ アドミンにカードテーブルを定義する """
 
     pass

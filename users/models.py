@@ -11,6 +11,7 @@ from localflavor.jp.jp_prefectures import JP_PREFECTURES, JP_PREFECTURE_CODES
 from datetime import date
 
 
+# 会員番号の生成のための関数
 def create_member_number():
     last_member = User.objects.all().order_by("pk").last()
     if not last_member:

@@ -172,6 +172,7 @@ class Order(models.Model):
         return self.order_items.all().count() - 1
 
 
+# モデルにデータを保存した後に注文コードを付与し再保存する
 @receiver(post_save, sender=Order)
 def set_order_code(sender, instance, created, **kwargs):
     if created:

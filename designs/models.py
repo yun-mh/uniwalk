@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from products import models as product_models
 
 
+# カスタマイズデザインコードを生成する関数
 def create_custom_design_code():
     last_design = Design.objects.all().order_by("pk").last()
     if not last_design:
@@ -172,7 +173,9 @@ class Design(core_models.TimeStampedModel):
         _("番号"), max_length=40, default=create_custom_design_code, blank=True, null=True
     )
     customize_code = models.CharField(_("カスタマイズデザインコード"), max_length=11)
-    likes = models.ManyToManyField("users.User", verbose_name=_("いいねユーザ"), related_name="likes")
+    likes = models.ManyToManyField(
+        "users.User", verbose_name=_("いいねユーザ"), related_name="likes"
+    )
 
     class Meta:
         verbose_name = _("デザイン")

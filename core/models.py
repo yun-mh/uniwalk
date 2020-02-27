@@ -5,7 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from localflavor.jp.forms import JPPostalCodeField
 from localflavor.jp.jp_prefectures import JP_PREFECTURE_CODES, JP_PREFECTURES
 
-# Create your models here.
+
+# 他アプリケーションに継承されるタイムスタンプモデルの定義
 class TimeStampedModel(models.Model):
 
     """ 再利用可能なフィールドを各モデルに提供する """
@@ -17,6 +18,7 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
+# 日本都道府県フィールドクラスの定義
 class JPPrefectureField(CharField):
 
     """ データベースに都道府県のコード番号を入れるモデルフィールド """
@@ -34,6 +36,7 @@ class JPPrefectureField(CharField):
         return name, path, args, kwargs
 
 
+# 日本郵便番号クラスの定義
 class JPPostalCodeModelField(CharField):
 
     """ 日本郵便番号の７桁を入れるモデルフィールド """

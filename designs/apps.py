@@ -2,6 +2,7 @@ from django.apps import AppConfig
 import vinaigrette
 
 
+# 素材データの翻訳のためのコード
 class DesignsConfig(AppConfig):
     name = "designs"
 

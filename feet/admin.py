@@ -13,13 +13,14 @@ class FootsizeAdmin(admin.ModelAdmin):
 @admin.register(models.FootImage)
 class FootImageAdmin(admin.ModelAdmin):
 
-    """ アドミンに足サイズテーブルを定義する """
+    """ アドミンに足イメージテーブルを定義する """
 
     pass
+
 
 @admin.register(models.ProcessedFootImage)
 class ProcessedFootImageAdmin(admin.ModelAdmin):
 
-    """ 削除する！ """
+    """ アドミンに処理済み足イメージテーブルを定義する """
 
     pass

@@ -56,7 +56,6 @@ class CustomUserAdmin(admin.ModelAdmin):
                     "address_city",
                     "address_detail",
                     "member_code",
-                    # "stripe_customer_id",
                 )
             },
         ),
