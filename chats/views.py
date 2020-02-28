@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 
-# configure pusher object
+
 pusher = pusher.Pusher(
     app_id="947136",
     key="768af5bb1417be83adc3",

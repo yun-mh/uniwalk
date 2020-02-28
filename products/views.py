@@ -35,11 +35,14 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        designs = self.object.design.all()
-        design_list = sorted(designs, key= lambda design: design.total_likes, reverse=True)[0:4]         
+        designs = self.object.design.all().exclude(user__isnull=True)
+        design_list = sorted(
+            designs, key=lambda design: design.total_likes, reverse=True
+        )[0:4]
         posts = self.object.reviews.all().order_by("-created")[0:4]
         each = {review.pk: review.text for review in posts}
         context["reviews_text"] = each
         context["rev"] = posts
         context["designs"] = design_list
+        context["count_designs"] = designs
         return context

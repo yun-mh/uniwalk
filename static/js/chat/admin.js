@@ -1,20 +1,12 @@
-(function() {
-  "use strict";
-
-  // ----------------------------------------------------
-  // Configure Pusher instance
-  // ----------------------------------------------------
-
+var pusherChat = (function() {
+  // pusherのAPI設定
   var pusher = new Pusher("768af5bb1417be83adc3", {
     authEndpoint: "/chats/pusher/auth/",
     cluster: "ap3",
     encrypted: true
   });
 
-  // ----------------------------------------------------
-  // Chat Details
-  // ----------------------------------------------------
-
+  // チャットのデフォルト設定
   let chat = {
     messages: [],
     currentRoom: "",
@@ -23,35 +15,20 @@
     subscribedUsers: []
   };
 
-  // ----------------------------------------------------
-  // Subscribe to the generalChannel
-  // ----------------------------------------------------
-
+  // 一般チャンネルにsubscribeする
   var generalChannel = pusher.subscribe("general-channel");
 
-  // ----------------------------------------------------
-  // Targeted Elements
-  // ----------------------------------------------------
-
+  // DOMの取得
   const chatBody = $(document);
   const chatRoomsList = $("#rooms");
   const chatReplyMessage = $("#replyMessage");
 
-  // ----------------------------------------------------
-  // Register helpers
-  // ----------------------------------------------------
-
+  // UIを操作するオブジェクトの定義
   const helpers = {
-    // ------------------------------------------------------------------
-    // Clear the chat messages UI
-    // ------------------------------------------------------------------
-
+    // チャットメッセージUIをクリアする
     clearChatMessages: () => $("#chat-msgs").html(""),
 
-    // ------------------------------------------------------------------
-    // Add a new chat message to the chat window.
-    // ------------------------------------------------------------------
-
+    // 新しいメッセージを表示する
     displayChatMessage: message => {
       if (message.email === chat.currentRoom) {
         if (message.sender === "Support") {
@@ -76,10 +53,7 @@
       }
     },
 
-    // ------------------------------------------------------------------
-    // Select a new guest chatroom
-    // ------------------------------------------------------------------
-
+    // 新しいチャットルームをロードする
     loadChatRoom: evt => {
       chat.currentRoom = evt.target.dataset.roomId;
       chat.currentChannel = evt.target.dataset.channelId;
@@ -90,12 +64,10 @@
       }
 
       evt.preventDefault();
-      helpers.clearChatMessages();
+      // helpers.clearChatMessages();
     },
 
-    // ------------------------------------------------------------------
-    // Reply a message
-    // ------------------------------------------------------------------
+    // 返事する
     replyMessage: evt => {
       evt.preventDefault();
 
@@ -127,16 +99,12 @@
     }
   };
 
-  // ------------------------------------------------------------------
-  // Listen to the event that returns the details of a new guest user
-  // ------------------------------------------------------------------
-
+  // 新しいゲストの情報を取得し、チャットに新しく設定する
   generalChannel.bind("new-guest-details", function(data) {
     chat.subscribedChannels.push(pusher.subscribe("private-" + data.email));
-
     chat.subscribedUsers.push(data);
 
-    // render the new list of subscribed users and clear the former
+    // チャットしようとしているチャットルームをリスト式で表示する
     $("#rooms").html("");
     chat.subscribedUsers.forEach(function(user, index) {
       $("#rooms").append(
@@ -145,18 +113,12 @@
     });
   });
 
-  // ------------------------------------------------------------------
-  // Listen for a new message event from a guest
-  // ------------------------------------------------------------------
-
+  // ゲストから新しいメッセージのイベントを検知し、表示する
   pusher.bind("client-guest-new-message", function(data) {
     helpers.displayChatMessage(data);
   });
 
-  // ----------------------------------------------------
-  // Register page event listeners
-  // ----------------------------------------------------
-
+  // イベントリスナーの設定
   chatReplyMessage.on("submit", helpers.replyMessage);
   chatRoomsList.on("click", "li", helpers.loadChatRoom);
 })();

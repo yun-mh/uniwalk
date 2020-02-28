@@ -10,11 +10,12 @@
     style="background-image: url({% static 'images/pattern.svg' %}); background-repeat: repeat;">
     <div class="flex p-10">
         <div class="w-1/6 shadow-lg bg-white rounded-lg ml-6 mr-3 h-2/3">
-            <h2 class="text-lg font-extrabold py-2 mb-1 pl-3 bg-gray-900 text-white rounded-t-lg">{% trans '商品カテゴリー' %}
+            <h2 class="text-lg font-extrabold py-2 mb-1 pl-3 bg-gray-900 text-white rounded-t-lg capitalize">
+                {% trans '商品カテゴリー' %}
             </h2>
             <ul class="px-4">
                 <li class="flex justify-between py-2 text-base pr-3 p-1">
-                    <a href="{% url 'products:list' %}">{% trans 'すべて' %}</a>
+                    <a href="{% url 'products:list' %}" class="capitalize">{% trans 'すべて' %}</a>
                     <span class="text-gray-500">{{ count }}</span>
                 </li>
                 {% for category in categories %}
@@ -26,7 +27,7 @@
             </ul>
         </div>
         <div class="w-5/6 flex flex-wrap mr-10 ml-3 rounded-lg p-5 bg-white">
-            <h2 class="w-full text-indigo-800 mt-3 mb-5 text-3xl text-center font-semibold">
+            <h2 class="w-full text-indigo-800 mt-3 mb-5 text-3xl text-center font-semibold uppercase">
                 {% if '/category-1/' in request.path %}
                 HIGH CUT
                 {% elif '/category-2/' in request.path %}
@@ -34,7 +35,7 @@
                 {% elif '/category-3/' in request.path %}
                 LOW CUT
                 {% else %}
-                ALL
+                {% trans 'すべて' %}
                 {% endif %}
             </h2>
             {% if products %}

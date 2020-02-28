@@ -79,7 +79,7 @@
   <script src="{% static 'js/chat/axios.js' %}"></script>
   <script src="{% static 'js/chat/app.js' %}"></script>
   <script>
-    (function () {
+    var pusherChat = (function () {
       // pusherのAPI設定
       var pusher = new Pusher("768af5bb1417be83adc3", {
         authEndpoint: "/chats/pusher/auth/",
