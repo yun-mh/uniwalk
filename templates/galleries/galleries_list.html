@@ -64,12 +64,9 @@
                                         <i
                                             class='{% for check_user in design.likes.all %}{% if check_user == user  %}fas fa-heart text-lg text-red-600 {% endif %}{% endfor %}far fa-heart text-lg'></i>
                                     </a>
-                                    {% else %}
-                                    <span>
-                                        <i class="far fa-heart text-lg"></i>
-                                    </span>
-                                    {% endif %}
                                     <span id="count{{ design.pk }}" class="ml-3">{{ design.total_likes }}</span>
+                                    {% else %}
+                                    {% endif %}
                                 </div>
                             </div>
                             <div>

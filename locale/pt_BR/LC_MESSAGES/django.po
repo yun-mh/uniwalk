@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-25 10:31+0900\n"
+"POT-Creation-Date: 2020-02-29 15:54+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,39 +23,39 @@ msgstr ""
 msgid "カート"
 msgstr "carrinho de compra"
 
-#: .\carts\models.py:19 .\designs\models.py:178 .\designs\models.py:179
+#: .\carts\models.py:19 .\designs\models.py:181 .\designs\models.py:182
 #: .\templates\statics\home.html:39
 msgid "デザイン"
 msgstr "designer"
 
-#: .\carts\models.py:26 .\designs\models.py:76 .\orders\models.py:204
-#: .\products\models.py:32 .\products\models.py:81 .\products\models.py:173
-#: .\products\models.py:174 .\reviews\models.py:13
+#: .\carts\models.py:26 .\designs\models.py:77 .\orders\models.py:205
+#: .\products\models.py:34 .\products\models.py:83 .\products\models.py:175
+#: .\products\models.py:176 .\reviews\models.py:13
 #: .\templates\admin\extra_nav.html:20 .\templates\partials\nav.html:116
 msgid "商品"
 msgstr "produto"
 
-#: .\carts\models.py:28 .\feet\models.py:43 .\orders\models.py:237
+#: .\carts\models.py:28 .\feet\models.py:43 .\orders\models.py:238
 #: .\templates\admin\footsize-analytics.html:8
 msgid "足長(左)"
 msgstr "largura do pé esquerdo "
 
-#: .\carts\models.py:29 .\feet\models.py:44 .\orders\models.py:238
+#: .\carts\models.py:29 .\feet\models.py:44 .\orders\models.py:239
 #: .\templates\admin\footsize-analytics.html:19
 msgid "足長(右)"
 msgstr "largura do pé direito"
 
-#: .\carts\models.py:30 .\feet\models.py:45 .\orders\models.py:239
+#: .\carts\models.py:30 .\feet\models.py:45 .\orders\models.py:240
 #: .\templates\admin\footsize-analytics.html:30
 msgid "足幅(左)"
 msgstr "comprimento do pé esquerdo"
 
-#: .\carts\models.py:31 .\feet\models.py:46 .\orders\models.py:240
+#: .\carts\models.py:31 .\feet\models.py:46 .\orders\models.py:241
 #: .\templates\admin\footsize-analytics.html:41
 msgid "足幅(右)"
 msgstr "comprimento do direito"
 
-#: .\carts\models.py:32 .\orders\models.py:210
+#: .\carts\models.py:32 .\orders\models.py:211
 #: .\templates\documents\bill.html:95 .\templates\documents\invoice.html:61
 #: .\templates\documents\ordersheet.html:86
 #: .\templates\documents\receipt.html:63
@@ -69,7 +69,7 @@ msgstr "comprimento do direito"
 msgid "数量"
 msgstr "quantidade"
 
-#: .\carts\models.py:33 .\users\models.py:144
+#: .\carts\models.py:33 .\users\models.py:145
 msgid "活性化"
 msgstr "Ativação"
 
@@ -81,19 +81,19 @@ msgstr "membro"
 msgid "カートセッションキー"
 msgstr "chave sessão do carrinho de compra"
 
-#: .\core\models.py:13
+#: .\core\models.py:14
 msgid "登録日時"
 msgstr "data de registro"
 
-#: .\core\models.py:14
+#: .\core\models.py:15
 msgid "更新日時"
 msgstr "data atualizada"
 
-#: .\core\models.py:24
+#: .\core\models.py:26
 msgid "日本地域コード (2桁)"
 msgstr "codigo do japao(2 dígitos)"
 
-#: .\core\models.py:41
+#: .\core\models.py:44
 msgid "日本郵便番号：数字７桁"
 msgstr "codigo postal(7 digitos)"
 
@@ -109,225 +109,225 @@ msgstr "informação do design"
 msgid "デザイン詳細"
 msgstr "detalhes do design"
 
-#: .\designs\models.py:24
+#: .\designs\models.py:25
 msgid "素材名"
 msgstr "nome do material"
 
-#: .\designs\models.py:25
+#: .\designs\models.py:26
 msgid "素材画像"
 msgstr "foto do material"
 
-#: .\designs\models.py:26
+#: .\designs\models.py:27
 msgid "素材コード"
 msgstr "codigo do material"
 
-#: .\designs\models.py:29 .\designs\models.py:30
+#: .\designs\models.py:30 .\designs\models.py:31
 #: .\templates\statics\home.html:35
 msgid "素材"
 msgstr "material"
 
-#: .\designs\models.py:43
+#: .\designs\models.py:44
 msgid "デザインid"
 msgstr "ID do design"
 
-#: .\designs\models.py:48 .\orders\models.py:212
+#: .\designs\models.py:49 .\orders\models.py:213
 msgid "正面"
 msgstr "frontal"
 
-#: .\designs\models.py:49 .\orders\models.py:213
+#: .\designs\models.py:50 .\orders\models.py:214
 msgid "側面"
 msgstr "lateral"
 
-#: .\designs\models.py:50 .\orders\models.py:214
+#: .\designs\models.py:51 .\orders\models.py:215
 msgid "上面"
 msgstr "superior"
 
-#: .\designs\models.py:51 .\orders\models.py:215
+#: .\designs\models.py:52 .\orders\models.py:216
 msgid "下面"
 msgstr "inferior"
 
-#: .\designs\models.py:54 .\designs\models.py:55
+#: .\designs\models.py:55 .\designs\models.py:56
 #: .\templates\documents\specification.html:76
 msgid "デザインイメージ"
 msgstr "amostra do design"
 
-#: .\designs\models.py:68
+#: .\designs\models.py:69
 msgid "ユーザ"
 msgstr "usuário"
 
-#: .\designs\models.py:84
+#: .\designs\models.py:85
 msgid "アウトソール素材(左)"
 msgstr "material solado (esquerda)"
 
-#: .\designs\models.py:93
+#: .\designs\models.py:94
 msgid "ミッドソール素材(左)"
 msgstr "material entressola (esquerda)"
 
-#: .\designs\models.py:102
+#: .\designs\models.py:103
 msgid "アッパーソール素材(左)"
 msgstr "Material da sola superior (esquerda)"
 
-#: .\designs\models.py:111
+#: .\designs\models.py:112
 msgid "シューレース素材(左)"
 msgstr "Material de renda (esquerda)"
 
-#: .\designs\models.py:120
+#: .\designs\models.py:121
 msgid "タン素材(左)"
 msgstr "material da lingueta (esquerda)"
 
-#: .\designs\models.py:129
+#: .\designs\models.py:130
 msgid "アウトソール素材(右)"
 msgstr "material solado (direita)"
 
-#: .\designs\models.py:138
+#: .\designs\models.py:139
 msgid "ミッドソール素材(右)"
 msgstr "material entressola (direita)"
 
-#: .\designs\models.py:147
+#: .\designs\models.py:148
 msgid "アッパーソール素材(右)"
 msgstr "Material da sola superior (direita)"
 
-#: .\designs\models.py:156
+#: .\designs\models.py:157
 msgid "シューレース素材(右)"
 msgstr "Material de renda (direita)"
 
-#: .\designs\models.py:165
+#: .\designs\models.py:166
 msgid "タン素材(右)"
 msgstr "material da lingueta (direita)"
 
-#: .\designs\models.py:172 .\products\models.py:126
+#: .\designs\models.py:173 .\products\models.py:128
 msgid "番号"
 msgstr "número"
 
-#: .\designs\models.py:174 .\orders\models.py:236
+#: .\designs\models.py:175 .\orders\models.py:237
 #: .\templates\documents\specification.html:51
 msgid "カスタマイズデザインコード"
 msgstr "codigo de design customizado"
 
-#: .\designs\models.py:175
+#: .\designs\models.py:177
 msgid "いいねユーザ"
 msgstr "curtir"
 
-#: .\feet\views.py:86 .\orders\views.py:149 .\orders\views.py:249
-#: .\orders\views.py:632 .\orders\views.py:640 .\orders\views.py:644
+#: .\feet\views.py:86 .\orders\views.py:159 .\orders\views.py:259
+#: .\orders\views.py:636 .\orders\views.py:644 .\orders\views.py:648
 #: .\users\views.py:985
 msgid "入力した情報をもう一度確認してください。"
 msgstr "verificar novamente os dados digitdo"
 
-#: .\orders\admin.py:18 .\orders\admin.py:19 .\orders\models.py:198
+#: .\orders\admin.py:18 .\orders\admin.py:19 .\orders\models.py:199
 msgid "注文アイテム"
 msgstr "item encomendado"
 
-#: .\orders\admin.py:26 .\orders\admin.py:36 .\orders\admin.py:46
-#: .\orders\admin.py:56 .\orders\admin.py:66 .\orders\admin.py:76
+#: .\orders\admin.py:27 .\orders\admin.py:40 .\orders\admin.py:53
+#: .\orders\admin.py:66 .\orders\admin.py:79 .\orders\admin.py:92
 msgid "1件の注文の対応を"
 msgstr "correspondência de um pedido"
 
-#: .\orders\admin.py:28 .\orders\admin.py:38 .\orders\admin.py:48
-#: .\orders\admin.py:58 .\orders\admin.py:68 .\orders\admin.py:78
+#: .\orders\admin.py:29 .\orders\admin.py:42 .\orders\admin.py:55
+#: .\orders\admin.py:68 .\orders\admin.py:81 .\orders\admin.py:94
 #, python-format
 msgid "%s 注文の対応を"
 msgstr "%s correspondência do pedido"
 
-#: .\orders\admin.py:29
+#: .\orders\admin.py:30
 #, python-format
 msgid "%s 入金前に変更しました。"
 msgstr "%s　mudou para antes da efetuação de pagamento"
 
-#: .\orders\admin.py:30 .\orders\admin.py:80
+#: .\orders\admin.py:33 .\orders\admin.py:98
 msgid "選択した注文を入金前に変更"
 msgstr "mudar o pedido para antes da efetuação de pagamento"
 
-#: .\orders\admin.py:39
+#: .\orders\admin.py:43
 #, python-format
 msgid "%s 決済処理中に変更しました。"
 msgstr "%s　mudou para Durante o processamento de pagamento"
 
-#: .\orders\admin.py:40
+#: .\orders\admin.py:46
 msgid "選択した注文を決済処理中に変更"
 msgstr "mudar para Durante o processamento de pagamento "
 
-#: .\orders\admin.py:49
+#: .\orders\admin.py:56
 #, python-format
 msgid "%s 決済確認済みに変更しました。"
 msgstr "%s　mudou para confirmação do processamento de pagamento"
 
-#: .\orders\admin.py:50
+#: .\orders\admin.py:59
 msgid "選択した注文を決済確認済みに変更"
 msgstr ""
 "mudar o pedido escolhido para confirmação do processamento de pagamento"
 
-#: .\orders\admin.py:59
+#: .\orders\admin.py:69
 #, python-format
 msgid "%s 対応中に変更しました。"
 msgstr "%s mudou o pedido escolhido para resolvendo"
 
-#: .\orders\admin.py:60
+#: .\orders\admin.py:72
 msgid "選択した注文を対応中に変更"
 msgstr "mudar pedido escolhido para resolvendo"
 
-#: .\orders\admin.py:69
+#: .\orders\admin.py:82
 #, python-format
 msgid "%s 発送済みに変更しました。"
 msgstr "%s　mudou pedido para enviado"
 
-#: .\orders\admin.py:70
+#: .\orders\admin.py:85
 msgid "選択した注文を発送済みに変更"
 msgstr "mudar pedido para enviado"
 
-#: .\orders\admin.py:79
+#: .\orders\admin.py:95
 #, python-format
 msgid "%s 注文取消しに変更しました。"
 msgstr "%s　mudou o pedido para pedido cancelado"
 
-#: .\orders\admin.py:92
+#: .\orders\admin.py:110
 msgid "注文情報"
 msgstr "informação do pedido"
 
-#: .\orders\admin.py:106
+#: .\orders\admin.py:124
 msgid "注文者情報"
 msgstr "informação do cliente que efetuou o pedido"
 
-#: .\orders\admin.py:122
+#: .\orders\admin.py:140
 msgid "配送先情報"
 msgstr "informação do destínatário "
 
-#: .\orders\admin.py:204 .\templates\admin\order_changeform.html:7
+#: .\orders\admin.py:232 .\templates\admin\order_changeform.html:7
 #: .\templates\documents\bill.html:16 .\templates\documents\bill.html:22
 #: .\templates\orders\bill.html:10 .\templates\orders\bill.html:16
 msgid "請求書"
 msgstr "Fatura"
 
-#: .\orders\admin.py:233 .\templates\admin\order_changeform.html:10
+#: .\orders\admin.py:261 .\templates\admin\order_changeform.html:10
 #: .\templates\documents\receipt.html:16 .\templates\documents\receipt.html:22
 #: .\templates\orders\receipt.html:10 .\templates\orders\receipt.html:16
 msgid "領収書"
 msgstr "Recibo"
 
-#: .\orders\admin.py:258 .\templates\admin\order_changeform.html:13
+#: .\orders\admin.py:286 .\templates\admin\order_changeform.html:13
 #: .\templates\documents\ordersheet.html:16
 #: .\templates\documents\ordersheet.html:22
 msgid "発注書"
 msgstr "formulário de pedido"
 
-#: .\orders\admin.py:283 .\templates\admin\order_changeform.html:14
+#: .\orders\admin.py:311 .\templates\admin\order_changeform.html:14
 msgid "仕様書"
 msgstr "formulário de Especificações"
 
-#: .\orders\admin.py:309 .\templates\admin\order_changeform.html:17
+#: .\orders\admin.py:337 .\templates\admin\order_changeform.html:17
 #: .\templates\documents\invoice.html:21 .\templates\documents\invoice.html:27
 msgid "納品書"
 msgstr "Nota de entrega"
 
-#: .\orders\admin.py:327
+#: .\orders\admin.py:355
 msgid "顧客名"
 msgstr "nome do cliente"
 
-#: .\orders\admin.py:332
+#: .\orders\admin.py:360
 msgid "顧客名(カナ)"
 msgstr "nome do cliente(katakana)"
 
-#: .\orders\admin.py:340
+#: .\orders\admin.py:368
 msgid "対応情報"
 msgstr "informação a ser a resolvida"
 
@@ -345,7 +345,7 @@ msgstr "depósito"
 #: .\orders\forms.py:16 .\orders\forms.py:196 .\orders\forms.py:197
 #: .\templates\partials\footer.html:60 .\users\forms.py:13 .\users\forms.py:49
 #: .\users\forms.py:117 .\users\forms.py:190 .\users\forms.py:223
-#: .\users\models.py:46 .\users\models.py:143
+#: .\users\models.py:47 .\users\models.py:144
 msgid "メールアドレス"
 msgstr "email"
 
@@ -364,42 +364,42 @@ msgstr "nome"
 #: .\orders\forms.py:39 .\orders\forms.py:66 .\orders\forms.py:68
 #: .\orders\forms.py:121 .\orders\forms.py:142 .\orders\forms.py:144
 #: .\templates\users\signup-check.html:24 .\users\forms.py:58
-#: .\users\forms.py:128 .\users\models.py:58
+#: .\users\forms.py:128 .\users\models.py:59
 msgid "姓(カナ)"
 msgstr "sobrenome(katakana)"
 
 #: .\orders\forms.py:42 .\orders\forms.py:71 .\orders\forms.py:73
 #: .\orders\forms.py:124 .\orders\forms.py:147 .\orders\forms.py:149
 #: .\templates\users\signup-check.html:25 .\users\forms.py:61
-#: .\users\forms.py:131 .\users\models.py:48
+#: .\users\forms.py:131 .\users\models.py:49
 msgid "名(カナ)"
 msgstr "nome(katakana)"
 
 #: .\orders\forms.py:45 .\orders\forms.py:76 .\orders\forms.py:78
 #: .\orders\forms.py:126 .\orders\forms.py:152 .\orders\forms.py:154
-#: .\users\forms.py:136 .\users\models.py:71
+#: .\users\forms.py:136 .\users\models.py:72
 msgid "電話番号"
 msgstr "número de telefone"
 
-#: .\orders\forms.py:48 .\users\models.py:73
+#: .\orders\forms.py:48 .\users\models.py:74
 msgid "都道府県"
 msgstr "Estado/províncias"
 
 #: .\orders\forms.py:51 .\orders\forms.py:81 .\orders\forms.py:83
 #: .\orders\forms.py:128 .\orders\forms.py:157 .\orders\forms.py:159
-#: .\users\forms.py:137 .\users\models.py:74
+#: .\users\forms.py:137 .\users\models.py:75
 msgid "市区町村番地"
 msgstr "cidade + destrito + bairro + vila"
 
 #: .\orders\forms.py:54 .\orders\forms.py:86 .\orders\forms.py:88
 #: .\orders\forms.py:130 .\orders\forms.py:162 .\orders\forms.py:164
-#: .\users\forms.py:138 .\users\models.py:75
+#: .\users\forms.py:138 .\users\models.py:76
 msgid "建物名・号室"
 msgstr "nome do predio + número do apartamento"
 
 #: .\orders\forms.py:91 .\orders\forms.py:93 .\orders\forms.py:127
 #: .\orders\forms.py:167 .\orders\forms.py:169 .\users\forms.py:147
-#: .\users\models.py:72
+#: .\users\models.py:73
 msgid "郵便番号"
 msgstr "codigo postal"
 
@@ -432,7 +432,7 @@ msgid "ユーザー"
 msgstr "usuário"
 
 #: .\orders\models.py:65 .\templates\admin\member-analytics.html:85
-#: .\users\models.py:147 .\users\models.py:148
+#: .\users\models.py:148 .\users\models.py:149
 msgid "ゲスト"
 msgstr "guest"
 
@@ -449,7 +449,7 @@ msgid "姓(ご請求書先,カナ)"
 msgstr "sobrenome do comprador(Fatura,katakana)"
 
 #: .\orders\models.py:77 .\orders\models.py:86 .\orders\models.py:106
-#: .\orders\models.py:117 .\users\models.py:53 .\users\models.py:63
+#: .\orders\models.py:117 .\users\models.py:54 .\users\models.py:64
 msgid "全角カタカナで入力してください。"
 msgstr "Escreva em katakana"
 
@@ -536,7 +536,7 @@ msgstr "total a ser pago"
 msgid "注文"
 msgstr "pedido"
 
-#: .\orders\models.py:211 .\templates\carts\cart.html:47
+#: .\orders\models.py:212 .\templates\carts\cart.html:47
 #: .\templates\documents\receipt.html:66
 #: .\templates\mixins\orders\order-detail-card.html:27
 #: .\templates\orders\bill.html:91 .\templates\orders\receipt.html:60
@@ -544,54 +544,54 @@ msgstr "pedido"
 msgid "単価"
 msgstr "preço unitário"
 
-#: .\orders\views.py:273 .\users\mixins.py:13
+#: .\orders\views.py:283 .\users\mixins.py:13
 msgid "アクセスできません。"
 msgstr "Não foi possivel acessar"
 
-#: .\orders\views.py:426
+#: .\orders\views.py:431
 msgid "支払限度を超過しました。"
 msgstr "excedeu o valor máximo a ser pago"
 
-#: .\orders\views.py:430
+#: .\orders\views.py:435
 msgid "無効なペラメタです。"
 msgstr "parametro inválido"
 
-#: .\orders\views.py:433
+#: .\orders\views.py:438
 msgid "認証できませんでした。"
 msgstr "não foi possível"
 
-#: .\orders\views.py:437
+#: .\orders\views.py:442
 msgid "ネットワークに問題があります。"
 msgstr "Ocorreu um problema na internet"
 
-#: .\orders\views.py:441 .\users\views.py:1023 .\users\views.py:1063
+#: .\orders\views.py:446 .\users\views.py:1023 .\users\views.py:1063
 #: .\users\views.py:1104 .\users\views.py:1171 .\users\views.py:1176
 msgid "問題が発生しました。もう一度試してみてください。"
 msgstr "Ocorreu um problema.Por favor tente novamente"
 
-#: .\orders\views.py:445
+#: .\orders\views.py:450
 msgid "エラーが発生しました。"
 msgstr "Ocorreu um erro"
 
-#: .\orders\views.py:589
+#: .\orders\views.py:593
 msgid "Uniwalk ご注文ありがとうございます。"
 msgstr "Obrigado por efetuar a compra em UniWalk"
 
-#: .\orders\views.py:680 .\users\views.py:302 .\users\views.py:345
+#: .\orders\views.py:684 .\users\views.py:302 .\users\views.py:345
 msgid "Uniwalk ご注文取消しのご連絡"
 msgstr "Comunicação de pedido cancelado"
 
-#: .\orders\views.py:688
+#: .\orders\views.py:692
 msgid "注文を取り消しました。"
 msgstr "pedido foi cancelado"
 
-#: .\products\admin.py:11 .\products\admin.py:12 .\products\models.py:85
-#: .\products\models.py:86
+#: .\products\admin.py:11 .\products\admin.py:12 .\products\models.py:87
+#: .\products\models.py:88
 msgid "商品イメージ"
 msgstr "amostra da item"
 
-#: .\products\admin.py:19 .\products\admin.py:20 .\products\models.py:68
-#: .\products\models.py:69
+#: .\products\admin.py:19 .\products\admin.py:20 .\products\models.py:70
+#: .\products\models.py:71
 msgid "テンプレート"
 msgstr "modelo de documento"
 
@@ -607,63 +607,63 @@ msgstr "miniatura"
 msgid "カテゴリー情報"
 msgstr "informação de categoria"
 
-#: .\products\models.py:37
+#: .\products\models.py:39
 msgid "シューレス(左)"
 msgstr "cadarço(esquerda)"
 
-#: .\products\models.py:40
+#: .\products\models.py:42
 msgid "タン(左)"
 msgstr "Língua do sapato (esquerda)"
 
-#: .\products\models.py:43
+#: .\products\models.py:45
 msgid "アッパーソール(左)"
 msgstr "Sola superior (esquerda)"
 
-#: .\products\models.py:46
+#: .\products\models.py:48
 msgid "ミッドソール(左)"
 msgstr "Entressola (esquerda)"
 
-#: .\products\models.py:49
+#: .\products\models.py:51
 msgid "アウトソール(左)"
 msgstr "Sola (esquerda)"
 
-#: .\products\models.py:52
+#: .\products\models.py:54
 msgid "シューレス(右)"
 msgstr "Cadarço(direita)"
 
-#: .\products\models.py:55
+#: .\products\models.py:57
 msgid "タン(右)"
 msgstr "Língua do sapato (direita)"
 
-#: .\products\models.py:58
+#: .\products\models.py:60
 msgid "アッパーソール(右)"
 msgstr "Sola superior (direita)"
 
-#: .\products\models.py:61
+#: .\products\models.py:63
 msgid "ミッドソール(右)"
 msgstr "Entressola (direita)"
 
-#: .\products\models.py:64
+#: .\products\models.py:66
 msgid "アウトソール(右)"
 msgstr "Sola (direita)"
 
-#: .\products\models.py:79
+#: .\products\models.py:81
 msgid "イメージ"
 msgstr "amostra"
 
-#: .\products\models.py:93
+#: .\products\models.py:95
 msgid "商品タイプ名"
 msgstr "tipo do item"
 
-#: .\products\models.py:94
+#: .\products\models.py:96
 msgid "タイプコード"
 msgstr "codigo do tipo "
 
-#: .\products\models.py:97 .\products\models.py:98
+#: .\products\models.py:99 .\products\models.py:100
 msgid "カテゴリー"
 msgstr "categoria"
 
-#: .\products\models.py:115 .\templates\documents\invoice.html:58
+#: .\products\models.py:117 .\templates\documents\invoice.html:58
 #: .\templates\documents\ordersheet.html:77
 #: .\templates\documents\specification.html:47
 #: .\templates\mixins\orders\order-card.html:15
@@ -672,27 +672,27 @@ msgstr "categoria"
 msgid "商品名"
 msgstr "nome do item"
 
-#: .\products\models.py:118 .\templates\products\product-list.html:13
+#: .\products\models.py:120 .\templates\products\product-list.html:14
 msgid "商品カテゴリー"
 msgstr "categoria do item"
 
-#: .\products\models.py:122
+#: .\products\models.py:124
 msgid "価格"
 msgstr "valor"
 
-#: .\products\models.py:123
+#: .\products\models.py:125
 msgid "詳細説明"
 msgstr "Explicação detalhada"
 
-#: .\products\models.py:124
+#: .\products\models.py:126
 msgid "販売中"
 msgstr "vendendo"
 
-#: .\products\models.py:128 .\templates\documents\invoice.html:55
+#: .\products\models.py:130 .\templates\documents\invoice.html:55
 msgid "商品番号"
 msgstr "número do itemr"
 
-#: .\products\models.py:142 .\reviews\models.py:23
+#: .\products\models.py:144 .\reviews\models.py:23
 msgid "評点"
 msgstr "pontuacao"
 
@@ -725,88 +725,88 @@ msgstr "Comentário"
 msgid "レビューを投稿しました。"
 msgstr "Postar o comentário"
 
-#: .\templates\admin\base.html:10 .\templates\admin\base.html:32
+#: .\templates\admin\base.html:10 .\templates\admin\base.html:33
 msgid "Uniwalk 管理者モード"
 msgstr "modo adnimistrador de UniWalk"
 
-#: .\templates\admin\base.html:41 .\templates\admin\extra_nav.html:6
+#: .\templates\admin\base.html:42 .\templates\admin\extra_nav.html:6
 msgid "View site"
 msgstr "Visão do site"
 
-#: .\templates\admin\base.html:46
+#: .\templates\admin\base.html:47
 msgid "Documentation"
 msgstr "Documentário"
 
-#: .\templates\admin\base.html:51 .\templates\admin\extra_nav.html:7
+#: .\templates\admin\base.html:52 .\templates\admin\extra_nav.html:7
 msgid "Change password"
 msgstr "Mudar a senha"
 
-#: .\templates\admin\base.html:54 .\templates\admin\extra_nav.html:9
+#: .\templates\admin\base.html:55 .\templates\admin\extra_nav.html:9
 msgid "Log out"
 msgstr "Desconectar"
 
-#: .\templates\admin\base.html:103
+#: .\templates\admin\base.html:104
 msgid "注文状況"
 msgstr "situação do pedido"
 
-#: .\templates\admin\base.html:109 .\vinaigrette-deleteme.py:8
+#: .\templates\admin\base.html:110
 msgid "入金前"
 msgstr "antes so pagamento"
 
-#: .\templates\admin\base.html:115 .\vinaigrette-deleteme.py:9
+#: .\templates\admin\base.html:116
 msgid "決済処理中"
 msgstr "Durante o processamento do pagamento"
 
-#: .\templates\admin\base.html:121 .\vinaigrette-deleteme.py:10
+#: .\templates\admin\base.html:122
 msgid "決済確認済み"
 msgstr "confirmação do pagamento"
 
-#: .\templates\admin\base.html:127 .\vinaigrette-deleteme.py:11
+#: .\templates\admin\base.html:128
 msgid "対応中"
 msgstr "resolvendo"
 
-#: .\templates\admin\base.html:136 .\templates\products\product-detail.html:91
+#: .\templates\admin\base.html:137 .\templates\products\product-detail.html:91
 msgid "詳しく見る"
 msgstr "ver detalhadamente"
 
-#: .\templates\admin\base.html:145
+#: .\templates\admin\base.html:146
 msgid "ショップ状況"
 msgstr "situação da loja"
 
-#: .\templates\admin\base.html:151
+#: .\templates\admin\base.html:152
 msgid "取扱商品数"
 msgstr "quantidades de itens manuzeado"
 
-#: .\templates\admin\base.html:157 .\templates\admin\member-analytics.html:16
+#: .\templates\admin\base.html:158 .\templates\admin\member-analytics.html:16
 msgid "会員数"
 msgstr "quantidade de membro"
 
-#: .\templates\admin\base.html:163
+#: .\templates\admin\base.html:164
 msgid "登録カスタムデザイン数"
 msgstr "quantidade de designs customizado registrado"
 
-#: .\templates\admin\base.html:177
+#: .\templates\admin\base.html:178
 msgid "今月状況"
 msgstr "situação do mes"
 
-#: .\templates\admin\base.html:181
+#: .\templates\admin\base.html:182
 msgid "年"
 msgstr "ano"
 
-#: .\templates\admin\base.html:181
+#: .\templates\admin\base.html:182
 msgid "月"
 msgstr "mes"
 
-#: .\templates\admin\base.html:183 .\templates\admin\base.html:193
-#: .\templates\admin\base.html:201
+#: .\templates\admin\base.html:184 .\templates\admin\base.html:194
+#: .\templates\admin\base.html:202
 msgid "件"
 msgstr "casos"
 
-#: .\templates\admin\base.html:189
+#: .\templates\admin\base.html:190
 msgid "今日売上実績"
 msgstr "desempenho de vendas de hoje"
 
-#: .\templates\admin\base.html:197
+#: .\templates\admin\base.html:198
 msgid "昨日売上実績"
 msgstr "desempenho de vendas de ontem"
 
@@ -873,7 +873,8 @@ msgstr "Por categoria"
 #: .\templates\admin\design-analytics.html:26
 #: .\templates\galleries\galleries_list.html:24
 #: .\templates\galleries\galleries_list.html:39
-#: .\templates\products\product-list.html:17
+#: .\templates\products\product-list.html:18
+#: .\templates\products\product-list.html:38
 msgid "すべて"
 msgstr "todos"
 
@@ -961,44 +962,55 @@ msgid "チャット"
 msgstr "Chat"
 
 #: .\templates\admin\footsize-analytics.html:64
-#: .\templates\admin\footsize-analytics.html:108
+#: .\templates\admin\footsize-analytics.html:114
 msgid "80以下"
 msgstr "menos de 80"
 
 #: .\templates\admin\footsize-analytics.html:68
-#: .\templates\admin\footsize-analytics.html:112
+#: .\templates\admin\footsize-analytics.html:118
 msgid "~110以上"
 msgstr "mais de 110"
 
 #: .\templates\admin\footsize-analytics.html:71
-#: .\templates\admin\footsize-analytics.html:115
-#: .\templates\admin\footsize-analytics.html:162
-#: .\templates\admin\footsize-analytics.html:209
+#: .\templates\admin\footsize-analytics.html:121
+#: .\templates\admin\footsize-analytics.html:174
+#: .\templates\admin\footsize-analytics.html:227
 #: .\templates\admin\member-analytics.html:41
 #: .\templates\admin\member-analytics.html:114
 #: .\templates\users\signup-check.html:36 .\users\forms.py:66
-#: .\users\models.py:37
+#: .\users\models.py:38
 msgid "男性"
 msgstr "masculino"
 
 #: .\templates\admin\footsize-analytics.html:77
-#: .\templates\admin\footsize-analytics.html:121
-#: .\templates\admin\footsize-analytics.html:168
-#: .\templates\admin\footsize-analytics.html:215
+#: .\templates\admin\footsize-analytics.html:127
+#: .\templates\admin\footsize-analytics.html:180
+#: .\templates\admin\footsize-analytics.html:233
 #: .\templates\admin\member-analytics.html:45
 #: .\templates\admin\member-analytics.html:115
 #: .\templates\users\signup-check.html:38 .\users\forms.py:66
-#: .\users\models.py:38
+#: .\users\models.py:39
 msgid "女性"
 msgstr "feminino"
 
-#: .\templates\admin\footsize-analytics.html:152
-#: .\templates\admin\footsize-analytics.html:199
+#: .\templates\admin\footsize-analytics.html:83
+#: .\templates\admin\footsize-analytics.html:133
+#: .\templates\admin\footsize-analytics.html:186
+#: .\templates\admin\footsize-analytics.html:239
+#: .\templates\admin\member-analytics.html:49
+#: .\templates\admin\member-analytics.html:116
+#: .\templates\users\signup-check.html:40 .\users\forms.py:66
+#: .\users\models.py:40
+msgid "その他"
+msgstr "outros"
+
+#: .\templates\admin\footsize-analytics.html:164
+#: .\templates\admin\footsize-analytics.html:217
 msgid "230未満"
 msgstr "menor de 230"
 
-#: .\templates\admin\footsize-analytics.html:159
-#: .\templates\admin\footsize-analytics.html:206
+#: .\templates\admin\footsize-analytics.html:171
+#: .\templates\admin\footsize-analytics.html:224
 msgid "290以上"
 msgstr "maior de 290"
 
@@ -1021,13 +1033,6 @@ msgstr "Proporção de gênero da associação"
 #: .\templates\admin\member-analytics.html:37
 msgid "全体会員数"
 msgstr "Número total de membros"
-
-#: .\templates\admin\member-analytics.html:49
-#: .\templates\admin\member-analytics.html:116
-#: .\templates\users\signup-check.html:40 .\users\forms.py:66
-#: .\users\models.py:39
-msgid "その他"
-msgstr "outros"
 
 #: .\templates\admin\member-analytics.html:62
 msgid "会員年齢分布"
@@ -1204,64 +1209,72 @@ msgstr "design customizado"
 msgid "画像を抽出しています。"
 msgstr "Extraindo imagem"
 
-#: .\templates\designs\design-customize.html:18
+#: .\templates\designs\design-customize.html:19
 msgid "デザイン確定"
 msgstr "Comfirmar o design"
 
-#: .\templates\designs\design-customize.html:279
+#: .\templates\designs\design-customize.html:470
 msgid "色(左)"
 msgstr "Cor(esquerda)"
 
-#: .\templates\designs\design-customize.html:280
-#: .\templates\designs\design-customize.html:288
-#: .\templates\designs\design-customize.html:296
-#: .\templates\designs\design-customize.html:304
+#: .\templates\designs\design-customize.html:471
+#: .\templates\designs\design-customize.html:479
+#: .\templates\designs\design-customize.html:487
+#: .\templates\designs\design-customize.html:495
 #: .\templates\documents\specification.html:189
 msgid "シューレス"
 msgstr "Cadarço"
 
-#: .\templates\designs\design-customize.html:281
-#: .\templates\designs\design-customize.html:289
-#: .\templates\designs\design-customize.html:297
-#: .\templates\designs\design-customize.html:305
+#: .\templates\designs\design-customize.html:472
+#: .\templates\designs\design-customize.html:480
+#: .\templates\designs\design-customize.html:488
+#: .\templates\designs\design-customize.html:496
 msgid "アッパーソール"
 msgstr "Sola superior"
 
-#: .\templates\designs\design-customize.html:282
-#: .\templates\designs\design-customize.html:290
-#: .\templates\designs\design-customize.html:298
-#: .\templates\designs\design-customize.html:306
+#: .\templates\designs\design-customize.html:473
+#: .\templates\designs\design-customize.html:481
+#: .\templates\designs\design-customize.html:489
+#: .\templates\designs\design-customize.html:497
 #: .\templates\documents\specification.html:206
 msgid "タン"
 msgstr "lingueta"
 
-#: .\templates\designs\design-customize.html:283
-#: .\templates\designs\design-customize.html:291
-#: .\templates\designs\design-customize.html:299
-#: .\templates\designs\design-customize.html:307
+#: .\templates\designs\design-customize.html:474
+#: .\templates\designs\design-customize.html:482
+#: .\templates\designs\design-customize.html:490
+#: .\templates\designs\design-customize.html:498
 #: .\templates\documents\specification.html:131
 msgid "ミッドソール"
 msgstr "Entressola"
 
-#: .\templates\designs\design-customize.html:284
-#: .\templates\designs\design-customize.html:292
-#: .\templates\designs\design-customize.html:300
-#: .\templates\designs\design-customize.html:308
+#: .\templates\designs\design-customize.html:475
+#: .\templates\designs\design-customize.html:483
+#: .\templates\designs\design-customize.html:491
+#: .\templates\designs\design-customize.html:499
 #: .\templates\documents\specification.html:108
 msgid "アウトソール"
 msgstr "sola"
 
-#: .\templates\designs\design-customize.html:287
+#: .\templates\designs\design-customize.html:478
 msgid "色(右)"
 msgstr "Cor(direita)"
 
-#: .\templates\designs\design-customize.html:295
+#: .\templates\designs\design-customize.html:486
 msgid "素材(左)"
 msgstr "Material(esquerda)"
 
-#: .\templates\designs\design-customize.html:303
+#: .\templates\designs\design-customize.html:494
 msgid "素材(右)"
 msgstr "material(direita)"
+
+#: .\templates\designs\design-customize.html:501
+msgid "右足を左足と同じにする"
+msgstr "Igualar com o da esquerda"
+
+#: .\templates\designs\design-customize.html:502
+msgid "左足を右足に同じにする"
+msgstr "Igualar com o da direita"
 
 #: .\templates\designs\design-list.html:5
 #: .\templates\designs\design-list.html:23
@@ -1283,7 +1296,7 @@ msgid "商品選択"
 msgstr "escolher"
 
 #: .\templates\designs\select-products.html:48
-#: .\templates\products\product-list.html:63
+#: .\templates\products\product-list.html:64
 msgid "商品が存在しません。"
 msgstr "o item não existe"
 
@@ -1864,7 +1877,7 @@ msgstr "Detalhes do pedido"
 
 #: .\templates\mixins\orders\order-card.html:29
 #: .\templates\mixins\orders\order-detail-card.html:39
-#: .\templates\orders\search-order-detail.html:59 .\vinaigrette-deleteme.py:13
+#: .\templates\orders\search-order-detail.html:59
 msgid "注文取消"
 msgstr "Cancelar pedido"
 
@@ -2196,7 +2209,7 @@ msgstr "Não há comentario"
 msgid "商品リスト"
 msgstr "Lista de item"
 
-#: .\templates\products\product-list.html:52
+#: .\templates\products\product-list.html:53
 #, python-format
 msgid ""
 "\n"
@@ -2264,8 +2277,8 @@ msgid ""
 "00<br>\n"
 "                    定休日 月曜日定休"
 msgstr ""
-"Aichi-ken nagoya-shi nakamura-ku meieki 4 choume 27-1 Prédio escolar spiral Towers "
-"Uniwalk<br>\n"
+"Aichi-ken nagoya-shi nakamura-ku meieki 4 choume 27-1 Prédio escolar spiral "
+"Towers Uniwalk<br>\n"
 "                   Horário comercial Nos meio de semana：13：00～20：00　"
 "Fins de semana e feriados：10：00～18：00<br>\n"
 "                    Fechado as Segunda-feira"
@@ -2405,7 +2418,7 @@ msgstr "Se caso lembrou a senha"
 msgid "会員登録情報確認"
 msgstr "Confirmação das informações de registro de membro"
 
-#: .\templates\users\signup-check.html:26 .\users\models.py:68
+#: .\templates\users\signup-check.html:26 .\users\models.py:69
 msgid "性別"
 msgstr "genero"
 
@@ -2510,11 +2523,11 @@ msgstr "informações de guest"
 msgid "会員情報"
 msgstr "informações de membro"
 
-#: .\users\admin.py:64
+#: .\users\admin.py:63
 msgid "認証・権限"
 msgstr "Autenticação/Direitos"
 
-#: .\users\admin.py:114
+#: .\users\admin.py:113
 msgid "会員名"
 msgstr "Nome do membro"
 
@@ -2547,7 +2560,7 @@ msgstr "A senha pode estar errada"
 msgid "現在のパスワード"
 msgstr "Senha atual"
 
-#: .\users\forms.py:134 .\users\models.py:70
+#: .\users\forms.py:134 .\users\models.py:71
 msgid "生年月日"
 msgstr "Data de nascimento"
 
@@ -2578,11 +2591,11 @@ msgstr ""
 "Para ter acesso as informações super usuário precisa ter direito de super "
 "usuário "
 
-#: .\users\models.py:36
+#: .\users\models.py:37
 msgid "--性別--"
 msgstr "Gênero"
 
-#: .\users\models.py:80
+#: .\users\models.py:81
 msgid "会員番号"
 msgstr "Numero de membro"
 
@@ -2650,33 +2663,31 @@ msgstr "Cadastrar o tamanho do pé"
 msgid "会員様のメールアドレスとは違います。"
 msgstr "O email está diferente do registrado"
 
-#: .\vinaigrette-deleteme.py:2
 msgid "ラバー"
 msgstr "Borracha"
 
-#: .\vinaigrette-deleteme.py:3
 msgid "キャンバス"
 msgstr "Campus"
 
-#: .\vinaigrette-deleteme.py:4
 msgid "レザー"
 msgstr "Couro"
 
-#: .\vinaigrette-deleteme.py:5
 msgid "Uniwalkのベーシックライン。どんなファッションにもよく合う！"
-msgstr "A linha basica de Uniwalk combinara com qualquer tipo de poupa e situação"
+msgstr ""
+"A linha basica de Uniwalk combinara com qualquer tipo de poupa e situação"
 
-#: .\vinaigrette-deleteme.py:6
 msgid "Uniwalk自慢のローカット。カジュアルで心地良いのがポイント！"
-msgstr "Sapatos de cortes baixos são orgulho da Uniwalk, um dos seus melhores pontos são sua casualidade e comfortabilidade."
+msgstr ""
+"Sapatos de cortes baixos são orgulho da Uniwalk, um dos seus melhores "
+"pontos são sua casualidade e comfortabilidade."
 
-#: .\vinaigrette-deleteme.py:7
 msgid ""
-"Uniwalkのハイカットライン。機能デザイン共に向上したHUMBLEで快適なライフスタイ"
-"ルを！"
-msgstr "A linha de cano alto da Uniwalk,junto com a função de design aprimorado do HUMBLE melhorará seu cotidiano."
+"Uniwalkのハイカットライン。機能デザイン共に向上したHUMBLEで快適なライフス"
+"タイルを！"
+msgstr ""
+"A linha de cano alto da Uniwalk,junto com a função de design aprimorado "
+"do HUMBLE melhorará seu cotidiano."
 
-#: .\vinaigrette-deleteme.py:12
 msgid "発送済み"
 msgstr "Já foi enviada"
 

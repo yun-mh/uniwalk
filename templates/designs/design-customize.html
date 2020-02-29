@@ -15,7 +15,8 @@
         {% csrf_token %}
         <div id="screen" class="w-full h-75vh relative">
             <div id="guiContainer" class="absolute" style="left: 1rem; top: 1rem"></div>
-            <button class="btn w-64 absolute" style="bottom: 1rem; right: 1rem;">{% trans 'デザイン確定' %}</button>
+            <button class="btn w-64 absolute" id="designButton"
+                style="bottom: 1rem; right: 1rem;">{% trans 'デザイン確定' %}</button>
         </div>
         {{ form }}
     </form>
@@ -242,10 +243,200 @@
 
     // GUIの設定
     var gui = new dat.GUI();
-    var parameters, left, right, left_m, right_m, l_shoelace, l_upper, l_tongue, l_bottom, l_sole, r_shoelace, r_upper, r_tongue, r_bottom, r_sole
+    var parameters, left, right, left_m, right_m, l_shoelace, l_upper, l_tongue, l_bottom, l_sole, r_shoelace, r_upper, r_tongue, r_bottom, r_sole, leftColor, rightColor;
 
     function displaygui() {
         parameters = {
+            a: function () {
+                // 右色の値を左色と同じように変更する
+                parameters.i = parameters.d;
+                parameters.j = parameters.e;
+                parameters.k = parameters.f;
+                parameters.l = parameters.g;
+                parameters.m = parameters.h;
+
+                //　右モデルの色を更新する
+                right_shoelace.material.color.setHex(parameters.i.replace("#", "0x"));
+                right_upper.material.color.setHex(parameters.j.replace("#", "0x"));
+                right_tongue.material.color.setHex(parameters.k.replace("#", "0x"));
+                right_bottom.material.color.setHex(parameters.l.replace("#", "0x"));
+                right_sole.material.color.setHex(parameters.m.replace("#", "0x"));
+
+                // 右素材の値を左素材と同じように変更する
+                parameters.s = parameters.n;
+                parameters.t = parameters.o;
+                parameters.u = parameters.p;
+                parameters.v = parameters.q;
+                parameters.w = parameters.r;
+
+                // 右モデルの素材を更新する
+                var right_shoelace_material = rm_shoelace.object.s;
+                var rm_shoelace_url = "";
+                if (right_shoelace_material == "{{ mat1.name }}") {
+                    rm_shoelace_url = "{{ mat1.file.url }}";
+                    right_shoelace.material.pk = "{{ mat1.pk }}";
+                } else if (right_shoelace_material == "{{ mat2.name }}") {
+                    rm_shoelace_url = "{{ mat2.file.url }}";
+                    right_shoelace.material.pk = "{{ mat2.pk }}";
+                } else if (right_shoelace_material == "{{ mat3.name }}") {
+                    rm_shoelace_url = "{{ mat3.file.url }}";
+                    right_shoelace.material.pk = "{{ mat3.pk }}";
+                }
+                right_shoelace.material.map = new THREE.TextureLoader().load(rm_shoelace_url);
+
+                var right_upper_material = rm_upper.object.t;
+                var rm_upper_url = "";
+                if (right_upper_material == "{{ mat1.name }}") {
+                    rm_upper_url = "{{ mat1.file.url }}";
+                    right_upper.material.pk = "{{ mat1.pk }}";
+                } else if (right_upper_material == "{{ mat2.name }}") {
+                    rm_upper_url = "{{ mat2.file.url }}";
+                    right_upper.material.pk = "{{ mat2.pk }}";
+                } else if (right_upper_material == "{{ mat3.name }}") {
+                    rm_upper_url = "{{ mat3.file.url }}";
+                    right_upper.material.pk = "{{ mat3.pk }}";
+                }
+                right_upper.material.map = new THREE.TextureLoader().load(rm_upper_url);
+
+                var right_tongue_material = rm_tongue.object.u;
+                var rm_tongue_url = "";
+                if (right_tongue_material == "{{ mat1.name }}") {
+                    rm_tongue_url = "{{ mat1.file.url }}";
+                    right_tongue.material.pk = "{{ mat1.pk }}";
+                } else if (right_tongue_material == "{{ mat2.name }}") {
+                    rm_tongue_url = "{{ mat2.file.url }}";
+                    right_tongue.material.pk = "{{ mat2.pk }}";
+                } else if (right_tongue_material == "{{ mat3.name }}") {
+                    rm_tongue_url = "{{ mat3.file.url }}";
+                    right_tongue.material.pk = "{{ mat3.pk }}";
+                }
+                right_tongue.material.map = new THREE.TextureLoader().load(rm_tongue_url);
+
+                var right_bottom_material = rm_bottom.object.v;
+                var rm_bottom_url = "";
+                if (right_bottom_material == "{{ mat1.name }}") {
+                    rm_bottom_url = "{{ mat1.file.url }}";
+                    right_bottom.material.pk = "{{ mat1.pk }}";
+                } else if (right_bottom_material == "{{ mat2.name }}") {
+                    rm_bottom_url = "{{ mat2.file.url }}";
+                    right_bottom.material.pk = "{{ mat2.pk }}";
+                } else if (right_bottom_material == "{{ mat3.name }}") {
+                    rm_bottom_url = "{{ mat3.file.url }}";
+                    right_bottom.material.pk = "{{ mat3.pk }}";
+                }
+                right_bottom.material.map = new THREE.TextureLoader().load(rm_bottom_url);
+
+                var right_sole_material = rm_sole.object.w;
+                var rm_sole_url = "";
+                if (right_sole_material == "{{ mat1.name }}") {
+                    rm_sole_url = "{{ mat1.file.url }}";
+                    right_sole.material.pk = "{{ mat1.pk }}";
+                } else if (right_sole_material == "{{ mat2.name }}") {
+                    rm_sole_url = "{{ mat2.file.url }}";
+                    right_sole.material.pk = "{{ mat2.pk }}";
+                } else if (right_sole_material == "{{ mat3.name }}") {
+                    rm_sole_url = "{{ mat3.file.url }}";
+                    right_sole.material.pk = "{{ mat3.pk }}";
+                }
+                right_sole.material.map = new THREE.TextureLoader().load(rm_sole_url);
+            },
+
+            b: function () {
+
+                // 左色の値を右色と同じように変更する
+                parameters.d = parameters.i;
+                parameters.e = parameters.j;
+                parameters.f = parameters.k;
+                parameters.g = parameters.l;
+                parameters.h = parameters.m;
+
+                // 左モデルの色を更新する
+                left_shoelace.material.color.setHex(parameters.d.replace("#", "0x"));
+                left_upper.material.color.setHex(parameters.e.replace("#", "0x"));
+                left_tongue.material.color.setHex(parameters.f.replace("#", "0x"));
+                left_bottom.material.color.setHex(parameters.g.replace("#", "0x"));
+                left_sole.material.color.setHex(parameters.h.replace("#", "0x"));
+
+                // 左素材の値を右素材と同じように変更する
+                parameters.n = parameters.s;
+                parameters.o = parameters.t;
+                parameters.p = parameters.u;
+                parameters.q = parameters.v;
+                parameters.r = parameters.w;
+
+                // 左モデルの素材を更新する
+                var left_shoelace_material = lm_shoelace.object.n;
+                var lm_shoelace_url = "";
+                if (left_shoelace_material == "{{ mat1.name }}") {
+                    lm_shoelace_url = "{{ mat1.file.url }}";
+                    left_shoelace.material.pk = "{{ mat1.pk }}";
+                } else if (left_shoelace_material == "{{ mat2.name }}") {
+                    lm_shoelace_url = "{{ mat2.file.url }}";
+                    left_shoelace.material.pk = "{{ mat2.pk }}";
+                } else if (left_shoelace_material == "{{ mat3.name }}") {
+                    lm_shoelace_url = "{{ mat3.file.url }}";
+                    left_shoelace.material.pk = "{{ mat3.pk }}";
+                }
+                left_shoelace.material.map = new THREE.TextureLoader().load(lm_shoelace_url);
+
+                var left_upper_material = lm_upper.object.o;
+                var lm_upper_url = "";
+                if (left_upper_material == "{{ mat1.name }}") {
+                    lm_upper_url = "{{ mat1.file.url }}";
+                    left_upper.material.pk = "{{ mat1.pk }}";
+                } else if (left_upper_material == "{{ mat2.name }}") {
+                    lm_upper_url = "{{ mat2.file.url }}";
+                    left_upper.material.pk = "{{ mat2.pk }}";
+                } else if (left_upper_material == "{{ mat3.name }}") {
+                    lm_upper_url = "{{ mat3.file.url }}";
+                    left_upper.material.pk = "{{ mat3.pk }}";
+                }
+                left_upper.material.map = new THREE.TextureLoader().load(lm_upper_url);
+
+                var left_tongue_material = lm_tongue.object.p;
+                var lm_tongue_url = "";
+                if (left_tongue_material == "{{ mat1.name }}") {
+                    lm_tongue_url = "{{ mat1.file.url }}";
+                    left_tongue.material.pk = "{{ mat1.pk }}";
+                } else if (left_tongue_material == "{{ mat2.name }}") {
+                    lm_tongue_url = "{{ mat2.file.url }}";
+                    left_tongue.material.pk = "{{ mat2.pk }}";
+                } else if (left_tongue_material == "{{ mat3.name }}") {
+                    lm_tongue_url = "{{ mat3.file.url }}";
+                    left_tongue.material.pk = "{{ mat3.pk }}";
+                }
+                left_tongue.material.map = new THREE.TextureLoader().load(lm_tongue_url);
+
+                var left_bottom_material = lm_bottom.object.q;
+                var lm_bottom_url = "";
+                if (left_bottom_material == "{{ mat1.name }}") {
+                    lm_bottom_url = "{{ mat1.file.url }}";
+                    left_bottom.material.pk = "{{ mat1.pk }}";
+                } else if (left_bottom_material == "{{ mat2.name }}") {
+                    lm_bottom_url = "{{ mat2.file.url }}";
+                    left_bottom.material.pk = "{{ mat2.pk }}";
+                } else if (left_bottom_material == "{{ mat3.name }}") {
+                    lm_bottom_url = "{{ mat3.file.url }}";
+                    left_bottom.material.pk = "{{ mat3.pk }}";
+                }
+                left_bottom.material.map = new THREE.TextureLoader().load(lm_bottom_url);
+
+                var left_sole_material = lm_sole.object.r;
+                var lm_sole_url = "";
+                if (left_sole_material == "{{ mat1.name }}") {
+                    lm_sole_url = "{{ mat1.file.url }}";
+                    left_sole.material.pk = "{{ mat1.pk }}";
+                } else if (left_sole_material == "{{ mat2.name }}") {
+                    lm_sole_url = "{{ mat2.file.url }}";
+                    left_sole.material.pk = "{{ mat2.pk }}";
+                } else if (left_sole_material == "{{ mat3.name }}") {
+                    lm_sole_url = "{{ mat3.file.url }}";
+                    left_sole.material.pk = "{{ mat3.pk }}";
+                }
+                left_sole.material.map = new THREE.TextureLoader().load(lm_sole_url);
+
+            },
+
             // 左足の色のデフォルト値
             d: "{% if design_before %}{{ design_before.shoelace_color_left }}{% else %}#ffffff{% endif %}",
             e: "{% if design_before %}{{ design_before.uppersole_color_left }}{% else %}#ffffff{% endif %}",
@@ -277,35 +468,39 @@
 
         // 左足の色
         left = gui.addFolder('{% trans "色(左)" %}');
-        l_shoelace = left.addColor(parameters, 'd').name('{% trans "シューレス" %}');
-        l_upper = left.addColor(parameters, 'e').name('{% trans "アッパーソール" %}');
-        l_tongue = left.addColor(parameters, 'f').name('{% trans "タン" %}');
-        l_bottom = left.addColor(parameters, 'g').name('{% trans "ミッドソール" %}');
-        l_sole = left.addColor(parameters, 'h').name('{% trans "アウトソール" %}');
+        l_shoelace = left.addColor(parameters, 'd').name('{% trans "シューレス" %}').listen();
+        l_upper = left.addColor(parameters, 'e').name('{% trans "アッパーソール" %}').listen();
+        l_tongue = left.addColor(parameters, 'f').name('{% trans "タン" %}').listen();
+        l_bottom = left.addColor(parameters, 'g').name('{% trans "ミッドソール" %}').listen();
+        l_sole = left.addColor(parameters, 'h').name('{% trans "アウトソール" %}').listen();
 
         // 右足の色
         right = gui.addFolder('{% trans "色(右)" %}');
-        r_shoelace = right.addColor(parameters, 'i').name('{% trans "シューレス" %}');
-        r_upper = right.addColor(parameters, 'j').name('{% trans "アッパーソール" %}');
-        r_tongue = right.addColor(parameters, 'k').name('{% trans "タン" %}');
-        r_bottom = right.addColor(parameters, 'l').name('{% trans "ミッドソール" %}');
-        r_sole = right.addColor(parameters, 'm').name('{% trans "アウトソール" %}');
+        r_shoelace = right.addColor(parameters, 'i').name('{% trans "シューレス" %}').listen();
+        r_upper = right.addColor(parameters, 'j').name('{% trans "アッパーソール" %}').listen();
+        r_tongue = right.addColor(parameters, 'k').name('{% trans "タン" %}').listen();
+        r_bottom = right.addColor(parameters, 'l').name('{% trans "ミッドソール" %}').listen();
+        r_sole = right.addColor(parameters, 'm').name('{% trans "アウトソール" %}').listen();
 
         // 左足の素材
         left_m = gui.addFolder('{% trans "素材(左)" %}');
-        lm_shoelace = left_m.add(parameters, 'n', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "シューレス" %}');
-        lm_upper = left_m.add(parameters, 'o', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "アッパーソール" %}');
-        lm_tongue = left_m.add(parameters, 'p', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "タン" %}');
-        lm_bottom = left_m.add(parameters, 'q', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "ミッドソール" %}');
-        lm_sole = left_m.add(parameters, 'r', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "アウトソール" %}');
+        lm_shoelace = left_m.add(parameters, 'n', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "シューレス" %}').listen();
+        lm_upper = left_m.add(parameters, 'o', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "アッパーソール" %}').listen();
+        lm_tongue = left_m.add(parameters, 'p', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "タン" %}').listen();
+        lm_bottom = left_m.add(parameters, 'q', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "ミッドソール" %}').listen();
+        lm_sole = left_m.add(parameters, 'r', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "アウトソール" %}').listen();
 
         // 右足の素材
         right_m = gui.addFolder('{% trans "素材(右)" %}');
-        rm_shoelace = right_m.add(parameters, 's', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "シューレス" %}');
-        rm_upper = right_m.add(parameters, 't', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "アッパーソール" %}');
-        rm_tongue = right_m.add(parameters, 'u', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "タン" %}');
-        rm_bottom = right_m.add(parameters, 'v', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "ミッドソール" %}');
-        rm_sole = right_m.add(parameters, 'w', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "アウトソール" %}');
+        rm_shoelace = right_m.add(parameters, 's', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "シューレス" %}').listen();
+        rm_upper = right_m.add(parameters, 't', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "アッパーソール" %}').listen();
+        rm_tongue = right_m.add(parameters, 'u', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "タン" %}').listen();
+        rm_bottom = right_m.add(parameters, 'v', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "ミッドソール" %}').listen();
+        rm_sole = right_m.add(parameters, 'w', ["{{ mat1.name }}", "{{ mat2.name }}", "{{ mat3.name }}"]).name('{% trans "アウトソール" %}').listen();
+
+        gui.add(parameters, 'a').name('{% trans "右足を左足と同じにする" %}');
+        gui.add(parameters, 'b').name('{% trans "左足を右足に同じにする" %}');
+
 
         // 左足の色の変更時の処理
         l_shoelace.onChange(function (jar) {
@@ -502,19 +697,27 @@
 
     //OrbitControlsの限界を設定し、マウスの操作に制限をかける
     var guiContainer = document.getElementById('guiContainer');
+    var designButton = document.getElementById('designButton');
     guiContainer.appendChild(gui.domElement);
+
     screen.addEventListener('mouseenter', function () {
         controls.enabled = true;
-    })
+    });
     screen.addEventListener('mouseout', function () {
         controls.enabled = false;
-    })
+    });
     guiContainer.addEventListener('mouseenter', function () {
         controls.enabled = false;
-    })
+    });
     guiContainer.addEventListener('mouseleave', function () {
         controls.enabled = true;
-    })
+    });
+    designButton.addEventListener('mouseenter', function () {
+        controls.enabled = false;
+    });
+    designButton.addEventListener('mouseleave', function () {
+        controls.enabled = true;
+    });
 
     // シーンにライトをつける
     var ambientLight = new THREE.AmbientLight(0x888888, 0.9);

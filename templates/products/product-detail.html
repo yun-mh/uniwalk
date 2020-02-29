@@ -43,10 +43,10 @@
         </div>
     </div>
     {% if designs %}
-    <div class="w-full flex justify-between mt-10 wow fadeIn">
+    <div class="w-full flex flex-wrap justify-around mt-10 wow fadeIn">
         {% for design in designs %}
-        <div class="w-1/5">
-            <div class="w-full h-64 bg-center bg-cover"
+        <div class="w-64 mt-3">
+            <div class="w-64 h-64 bg-center bg-cover"
                 style="background-image: url('{% for image in design.images.all %}{{ image.front.url }}{% endfor %}');">
             </div>
         </div>

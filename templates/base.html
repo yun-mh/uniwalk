@@ -219,16 +219,18 @@
     {% endif %}
 
     if (isLogin === true) {
-      email = "{{ user.email }}"
-      chatBody
-        .find("#loginScreenForm input, #loginScreenForm button")
-        .attr("disabled", true);
-      axios.post("/chats/guest/", { email }).then(response => {
-        chat.email = email;
-        chat.myChannel = pusher.subscribe("private-" + response.data.email);
-        helpers.ShowAppropriateChatDisplay();
+      chatBtn.on("click", () => {
+        email = "{{ user.email }}"
+        chatBody
+          .find("#loginScreenForm input, #loginScreenForm button")
+          .attr("disabled", true);
+        axios.post("/chats/guest/", { email }).then(response => {
+          chat.email = email;
+          chat.myChannel = pusher.subscribe("private-" + response.data.email);
+          helpers.ShowAppropriateChatDisplay();
+        });
+        helpers.ShowChatRoomDisplay();
       });
-      helpers.ShowChatRoomDisplay();
     }
     }) ();
   </script>

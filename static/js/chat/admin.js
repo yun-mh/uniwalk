@@ -64,7 +64,7 @@ var pusherChat = (function() {
       }
 
       evt.preventDefault();
-      // helpers.clearChatMessages();
+      helpers.clearChatMessages();
     },
 
     // 返事する
@@ -108,7 +108,7 @@ var pusherChat = (function() {
     $("#rooms").html("");
     chat.subscribedUsers.forEach(function(user, index) {
       $("#rooms").append(
-        `<li class="p-5 text-center rounded bg-white shadow"><a data-room-id="${user.email}" data-channel-id="${index}" class="nav-link" href="#">${user.email}</a></li>`
+        `<li class="p-5 text-center rounded bg-white mb-2 shadow"><a data-room-id="${user.email}" data-channel-id="${index}" class="nav-link" href="#">${user.email}</a></li>`
       );
     });
   });
