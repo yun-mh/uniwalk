@@ -160,7 +160,7 @@ class OrderAdmin(admin.ModelAdmin):
         "order_code",
         "amount",
         "step",
-        "get_fullname_kana",
+        "get_fullname",
         "order_date",
         "bill",
         "receipt",
@@ -317,7 +317,6 @@ class OrderAdmin(admin.ModelAdmin):
         template = get_template("documents/specification.html")
         html = template.render({"order": order})
         response = HttpResponse(content_type="application/pdf")
-        print(request.build_absolute_uri())
         HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
             response,
             stylesheets=[CSS(settings.STATICFILES_DIRS[0] + "/css/styles.css")],

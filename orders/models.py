@@ -177,7 +177,11 @@ class Order(models.Model):
 def set_order_code(sender, instance, created, **kwargs):
     if created:
         order_date = instance.order_date
-        date_string = order_date.strftime("%y%m")
+        try:
+            date_string = order_date.strftime("%y%m")
+        except:
+            temp = order_date.split("-")
+            date_string = temp[0] + temp[1]
         if instance.user:
             instance.order_code = (
                 date_string + instance.user.member_code + instance.order_number
